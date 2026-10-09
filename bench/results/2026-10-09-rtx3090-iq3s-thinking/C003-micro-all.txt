@@ -1,0 +1,25 @@
+iq_avx2_parity: Intel(R) Core(TM) i9-10900KF CPU @ 3.70GHz (avx2 1, avx512 0), CPU 2, core type 00h
+  STRATA_IQ256_GATHER -, STRATA_NO_AVXVNNI -, STRATA_IQ_MT_MIN -, STRATA_IQ_PREFETCH -
+  variants this CPU runs: gather; this thread's: scalar
+
+iq3_s/iq4_nl: 115 experts of 2.22 MB (255 MB), one thread
+  1 token ms per expert, median of 5 (min): gate/up, down, total
+    scalar         0.437 (0.413)    0.097 (0.091)    0.533 (0.504)
+    gather         0.324 (0.319)    0.091 (0.091)    0.415 (0.411)
+    ggml           0.560 (0.544)    0.101 (0.099)    0.662 (0.642)
+    engine         0.562 (0.546)    0.103 (0.102)    0.665 (0.648)
+  2 tokens ms per expert, median of 5 (min): gate/up, down, total
+    scalar         0.468 (0.467)    0.131 (0.130)    0.599 (0.597)
+    gather         0.394 (0.391)    0.131 (0.130)    0.525 (0.523)
+    ggml           1.066 (1.065)    0.176 (0.174)    1.242 (1.240)
+    engine         0.469 (0.468)    0.132 (0.130)    0.601 (0.598)
+  3 tokens ms per expert, median of 5 (min): gate/up, down, total
+    scalar         0.532 (0.525)    0.174 (0.170)    0.703 (0.695)
+    gather         0.458 (0.447)    0.175 (0.170)    0.633 (0.617)
+    ggml           1.612 (1.586)    0.256 (0.254)    1.868 (1.840)
+    engine         0.526 (0.525)    0.170 (0.169)    0.696 (0.695)
+  4 tokens ms per expert, median of 5 (min): gate/up, down, total
+    scalar         0.576 (0.575)    0.212 (0.211)    0.788 (0.786)
+    gather         0.506 (0.504)    0.216 (0.213)    0.725 (0.717)
+    ggml           2.121 (2.114)    0.338 (0.336)    2.459 (2.451)
+    engine         0.576 (0.574)    0.214 (0.211)    0.790 (0.789)

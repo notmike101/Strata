@@ -1,17 +1,33 @@
 {
-  "exported_utc": "2026-10-09T16:22:38.784361+00:00",
+  "exported_utc": "2026-10-09T16:35:16.761815+00:00",
   "files": {
     ".gitattributes": {
       "bytes": 76,
       "sha256": "58db0ad9f98bbd4050888e306eb9c2fe00fabc7ef9e5c3e8ee0616ff5c37f05f"
     },
     "all-runs.csv": {
-      "bytes": 33953,
-      "sha256": "db25a2b033aaf0e3ea7b0717644b2586c228c6f0307fa5da3275fe3c68029d36"
+      "bytes": 36623,
+      "sha256": "6e197e86689e85bdafe793be56eca4e75366e16c5986615112dfe3513efb8041"
+    },
+    "C001-parity-default.txt": {
+      "bytes": 2562,
+      "sha256": "b7bde8915844a909804f31d338689e8320a0502e344433dfb70ca0388881b88e"
+    },
+    "C002-parity-gather-mt1.txt": {
+      "bytes": 2676,
+      "sha256": "3d441258ed63ff5a88733cb222d233629a621dd269741ed785942964e2db8184"
+    },
+    "C003-micro-all.txt": {
+      "bytes": 1637,
+      "sha256": "2462d209abd8d4506a82449bebe2995b182ae00898af106c2539ef141bbcc90b"
+    },
+    "C004-micro-actual-formats.txt": {
+      "bytes": 4598,
+      "sha256": "a4a5e9b5d6e8f0ee92a87537757436a01b7145a436a47c3c609b403d498bf4bf"
     },
     "experiment-index.json": {
-      "bytes": 17060,
-      "sha256": "aae64b5e4555df889473f9c43c5f91576a097e8518b727e42777d4ee02d28d1f"
+      "bytes": 18593,
+      "sha256": "f6a3a8e1eaf221d27ef0e42fd0229557c781299406fe2a2066de42e503d29edf"
     },
     "fixed-thinking-previous-summary.json": {
       "bytes": 8858,
@@ -26,8 +42,8 @@
       "sha256": "a8f3e347f34f8cc3fa566d2a223ec0845e0f25027f961170fa08e082ae71d6ee"
     },
     "ledger.md": {
-      "bytes": 19226,
-      "sha256": "2b738bb0caa763063410034d952713ebb877686c33a8cb8813080028216ecbcb"
+      "bytes": 22173,
+      "sha256": "9e10a449850f1049641d2a92d6833ef38b51ff367e3bb432e8e0a25c27ad064d"
     },
     "P001-cuda_api_sum.csv": {
       "bytes": 2053,
@@ -281,9 +297,33 @@
       "bytes": 1726,
       "sha256": "f3295e95622ceeacf7a407270067e9aa7f390c7698e6ed058549dfe493541b67"
     },
+    "raw/target-80/R010-cpu-vision-dfbranch/identity.json": {
+      "bytes": 3884,
+      "sha256": "d3e66e67d51064080db3aa3fab291d2ba6c71fee42b53da0cdcfd630998a76d5"
+    },
+    "raw/target-80/R010-cpu-vision-dfbranch/runs.json": {
+      "bytes": 6384,
+      "sha256": "8c7ff734964bee89b90dd135118896c5925f7b104bd31c777526728ff2fd099b"
+    },
+    "raw/target-80/R010-cpu-vision-dfbranch/summary.json": {
+      "bytes": 1733,
+      "sha256": "f32dc0d890afa8d39046dc679903e0eeb82cd8ddab3d61e12b5759c55127117b"
+    },
+    "raw/target-80/R011-cpu-vision-gather-mt1/identity.json": {
+      "bytes": 3916,
+      "sha256": "44df2f61835dc69565dd4344f388377e0534e8de75fa5063219965b884ee512c"
+    },
+    "raw/target-80/R011-cpu-vision-gather-mt1/runs.json": {
+      "bytes": 6389,
+      "sha256": "e644da0b094e8566aaff514c70f2762906e3d825f6733443c7239770fd1adf15"
+    },
+    "raw/target-80/R011-cpu-vision-gather-mt1/summary.json": {
+      "bytes": 1732,
+      "sha256": "c663e312694f33709deee549671a4361d8cbbf49b5e729d4813be92b914155ba"
+    },
     "README.md": {
-      "bytes": 12753,
-      "sha256": "98e1c8fe427063dff76da42913f9e8b7d82cabcfa79a8e8ffbe4cf7ed280d8d6"
+      "bytes": 12826,
+      "sha256": "77bd5ad7bb26bb4b2192b33733f0c80f0c755b2bb2ad0a5490a4ad8b2ec6b378"
     },
     "replay.py": {
       "bytes": 1104,

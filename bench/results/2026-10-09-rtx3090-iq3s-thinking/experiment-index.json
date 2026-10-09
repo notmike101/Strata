@@ -774,5 +774,73 @@
       82.4,
       90.0
     ]
+  },
+  {
+    "campaign": "target-80",
+    "arm": "R010-cpu-vision-dfbranch",
+    "workload": "longer",
+    "runs": 3,
+    "decode_median": 73.1,
+    "decode_min": 69.1,
+    "decode_max": 73.7,
+    "e2e_median": 38.92632231750197,
+    "stream_total_median": 38.9298553806587,
+    "ttft_median_seconds": 6.166526499990141,
+    "raw_decode": [
+      73.1,
+      73.7,
+      69.1
+    ]
+  },
+  {
+    "campaign": "target-80",
+    "arm": "R010-cpu-vision-dfbranch",
+    "workload": "short",
+    "runs": 3,
+    "decode_median": 80.5,
+    "decode_min": 79.4,
+    "decode_max": 82.0,
+    "e2e_median": 70.90134848672838,
+    "stream_total_median": 70.9158659430508,
+    "ttft_median_seconds": 0.880056499998318,
+    "raw_decode": [
+      80.5,
+      79.4,
+      82.0
+    ]
+  },
+  {
+    "campaign": "target-80",
+    "arm": "R011-cpu-vision-gather-mt1",
+    "workload": "longer",
+    "runs": 3,
+    "decode_median": 73.8,
+    "decode_min": 73.3,
+    "decode_max": 74.5,
+    "e2e_median": 39.097260146470994,
+    "stream_total_median": 39.10220631672738,
+    "ttft_median_seconds": 6.155542999971658,
+    "raw_decode": [
+      73.8,
+      73.3,
+      74.5
+    ]
+  },
+  {
+    "campaign": "target-80",
+    "arm": "R011-cpu-vision-gather-mt1",
+    "workload": "short",
+    "runs": 3,
+    "decode_median": 80.0,
+    "decode_min": 78.7,
+    "decode_max": 80.3,
+    "e2e_median": 70.66107660269464,
+    "stream_total_median": 70.6726618435547,
+    "ttft_median_seconds": 0.8638758999877609,
+    "raw_decode": [
+      78.7,
+      80.0,
+      80.3
+    ]
   }
 ]

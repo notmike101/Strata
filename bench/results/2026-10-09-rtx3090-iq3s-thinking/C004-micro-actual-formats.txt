@@ -1,0 +1,75 @@
+iq_avx2_parity: Intel(R) Core(TM) i9-10900KF CPU @ 3.70GHz (avx2 1, avx512 0), CPU 2, core type 00h
+  STRATA_IQ256_GATHER -, STRATA_NO_AVXVNNI -, STRATA_IQ_MT_MIN -, STRATA_IQ_PREFETCH -
+  variants this CPU runs: gather; this thread's: scalar
+
+iq2_s/iq4_nl: 136 experts of 1.88 MB (256 MB), one thread
+  1 token ms per expert, median of 5 (min): gate/up, down, total
+    scalar         0.237 (0.230)    0.094 (0.091)    0.332 (0.321)
+    gather         0.353 (0.344)    0.095 (0.092)    0.448 (0.437)
+    ggml           0.290 (0.290)    0.099 (0.099)    0.389 (0.389)
+    engine         0.292 (0.291)    0.102 (0.101)    0.395 (0.392)
+  2 tokens ms per expert, median of 5 (min): gate/up, down, total
+    scalar         0.271 (0.270)    0.131 (0.130)    0.401 (0.400)
+    gather         0.367 (0.367)    0.130 (0.130)    0.498 (0.497)
+    ggml           0.563 (0.562)    0.175 (0.175)    0.738 (0.737)
+    engine         0.271 (0.270)    0.131 (0.130)    0.403 (0.401)
+
+iq3_xxs/iq4_nl: 123 experts of 2.08 MB (255 MB), one thread
+  1 token ms per expert, median of 5 (min): gate/up, down, total
+    scalar         0.323 (0.321)    0.092 (0.091)    0.414 (0.412)
+    gather         0.289 (0.288)    0.091 (0.091)    0.380 (0.379)
+    ggml           0.357 (0.355)    0.100 (0.099)    0.457 (0.455)
+    engine         0.356 (0.355)    0.101 (0.101)    0.458 (0.456)
+  2 tokens ms per expert, median of 5 (min): gate/up, down, total
+    scalar         0.371 (0.368)    0.131 (0.131)    0.503 (0.500)
+    gather         0.320 (0.317)    0.131 (0.130)    0.450 (0.448)
+    ggml           0.692 (0.689)    0.175 (0.174)    0.867 (0.865)
+    engine         0.373 (0.368)    0.131 (0.130)    0.504 (0.499)
+
+iq2_s/q2_0: 177 experts of 1.44 MB (255 MB), one thread
+  1 token ms per expert, median of 5 (min): gate/up, down, total
+    scalar         0.232 (0.230)    0.089 (0.089)    0.321 (0.319)
+    gather         0.343 (0.339)    0.090 (0.089)    0.433 (0.428)
+    ggml           0.299 (0.292)    0.596 (0.587)    0.896 (0.879)
+    engine         0.291 (0.291)    0.089 (0.089)    0.381 (0.380)
+  2 tokens ms per expert, median of 5 (min): gate/up, down, total
+    scalar         0.275 (0.272)    0.122 (0.121)    0.397 (0.392)
+    gather         0.368 (0.368)    0.121 (0.121)    0.490 (0.489)
+    ggml           0.582 (0.575)    1.156 (1.145)    1.741 (1.720)
+    engine         0.273 (0.272)    0.121 (0.121)    0.394 (0.393)
+
+iq3_xxs/q2_0: 156 experts of 1.64 MB (255 MB), one thread
+  1 token ms per expert, median of 5 (min): gate/up, down, total
+    scalar         0.325 (0.322)    0.090 (0.089)    0.414 (0.411)
+    gather         0.289 (0.288)    0.089 (0.089)    0.378 (0.377)
+    ggml           0.357 (0.356)    0.589 (0.587)    0.949 (0.944)
+    engine         0.360 (0.358)    0.091 (0.089)    0.450 (0.447)
+  2 tokens ms per expert, median of 5 (min): gate/up, down, total
+    scalar         0.370 (0.367)    0.121 (0.121)    0.492 (0.488)
+    gather         0.319 (0.318)    0.121 (0.121)    0.440 (0.439)
+    ggml           0.705 (0.700)    1.156 (1.148)    1.862 (1.848)
+    engine         0.370 (0.368)    0.121 (0.120)    0.491 (0.489)
+
+iq3_s/q2_0: 143 experts of 1.78 MB (255 MB), one thread
+  1 token ms per expert, median of 5 (min): gate/up, down, total
+    scalar         0.421 (0.416)    0.089 (0.089)    0.510 (0.505)
+    gather         0.320 (0.320)    0.089 (0.089)    0.410 (0.409)
+    ggml           0.550 (0.545)    0.592 (0.586)    1.140 (1.133)
+    engine         0.547 (0.545)    0.090 (0.089)    0.637 (0.634)
+  2 tokens ms per expert, median of 5 (min): gate/up, down, total
+    scalar         0.476 (0.470)    0.123 (0.122)    0.599 (0.592)
+    gather         0.398 (0.392)    0.122 (0.122)    0.520 (0.513)
+    ggml           1.088 (1.084)    1.168 (1.155)    2.256 (2.241)
+    engine         0.473 (0.470)    0.122 (0.121)    0.595 (0.591)
+
+iq4_xs/iq4_nl: 100 experts of 2.54 MB (254 MB), one thread
+  1 token ms per expert, median of 5 (min): gate/up, down, total
+    scalar         0.293 (0.279)    0.102 (0.098)    0.397 (0.378)
+    gather         0.286 (0.278)    0.101 (0.097)    0.387 (0.376)
+    ggml           0.243 (0.225)    0.105 (0.104)    0.354 (0.329)
+    engine         0.239 (0.228)    0.109 (0.105)    0.348 (0.333)
+  2 tokens ms per expert, median of 5 (min): gate/up, down, total
+    scalar         0.307 (0.303)    0.133 (0.131)    0.439 (0.436)
+    gather         0.306 (0.304)    0.132 (0.130)    0.436 (0.435)
+    ggml           0.397 (0.386)    0.182 (0.174)    0.579 (0.560)
+    engine         0.309 (0.303)    0.132 (0.131)    0.440 (0.434)
