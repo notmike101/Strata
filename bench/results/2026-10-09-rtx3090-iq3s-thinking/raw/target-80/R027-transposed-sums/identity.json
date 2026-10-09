@@ -1,0 +1,132 @@
+{
+  "utc_started": "2026-10-09T18:33:00.214272+00:00",
+  "engine_sha256": "6048736d7674d8f3c66ce50060f11ca6623df33d3e885030941a6ef9e62f427c",
+  "vision_sha256": "a4a8488a45a19bdf10f0c550a4fddd980572ac9c355456f0412a06cfd57b4f75",
+  "projector_sha256": "1f7b7f0b984cf065c604360c29c8098362ed61b290db0ff12c6f360bb1a8a980",
+  "config_sha256": "0ad24fbbaefa962c26376b2050608840876ca9586dbb623032c9b438c0c77d50",
+  "git_commit": "d1df4952ed0d0b4d05925236d9a1ca8fd2ad458c",
+  "contract": {
+    "route": "/v1/chat/completions",
+    "stream": true,
+    "max_tokens": 512,
+    "concurrency": 1,
+    "sampling_and_thinking": {
+      "temperature": 1.0,
+      "top_p": 0.95,
+      "top_k": 20,
+      "min_p": 0.0,
+      "presence_penalty": 0.0,
+      "repetition_penalty": 1.0,
+      "frequency_penalty": 0.0,
+      "reasoning_effort": "high",
+      "reasoning_budget_tokens": 0,
+      "chat_template_kwargs": {
+        "enable_thinking": true,
+        "preserve_thinking": true
+      }
+    },
+    "hardware_tune": {},
+    "sweep_arms": [
+      [
+        "single",
+        {}
+      ]
+    ],
+    "checkpoint": true,
+    "profile_sha256": "6820cb09f179ff75f705392089605b8e9ca9b273892208f16715d0a2cf304264",
+    "token_metric": "Generated tokens include reasoning and final content; 512-token speed diagnostic may end in reasoning. Separate natural-stop coding tests validate completed answers.",
+    "cache_state": "Unique opening nonce per request; actual cache_n reported",
+    "warmup": "One request per workload, excluded from measured results",
+    "measured_runs_per_workload": 5,
+    "model_loading_included": false,
+    "workload_order": [
+      "short",
+      "longer"
+    ],
+    "vision": "Remains loaded; requests are text only",
+    "network": "Client is this PC, connecting through its LAN IP; remote-device latency is not measured"
+  },
+  "configuration_unchanged": true,
+  "expert_profile_sha256": "8f59b4aa8873209dff11c11e37bcda9529a1335b724a1afeea37bf6388975baf",
+  "expert_profile_filename": "expert-profile.bin",
+  "model_alias": "qwen3.8-flash-next-iq3_s",
+  "model_files": [
+    {
+      "bytes": 54817524224,
+      "sha256_from_setup_verification": "sha256 4c1eb2ceb4915e1192f4f386021897bde56a97f40a0bb78bb86465e0f7d2aca3",
+      "note": "Previously fully hashed during this setup; not rehashed by this benchmark.",
+      "filename": "Qwen3.8-Flash-Next-GSQ-RCO-IQ3_S-00001-of-00002.gguf"
+    },
+    {
+      "bytes": 28800138432,
+      "sha256_from_setup_verification": "sha256 316b46f3a2dbd68c900f43136ab9449f9dcc3725dfd8c794847c204bc161e113",
+      "note": "Previously fully hashed during this setup; not rehashed by this benchmark.",
+      "filename": "Qwen3.8-Flash-Next-GSQ-RCO-IQ3_S-00002-of-00002.gguf"
+    }
+  ],
+  "engine_arguments": [
+    "--pack",
+    "<MODEL_ROOT>/Strata/packs/iq3_s",
+    "--native",
+    "<MODEL_ROOT>/IQ3_S/Qwen3.8-Flash-Next-GSQ-RCO-IQ3_S-00001-of-00002.gguf",
+    "--ple-gguf",
+    "<MODEL_ROOT>/IQ3_S/Qwen3.8-Flash-Next-GSQ-RCO-IQ3_S-00002-of-00002.gguf",
+    "--expert-profile",
+    "<STRATA_ROOT>/data/expert-profile.bin",
+    "--expert-cache",
+    "auto",
+    "--prefill",
+    "auto",
+    "--spec",
+    "4",
+    "--spec-min-p",
+    "0.70",
+    "--mtp",
+    "<MODEL_ROOT>/Strata/mtp/rt",
+    "--max-context",
+    "262144",
+    "--kv",
+    "int8",
+    "--kv-resident",
+    "32768",
+    "--vision",
+    "--vram-reserve-mib",
+    "700",
+    "--pcie-frac",
+    "0.20"
+  ],
+  "engine_environment": {
+    "STRATA_IQ256_GATHER": "1",
+    "STRATA_IQ_MT_MIN": "1",
+    "STRATA_IQ256_GATHER_IQ2_S": "0",
+    "STRATA_ADAPT_LAG": "2",
+    "STRATA_TSUM": "1"
+  },
+  "engine_build": {
+    "kind": "local opt-in per-format dispatch candidate",
+    "source_commit": "2f8f36b",
+    "cuda": "13.3.73",
+    "sm": "86",
+    "msvc": "17.14.36"
+  },
+  "git_commit_note": "git_commit is the measurement workspace HEAD, not necessarily the engine source revision; use engine_build and the executable hash.",
+  "sampling_defaults": {
+    "temperature": 1.0,
+    "top_p": 0.95,
+    "top_k": 20,
+    "min_p": 0.0,
+    "presence_penalty": 0.0,
+    "repetition_penalty": 1.0,
+    "frequency_penalty": 0.0
+  },
+  "vision_execution": {
+    "device": "CPU",
+    "max_tokens": 1024,
+    "projector": "Flash-Next mmproj-F16.gguf"
+  },
+  "loaded_backend_hashes": {
+    "cublas64_13.dll": "b5846446f2a151ca24b74b8113d4ca32c52105ad89d4c2f1bc56a4ccffa9ea61",
+    "cublasLt64_13.dll": "680561bdc5d8a8c921e9ae974e6b60a6608c9d9fca8c0fd125e9da08c5c33ff1",
+    "nvcuda.dll": "3fe38dc3b7eb45f4c364d87df01dbf1c224c5ffd96b542cea8c0dca215330b84"
+  }
+}

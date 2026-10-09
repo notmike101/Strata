@@ -1,0 +1,11 @@
+We need answer user's request. Need produce complete code, tests, explanation design, at least 1200 words, detailed. Need likely implement thread-safe Python TTLCache class using OrderedDict and monotonic clock. Include set, get, delete, clear, len, expiration, capacity eviction, unit tests with injected fake clock, detailed explanation thread safety complexity. Do not abbreviate implementation.
+
+Need ensure no mention benchmark identifier? User says ignore. We can ignore.
+
+Need think about implementation robust. Python class.
+
+Potential requirements: thread-safe TTLCache, OrderedDict. monotonic clock injectable fake clock. Need tests. Use unittest. Methods set(key, value, ttl=None), get(key, default=None), delete(key), clear(), __len__, maybe __contains__, keys? expiration? Could have _expire, maybe purge. Capacity eviction LRU. Monotonic clock default time.monotonic.
+
+Need decide expiration semantics: TTL per item. On set, expiration = now + ttl if ttl not None else None (no expiry). For ttl=0? immediate expiration? Could allow ttl <= 0 => expired now. get checks if expired delete and return default. Also maybe lazy expiration only get/purge? But tests need expiration. Maybe method expire/evict_expired? User says include expiration. Could provide method expire_expired? Need maybe `expire(now=None)` or `purge()`.
+
+Thread-safe: all public methods acquire RLock? Need avoid reentrant? Use threading.RLock because internal calls? Could use lock per operation. Since fake clock may be monkey? Need ensure lock not held too long. Use OrderedDict. Capacity eviction: if len > maxsize, popitem(last=False) before or after set? Usually insert then evict oldest if capacity exceeded. Need handle maxsize=0: set should evict inserted item? Could if maxsize <=0: clear? Simpler: if maxsize is not None and len >= maxsize, pop oldest before insert; if maxsize == 0 then delete old then pop just inserted? Better: if maxsize is not None and len(self._cache) >= maxsize: evict one. Then insert. If maxsize==0, after evict? len>=0 true, popitem fails if empty. So if maxsize == 0, do not store? Or set stores then if maxsize < len: pop. More robust: `if maxsize is not None: while len(self._cache) > maxsize: self._

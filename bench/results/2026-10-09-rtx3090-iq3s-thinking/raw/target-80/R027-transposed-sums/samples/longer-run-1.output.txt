@@ -1,0 +1,13 @@
+We need answer user's request. Need produce final detailed answer at least 1200 words. User asks: Benchmark identifier ignore. Read existing design requirements before implementing cache: many existing cache rules with lifetimes increasing 30 sec for item_000 size 64 etc. Need implement thread-safe Python TTLCache class using OrderedDict and monotonic clock. Include set, get, delete, clear, len, expiration, capacity eviction, unit tests with injected fake clock, detailed explanation of thread safety and complexity. Complete code, tests, explain design. Do not abbreviate. At least 1200 words.
+
+We need likely incorporate existing design requirements: keys item_000 to item_063 have lifetime and size; expiration remove stale entries, access update LRU. Maybe need pre-seed? It says read existing design requirements before implementing cache. Could implement cache supporting per-key TTL and size? Requirements list lifetimes/sizes for keys. We can use those as test cases or seed rules? The class likely generic TTLCache with capacity and default ttl? But requirements say each key has lifetime and size. Maybe set can accept ttl and size? Or have cache entries with individual expiry, capacity measured in bytes, and LRU. Need implement capacity eviction maybe by total size or item count? They mention size 64 bytes etc. Use capacity in bytes. Need thread-safe. Use OrderedDict, monotonic clock, RLock. Inject fake clock for tests. Expiration can be lazy and active. Unit tests. Detailed explanation.
+
+Need ensure at least 1200 words. We can provide code long with tests. Need no abbreviations. Could include full implementation. Let's design robust.
+
+Requirements:
+- Thread-safe Python TTLCache class using OrderedDict and monotonic clock.
+- Include set, get, delete, clear, len, expiration, capacity eviction.
+- Unit tests with injected fake clock.
+- Detailed explanation of thread safety and complexity.
+
+Design: TTLCache entries: value, size (bytes), expiry_time (monotonic timestamp). LRU order via OrderedDict move_to_end on access (get/set). Capacity in bytes maybe max_bytes. Also maybe max_items? Could include both. User says capacity eviction and sizes given. So support max_bytes, maybe max_items optional. Eviction when inserting would exceed capacity: remove LRU entries until fit. If item size > capacity maybe raise ValueError or not store? Better reject if size > capacity (unless capacity

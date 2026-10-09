@@ -1,0 +1,11 @@
+We need answer user's request. Need produce final answer with complete code, tests, detailed explanation at least 1200 words. Need think fully.
+
+Task: Implement thread-safe Python TTLCache class using OrderedDict and monotonic clock. Include set, get, delete, clear, len, expiration, capacity eviction, unit tests with injected fake clock, detailed explanation of thread safety and complexity. Write complete code, then tests, then explain design. Do not abbreviate implementation. At least 1200 words.
+
+Need produce Python code. Need be careful thread-safe. Use OrderedDict, threading.RLock maybe. TTLCache: capacity, default_ttl maybe. monotonic clock injectable: clock=functools.monotonic? Actually from time import monotonic. Fake clock in tests.
+
+Implementation details:
+- TTLCache class with __init__(self, maxsize=128, ttl=60.0, clock=monotonic): ensure maxsize non-negative? If maxsize==0 maybe not store? Or capacity eviction. maxsize int >0? Can allow 0. Need handle ttl None? Could allow default_ttl optional. Need methods:
+  - set(key, value, ttl=None): remove expired entries? If capacity == 0 return? With lock. Remove existing if present (pop with last=False? Actually OrderedDict stores values with expire_at). Need eviction capacity: if len(self._data) >= self._maxsize: evict oldest/least recently? Since OrderedDict move_to_end on set/get? Need expiration eviction: when len reaches maxsize, before inserting, prune expired? Then if still over, popitem(last=False) to evict oldest by insertion/recency if move_to_end. Need ensure not evict just expired? If expired, prune expired entries. But checking all expired O(n). Could lazily expire on access and set; capacity eviction maybe pop LRU and if expired? Need complexity. User specifically: OrderedDict and monotonic clock, expiration, capacity eviction. Unit tests.
+
+Thread safety: all public methods lock. No nested lock? RLock safe. Use private _get_no_lock? But public method locks. Use monotonic clock called inside lock? Clock could be non-thread-safe but okay. Use monotonic not time.time to avoid system clock jumps. For capacity eviction, if maxsize == 0 don't store. If ttl <=0? Could immediately expire; maybe not store or set expire_at = now? If ttl None no expiration

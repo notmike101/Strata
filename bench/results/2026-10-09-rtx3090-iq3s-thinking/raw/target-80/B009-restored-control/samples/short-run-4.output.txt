@@ -1,0 +1,29 @@
+We need answer user's request. Need produce complete code, tests, explanation design, at least 1200 words. Need implement thread-safe Python TTLCache using OrderedDict and monotonic clock. Include set, get, delete, clear, len, expiration, capacity eviction, unit tests with injected fake clock. Detailed explanation thread safety and complexity. No abbreviation. Need likely use threading.RLock? OrderedDict thread-safety? Python OrderedDict not thread-safe. Need lock around all operations. Need expiration lazy or active? Need use time.monotonic or fake clock injected. Need set ttl. Need len count only unexpired? Include purge? We can provide implementation. Need careful about capacity eviction: OrderedDict LRU? TTLCache with capacity and TTL, eviction by LRU when over capacity, and expired entries removed on access and maybe during set. Need fake clock. Unit tests using unittest. Need at least 1200 words, likely code + tests + explanation. Need ensure not too terse. Let's design robust.
+
+Potential class:
+
+from __future__ import annotations
+from collections import OrderedDict
+from typing import Any, Hashable, Optional
+import threading
+from time import monotonic
+
+class FakeClock? For tests: class FakeClock: __init__(initial=0.0); now() returns self._now; advance(seconds). Or use callable time_fn.
+
+TTLCache:
+
+class TTLCache:
+    def __init__(self, capacity: int, ttl: float, time_fn: Callable[[], float] = time.monotonic):
+        if capacity <=0 raise ValueError
+        if ttl <0 raise ValueError
+        self._capacity = capacity
+        self._ttl = ttl
+        self._time_fn = time_fn
+        self._cache = OrderedDict()
+        self._lock = threading.RLock()
+
+    def set(self, key, value, ttl=None):
+       now = self._time_fn()
+       expiry = now + (ttl if ttl is not None else self._ttl) if ttl is not None? If ttl None use default. If ttl ==0 means expire immediately? Need support: if ttl is None use default, else ttl must >=0. If ttl=0: expiry=now, expired immediately? We can define ttl None = default, 0 immediate. But if default ttl =0 also. 
+       with lock:
+         if key in cache: move_to_end(key)? set overwrites and makes most recently used. Need delete old

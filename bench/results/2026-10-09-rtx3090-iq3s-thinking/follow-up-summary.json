@@ -1,0 +1,124 @@
+{
+  "checked_utc": "2026-10-09T18:48:54.292487+00:00",
+  "target": {
+    "short": 90,
+    "longer": 85
+  },
+  "target_demonstrated": false,
+  "new_configuration_promoted": false,
+  "retained_config_equal_to_previous_fallback": true,
+  "engine_sha256": "6048736d7674d8f3c66ce50060f11ca6623df33d3e885030941a6ef9e62f427c",
+  "control_arm": "B009-restored-control",
+  "control_summary": {
+    "longer": {
+      "runs": 5,
+      "prompt_tokens": [
+        3034,
+        3035,
+        3034,
+        3034,
+        3033
+      ],
+      "completion_tokens": [
+        512,
+        512,
+        512,
+        512,
+        512
+      ],
+      "server_decode_tps": {
+        "median": 83.6,
+        "min": 80.8,
+        "max": 86.1
+      },
+      "prompt_tps": {
+        "median": 495.5,
+        "min": 494.7,
+        "max": 497.0
+      },
+      "ttft_seconds": {
+        "median": 6.156395800004248,
+        "min": 6.150520499999402,
+        "max": 6.174847400019644
+      },
+      "request_seconds": {
+        "median": 12.249545900005614,
+        "min": 12.08803519999492,
+        "max": 12.472249999991618
+      },
+      "request_e2e_tps": {
+        "median": 41.79746777386787,
+        "min": 41.051133516434014,
+        "max": 42.35593225276306
+      },
+      "stream_total_tps": {
+        "median": 41.80057034425833,
+        "min": 41.05642479079652,
+        "max": 42.359468389021764
+      }
+    },
+    "short": {
+      "runs": 5,
+      "prompt_tokens": [
+        165,
+        168,
+        168,
+        165,
+        167
+      ],
+      "completion_tokens": [
+        512,
+        512,
+        512,
+        512,
+        512
+      ],
+      "server_decode_tps": {
+        "median": 85.9,
+        "min": 83.5,
+        "max": 88.4
+      },
+      "prompt_tps": {
+        "median": 194.2,
+        "min": 190.8,
+        "max": 212.2
+      },
+      "ttft_seconds": {
+        "median": 0.8831480999942869,
+        "min": 0.8340353000094183,
+        "max": 0.9089259000029415
+      },
+      "request_seconds": {
+        "median": 6.79815790001885,
+        "min": 6.653971399995498,
+        "max": 6.997148599999491
+      },
+      "request_e2e_tps": {
+        "median": 75.31452012883965,
+        "min": 73.1726635046792,
+        "max": 76.9465285048184
+      },
+      "stream_total_tps": {
+        "median": 75.32797535646965,
+        "min": 73.18602121269875,
+        "max": 76.96831546676681
+      }
+    }
+  },
+  "quality_status": "Previous production engine/config unchanged; Q006 repeats service capability checks.",
+  "unresolved": "Intermittent severe stalls in unchanged controls and some candidates; no proven cause or hardware ceiling.",
+  "measured_candidates": [
+    "R017",
+    "R018",
+    "R019",
+    "R020",
+    "R021",
+    "R022",
+    "R023",
+    "R024",
+    "R025",
+    "R027",
+    "R028",
+    "R029"
+  ]
+}

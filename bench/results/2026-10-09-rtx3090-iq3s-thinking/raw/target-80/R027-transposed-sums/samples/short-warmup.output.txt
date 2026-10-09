@@ -1,0 +1,24 @@
+We need answer user's request. Need produce final answer with complete code, tests, detailed explanation at least 1200 words. Need think fully.
+
+Task: Implement thread-safe Python TTLCache class using OrderedDict and monotonic clock. Include set, get, delete, clear, len, expiration, capacity eviction, unit tests with injected fake clock, detailed explanation of thread safety and complexity. Write complete code, then tests, then explain design. Do not abbreviate implementation. At least 1200 words.
+
+Need produce robust code. Let's design.
+
+TTLCache: thread-safe. Use OrderedDict. Store key -> (value, expires_at). TTL maybe default ttl per cache or set method ttl argument. Use monotonic_clock injected callable returning float. Thread safety: lock RLock. Operations atomic. Expiration on access: lazy expiration. Also maybe background? Requirement includes expiration and capacity eviction. Unit tests with fake clock. Need avoid abbreviating implementation, include imports.
+
+Need careful about capacity: maxsize >=1. TTL >=0? Use maxsize None for unlimited? Could implement capacity eviction: when inserting new key if len(self._entries) >= self._maxsize, evict oldest? But OrderedDict move_to_end on get to maintain LRU? They didn't require LRU, but using OrderedDict suggests insertion/access order. Need define eviction order: least-recently-used if get updates order, or oldest inserted if not. Since OrderedDict, can move_to_end(key) on successful get to make LRU. Or if expiration, we may remove expired. Capacity eviction: remove next(iter(self._entries)) after purging expired? Need decide.
+
+Potential issues: TTL default None means no expiration. set(key, value, ttl=None). get(key, default=None). If ttl provided overrides default. expire? Maybe method to force purge_expired? Include len includes only live? Requirement len likely number live entries. Need thread-safe len: with lock: purge_expired_locked? Then return len. If len purges, that may cause side effects under lock. OK.
+
+Implement _now = clock().
+
+Need monotonic clock injection: constructor clock: Callable[[], float] = time.monotonic. For tests FakeClock increments.
+
+Data class? Keep simple.
+
+Detailed code:
+
+from __future__ import annotations
+import threading
+from collections import OrderedDict
+from typing import Any, Callable, Optional, Generic, TypeVar? Could include TypeVar. Need Python version? Use generic for K

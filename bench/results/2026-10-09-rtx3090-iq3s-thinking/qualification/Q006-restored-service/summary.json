@@ -1,0 +1,21 @@
+{
+  "passed": true,
+  "health": {
+    "status": "ok",
+    "max_context": 262144,
+    "model": "qwen3.8-flash-next-iq3_s",
+    "images": true,
+    "api_key": false,
+    "loaded": true,
+    "service": "strata"
+  },
+  "defaults_verified": true,
+  "vision_ocr": true,
+  "reasoning_levels": [
+    "xhigh",
+    "medium",
+    "low",
+    "off"
+  ],
+  "note": "Capability checks, not comparable throughput benchmarks. Numeric sampling defaults unchanged."
+}

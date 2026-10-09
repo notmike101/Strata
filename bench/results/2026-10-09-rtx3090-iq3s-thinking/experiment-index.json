@@ -721,6 +721,44 @@
   },
   {
     "campaign": "target-80",
+    "arm": "B009-restored-control",
+    "workload": "longer",
+    "runs": 5,
+    "decode_median": 83.6,
+    "decode_min": 80.8,
+    "decode_max": 86.1,
+    "e2e_median": 41.79746777386787,
+    "stream_total_median": 41.80057034425833,
+    "ttft_median_seconds": 6.156395800004248,
+    "raw_decode": [
+      85.6,
+      86.1,
+      81.5,
+      80.8,
+      83.6
+    ]
+  },
+  {
+    "campaign": "target-80",
+    "arm": "B009-restored-control",
+    "workload": "short",
+    "runs": 5,
+    "decode_median": 85.9,
+    "decode_min": 83.5,
+    "decode_max": 88.4,
+    "e2e_median": 75.31452012883965,
+    "stream_total_median": 75.32797535646965,
+    "ttft_median_seconds": 0.8831480999942869,
+    "raw_decode": [
+      85.8,
+      85.9,
+      86.5,
+      88.4,
+      83.5
+    ]
+  },
+  {
+    "campaign": "target-80",
     "arm": "F001-mixed-gather-lag2",
     "workload": "longer",
     "runs": 5,
@@ -1623,6 +1661,116 @@
       83.3,
       86.0,
       88.3
+    ]
+  },
+  {
+    "campaign": "target-80",
+    "arm": "R027-transposed-sums",
+    "workload": "longer",
+    "runs": 5,
+    "decode_median": 83.1,
+    "decode_min": 82.7,
+    "decode_max": 88.8,
+    "e2e_median": 41.696125753208854,
+    "stream_total_median": 41.70329076272569,
+    "ttft_median_seconds": 6.144253199978266,
+    "raw_decode": [
+      88.8,
+      84.8,
+      83.0,
+      83.1,
+      82.7
+    ]
+  },
+  {
+    "campaign": "target-80",
+    "arm": "R027-transposed-sums",
+    "workload": "short",
+    "runs": 5,
+    "decode_median": 87.0,
+    "decode_min": 82.7,
+    "decode_max": 90.4,
+    "e2e_median": 76.36735411956633,
+    "stream_total_median": 76.38071759834213,
+    "ttft_median_seconds": 0.9187163999886252,
+    "raw_decode": [
+      85.0,
+      87.0,
+      90.4,
+      88.4,
+      82.7
+    ]
+  },
+  {
+    "campaign": "target-80",
+    "arm": "R028-measured-il-table",
+    "workload": "longer",
+    "runs": 5,
+    "decode_median": 83.2,
+    "decode_min": 80.2,
+    "decode_max": 85.4,
+    "e2e_median": 41.6848216820397,
+    "stream_total_median": 41.687842380746986,
+    "ttft_median_seconds": 6.152448500011815,
+    "raw_decode": [
+      85.4,
+      80.6,
+      83.2,
+      84.7,
+      80.2
+    ]
+  },
+  {
+    "campaign": "target-80",
+    "arm": "R028-measured-il-table",
+    "workload": "short",
+    "runs": 5,
+    "decode_median": 86.5,
+    "decode_min": 85.4,
+    "decode_max": 90.6,
+    "e2e_median": 75.8231064698683,
+    "stream_total_median": 75.83828634863637,
+    "ttft_median_seconds": 0.8712030000169761,
+    "raw_decode": [
+      86.5,
+      89.5,
+      85.8,
+      90.6,
+      85.4
+    ]
+  },
+  {
+    "campaign": "target-80",
+    "arm": "R029-shared-stream-off",
+    "workload": "longer",
+    "runs": 3,
+    "decode_median": 79.7,
+    "decode_min": 77.7,
+    "decode_max": 80.8,
+    "e2e_median": 40.77550097045676,
+    "stream_total_median": 40.77854428613276,
+    "ttft_median_seconds": 6.1563019999885,
+    "raw_decode": [
+      79.7,
+      80.8,
+      77.7
+    ]
+  },
+  {
+    "campaign": "target-80",
+    "arm": "R029-shared-stream-off",
+    "workload": "short",
+    "runs": 3,
+    "decode_median": 82.2,
+    "decode_min": 79.2,
+    "decode_max": 83.9,
+    "e2e_median": 72.50171720757989,
+    "stream_total_median": 72.51158064493853,
+    "ttft_median_seconds": 0.8877714999835007,
+    "raw_decode": [
+      82.2,
+      79.2,
+      83.9
     ]
   }
 ]

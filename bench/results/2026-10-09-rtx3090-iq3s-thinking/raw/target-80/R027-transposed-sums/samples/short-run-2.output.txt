@@ -1,0 +1,25 @@
+We need answer user's request. Need produce final detailed answer >=1200 words, complete code, tests, explanation. User provided benchmark identifier ignore. Need implement thread-safe Python TTLCache using OrderedDict and monotonic clock. Include set, get, delete, clear, len, expiration, capacity eviction, unit tests with injected fake clock, detailed explanation thread safety and complexity. Do not abbreviate implementation. Need likely provide code blocks: implementation, tests, explanation. Need ensure complete code. Need think design.
+
+We need create TTLCache class. Requirements:
+- Thread-safe: likely use threading.RLock, because OrderedDict operations not atomic across read-modify-write. Need maybe use Lock. Monotonic clock injected.
+- Use OrderedDict. set, get, delete, clear, len, expiration, capacity eviction. Need probably include __len__, get, set maybe setdefault? But include set/get/delete/clear/len. Expiration maybe lazy purge on get and set, maybe active cleanup? Need capacity eviction.
+
+Potential implementation:
+
+import threading
+import time
+from collections import OrderedDict
+from typing import Any, Optional, Callable, Tuple
+
+_UNSET = object()
+
+class TTLCache:
+    def __init__(self, capacity, ttl, clock=time.monotonic):
+        if capacity <= 0: raise ValueError
+        if ttl < 0? TTL 0 immediate expire? Could allow >=0. Use self._capacity int.
+        self._clock = clock
+        self._entries = OrderedDict() # key -> (value, expires_at)
+        self._lock = threading.RLock()
+
+    def set(self, key, value, ttl=None):
+       now = clock(); if ttl is None: ttl=self.ttl; expires_at = None if ttl is None? TTL maybe required. But TTLCache has ttl. set supports optional ttl. If ttl is None, use default. If ttl <0 raise? If ttl ==0, expires_at=now? Should expire immediately. But set then len? Need decide. Could use None for no expiration? But TTLCache maybe default ttl. But requirement TTL cache; can use ttl optional and default. For no expiration allow ttl=None? If default ttl None? Could be. Simpler: __init__(capacity, ttl=10.0, clock=time.monotonic). set(..., ttl=not given using sentinel _UNSET). If ttl is None? Maybe allow no expiration with ttl=None. Need careful. We

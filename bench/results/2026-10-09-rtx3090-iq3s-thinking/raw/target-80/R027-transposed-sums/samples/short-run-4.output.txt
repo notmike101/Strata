@@ -1,0 +1,20 @@
+We need answer user's request. Need produce complete code, tests, explanation detailed >=1200 words. User: Benchmark identifier ignore. Implement thread-safe Python TTLCache class using OrderedDict and monotonic clock. Include set, get, delete, clear, len, expiration, capacity eviction, unit tests with injected fake clock, detailed explanation thread safety and complexity. Complete code, then tests, then explain design. Do not abbreviate implementation. At least 1200 words.
+
+Need final only. Need think details. Need ensure Python code correct. Class TTLCache uses OrderedDict, monotonic clock injected. Thread safety: RLock? operations with locks. TTL: store expiry timestamp. OrderedDict for LRU? Capacity eviction likely LRU. set updates existing and move_to_end. get checks expiration and maybe touch? Should get move_to_end? LRU eviction. delete removes. clear clears. len includes expired? We should define len returns number of live entries after purging expired? Requirement: len, expiration, capacity eviction. Could have __len__ that prunes expired entries? But if using lock in __len__, careful. Need thread-safe. We can provide public methods with lock. Need not recursive. Use contextlib? Let's design:
+
+from __future__ import annotations
+import threading
+from collections import OrderedDict
+from typing import Any, Optional, Callable, Iterator, Tuple
+
+CacheEntry = tuple[Optional[float], Any]? For TTL None no expiry.
+class TTLCache:
+    def __init__(self, capacity: int = 128, ttl: Optional[float] = 60.0, clock: Callable[[], float] = time.monotonic):
+         if capacity <=0 raise ValueError. self._capacity = int(capacity)
+         self._ttl = ttl if ttl is None or ttl >=0? raise if negative.
+         self._clock = clock
+         self._lock = threading.RLock() # RLock to allow internal method calls? We can use internal helpers assume lock held.
+         self._data = OrderedDict() # key -> (expiry, value)
+         self._hits? not needed.
+    def set(self, key, value, ttl=None): with self._lock: now = self._clock(); self._set_locked(key,value,ttl,now)
+But ttl override; None could mean use default? Ambiguity. Better method signature ttl: Optional[float] = None, use default_ttl if None. But if
