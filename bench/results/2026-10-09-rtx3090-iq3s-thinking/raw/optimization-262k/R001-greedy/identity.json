@@ -68,6 +68,11 @@
   ],
   "engine_environment": {},
   "sampling_defaults": {},
+  "vision_execution": {
+    "device": "GPU",
+    "max_tokens": 1024,
+    "projector": "Flash-Next mmproj-F16.gguf"
+  },
   "loaded_backend_hashes": {
     "cublas64_13.dll": "b5846446f2a151ca24b74b8113d4ca32c52105ad89d4c2f1bc56a4ccffa9ea61",
     "cublasLt64_13.dll": "680561bdc5d8a8c921e9ae974e6b60a6608c9d9fca8c0fd125e9da08c5c33ff1",

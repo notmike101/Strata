@@ -1,10 +1,10 @@
 {
-  "utc_started": "2026-10-09T15:43:49.439216+00:00",
+  "utc_started": "2026-10-09T16:16:05.615956+00:00",
   "engine_sha256": "17dabc6a49746aa22beebdf354923ba5eeb21affc6597c6976ac430e46671518",
   "vision_sha256": "a4a8488a45a19bdf10f0c550a4fddd980572ac9c355456f0412a06cfd57b4f75",
   "projector_sha256": "1f7b7f0b984cf065c604360c29c8098362ed61b290db0ff12c6f360bb1a8a980",
-  "config_sha256": "7e8d6e4a196b3d9ff41c7b33d3f0544fe0d0483de3486e6ea96adcdb968a580f",
-  "git_commit": "fb58e0dbc8399662c0e47c76578c6e878b14f6cf",
+  "config_sha256": "4fedf3faa746887e04ac87456cd88993c47390984d90ba27fbdd0eaadc5ba4cc",
+  "git_commit": "043571bd5669dbb65ff96ae09711f12d2b8cd57c",
   "contract": {
     "route": "/v1/chat/completions",
     "stream": true,
@@ -100,7 +100,7 @@
     "frequency_penalty": 0.0
   },
   "vision_execution": {
-    "device": "GPU",
+    "device": "CPU",
     "max_tokens": 1024,
     "projector": "Flash-Next mmproj-F16.gguf"
   },

@@ -1,0 +1,41 @@
+{
+  "response": {
+    "id": "chatcmpl-ffed57e9badb4f97a4fbd908",
+    "object": "chat.completion",
+    "created": 1791562687,
+    "model": "qwen3.8-flash-next-iq3_s",
+    "choices": [
+      {
+        "index": 0,
+        "message": {
+          "role": "assistant",
+          "content": "STRATA VISION 42",
+          "reasoning_content": "The user wants the text extracted from the image. The image contains clear, bold text on a white background. I will transcribe it exactly as shown.\n"
+        },
+        "finish_reason": "stop"
+      }
+    ],
+    "usage": {
+      "prompt_tokens": 259,
+      "completion_tokens": 42,
+      "total_tokens": 301,
+      "prompt_tokens_details": {
+        "cached_tokens": 0
+      }
+    },
+    "timings": {
+      "cache_n": 0,
+      "prompt_n": 259,
+      "prompt_ms": 1417.6,
+      "prompt_per_token_ms": 5.473,
+      "prompt_per_second": 182.7,
+      "predicted_n": 42,
+      "predicted_ms": 618.3,
+      "predicted_per_token_ms": 14.721,
+      "predicted_per_second": 67.9,
+      "draft_n": 29,
+      "draft_n_accepted": 28
+    }
+  },
+  "seconds": 3.7523860999790486
+}

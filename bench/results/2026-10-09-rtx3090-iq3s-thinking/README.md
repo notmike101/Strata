@@ -10,7 +10,7 @@ This report records the local setup, every completed throughput experiment, reje
 - NVIDIA RTX 3090, 24,576 MiB VRAM; PCIe 3.0 x8 on this host; driver 610.88.
 - Release CUDA 13.0 engine; CUDA Toolkit 13.3.73 and Nsight Systems 2026.1.3 available for development.
 - Target: `ISTA-DASLab/Qwen3.8-Flash-Next-GSQ-RCO-GGUF`, **IQ3_S**, two GGUF shards. The PLE/ngram shard is always supplied.
-- Compatible Flash-Next **F16** vision projector remains loaded on the GPU, with 1,024 image tokens. The initially requested 27B projector was incompatible (5120 vs 2560 embedding width); the compatible Flash-Next projector was selected with user approval.
+- Compatible Flash-Next **F16** vision projector remains loaded, with 1,024 image tokens. The baseline uses GPU vision; R007 separately tests CPU execution with identical F16 weights and records the latency tradeoff. The initially requested 27B projector was incompatible (5120 vs 2560 embedding width); the compatible Flash-Next projector was selected with user approval.
 - Maximum context 262,144; INT8 KV; 32,768 cells resident in VRAM, remaining KV streamed from RAM. Maximum configured context is not equivalent to maximum occupied context.
 - Single request at a time, OpenAI-compatible API, LAN binding `0.0.0.0:8080`. The user explicitly selected keyless access on their private network. Public evidence omits host addresses and credentials.
 - Model weights, quantization, KV precision, context, vision capability and target sampling must not be reduced to obtain a speed result.
@@ -73,6 +73,9 @@ The 80 tok/s target is **server decode TPS**, ordinary median of all qualifying 
 | target-80 B002 restored control, three runs | 62.8 | 60.4 | 56.32 | 32.82 | Control failed to recover; investigate |
 | target-80 B003 quiet control, three runs | 63.1 | 58.0 | 56.39 | 32.17 | Profiler-agent cleanup did not restore baseline |
 | target-80 B004 recovery control, three runs | 73.7 | 71.4 | 65.38 | 37.98 | Prior performance range recovered; cause of transient slowdown unresolved |
+| target-80 R006 reserve1200, three runs | 71.3 | 67.4 | 63.35 | 36.61 | Rejected: smaller expert cache costs throughput |
+| target-80 R007 CPU vision, three runs | 80.2 | 72.9 | 70.36 | 38.89 | Candidate; F16 vision stays loaded on CPU, OCR passed |
+| target-80 R008 CPU vision + QFUSE, three runs | 82.4 | 75.0 | 73.49 | 39.55 | Provisional gain; wide short spread, longer below80 |
 
 Rates are tok/s; ordinary medians. `experiment-index.json` contains every completed workload's raw seed rates, medians, spread, E2E, streaming total and TTFT. `all-runs.csv` includes warmups. The raw JSON files preserve full timing fields and draft counters.
 

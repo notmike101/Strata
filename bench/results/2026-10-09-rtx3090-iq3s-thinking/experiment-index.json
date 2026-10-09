@@ -672,5 +672,107 @@
       60.7,
       61.1
     ]
+  },
+  {
+    "campaign": "target-80",
+    "arm": "R006-reserve1200",
+    "workload": "longer",
+    "runs": 3,
+    "decode_median": 67.4,
+    "decode_min": 67.3,
+    "decode_max": 69.5,
+    "e2e_median": 36.60915692256385,
+    "stream_total_median": 36.61148964793073,
+    "ttft_median_seconds": 6.420139599998947,
+    "raw_decode": [
+      67.3,
+      67.4,
+      69.5
+    ]
+  },
+  {
+    "campaign": "target-80",
+    "arm": "R006-reserve1200",
+    "workload": "short",
+    "runs": 3,
+    "decode_median": 71.3,
+    "decode_min": 70.2,
+    "decode_max": 73.3,
+    "e2e_median": 63.35356399045309,
+    "stream_total_median": 63.362533313181984,
+    "ttft_median_seconds": 0.9416603000136092,
+    "raw_decode": [
+      70.2,
+      73.3,
+      71.3
+    ]
+  },
+  {
+    "campaign": "target-80",
+    "arm": "R007-cpu-vision",
+    "workload": "longer",
+    "runs": 3,
+    "decode_median": 72.9,
+    "decode_min": 72.4,
+    "decode_max": 74.6,
+    "e2e_median": 38.88638329945584,
+    "stream_total_median": 38.89122780631607,
+    "ttft_median_seconds": 6.170247000001837,
+    "raw_decode": [
+      74.6,
+      72.9,
+      72.4
+    ]
+  },
+  {
+    "campaign": "target-80",
+    "arm": "R007-cpu-vision",
+    "workload": "short",
+    "runs": 3,
+    "decode_median": 80.2,
+    "decode_min": 79.2,
+    "decode_max": 81.1,
+    "e2e_median": 70.35855212870588,
+    "stream_total_median": 70.3713556916075,
+    "ttft_median_seconds": 0.9126145000045653,
+    "raw_decode": [
+      79.2,
+      80.2,
+      81.1
+    ]
+  },
+  {
+    "campaign": "target-80",
+    "arm": "R008-cpu-vision-qfuse",
+    "workload": "longer",
+    "runs": 3,
+    "decode_median": 75.0,
+    "decode_min": 71.3,
+    "decode_max": 76.1,
+    "e2e_median": 39.5501076380848,
+    "stream_total_median": 39.55510580163461,
+    "ttft_median_seconds": 6.13599329997669,
+    "raw_decode": [
+      71.3,
+      76.1,
+      75.0
+    ]
+  },
+  {
+    "campaign": "target-80",
+    "arm": "R008-cpu-vision-qfuse",
+    "workload": "short",
+    "runs": 3,
+    "decode_median": 82.4,
+    "decode_min": 76.8,
+    "decode_max": 90.0,
+    "e2e_median": 73.49160209190451,
+    "stream_total_median": 73.5017008466525,
+    "ttft_median_seconds": 0.7864725000108592,
+    "raw_decode": [
+      76.8,
+      82.4,
+      90.0
+    ]
   }
 ]
