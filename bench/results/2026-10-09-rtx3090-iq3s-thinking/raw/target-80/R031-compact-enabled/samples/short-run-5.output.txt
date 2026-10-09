@@ -1,0 +1,14 @@
+We need answer user's request. Need produce final answer at least 1200 words. Need implement thread-safe Python TTLCache using OrderedDict monotonic clock, include set, get, delete, clear, len, expiration, capacity eviction, unit tests with injected fake clock, detailed explanation thread safety and complexity. Do not abbreviate implementation. Need ignore benchmark identifier. Need likely provide code, tests, explanation. Need ensure complete code. Could use threading.RLock. OrderedDict move_to_end. Need expiration lazily and possibly active? Need thread safety. Need tests using fake clock. Need detailed answer >1200 words. Need maybe include Python 3. Need class.
+
+Let's design: TTLCache with maxsize, default_ttl maybe optional. OrderedDict maps key -> (value, expires_at). Uses monotonic clock injected for test. Need thread safe with Lock. Operations: set(key, value, ttl=None), get(key, default=None), delete(key) returns bool, clear(), __len__, __contains__ maybe, pop? Need expiration: on get/set/clear/len maybe purge expired. Need capacity eviction: if maxsize and len >= maxsize after set? Need remove oldest if over capacity. OrderedDict LRU? It says OrderedDict and expiration, capacity eviction. Could maintain order of insertion/last accessed? OrderedDict can do LRU by move_to_end on get. But TTL expiration uses stored expires_at. If maxsize, evict oldest in OrderedDict (least recently used if move_to_end on get, or insertion order). Should document. Need thread safety: internal lock for all public methods. Clock injected must be thread-safe? We call monotonic inside lock. If fake clock simple int, fine. Need avoid nested calls? Use private non-locked helpers but ensure call from public methods only. Use context managers.
+
+Implementation no abbreviations. Need include imports: threading, OrderedDict, Optional, Callable, TypeVar? Use typing.
+
+Code:
+from __future__ import annotations
+import threading
+from collections import OrderedDict
+from typing import Any, Callable, Optional
+
+class TTLCache:
+    def __init__(self, maxsize: int = None, default_ttl: float = None, clock: Callable[[], float] = time.monotonic): validate. Use None for unlimited? Need len. maxsize None unlimited? Could allow. But requirement capacity eviction. Maybe maxsize int. If maxsize <1 raise ValueError. default_ttl positive or None. clock callable. self._lock =

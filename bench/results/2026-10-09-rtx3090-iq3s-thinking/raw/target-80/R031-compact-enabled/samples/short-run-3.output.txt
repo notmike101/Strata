@@ -1,0 +1,12 @@
+We need answer user's request. Need produce final detailed answer at least 1200 words. Need implement thread-safe Python TTLCache using OrderedDict and monotonic clock. Include set, get, delete, clear, len, expiration, capacity eviction, unit tests with injected fake clock, detailed explanation thread safety complexity. Complete code, then tests, then explain design. Do not abbreviate.
+
+Need ensure code correct. Need think through design.
+
+Requirements: thread-safe TTLCache class using OrderedDict and monotonic clock. Monotonic clock can be injected fake clock? Likely constructor accepts clock: Callable[[], float] = time.monotonic. Thread-safe: use RLock or Lock. Operations need atomicity. Expiration: lazy delete expired entries on access, maybe also purge on set, len. Need capacity eviction LRU? OrderedDict supports move_to_end. TTLCache could combine LRU and TTL? Need capacity eviction. Use OrderedDict with keys insertion/last use order. For capacity: on set, if new key or update? If key exists update value and ttl, move to end, evict if over capacity. Expired entries: need remove expired before operations. Complexity amortized? get O(1) after expiration? Purge all expired in len could O(n). Need complexity.
+
+Need thread safety: use threading.Lock around public methods; internal methods assume lock held. clock injected could be fake. Need avoid calling clock outside? If clock itself thread-safe? Could hold lock while calling clock; if fake clock mutable maybe need. Could make public methods acquire lock and call clock. Potential deadlock if clock callback calls cache? Not expected. Could use RLock to support reentrant internal calls? We can design public methods acquire _lock, call internal no reentrant. But clear? no. Use threading.RLock safer. Need ensure no race between check expiry and delete. Use single lock.
+
+Detailed code: imports threading, time, collections.OrderedDict, typing. Maybe Generic? Use Generic? Python 3.9+? Could use typing.Generic, TypeVar. Keep simple.
+
+Class TTLCache:
+- def __init__(self, capacity, ttl, clock=time.monotonic): if capacity <=0 raise ValueError; ttl? Could allow None? Better positive? TTL positive float? If ttl None means never? Requirement TTL. Use float? If ttl <0? raise. But set may have ttl override? Need set accepts ttl=None? Could set default_ttl and optional ttl in set. Include set

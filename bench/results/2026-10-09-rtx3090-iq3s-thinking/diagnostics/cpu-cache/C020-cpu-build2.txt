@@ -1,0 +1,47 @@
+**********************************************************************
+** Visual Studio 2022 Developer Command Prompt v17.14.36
+** Copyright (c) 2025 Microsoft Corporation
+**********************************************************************
+[0/1] Re-running CMake...
+-- Warning: ccache not found - consider installing it for faster compilation or disable this warning with GGML_CCACHE=OFF
+-- CMAKE_SYSTEM_PROCESSOR: AMD64
+-- CMAKE_GENERATOR_PLATFORM: 
+-- GGML_SYSTEM_ARCH: x86
+-- Including CPU backend
+-- x86 detected
+-- Adding CPU backend variant ggml-cpu: /arch:AVX2 GGML_AVX2;GGML_FMA;GGML_F16C;__BMI2__;GGML_BMI2
+-- ggml version: 0.24.0
+-- ggml commit:  b1eea8a5
+-- Configuring done (0.2s)
+-- Generating done (0.1s)
+-- Build files have been written to: C:/strata/local-setup/target-80/build-cpu-parity
+[1/5] Linking CXX static library strata_kernels_cpu.lib
+[2/5] Linking CXX executable iq_avx2_parity.exe
+[3/5] Building CXX object CMakeFiles\iq3s_cache_test.dir\src\kernels\cpu\iq3s_cache_test.cpp.obj
+[4/5] Linking CXX executable iq3s_cache_test.exe
+C020 cache memory/bounds/lifecycle PASS; 16 complete-pool parity cases PASS
+C020 cache memory/bounds/lifecycle PASS; 16 complete-pool parity cases PASS
+-- The CXX compiler identification is MSVC 19.44.35228.0
+-- Detecting CXX compiler ABI info
+-- Detecting CXX compiler ABI info - done
+-- Check for working CXX compiler: C:/llama-cpp-src/toolchains/vs-buildtools/VC/Tools/MSVC/14.44.35207/bin/Hostx64/x64/cl.exe - skipped
+-- Detecting CXX compile features
+-- Detecting CXX compile features - done
+-- Performing Test STRATA_HAVE_AVXVNNI_INTRINSICS
+-- Performing Test STRATA_HAVE_AVXVNNI_INTRINSICS - Success
+-- Performing Test CMAKE_HAVE_LIBC_PTHREAD
+-- Performing Test CMAKE_HAVE_LIBC_PTHREAD - Failed
+-- Looking for pthread_create in pthreads
+-- Looking for pthread_create in pthreads - not found
+-- Looking for pthread_create in pthread
+-- Looking for pthread_create in pthread - not found
+-- Found Threads: TRUE
+-- Configuring done (2.5s)
+-- Generating done (0.0s)
+-- Build files have been written to: C:/strata/local-setup/target-80/build-native-off
+[1/5] Building CXX object CMakeFiles\strata_kernels_cpu.dir\src\kernels\cpu\expert.cpp.obj
+[2/5] Building CXX object CMakeFiles\strata_kernels_cpu.dir\src\kernels\cpu\q2_avx2.cpp.obj
+[3/5] Building CXX object CMakeFiles\strata_kernels_cpu.dir\src\kernels\cpu\expert_layout.cpp.obj
+[4/5] Building CXX object CMakeFiles\strata_kernels_cpu.dir\src\kernels\cpu\pool.cpp.obj
+[5/5] Linking CXX static library strata_kernels_cpu.lib
+native-off-smoke.cpp

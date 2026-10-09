@@ -1,0 +1,63 @@
+**********************************************************************
+** Visual Studio 2022 Developer Command Prompt v17.14.36
+** Copyright (c) 2025 Microsoft Corporation
+**********************************************************************
+[0/1] Re-running CMake...
+-- Strata: CUDA enabled, arch 86
+-- strata: pack/full/experts.bin absent - the expert arena load test is NOT registered
+-- Warning: ccache not found - consider installing it for faster compilation or disable this warning with GGML_CCACHE=OFF
+-- CMAKE_SYSTEM_PROCESSOR: AMD64
+-- CMAKE_GENERATOR_PLATFORM: 
+-- GGML_SYSTEM_ARCH: x86
+-- Including CPU backend
+-- x86 detected
+-- Adding CPU backend variant ggml-cpu: /arch:AVX2 GGML_AVX2;GGML_FMA;GGML_F16C;__BMI2__;GGML_BMI2
+-- ggml version: 0.24.0
+-- ggml commit:  b1eea8a5
+-- Configuring done (4.0s)
+-- Generating done (0.2s)
+-- Build files have been written to: C:/strata/local-setup/target-80/build-cuda86-main
+[1/8] Linking CXX static library strata_engine.lib
+[2/8] Linking CXX static library strata_prefill.lib
+[3/8] Linking CXX executable iq_avx2_dispatch_test.exe
+[4/8] Linking CXX executable iq_avx2_parity.exe
+[5/8] Linking CXX executable strata.exe
+[6/8] Building CXX object CMakeFiles\iq3s_cache_test.dir\src\kernels\cpu\iq3s_cache_test.cpp.obj
+[7/8] Linking CXX executable iq3s_cache_test.exe
+Test project C:/strata/local-setup/target-80/build-cuda86-main
+      Start 74: pool_tasks_test
+ 1/16 Test #74: pool_tasks_test ..................   Passed    3.47 sec
+      Start 77: iq_dispatch_auto
+ 2/16 Test #77: iq_dispatch_auto .................   Passed    0.07 sec
+      Start 78: iq_dispatch_global_off
+ 3/16 Test #78: iq_dispatch_global_off ...........   Passed    0.04 sec
+      Start 79: iq_dispatch_global_on
+ 4/16 Test #79: iq_dispatch_global_on ............   Passed    0.04 sec
+      Start 80: iq_dispatch_mixed
+ 5/16 Test #80: iq_dispatch_mixed ................   Passed    0.04 sec
+      Start 81: iq_dispatch_xxs_on
+ 6/16 Test #81: iq_dispatch_xxs_on ...............   Passed    0.04 sec
+      Start 82: iq_dispatch_s_on
+ 7/16 Test #82: iq_dispatch_s_on .................   Passed    0.04 sec
+      Start 83: iq_dispatch_two_on
+ 8/16 Test #83: iq_dispatch_two_on ...............   Passed    0.04 sec
+      Start 84: iq_dispatch_xxs_off
+ 9/16 Test #84: iq_dispatch_xxs_off ..............   Passed    0.04 sec
+      Start 85: iq_dispatch_s_off
+10/16 Test #85: iq_dispatch_s_off ................   Passed    0.04 sec
+      Start 86: iq_dispatch_invalid_off
+11/16 Test #86: iq_dispatch_invalid_off ..........   Passed    0.04 sec
+      Start 87: iq_dispatch_invalid_on
+12/16 Test #87: iq_dispatch_invalid_on ...........   Passed    0.04 sec
+      Start 88: iq_avx2_parity
+13/16 Test #88: iq_avx2_parity ...................   Passed    0.25 sec
+      Start 89: iq3s_cache_test
+14/16 Test #89: iq3s_cache_test ..................   Passed    0.12 sec
+      Start 90: iq_avx2_parity_iq3s_mt1
+15/16 Test #90: iq_avx2_parity_iq3s_mt1 ..........   Passed    0.24 sec
+      Start 91: iq_avx2_parity_mixed_gather
+16/16 Test #91: iq_avx2_parity_mixed_gather ......   Passed    0.29 sec
+
+100% tests passed out of 16
+
+Total Test time (real) =   4.95 sec

@@ -1,0 +1,21 @@
+We need answer user's request. Need produce final detailed answer at least 1200 words, complete code, tests, explanation thread safety complexity. User says benchmark identifier ignore. Implement thread-safe Python TTLCache class using OrderedDict and monotonic clock. Include set, get, delete, clear, len, expiration, capacity eviction, unit tests with injected fake clock, detailed explanation. Do not abbreviate implementation. Need likely provide code fully. Need think about design.
+
+Need ensure thread-safe. Use OrderedDict for LRU? They didn't explicitly require LRU but capacity eviction likely least-recently used maybe expiration also. Use OrderedDict and monotonic clock. Need injected fake clock for tests. Could include Clock protocol with monotonic method? Python time.monotonic. We can use `time.monotonic` but inject. Maybe class accepts `clock` callable or object. Need complete code.
+
+Potential implementation:
+
+import threading, time
+from collections import OrderedDict
+from typing import Any, Callable, Optional, Hashable
+
+class TTLCache:
+    def __init__(self, maxsize=100, ttl=300.0, clock=None):
+       if maxsize <0? maxsize int positive maybe 0? If maxsize <=0 no entries? Could support maxsize=0.
+       self._maxsize = maxsize
+       self._default_ttl = ttl
+       self._clock = clock or time.monotonic
+       self._lock = threading.RLock()? If methods call each other? Need careful.
+       self._cache = OrderedDict()
+       self._hits = self._misses = 0 maybe not necessary.
+    _monotonic returns self._clock()
+    _purge_expired(now): iterate list(_cache.items())? Since OrderedDict, need remove expired. Could be O(n) but okay. To avoid full scan? We can store expiration and maybe use heap for exact expiration, but user specifically OrderedDict. Could use OrderedDict for LRU and expiration purge by scanning. But capacity eviction: OrderedDict.move_to_end on access. Expired entries removed lazily on get and during set/capacity. For expiration maybe `_purge` scans all entries to remove expired. Could be O(n). Maybe okay? For detailed complexity maybe O(1) amortized for get/set if lazy expiration? But to ensure max capacity maybe purge first. But if many expired, O(n). We can design efficient expiration? OrderedDict alone can maintain LRU and

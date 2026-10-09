@@ -1,0 +1,18 @@
+We need answer user's request. Need produce detailed answer at least 1200 words. User: "Benchmark identifier ... Ignore. Implement a thread-safe Python TTLCache class using an OrderedDict and a monotonic clock. Include set, get, delete, clear, len, expiration, capacity eviction, unit tests with an injected fake clock, and a detailed explanation of thread safety and complexity. Write complete code, then tests, then explain the design. Do not abbreviate the implementation. Produce a detailed answer of at least 1200 words."
+
+We need output complete code, tests, explanation. Need likely mention ignore identifier. Need satisfy thread-safe, OrderedDict, monotonic clock. Include set, get, delete, clear, len, expiration, capacity eviction, unit tests with fake clock. Detailed explanation. At least 1200 words. Could write Python code with typing, threading.RLock, OrderedDict from collections, time.monotonic. Need consider len() should count live entries? User says include len, expiration. For len perhaps evict expired and return len. Need capacity eviction. Implement __len__, __contains__, maybe items? Complete code no abbreviations. Need unit tests likely use unittest and fake clock. Need ensure thread-safe. Could discuss reentrancy? Use RLock to allow internal method calls under lock. Could implement _purge_expired, _evict_capacity, _set. Expiration on access and len. For set, if expired, remove. If capacity exceeded, evict oldest? OrderedDict supports move_to_end; with TTL, capacity eviction LRU? The user says capacity eviction. We can do LRU: on get hit move_to_end; on set move_to_end; evict firstitem if capacity exceeded. But OrderedDict + TTL: could also evict expired entries before capacity. Need thread safety: all public methods acquire lock. Use monotonic clock injected as callable returning float. Maybe clock=time.monotonic.
+
+Potential implementation:
+
+from __future__ import annotations
+import threading
+import time
+from collections import OrderedDict
+from typing import Any, Callable, Iterable, Iterator, Mapping, Optional, Tuple, TypeVar
+
+K = TypeVar("K")
+V = TypeVar("V")
+
+class TTLCache:
+    def __init__(self, maxsize=128, ttl=300.0, *, clock: Callable[[], float] | None = None, thread_safe: bool=True):
+        if maxsize <=0: raise

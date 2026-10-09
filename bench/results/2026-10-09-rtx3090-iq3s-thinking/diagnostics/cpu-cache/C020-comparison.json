@@ -1,0 +1,586 @@
+{
+  "R030-compact-control": {
+    "summary": {
+      "longer": {
+        "runs": 5,
+        "prompt_tokens": [
+          3034,
+          3035,
+          3034,
+          3034,
+          3033
+        ],
+        "completion_tokens": [
+          512,
+          512,
+          512,
+          512,
+          512
+        ],
+        "server_decode_tps": {
+          "median": 85.6,
+          "min": 82.3,
+          "max": 88.1
+        },
+        "prompt_tps": {
+          "median": 496.1,
+          "min": 495.3,
+          "max": 496.4
+        },
+        "ttft_seconds": {
+          "median": 6.154181499994593,
+          "min": 6.142517000000225,
+          "max": 6.168296299991198
+        },
+        "request_seconds": {
+          "median": 12.115908300009323,
+          "min": 11.951677600009134,
+          "max": 12.348615299997618
+        },
+        "request_e2e_tps": {
+          "median": 42.25849084707962,
+          "min": 41.46213867396928,
+          "max": 42.83917430968927
+        },
+        "stream_total_tps": {
+          "median": 42.26190468326608,
+          "min": 41.46947371703632,
+          "max": 42.8436663484774
+        }
+      },
+      "short": {
+        "runs": 5,
+        "prompt_tokens": [
+          165,
+          168,
+          168,
+          165,
+          167
+        ],
+        "completion_tokens": [
+          512,
+          512,
+          512,
+          512,
+          512
+        ],
+        "server_decode_tps": {
+          "median": 86.7,
+          "min": 84.5,
+          "max": 87.9
+        },
+        "prompt_tps": {
+          "median": 197.3,
+          "min": 193.5,
+          "max": 213.1
+        },
+        "ttft_seconds": {
+          "median": 0.8874511000176426,
+          "min": 0.8292131999915,
+          "max": 0.911392000009073
+        },
+        "request_seconds": {
+          "median": 6.716883199987933,
+          "min": 6.626353600004222,
+          "max": 6.922617200005334
+        },
+        "request_e2e_tps": {
+          "median": 76.22583045673919,
+          "min": 73.96046685921121,
+          "max": 77.26723186032115
+        },
+        "stream_total_tps": {
+          "median": 76.23727930006974,
+          "min": 73.97398979159094,
+          "max": 77.27731026177537
+        }
+      }
+    },
+    "resources": {
+      "gpu_used": {
+        "min": 861343744.0,
+        "max": 25233747968.0
+      },
+      "gpu_free": {
+        "min": 536055808.0,
+        "max": 24908460032.0
+      },
+      "ram_available": {
+        "min": 66118967296.0,
+        "max": 124653215744.0
+      },
+      "commit_available": {
+        "min": 43378814976.0,
+        "max": 127181299712.0
+      },
+      "engine_rss": {
+        "min": 0.0,
+        "max": 57717985280.0
+      },
+      "engine_private": {
+        "min": 0.0,
+        "max": 82917273600.0
+      },
+      "pages_input_sec": {
+        "min": 0.0,
+        "max": 8975.891481691446
+      },
+      "sm_MHz": {
+        "min": 210.0,
+        "max": 2040.0
+      },
+      "power_mW": {
+        "min": 19180.0,
+        "max": 347588.0
+      },
+      "gpu_C": {
+        "min": 33.0,
+        "max": 76.0
+      }
+    },
+    "monitor": {
+      "samples": 160,
+      "wall_seconds": 160.44614980000188,
+      "cpu_seconds": 0.375,
+      "note": "One-second snapshots, not exact peaks. Pages Input/sec is system-wide, not engine attribution."
+    }
+  },
+  "R031-compact-enabled": {
+    "summary": {
+      "longer": {
+        "runs": 5,
+        "prompt_tokens": [
+          3034,
+          3035,
+          3034,
+          3034,
+          3033
+        ],
+        "completion_tokens": [
+          512,
+          512,
+          512,
+          512,
+          512
+        ],
+        "server_decode_tps": {
+          "median": 83.2,
+          "min": 81.5,
+          "max": 84.7
+        },
+        "prompt_tps": {
+          "median": 494.6,
+          "min": 494.0,
+          "max": 494.9
+        },
+        "ttft_seconds": {
+          "median": 6.180079700017814,
+          "min": 6.174723000003723,
+          "max": 6.1892413000168744
+        },
+        "request_seconds": {
+          "median": 12.304965899995295,
+          "min": 12.206038500007708,
+          "max": 12.440212400018936
+        },
+        "request_e2e_tps": {
+          "median": 41.60921729983793,
+          "min": 41.156853559768855,
+          "max": 41.94645134043094
+        },
+        "stream_total_tps": {
+          "median": 41.6122683110174,
+          "min": 41.160917303811964,
+          "max": 41.95188314016717
+        }
+      },
+      "short": {
+        "runs": 5,
+        "prompt_tokens": [
+          165,
+          168,
+          168,
+          165,
+          167
+        ],
+        "completion_tokens": [
+          512,
+          512,
+          512,
+          512,
+          512
+        ],
+        "server_decode_tps": {
+          "median": 86.0,
+          "min": 83.4,
+          "max": 88.4
+        },
+        "prompt_tps": {
+          "median": 196.3,
+          "min": 189.6,
+          "max": 206.2
+        },
+        "ttft_seconds": {
+          "median": 0.8803093000024091,
+          "min": 0.8586779000179376,
+          "max": 0.9111730000004172
+        },
+        "request_seconds": {
+          "median": 6.802722400025232,
+          "min": 6.625866400019731,
+          "max": 7.023604899994098
+        },
+        "request_e2e_tps": {
+          "median": 75.26398548882443,
+          "min": 72.89703895508562,
+          "max": 77.2729133202075
+        },
+        "stream_total_tps": {
+          "median": 75.27913045756463,
+          "min": 72.9131390900628,
+          "max": 77.2877797950825
+        }
+      }
+    },
+    "resources": {
+      "gpu_used": {
+        "min": 861343744.0,
+        "max": 25235845120.0
+      },
+      "gpu_free": {
+        "min": 533958656.0,
+        "max": 24908460032.0
+      },
+      "ram_available": {
+        "min": 57143115776.0,
+        "max": 124641603584.0
+      },
+      "commit_available": {
+        "min": 34430390272.0,
+        "max": 127195590656.0
+      },
+      "engine_rss": {
+        "min": 0.0,
+        "max": 66760409088.0
+      },
+      "engine_private": {
+        "min": 0.0,
+        "max": 91972370432.0
+      },
+      "pages_input_sec": {
+        "min": 0.0,
+        "max": 2775.0267930183
+      },
+      "sm_MHz": {
+        "min": 210.0,
+        "max": 2040.0
+      },
+      "power_mW": {
+        "min": 21140.0,
+        "max": 343990.0
+      },
+      "gpu_C": {
+        "min": 48.0,
+        "max": 76.0
+      }
+    },
+    "monitor": {
+      "samples": 171,
+      "wall_seconds": 171.46874260000186,
+      "cpu_seconds": 0.453125,
+      "note": "One-second snapshots, not exact peaks. Pages Input/sec is system-wide, not engine attribution."
+    }
+  },
+  "R032-compact-enabled-reverse": {
+    "summary": {
+      "longer": {
+        "runs": 5,
+        "prompt_tokens": [
+          3034,
+          3035,
+          3034,
+          3034,
+          3033
+        ],
+        "completion_tokens": [
+          512,
+          512,
+          512,
+          512,
+          512
+        ],
+        "server_decode_tps": {
+          "median": 82.8,
+          "min": 82.3,
+          "max": 85.1
+        },
+        "prompt_tps": {
+          "median": 495.9,
+          "min": 495.5,
+          "max": 496.4
+        },
+        "ttft_seconds": {
+          "median": 6.167064699984621,
+          "min": 6.154813099972671,
+          "max": 6.17005230000359
+        },
+        "request_seconds": {
+          "median": 12.326455200003693,
+          "min": 12.158591999992495,
+          "max": 12.355395199992927
+        },
+        "request_e2e_tps": {
+          "median": 41.53667795749151,
+          "min": 41.43938673853938,
+          "max": 42.11013906876027
+        },
+        "stream_total_tps": {
+          "median": 41.54029195754802,
+          "min": 41.442474951091924,
+          "max": 42.115457107305275
+        }
+      },
+      "short": {
+        "runs": 5,
+        "prompt_tokens": [
+          165,
+          168,
+          168,
+          165,
+          167
+        ],
+        "completion_tokens": [
+          512,
+          512,
+          512,
+          512,
+          512
+        ],
+        "server_decode_tps": {
+          "median": 85.9,
+          "min": 83.9,
+          "max": 90.8
+        },
+        "prompt_tps": {
+          "median": 197.9,
+          "min": 187.8,
+          "max": 206.3
+        },
+        "ttft_seconds": {
+          "median": 0.8849388000089675,
+          "min": 0.853035500011174,
+          "max": 0.9135555999819189
+        },
+        "request_seconds": {
+          "median": 6.83774230000563,
+          "min": 6.48543930001324,
+          "max": 6.928266700007953
+        },
+        "request_e2e_tps": {
+          "median": 74.87851655356747,
+          "min": 73.90015745199479,
+          "max": 78.94607848676569
+        },
+        "stream_total_tps": {
+          "median": 74.88826509944356,
+          "min": 73.91683397558971,
+          "max": 78.9569600523121
+        }
+      }
+    },
+    "resources": {
+      "gpu_used": {
+        "min": 861343744.0,
+        "max": 25231650816.0
+      },
+      "gpu_free": {
+        "min": 538152960.0,
+        "max": 24908460032.0
+      },
+      "ram_available": {
+        "min": 56923516928.0,
+        "max": 124704657408.0
+      },
+      "commit_available": {
+        "min": 34090192896.0,
+        "max": 127228071936.0
+      },
+      "engine_rss": {
+        "min": 0.0,
+        "max": 66757890048.0
+      },
+      "engine_private": {
+        "min": 0.0,
+        "max": 91954425856.0
+      },
+      "pages_input_sec": {
+        "min": 0.0,
+        "max": 58528.19547503876
+      },
+      "sm_MHz": {
+        "min": 210.0,
+        "max": 2040.0
+      },
+      "power_mW": {
+        "min": 20977.0,
+        "max": 345590.0
+      },
+      "gpu_C": {
+        "min": 47.0,
+        "max": 77.0
+      }
+    },
+    "monitor": {
+      "samples": 200,
+      "wall_seconds": 200.72788439999567,
+      "cpu_seconds": 0.421875,
+      "note": "One-second snapshots, not exact peaks. Pages Input/sec is system-wide, not engine attribution."
+    }
+  },
+  "R033-compact-control-reverse": {
+    "summary": {
+      "longer": {
+        "runs": 5,
+        "prompt_tokens": [
+          3034,
+          3035,
+          3034,
+          3034,
+          3033
+        ],
+        "completion_tokens": [
+          512,
+          512,
+          512,
+          512,
+          512
+        ],
+        "server_decode_tps": {
+          "median": 44.9,
+          "min": 16.9,
+          "max": 82.2
+        },
+        "prompt_tps": {
+          "median": 495.1,
+          "min": 458.7,
+          "max": 495.2
+        },
+        "ttft_seconds": {
+          "median": 6.172236999991583,
+          "min": 6.153720800008159,
+          "max": 6.9766286999802105
+        },
+        "request_seconds": {
+          "median": 17.545233200013172,
+          "min": 12.358795399981318,
+          "max": 36.87814929999877
+        },
+        "request_e2e_tps": {
+          "median": 29.18171529345165,
+          "min": 13.883560040796763,
+          "max": 41.4279857728508
+        },
+        "stream_total_tps": {
+          "median": 29.183954003154504,
+          "min": 13.883993749137996,
+          "max": 41.431089049255846
+        }
+      },
+      "short": {
+        "runs": 5,
+        "prompt_tokens": [
+          165,
+          168,
+          168,
+          165,
+          167
+        ],
+        "completion_tokens": [
+          512,
+          512,
+          512,
+          512,
+          512
+        ],
+        "server_decode_tps": {
+          "median": 86.8,
+          "min": 83.5,
+          "max": 89.5
+        },
+        "prompt_tps": {
+          "median": 202.3,
+          "min": 195.1,
+          "max": 204.0
+        },
+        "ttft_seconds": {
+          "median": 0.8621856999816373,
+          "min": 0.8536285999871325,
+          "max": 0.8911499000096228
+        },
+        "request_seconds": {
+          "median": 6.750077699980466,
+          "min": 6.557017699989956,
+          "max": 6.973402100004023
+        },
+        "request_e2e_tps": {
+          "median": 75.8509787230274,
+          "min": 73.4218381010475,
+          "max": 78.08427907717625
+        },
+        "stream_total_tps": {
+          "median": 75.8613373289645,
+          "min": 73.43158699588156,
+          "max": 78.09505537956164
+        }
+      }
+    },
+    "resources": {
+      "gpu_used": {
+        "min": 861343744.0,
+        "max": 25231650816.0
+      },
+      "gpu_free": {
+        "min": 538152960.0,
+        "max": 24908460032.0
+      },
+      "ram_available": {
+        "min": 58755092480.0,
+        "max": 121638928384.0
+      },
+      "commit_available": {
+        "min": 34960969728.0,
+        "max": 123666153472.0
+      },
+      "engine_rss": {
+        "min": 0.0,
+        "max": 57714716672.0
+      },
+      "engine_private": {
+        "min": 0.0,
+        "max": 82899726336.0
+      },
+      "pages_input_sec": {
+        "min": 0.0,
+        "max": 165857.50499514106
+      },
+      "sm_MHz": {
+        "min": 210.0,
+        "max": 2040.0
+      },
+      "power_mW": {
+        "min": 21063.0,
+        "max": 343919.0
+      },
+      "gpu_C": {
+        "min": 47.0,
+        "max": 77.0
+      }
+    },
+    "monitor": {
+      "samples": 218,
+      "wall_seconds": 233.5303639000049,
+      "cpu_seconds": 14.796875,
+      "note": "One-second snapshots, not exact peaks. Pages Input/sec is system-wide, not engine attribution."
+    }
+  }
+}

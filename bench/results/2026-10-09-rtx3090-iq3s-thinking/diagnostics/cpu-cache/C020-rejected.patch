@@ -1,0 +1,466 @@
+diff --git a/CMakeLists.txt b/CMakeLists.txt
+index 98409b83..c329f7d0 100644
+--- a/CMakeLists.txt
++++ b/CMakeLists.txt
+@@ -1231,6 +1231,9 @@ if(STRATA_NATIVE_EXPERTS)
+   # against ggml-cpu's dot, on random blocks; --bench: ms per expert on one thread, the weights streamed from DRAM
+   add_executable(iq_avx2_parity src/kernels/cpu/iq_avx2_parity.cpp)
+   target_link_libraries(iq_avx2_parity PRIVATE strata_kernels_cpu)
++  add_executable(iq3s_cache_test src/kernels/cpu/iq3s_cache_test.cpp)
++  target_link_libraries(iq3s_cache_test PRIVATE strata_kernels_cpu)
++  target_include_directories(iq3s_cache_test PRIVATE third_party/ggml)
+   if(STRATA_BUILD_TESTS)
+     add_executable(iq_avx2_dispatch_test src/kernels/cpu/iq_avx2_dispatch_test.cpp)
+     target_link_libraries(iq_avx2_dispatch_test PRIVATE strata_kernels_cpu)
+@@ -1254,6 +1257,9 @@ if(STRATA_NATIVE_EXPERTS)
+     strata_iq_dispatch_test(invalid_off 0 junk 01 2 0 0 0)
+     strata_iq_dispatch_test(invalid_on 1 junk 01 2 1 1 1)
+     add_test(NAME iq_avx2_parity COMMAND iq_avx2_parity)
++    add_test(NAME iq3s_cache_test COMMAND ${CMAKE_COMMAND} -E env STRATA_IQ_MT_MIN=1
++      STRATA_IQ256_GATHER=1 STRATA_IQ256_GATHER_IQ2_S=0 $<TARGET_FILE:iq3s_cache_test>)
++    set_tests_properties(iq3s_cache_test PROPERTIES SKIP_RETURN_CODE 77)
+     add_test(NAME iq_avx2_parity_iq3s_mt1 COMMAND ${CMAKE_COMMAND} -E env STRATA_IQ3S_MT1=1 $<TARGET_FILE:iq_avx2_parity>)
+     add_test(NAME iq_avx2_parity_mixed_gather COMMAND ${CMAKE_COMMAND} -E env
+       STRATA_IQ256_GATHER=1 STRATA_IQ256_GATHER_IQ2_S=0 STRATA_IQ256_GATHER_IQ3_XXS=1
+diff --git a/include/strata/core/expert_source.hpp b/include/strata/core/expert_source.hpp
+index dfc249d8..a26a59bf 100644
+--- a/include/strata/core/expert_source.hpp
++++ b/include/strata/core/expert_source.hpp
+@@ -25,6 +25,7 @@
+ #include "strata/core/exchange_storage.hpp"
+ #include "strata/core/hit_hook.hpp"
+ #include "strata/kernels/cpu/pool.hpp"
++#include "strata/kernels/cpu/iq3s_cache.hpp"
+ 
+ #include <atomic>
+ #include <cstdint>
+@@ -147,6 +148,10 @@ public:
+     /// asynchronously long after the call (the adaptive tier's swap-ins).  Defaults to `blob`.
+     virtual const uint8_t* blob_stable(int64_t layer, int64_t expert) { return blob(layer, expert); }
+ 
++    const strata::kernels::cpu::Iq3sCompactBlock* compact_gu(int64_t layer, int64_t expert) const {
++        return compact_gu_.get(layer, expert);
++    }
++
+     /// Blobs touched, for the driver to report.  A source that does not count returns 0.
+     virtual int64_t reads() const { return 0; }
+ 
+@@ -207,6 +212,7 @@ protected:
+     void record_inputs(const std::string& pack_experts, const std::string& gguf,
+                        const strata::kernels::cpu::ExpertLayout& lay, bool from_gguf);
+     std::vector<std::pair<std::string, std::string>> inputs_;
++    strata::kernels::cpu::Iq3sCache compact_gu_; // arena-only, empty by default
+ };
+ 
+ /// CS-T, routing-aware prefetch of the file tier: when the CPU pool starts layer `l`, a worker thread applies layer
+diff --git a/include/strata/kernels/cpu/iq3s_cache.hpp b/include/strata/kernels/cpu/iq3s_cache.hpp
+new file mode 100644
+index 00000000..1aa201b7
+--- /dev/null
++++ b/include/strata/kernels/cpu/iq3s_cache.hpp
+@@ -0,0 +1,97 @@
++#pragma once
++
++#include "strata/kernels/cpu/expert_layout.hpp"
++#include <limits>
++#include <memory>
++#include <cstdlib>
++
++namespace strata::kernels::cpu {
++
++// Exact IQ3_S codebook entries, signs, subscales and original fp16 scale.
++// This is a CPU representation, never a new model quant or a GPU tensor.
++struct Iq3sCompactBlock {
++    uint8_t weights[128];
++    uint8_t scales[8];
++    uint16_t d;
++};
++static_assert(sizeof(Iq3sCompactBlock) == 138);
++
++// AVX2 translation unit: callers must check cpu_avx2_ok first.
++void iq3s_compact_expand(const uint8_t* src, Iq3sCompactBlock* dst, size_t blocks);
++void iq3s_compact_gu(const Iq3sCompactBlock* src, int nb, const void* const* act, int nt,
++                     float* const* out, int rows, int r0, int r1);
++
++// Owned by one source, immutable after prepare, no request-time allocation.
++// As with its native arena, clear/destruction requires all source users stopped.
++class Iq3sCache {
++public:
++    bool prepare(const uint8_t* base, uint64_t base_bytes, const ExpertLayout& lay,
++                 uint64_t budget, uint64_t available, uint64_t commit, uint64_t reserve,
++                 std::string& why) {
++        clear();
++        if (!budget) { why = "disabled"; return false; }
++        if (commit == ~uint64_t{0}) { why = "commit headroom unavailable"; return false; }
++        if (!cpu_avx2_ok() || cpu_avx512_ok() || std::getenv("STRATA_NO_IQ256")) {
++            why = "requires the native AVX2 IQ path"; return false;
++        }
++        if (!base || !lay.native || lay.n_layers <= 0 || lay.n_expert <= 0 ||
++            uint64_t(lay.n_layers) != lay.fmt.size() || lay.fmt.size() != lay.offset.size() ||
++            lay.fmt.size() != lay.bytes.size() || lay.total > base_bytes) {
++            why = "invalid native layout"; return false;
++        }
++        uint64_t count = 0;
++        const uint64_t max_blocks = std::numeric_limits<size_t>::max() / sizeof(Iq3sCompactBlock);
++        try {
++            std::vector<uint64_t> offsets(lay.fmt.size(), ~uint64_t{0}), strides(lay.fmt.size(), 0);
++            for (size_t l = 0; l < lay.fmt.size(); ++l) {
++                const auto& f = lay.fmt[l];
++                if (f.gu_type != 21) continue;
++                NativeFmt expected; std::string error;
++                // Validate before native_fmt's row-byte arithmetic; the pool has bounded geometry.
++                if (f.n_embd <= 0 || f.n_embd > H || f.n_embd % 256 || f.n_ff <= 0 || f.n_ff > FF ||
++                    !native_fmt(21, f.d_type, f.n_embd, f.n_ff, expected, error) ||
++                    f.gu_row != expected.gu_row || f.up_off != expected.up_off ||
++                    f.down_off != expected.down_off || f.bytes != expected.bytes ||
++                    lay.bytes[l] != f.bytes || lay.offset[l] > base_bytes || !f.bytes ||
++                    uint64_t(lay.n_expert) > (base_bytes - lay.offset[l]) / f.bytes) {
++                    why = "unsupported or out-of-bounds IQ3_S geometry"; return false;
++                }
++                const uint64_t stride = 2 * uint64_t(f.n_ff) * uint64_t(f.n_embd / 256);
++                if (uint64_t(lay.n_expert) > (max_blocks - count) / stride) {
++                    why = "compact cache size overflow"; return false;
++                }
++                offsets[l] = count; strides[l] = stride;
++                count += stride * uint64_t(lay.n_expert);
++            }
++            const uint64_t need = count * sizeof(Iq3sCompactBlock);
++            if (!need || need > budget || available < reserve || need > available - reserve ||
++                commit < reserve || need > commit - reserve) {
++                why = "no supported layers or insufficient budget/RAM/commit headroom"; return false;
++            }
++            // Allocate into a temporary owner: failure never publishes a partial cache.
++            auto data = std::unique_ptr<Iq3sCompactBlock[]>(new Iq3sCompactBlock[size_t(count)]);
++            for (size_t l = 0; l < offsets.size(); ++l) if (strides[l])
++                for (int64_t e = 0; e < lay.n_expert; ++e)
++                    iq3s_compact_expand(base + lay.offset[l] + uint64_t(e) * lay.bytes[l],
++                                        data.get() + offsets[l] + uint64_t(e) * strides[l], size_t(strides[l]));
++            data_ = std::move(data); offsets_ = std::move(offsets); strides_ = std::move(strides);
++            experts_ = lay.n_expert; bytes_ = need; why = "ready"; return true;
++        } catch (const std::exception& e) {
++            why = std::string("compact allocation/expansion failed: ") + e.what(); return false;
++        }
++    }
++    const Iq3sCompactBlock* get(int64_t layer, int64_t expert) const {
++        if (!data_ || layer < 0 || uint64_t(layer) >= strides_.size() || !strides_[size_t(layer)] ||
++            expert < 0 || expert >= experts_) return nullptr;
++        return data_.get() + offsets_[size_t(layer)] + uint64_t(expert) * strides_[size_t(layer)];
++    }
++    uint64_t bytes() const { return bytes_; }
++    void clear() { data_.reset(); offsets_.clear(); strides_.clear(); bytes_ = 0; experts_ = 0; }
++private:
++    std::unique_ptr<Iq3sCompactBlock[]> data_;
++    std::vector<uint64_t> offsets_, strides_;
++    uint64_t bytes_ = 0;
++    int64_t experts_ = 0;
++};
++
++} // namespace strata::kernels::cpu
+diff --git a/include/strata/kernels/cpu/pool.hpp b/include/strata/kernels/cpu/pool.hpp
+index 6796e391..c9028bd3 100644
+--- a/include/strata/kernels/cpu/pool.hpp
++++ b/include/strata/kernels/cpu/pool.hpp
+@@ -42,6 +42,8 @@
+ 
+ namespace strata::kernels::cpu {
+ 
++struct Iq3sCompactBlock;
++
+ /// One expert evaluation.  `act` is SHARED and read-only across the whole batch - that sharing is the point
+ /// of `s2_expert_vnni_q` and it is what saves 480 redundant activation conversions per token.
+ struct ExpertJob {
+@@ -56,6 +58,7 @@ struct ExpertJob {
+ /// is bitwise the single-token job's.
+ struct ExpertJobMulti {
+     const uint8_t* blob = nullptr;
++    const Iq3sCompactBlock* compact_gu = nullptr; // optional source-owned exact IQ3_S gate/up
+     int nt = 0;
+     const ActQ* act[MAXT] = {};
+     float* out[MAXT] = {};
+diff --git a/src/core/expert_source.cpp b/src/core/expert_source.cpp
+index e4b46490..ebceb06f 100644
+--- a/src/core/expert_source.cpp
++++ b/src/core/expert_source.cpp
+@@ -3335,6 +3335,7 @@ void expert_pool_dispatch_multi(ExpertDispatch& d, const float* x_f, const int32
+                 jo = (int16_t) njobs++;
+                 ExpertJobMulti& nj = d.jobs_multi[(size_t) jo];
+                 nj.blob = b;
++                nj.compact_gu = native ? d.src->compact_gu(d.layers, e) : nullptr;
+                 nj.nt = 0;
+             }
+             ExpertJobMulti& jb = d.jobs_multi[(size_t) jo];
+@@ -4092,11 +4093,33 @@ bool ArenaExpertSource::open(const std::string& pack_dir, int64_t n_layers, int6
+     load_seconds_ = st.seconds;
+     load_read_s_ = st.read_seconds;
+     load_copy_s_ = st.copy_seconds;
++    // Opt-in, exact CPU-only IQ3_S expansion. Prepare before workers can read the source.
++    // A static extra allocation, never a miss cache: native blobs and GPU transfers stay intact.
++    if (const char* setting = std::getenv("STRATA_CPU_IQ3S_CACHE_GIB")) {
++        const auto start = std::chrono::steady_clock::now();
++        uint64_t gib = 0;
++        bool valid = *setting != '\0';
++        for (const char* p = setting; valid && *p; ++p) {
++            valid = *p >= '0' && *p <= '9' && gib <= (UINT64_MAX / (1ull << 30) - 9) / 10;
++            if (valid) gib = gib * 10 + uint64_t(*p - '0');
++        }
++        detail::HostMemory hm;
++        std::string reason;
++        if (!valid) reason = "budget must be a nonnegative integer GiB";
++        else if (!gib) reason = "disabled";
++        else if (!shared_arena_file.empty()) reason = "shared expert arenas are not supported";
++        else if (!detail::host_available_memory(hm)) reason = "host RAM/commit information unavailable";
++        else compact_gu_.prepare(base_, want, lay, gib << 30, hm.available, hm.commit, 16ull << 30, reason);
++        const double seconds = std::chrono::duration<double>(std::chrono::steady_clock::now() - start).count();
++        std::fprintf(stderr, "strata generate: exact IQ3_S CPU cache: %s; %llu bytes, %.3f s; 16 GiB RAM/commit reserve\n",
++                     reason.c_str(), (unsigned long long) compact_gu_.bytes(), seconds);
++    }
+     record_inputs(path, gguf_, lay, from_gguf);
+     return true;
+ }
+ 
+ void ArenaExpertSource::close() {
++    compact_gu_.clear();
+ #if !defined(_WIN32)
+     if (map_ != nullptr) munmap(map_, (size_t) map_bytes_);
+ #endif
+diff --git a/src/kernels/cpu/expert_layout.cpp b/src/kernels/cpu/expert_layout.cpp
+index 4e13167a..6f65fed2 100644
+--- a/src/kernels/cpu/expert_layout.cpp
++++ b/src/kernels/cpu/expert_layout.cpp
+@@ -1,5 +1,6 @@
+ // src/kernels/cpu/expert_layout.cpp - plan v0.3 P6: the per-layer expert table.  See the header.
+ #include "strata/kernels/cpu/expert_layout.hpp"
++#include "strata/kernels/cpu/iq3s_cache.hpp"
+ 
+ #include <atomic>
+ #include <cstdio>
+@@ -357,6 +358,8 @@ void act_quant_any(const float* x, int n, ActQ& a) {
+ }
+ 
+ #if !defined(STRATA_NATIVE_EXPERTS)
++void iq3s_compact_expand(const uint8_t*, Iq3sCompactBlock*, size_t) { std::abort(); }
++void iq3s_compact_gu(const Iq3sCompactBlock*, int, const void* const*, int, float* const*, int, int, int) { std::abort(); }
+ // Without ggml-cpu no native pack loads (expert_layout_load refuses), so these are never reached.
+ bool native_experts_available() noexcept { return false; }
+ bool native_fmt(int, int, int64_t, int64_t, NativeFmt&, std::string& err) { err = "built without native experts"; return false; }
+diff --git a/src/kernels/cpu/iq3s_cache_test.cpp b/src/kernels/cpu/iq3s_cache_test.cpp
+new file mode 100644
+index 00000000..d649fba2
+--- /dev/null
++++ b/src/kernels/cpu/iq3s_cache_test.cpp
+@@ -0,0 +1,82 @@
++#include "strata/kernels/cpu/iq3s_cache.hpp"
++#define main original_parity_main
++#include "iq_avx2_parity.cpp"
++#undef main
++#include "strata/kernels/cpu/pool.hpp"
++#include <stdexcept>
++#define GGML_COMMON_DECL_CPP
++#include "ggml-common.h"
++
++static void require(bool ok, const char* msg) { if (!ok) throw std::runtime_error(msg); }
++int main() {
++    ggml_cpu_init();
++    if (!cpu::cpu_avx2_ok() || cpu::cpu_avx512_ok() || std::getenv("STRATA_NO_IQ256")) return 77;
++    try {
++        cpu::NativeFmt f; std::string why;
++        require(cpu::native_fmt(21,20,kH,kFF,f,why), "native geometry");
++        cpu::ExpertLayout lay; lay.native=true; lay.n_layers=1; lay.n_expert=3;
++        lay.fmt={f}; lay.offset={0}; lay.bytes={f.bytes}; lay.total=f.bytes*3; lay.max_blob=f.bytes;
++        std::vector<uint8_t> blobs(lay.total);
++        for(int e=0;e<3;++e) { uint64_t seed=301+e; fill_blob(blobs.data()+e*f.bytes,f,seed); }
++        const uint64_t need=3*2*kFF*(kH/256)*sizeof(cpu::Iq3sCompactBlock), reserve=16ull<<30;
++        cpu::Iq3sCache cache;
++        require(!cache.prepare(blobs.data(),blobs.size(),lay,0,need+reserve,64ull<<30,reserve,why), "disabled");
++        require(cache.get(0,0)==nullptr && cache.bytes()==0,"disabled storage");
++        require(!cache.prepare(blobs.data(),blobs.size(),lay,need-1,need+reserve,64ull<<30,reserve,why),"budget refusal");
++        require(!cache.prepare(blobs.data(),blobs.size(),lay,need,need+reserve-1,64ull<<30,reserve,why),"RAM refusal");
++        require(!cache.prepare(blobs.data(),blobs.size(),lay,need,need+reserve,need+reserve-1,reserve,why),"commit refusal");
++        require(!cache.prepare(blobs.data(),blobs.size(),lay,need,need+reserve,~0ull,reserve,why),"unknown commit refusal");
++        require(cache.prepare(blobs.data(),blobs.size(),lay,need,need+reserve,64ull<<30,reserve,why),"valid exact cache must load");
++        require(cache.bytes()==need && cache.get(0,0) && cache.get(0,2),"cache size/endpoints");
++        require(!cache.get(-1,0)&&!cache.get(1,0)&&!cache.get(0,-1)&&!cache.get(0,3),"lookup bounds");
++        cache.clear(); require(cache.bytes()==0 && !cache.get(0,0),"clear releases");
++        require(cache.prepare(blobs.data(),blobs.size(),lay,need,need+reserve,64ull<<30,reserve,why),"reopen");
++        auto bad=lay; bad.offset[0]=~0ull-1;
++        require(!cache.prepare(blobs.data(),blobs.size(),bad,need,need+reserve,64ull<<30,reserve,why),"offset overflow");
++        require(!cache.get(0,0)&&cache.bytes()==0,"failure clears old storage");
++        bad=lay; bad.fmt[0].n_embd=1;
++        require(!cache.prepare(blobs.data(),blobs.size(),bad,need,need+reserve,64ull<<30,reserve,why),"invalid shape");
++        bad=lay; bad.n_expert=INT64_MAX;
++        require(!cache.prepare(blobs.data(),blobs.size(),bad,need,need+reserve,64ull<<30,reserve,why),"size overflow");
++        bad=lay; bad.fmt[0].gu_type=18;
++        require(!cache.prepare(blobs.data(),blobs.size(),bad,need,need+reserve,64ull<<30,reserve,why),"unsupported format");
++        require(cache.prepare(blobs.data(),blobs.size(),lay,need,need+reserve,64ull<<30,reserve,why),"parity prepare");
++        cpu::Iq3sCache other;
++        require(other.prepare(blobs.data(),blobs.size(),lay,need,need+reserve,64ull<<30,reserve,why),"second owner");
++        require(other.get(0,0)!=cache.get(0,0),"independent owners");
++        other.clear(); require(cache.get(0,0)!=nullptr,"independent lifetime");
++        // Direct rows additionally stress sign-on-activation at -128, signed/zero scales,
++        // and partial row ranges without relying on the pool's dispatch threshold.
++        Acts edge(f,1701);
++        for(int t=0;t<kMaxT;++t) for(int b=0;b<kH/256;++b) {
++            auto& q=reinterpret_cast<block_q8_K*>(edge.gu[t].data())[b];
++            q.d=b%3==0?0.f:((b%2)?-.001f:.001f);
++            for(int j=0;j<256;++j) q.qs[j]=((j+t)%3==0)?-128:(((j+t)%3==1)?127:0);
++        }
++        for(int nt=1;nt<=8;++nt) {
++            std::vector<float> a(nt*kFF,-99),b(a); float* ap[8];float* bp[8];
++            for(int t=0;t<nt;++t) { ap[t]=a.data()+t*kFF;bp[t]=b.data()+t*kFF; }
++            cpu::iq256_gu_rows_v(cpu::kIq256Gather,21,blobs.data(),f.gu_row,f.up_off,kH,edge.gup,nt,ap,7,kFF-3);
++            cpu::iq3s_compact_gu(cache.get(0,0),kH/256,edge.gup,nt,bp,kFF,7,kFF-3);
++            require(rows_differ(a.data(),b.data(),a.size())==0,"extreme activation/range parity");
++        }
++        Acts act(f,1601); cpu::ExpertPool pool(9,false,true,cpu::PoolAffinity::All,30);
++        int cases=0;
++        for(int nt=1;nt<=8;++nt) for(int nj:{1,3}) {
++            std::vector<float> out(nj*nt*kH), reference;
++            std::vector<cpu::ExpertJobMulti> jobs(nj);
++            for(int j=0;j<nj;++j) {
++                jobs[j].blob=blobs.data()+j*f.bytes; jobs[j].nt=nt;
++                for(int t=0;t<nt;++t) { jobs[j].nact[t]=act.gup[t]; jobs[j].out[t]=out.data()+(j*nt+t)*kH; }
++            }
++            pool.run_split_multi_native(f,jobs.data(),nj); reference=out;
++            for(int j=0;j<nj;++j) jobs[j].compact_gu=cache.get(0,j);
++            pool.run_split_multi_native(f,jobs.data(),nj);
++            require(rows_differ(reference.data(),out.data(),out.size())==0,"complete pool bitwise parity");
++            for(float x:out) require(std::isfinite(x),"finite output");
++            ++cases;
++        }
++        std::printf("C020 cache memory/bounds/lifecycle PASS; %d complete-pool parity cases PASS\n",cases); return 0;
++    } catch(const std::exception& e) { std::fprintf(stderr,"C020 FAIL: %s\n",e.what()); return 1; }
++}
++
+diff --git a/src/kernels/cpu/iq3s_compact.inl b/src/kernels/cpu/iq3s_compact.inl
+new file mode 100644
+index 00000000..b66e8917
+--- /dev/null
++++ b/src/kernels/cpu/iq3s_compact.inl
+@@ -0,0 +1,81 @@
++// Included inside the AVX2 translation unit after its native row helpers.
++namespace iq3s_compact_detail {
++
++template<int NT>
++inline void dot(const Iq3sCompactBlock* row, int nb, const block_q8_K* const* y, float* res) {
++    const __m128i table = _mm_setr_epi8(1,3,5,7,9,11,13,15,-1,-3,-5,-7,-9,-11,-13,-15);
++    const __m128i mask = _mm_set1_epi8(15);
++    __m256 accf[NT];
++    for (int t = 0; t < NT; ++t) accf[t] = _mm256_setzero_ps();
++    const int pf = prefetch_distance();
++    for (int i = 0; i < nb; ++i) {
++        const auto& b = row[i];
++        rows_ahead(reinterpret_cast<const uint8_t*>(&b), pf);
++        __m256i acci[NT];
++        for (int t = 0; t < NT; ++t) acci[t] = _mm256_setzero_si256();
++        for (int h = 0; h < 8; ++h) {
++            const __m128i q = _mm_loadu_si128(reinterpret_cast<const __m128i*>(b.weights + 16*h));
++            const __m128i lo = _mm_shuffle_epi8(table, _mm_and_si128(q, mask));
++            const __m128i hi = _mm_shuffle_epi8(table, _mm_and_si128(_mm_srli_epi16(q, 4), mask));
++            const __m256i signed_g = _mm256_inserti128_si256(_mm256_castsi128_si256(lo), hi, 1);
++            const __m256i g = _mm256_abs_epi8(signed_g);
++            const __m256i sgn = _mm256_sign_epi8(_mm256_set1_epi8(1), signed_g);
++            const int s = b.scales[h];
++            const __m256i sc = sc16(2*(s & 15)+1, 2*(s >> 4)+1);
++            for (int t = 0; t < NT; ++t) {
++                const __m256i yv = _mm256_loadu_si256(reinterpret_cast<const __m256i*>(y[t][i].qs + 32*h));
++                // Sign the activation, including native -128 wrap; do not sign the multiply instead.
++                acci[t] = plain::madd_add(acci[t], _mm256_maddubs_epi16(g, _mm256_sign_epi8(yv, sgn)), sc);
++            }
++        }
++        const float d = h2f(b.d) * Fmt32<21>::K;
++        for (int t = 0; t < NT; ++t)
++            accf[t] = _mm256_fmadd_ps(_mm256_set1_ps(d*y[t][i].d), _mm256_cvtepi32_ps(acci[t]), accf[t]);
++    }
++    for (int t = 0; t < NT; ++t) res[t] = hsum8(accf[t]);
++}
++
++template<int NT>
++void gu(const Iq3sCompactBlock* data, int nb, const void* const* act, float* const* out,
++        int rows, int r0, int r1) {
++    const block_q8_K* y[NT];
++    for (int t = 0; t < NT; ++t) y[t] = reinterpret_cast<const block_q8_K*>(act[t]);
++    float g[NT], u[NT];
++    for (int r = r0; r < r1; ++r) {
++        dot<NT>(data + size_t(r)*nb, nb, y, g);
++        dot<NT>(data + size_t(rows+r)*nb, nb, y, u);
++        for (int t = 0; t < NT; ++t) out[t][r] = (g[t]/(1.f + std::exp(-g[t]))) * u[t];
++    }
++}
++} // namespace iq3s_compact_detail
++
++void iq3s_compact_expand(const uint8_t* src, Iq3sCompactBlock* dst, size_t blocks) {
++    for (size_t i = 0; i < blocks; ++i) {
++        const uint8_t* b = src + i*Fmt32<21>::bytes;
++        dst[i].d = u16(b);
++        for (int j = 0; j < 4; ++j) for (int h = 0; h < 2; ++h) {
++            __m256i g, sign, sc;
++            Fmt32<21>::decode(b, j, h, g, sign, sc);
++            alignas(32) uint8_t codes[32];
++            alignas(32) int16_t scales[16];
++            // Each positive grid is odd in [1,15]. Its three-bit magnitude index plus sign is exact.
++            const __m256i mag = _mm256_and_si256(_mm256_srli_epi16(_mm256_sub_epi8(g,_mm256_set1_epi8(1)),1),_mm256_set1_epi8(7));
++            const __m256i neg = _mm256_and_si256(sign, _mm256_set1_epi8(8));
++            _mm256_store_si256(reinterpret_cast<__m256i*>(codes), _mm256_or_si256(mag,neg));
++            _mm256_store_si256(reinterpret_cast<__m256i*>(scales), sc);
++            const int H = 2*j+h;
++            for (int q = 0; q < 16; ++q) dst[i].weights[16*H+q] = codes[q] | (codes[q+16] << 4);
++            dst[i].scales[H] = uint8_t(((scales[0]-1)/2) | (((scales[8]-1)/2) << 4));
++        }
++    }
++}
++
++void iq3s_compact_gu(const Iq3sCompactBlock* src, int nb, const void* const* act, int nt,
++                     float* const* out, int rows, int r0, int r1) {
++    switch (nt) {
++#define IQ3S_NT(N) case N: iq3s_compact_detail::gu<N>(src,nb,act,out,rows,r0,r1); break
++        IQ3S_NT(1); IQ3S_NT(2); IQ3S_NT(3); IQ3S_NT(4);
++        IQ3S_NT(5); IQ3S_NT(6); IQ3S_NT(7); IQ3S_NT(8);
++#undef IQ3S_NT
++    }
++}
+diff --git a/src/kernels/cpu/iq_avx2.cpp b/src/kernels/cpu/iq_avx2.cpp
+index 0bd485c4..24f659bd 100644
+--- a/src/kernels/cpu/iq_avx2.cpp
++++ b/src/kernels/cpu/iq_avx2.cpp
+@@ -22,6 +22,7 @@
+ // initializer at namespace scope (#391, 016ea2e), the switches are read on first use.
+ #include "strata/kernels/cpu/iq_avx2.hpp"
+ #include "strata/kernels/cpu/expert_layout.hpp"
++#include "strata/kernels/cpu/iq3s_cache.hpp"
+ 
+ #define GGML_COMMON_DECL_CPP
+ #define GGML_COMMON_IMPL_CPP
+@@ -535,4 +536,6 @@ void iq4nl256_down_rows(const uint8_t* w, size_t row_bytes, int n, const void* c
+     iq4nl256_down_rows_v(vnni_on() ? kIq256Vnni : 0, w, row_bytes, n, hq, nt, out, r0, r1);
+ }
+ 
++#include "iq3s_compact.inl"
++
+ }  // namespace strata::kernels::cpu
+diff --git a/src/kernels/cpu/pool.cpp b/src/kernels/cpu/pool.cpp
+index 16e3fb2d..e7814e90 100644
+--- a/src/kernels/cpu/pool.cpp
++++ b/src/kernels/cpu/pool.cpp
+@@ -2,6 +2,7 @@
+ #include "strata/kernels/cpu/pool.hpp"
+ #include "strata/core/progress.hpp"
+ #include "strata/kernels/cpu/expert_layout.hpp"
++#include "strata/kernels/cpu/iq3s_cache.hpp"
+ 
+ #include <algorithm>
+ #include <atomic>
+@@ -647,7 +648,13 @@ void ExpertPool::drain(int id, ExpertScratch& scratch, uint32_t epoch) {
+                 } else if (mode_ == 5) {
+                     float* ff[MAXT];
+                     for (int t = 0; t < mjobs_[e].nt; ++t) ff[t] = sb.ff[t];
+-                    native_gu_rows(*nfmt_, mjobs_[e].blob, mjobs_[e].nact, mjobs_[e].nt, ff, r0, r1);
++                    const auto& job = mjobs_[e];
++                    if (job.compact_gu && nfmt_->gu_type == 21 && job.nt >= native_gu_mt_min(21) &&
++                        job.nt <= 8 && cpu_avx2_ok())
++                        iq3s_compact_gu(job.compact_gu, int(nfmt_->n_embd / 256), job.nact, job.nt,
++                                        ff, int(nfmt_->n_ff), r0, r1);
++                    else
++                        native_gu_rows(*nfmt_, job.blob, job.nact, job.nt, ff, r0, r1);
+                 } else if (q2_native_kernels(nfmt_->d_type)) {
+                     // Q2_0 down (most IQ layers): the AVX-512 kernel, ggml-cpu has only a scalar one on x86
+                     const ActQ* a2[MAXT];

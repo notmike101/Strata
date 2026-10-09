@@ -1,0 +1,14 @@
+We need answer user's request. Need produce final detailed answer >=1200 words. Need implement thread-safe Python TTLCache class using OrderedDict and monotonic clock. Include set, get, delete, clear, len, expiration, capacity eviction, unit tests with injected fake clock, detailed explanation thread safety and complexity. Complete code, then tests, then design. Do not abbreviate. We should likely provide full code blocks. Need maybe include imports. Need ensure thread-safe: use RLock? OrderedDict not thread-safe; operations under lock. Expiration can be lazy. Capacity eviction after expiring maybe evict oldest. TTLCache class with maxsize and ttl. Fake clock injectable. Need unit tests using unittest. Need think through implementation details.
+
+We need produce at least 1200 words. Should be detailed. Let's design:
+
+class MonotonicClock: now -> time.monotonic()
+class FakeClock: now attribute increments.
+TTLCache:
+- __init__(maxsize, ttl, clock=None)
+- _data OrderedDict mapping key -> (value, expires_at)
+- maxsize nonnegative? ttl nonnegative? validate.
+- _lock = threading.RLock() to allow methods call _prune? Maybe not needed if no reentrant calls, but RLock safer.
+- _clock = clock or MonotonicClock()
+Methods:
+- set(key, value, ttl=None): with lock: now = _clock.now(); expires_at = now + ttl; if key exists pop? For LRU? Need move_to_end? set: if maxsize <= 0 maybe return; if key exists update value and expire and move_to_end. Else if len >= maxsize: self._evict_one_locked() after pruning? Need expire before insertion. Then insert at end. Could call _prune_expired_locked then if len>=maxsize evict oldest. But pruning may be O(n) if many expired. For capacity eviction, OrderedDict order insertion/access? For LRU, get should move_to_end. set of existing update move_to_end. delete remove. Expiration lazy and proactive pruning. Complexity: O(1) amortized if pruning only expired entries? But _prune_expired iterates all if many expired could be O(n). Need maybe use heap for exact expiration, but request says OrderedDict and monotonic clock. Could keep OrderedDict and implement expiry by lazy checking. But they ask expiration and complexity. Need discuss. Could implement efficient expiration

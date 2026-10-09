@@ -1,0 +1,15 @@
+We need answer user's request. Need produce final detailed answer at least 1200 words, complete code, tests, explanation thread safety complexity. User says benchmark identifier ignore. Implement thread-safe Python TTLCache using OrderedDict and monotonic clock. Include set, get, delete, clear, len, expiration, capacity eviction, unit tests with injected fake clock, detailed explanation. Do not abbreviate implementation. Need likely provide full code with class, fake clock tests. Need ensure correctness.
+
+Need think about design. Python TTLCache thread-safe. Use collections.OrderedDict for LRU and expiration. Use time.monotonic by default but allow injected clock. Need methods set(key, value, ttl? maybe ttl optional? Could have per-entry TTL). get returns value if not expired and moves to end for LRU. delete. clear. len: active entries only (excluding expired) maybe triggers expiration. Expiration: on set/get/len perhaps purge expired. Capacity eviction: maxsize? If maxsize None? We need decide. Maybe capacity eviction means max_size. Use OrderedDict: insertion/update order. But if get moves to end, LRU. Need thread safety: RLock? Use threading.Lock (or RLock if methods call internal helper requiring lock). Public methods acquire lock. Internal helpers assume lock held. Monotonic clock injected: callable returning float. Need ensure fake clock used in tests. Need avoid time.monotonic inside while expired? Use self._now = clock. Could have default_clock=time.monotonic.
+
+Need complete implementation not abbreviated. Include unit tests perhaps using unittest and FakeClock.
+
+Potential implementation details:
+
+from collections import OrderedDict
+import threading
+from time import monotonic
+
+DEFAULT_TTL = None? TTLCache(max_size, default_ttl=None, clock=time.monotonic). Entries store (value, expires_at). For TTL, when set: ttl = ttl if ttl is not None else default_ttl. If ttl <=0? If ttl is None no expiration? Need handle. If ttl <= 0: maybe immediate expiration; but to be robust, if ttl is not None and ttl <= 0: don't store? Maybe store with expires_at = now so purged. But if default_ttl None and ttl None, no expiration.
+
+OrderDict: key -> (value, expires_at). Need purge expired: iterate over list(order.keys()) to detect from oldest by expiration? OrderedDict order is access/insertion order, not expiration order, so cannot break when first unexpired

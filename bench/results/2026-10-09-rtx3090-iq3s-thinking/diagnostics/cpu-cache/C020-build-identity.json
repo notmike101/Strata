@@ -1,0 +1,22 @@
+{
+  "base_commit": "b1eea8a5",
+  "dirty_source": true,
+  "engine_sha256": "65c6b700235901b756a1a634aaefa4f1146f2d2fb4f1ccfeed20efce7a3e6295",
+  "source_sha256": {
+    "CMakeLists.txt": "967b8a861c18c41778b6c6bf0f0365effbae5b3ff2856b0044bf4c1761f5fe31",
+    "include/strata/core/expert_source.hpp": "b9a85f8acd3a1242b306acfbf87584ff44105ea5508c5e66559a7399409da368",
+    "include/strata/kernels/cpu/iq3s_cache.hpp": "a3fbfbabaeb89d1bfb3916b8afeb28d2956f89190b556d8febcef37a6dc84c94",
+    "include/strata/kernels/cpu/pool.hpp": "1cf80f28018b76f47fe0904b721d9efb91ae512c7964a98bcc4d33c1c84d00a4",
+    "src/core/expert_source.cpp": "74aeb710f3d2d694367bc833e47dc4b1df7a0ca41811f1cc42b561738d296e99",
+    "src/kernels/cpu/expert_layout.cpp": "b9260c90cbb192d42501494892679a304185c268da0d5a0130f36265941e3fee",
+    "src/kernels/cpu/iq_avx2.cpp": "84dbaada646cd0f284ec79c1a196da57ae037a8255474d24fbc7a86c055d9eb7",
+    "src/kernels/cpu/iq3s_compact.inl": "e2a867808ea877a0ccf26183e243be2367ab8e045e61672052830613c0ab748d",
+    "src/kernels/cpu/iq3s_cache_test.cpp": "20c1aa88867d2fb841ff9461a8b51a2b178b36b22e5fddf2e11300d71b58183b",
+    "src/kernels/cpu/pool.cpp": "46fd4e2370a5a10a664b1f65c739219c3ce6849459735652b669832adce8c77e"
+  },
+  "cuda": "13.3.73",
+  "cuda_architecture": 86,
+  "msvc": "17.14.36",
+  "build_type": "Release",
+  "portable_static_runtime": true
+}

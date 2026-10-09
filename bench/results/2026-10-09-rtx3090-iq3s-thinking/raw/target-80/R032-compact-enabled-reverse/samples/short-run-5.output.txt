@@ -1,0 +1,11 @@
+We need answer user's request. Need produce final answer at least 1200 words. Need implement thread-safe Python TTLCache using OrderedDict monotonic clock, include set, get, delete, clear, len, expiration, capacity eviction, unit tests with injected fake clock, detailed explanation thread safety and complexity. Do not abbreviate implementation. Need code complete then tests then explain design.
+
+Need think through design. Python TTLCache thread-safe. Use OrderedDict. monotonic clock injected? Use time.monotonic by default but fake clock injectable. Need class methods: set, get, delete, clear, __len__, maybe __contains__, purge, etc. Expiration and capacity eviction. Thread safety using threading.RLock. Need ensure monotonic clock injected. Fake clock in tests. Need complete code not abbreviate. Include imports collections, threading, time. Use sentinel? 
+
+Potential pitfalls: OrderedDict move_to_end. Need store TTL maybe per-key default? Could constructor ttl per cache. set(key, value, ttl=None). If ttl <=0? Could delete? Maybe if ttl is None use default ttl. If ttl <=0 maybe store with immediate expiration? For cache, set with ttl <=0 deletes existing and does not insert? Or maybe stores expiring in past. Tests easier. Define set always insert and expire = clock() + ttl. If ttl <=0: if ttl == 0 immediate delete maybe. Need avoid stale returns. get checks expiration and deletes if expired. set if expired? If ttl <=0 maybe delete key and don't insert? But capacity? Hmm.
+
+Capacity eviction: LRU eviction. OrderedDict maintains order: when get on existing, move_to_end. set existing updates move_to_end. If len > capacity after insert, evict oldest item at end(False) (oldest = first in ordered dict). Since ordered dict insertion order, move_to_end makes recently used last. Popitem(last=False). Need under lock.
+
+len: Need __len__ returns number of non-expired? The request says len, expiration. Could __len__ perform purge_expired and return len? But under lock. Better __len__ purges expired then returns internal length. Could also add size() excluding expired. If we purge in len, side effects. Need thread safe. If len purges expired, it may evict? no. Need capacity not exceed; expired purge reduces. Use _purge_expired. 
+
+Thread safety: use RLock, because internal methods call under lock? Or use lock in

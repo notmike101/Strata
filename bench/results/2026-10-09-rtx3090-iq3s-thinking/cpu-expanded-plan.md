@@ -59,3 +59,6 @@ Integration is scoped to IQ3_S gate/up on AVX2 CPUs using the existing AVX2 arit
 - [ ] Build CUDA and available CPU tests. HIP/SYCL toolchains are unavailable on this host; do not claim those builds or request upstream review.
 - [ ] Run same-day full-model control/candidate with fixed sampler/context/prompts, all samples, startup/RAM telemetry and prompt processing. Reject if gains do not transfer or any quality/stability/memory/prompt gate regresses. Only then extend full qualification matrix.
 - [ ] Publish source, commands, binary hashes, failures and results on the current branch. Preserve production launcher until qualification. Stop all benchmark models.
+
+
+C020 disposition: implementation, memory/ISA/lifecycle unit checks, CPU/CUDA builds, independent review and two-order served comparisons completed(E047/E048). Not promoted. Full source retained as diagnostics/cpu-cache/C020-rejected.patch; active source restored. Actual ArenaExpertSource reopen and extended serving qualification intentionally remain uncompleted for this rejected candidate. The microbenchmark gain did not transfer to a repeatable90tok/s server result.
