@@ -1,0 +1,12 @@
+We need answer user's request. Need produce final detailed answer at least 1200 words. Need implement thread-safe Python TTLCache using OrderedDict and monotonic clock. Include set, get, delete, clear, len, expiration, capacity eviction, unit tests with injected fake clock, detailed explanation thread safety complexity. Complete code, tests, explain design. No abbreviate implementation. Ignore identifier.
+
+Need think carefully. We need provide code. Python. Thread-safe: use RLock? OrderedDict not thread-safe. TTL expiration on get, lazy expiration maybe also purge on len? Need ensure capacity eviction. Inject fake clock. Need maybe type hints.
+
+Design:
+- Clock protocol: monotonic -> float
+- SystemClock uses time.monotonic
+- TTLCache:
+  - _entries: OrderedDict[str, Any]? Need store value and expires_at. Could store value, but if value None can't distinguish. Use tuple (value, expires_at). Use sentinel for no expiry.
+  - _lock = threading.RLock()
+  - _maxsize, _default_ttl maybe. If ttl None or <=? Need maybe ttl positive. If ttl is None = never expires? But TTLCache maybe requires ttl. Include maxsize and ttl? The request only TTLCache class; could have maxsize and ttl default. If ttl None means default no expiration? Need expiration. I'll make ttl float | None, None means no default expiry; set ttl can override.
+  - set(key, value, ttl=None): lock, validate key? not necessary. now = clock.monotonic(); expires = now + ttl if ttl else None. If key exists delete then add to end. Then _evict_capacity? Also expire? Need when len exceed maxsize. Could remove oldest. But OrderedDict ordering should reflect insertion/refresh. For LRU-ish? TTLCache often OrderedDict with move_to_end on get, but capacity eviction can remove oldest? If move_to_end on get, capacity evicts least recently used. If don't move, FIFO. Need decide. User didn't specify LRU. OrderedDict often for LRU. TTLCache could move_to_end on get to keep recently used. But with TTL, expiration independent. Capacity eviction: remove oldest by insertion or LRU. Implement LRU: move_to_end in get/set. This is fine. But if capacity eviction should remove oldest? LRU more useful. Need explain. Need ensure if maxsize=0? Raise ValueError or support maxsize >=0

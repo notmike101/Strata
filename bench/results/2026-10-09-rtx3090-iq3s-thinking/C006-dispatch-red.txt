@@ -1,0 +1,72 @@
+**********************************************************************
+** Visual Studio 2022 Developer Command Prompt v17.14.36
+** Copyright (c) 2025 Microsoft Corporation
+**********************************************************************
+[0/1] Re-running CMake...
+-- Strata: CUDA enabled, arch 86
+-- strata: pack/full/experts.bin absent - the expert arena load test is NOT registered
+-- Warning: ccache not found - consider installing it for faster compilation or disable this warning with GGML_CCACHE=OFF
+-- CMAKE_SYSTEM_PROCESSOR: AMD64
+-- CMAKE_GENERATOR_PLATFORM: 
+-- GGML_SYSTEM_ARCH: x86
+-- Including CPU backend
+-- x86 detected
+-- Adding CPU backend variant ggml-cpu: /arch:AVX2 GGML_AVX2;GGML_FMA;GGML_F16C;__BMI2__;GGML_BMI2
+-- ggml version: 0.24.0
+-- ggml commit:  8a46952
+-- Configuring done (5.8s)
+-- Generating done (0.4s)
+-- Build files have been written to: <STRATA_ROOT>/local-setup/target-80/build-cuda86
+[1/10] Building C object ggml/src/CMakeFiles/ggml-base.dir/ggml.c.obj
+[2/10] Linking CXX static library ggml/src/ggml-base.lib
+[3/10] Building CXX object CMakeFiles/iq_avx2_dispatch_test.dir/src/kernels/cpu/iq_avx2_dispatch_test.cpp.obj
+[4/10] Building CXX object CMakeFiles/strata_kernels_cpu.dir/src/kernels/cpu/native_expert.cpp.obj
+[5/10] Building CXX object CMakeFiles/strata_kernels_cpu.dir/src/kernels/cpu/iq_avx2.cpp.obj
+[6/10] Linking CXX static library strata_kernels_cpu.lib
+[7/10] Linking CXX executable iq_avx2_dispatch_test.exe
+[8/10] Building CXX object CMakeFiles/iq_avx2_parity.dir/src/kernels/cpu/iq_avx2_parity.cpp.obj
+[9/10] Linking CXX executable iq_avx2_parity.exe
+Test project <STRATA_ROOT>/local-setup/target-80/build-cuda86
+    Start 77: iq_dispatch_auto
+1/9 Test #77: iq_dispatch_auto .................   Passed    0.10 sec
+    Start 78: iq_dispatch_global_off
+2/9 Test #78: iq_dispatch_global_off ...........   Passed    0.06 sec
+    Start 79: iq_dispatch_global_on
+3/9 Test #79: iq_dispatch_global_on ............   Passed    0.06 sec
+    Start 80: iq_dispatch_mixed
+4/9 Test #80: iq_dispatch_mixed ................***Failed    0.06 sec
+type 22: variant 1, expected 0 (legacy 1)
+
+    Start 81: iq_dispatch_xxs_on
+5/9 Test #81: iq_dispatch_xxs_on ...............***Failed    0.06 sec
+type 18: variant 0, expected 1 (legacy 0)
+
+    Start 82: iq_dispatch_s_on
+6/9 Test #82: iq_dispatch_s_on .................***Failed    0.06 sec
+type 21: variant 0, expected 1 (legacy 0)
+
+    Start 83: iq_dispatch_two_on
+7/9 Test #83: iq_dispatch_two_on ...............***Failed    0.06 sec
+type 22: variant 0, expected 1 (legacy 0)
+
+    Start 84: iq_dispatch_xxs_off
+8/9 Test #84: iq_dispatch_xxs_off ..............***Failed    0.06 sec
+type 18: variant 1, expected 0 (legacy 1)
+
+    Start 85: iq_dispatch_s_off
+9/9 Test #85: iq_dispatch_s_off ................***Failed    0.06 sec
+type 21: variant 1, expected 0 (legacy 1)
+
+
+33% tests passed, 6 tests failed out of 9
+
+Total Test time (real) =   0.63 sec
+
+The following tests FAILED:
+	 80 - iq_dispatch_mixed (Failed)
+	 81 - iq_dispatch_xxs_on (Failed)
+	 82 - iq_dispatch_s_on (Failed)
+	 83 - iq_dispatch_two_on (Failed)
+	 84 - iq_dispatch_xxs_off (Failed)
+	 85 - iq_dispatch_s_off (Failed)
+Errors while running CTest

@@ -90,6 +90,14 @@
     "0.20"
   ],
   "engine_environment": {},
+  "engine_build": {
+    "kind": "local unchanged source control",
+    "source_commit": "fb58e0dbc8399662c0e47c76578c6e878b14f6cf",
+    "cuda": "13.3.73",
+    "sm": "86",
+    "msvc": "17.14.36"
+  },
+  "git_commit_note": "git_commit is the measurement workspace HEAD, not necessarily the engine source revision; use engine_build and the executable hash.",
   "sampling_defaults": {
     "temperature": 1.0,
     "top_p": 0.95,

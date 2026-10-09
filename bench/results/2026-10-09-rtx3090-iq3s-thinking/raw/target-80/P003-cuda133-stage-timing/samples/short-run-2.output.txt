@@ -1,0 +1,20 @@
+We need answer user's request. Need produce final detailed answer at least 1200 words, complete code, tests, explanation thread safety complexity. User says benchmark identifier ignore. Implement thread-safe Python TTLCache using OrderedDict and monotonic clock. Include set, get, delete, clear, len, expiration, capacity eviction, unit tests with injected fake clock, detailed explanation. Do not abbreviate implementation. Need likely provide code blocks. Need ensure length >=1200 words. Need think through implementation.
+
+We need craft Python code. Thread-safe TTLCache. OrderedDict, monotonic clock injectable. set get delete clear len expiration capacity eviction. Need maybe context manager, lock, condition? Unit tests with fake clock. Need full code not abbreviate. Need discuss thread safety: lock protects shared state, get may move item to end, evicts expired and LRU. Monotonic clock prevents system clock changes. Expiration lazy on get, also purge on set maybe. Capacity eviction LRU. Need thread safety issues: multiple operations with lock. Avoid deadlocks. Clock injection: class accepts clock=lambda: time.monotonic(). Fake clock increments manually.
+
+Need code complete. Could include TTLCache class with __init__, _now, _purge, _expire_entry, set, get, delete, clear, __len__, __contains__, maybe __getitem__, __setitem__, __delitem__, __repr__. Need avoid abbreviated. Need unit tests perhaps with unittest. FakeClock class. Tests: insert/get, expiration, delete, capacity eviction, clear, thread safety concurrent? Maybe tests with injected fake clock and threads? Need complete but not too huge.
+
+Potential implementation:
+import threading, time, unittest
+from collections import OrderedDict
+from typing import Any, Callable, Mapping, Optional
+
+class TTLCache:
+    """Thread-safe TTL + LRU cache."""
+    def __init__(self, maxsize=128, ttl=300.0, clock=None, timer=None? no):
+        if maxsize <=0: raise ValueError
+        if ttl <0: raise ValueError? TTL zero means immediate expiry? allow zero.
+        self._maxsize = maxsize
+        self._ttl = float(ttl)
+        self._clock = clock or time.monotonic
+        self._lock = threading.RLock()? Since public methods might call internal without nested. Use RLock if clear calls purge. But simple Lock okay. Need avoid recursive lock? _set

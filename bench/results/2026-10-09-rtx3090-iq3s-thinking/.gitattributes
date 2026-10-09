@@ -1,2 +1,5 @@
 # Evidence hashes refer to exact bytes, including CSV line endings.
 * -text
+# Generated response text is evidence; preserve trailing whitespace as captured.
+*.output.txt -whitespace
+C00?-*.txt -whitespace

@@ -1,0 +1,11 @@
+We need answer user's request. Need produce final detailed answer at least 1200 words, complete code, tests, explanation design. Need ignore benchmark identifier. Need implement thread-safe Python TTLCache class using OrderedDict and monotonic clock. Include set, get, delete, clear, len, expiration, capacity eviction, unit tests with injected fake clock, detailed explanation thread safety and complexity. Do not abbreviate implementation. Need likely no external libs? Use collections.OrderedDict, threading.RLock, time.monotonic maybe default. Could include type hints. Need ensure correct behavior: get returns default None, touches expiry? TTLCache: items expire at ttl. Need capacity eviction LRU? OrderedDict typical: set moves to end, delete, clear. Expiration: need remove expired on access and maybe len? Since len cannot scan all? Could remove expired on len. Need thread safety: lock around operations. Monotonic clock: injected clock for tests, default time.monotonic. Potential issue: TTLCache capacity and expiry: when setting new item, if expired entries exist, should evict expired first to free capacity; if still over capacity, evict oldest (LRU). Need handle ttl=0? If ttl <=0 perhaps immediately expire. Need avoid mutating OrderedDict during iteration? Could implement _purge_expired? But for len, if we purge all expired, O(n). Is that okay? Complexity: get/set/delete O(1) amortized? expiration checking may require O(1) if we remove only expired at access. But if many expired, set eviction may purge? Could keep expiration order? Need detailed. Need tests with fake clock. Need ensure fake clock can set current time, increment. Also monotonic clock: time.monotonic for default.
+
+Need design carefully.
+
+Option: OrderedDict[str, tuple[float, Any]] mapping key -> (expire_at, value). Maintain maxsize and ttl. Clock callable returning float.
+
+Thread safety: Use threading.RLock to allow nested lock? Public methods acquire lock. _locked methods assume lock held. If clock can call user code? no.
+
+get(key, default=None): with lock: check if key in cache. If not return default. expire_at, value = cache[key]. If now >= expire_at (maybe >? Usually expired when time >= expire_at). Delete expired, return default. Else touch key move_to_end, return value.
+
+set(key, value, ttl=None): ttl = self.default_ttl if None else ttl. now

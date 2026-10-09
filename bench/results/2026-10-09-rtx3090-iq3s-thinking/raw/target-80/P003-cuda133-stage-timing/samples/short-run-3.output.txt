@@ -1,0 +1,20 @@
+We need answer user's request. Need produce final detailed answer at least 1200 words. Need implement thread-safe Python TTLCache using OrderedDict and monotonic clock. Include set, get, delete, clear, len, expiration, capacity eviction, unit tests with injected fake clock, detailed explanation thread safety complexity. Complete code, tests, explain design. No abbreviate implementation.
+
+We need design. Need be careful. Python threading.Lock. OrderedDict for LRU? TTLCache: capacity eviction likely LRU. Thread safety with single lock around all operations. Use monotonic clock injected callable. TTL expiration. len should count non-expired entries. get returns value or None? Maybe sentinel? We need include tests. Use unittest. Fake clock. Need complete code.
+
+Potential implementation:
+
+import threading
+from collections import OrderedDict
+
+_MISSING = object()
+
+class TTLCache:
+    """..."""
+    def __init__(self, maxsize=128, ttl=30.0, clock=time.monotonic):
+        if maxsize <=0: raise ValueError
+        if ttl <0? ttl should positive. If ttl=0 immediate expire? support? ttl None? We'll require >0 maybe >=0. Use float.
+        self._maxsize = int(maxsize)
+        self._ttl = float(ttl)
+        self._clock = clock
+        self._lock = threading.RLock? Single lock. RLock allows internal calls? Could use Lock and private helpers no locks. Simpler: all public methods acquire lock, call _get_nowait etc. Avoid reentrancy. Use _entries OrderedDict mapping key -> value. Expiration maybe store per-entry expires_at to support variable ttl? User said using TTLCache, include expiration. Could support set(key,value,ttl=None). Need capacity eviction. Store expiration per entry? If using OrderedDict and global TTL, need compute expiration on access. If variable ttl, store tuple (value, expires_at). Better. But OrderedDict for LRU. On set: if key exists update, move_to_end. If new and maxsize reached evict oldest (least recently used). But need purge expired entries before len/get/eviction. For capacity eviction, if expired entries exist, maybe purge them first before evicting live. Need careful thread safe. Use _now(). _purge_expired(now) while first entry expired? Since OrderedDict insertion/access order LRU, expiration times may not be sorted if ttl constant and insertion order?

@@ -1,0 +1,33 @@
+Test project <STRATA_ROOT>/local-setup/target-80/build-cuda86
+      Start 77: iq_dispatch_auto
+ 1/14 Test #77: iq_dispatch_auto .................   Passed    0.04 sec
+      Start 78: iq_dispatch_global_off
+ 2/14 Test #78: iq_dispatch_global_off ...........   Passed    0.04 sec
+      Start 79: iq_dispatch_global_on
+ 3/14 Test #79: iq_dispatch_global_on ............   Passed    0.04 sec
+      Start 80: iq_dispatch_mixed
+ 4/14 Test #80: iq_dispatch_mixed ................   Passed    0.04 sec
+      Start 81: iq_dispatch_xxs_on
+ 5/14 Test #81: iq_dispatch_xxs_on ...............   Passed    0.04 sec
+      Start 82: iq_dispatch_s_on
+ 6/14 Test #82: iq_dispatch_s_on .................   Passed    0.04 sec
+      Start 83: iq_dispatch_two_on
+ 7/14 Test #83: iq_dispatch_two_on ...............   Passed    0.04 sec
+      Start 84: iq_dispatch_xxs_off
+ 8/14 Test #84: iq_dispatch_xxs_off ..............   Passed    0.04 sec
+      Start 85: iq_dispatch_s_off
+ 9/14 Test #85: iq_dispatch_s_off ................   Passed    0.04 sec
+      Start 86: iq_dispatch_invalid_off
+10/14 Test #86: iq_dispatch_invalid_off ..........   Passed    0.04 sec
+      Start 87: iq_dispatch_invalid_on
+11/14 Test #87: iq_dispatch_invalid_on ...........   Passed    0.04 sec
+      Start 88: iq_avx2_parity
+12/14 Test #88: iq_avx2_parity ...................   Passed    0.25 sec
+      Start 89: iq_avx2_parity_iq3s_mt1
+13/14 Test #89: iq_avx2_parity_iq3s_mt1 ..........   Passed    0.24 sec
+      Start 90: iq_avx2_parity_mixed_gather
+14/14 Test #90: iq_avx2_parity_mixed_gather ......   Passed    0.29 sec
+
+100% tests passed out of 14
+
+Total Test time (real) =   1.26 sec
