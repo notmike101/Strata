@@ -55,6 +55,10 @@
     "wall_seconds": 353.32869540000684,
     "observer_interference_excluded": false
   },
+  "qualification": {
+    "passed": false,
+    "reason": "Commit headroom fell below16GiB; severe stalls; throughput below90; not a quality-qualified candidate."
+  },
   "model_alias": "qwen3.8-flash-next-iq3_s",
   "model_files": [
     {
