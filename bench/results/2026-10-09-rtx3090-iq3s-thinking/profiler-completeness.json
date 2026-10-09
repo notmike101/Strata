@@ -26,5 +26,36 @@
     ],
     "report_bytes": 50979154,
     "report_sha256": "17dc90e764ca9154027ac4627fd349d7789c64b44338c99a5b8141ed37d37ec0"
+  },
+  "P007": {
+    "kernel_records": 25333,
+    "first_kernel_seconds": 5.319827178,
+    "last_kernel_seconds": 20.196574984,
+    "graph_records": 1886,
+    "first_graph_seconds": 6.5839955,
+    "last_graph_seconds": 20.240039091,
+    "capture_seconds": 136.6825311,
+    "complete": false,
+    "diagnostics": [
+      "Configuration option cudaUseForceFlush was enabled. It may cause unnecessary synchronization, and in rare cases crash your application.",
+      "Couldn't allocate CUPTI buffers 1434033 times.Some CUPTI events might be missing.",
+      "CUPTI dropped 1434033 records. Some CUPTI events might be missing."
+    ],
+    "report_bytes": 12006366,
+    "report_sha256": "e1e5a174bdf1426b904ed7c9ba871f57fc4fef7394389696878d7a5097c9404d"
+  },
+  "P008": {
+    "kernel_records": 438817,
+    "first_kernel_seconds": 1.182642862,
+    "last_kernel_seconds": 9.777388918,
+    "capture_seconds": 11.2889814,
+    "complete": false,
+    "diagnostics": [
+      "Configuration option cudaUseForceFlush was enabled. It may cause unnecessary synchronization, and in rare cases crash your application.",
+      "Couldn't allocate CUPTI buffers 344406 times.Some CUPTI events might be missing.",
+      "CUPTI dropped 344406 records. Some CUPTI events might be missing."
+    ],
+    "report_bytes": 14955135,
+    "report_sha256": "743a6d70679ac752c11477ffae348969e50291c21409b24ef1a59aa25ea7d530"
   }
 }

@@ -1,0 +1,40 @@
+{
+  "qualifying": false,
+  "raw_target_decode": true,
+  "mtp": false,
+  "short_measured_runs": 3,
+  "longer_completed": false,
+  "abandoned": "Orders of magnitude below target in this placement; alternatives not exhausted.",
+  "metrics": {
+    "server_decode_tps": {
+      "median": 8.876380815705698,
+      "min": 8.688526739230092,
+      "max": 8.957306270512296
+    },
+    "prompt_tps": {
+      "median": 17.5148632492966,
+      "min": 17.275843074150938,
+      "max": 17.966511076680742
+    },
+    "request_e2e_tps": {
+      "median": 7.616669597325344,
+      "min": 7.472521524276198,
+      "max": 7.7191481888033255
+    },
+    "stream_total_tps": {
+      "median": 7.616728506569367,
+      "min": 7.472576141784519,
+      "max": 7.719208554252008
+    },
+    "ttft_seconds": {
+      "median": 9.651993199979188,
+      "min": 9.279740699974354,
+      "max": 9.704109300015261
+    },
+    "request_seconds": {
+      "median": 67.22098069998901,
+      "min": 66.32856209998135,
+      "max": 68.51770160000888
+    }
+  }
+}

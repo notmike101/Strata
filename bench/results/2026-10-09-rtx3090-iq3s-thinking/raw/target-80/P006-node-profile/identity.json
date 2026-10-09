@@ -49,6 +49,15 @@
   "configuration_unchanged": true,
   "expert_profile_sha256": "8f59b4aa8873209dff11c11e37bcda9529a1335b724a1afeea37bf6388975baf",
   "expert_profile_filename": "expert-profile.bin",
+  "instrumentation": {
+    "profiler": "Nsight Systems 2026.1.3",
+    "trace": "CUDA graph nodes",
+    "CUDA_event_tracing": false,
+    "STRATA_DECODE_TIMING": "1",
+    "STRATA_VERIFY_PROFILE": "unset",
+    "complete_trace": false,
+    "source": "Retrospectively annotated from executed profile-goal90.ps1, engine timers and SQLite diagnostics; not a promotion benchmark."
+  },
   "model_alias": "qwen3.8-flash-next-iq3_s",
   "model_files": [
     {

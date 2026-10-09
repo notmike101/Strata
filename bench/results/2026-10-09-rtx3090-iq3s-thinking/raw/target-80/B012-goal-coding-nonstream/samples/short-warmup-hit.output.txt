@@ -1,0 +1,27 @@
+We need answer user wants code only in Python code block. Need implement topological_order(nodes, edges). Need think through requirements.
+
+We need produce complete function. Requirements:
+- nodes list of unique strings. Could assume unique but maybe not mutate inputs. Need not modify inputs. Use no imports.
+- edges list of (before, after) pairs. Return lexicographically smallest topological ordering, include isolated nodes, ignore duplicate edges. Raise ValueError for edge endpoint absent from nodes or a cycle.
+- Do not mutate either input.
+- Return only complete function in Python code block.
+
+Need ensure lexicographically smallest topological ordering. For DAG with string labels, lexicographically smallest sequence of nodes. Standard algorithm: Kahn with min selection: at each step choose smallest available node with indegree zero. But careful: does picking smallest available yield lexicographically smallest topological order? Yes for total order sequence? For topological sorting to lexicographically smallest list by comparing node labels at first difference, Kahn using min-heap of zero indegree yields lexicographically smallest. But need proof? Yes, at each position, among all nodes that can be placed next (indegree zero in remaining graph), choosing smallest possible yields lexicographically minimal. However need ensure duplicates ignored, endpoints validation, cycle detection.
+
+Input no imports. Since no heapq, implement selection from set/list with min. Need not mutate input. Need create sets.
+
+Potential edge cases:
+- nodes empty: if edges empty -> []. If edges non-empty endpoints absent -> ValueError. Cycle detection? Empty ok.
+- nodes maybe list with unique strings but could contain duplicates? Requirement says unique, but robust? If duplicate, maybe set changes. Could preserve? We can convert to set. If duplicate edges ignored.
+- edge pairs: list of pairs maybe tuples length 2. Endpoint absent from nodes raise ValueError. Also if before == after: self-loop cycle -> ValueError. Duplicate edges ignored; self-loop duplicate should still cycle. Need count indegree only once per distinct directed edge. Also adjacency set.
+
+Implementation choices:
+```
+def topological_order(nodes, edges):
+    node_set = set(nodes)
+    adj = {node: set() for node in node_set}
+    indeg = {node: 0 for node in node_set}
+    seen = set()
+    for before, after in edges:
+        if before not in node_set or after not in node_set:
+            raise ValueError

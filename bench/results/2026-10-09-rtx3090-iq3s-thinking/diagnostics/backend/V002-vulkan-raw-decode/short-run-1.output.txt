@@ -1,0 +1,21 @@
+We need answer user wants code only in Python code block. Need implement topological_order. Need produce final only code block. Need ensure no imports. Requirements: nodes list unique strings, edges list pairs (before, after). Return lexicographically smallest topological ordering, include isolated nodes, ignore duplicate edges. Raise ValueError for edge endpoint absent from nodes or cycle. Do not mutate either input. No imports.
+
+Need think through algorithm. Lexicographically smallest topological order can be obtained via Kahn's algorithm selecting smallest available node using a heap. But cannot use heapq due no imports. Could implement min-heap manually, or use sorted list and pop min. Need no imports. Could also implement with a list as heap via helper functions inside function. Since no imports, implement heappush/heappop manually or simple list with min extraction. Constraints unspecified. For robustness, use O((V+E) log V) with manual heap. Or simpler maintain sorted set of sources by repeatedly min? That is O(V*(V+E)) maybe acceptable but better manual heap.
+
+Need ensure not mutate inputs. Edges may contain tuples. We can construct set of edges to ignore duplicates. But building set of tuples is okay. Could also use set to avoid indegree increments duplicates. Need not mutate input. If edges is list or maybe any sequence? list of pairs. We can iterate edges. Need endpoints exist in nodes. nodes unique strings but should we validate? no need but maybe convert to set.
+
+Cycle detection: Kahn processes all nodes; if processed length != len(nodes) raise ValueError. Need include isolated nodes with indegree 0 and outdegree 0. Need lexicographically smallest ordering among all topological orders. Kahn min-heap yields lexicographically smallest for DAG (assuming compare strings lexicographically Python default). Need verify: For partial order, greedy picking smallest source at each step yields lexicographically smallest sequence. Yes.
+
+Need implement no imports. Manual heap:
+
+def topological_order(nodes, edges):
+    node_set = set(nodes)
+    indegree = {node: 0 for node in nodes}
+    successors = {node: set() for node in nodes}
+    seen_edges = set()
+    for before, after in edges:
+         if before not in node_set or after not in node_set: raise ValueError...
+         edge=(before, after)
+         if edge in seen_edges: continue
+         seen_edges.add(edge)
+         if before == after

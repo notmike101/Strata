@@ -1,0 +1,22 @@
+We need answer user wants code only? "Return only the complete function in a Python code block." Need implement topological_order(nodes, edges) with requirements:
+- nodes list unique strings.
+- edges list of (before, after) pairs.
+- Return lexicographically smallest topological ordering, include isolated nodes, ignore duplicate edges.
+- Raise ValueError for edge endpoint absent from nodes or cycle.
+- Do not mutate either input.
+- Use no imports.
+- Return only complete function in Python code block.
+
+Need produce final code block only. Need ensure no imports. Lexicographically smallest topological ordering among valid orderings of strings. Use Kahn with min-heap but no imports. Since no imports, can manually select min from available set/list. Need no mutate inputs: don't modify nodes list/edges list. Could copy? We don't mutate original. Build set nodes_set from nodes (no mutate). indeg dict. adjacency maybe dict set or list with duplicate ignore. Edges duplicates: ignore duplicate edges. Need detect edge endpoint absent: before/after not in nodes_set raise ValueError. Also self-loop? cycle: self-loop causes indegree never zero, cycle detected. Duplicate edges: If duplicate (u,v), don't double count indegree. Could store adj[u] as set; but when iterating sorted? For lexicographically smallest order, Kahn: repeatedly choose smallest node among indegree zero. Need efficient but no imports. Could maintain available sorted list? Use min(available) O(n) each; okay? No constraints. Could maintain set and min(available). Or sort nodes initially and pick from list? Need robust.
+
+Potential issue: if edges contains tuple length? assume pairs. Need not mutate edges. Iterate. Duplicate edges: use adjacency set or set of edges to ignore. If duplicate, skip increment. If edge (a,b) where a or b missing raise ValueError. Need include isolated nodes.
+
+Algorithm:
+def topological_order(nodes, edges):
+    node_set = set(nodes) # if nodes not iterable? fine.
+    # optional if duplicate nodes? says unique. If not, set could hide. Maybe no.
+    adj = {node: set() for node in node_set} # or list.
+    indeg = {node:0 for node in node_set}
+    seen_edges = set()
+    for edge in edges:
+        # maybe if len != 2 raise ValueError? Not specified but could do

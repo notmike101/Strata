@@ -1,0 +1,26 @@
+We need answer user's final task. Need produce final only code block complete function. Need think through implementation. Requirements:
+
+Implement topological_order(nodes, edges) in Python.
+- nodes list of unique strings; edges list of (before, after) pairs.
+- Return lexicographically smallest topological ordering, include isolated nodes, ignore duplicate edges.
+- Raise ValueError for edge endpoint absent from nodes or a cycle.
+- Do not mutate either input.
+- Use no imports.
+- Return only complete function in Python code block.
+
+Need ensure lexicographically smallest topological ordering among all valid orderings. Standard Kahn with min-heap/heapq, but no imports? Python heapq is an import not allowed. Could implement own min selection by sorting candidate set each iteration or use list and min. Need no imports. Could use built-in sorted. For deterministic and lex smallest, repeatedly choose lexicographically smallest available node among zero indegree nodes. Need avoid mutating inputs. Since nodes unique strings. Validate edge endpoints. Duplicate edges ignored: use set of normalized edges? Need not mutate. If duplicate edges, indegree count once. Also self-loop? Edge (a,a) endpoint present; creates cycle. Should raise ValueError. Ignore duplicate edges: set handles.
+
+Need consider input may be tuple/list? nodes is list but could any iterable? We can not mutate. Use list(nodes), set(nodes) for lookup. But if nodes contains non-string? Spec unique strings, can assume. Lex order string. Edges list maybe contains tuples. Need endpoint absent -> ValueError. What about malformed edge? Could assume pair. Could robustly check length? But not necessary maybe. Could handle if edge is not length 2 raises? Should not import.
+
+Algorithm:
+def topological_order(nodes, edges):
+    node_set = set(nodes)
+    # Need preserve nodes? For candidates initial zero indegree all nodes not in edge after? Use set.
+    # Edge validation and duplicates. Need ignore duplicate edges but self-loop counts once.
+    normalized_edges = set()
+    indegree = {node:0 for node in node_set}
+    outgoing = {node: [] for node in node_set}? Need deterministic maybe sort later? We can just add to sets.
+    For edge in edges:
+        if len(edge) !=2: maybe raise ValueError? But if edge is string length? Edge endpoints? Better:
+          try: before, after = edge
+        except

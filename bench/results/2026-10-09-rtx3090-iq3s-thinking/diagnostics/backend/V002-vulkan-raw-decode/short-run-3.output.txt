@@ -1,0 +1,13 @@
+We need answer user's request: Need implement function topological_order(nodes, edges) Python. Need return only complete function in Python code block. Done. Need think through requirements.
+
+Need produce complete function, no imports. Nodes list of unique strings, edges list of (before, after). Return lexicographically smallest topological ordering, include isolated nodes, ignore duplicate edges. Raise ValueError for edge endpoint absent from nodes or cycle. Do not mutate either input.
+
+Need design algorithm. Lexicographically smallest topological order for DAG given all nodes. Usual Kahn with min-heap. Can't import heapq. Could implement with list and sort at each step, selecting min among zero indegree. n maybe unspecified. Use no imports. Need not mutate inputs. We can copy nodes, build sets/dicts.
+
+Duplicate edges: ignore. Edges may be tuples? Need handle endpoints absent. Edge endpoint absent from nodes raise ValueError. Duplicate edges ignore. Should we validate edge is pair length? Maybe not required but could robust. But only endpoint absent/cycle. If malformed edge maybe unpack error; okay. But can avoid mutation.
+
+Lexicographically smallest: At each step pick smallest node name among available zero indegree. Need ensure stable? nodes unique. If nodes input order not sorted, we should sort candidates. Without imports, can maintain sorted list? Simple: at each iteration scan available list and take min via built-in min, O(n^2) maybe okay. But can implement O((n+m) log n) manually heap? No imports but can implement heappush/pop manually. Simpler scanning is fine unless huge; but no constraints. Need robust and concise. Could use available set; for each step candidate = min(available). Then remove. Build adj and indegree. To avoid mutating edges/nodes: don't modify edges/nodes; use new structures.
+
+Need be careful duplicate edges: use set adjacency. Since nodes strings hashable. Edges may have duplicate pairs; adjacency sets avoid double indegree. But if edge (a,b) and (a,b) duplicate, ignore. Need validate endpoint exists before adding; if absent raise. If self-loop? Endpoint exists, self-loop. This creates cycle; should raise ValueError. Kahn will detect remaining nodes, raise cycle. Self-loop duplicate? indegree increment once. If self-loop, node never zero unless no edges? cycle.
+
+Need include isolated nodes; initial indegree for all nodes. Candidate selection min lexicographically by string. If

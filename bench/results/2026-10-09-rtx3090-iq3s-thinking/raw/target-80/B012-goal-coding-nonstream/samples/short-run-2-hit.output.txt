@@ -1,0 +1,31 @@
+We need answer user: "Implement topological_order(nodes, edges) in Python. nodes is a list of unique strings; edges is a list of (before, after) pairs. Return the lexicographically smallest topological ordering, include isolated nodes, and ignore duplicate edges. Raise ValueError for an edge endpoint absent from nodes or a cycle. Do not mutate either input. Use no imports. Return only the complete function in a Python code block."
+
+Need provide only complete function in Python code block. Need think through implementation. Requirements:
+- topological_order(nodes, edges)
+- nodes list unique strings, edges list of pairs before after.
+- Return lexicographically smallest topological ordering, include isolated nodes. Lexicographically smallest among all topological sorts. Use Kahn's algorithm selecting smallest available node by string order. Need handle duplicate edges: ignore duplicate edges for indegree counting; also adjacency set to avoid duplicate indegree. Edge endpoint absent raise ValueError. Cycle raise ValueError.
+- Do not mutate inputs. Use no imports. Need possibly avoid modifying lists passed. Could create local structures. Need ensure edges pairs maybe tuples. Should not mutate nodes/edges. Use sorted on available. Need lexicographically smallest: for unique strings, repeatedly pick min string among nodes with indegree zero.
+
+Implementation details:
+```
+def topological_order(nodes, edges):
+    node_set = set(nodes)
+    adjacency = {node: set() for node in nodes}
+    indegree = {node: 0 for node in nodes}
+    seen_edges = set()
+    for before, after in edges:
+        if before not in node_set or after not in node_set:
+             raise ValueError(...)
+        edge = (before, after)
+        if edge in seen_edges:
+             continue
+        seen_edges.add(edge)
+        if after in adjacency[before]: continue # redundant but seen handles.
+        adjacency[before].add(after)
+        indegree[after] += 1
+    available = [node for node in nodes if indegree[node] == 0]
+    # Need lexicographically smallest. Could sort each time by min(available), O(n^2) okay. Or sort initial and use min each iteration.
+    order=[]
+    while available:
+       # pick min
+       # If many, min each iteration okay but perhaps n small unspecified. Could use heap but no imports. Implement custom heap? Could use sort and pop

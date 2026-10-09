@@ -1,0 +1,36 @@
+[
+  {
+    "label": "longer-warmup-new",
+    "workload": "longer/nonstream/new",
+    "warmup": true,
+    "seed": 100,
+    "request_started_utc": "2026-10-09T20:57:39.325870+00:00",
+    "prompt_tokens": 3137,
+    "fresh_prompt_tokens": 3137,
+    "cached_tokens": 0,
+    "completion_tokens": 512,
+    "server_decode_tps": 78.4,
+    "prompt_tps": 478.3,
+    "request_seconds": 13.096545699983835,
+    "request_e2e_tps": 39.09427811950688,
+    "stream_total_tps": null,
+    "ttft_seconds": null,
+    "finish_reason": "length",
+    "timings": {
+      "cache_n": 0,
+      "prompt_n": 3137,
+      "prompt_ms": 6559.1,
+      "prompt_per_token_ms": 2.091,
+      "prompt_per_second": 478.3,
+      "predicted_n": 512,
+      "predicted_ms": 6527.1,
+      "predicted_per_token_ms": 12.748,
+      "predicted_per_second": 78.4,
+      "draft_n": 269,
+      "draft_n_accepted": 186
+    },
+    "cache_expected": "miss",
+    "cache_valid": true,
+    "output_512": true
+  }
+]

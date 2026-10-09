@@ -1,0 +1,19 @@
+We need answer user's final task. Need produce final only code block complete function. Need think through implementation. Requirements:
+
+Implement topological_order(nodes, edges) in Python.
+- nodes list unique strings; edges list of (before, after) pairs.
+- Return lexicographically smallest topological ordering, include isolated nodes, ignore duplicate edges.
+- Raise ValueError for edge endpoint absent from nodes or cycle.
+- Do not mutate either input.
+- Use no imports.
+- Return only complete function in Python code block.
+
+Need consider input validation? nodes unique strings maybe assumed. Could defensively handle. No imports. Need deterministic lexicographically smallest topological order. Standard Kahn using sorted available nodes, using a heap would need import? No imports. Could implement using list sorted each step or maintain sorted list. Since no imports, can use built-in sorted. Complexity maybe fine.
+
+Need not mutate inputs: avoid modifying nodes, edges. Create node_set = set(nodes). Need set is okay. For cycle detect. Need ignore duplicate edges. We can build indegree dict and adjacency sets to avoid duplicates. Need validate edge endpoints. Edges may be tuples/lists? likely pairs. Could handle sequence length 2? Not necessary but validate maybe if malformed? Edge endpoint absent from nodes raise ValueError. If edge not pair, maybe ValueError? Could try unpack. But if unpack raises ValueError? It could be TypeError? Need perhaps robust. But final likely simple.
+
+Need include isolated nodes: all nodes initially.
+
+Lexicographically smallest: choose smallest node among currently zero indegree at each step. With string comparison default lexicographic. Use list zero = [n for n in nodes if indegree[n]==0]? But lexicographic requires sorted. Could sort zero initially and then each step pick min via min(zero) or remove? If use zero list and min then remove, O(N^2) okay. But after adding neighbors, need maintain sorted? Could use zero sorted and bisect without imports? bisect import disallowed? Use list insertion sorted each time? Could just append and then sort(zero) at start of each iteration and pop(0). Or use while zero: min_val = min(zero); zero.remove(min_val); after decrement if indegree becomes zero append. Then min next. This gives lexicographically smallest. Simpler: use a sorted list available and re-sort each iteration:
+
+available = [n for n in nodes if indegree[n] == 0]

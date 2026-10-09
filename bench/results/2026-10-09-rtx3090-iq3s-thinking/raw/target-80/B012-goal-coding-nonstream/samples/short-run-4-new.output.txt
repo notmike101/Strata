@@ -1,0 +1,33 @@
+We need answer user wants code only in Python code block. We need implement function topological_order(nodes, edges) with constraints. Need produce final only code block.
+
+Need think carefully: nodes list unique strings, edges list pairs before after. Return lexicographically smallest topological ordering, include isolated nodes, ignore duplicate edges. Raise ValueError if edge endpoint absent from nodes or cycle. Do not mutate either input. No imports.
+
+Lexicographically smallest topological ordering among all valid orders. Standard Kahn's algorithm selecting smallest available node using min-heap. No imports means cannot heapq? We can implement selection with list and min each time. n maybe unknown; O(n^2) okay? Could implement without imports using sorted sets? We can use built-in sorted/min. Need no imports. Need avoid mutating inputs. We can create copies / structures.
+
+Potential issues: edges may have duplicates, self-loop? Cycle detection: self-loop is cycle. Duplicate edges should be ignored; multiple edges should not cause indegree overcount. Need only add unique edges. But we also need validate endpoints before duplicate handling? If endpoint absent raise ValueError. Could validate all edges first. But if duplicate edges, process only once.
+
+Input nodes list unique strings. Could sort nodes? Need lexicographically smallest topological ordering using standard string lex order. Python min/sort uses lex.
+
+Algorithm:
+
+def topological_order(nodes, edges):
+    # nodes iterable? list unique strings. Need not mutate.
+    node_set = set(nodes)
+    # validate endpoints
+    for before, after in edges:
+        if before not in node_set or after not in node_set:
+             raise ValueError...
+    # unique edges
+    unique_edges = set()
+    # adjacency dict mapping node to set of successors; indegree dict int
+    adj = {node: set() for node in nodes}
+    indegree = {node: 0 for node in nodes}
+    for before, after in edges:
+         edge = (before, after)
+         if edge in unique_edges: continue
+         unique_edges.add(edge)
+         if after in adj[before]? Since unique edge set sufficient, but maybe if duplicate? yes. But if self-loop, indegree? We'll detect cycle. Add.
+         adj[before].add(after)
+         indegree[after] += 1
+
+    # available list nodes indegree 0. Could use list and min each step. To

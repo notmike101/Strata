@@ -1,0 +1,37 @@
+{
+  "passed": true,
+  "cases": 210,
+  "compared_float_values": 2227200,
+  "sampled_experts_per_layer": [
+    0,
+    173,
+    511
+  ],
+  "layers": [
+    17,
+    21,
+    25,
+    27,
+    28,
+    29,
+    35,
+    40,
+    44,
+    45
+  ],
+  "down_types": [
+    20,
+    42
+  ],
+  "token_widths": [
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    8
+  ],
+  "executable_sha256": "5da24c120a226d54da9daea053bb6213216bc51ef3a85afcf5cfeeebc2021c6f",
+  "limitation": "Sampled actual experts, not every expert or whole-model output. No server integration yet."
+}

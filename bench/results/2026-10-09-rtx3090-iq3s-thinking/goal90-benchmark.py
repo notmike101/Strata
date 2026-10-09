@@ -174,7 +174,7 @@ def ask(label,payload,workload,warmup,cache_expected):
     else:
         with urlopen(req,timeout=1800) as response:final=json.load(response)
         end=time.perf_counter(); save(label+'.response.json',final)
-        message=final['choices'][0]['message']; parts=[message.get('reasoning_content',''),message.get('content','')]; content=[message.get('content','')]
+        message=final['choices'][0]['message']; parts=[message.get('reasoning_content') or '',message.get('content') or '']; content=[message.get('content') or '']
     assert final and final.get('timings')
     t=final['timings']; n=final['usage']['completion_tokens']
     row=dict(label=label,workload=workload,warmup=warmup,seed=payload['seed'],request_started_utc=utc,

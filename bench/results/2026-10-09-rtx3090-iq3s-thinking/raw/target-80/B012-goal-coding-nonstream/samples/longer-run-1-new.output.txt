@@ -1,0 +1,17 @@
+We need answer user's request. Need implement topological_order(nodes, edges) in Python. Need final only complete function in Python code block. Need consider details:
+- nodes list of unique strings; edges list of (before, after) pairs.
+- Return lexicographically smallest topological ordering.
+- include isolated nodes.
+- ignore duplicate edges.
+- Raise ValueError for edge endpoint absent from nodes or a cycle.
+- Do not mutate either input.
+- Use no imports.
+- Return only complete function in Python code block.
+
+Need design robust. Input types? Could assume lists. Need avoid mutation: copy nodes? Need validate endpoints present. Need cycle detection and deterministic smallest lex order.
+
+Kahn's algorithm with min-heap but no imports. Can implement with list and sort/min each iteration, but O(n^2 log n) okay? Need complete function. Since no imports, no heapq. Could use min candidate via sorted list. To get lexicographically smallest topological sort, at each step pick smallest available node (in-degree zero and not used). Duplicates ignored. Need handle edges maybe invalid format? Could raise ValueError? Not specified. But could handle non-pair by trying unpack? If edge not iterable length 2? Could raise ValueError maybe. But avoid overcomplicating? Need likely standard.
+
+Potential concerns: if edge self-loop (a,a) is cycle. Need raise ValueError. Duplicate edges ignored. Need ensure endpoints in set of nodes. Since no imports, can use set. nodes unique, but if duplicate input nodes? Says unique, but perhaps handle by set. But should we preserve? Return list. We can convert to set for validation. But if duplicate nodes in nodes? Not needed. But maybe keep input data intact: copying. Use nodes_set = set(nodes). Need not mutate. indegree dict initialized for each node. adjacency sets to deduplicate. If duplicate edges, indegree increment once. Need ignore duplicate edges. If self-loop? adjacency set will add self? indegree once, later no zero -> cycle raise. Good.
+
+Lexicographically smallest topological order: use available = sorted([node for node in nodes if indegree[node]==0]) and pop(0) O(n). Or use index? For determinism, at each step sort? Better: available list sorted. After removing u, for each v in adjacency[u], decrement indegree; if zero add v and keep sorted? Could insert then sort. Simpler

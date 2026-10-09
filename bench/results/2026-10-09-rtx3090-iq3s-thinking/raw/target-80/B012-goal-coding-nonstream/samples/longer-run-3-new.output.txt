@@ -1,0 +1,15 @@
+We need answer user's request: implement topological_order in Python, return only complete function in code block. Need think thoroughly. Requirements: nodes list unique strings; edges list of (before, after) pairs. Return lexicographically smallest topological ordering, include isolated nodes, ignore duplicate edges. Raise ValueError for edge endpoint absent from nodes or a cycle. Do not mutate either input. Use no imports. Return only complete function in Python code block.
+
+Need craft function no imports. Lexicographically smallest topological ordering: Kahn's algorithm selecting smallest available node at each step. Need handle duplicate edges, no mutation. Validate edges endpoints in nodes. Since nodes unique strings; edges pairs maybe any iterable? likely tuples/list. Need avoid mutating inputs. Build set from nodes. Need maybe not mutate input by using new lists/dicts. Duplicate edges: could use set of edges? But edges can be list of pairs; pairs may be tuples, lists? To ignore duplicate edges robust: normalize endpoints as strings; if endpoint not string? It's strings. Need not imports. Cycle detection: if result length != len(nodes) raise ValueError.
+
+Need lexicographically smallest. Options: adjacency sets and indegree dict; available sorted? Since no imports, need maintain list and sort each iteration. Could maintain available set/list and sort. Complexity okay. Need not import heapq. If nodes large maybe repeated sort okay. Could implement min heap manually? Not necessary but can. Simpler:
+
+def topological_order(nodes, edges):
+    node_set = set(nodes)
+    adj = {node: set() for node in nodes}
+    indegree = {node: 0 for node in nodes}
+    seen_edges = set()
+    for before, after in edges:
+        if before not in node_set or after not in node_set: raise ValueError(...)
+        if before == after? Edge self-loop causes cycle. Should ignore duplicate edges but self-loop should raise ValueError? A cycle includes self-loop. We can include self-loop; indegree after increments, adjacency includes before. Kahn result length less -> ValueError. But if duplicate self-loop, seen_edges handles duplicate. However if self-loop present in adjacency, indegree. Okay. Could also immediate raise for self-loop? Not necessary but cycle check. However if self-loop and no other dependencies, available nodes? node has indegree 1, never available, result length less. Raise cycle. Good.
+        if (before, after) not in seen_edges:

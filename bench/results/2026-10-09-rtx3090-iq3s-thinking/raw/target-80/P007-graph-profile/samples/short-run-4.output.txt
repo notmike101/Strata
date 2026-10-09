@@ -1,0 +1,19 @@
+We need answer user's request. Need produce detailed answer at least 1200 words. User: "Benchmark identifier ... Ignore. Implement a thread-safe Python TTLCache class using an OrderedDict and a monotonic clock. Include set, get, delete, clear, len, expiration, capacity eviction, unit tests with an injected fake clock, and a detailed explanation of thread safety and complexity. Write complete code, then tests, then explain the design. Do not abbreviate the implementation. Produce a detailed answer of at least 1200 words."
+
+We need output complete code, tests, explanation. Need likely mention ignore identifier. Need be careful with thread-safe: use RLock? OrderedDict not thread-safe. Use lock. Monotonic clock injected. TTLCache: capacity, ttl maybe default. Methods set, get, delete, clear, __len__ maybe values? Expiration: purge expired items on access; lazy expiration. Capacity eviction: LRU? OrderedDict supports move_to_end; evict oldest if maxsize. Need implement complete class not abbreviate. Include get, set, delete, clear, len, maybe items? Need tests with fake clock: unittest. Use time.monotonic() as default.
+
+Need ensure thread safety and complexity. Design: OrderedDict maps key -> (value, expires_at). maxsize None or int. default_ttl optional. Lock: threading.RLock so reentrant if clear calls delete? Could avoid nested. Use with self._lock. For get: check if key in; if expired, delete and return default? Need move_to_end if hit. If miss maybe default None. Could return None or sentinel. Include __contains__ maybe? User requested get, delete, clear, len, expiration, capacity eviction. Could implement len purges expired? Need decide.
+
+Implementation details:
+class TTLCache:
+    def __init__(self, maxsize=128, default_ttl=30.0, clock=None):
+        if maxsize is not None and maxsize <=0 raise
+        self._cache = OrderedDict()
+        self._lock = threading.RLock()
+        self._clock = clock or time.monotonic
+        self._default_ttl = float(default_ttl) if default_ttl is not None else None
+        self._maxsize = maxsize
+
+    def set(self,key,value,ttl=None):
+        if ttl is None: ttl = default_ttl
+        if ttl is not None and ttl < 0: raise ValueError

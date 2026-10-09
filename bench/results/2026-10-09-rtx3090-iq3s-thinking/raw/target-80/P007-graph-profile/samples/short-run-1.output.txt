@@ -1,0 +1,19 @@
+We need answer user's request. Need produce complete code, tests, explanation >=1200 words. Need think in English because user English. Need final answer detailed. Need ensure implementation thread-safe Python TTLCache using OrderedDict and monotonic clock. Include set, get, delete, clear, len, expiration, capacity eviction, unit tests with injected fake clock, detailed explanation thread safety and complexity. Do not abbreviate. At least 1200 words.
+
+Need design code. Need consider thread safety: OrderedDict not thread-safe, use RLock or Lock? Methods public take lock. _purge expired maybe internal assumes lock. Need monotonic clock injected for tests. TTLCache class: __init__(maxsize=128, ttl=None, clock=time.monotonic). If ttl not None: ttl <=0? We can set entries with None ttl = never expire? The requirement TTLCache maybe expiration. Could allow per-call ttl override in set(key, value, ttl=None). If ttl None use default ttl; if both None never expire? But TTLCache likely has ttl. Need support expiration. Maybe if ttl=None => no expiry. Need capacity eviction. OrderedDict move_to_end on get for LRU? TTL cache can be LRU on access. Could implement LRU eviction of least recently used among unexpired? Simpler: OrderedDict insertion/access order. Evict oldest (first) after purging expired. If expired at front removed. Need len: __len__ purge expired? But thread safety. __len__ can acquire lock, expire, return len. Need delete returns bool. clear empties. items maybe keys/values? not required. Could include.
+
+Potential issue capacity 0? maxsize nonnegative. If maxsize <=0 invalid? Could allow 0 clear? Simpler require maxsize >0. But tests may test maxsize=1. TTL can be float >=0.
+
+Fake clock: class FakeClock with now, advance. Need thread safety? Tests can use. Need unit tests. Use unittest. Need test set/get, default ttl, expiry, monotonic? fake clock injection. Per entry ttl override? Good.
+
+Need detailed design explanation after code.
+
+Potential code:
+
+import threading, time
+from collections import OrderedDict
+from typing import Optional, Any
+
+class TTLCache:
+    def __init__(self, maxsize: int = 128, ttl: Optional[float] = None, clock=time.monotonic):
+       if maxsize <=

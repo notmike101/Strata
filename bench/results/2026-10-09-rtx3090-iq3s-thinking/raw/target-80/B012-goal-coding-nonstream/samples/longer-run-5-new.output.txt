@@ -1,0 +1,16 @@
+We need answer user wants only complete function in Python code block. Need produce final only code block. Need implement topological_order(nodes, edges). Requirements:
+- nodes list unique strings (but don't assume? unique). edges list pairs (before, after).
+- return lexicographically smallest topological ordering. include isolated nodes. ignore duplicate edges.
+- Raise ValueError for edge endpoint absent from nodes or a cycle.
+- Do not mutate either input. Use no imports.
+- Return only complete function in Python code block.
+
+Need consider lexicographically smallest topological ordering. Use Kahn's algorithm with min-heap normally, but no imports. Need avoid imports. Can implement manual min selection or sort candidates each iteration. Since no imports, can use built-in sorted, list. Need not mutate inputs. Copy nodes. Need validate endpoints absent. Need duplicate edges ignored. Need cycle detection.
+
+Potential pitfalls: if cycle raise ValueError. If duplicate self-loop? If edge (a,a) absent? Endpoint present but cycle. Should raise cycle. Duplicate edges: need set of pairs to ignore duplicates. Since nodes strings unique, can use set(edges?) But edge pair maybe tuple. We can create edge_set = set() and add if not present. But do not mutate input. If edges contains list? likely tuple. We can accept sequence pair length 2? Use for before, after in edges? But if invalid length maybe ValueError? User only requires endpoints absent or cycle. We can handle.
+
+Lexicographically smallest: Kahn's algorithm selecting smallest among zero indegree nodes yields lexicographically smallest topological sort if order compare lexicographic on node names? Yes for unique strings. Need include isolated nodes with indegree zero. Initial candidates sorted unique zero indegree. At each step pop min and add, decrement neighbors. To avoid duplicates, only add neighbor to candidates when indegree becomes zero? Need handle duplicates by unique edges. Could maintain adjacency unique. Use dict node -> set neighbors. For each unique edge, add after to adjacency before; indegree after++.
+
+But need not mutate input. nodes and edges not mutated. We can use node_set = set(nodes). If nodes contains non-string? It says strings. We don't need type validation but okay.
+
+Manual min heap without imports: Could maintain candidates list sorted. Since need no imports, easiest: candidates = [n for n in nodes if indeg[n]==0]; candidates.sort(); result=[]; while candidates: pick candidates.pop(0);

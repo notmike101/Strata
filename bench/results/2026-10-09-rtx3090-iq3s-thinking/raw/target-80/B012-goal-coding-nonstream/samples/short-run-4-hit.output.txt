@@ -1,0 +1,17 @@
+We need answer user wants code only in Python code block. We did. Need think. Implement topological_order(nodes, edges) no imports. Return lexicographically smallest topological ordering, include isolated nodes, ignore duplicate edges. Raise ValueError for edge endpoint absent from nodes or cycle. Do not mutate inputs. Need complete function only.
+
+Consider inputs: nodes list unique strings. edges list pairs maybe duplicates. Need lexicographically smallest topological ordering. Kahn with min-heap but no imports. Could implement own heap using list functions or sort each time. Nodes could be large but okay? Need no imports, can use heapq? heapq import forbidden. We can implement simple heap operations manually or use sorted list? Simpler: each iteration pick min among zero indegree list. Use min() O(n^2) maybe acceptable? Could implement binary heap.
+
+Need not mutate nodes or edges. Create copies. Edge duplicate ignore: need indegree count unique edges only. If duplicate edges appear, ignore duplicates to avoid double counting. If edges with invalid endpoints raise ValueError.
+
+Cycle detection: if processed != len(nodes) raise ValueError.
+
+Lexicographically smallest: among available nodes choose smallest string at each step. If use min available each time correct for lexicographically smallest topological order? Yes for DAG, greedily pick smallest available gives lexicographically smallest sequence.
+
+Need careful with strings comparison.
+
+Do not mutate either input: if nodes is list, edges list. We can iterate. We can make adjacency sets. Duplicate edges: use adjacency = {node: set()} for each node? Need if endpoint absent. Validate: nodes_set = set(nodes). For before, after in edges: if not in nodes_set raise ValueError. Could ignore self-loop? A self-loop is cycle. Edge (a,a) endpoint present. It will add indegree? But duplicate ignore. Kahn will leave a with indegree > 0, processed count != len => cycle ValueError. Good. But if using adjacency sets, self loop indegree increment 1.
+
+Need ignore duplicate edges: use set of edges maybe. If before==after, duplicate still adds once. Use edge_seen = set() to ensure unique. For each (u,v) if (u,v) in edge_seen continue else add. adjacency[u].add(v), indegree[v]+=1. If edges might not be tuples? Could be any sequence of two? Spec says pairs. Could tuple unpack.
+
+Need heap implementation without imports. Could use list as heap:

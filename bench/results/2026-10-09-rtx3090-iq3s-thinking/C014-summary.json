@@ -1,0 +1,13 @@
+{
+    "exit_code":  0,
+    "bitwise_selftest_passed":  true,
+    "gpu_before":  [
+                       "memory.used [MiB], memory.free [MiB]",
+                       "541 MiB, 23782 MiB"
+                   ],
+    "gpu_after":  [
+                      "memory.used [MiB], memory.free [MiB]",
+                      "541 MiB, 23782 MiB"
+                  ],
+    "note":  "Existing built-in actual-weight head self-test,1-4 columns,11 paired timing samples for1/2/4 columns. Kernel diagnostic only; not served TPS or full quality validation."
+}

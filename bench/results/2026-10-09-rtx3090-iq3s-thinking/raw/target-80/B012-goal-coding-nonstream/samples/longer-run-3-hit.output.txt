@@ -1,0 +1,14 @@
+We need answer user's request: implement topological_order in Python, return only complete function in code block. Need think carefully. Requirements: nodes list unique strings; edges list of (before, after) pairs. Return lexicographically smallest topological ordering, include isolated nodes, ignore duplicate edges. Raise ValueError for edge endpoint absent from nodes or a cycle. Do not mutate either input. Use no imports. Return only complete function in Python code block.
+
+Need provide final with code block only? User: Return only the complete function in a Python code block. So final likely just ```python ... ```. Need no extra text. Need ensure lexicographically smallest topological order. For DAG, Kahn's algorithm with min-heap. But no imports; cannot import heapq. Could use list and pop min each time (O(n^2), ok?) Need deterministic. Need avoid mutating inputs: don't modify nodes or edges. Need validate endpoints. Duplicate edges ignored: if using set of pairs to avoid multiple indegree increments and adjacency duplicates. Need not mutate input lists. nodes unique per spec but maybe validate? Could handle duplicates? It says nodes is list of unique strings, edges unique? Could still robust. Lexicographically smallest topological ordering: with Kahn: maintain available nodes with indegree zero, at each step choose lexicographically smallest. Is this always lexicographically smallest? Yes for total order lexicographic over sequence: choosing smallest available at each step yields lexicographically smallest topological order. Need ensure if duplicate edges: if edge (a,b) appears multiple times, only count once. Use seen_edges set. Need avoid hidden state. 
+
+Implementation options:
+
+def topological_order(nodes, edges):
+    node_set = set(nodes)
+    # maybe ensure nodes iterable? but okay.
+    adj = {node: set() for node in nodes} # but nodes may not be hashable? strings. 
+    indegree = {node:0 for node in nodes}
+    for before, after in edges:
+        if before not in node_set or after not in node_set: raise ValueError(...)
+        if before == after? self-loop cycle -> if ignore duplicates? Edge endpoint present; if before == after then cycle. In adjacency set, if before not already? Should detect cycle. If before == after: if edge exists, self-loop cycle. Should raise ValueError. But if duplicate self-loop? Should raise. If we add adjacency set only if after not in adj[before]

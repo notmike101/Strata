@@ -1,0 +1,22 @@
+We need answer to user: implement topological_order(nodes, edges) in Python, return only complete function in Python code block. Need think through requirements. Need ensure no imports. Deterministic, validate edge cases, avoid hidden state, don't mutate inputs. Lexicographically smallest topological ordering: nodes unique strings, edges list of (before, after). Include isolated nodes. Ignore duplicate edges. Raise ValueError for edge endpoint absent from nodes or a cycle. Need only code block. Need likely robust implementation.
+
+Need choose algorithm for lexicographically smallest topological order. Given nodes list arbitrary order. Edges pairs before->after means dependency before must come after? Topological order: before node appears before after node. Need lex smallest sequence among valid topological orders. Standard Kahn with min-heap of zero indegree nodes. But duplicates edges: need indegree counts not inflated by duplicate edges. Also need ensure graph no duplicate adjacency. Could construct adjacency sets per node and in-degree counts from unique edges. Need not mutate inputs. Since nodes list of unique strings, but should we validate? Could trust. Edge endpoint absent raise ValueError. Duplicate edges ignored. Cycle detection: if len(order) != len(nodes) raise ValueError.
+
+Potential issue: lexicographically smallest topological order can be obtained by repeatedly choosing smallest available node (Kahn min-heap). For total order lex smallest yes. Need heap without import heapq. Need no imports. Could use list and min() each iteration O(n^2) acceptable? Could implement simple heap manually? No imports but can implement functions inside? Simpler: available list; choose min each time via min(available). Complexity O(n^2) but okay. Need handle nodes maybe non-comparable? strings yes. Need return list.
+
+Need not mutate either input. If iterate and construct new structures ok. Need careful if nodes not list but sequence? Requirement list. Could not modify.
+
+Potential hidden state: avoid globals. No imports. Return complete function.
+
+Possible implementation:
+def topological_order(nodes, edges):
+    node_set = set(nodes)
+    adjacency = {node: set() for node in nodes}
+    indegree = {node: 0 for node in nodes}
+    seen_edges = set()
+    for before, after in edges:
+        if before not in node_set or after not in node_set:
+             raise ValueError(...)
+        edge = (before, after)
+        if edge in seen_edges: continue
+        seen

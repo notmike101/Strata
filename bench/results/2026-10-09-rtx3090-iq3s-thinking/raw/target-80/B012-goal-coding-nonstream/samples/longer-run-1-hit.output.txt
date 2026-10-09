@@ -1,0 +1,18 @@
+We need answer user's request. Need implement topological_order in Python, return only complete function in code block. Need likely no imports. Need ignore archive noise. Need consider lexicographically smallest topological ordering of DAG, nodes unique strings, edges before->after. Isolated nodes included. Duplicate edges ignored. Raise ValueError if edge endpoint absent from nodes or cycle. Do not mutate inputs. No imports. Need produce only function in Python code block.
+
+Need design. Since no imports, can't use heapq. Use min selection manually O(n^2) or sort nodes and scan. Deterministic.
+
+Inputs: nodes list, edges list. Need not mutate. Use copy? Avoid mutating input data: can read. But for algorithm need local structures. If edges contain lists? pairs tuples? okay.
+
+Need ignore duplicate edges. Use set of edges to avoid duplicate. But if edges may contain non-hashable? endpoints are strings presumably. Could check type. Need validate endpoints: if not in nodes set. nodes list unique but can make set. Need if edge endpoint absent raise ValueError. Duplicate edges: ignore. But if duplicate endpoints absent? Need still raise? Yes edge endpoint absent from nodes invalid regardless duplicate. So check first.
+
+Cycle detection: Kahn. Need indegree counts and adjacency sets. For duplicate edges, ensure not count multiple times. Use adjacency as sets to avoid duplicate adjacency. indegree counts only for unique edges. But if edges has duplicate, after building unique adjacency, decrement correctly. Alternative maintain unique_edges set. For each edge (u,v): if endpoints in set; add to unique_edges; build.
+
+Then initial candidates sorted nodes with indegree 0. But if we sort initially and pop min via list.pop(min_index) O(n^2). Need produce lexicographically smallest topological order. Standard: repeatedly choose smallest available zero indegree node. Since nodes unique strings, sorted lexicographically by Python string. Need not mutate input list. Could maintain available sorted list. But if adding new zero indegree nodes, need insert. Could instead scan sorted_nodes each iteration to find first not processed and indegree zero. n small unspecified. O(n^2) okay. Avoid imports. Simpler:
+
+nodes_sorted = sorted(nodes)
+indegrees = {node:0}
+adj = {node:set() for node in nodes}
+seen_edges = set()
+for edge in edges:
+    try: before, after = edge? But edges list of pairs. Could unpack;

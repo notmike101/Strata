@@ -1,0 +1,71 @@
+```python
+def topological_order(nodes, edges):
+    node_set = set(nodes)
+    outgoing = {node: set() for node in nodes}
+    indegree = {node: 0 for node in nodes}
+
+    def heap_push(heap, value):
+        heap.append(value)
+        i = len(heap) - 1
+        while i > 0:
+            parent = (i - 1) // 2
+            if heap[parent] <= value:
+                break
+            heap[i] = heap[parent]
+            i = parent
+        heap[i] = value
+
+    def heap_pop(heap):
+        root = heap[0]
+        last = heap.pop()
+        if heap:
+            heap[0] = last
+            i = 0
+            size = len(heap)
+            while True:
+                left = 2 * i + 1
+                right = left + 1
+                smallest = i
+
+                if left < size and heap[left] < heap[smallest]:
+                    smallest = left
+                if right < size and heap[right] < heap[smallest]:
+                    smallest = right
+
+                if smallest == i:
+                    break
+
+                heap[i], heap[smallest] = heap[smallest], heap[i]
+                i = smallest
+
+        return root
+
+    for edge in edges:
+        before, after = edge
+        if before not in node_set or after not in node_set:
+            raise ValueError("edge endpoint absent")
+
+        if after not in outgoing[before]:
+            outgoing[before].add(after)
+            indegree[after] += 1
+
+    available = []
+    for node in nodes:
+        if indegree[node] == 0:
+            heap_push(available, node)
+
+    order = []
+    while available:
+        current = heap_pop(available)
+        order.append(current)
+
+        for neighbor in outgoing[current]:
+            indegree[neighbor] -= 1
+            if indegree[neighbor] == 0:
+                heap_push(available, neighbor)
+
+    if len(order) != len(nodes):
+        raise ValueError("cycle detected")
+
+    return order
+```

@@ -1,0 +1,15 @@
+We need answer user's request. Need produce final only complete function in Python code block. Need ensure meets requirements: topological_order(nodes, edges). nodes list unique strings, edges list pairs (before, after). Return lexicographically smallest topological ordering. Include isolated nodes. Ignore duplicate edges. Raise ValueError for edge endpoint absent from nodes or cycle. Do not mutate either input. Use no imports. Return only function code block.
+
+Need think about implementation. Lexicographically smallest topological ordering among nodes (strings). Standard Kahn with min-heap priority by node string. But no imports means implement heap manually or sort available list. Could use sorted list and min extraction O(n^2) but okay. Need no imports, can implement custom heap or use list min. Need avoid mutating inputs: don't modify nodes list or edges list. Need maybe make copies. Need ignore duplicate edges: if multiple (a,b) same, process once. Need detect cycle: if processed count < len(nodes). Also edge endpoint absent ValueError. Need maybe edges can contain non-pair? Not specified. Could robustly unpack pairs. No imports.
+
+Lexicographically smallest topological ordering: At each step choose smallest among available nodes. Need ensure using strings lex order. Since no imports, implement binary heap for lexicographic min? Or use sorted(available) each iteration, available list. Could be O(V^2) worst. Could implement simple heap with heapq? No imports forbidden, so no heapq. Could implement custom min-heap functions inside function. But need code only. Simpler: available = sorted(available) and each iteration pop(0) and then sort after additions? That's O(V^2 log V). Could implement heap.
+
+Potential issue lexicographically smallest for total topological order with arbitrary string comparison. Kahn with priority queue gives lexicographically smallest sequence. Proof okay.
+
+Need ignore duplicate edges. Approach:
+- Maybe first validate nodes list has unique? User says nodes unique. We don't need raise for duplicates? Could still not mutate.
+- Create set node_set = set(nodes).
+- Need adjacency: dict mapping node -> set of successors, and indegree dict mapping node -> int.
+- For each edge in edges:
+   try before, after = edge? If malformed maybe ValueError? Edge endpoint absent maybe raise. If tuple length mismatch raise ValueError? Not required. Could unpack; if raises TypeError, maybe convert to ValueError? But no need? Maybe robust.
+   if

@@ -1,0 +1,306 @@
+We need answer user's request: implement topological_order(nodes, edges) in Python. Return only complete function in Python code block. Need satisfy constraints: nodes list unique strings, edges list pairs before after. Return lexicographically smallest topological ordering, include isolated nodes, ignore duplicate edges. Raise ValueError for edge endpoint absent from nodes or a cycle. Do not mutate inputs. No imports. Need likely use heapq? No imports, so cannot import heapq. Implement min-heap manually or sorted set selection. Need lexicographically smallest topological order: Kahn's algorithm selecting smallest available node each step. Need ignore duplicate edges but no mutate. Could build adjacency sets and indegree dict. Validate endpoints: for edge in edges: if before not in node_set or after not in node_set raise ValueError. If before==after? self-loop cycle raise ValueError? Since cycle. Duplicate edges ignored: use sets for outgoing neighbors. Need ensure input not mutated: don't modify nodes or edges, build own dicts. Could make indegree = {node:0 for node in nodes}, outgoing = {node:set() for node in nodes}. But sets no imports. For duplicate edges, check if after not in outgoing[before], add and indegree[after]+=1. Need lexicographically smallest with no imports: maintain available list of zero indegree nodes. At each iteration pick min. Naive min available O(n^2) acceptable? No performance constraints. Could implement heap manually to be efficient, but code complexity. No imports means can implement heap operations ourselves. Need ensure lexicographically smallest among all topological orders. Kahn with min heap works. We can maintain min-heap of strings. But no heapq. Implement helper _heappush, _heappop inside function? Use local functions. Need be careful with no imports. Could just use sorted(available)[0] and remove, simpler. But if many nodes could be O(n^2). The prompt not specify performance. But topological order can have many nodes, perhaps need efficient. However no imports, manual heap is okay. Let's think code clarity. Need return only function in code block. Could include nested helper functions.
+
+Potential pitfalls: lexicographically smallest topological ordering for strings. Use '<'. Duplicate edges ignored. Edge endpoint absent: any endpoint not in nodes. If nodes empty? Return []. If edge empty. If edges contains non-string? Input spec nodes unique strings; maybe not check edge type. But if before/after not in node_set raises ValueError.
+
+Cycle detection: if len(order) != len(nodes) raise ValueError. But if duplicate edges? fine. If self-loop: outgoing add after to before, indegree after++ ; no available, len order 0 -> cycle.
+
+Do not mutate either input. Building outgoing with sets copies edge references? We don't mutate edges. Good. But if we use set(node_set) doesn't mutate. Need no imports: node_set = set(nodes) built-in.
+
+Potential issue with nested helper heap functions mutating list heap not inputs. okay. Need if using local names.
+
+Let's design manual heap:
+
+def topological_order(nodes, edges):
+    node_set = set(nodes)
+    outgoing = {node: set() for node in nodes}
+    indegree = {node: 0 for node in nodes}
+
+    for edge in edges:
+        if len(edge) != 2? edges are pairs; if malformed? Could raise? Spec pairs, no need. But if tuple/list maybe unpack causes TypeError; ValueError perhaps for absent? Better not catch. Could do before, after = edge. If not pair, ValueError? Not required. But robust? If edge is not sequence length 2, unpack raises ValueError, acceptable? Maybe okay.
+        if before not in node_set or after not in node_set: raise ValueError(...)
+        if after not in outgoing[before]:
+            outgoing[before].add(after)
+            indegree[after] += 1
+
+    available = []
+    # heap push zero indegree
+    for node in nodes:
+       if indegree[node] == 0: push(available,node)
+    order=[]
+    while available:
+        node = pop(available)
+        order.append(node)
+        for nxt in outgoing[node]: # iteration over set no deterministic needed, push all
+            if after not? indegree decrement. if zero push.
+    if len(order) != len(nodes): raise ValueError
+    return order
+
+Manual heap:
+    def _push(heap, item):
+       heap.append(item)
+       i = len(heap)-1
+       while i>0:
+          p=(i-1)//2
+          if heap[p] <= item: break
+          heap[i]=heap[p]
+          i=p
+       heap[i]=item
+    def _pop(heap):
+       item=heap[0]
+       last=heap.pop()
+       if heap:
+          heap[0]=last
+          i=0; n=len(heap)
+          while True:
+             l=2*i+1
+             r=l+1
+             m=i
+             if l<n and heap[l] < heap[m]: m=l
+             if r<n and heap[r] < heap[m]: m=r
+             if m==i: break
+             heap[i], heap[m] = heap[m], heap[i]
+             i=m
+       return item
+Need if heap only had one element: after pop empty, return item. Code if last? Works.
+
+But note _push uses item and assignments; standard. Could just sort available initially? Manual heap push. Need no imports.
+
+Is lexicographically smallest topological order produced by min-heap Kahn? Yes for DAG with total ordering. Proof: choose smallest zero-indegree at each step. Good.
+
+Need include isolated nodes: indegree 0 and no outgoing, included. Good.
+
+Potential edge case: duplicate edges after/outgoing set. Good.
+
+Potential issue: mutating indegree/outgoing no input. Good.
+
+Potential issue: nodes list unique strings, but if nodes list has duplicates? Spec unique. If duplicates, node_set less than len nodes; len(order) may mismatch causing false cycle. But spec unique.
+
+Need decide error messages. Just ValueError. Could no message or descriptive. User: Return only complete function in Python code block. We should output code block only. No explanation. The validation identifier says ignore. okay.
+
+Need ensure no imports in code. No collections, heapq.
+
+Alternative simpler using sorted available: no heap helpers. But manual heap maybe longer. User wants complete function. No imports. Code length acceptable. Need perhaps avoid nested functions for readability? Fine.
+
+Check if manual heap code bug: _pop when heap length 1: item=heap[0], last=heap.pop() -> last item. if heap: false. returns item. Good.
+
+_push with heap and item:
+heap.append(item); i=len(heap)-1; while i>0: parent=(i-1)//2; if heap[parent] <= item: break; heap[i]=heap[parent]; i=parent; heap[i]=item. Correct, because item variable unchanged. Need not heapify.
+
+_pop:
+root=heap[0]; last=heap.pop(); if heap: heap[0]=last; i=0; size=len(heap); while True: left=2*i+1; right=left+1; smallest=i; if left<size and heap[left] < heap[smallest]: smallest=left; if right<size and heap[right] < heap[smallest]: smallest=right; if smallest==i: break; heap[i],heap[smallest]=heap[smallest],heap[i]; i=smallest; return root. Correct.
+
+Potential performance: for nxt in outgoing[node], set iteration. Since order of pushes may differ but heap ensures min. Good.
+
+Could sort outgoing neighbors? not necessary. But if indegrees become zero, pushed. Good.
+
+Input edge could be tuple or list. before, after = edge. If edge is string of length 2, unpack chars; maybe not intended. Spec pairs. okay.
+
+Check cycle: Suppose nodes ['a','b'], edges [('b','a')]. zero indegree b, pop b, decrement a push a, order both. ok.
+
+Cycle a->b,b->a: no zero, order empty -> ValueError. ok.
+
+Duplicate self-edge: a->a duplicate. outgoing set prevents multiple indegree but self-loop indegree a 1 no zero -> ValueError. ok.
+
+Absent edge endpoint: before absent or after absent raises ValueError. If edge malformed unpack raises ValueError maybe okay. Could explicitly if len(edge)!=2 raise ValueError("edges must contain pairs") to avoid TypeError? But no requirement. Adding explicit may be okay. But if edge is generator? len fails. Spec list of pairs. Keep simple.
+
+Do not mutate inputs: We iterate nodes and edges; we use nodes for iteration; no modification.
+
+No imports. Good.
+
+One nuance: lexicographically smallest topological ordering when nodes are strings but not necessarily comparable? All strings. Good.
+
+Potential hidden tests may pass edges as set of tuples? edges iterable. okay.
+
+Potential hidden tests check no mutation by passing list and comparing. Our outgoing dict uses node keys strings, not list. Good.
+
+Potential hidden tests check ValueError for edge endpoint absent. If edge is ('x','a') where x not in nodes raise. Good.
+
+Potential hidden tests check ignore duplicate edges: if edge repeated, indegree not double. Using outgoing sets. Good.
+
+Potential hidden tests check lexicographically smallest: Example nodes ['b','a'], edges [('a','b')]. available a then b -> ['a','b']; isolated? good. Example nodes ['a','b','c'], edges [('a','c')] zero indegree a,b. heap min a then b then c. Topological orders: a,b,c or b,a,c; lexicographic compare a,b,c smallest. Good. Example where choosing a may block? Kahn min is correct.
+
+Should we use sorted(nodes) initial? We push all zero indegree in nodes order, heap sorts. Good.
+
+Need final code block only. Could include type hints? fine. No imports. Type hints okay. But complete function only. Might not want from typing. No imports. Use -> list. okay. But Python version? list generic okay. Could not include type hints to be safe. But function name only. We can include docstring? They ask only complete function. Docstring okay but maybe not needed.
+
+Potential issue: If nodes is a generator? Spec list. If nodes is list unique. We do node_set = set(nodes); outgoing = {node:set() for node in nodes}; This iterates nodes twice if it's iterator (would be empty second time), but spec list. Good.
+
+Could avoid nested helpers? okay.
+
+Need maybe validate nodes unique? Spec. No need. If not unique, could not mutate but if duplicates? We could handle by order? But not required. If nodes duplicates, return unique? Could raise? Not asked. Keep as is.
+
+Let's consider if edge list has duplicate edges but before/after strings equal; outgoing set handles. If there are multiple duplicate edges and no other edges, indegree 1. okay.
+
+Potential issue: Using set for outgoing. If there is duplicate edge, after not in outgoing before. For cycle detection, if there is edge a->b and duplicate a->b, only one indegree. Good.
+
+Potential issue: If graph has nodes with same string? Spec unique. okay.
+
+Let's think about lexicographically smallest with strings: Python's default lexical Unicode codepoint. Likely expected.
+
+Could use manual heap over list of strings; comparisons string. okay.
+
+Do we need raise ValueError for cycle after partial order? Yes.
+
+Should we raise ValueError for empty edge tuple? If before, after = edge may raise ValueError; if edge is ['a'] unpack ValueError. acceptable. If edge is object not iterable TypeError. Spec pairs.
+
+Need output only code block. final must no extra. Use ```python ... ```.
+
+Double-check code style.
+
+Potential hidden test may inspect no imports: no import.
+
+Potential hidden test may mutate returned order? Not our issue.
+
+Potential hidden test may call with tuple nodes? Spec list but if tuple, works if iterable. We do outgoing = {node: set() for node in nodes}; then node_set set(nodes). If nodes is tuple, okay. If nodes iterator, not okay but spec list.
+
+Potential hidden test may include edge endpoint not hashable? nodes strings, edges endpoints strings. okay.
+
+Could we use list of available sorted each time simpler and less error prone. Let's compare manual heap correctness and length. Manual heap more complex but robust. Need ensure no bug from heap with duplicate nodes? Heap can contain duplicates? We only push a node when indegree becomes 0. But if duplicate edge ignored, indegree not decrement extra. Good. Could indegree become negative? No if edges valid and duplicate ignored. If input has duplicate self-loop? indegree one, outgoing self. If cycle, no pop. If duplicate edges and some node? no. If outgoing[node] includes node and later pop? Node with self-loop indegree not zero. If node popped, its outgoing cannot include itself unless self-loop indegree would not be zero. okay.
+
+Potential issue: We build node_set = set(nodes). For large, okay.
+
+Potential hidden test may require raise ValueError for edge endpoint absent before adding? We validate every edge before building. Good.
+
+Could we do two-pass: if any absent, raise. We raise as encountered. okay.
+
+Potential hidden test may require ignore duplicate edges even if endpoints absent? If edge duplicate with absent endpoint? Absent should raise. We do.
+
+Potential hidden test may require not mutate edges: If edge is list and we don't mutate. okay.
+
+Let's craft final:
+
+def topological_order(nodes, edges):
+    node_set = set(nodes)
+    outgoing = {node: set() for node in nodes}
+    indegree = {node: 0 for node in nodes}
+
+    def heap_push(heap, value): ...
+    def heap_pop(heap): ...
+
+    for edge in edges:
+        before, after = edge
+        if before not in node_set or after not in node_set:
+            raise ValueError("edge endpoint absent")
+        if after not in outgoing[before]:
+            outgoing[before].add(after)
+            indegree[after] += 1
+
+    available = []
+    for node in nodes:
+        if indegree[node] == 0:
+            heap_push(available, node)
+
+    order = []
+    while available:
+        current = heap_pop(available)
+        order.append(current)
+        for neighbor in outgoing[current]:
+            indegree[neighbor] -= 1
+            if indegree[neighbor] == 0:
+                heap_push(available, neighbor)
+
+    if len(order) != len(nodes):
+        raise ValueError("cycle detected")
+    return order
+
+Potential issue: len(nodes) if nodes is list okay. If nodes not list but iterator? okay. If nodes is dict? unique strings? len works. okay.
+
+Should we store node_count = len(nodes) for comparison; if len nodes? okay.
+
+Should we convert outgoing[current] iteration to tuple to prevent modification? We don't modify sets. Fine.
+
+Potential issue: If nodes contains duplicates, len(order) != len(nodes) may raise cycle. But spec unique. Could if duplicates and no cycle, wrong; not required. If want robust, could use len(node_set). But if nodes unique, same. If nodes not unique, maybe should include each node? But nodes is list of unique. If we used len(node_set) and node_set, outgoing keys unique, order unique. Better to compare to len(node_set) for robust? But if duplicate node in input, do we include duplicates? Spec unique. If hidden test duplicate nodes maybe they expect no duplicate? Not sure. But using len(node_set) is safer for duplicate nodes. But if they expect error for duplicates? Not specified. Could use len(node_set) to avoid false cycle. But if nodes list has duplicates, outgoing dict has one key, order length = len(node_set), len(nodes) > that, using len(node_set) return one copy. Maybe okay. Let's consider if nodes = ['a','a']; edges []; expected? unique violation. Not asked. Could raise? Not needed. Use len(nodes) per spec. But hidden tests likely unique. Either fine.
+
+Potential hidden test may pass nodes as set? nodes unique strings but not list? Spec list. If set, len works. order length = len(node_set). Good.
+
+Maybe to avoid mutating inputs and preserve lexicographic order, if available initially we can heap_push nodes in any order. Good.
+
+Need consider no imports: builtins set, len. okay.
+
+Should we avoid nested function name starting underscore? okay.
+
+Potential bug in heap_push: heap[parent] <= value. If equal? nodes unique, no equal. If equal, not swap. okay.
+
+Let's test mentally:
+nodes ['c','a','b'] edges [('b','a'),('c','b')]
+indegree: a1 b1 c0. available heap push c -> [c]. pop c, outgoing c {'b'} indegree b0 push b -> [b]. pop b outgoing {'a'} indegree a0 push a. order c,b,a. only topo. ok.
+nodes ['a','b','c'] edges [] heap pushes a,b,c? node order a,b,c -> heap remains [a,b,c]? push b: parent a <= b, no swap. push c: parent b <= c. pop a root last c -> [c,b]; sift left b < c swap -> [b,c]. pop b etc. order sorted. ok.
+
+Could we implement heap functions after building to avoid closure? okay.
+
+One subtlety: We iterate over outgoing[current] set. If outgoing sets contain current due to self-loop but current popped? impossible as said. If cycle plus other? no pop cycle nodes. If graph has cycle reachable from available? Example a available, a->b, b->c, c->b. Pop a, indegrees b? b indegree 2 (a,c) -> after a decrement to 1, c indegree1; b,c not zero. len order 1 != 3 -> ValueError. ok.
+
+Potential hidden test: edge endpoint absent and cycle in same edges. We raise first encountered. okay.
+
+Now final only code block. Ensure not include analysis. final.
+```python
+def topological_order(nodes, edges):
+    node_set = set(nodes)
+    outgoing = {node: set() for node in nodes}
+    indegree = {node: 0 for node in nodes}
+
+    def heap_push(heap, value):
+        heap.append(value)
+        i = len(heap) - 1
+        while i > 0:
+            parent = (i - 1) // 2
+            if heap[parent] <= value:
+                break
+            heap[i] = heap[parent]
+            i = parent
+        heap[i] = value
+
+    def heap_pop(heap):
+        root = heap[0]
+        last = heap.pop()
+        if heap:
+            heap[0] = last
+            i = 0
+            size = len(heap)
+            while True:
+                left = 2 * i + 1
+                right = left + 1
+                smallest = i
+
+                if left < size and heap[left] < heap[smallest]:
+                    smallest = left
+                if right < size and heap[right] < heap[smallest]:
+                    smallest = right
+
+                if smallest == i:
+                    break
+
+                heap[i], heap[smallest] = heap[smallest], heap[i]
+                i = smallest
+
+        return root
+
+    for edge in edges:
+        before, after = edge
+        if before not in node_set or after not in node_set:
+            raise ValueError("edge endpoint absent")
+
+        if after not in outgoing[before]:
+            outgoing[before].add(after)
+            indegree[after] += 1
+
+    available = []
+    for node in nodes:
+        if indegree[node] == 0:
+            heap_push(available, node)
+
+    order = []
+    while available:
+        current = heap_pop(available)
+        order.append(current)
+
+        for neighbor in outgoing[current]:
+            indegree[neighbor] -= 1
+            if indegree[neighbor] == 0:
+                heap_push(available, neighbor)
+
+    if len(order) != len(nodes):
+        raise ValueError("cycle detected")
+
+    return order
+```

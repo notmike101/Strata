@@ -1,0 +1,28 @@
+{
+  "model": "<MODEL_ROOT>/IQ3_S/Qwen3.8-Flash-Next-GSQ-RCO-IQ3_S-00001-of-00002.gguf",
+  "messages": [
+    {
+      "role": "user",
+      "content": "Request identifier 084753c10277e6956a3bee4b. Ignore this identifier.\nImplement topological_order(nodes, edges) in Python. nodes is a list of unique strings; edges is a list of (before, after) pairs. Return the lexicographically smallest topological ordering, include isolated nodes, and ignore duplicate edges. Raise ValueError for an edge endpoint absent from nodes or a cycle. Do not mutate either input. Use no imports. Return only the complete function in a Python code block."
+    }
+  ],
+  "max_tokens": 512,
+  "stream": true,
+  "seed": 101,
+  "temperature": 1.0,
+  "top_p": 0.95,
+  "top_k": 20,
+  "min_p": 0.0,
+  "presence_penalty": 0.0,
+  "frequency_penalty": 0.0,
+  "reasoning_effort": "high",
+  "chat_template_kwargs": {
+    "enable_thinking": true,
+    "preserve_thinking": true
+  },
+  "repeat_penalty": 1.0,
+  "stream_options": {
+    "include_usage": true
+  },
+  "cache_prompt": false
+}

@@ -1,0 +1,18 @@
+We need answer user's request. Need produce final detailed answer at least 1200 words. Need implement thread-safe Python TTLCache using OrderedDict and monotonic clock. Include set, get, delete, clear, len, expiration, capacity eviction, unit tests with injected fake clock, detailed explanation thread safety complexity. Complete code, tests, explanation. Do not abbreviate implementation. Also Benchmark identifier ignored. Need likely provide Python code. Need ensure thread-safe. Consider using threading.Lock (RLock?) OrderedDict operations. Monotonic clock injectable. Need handle TTL seconds float. Expiration on get, len maybe purge expired? Need define behavior. Thread safety: lock protecting cache state. Could use threading.RLock to allow internal methods. Capacity eviction: when exceed maxsize, popitem(last=False) after insertion? Need consider TTLCache: set(key, value, ttl). store OrderedDict, key -> (value, expires_at). On get: with lock, entry=cache.get(key); if not exists return default? If expired delete return default. Else move_to_end(key) and return value. Need capacity eviction: after set: if ttl <=0? Could not store? maybe immediately expired if ttl <=0? We need decide. Typically ttl positive. We can if ttl <=0: if key in cache delete; return? But len? Better: set with ttl <=0 deletes key? But spec include expiration. Could store with expires_at now and get returns default; but capacity might include expired entries until purge. Better remove. But set ttl=0: maybe delete existing key and don't store. But if ttl negative? same. Need complete robust.
+
+Need unit tests with fake clock. Use unittest. FakeClock has time attribute and advance. Injectable: ttl=...; clock=lambda: fake.time. In constructor: clock=None -> time.monotonic. Need ensure no global time.
+
+Thread tests? Could include unit tests with injected fake clock only? User says unit tests with injected fake clock. Could also include concurrency test. Need detailed.
+
+Need at least 1200 words. Need code complete no abbreviations. Could provide sections.
+
+Let's design class:
+
+import threading
+from collections import OrderedDict
+from typing import Any, Optional, Callable
+
+class TTLCache:
+    def __init__(self, maxsize=100, ttl=300.0, clock=None):
+        if maxsize <=0: raise ValueError
+        if ttl <=0? maybe allow default

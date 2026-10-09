@@ -1,0 +1,14 @@
+We need answer user wants only complete function in Python code block. Need implement topological_order(nodes, edges) lexicographically smallest, include isolated, ignore duplicate edges, raise ValueError for edge endpoint absent from nodes or cycle. Do not mutate inputs. No imports. Return only complete function code block. Need think through implementation.
+
+Need produce final only code block. Let's analyze.
+
+Function topological_order(nodes, edges):
+- nodes list unique strings. edges list of (before, after) pairs.
+- Need not mutate nodes or edges. Use sets. Validate endpoints absent from nodes: if any endpoint not in node_set -> ValueError. Cycle detection: if cycle -> ValueError.
+- Lexicographically smallest topological ordering: use Kahn's algorithm selecting smallest available node lexicographically.
+- No imports: need min without import, maintain list of zero indegree nodes, repeatedly pick min via min(). n unique nodes. Complexity ok. Duplicate edges ignore: need ensure indegree counts only unique directed edges. Use set of edges after validation? Could process edges set. But edges elements may be tuples? assume (before, after). If duplicate identical ignore. If reverse duplicate? distinct edges matter.
+- Should we treat edges with endpoints absent before adding? Raise if endpoint absent. Duplicate edges ignore after validation. If invalid endpoint in duplicate? still raise.
+- Do not mutate either input: don't modify nodes list, don't modify edges list. We can create node_set = set(nodes) but if nodes is not list? prompt says list. But set(nodes) does not mutate. If nodes empty returns []? yes.
+- Lexicographic string comparison. Python default lex order.
+- Kahn: indegree = {node:0 for node in nodes}; adjacency = {node:set() for node in nodes}; seen_edges=set(); for edge in edges: maybe edge must be iterable pair. We can unpack; if edge invalid? Could raise ValueError? Spec only endpoint absent or cycle. But if malformed edge? We can let unpack error? Not required. Need robust. If before not in nodes or after not in nodes -> ValueError. If (before, after) not in seen_edges: add, adjacency[before].add(after), indegree[after] +=1. Self-loop: endpoint present, edge (a,a): creates indegree a, not in initial zero, after processing others remaining cycle -> raise ValueError. Good.
+- available = [node for node in nodes if indegree[node]==

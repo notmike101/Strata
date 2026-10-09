@@ -1,0 +1,15 @@
+We need answer user: Request identifier... Read archive... Implement topological_order(nodes, edges) in Python. Return only complete function in Python code block. Need produce final only code block. Need ensure function meets requirements.
+
+Need think thoroughly. We need implement topological order lexicographically smallest among all topological orderings, include isolated nodes, ignore duplicate edges. Validate endpoints present, cycle -> ValueError. Do not mutate inputs. No imports.
+
+Need consider lexicographically smallest topological ordering given strings. Standard algorithm: Kahn with min-heap. No imports (heapq is import) so need implement min selection manually or sort each step. Since nodes unique. Need not mutate inputs: can copy lists/sets. Ignore duplicate edges. Need edge endpoints absent -> ValueError. Cycle if cannot process all nodes.
+
+Need lexicographically smallest: At each step choose smallest available node (indegree 0) by lexicographic string order. Since graph arbitrary. Use available list sorted and pop(0) maybe O(n^2). Could use manual binary insertion to maintain sorted available. No imports. Need deterministic. Use strings; default <. Could sort available each iteration. Need maybe n moderate. Simplest:
+
+def topological_order(nodes, edges):
+    # maybe validate nodes list unique? Problem says unique. Do not assume? Could raise? Not specified. We can handle duplicates? Maybe not.
+    # copy to avoid mutate: node_list = list(nodes); edges = list(edges) maybe tuple elements. Need not mutate input: if nodes is list, list(nodes) copy. If edges list of tuples, copying list enough; tuples not mutated.
+    node_set = set(nodes) # no imports. But set okay. Need no hidden state. If nodes list order maybe unique. For lexicographic initial? available sorted node_set.
+    # validate edges: for each before, after in edges: if before not in node_set or after not in node_set: raise ValueError.
+    # Need ignore duplicate edges. Use set adjacency? sets not ordered. We can store adjacency lists but dedupe using set of edge pairs or adjacency sets. No imports. To update indegree, need avoid duplicate increment. So either dedupe edges first: unique_edges=set(); for e in edges: if e[0] not in nodeset or e[1] not in nodeset raise; if e not in unique_edges: add, increment indegree, adjacency append.
+    # Need indegree dict
