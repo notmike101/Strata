@@ -1,0 +1,86 @@
+{
+  "utc_started": "2026-10-09T04:52:10.883039+00:00",
+  "engine_sha256": "17dabc6a49746aa22beebdf354923ba5eeb21affc6597c6976ac430e46671518",
+  "vision_sha256": "a4a8488a45a19bdf10f0c550a4fddd980572ac9c355456f0412a06cfd57b4f75",
+  "projector_sha256": "1f7b7f0b984cf065c604360c29c8098362ed61b290db0ff12c6f360bb1a8a980",
+  "config_sha256": "04e9630b7c23d22e63b1fe1420488ccb56ce935cbf077d19f7141ad4b352af26",
+  "git_commit": "fb58e0dbc8399662c0e47c76578c6e878b14f6cf",
+  "contract": {
+    "route": "/v1/chat/completions",
+    "stream": true,
+    "max_tokens": 512,
+    "reasoning_effort": "none",
+    "concurrency": 1,
+    "sampling": "Existing API default: greedy",
+    "cache_state": "Unique opening nonce per request; actual cache_n reported",
+    "warmup": "One request per workload, excluded from measured results",
+    "measured_runs_per_workload": 3,
+    "model_loading_included": false,
+    "vision": "Remains loaded; requests are text only",
+    "network": "Client is this PC, connecting through its LAN IP; remote-device latency is not measured"
+  },
+  "configuration_unchanged": true,
+  "model_alias": "qwen3.8-flash-next-unsloth-ud-q4_k_xl",
+  "model_files": [
+    {
+      "bytes": 10946624,
+      "sha256_from_setup_verification": "sha256 4448186216b3af4cc558bbce2c3213f01608f8f8b2e5267a9767971dd3ec8082",
+      "note": "Previously fully hashed during this setup; not rehashed by this benchmark.",
+      "filename": "Qwen3.8-Flash-Next-UD-Q4_K_XL-00001-of-00004.gguf"
+    },
+    {
+      "bytes": 49859583136,
+      "sha256_from_setup_verification": "sha256 3f342f1c1580473f1ee94ddd5b28206e8c07a70fa1a366f59d1d6c922919a6c9",
+      "note": "Previously fully hashed during this setup; not rehashed by this benchmark.",
+      "filename": "Qwen3.8-Flash-Next-UD-Q4_K_XL-00002-of-00004.gguf"
+    },
+    {
+      "bytes": 49376141504,
+      "sha256_from_setup_verification": "sha256 56758f40269cad5cd9b0d3d6fbae0f40f6d5be6de49e4ab392dbe83157d9cbd3",
+      "note": "Previously fully hashed during this setup; not rehashed by this benchmark.",
+      "filename": "Qwen3.8-Flash-Next-UD-Q4_K_XL-00003-of-00004.gguf"
+    },
+    {
+      "bytes": 12087983520,
+      "sha256_from_setup_verification": "sha256 753bda48b98ba4f1636134a90a967de1b2d3908a236c026e464777342e53510a",
+      "note": "Previously fully hashed during this setup; not rehashed by this benchmark.",
+      "filename": "Qwen3.8-Flash-Next-UD-Q4_K_XL-00004-of-00004.gguf"
+    }
+  ],
+  "engine_arguments": [
+    "--pack",
+    "<MODEL_ROOT>/Strata/packs/unsloth-ud-q4_k_xl",
+    "--native",
+    "<MODEL_ROOT>/Qwen3.8-Flash-Next-UD-Q4_K_XL-00001-of-00004.gguf",
+    "--expert-profile",
+    "<STRATA_ROOT>/data/expert-profile.bin",
+    "--expert-cache",
+    "auto",
+    "--prefill",
+    "auto",
+    "--spec",
+    "4",
+    "--spec-min-p",
+    "0.5",
+    "--mtp",
+    "<MODEL_ROOT>/Strata/mtp/rt",
+    "--max-context",
+    "147456",
+    "--kv",
+    "int8",
+    "--kv-resident",
+    "32768",
+    "--resident-budget-gib",
+    "71",
+    "--vision",
+    "--vram-reserve-mib",
+    "700"
+  ],
+  "engine_environment": {},
+  "sampling_defaults": {},
+  "loaded_backend_hashes": {
+    "cublas64_13.dll": "b5846446f2a151ca24b74b8113d4ca32c52105ad89d4c2f1bc56a4ccffa9ea61",
+    "cublasLt64_13.dll": "680561bdc5d8a8c921e9ae974e6b60a6608c9d9fca8c0fd125e9da08c5c33ff1",
+    "nvcuda.dll": "3fe38dc3b7eb45f4c364d87df01dbf1c224c5ffd96b542cea8c0dca215330b84"
+  }
+}
