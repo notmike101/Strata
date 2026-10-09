@@ -1,0 +1,20 @@
+**********************************************************************
+** Visual Studio 2022 Developer Command Prompt v17.14.36
+** Copyright (c) 2025 Microsoft Corporation
+**********************************************************************
+[1/4] Building CXX object CMakeFiles\spec_verify_parity.dir\src\kernels\spec_verify_parity.cpp.obj
+C:\strata\include\strata/core/spec_prob.hpp(47): warning C4996: 'getenv': This function or variable may be unsafe. Consider using _dupenv_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+C:\strata\include\strata/core/spec_prob.hpp(57): warning C4996: 'getenv': This function or variable may be unsafe. Consider using _dupenv_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+C:\strata\include\strata/core/spec_prob.hpp(69): warning C4996: 'getenv': This function or variable may be unsafe. Consider using _dupenv_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+[2/4] Building CXX object CMakeFiles\spec_prob_test.dir\src\core\spec_prob_test.cpp.obj
+[3/4] Linking CXX executable spec_verify_parity.exe
+[4/4] Linking CXX executable spec_prob_test.exe
+Test project C:/strata/local-setup/target-80/build-cuda86-main
+    Start 35: spec_verify_parity
+1/2 Test #35: spec_verify_parity ...............   Passed    3.30 sec
+    Start 71: spec_prob_test
+2/2 Test #71: spec_prob_test ...................   Passed    4.78 sec
+
+100% tests passed out of 2
+
+Total Test time (real) =   8.15 sec

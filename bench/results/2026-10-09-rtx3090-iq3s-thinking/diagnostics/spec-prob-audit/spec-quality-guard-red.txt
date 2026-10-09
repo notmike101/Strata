@@ -1,0 +1,32 @@
+.FFF.
+======================================================================
+FAIL: test_reject_draft_dependent_suffix_selection (__main__.GuardTests.test_reject_draft_dependent_suffix_selection)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "C:\strata\local-setup\target-80\test-spec-quality-guard.py", line 12, in test_reject_draft_dependent_suffix_selection
+    with self.assertRaisesRegex(ValueError,'suffix'):
+         ~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^
+AssertionError: ValueError not raised
+
+======================================================================
+FAIL: test_reject_picked_token_gate (__main__.GuardTests.test_reject_picked_token_gate)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "C:\strata\local-setup\target-80\test-spec-quality-guard.py", line 9, in test_reject_picked_token_gate
+    with self.assertRaisesRegex(ValueError,'distribution-top'):
+         ~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: ValueError not raised
+
+======================================================================
+FAIL: test_reject_unaudited_lookup_chain (__main__.GuardTests.test_reject_unaudited_lookup_chain)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "C:\strata\local-setup\target-80\test-spec-quality-guard.py", line 17, in test_reject_unaudited_lookup_chain
+    with self.assertRaisesRegex(ValueError,'lookup chain'):
+         ~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: ValueError not raised
+
+----------------------------------------------------------------------
+Ran 5 tests in 0.002s
+
+FAILED (failures=3)

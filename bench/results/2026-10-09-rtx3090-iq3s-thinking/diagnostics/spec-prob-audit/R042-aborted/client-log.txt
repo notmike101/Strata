@@ -1,0 +1,11 @@
+START short-warmup
+Traceback (most recent call last):
+  File "C:\strata\local-setup\coding-best-practices\benchmark.py", line 183, in <module>
+    for line in response:
+                ^^^^^^^^
+  File "<USER_HOME>\AppData\Local\Python\pythoncore-3.14-64\Lib\http\client.py", line 711, in readline
+    result = self.fp.readline(limit)
+  File "<USER_HOME>\AppData\Local\Python\pythoncore-3.14-64\Lib\socket.py", line 729, in readinto
+    return self._sock.recv_into(b)
+           ~~~~~~~~~~~~~~~~~~~~^^^
+ConnectionResetError: [WinError 10054] An existing connection was forcibly closed by the remote host

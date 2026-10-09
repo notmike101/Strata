@@ -1,0 +1,37 @@
+**********************************************************************
+** Visual Studio 2022 Developer Command Prompt v17.14.36
+** Copyright (c) 2025 Microsoft Corporation
+**********************************************************************
+[0/1] Re-running CMake...
+-- Strata: CUDA enabled, arch 86
+-- strata: pack/full/experts.bin absent - the expert arena load test is NOT registered
+-- Warning: ccache not found - consider installing it for faster compilation or disable this warning with GGML_CCACHE=OFF
+-- CMAKE_SYSTEM_PROCESSOR: AMD64
+-- CMAKE_GENERATOR_PLATFORM: 
+-- GGML_SYSTEM_ARCH: x86
+-- Including CPU backend
+-- x86 detected
+-- Adding CPU backend variant ggml-cpu: /arch:AVX2 GGML_AVX2;GGML_FMA;GGML_F16C;__BMI2__;GGML_BMI2
+-- ggml version: 0.24.0
+-- ggml commit:  ed80c288
+-- Configuring done (4.1s)
+-- Generating done (0.3s)
+-- Build files have been written to: C:/strata/local-setup/target-80/build-cuda86-main
+[1/5] Building CXX object CMakeFiles\coupled_draft_test.dir\src\core\coupled_draft_test.cpp.obj
+[2/5] Linking CXX executable coupled_draft_test.exe
+[3/5] Building CXX object CMakeFiles\sampler_parity.dir\src\kernels\sampler_parity.cpp.obj
+C:\strata\src\kernels\sampler_parity.cpp(475): warning C4996: 'getenv': This function or variable may be unsafe. Consider using _dupenv_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+[4/5] Linking CXX executable sampler_parity.exe
+Test project C:/strata/local-setup/target-80/build-cuda86-main
+    Start 34: sampler_parity
+1/4 Test #34: sampler_parity ...................   Passed    1.02 sec
+    Start 36: sampler_parity_one_block
+2/4 Test #36: sampler_parity_one_block .........   Passed    1.31 sec
+    Start 37: sampler_parity_old
+3/4 Test #37: sampler_parity_old ...............   Passed    3.85 sec
+    Start 70: coupled_draft_test
+4/4 Test #70: coupled_draft_test ...............   Passed    0.10 sec
+
+100% tests passed out of 4
+
+Total Test time (real) =   6.47 sec

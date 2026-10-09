@@ -1,0 +1,4 @@
+mode=draft-dependent-suffix lookup=750019/1000000 target=(0.500,0.500) observed=(0.373727,0.626273) TV=0.126273 target_matches=NO
+mode=suffix-disabled lookup=0/1000000 target=(0.500,0.500) observed=(0.500338,0.499662) TV=0.000338 target_matches=yes
+mode=suffix-independent lookup=1000000/1000000 target=(0.500,0.500) observed=(0.500074,0.499926) TV=0.000074 target_matches=yes
+expected_biased_control_and_unbiased_alternatives: PASS

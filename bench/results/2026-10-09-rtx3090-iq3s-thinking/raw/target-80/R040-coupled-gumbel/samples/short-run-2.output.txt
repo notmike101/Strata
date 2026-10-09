@@ -1,0 +1,14 @@
+We need answer user's request. Need produce final answer at least 1200 words, complete code, tests, explanation. Need implement thread-safe Python TTLCache using OrderedDict and monotonic clock. Include set, get, delete, clear, len, expiration, capacity eviction, unit tests with injected fake clock, detailed explanation of thread safety and complexity. Do not abbreviate implementation. Ignore identifier.
+
+Need craft thorough. Let's think design.
+
+Need class TTLCache. Use collections.OrderedDict. Monotonic clock via time.monotonic, but injectable clock for tests. Thread safe with RLock maybe. Need expiration: lazy expiration on access? Could include _purge_expired, maybe cleanup on set/get. Also maybe count property? User asks len, expiration. Maybe expiration capacity eviction. Include len? Could implement __len__, __contains__, get, set, delete, clear, maxsize, ttl, maybe items? Need ensure capacity eviction. OrderedDict with move_to_end True for LRU? TTL cache could evict expired first, then LRU? We need decide.
+
+Implement:
+
+class TTLCache:
+    def __init__(self, maxsize=0, ttl=0, clock=None): self._lock=threading.RLock(); self._data=OrderedDict(); self._maxsize=...; self._ttl=...; self._clock=clock or time.monotonic
+    def set(self,key,value,ttl=None):
+       with lock: now=clock(); self._purge_expired(now); expire_at = now + (ttl if ttl is not None else self._ttl) if ttl not None and ttl !=0? If ttl<=0 then no expiration? Need decide. Maybe None means default ttl; 0 means immediately expire? Better: if default ttl is None? Use ttl None for default; negative means never? We can define: ttl is None uses default; if resolved_ttl is None -> no expiration. But request TTL cache likely default ttl. To support injected fake clock, tests. Could define ttl as float seconds. If ttl is None then infinite. If ttl <=0? If set with ttl=0 maybe expires immediately after? Maybe treat ttl <= 0 as no expiration? Hmm.
+
+Better robust: self._ttl = ttl; if self._ttl is None => no expiration; else positive. If caller passes ttl, use it; if ttl is None use default. If resolved_ttl is not None and resolved_ttl <=0: store no

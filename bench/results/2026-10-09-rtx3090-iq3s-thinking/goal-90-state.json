@@ -3,14 +3,14 @@
   "target_tps": 90,
   "metric": "server_decode_tps",
   "contract": "goal-90-contract.md",
-  "current": "R038 CUDA13.4 compiler-only trial86.5/84.2; memory and full cleanup passed. No clear gain; unpromoted.",
+  "current": "R043-spec-prob-top-no-suffix: R043 audited rejection-mode composition reached85.3/85.1 short/longer server decode tok/s. Neither cell meets90, and short speed is lower than the retained control. Keep it unpromoted; the production launcher retains ordinary exact-match drafting.",
   "next": [
-    "Publish E052-E055 and all completed/aborted observer, compiler and row-group evidence.",
-    "R039: same CUDA13.4 binary with the newly downloaded runtime DLLs, verified by module names and configured directory.",
-    "If no repeatable gain, retain existing production stack and reassess exact serving/speculation scheduling."
+    "R044 is queued: change only the audited proposal-distribution confidence floor from0.70 to0.50, leaving target min_p0 and every thinking parameter fixed. See spec-prob-threshold-plan.md; repeat and qualify only a measured winner."
   ],
   "promoted": "The previously qualified format-gather engine with IQ2_S gather disabled and adaptive lag2; no changes this turn.",
   "stopping_rule": "Leave goal active until all fixed qualification cells pass. No benchmark model resident at handoff.",
   "quality": "Q007: 3/5 compiled and passed72 tests each, 2/5 no final answer at8192 tokens. Goal unqualified.",
-  "last_checkpoint": "E055"
+  "last_checkpoint": "E061",
+  "resume_command": ".venv/Scripts/python.exe local-setup/target-80/run-c020-arm.py local-setup/target-80/R044-spec-prob-top-floor05.json --out local-setup/target-80/R044-spec-prob-top-floor05 --observer audit-no-process --reverse-order",
+  "safety": "Full-tree cleanup verified; no benchmark resident. Probabilistic mode guard requires top gate, suffix0 and no lookup chain. Target sampler unchanged."
 }

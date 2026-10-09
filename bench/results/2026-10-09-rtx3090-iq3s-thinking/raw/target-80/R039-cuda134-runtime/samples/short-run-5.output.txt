@@ -1,0 +1,20 @@
+We need answer user's request. Need produce final answer at least 1200 words. Need implement thread-safe Python TTLCache using OrderedDict monotonic clock, include set, get, delete, clear, len, expiration, capacity eviction, unit tests with injected fake clock, detailed explanation thread safety and complexity. Do not abbreviate implementation. Need maybe no benchmark identifier mention? Ignore identifier. Need complete code, tests, explanation. Need likely include imports, class. Need ensure thread safety: use RLock? OrderedDict operations under lock. Need fake clock injectable, monotonic default time.monotonic. Need expiration: lazy expiration on get, set? maybe purge expired? Capacity eviction: LRU with capacity? TTLCache often TTL + LRU? User says capacity eviction. Could implement maxsize LRU using OrderedDict: set moves existing to end; get moves to end; popitem(last=False) evict oldest. Also expiration evicts expired on operations. Need thread-safe all methods. Need unit tests with injected fake clock. Need detailed explanation. Need at least 1200 words. Could write code blocks. Need ensure no abbreviations. Need include if __name__ main? Could include unit tests using unittest. Need maybe type hints. Need handle timeout None? Maybe default ttl required or default_ttl? Let's design robust.
+
+Class:
+from collections import OrderedDict
+import threading
+import time
+
+class TTLCache:
+    def __init__(self, maxsize=128, ttl=300, default_factory=None, timer=time.monotonic, lock=None):
+       if maxsize <=0? Could allow 0? Maybe maxsize positive. If maxsize == 0? Could raise ValueError? But capacity eviction perhaps allow maxsize>0.
+       self._maxsize = int(maxsize); if <=0 raise ValueError.
+       self._default_ttl = float(ttl)
+       self._timer = timer
+       self._entries = OrderedDict() # key -> (value, expires_at)
+       self._lock = threading.RLock() if lock is None else lock? Allow inject lock? For thread safety, internal.
+    _now(self): return float(self._timer())
+    _expired(self, expires_at): return now >= expires_at? Expiration when now >= expires_at.
+    _is_expired(now, expires_at): now >= expires_at.
+    _touch(self, key, expires_at): OrderedDict move_to_end.
+    _pur

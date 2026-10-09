@@ -1,0 +1,123 @@
+Start testing: Oct 09 18:22 Central Daylight Time
+----------------------------------------------------------
+35/112 Testing: spec_verify_parity
+35/112 Test: spec_verify_parity
+Command: "C:/strata/local-setup/target-80/build-cuda86-main/spec_verify_parity.exe"
+Directory: C:/strata/local-setup/target-80/build-cuda86-main
+"spec_verify_parity" start time: Oct 09 18:22 Central Daylight Time
+Output:
+----------------------------------------------------------
+spec_verify_parity: 1296 rows (386 drafts kept, 622 rejected, 288 plain last rows, 496 with a q list): 0 mismatches
+<end of output>
+Test time =   3.30 sec
+----------------------------------------------------------
+Test Passed.
+"spec_verify_parity" end time: Oct 09 18:22 Central Daylight Time
+"spec_verify_parity" time elapsed: 00:00:03
+----------------------------------------------------------
+
+71/112 Testing: spec_prob_test
+71/112 Test: spec_prob_test
+Command: "C:/strata/local-setup/target-80/build-cuda86-main/spec_prob_test.exe"
+Directory: C:/strata/local-setup/target-80/build-cuda86-main
+"spec_prob_test" start time: Oct 09 18:22 Central Daylight Time
+Output:
+----------------------------------------------------------
+spec_prob_test: 2000000 trials per case, 16-token vocabulary
+chain top_k 64 top_p 1.00 min_p 0.00 temp 1.0
+  ok   q = p (accept 1.000)                                       chi2      11.0  df 15  bound   37.8
+  ok   perturbed q (accept 0.778)                                 chi2      10.7  df 15  bound   37.8
+  ok   q = point mass (argmax draft, no list) (accept 0.195)      chi2      15.3  df 15  bound   37.8
+  ok   q disjoint from p (inverted logits) (accept 0.060)         chi2       9.1  df 15  bound   37.8
+  ok   q support wider than p's (accept 0.778)                    chi2      12.0  df 15  bound   37.8
+  ok   p(argmax draft) = 0, point mass (accept 0.000)             chi2      10.2  df 14  bound   36.3
+chain top_k 1 top_p 1.00 min_p 0.00 temp 1.0
+  ok   q = p (accept 1.000)                                       chi2       0.0  df  1  bound   11.2
+  ok   perturbed q (accept 1.000)                                 chi2       0.0  df  1  bound   11.2
+  ok   q = point mass (argmax draft, no list) (accept 1.000)      chi2       0.0  df  1  bound   11.2
+  ok   q disjoint from p (inverted logits) (accept 0.000)         chi2       0.0  df  1  bound   11.2
+  ok   q support wider than p's (accept 0.365)                    chi2       0.0  df  1  bound   11.2
+  ok   p(argmax draft) = 0, point mass (accept 0.000)             chi2       0.0  df  1  bound   11.2
+chain top_k 5 top_p 1.00 min_p 0.00 temp 1.0
+  ok   q = p (accept 1.000)                                       chi2       3.9  df  4  bound   18.7
+  ok   perturbed q (accept 0.675)                                 chi2       3.6  df  4  bound   18.7
+  ok   q = point mass (argmax draft, no list) (accept 0.194)      chi2       6.8  df  4  bound   18.7
+  ok   q disjoint from p (inverted logits) (accept 0.000)         chi2       2.2  df  4  bound   18.7
+  ok   q support wider than p's (accept 0.684)                    chi2       2.6  df  4  bound   18.7
+  ok   p(argmax draft) = 0, point mass (accept 0.000)             chi2       5.8  df  4  bound   18.7
+chain top_k 64 top_p 0.50 min_p 0.00 temp 1.0
+  ok   q = p (accept 1.000)                                       chi2       0.0  df  1  bound   11.2
+  ok   perturbed q (accept 1.000)                                 chi2       0.0  df  1  bound   11.2
+  ok   q = point mass (argmax draft, no list) (accept 1.000)      chi2       0.0  df  1  bound   11.2
+  ok   q disjoint from p (inverted logits) (accept 0.000)         chi2       0.0  df  1  bound   11.2
+  ok   q support wider than p's (accept 0.608)                    chi2       0.0  df  1  bound   11.2
+  ok   p(argmax draft) = 0, point mass (accept 0.000)             chi2       0.9  df  1  bound   11.2
+chain top_k 64 top_p 0.95 min_p 0.00 temp 1.0
+  ok   q = p (accept 1.000)                                       chi2       0.4  df  2  bound   14.1
+  ok   perturbed q (accept 0.626)                                 chi2       3.8  df  2  bound   14.1
+  ok   q = point mass (argmax draft, no list) (accept 0.872)      chi2       3.5  df  2  bound   14.1
+  ok   q disjoint from p (inverted logits) (accept 0.000)         chi2       0.7  df  2  bound   14.1
+  ok   q support wider than p's (accept 0.606)                    chi2       0.2  df  2  bound   14.1
+  ok   p(argmax draft) = 0, point mass (accept 0.000)             chi2       3.3  df  7  bound   24.5
+chain top_k 20 top_p 0.95 min_p 0.05 temp 0.7
+  ok   q = p (accept 1.000)                                       chi2       0.2  df  2  bound   14.1
+  ok   perturbed q (accept 0.875)                                 chi2       0.5  df  2  bound   14.1
+  ok   q = point mass (argmax draft, no list) (accept 0.861)      chi2       0.4  df  2  bound   14.1
+  ok   q disjoint from p (inverted logits) (accept 0.000)         chi2       2.4  df  2  bound   14.1
+  ok   q support wider than p's (accept 0.887)                    chi2       1.2  df  2  bound   14.1
+  ok   p(argmax draft) = 0, point mass (accept 0.000)             chi2       3.2  df  5  bound   20.8
+chain top_k 64 top_p 1.00 min_p 0.10 temp 1.0
+  ok   q = p (accept 1.000)                                       chi2      18.7  df  6  bound   22.7
+  ok   perturbed q (accept 0.789)                                 chi2       9.4  df  6  bound   22.7
+  ok   q = point mass (argmax draft, no list) (accept 0.371)      chi2      11.4  df  6  bound   22.7
+  ok   q disjoint from p (inverted logits) (accept 0.000)         chi2       2.3  df  6  bound   22.7
+  ok   q support wider than p's (accept 0.835)                    chi2       5.3  df  6  bound   22.7
+  ok   p(argmax draft) = 0, point mass (accept 0.000)             chi2      10.0  df  8  bound   26.3
+chain top_k 64 top_p 1.00 min_p 0.00 temp 0.3
+  ok   q = p (accept 1.000)                                       chi2       9.9  df  8  bound   26.3
+  ok   perturbed q (accept 0.825)                                 chi2       4.8  df  8  bound   26.3
+  ok   q = point mass (argmax draft, no list) (accept 0.825)      chi2       8.1  df  8  bound   26.3
+  ok   q disjoint from p (inverted logits) (accept 0.000)         chi2       8.0  df  8  bound   26.3
+  ok   q support wider than p's (accept 0.775)                    chi2       8.4  df  8  bound   26.3
+  ok   p(argmax draft) = 0, point mass (accept 0.000)             chi2       9.9  df 10  bound   29.8
+chain top_k 64 top_p 1.00 min_p 0.00 temp 1.5
+  ok   q = p (accept 1.000)                                       chi2      18.6  df 15  bound   37.8
+  ok   perturbed q (accept 0.759)                                 chi2      10.6  df 15  bound   37.8
+  ok   q = point mass (argmax draft, no list) (accept 0.226)      chi2       7.9  df 15  bound   37.8
+  ok   q disjoint from p (inverted logits) (accept 0.129)         chi2       9.2  df 15  bound   37.8
+  ok   q support wider than p's (accept 0.671)                    chi2      14.8  df 15  bound   37.8
+  ok   p(argmax draft) = 0, point mass (accept 0.000)             chi2      15.9  df 14  bound   36.3
+chain top_k 8 top_p 0.90 min_p 0.02 temp 1.0
+  ok   q = p (accept 1.000)                                       chi2       2.7  df  3  bound   16.6
+  ok   perturbed q (accept 0.838)                                 chi2       2.2  df  3  bound   16.6
+  ok   q = point mass (argmax draft, no list) (accept 0.457)      chi2       5.2  df  3  bound   16.6
+  ok   q disjoint from p (inverted logits) (accept 0.000)         chi2       1.8  df  3  bound   16.6
+  ok   q support wider than p's (accept 0.797)                    chi2       1.0  df  3  bound   16.6
+  ok   p(argmax draft) = 0, point mass (accept 0.000)             chi2       2.3  df  3  bound   16.6
+controls
+  ok   always accept the draft (accept 1.000)                     chi2  296641.4  df  8  bound   26.3  (control: must fail)
+  ok   point mass, standard rule (accept 0.237)                   chi2      16.2  df  8  bound   26.3
+  ok   point mass, 'no list = q 0' (rejects all: #29924) (accept 0.000) chi2       7.6  df  8  bound   26.3
+  ok   point-mass accept rate 0.2368 = p(d) 0.2365; the q = 0 rule accepts 0.0000
+joint (x0, x1) over a Markov model: top_k 64 top_p 1.00 min_p 0.00 temp 1.0
+  ok   joint of 2 tokens (row-0 kept 0.849)                       chi2     255.1  df 251  bound  326.0
+joint (x0, x1) over a Markov model: top_k 20 top_p 0.95 min_p 0.05 temp 0.7
+  ok   joint of 2 tokens (row-0 kept 0.713)                       chi2      70.7  df 77  bound  121.2
+joint (x0, x1) over a Markov model: top_k 5 top_p 0.50 min_p 0.00 temp 1.5
+  ok   joint of 2 tokens (row-0 kept 0.586)                       chi2       2.3  df  3  bound   16.6
+truncation regressions
+  ok   point-mass row: accept 0.3344 vs p(d) 0.3341 (4.5 se 0.0034)
+  ok   point-mass row: accept 0.2686 vs p(d) 0.2689 (4.5 se 0.0032)
+  ok   point-mass row: accept 0.0622 vs p(d) 0.0626 (4.5 se 0.0017)
+  ok   a draft outside top_k/top_p/min_p support is always rejected, replaced inside p (0 bad)
+  ok   p == q: every draft is accepted (0 rejected)
+spec_prob_test: 72 cases, 0 failed
+<end of output>
+Test time =   4.78 sec
+----------------------------------------------------------
+Test Passed.
+"spec_prob_test" end time: Oct 09 18:22 Central Daylight Time
+"spec_prob_test" time elapsed: 00:00:04
+----------------------------------------------------------
+
+End testing: Oct 09 18:22 Central Daylight Time

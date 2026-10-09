@@ -1,0 +1,41 @@
+.FFFF....
+======================================================================
+FAIL: test_nonzero_environment_values_match_engine (__main__.GuardTests.test_nonzero_environment_values_match_engine) (enabled='yes')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "C:\strata\local-setup\target-80\test-spec-quality-guard.py", line 10, in test_nonzero_environment_values_match_engine
+    with self.subTest(enabled=enabled), self.assertRaisesRegex(ValueError,'distribution-top'):
+                                        ~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: ValueError not raised
+
+======================================================================
+FAIL: test_nonzero_environment_values_match_engine (__main__.GuardTests.test_nonzero_environment_values_match_engine) (enabled='true')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "C:\strata\local-setup\target-80\test-spec-quality-guard.py", line 10, in test_nonzero_environment_values_match_engine
+    with self.subTest(enabled=enabled), self.assertRaisesRegex(ValueError,'distribution-top'):
+                                        ~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: ValueError not raised
+
+======================================================================
+FAIL: test_nonzero_environment_values_match_engine (__main__.GuardTests.test_nonzero_environment_values_match_engine) (enabled='2')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "C:\strata\local-setup\target-80\test-spec-quality-guard.py", line 10, in test_nonzero_environment_values_match_engine
+    with self.subTest(enabled=enabled), self.assertRaisesRegex(ValueError,'distribution-top'):
+                                        ~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: ValueError not raised
+
+======================================================================
+FAIL: test_nonzero_environment_values_match_engine (__main__.GuardTests.test_nonzero_environment_values_match_engine) (enabled=1)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "C:\strata\local-setup\target-80\test-spec-quality-guard.py", line 10, in test_nonzero_environment_values_match_engine
+    with self.subTest(enabled=enabled), self.assertRaisesRegex(ValueError,'distribution-top'):
+                                        ~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: ValueError not raised
+
+----------------------------------------------------------------------
+Ran 6 tests in 0.003s
+
+FAILED (failures=4)

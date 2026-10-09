@@ -553,3 +553,110 @@ Same-day retained controls R035 and R037 produced short/longer decode medians 89
 Minimum available physical memory 64,233,795,584 bytes; minimum available commit 42,596,917,248 bytes. Peak sampled GPU use 25,260,417,024 bytes. Both 16 GiB floors passed. Observer total CPU time 0.000 ms; maximum individual observer call 0.4519 ms. Per-process peak memory was deliberately not queried during requests. Full launcher, server, engine and vision tree cleanup passed; a subsequent idle check read 585 MiB GPU used. Original configuration was restored.
 
 Disposition: compiler candidate unpromoted; production launcher unchanged. Next, isolate the newly downloaded CUDA runtime libraries using the same CUDA13.4 executable, with library-name-based identity capture and an explicit configured-directory guard. If that also lacks a clear gain, leave the retained compiler/runtime stack in place and move to broader serving/scheduling alternatives. All raw measured seeds and failed arms remain public evidence.
+
+
+## E056 / newer CUDA libraries fail to improve the served workload
+
+R039 held the R038 CUDA13.4 executable constant and changed only lib_dirs to the side-by-side CUDA13.4.2 SDK directory. Module capture now matches CUDA DLL names independently of installation path and refuses a non-driver CUDA library outside the configured directories. Live identity confirmed new cuBLAS/cuBLASLt binaries and unchanged nvcuda driver. This avoids attributing a compiler build to runtime libraries it did not load.
+
+Loaded library SHA256:
+
+- cublas64_13.dll: `60bbba8868290311e9c1657b2193ddec667744eb555ff843f87acb7c039f9efa`.
+
+- cublasLt64_13.dll: `cad63434448e7141629e240ea093ad596a7ef6a0f67b468ba9bc1df6e1eeee33`.
+
+- nvcuda.dll: `3fe38dc3b7eb45f4c364d87df01dbf1c224c5ffd96b542cea8c0dca215330b84`.
+
+Original TTLCache streaming cache misses, one excluded warmup plus five seeds per cell, 512 generated tokens each, longer then short. Same fixed thinking profile, context, precision, MTP and vision.
+
+| Workload | Server decode median (range), tok/s | Prompt median, tok/s | Request E2E median, tok/s | Stream total median, tok/s | TTFT median, s |
+|---|---:|---:|---:|---:|---:|
+| Short | 87.4 (84.2-90.1) | 201.6 | 76.3132 | 76.3240 | 0.8588 |
+| Approximately 3K | 80.5 (70.3-85.2) | 496.4 | 41.0086 | 41.0118 | 6.1523 |
+
+The longer median is lower than R038's84.2 and the retained R037's83.9. One90.1 short seed is not goal evidence. All slower seeds remain included. Do not promote this runtime stack; compiler and runtime candidates remain available for development, while the launcher keeps the retained CUDA13.3 engine and original runtime libraries. No quality win or full-matrix qualification is claimed.
+
+Minimum available physical RAM 62,318,350,336 bytes and commit 41,375,252,480 bytes; sampled GPU peak 25,283,485,696 bytes. Both16GiB host safety floors passed. Full launcher/server/text/vision process cleanup passed, followed by585MiB idle GPU use. Original configuration restored.
+
+Next larger alternative R040 is the existing opt-in coupled Gumbel draft implementation, after sampler/host-reference and distribution checks. Its exact numeric sampling remains fixed, but its random stream changes; it is diagnostic until full correctness/quality gates pass. T003's losing coupled-only arm remains recorded and is not being relabeled. Plan and rationale are in diagnostics/coupled-gumbel/coupled-gumbel-plan.md.
+
+
+## E057 / coupled Gumbel sampler checks pass; served trial started
+
+C023 built the existing sampler_parity and coupled_draft_test targets using CUDA13.3.73/sm86 Release and the production runtime libraries. All four selected tests passed: sampler_parity, sampler_parity_one_block, sampler_parity_old and coupled_draft_test. Each sampler implementation reported zero failures, including Gumbel GPU/host-reference parity for48draws across three chains (one is exactly temperature1/top_k20/top_p.95/min_p0), and total variation0.0098 over10240categorical draws against the expected softmax. Flag controls confirmed a different sampled random stream and unchanged greedy behavior. These are finite implementation checks, not a claim of universal coding-quality equivalence.
+
+Source selection, counter/history arithmetic, and the exact-match target verifier support a distribution-preserving diagnostic. No probability threshold is used to accept an unverified token. The numerical thinking sampler stays identical. Retain per-arm reproducibility with explicit engine, flags and seed; do not claim identical text to the inverse-CDF stream for the same seed. There is no production source edit, quantization change, reduced context or reasoning restriction.
+
+R040 is running on the retained production engine/library stack with only STRATA_SPEC_COUPLED=1 and STRATA_SPEC_GUMBEL=1 added. Both original five-seed512-token cells are required; sampler tests alone cannot promote it. If throughput improves, complete paired repeated controls and the random-coding/full quality matrix before changing the launcher.
+
+
+## E058 / R040-coupled-gumbel
+
+Same retained production engine and loaded library hashes as R037. Config diff is archived. Fixed numeric sampling, high/xhigh reasoning, model/quant, vision, context262144 and INT8KV retained. Original TTLCache streaming cache-miss workloads; one excluded warmup and five measured seeds101-105 per cell,512tokens per measured run. No slow seed excluded.
+
+| Workload | Decode median (range), tok/s | Prompt median, tok/s | E2E median, tok/s | Stream total median, tok/s | TTFT median, s | Draft accepted/offered |
+|---|---:|---:|---:|---:|---:|---:|
+| short | 86.9 (85.6-89.7) | 205.4 | 76.1232 | 76.1376 | 0.8606 | 876/1107 (79.13%) |
+| longer | 85.1 (80.2-87.0) | 496.2 | 42.1124 | 42.1187 | 6.1566 | 985/1251 (78.74%) |
+
+Minimum available physical RAM 63,815,675,904 bytes; available commit 42,119,364,608 bytes. Sampled GPU peak 25,258,319,872 bytes. Both16GiB host floors passed. Per-process peak memory not sampled. Full launcher/server/text/vision cleanup passed and previous config restored.
+
+R040 coupled Gumbel completed at86.9/85.1 short/longer decode tok/s. The mixed difference versus R03787.5/83.9 does not establish a repeatable overall gain or meet90. Keep it unpromoted; all five seeds remain included.
+
+Next: R041 tests --spec6 alone on the retained control, with exact-match target verification and additional GPU buffers explicitly measured.
+
+
+## E059 / R041-spec6
+
+Same retained production engine and loaded library hashes as R037. Config diff is archived. Fixed numeric sampling, high/xhigh reasoning, model/quant, vision, context262144 and INT8KV retained. Original TTLCache streaming cache-miss workloads; one excluded warmup and five measured seeds101-105 per cell,512tokens per measured run. No slow seed excluded.
+
+| Workload | Decode median (range), tok/s | Prompt median, tok/s | E2E median, tok/s | Stream total median, tok/s | TTFT median, s | Draft accepted/offered |
+|---|---:|---:|---:|---:|---:|---:|
+| short | 85.5 (84.6-88.5) | 199.6 | 74.7996 | 74.8136 | 0.8811 | 904/1236 (73.14%) |
+| longer | 81.5 (80.2-85.4) | 496.3 | 41.2792 | 41.2822 | 6.1481 | 1043/1480 (70.47%) |
+
+Minimum available physical RAM 64,107,753,472 bytes; available commit 42,449,571,840 bytes. Sampled GPU peak 25,298,165,760 bytes. Both16GiB host floors passed. Per-process peak memory not sampled. Full launcher/server/text/vision cleanup passed and previous config restored.
+
+R041 six-token MTP windows finished below90 in both cells and lost throughput versus the retained control. The larger window did not justify its cost; reject and retain --spec4. No quality or prompt-rate concession was made.
+
+Next: C024 tests exact speculative rejection sampling before an independently labeled R042 trial; keep target sampling fixed.
+
+
+## E060 / rejection-sampling integration audit finds two distribution biases
+
+C024 passed the existing spec_prob_test (72 cases, including two-million-trial distribution cases, joint distributions, support boundaries and deliberately wrong negative controls) and spec_verify_parity (1,296 GPU rows, zero mismatches). These tests exercise the rejection rule in isolation. They do not test the surrounding draft-confidence gate or proposal-source selection. The earlier plan's implication that these tests alone would establish the served mode's target distribution was too strong.
+
+While R042 was preparing, source audit found that spec_draft_merge_kernel writes the probability of the sampled draft token by default (spec_gate_pick), then generate.cpp allows that draft into verification only when its probability exceeds --spec-min-p. Selecting the rejection-sampling path using the realized draft changes the conditional proposal distribution, while the verifier still receives the original q. The plain-sampling fallback does not cancel this bias.
+
+Readable counterexample: p=(0.5,0.5), q=(0.75,0.25), confidence floor0.70. Only draft A enters rejection sampling. Its accepted contribution to A is0.75*(0.5/0.75)=0.5; when B is discarded, plain p sampling adds0.25*0.5=0.125. Thus final P(A)=0.625, not0.5. C025 uses the real host spec_verify_row/spec_sample and spec_gate_pick, plus the served gate rule. One million draws observed0.623935/0.376065, total variation0.123935; a second asymmetric case also failed. Ungated and always-closed controls passed. With existing STRATA_SPEC_PROB_GATE=top, all four cases passed (maximum observed total variation0.000722). This is a synthetic integration counterexample, not a measured percentage of bias on the selected model.
+
+A second source-dependent selection exists in generate.cpp: suffix lookup is considered only when its first token equals the MTP's sampled draft; suffix windows then use plain exact-match target sampling instead of q-based rejection. C026 isolates this rule with the same p/q and a policy choosing the matching suffix. Observed target A frequency0.373727 instead of0.5 (analytical0.375). Disabling suffix choice produced0.500338; a draft-independent always-lookup control produced0.500074. The retained ordinary exact-match mode and R040's shared-draw coupled mode are different algorithms; these counterexamples specifically invalidate the audited probabilistic-rejection composition.
+
+R042 was stopped immediately during its excluded warmup. No measured result or successful speed summary exists; partial request/SSE, failure, memory and complete cleanup evidence are retained. ConnectionResetError is the intentional termination, not an unexplained model crash. The previous production configuration was restored and idle GPU memory returned585MiB. This optional mode was never promoted.
+
+A benchmark preflight guard now rejects STRATA_SPEC_PROB unless distribution-top gating is explicit, suffix drafting is disabled, and lookup chaining is absent/zero. Five focused tests first failed three rejection cases with a no-op guard, then all passed. The supervisor checks before model launch. Production engine source and launcher are unchanged.
+
+Next diagnostic R043 may use the existing rejection algorithm only with STRATA_SPEC_PROB=1, STRATA_SPEC_PROB_GATE=top and --suffix-draft0, on the retained engine/libraries and four-token MTP. These settings remove the two demonstrated draft-dependent selection paths while preserving the target numeric sampler, model, context and reasoning. Disabling lookup can reduce speed for repeated text; it is a candidate cost to measure, not a quality concession or a promoted setting. Full random-coding, capability, memory, repeated speed and prompt/client non-regression gates remain required. No upstream issue or message was sent; this evidence is published only to the authorized fork.
+
+
+## E061 / R043-spec-prob-top-no-suffix
+
+Same retained production engine and loaded library hashes as R037. Config diff is archived. Fixed numeric sampling, high/xhigh reasoning, model/quant, vision, context262144 and INT8KV retained. Original TTLCache streaming cache-miss workloads; one excluded warmup and five measured seeds101-105 per cell,512tokens per measured run. No slow seed excluded.
+
+| Workload | Decode median (range), tok/s | Prompt median, tok/s | E2E median, tok/s | Stream total median, tok/s | TTFT median, s | Draft accepted/offered |
+|---|---:|---:|---:|---:|---:|---:|
+| short | 85.3 (85.0-87.8) | 200.9 | 74.7275 | 74.7376 | 0.8665 | 914/1206 (75.79%) |
+| longer | 85.1 (81.8-86.1) | 496.0 | 42.1726 | 42.1772 | 6.1517 | 1008/1320 (76.36%) |
+
+Minimum available physical RAM 64,181,604,352 bytes; available commit 42,612,404,224 bytes. Sampled GPU peak 25,220,571,136 bytes. Both16GiB host floors passed. Per-process peak memory not sampled. Full launcher/server/text/vision cleanup passed and previous config restored.
+
+R043 audited rejection-mode composition reached85.3/85.1 short/longer server decode tok/s. Neither cell meets90, and short speed is lower than the retained control. Keep it unpromoted; the production launcher retains ordinary exact-match drafting.
+
+Next: R044 is queued: change only the audited proposal-distribution confidence floor from0.70 to0.50, leaving target min_p0 and every thinking parameter fixed. See spec-prob-threshold-plan.md; repeat and qualify only a measured winner.
+
+
+E061 checkpoint supplement: the preflight guard also matches the engine's boolean environment semantics (any nonempty value except exact string0). Four enabled-value subcases first failed, then the six-test suite passed after correction. These current guard sources and red/green outputs are archived separately from E060's five-test version. The complete all-run MTP counts for R037/R040/R041/R043 are retained in diagnostics/spec-prob-audit/all-run-acceptance-comparison.json; no acceptance claim depends on a selected fast seed. Higher acceptance alone is not evidence of higher served throughput.
+
+The read-only GitHub search used the required bot helper. The open issue search for STRATA_SPEC_PROB returned1447; the open speculative-PR search returned existing pipeline, batch, benchmark and kernel work. No issue, comment or upstream pull request was created. This fork report does not claim to have exhaustively searched every discussion or to be an upstream-reviewed bug fix.
+
+Final checkpoint cleanup again verified zero live Strata launcher/server/text/vision processes. GPU use585MiB, free23738MiB, utilization0%. The production configuration is byte-identical to the saved pre-trial version. No failed compiler/runtime/draft experiment is installed. The goal remains active, with its full quality and repeated-workload conditions unmet.

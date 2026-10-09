@@ -1,0 +1,19 @@
+We need answer user's request. Need produce final answer: detailed answer at least 1200 words. Need implement thread-safe Python TTLCache class using OrderedDict and monotonic clock. Include set, get, delete, clear, len, expiration, capacity eviction, unit tests with injected fake clock, detailed explanation thread safety and complexity. Complete code, tests, explain design. Also user provided many existing cache rules maybe red herring? They say benchmark identifier ignore. Read these existing design requirements before implementing the cache: existing cache rule 0... key item_000 lifetime 30 sec size 64 bytes etc. Need likely account for per-key lifetimes? Existing cache rules mention key item_000 has lifetime and size; expiration remove stale entries, access update LRU. Could integrate as seed initial cache? They likely expect maybe these as existing requirements? Need implement generic TTLCache; maybe also show how existing rules can be loaded/initialized. Need maybe mention existing rules are data-driven lifetimes, not affecting core algorithm except per-key TTL and size? Could include initial rules? But code can be generic. Need likely include size bytes? TTLCache with capacity bytes? It says size 64 bytes etc. Cache has size (bytes) and capacity eviction maybe based on total size? Need implement with capacity as maximum total size? The class could have capacity (max total size bytes) and each item size. It needs expiration and capacity eviction. So implement capacity as total bytes. Each set has ttl and size. If size exceeds capacity maybe reject/evict? Need decide. Use OrderedDict for LRU, move_to_end on get/set. Thread-safe with RLock. Monotonic clock injected: now() default time.monotonic. Fake clock tests.
+
+Need ensure complete code. Potential implementation:
+
+import threading, time
+from collections import OrderedDict
+from typing import Any, Optional, Callable
+
+class TTLCache:
+    def __init__(self, capacity: int, clock: Optional[Callable[[], float]] = None, initial_rules: ...):
+        if capacity < 0 raise ValueError
+        self.capacity = capacity
+        self.clock = clock or time.monotonic
+        self._entries = OrderedDict() # key -> (value, expires_at, size)
+        self._total_size = 0
+        self._lock = threading.RLock()
+        load initial rules maybe from existing cache rules? Could define from_cache_rules.
+
+Could include initial_rules as list of

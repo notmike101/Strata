@@ -1,0 +1,19 @@
+We need answer user: implement thread-safe Python TTLCache class using OrderedDict and monotonic clock. Include set, get, delete, clear, len, expiration, capacity eviction, unit tests with injected fake clock, detailed explanation thread safety and complexity. Complete code, tests, then explain design. Do not abbreviate. At least 1200 words.
+
+Need produce final with code. Need think thoroughly.
+
+Requirements:
+- Thread-safe TTLCache class using OrderedDict and monotonic clock.
+- Include set, get, delete, clear, len, expiration, capacity eviction.
+- Unit tests with injected fake clock.
+- Detailed explanation of thread safety and complexity.
+- Write complete code, then tests, then explain design.
+- At least 1200 words.
+
+Need maybe include type hints, imports. Thread safety: use RLock? Need avoid nested lock? Methods simple, one lock. Use OrderedDict move_to_end for LRU? TTLCache maybe least recently used? User didn't ask LRU but capacity eviction. Could implement LRU eviction (oldest in order). set: if key present, update value, expiry, move_to_end. If capacity full, popitem(last=False) evict oldest? But if TTL cache maybe expiration first? Need clear expired? Could implement lazy expiration. For len: need return count of unexpired entries, maybe purge expired. But OrderedDict len can include expired. Could maintain internal _entries with expiry? Simpler: OrderedDict stores (value, expiry). Methods purge expired. Need thread-safe.
+
+Potential issue: monotonic clock. Use time.monotonic by default, injected fake clock. Clock can be callable. Use time.monotonic. If monotonic_clock not callable? Not needed.
+
+Need unit tests with fake clock. Could use unittest.TestCase. FakeClock class returning time, increment method.
+
+Detailed design: data structure OrderedDict[key, tuple(value, expires_at)]? For get returns value if present and not expired. set sets ttl; ttl may be None? TTL must be non-negative? Use ttl seconds float. If ttl <= 0 maybe not store? Could reject ValueError or treat immediate expiration? Better: ttl > 0 required for set? For TTLCache, set(key, value, ttl) maybe ttl=None for no expiry? Could support None means never expires? But monotonic + ttl; if ttl is None then expiry = None. But capacity eviction still. However user asks TTLCache and expiration. Could require ttl > 

@@ -96,10 +96,16 @@ assert Path(engine['ExecutablePath']).resolve() == Path(CONFIG['exe']).resolve()
 native = Path(CONFIG['args'][CONFIG['args'].index('--native') + 1])
 assert str(EXPECTED_CONTEXT) in engine['CommandLine'] and str(native).lower() in engine['CommandLine'].lower()
 libraries = ps(f"(Get-Process -Id {engine['ProcessId']}).Modules | Where-Object {{ "
-               "$_.FileName -like '*nvidia*cu13*' -or $_.ModuleName -eq 'nvcuda.dll' } | "
+               "$_.ModuleName -match '^(nvcuda|cublas(?:Lt)?64_\\d+|cudart64_\\d+|nvrtc64_[\\d_]+|nvJitLink_\\d+)\\.dll$' } | "
                "Select-Object -ExpandProperty FileName | ConvertTo-Json -Compress")
 if isinstance(libraries, str):
     libraries = [libraries]
+assert libraries, 'No loaded CUDA libraries captured'
+assert {'cublas64_13.dll','cublasLt64_13.dll'} <= {Path(p).name for p in libraries}
+configured_lib_dirs = {Path(p).resolve() for p in CONFIG['lib_dirs']}
+for path in libraries:
+    if Path(path).name.lower() != 'nvcuda.dll':
+        assert Path(path).resolve().parent in configured_lib_dirs, 'CUDA library outside configured directories: ' + path
 shards = []
 shard_prefix = native.name.split('-00001-of-')[0]
 for path in sorted(native.parent.glob(shard_prefix + '-*.gguf')):

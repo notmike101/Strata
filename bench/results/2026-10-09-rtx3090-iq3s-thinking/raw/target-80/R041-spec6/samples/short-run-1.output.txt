@@ -1,0 +1,21 @@
+We need answer user's request. Need produce detailed answer at least 1200 words. User asks: Benchmark identifier ignore. Implement thread-safe Python TTLCache class using OrderedDict and monotonic clock. Include set, get, delete, clear, len, expiration, capacity eviction, unit tests with injected fake clock, detailed explanation thread safety and complexity. Write complete code, then tests, then explain design. Do not abbreviate implementation.
+
+Need produce final with code and tests and explanation. Need ensure complete code not abbreviated. Need probably use collections.OrderedDict, time.monotonic maybe injectable clock. Thread-safe using RLock or Lock. TTLCache: set(key,value,ttl=None), get(key,default=None), delete(key), clear(), __len__, maybe __contains__, __getitem__, __setitem__? They specifically include len, expiration. Could use OrderedDict with move_to_end. For expiration: on get check expiry and remove expired. For capacity eviction: if maxsize, popitem(last=False) when len >= maxsize after insertion? Need careful with existing key update and TTL. Need ensure thread-safe. Use monotonic clock via self._clock = clock or time.monotonic. Need unit tests with fake clock using unittest.mock? Better provide FakeClock and tests using unittest. Include tests for expiration, eviction, thread safety maybe simple concurrent test? Unit tests with injected fake clock. Need at least 1200 words.
+
+Need consider implementation details.
+
+Potential class:
+
+import threading
+from collections import OrderedDict
+from typing import Optional, Any, Callable, Hashable
+import time
+
+class TTLCache:
+    def __init__(self, ttl=300, maxsize=128, clock=time.monotonic, lock=None):
+        self._ttl = ttl
+        self._maxsize = maxsize
+        self._clock = clock
+        self._cache = OrderedDict() # key -> (expires_at, value)
+        self._lock = lock or threading.RLock()
+        # maybe default_ttl None? allow per set TTL. Could set default_ttl. Use ttl param or default_ttl? Simpler: default_ttl (seconds), maxsize. If ttl <=0? Maybe immediate expiration? Could support None for no TTL? User TTLCache likely ttl. Let's design robust: default_ttl seconds, if None no expiration unless set ttl. But capacity eviction. However with monotonic clock and TTL expiration. Could use None for infinite. But TTLCache should have
