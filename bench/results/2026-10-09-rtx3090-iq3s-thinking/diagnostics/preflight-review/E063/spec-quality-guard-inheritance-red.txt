@@ -1,0 +1,34 @@
+.F.EF.....
+======================================================================
+ERROR: test_inherited_gate_is_used_with_config_enablement (__main__.GuardTests.test_inherited_gate_is_used_with_config_enablement)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "C:\strata\local-setup\target-80\test-spec-quality-guard.py", line 20, in test_inherited_gate_is_used_with_config_enablement
+    m.require_spec_quality({'env': {'STRATA_SPEC_PROB': 1}, 'args': ['--suffix-draft', '0']})
+    ~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\strata\local-setup\target-80\spec-quality-guard.py", line 8, in require_spec_quality
+    raise ValueError('Speculative rejection requires distribution-top gating; picked-token gating is biased')
+ValueError: Speculative rejection requires distribution-top gating; picked-token gating is biased
+
+======================================================================
+FAIL: test_config_gate_overrides_inherited_gate (__main__.GuardTests.test_config_gate_overrides_inherited_gate)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "C:\strata\local-setup\target-80\test-spec-quality-guard.py", line 23, in test_config_gate_overrides_inherited_gate
+    with self.assertRaisesRegex(ValueError, 'distribution-top'):
+         ~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: ValueError not raised
+
+======================================================================
+FAIL: test_inherited_probabilistic_mode_is_checked (__main__.GuardTests.test_inherited_probabilistic_mode_is_checked)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "C:\strata\local-setup\target-80\test-spec-quality-guard.py", line 13, in test_inherited_probabilistic_mode_is_checked
+    with self.assertRaisesRegex(ValueError, 'distribution-top'):
+         ~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: ValueError not raised
+
+----------------------------------------------------------------------
+Ran 10 tests in 0.008s
+
+FAILED (failures=2, errors=1)

@@ -1,0 +1,80 @@
+.....FFEFFEF.....
+======================================================================
+ERROR: test_last_duplicate_value_controls_validation (__main__.GuardTests.test_last_duplicate_value_controls_validation) (flag='--lookup-chain', last='safe')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "C:\strata\local-setup\target-80\test-spec-quality-guard.py", line 33, in test_last_duplicate_value_controls_validation
+    m.require_spec_quality({'env': env, 'args': ['--suffix-draft', '0', flag, '3', flag, '0']})
+    ~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\strata\local-setup\target-80\spec-quality-guard.py", line 25, in require_spec_quality
+    raise ValueError('Speculative rejection lookup chain has not passed the integration audit')
+ValueError: Speculative rejection lookup chain has not passed the integration audit
+
+======================================================================
+ERROR: test_missing_relevant_flag_value_is_rejected (__main__.GuardTests.test_missing_relevant_flag_value_is_rejected) (flag='--lookup-chain', tail=[])
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "C:\strata\local-setup\target-80\test-spec-quality-guard.py", line 39, in test_missing_relevant_flag_value_is_rejected
+    m.require_spec_quality({'env': env, 'args': ['--suffix-draft', '0', flag] + tail})
+    ~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\strata\local-setup\target-80\spec-quality-guard.py", line 24, in require_spec_quality
+    if flag('--lookup-chain','0')!='0':
+       ~~~~^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\strata\local-setup\target-80\spec-quality-guard.py", line 21, in flag
+    return args[args.index(name)+1] if name in args else default
+           ~~~~^^^^^^^^^^^^^^^^^^^^
+IndexError: list index out of range
+
+======================================================================
+FAIL: test_last_duplicate_value_controls_validation (__main__.GuardTests.test_last_duplicate_value_controls_validation) (flag='--suffix-draft', last='unsafe')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "C:\strata\local-setup\target-80\test-spec-quality-guard.py", line 30, in test_last_duplicate_value_controls_validation
+    with self.subTest(flag=flag, last='unsafe'), self.assertRaisesRegex(ValueError, error):
+                                                 ~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^
+AssertionError: ValueError not raised
+
+======================================================================
+FAIL: test_last_duplicate_value_controls_validation (__main__.GuardTests.test_last_duplicate_value_controls_validation) (flag='--lookup-chain', last='unsafe')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "C:\strata\local-setup\target-80\test-spec-quality-guard.py", line 30, in test_last_duplicate_value_controls_validation
+    with self.subTest(flag=flag, last='unsafe'), self.assertRaisesRegex(ValueError, error):
+                                                 ~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^
+AssertionError: ValueError not raised
+
+======================================================================
+FAIL: test_missing_relevant_flag_value_is_rejected (__main__.GuardTests.test_missing_relevant_flag_value_is_rejected) (flag='--suffix-draft', tail=[])
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "C:\strata\local-setup\target-80\test-spec-quality-guard.py", line 38, in test_missing_relevant_flag_value_is_rejected
+    with self.subTest(flag=flag, tail=tail), self.assertRaisesRegex(ValueError, 'Missing value'):
+                                             ~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: ValueError not raised
+
+======================================================================
+FAIL: test_missing_relevant_flag_value_is_rejected (__main__.GuardTests.test_missing_relevant_flag_value_is_rejected) (flag='--suffix-draft', tail=['--spec', '4'])
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "C:\strata\local-setup\target-80\test-spec-quality-guard.py", line 38, in test_missing_relevant_flag_value_is_rejected
+    with self.subTest(flag=flag, tail=tail), self.assertRaisesRegex(ValueError, 'Missing value'):
+                                             ~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: ValueError not raised
+
+======================================================================
+FAIL: test_missing_relevant_flag_value_is_rejected (__main__.GuardTests.test_missing_relevant_flag_value_is_rejected) (flag='--lookup-chain', tail=['--spec', '4'])
+----------------------------------------------------------------------
+ValueError: Speculative rejection lookup chain has not passed the integration audit
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\strata\local-setup\target-80\test-spec-quality-guard.py", line 38, in test_missing_relevant_flag_value_is_rejected
+    with self.subTest(flag=flag, tail=tail), self.assertRaisesRegex(ValueError, 'Missing value'):
+                                             ~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: "Missing value" does not match "Speculative rejection lookup chain has not passed the integration audit"
+
+----------------------------------------------------------------------
+Ran 12 tests in 0.011s
+
+FAILED (failures=5, errors=2)

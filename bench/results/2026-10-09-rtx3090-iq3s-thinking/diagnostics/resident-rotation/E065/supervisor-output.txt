@@ -1,0 +1,13 @@
+SUCCESS: The process with PID 315340 (child process of PID 33012) has been terminated.
+SUCCESS: The process with PID 317904 (child process of PID 33012) has been terminated.
+SUCCESS: The process with PID 33012 (child process of PID 700120) has been terminated.
+SUCCESS: The process with PID 442628 (child process of PID 668536) has been terminated.
+SUCCESS: The process with PID 700120 (child process of PID 668536) has been terminated.
+SUCCESS: The process with PID 668536 (child process of PID 22328) has been terminated.
+Cleanup verified: no live Strata launcher, server, engine or vision process.
+Traceback (most recent call last):
+  File "C:\strata\local-setup\target-80\run-c020-arm.py", line 58, in <module>
+    proof=resident_guard.require_resident_startup(startup,require_rotation=spec_guard.effective_environment(candidate).get('STRATA_EXCHANGE_ROTATE')=='1')
+  File "C:\strata\local-setup\target-80\resident-mode-guard.py", line 18, in require_resident_startup
+    raise ValueError('Requested exchange rotation activation is not proven')
+ValueError: Requested exchange rotation activation is not proven

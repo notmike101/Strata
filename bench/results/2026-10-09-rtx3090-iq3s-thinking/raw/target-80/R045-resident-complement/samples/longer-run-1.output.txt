@@ -1,0 +1,19 @@
+We need answer user's request. Need produce final detailed answer at least 1200 words. User asks: Benchmark identifier ignore. Read existing design requirements before implementing cache: many existing cache rules 0-63 keys item_x with lifetime and size. Implement thread-safe Python TTLCache class using OrderedDict and monotonic clock. Include set, get, delete, clear, len, expiration, capacity eviction, unit tests with injected fake clock, detailed explanation of thread safety and complexity. Write complete code, tests, explain design. Do not abbreviate implementation. Produce detailed answer at least 1200 words.
+
+Need decide how incorporate existing cache rules? Likely initialize with those entries? They are existing cache rule 0-63. Could create bootstrap data or seed cache with existing rules. Need include size? The TTLCache likely tracks size bytes and capacity maybe max_size bytes. Existing rules have sizes. Need implement capacity eviction. Use OrderedDict, monotonic clock injectable. Thread-safe: RLock. Methods set, get, delete, clear, len maybe __len__, maybe __contains__. Expiration: lazy expiration on access and explicit cleanup method? Include expire() maybe. Unit tests with FakeClock. Complete code not abbreviated.
+
+Need maybe mention benchmark identifier ignored? No need mention. Need final long detailed. Need ensure code complete and correct.
+
+Let's design TTLCache:
+- from threading import RLock
+- from collections import OrderedDict
+- from numbers? no.
+- class Clock: protocol? Simple.
+- FakeClock:
+class FakeClock:
+    def __init__(self): self._now=0.0
+    def monotonic(self): return self._now
+    def advance(self, delta): self._now += delta
+
+TTLCache:
+    def __init__(self, capacity=..., clock=time.monotonic, capacity_bytes=??? maybe max_size? capacity can be number of items? User says using OrderedDict and monotonic clock, include len and capacity eviction. Need size bytes. Existing rules have size 64 etc. Should track total size bytes and evict to respect max_size (byte capacity). Also maybe max_items. Could implement both max_size (bytes) and max_items? For simplicity capacity = max total size in bytes; len returns item count. Existing cache rules sizes from 64 to 253 step 3: 64 entries sum? arithmetic series n=64 first 64 last 253 diff

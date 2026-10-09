@@ -1,0 +1,32 @@
+.............FFF
+======================================================================
+FAIL: test_windows_noncanonical_mode_keys_are_rejected (__main__.GuardTests.test_windows_noncanonical_mode_keys_are_rejected) (env={'strata_spec_prob': '1'})
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "C:\strata\local-setup\target-80\test-spec-quality-guard.py", line 37, in test_windows_noncanonical_mode_keys_are_rejected
+    with self.subTest(env=env), self.assertRaisesRegex(ValueError, 'canonical uppercase'):
+                                ~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: ValueError not raised
+
+======================================================================
+FAIL: test_windows_noncanonical_mode_keys_are_rejected (__main__.GuardTests.test_windows_noncanonical_mode_keys_are_rejected) (env={'STRATA_SPEC_PROB': '0', 'strata_spec_prob': '1'})
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "C:\strata\local-setup\target-80\test-spec-quality-guard.py", line 37, in test_windows_noncanonical_mode_keys_are_rejected
+    with self.subTest(env=env), self.assertRaisesRegex(ValueError, 'canonical uppercase'):
+                                ~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: ValueError not raised
+
+======================================================================
+FAIL: test_windows_noncanonical_mode_keys_are_rejected (__main__.GuardTests.test_windows_noncanonical_mode_keys_are_rejected) (env={'Strata_Spec_Prob_Gate': 'top'})
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "C:\strata\local-setup\target-80\test-spec-quality-guard.py", line 37, in test_windows_noncanonical_mode_keys_are_rejected
+    with self.subTest(env=env), self.assertRaisesRegex(ValueError, 'canonical uppercase'):
+                                ~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: ValueError not raised
+
+----------------------------------------------------------------------
+Ran 14 tests in 0.010s
+
+FAILED (failures=3)

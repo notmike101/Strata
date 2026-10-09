@@ -660,3 +660,63 @@ E061 checkpoint supplement: the preflight guard also matches the engine's boolea
 The read-only GitHub search used the required bot helper. The open issue search for STRATA_SPEC_PROB returned1447; the open speculative-PR search returned existing pipeline, batch, benchmark and kernel work. No issue, comment or upstream pull request was created. This fork report does not claim to have exhaustively searched every discussion or to be an upstream-reviewed bug fix.
 
 Final checkpoint cleanup again verified zero live Strata launcher/server/text/vision processes. GPU use585MiB, free23738MiB, utilization0%. The production configuration is byte-identical to the saved pre-trial version. No failed compiler/runtime/draft experiment is installed. The goal remains active, with its full quality and repeated-workload conditions unmet.
+
+
+## E062 / R044-spec-prob-top-floor05
+
+Same retained production engine and loaded library hashes as R037. Config diff is archived. Fixed numeric sampling, high/xhigh reasoning, model/quant, vision, context262144 and INT8KV retained. Original TTLCache streaming cache-miss workloads; one excluded warmup and five measured seeds101-105 per cell,512tokens per measured run. No slow seed excluded.
+
+| Workload | Decode median (range), tok/s | Prompt median, tok/s | E2E median, tok/s | Stream total median, tok/s | TTFT median, s | Draft accepted/offered |
+|---|---:|---:|---:|---:|---:|---:|
+| short | 82.6 (74.4-93.9) | 203.5 | 72.2176 | 72.2264 | 0.8648 | 1123/1775 (63.27%) |
+| longer | 84.5 (81.6-87.4) | 496.3 | 42.0126 | 42.0178 | 6.1585 | 1217/1919 (63.42%) |
+
+Minimum available physical RAM 63,070,449,664 bytes; available commit 41,725,988,864 bytes. Sampled GPU peak 25,205,891,072 bytes. Both16GiB host floors passed. Per-process peak memory not sampled. Full launcher/server/text/vision cleanup passed and previous config restored.
+
+R044 lower draft-confidence floor finished at82.6/84.5 short/longer decode tok/s, versus R04385.3/85.1. Reject the threshold change; the93.9 short peak does not replace the all-run median. No candidate is promoted.
+
+Next: Independent review of the rejection-mode audit is pending. In parallel, prepare R045 resident-complement memory layout with the retained ordinary sampler, after byte-ownership and GPU-alias tests.
+
+
+## E063 / Independent sampling audit review and preflight corrections
+
+The independent source review confirmed the two E060 integration counterexamples. It found no further concrete conditioning or counter-domain defect in the explicitly configured R043/R044 serial path. This is source review of the inspected path, not finite-precision distribution proof, completed coding quality, or performance qualification. The review also confirmed that old/one-block sampler modes can silently use exact-match verification while startup still announces probabilistic drafting; a startup label alone is insufficient evidence of actual rejection verification.
+
+The review found two defects in the benchmark preflight, both reproduced before correction. First, serve/server.py inherits os.environ and then overlays stringified config entries; the guard inspected config entries only. The guard now checks the effective inherited environment with the same overlay. Ten tests passed after the inheritance correction, including inherited enablement, explicit disablement and gate overrides. Second, the engine parses repeated CLI flags from left to right, with the final value winning; the guard used the first. It now validates the final occurrence and refuses a missing value. Twelve tests passed after that correction. A manifest privacy test brought the suite to thirteen.
+
+A follow-up review found the Windows case-insensitive environment edge. The guard now refuses noncanonical spellings of the eight recognized sampling-mode keys on Windows, including differently-cased collisions, rather than guessing child duplicate-key precedence. All three new subcases first failed; the final fourteen-test suite passed. The original E060/E061 archived guards remain historical evidence and are superseded by E063. The final Windows-case correction is covered by tests; the independent review had verified the preceding corrections and identified this additional case.
+
+The supervisor now snapshots the effective sampling-mode allowlist and helper source before preparation. It never publishes the full environment. The keys are STRATA_SPEC_PROB, STRATA_SPEC_PROB_GATE, STRATA_SPEC_MIN_TEMP, STRATA_SPEC_PROB_DT, STRATA_SPEC_GUMBEL, STRATA_SPEC_COUPLED, STRATA_OLD_SAMPLER and STRATA_SAMPLER_ONE_BLOCK; null means absent. R043/R044 config files explicitly set PROB/top and have no duplicate relevant arguments, so the two original defects do not directly invalidate their explicit configuration. Their prior parent environment was not captured with this new manifest; absence of other inherited modes cannot be proven retrospectively. Future trials carry the allowlist.
+
+C027 independently passed the existing exchange_storage_test and file_expert_source_test CTest fixtures under CUDA13.3, then the explicit GPU fixture completed 64 exact-byte exchanges each for pinned copy, pinned rotation and pageable fallback. No serving model was resident during the build/tests. These small ownership/alias/lifetime tests support trying the existing resident-complement path; they do not establish full-model speed or answer quality. Compilation warnings are preserved in the raw log. HIP/SYCL execution and Compute Sanitizer were not run in C027.
+
+R045 adds only --resident-experts to the retained R037 configuration. Its startup guard requires page-locked resident storage, all 8409 control cache entries, and no reported partial-RAM/prompt-lending fallback. Four focused guard tests passed after the failing placeholder version. R045 snapshotted the thirteen-test sampling guard before the Windows-case correction landed; its canonical config keys and all-null saved effective sampling-mode manifest have no case ambiguity. The final guard is used for subsequent trials. No target sampling parameter or production launcher setting changed.
+
+
+## E064 / R045-resident-complement
+
+Same retained production engine and loaded library hashes as R037. Config diff is archived. Fixed numeric sampling, high/xhigh reasoning, model/quant, vision, context262144 and INT8KV retained. Original TTLCache streaming cache-miss workloads; one excluded warmup and five measured seeds101-105 per cell,512tokens per measured run. No slow seed excluded.
+
+| Workload | Decode median (range), tok/s | Prompt median, tok/s | E2E median, tok/s | Stream total median, tok/s | TTFT median, s | Draft accepted/offered |
+|---|---:|---:|---:|---:|---:|---:|
+| short | 75.3 (74.8-77.6) | 200.9 | 66.8598 | 66.8707 | 0.8772 | 824/1097 (75.11%) |
+| longer | 67.2 (66.0-72.1) | 515.9 | 37.8599 | 37.8626 | 5.9255 | 982/1322 (74.28%) |
+
+Minimum available physical RAM 41,651,535,872 bytes; available commit 53,762,297,856 bytes. Sampled GPU peak 25,224,896,512 bytes. Both16GiB host floors passed. Per-process peak memory not sampled. Full launcher/server/text/vision cleanup passed and previous config restored.
+
+The resident complement reduced pinned expert storage from46.84 to34.55GiB but lost throughput:75.3/67.2 short/longer server decode tok/s, versus R03787.5/83.9. All12 requests including warmups recorded zero fallback blob reads;28682 expert exchanges occurred. The smaller allocation did not translate to a speed gain. Reject this copy-based resident mode; no promotion.
+
+Next: Measure R046 with only exchange-buffer rotation enabled on top of R045, after a startup activation guard. This existing byte-preserving path removes the extra host copy but retains the GPU transfers; keep the same sampling, all-run benchmark and cleanup.
+
+
+## E065 / R046 resident rotation refused before measurement
+
+R046 changed only STRATA_EXCHANGE_ROTATE=1 from R045. Startup retained 34.55 GiB of page-locked resident expert storage and 8409 GPU cache entries, but explicitly reported: `exchange rotation unavailable; retaining copy path: requires equal-size expert blocks and a fully mapped/pinned RAM complement`. The source eligibility check in FileExpertSource::reserve_exchanges requires uniform layer blob sizes as well as fully pinned, mapped, nonpartial storage. This requested mode is not available on the current layout through the existing flag.
+
+The new activation guard rejected the arm before any warmup or measured API request. There is no throughput result, no successful summary and no claim that rotation improved or lost speed on this model. Its failed-startup record, exact supervisor/helpers, config, engine log, memory and complete cleanup output are retained separately from successful arms. The five-test resident guard suite passed, including a previously failing test that requires explicit rotation activation.
+
+The cleanup finally stopped the launcher root and every descendant, and the previous production config hash returned to 3457fdfe7d69fbf6651e2031320cdebf88a9d8d269ebbe459db7fdd885e8c9f0. GPU memory returned to 553 MiB. No benchmark model remains resident. The full engine session is now captured in a nested try/finally, so a log-write failure cannot skip the stop call; restoration of configuration and observer shutdown remain in the outer finally.
+
+The memory-layout branch of the experiment queue is closed for the existing implementations: R045 saves expert RAM but loses decode speed, and R046 cannot activate rotation. Generalizing ownership rotation to mixed block sizes would be new engine work and would still retain the extra GPU-to-host transfers; it is not an established path to 90 tok/s. No source change or production promotion is justified by these results alone.
+
+Next: refresh current upstream and profiler evidence for a different single-GPU scheduling or kernel theory on the retained full arena. Do not retry the losing threshold, compiler/runtime, head layout, CPU repack or resident-copy arms without new evidence. The existing --pipeline-windows option is specifically a two-GPU layer-split path and is not an applicable one-GPU knob. Windows large pages still require a user-right/session change; no such change has been made. The fixed numeric sampling and every quality/workload gate remain in force; the goal stays active and unqualified, including Q007's two incomplete answers.

@@ -1,0 +1,14 @@
+{
+  "toolchain": "retained CUDA13.3/sm86 test build; production cu13 DLL directory",
+  "tests": {
+    "exchange_storage_test.exe": {
+      "sha256": "40cc22933c5cc3a571db827ebac0da0cff1db27428aabf739cb80d045c27f8b3",
+      "bytes": 237568
+    },
+    "file_expert_source_test.exe": {
+      "sha256": "3d67105a795f763edf6cc37afd1c8cd08afbbd0ba8625b07241c96442b645c87",
+      "bytes": 8209920
+    }
+  },
+  "scope": "Two CTest fixtures and explicit GPU rotation fixture. No throughput qualification and no full-model output quality proof."
+}

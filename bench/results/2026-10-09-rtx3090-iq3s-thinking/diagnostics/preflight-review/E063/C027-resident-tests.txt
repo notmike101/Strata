@@ -1,0 +1,241 @@
+**********************************************************************
+** Visual Studio 2022 Developer Command Prompt v17.14.36
+** Copyright (c) 2025 Microsoft Corporation
+**********************************************************************
+[1/20] Building C object ggml\src\CMakeFiles\ggml-base.dir\ggml.c.obj
+[2/20] Linking CXX static library ggml\src\ggml-base.lib
+[3/20] Building CXX object CMakeFiles\strata_kernels_cpu.dir\src\kernels\cpu\expert_layout.cpp.obj
+[4/20] Building CXX object CMakeFiles\strata_kernels_cpu.dir\src\kernels\cpu\iq_avx2.cpp.obj
+[5/20] Building CXX object CMakeFiles\strata_engine.dir\src\core\session.cpp.obj
+C:\strata\include\strata/kernels/cpu/expert.hpp(74): warning C4324: 'strata::kernels::cpu::ActQ': structure was padded due to alignment specifier
+C:\strata\include\strata/kernels/cpu/pool.hpp(267): warning C4324: 'strata::kernels::cpu::ExpertPool': structure was padded due to alignment specifier
+C:\strata\include\strata/kernels/cpu/pool.hpp(268): warning C4324: 'strata::kernels::cpu::ExpertPool': structure was padded due to alignment specifier
+C:\strata\include\strata/kernels/cpu/pool.hpp(269): warning C4324: 'strata::kernels::cpu::ExpertPool': structure was padded due to alignment specifier
+C:\strata\include\strata/kernels/cpu/pool.hpp(270): warning C4324: 'strata::kernels::cpu::ExpertPool': structure was padded due to alignment specifier
+C:\strata\include\strata/kernels/cpu/pool.hpp(271): warning C4324: 'strata::kernels::cpu::ExpertPool': structure was padded due to alignment specifier
+C:\strata\include\strata/kernels/cpu/pool.hpp(274): warning C4324: 'strata::kernels::cpu::ExpertPool': structure was padded due to alignment specifier
+C:\strata\src\core\session.cpp(922): warning C4996: 'getenv': This function or variable may be unsafe. Consider using _dupenv_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+[6/20] Building CXX object CMakeFiles\strata_kernels_cpu.dir\src\kernels\cpu\pool.cpp.obj
+[7/20] Building CXX object CMakeFiles\strata_engine.dir\src\core\remote_experts.cpp.obj
+C:\strata\include\strata/kernels/cpu/expert.hpp(74): warning C4324: 'strata::kernels::cpu::ActQ': structure was padded due to alignment specifier
+C:\strata\include\strata/kernels/cpu/pool.hpp(267): warning C4324: 'strata::kernels::cpu::ExpertPool': structure was padded due to alignment specifier
+C:\strata\include\strata/kernels/cpu/pool.hpp(268): warning C4324: 'strata::kernels::cpu::ExpertPool': structure was padded due to alignment specifier
+C:\strata\include\strata/kernels/cpu/pool.hpp(269): warning C4324: 'strata::kernels::cpu::ExpertPool': structure was padded due to alignment specifier
+C:\strata\include\strata/kernels/cpu/pool.hpp(270): warning C4324: 'strata::kernels::cpu::ExpertPool': structure was padded due to alignment specifier
+C:\strata\include\strata/kernels/cpu/pool.hpp(271): warning C4324: 'strata::kernels::cpu::ExpertPool': structure was padded due to alignment specifier
+C:\strata\include\strata/kernels/cpu/pool.hpp(274): warning C4324: 'strata::kernels::cpu::ExpertPool': structure was padded due to alignment specifier
+C:\strata\src\core\remote_experts.cpp(78): warning C4996: 'getenv': This function or variable may be unsafe. Consider using _dupenv_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+C:\strata\src\core\remote_experts.cpp(209): warning C4996: 'getenv': This function or variable may be unsafe. Consider using _dupenv_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+[8/20] Building CXX object CMakeFiles\strata_engine.dir\src\core\conversation_snapshot.cpp.obj
+C:\strata\include\strata/kernels/cpu/expert.hpp(74): warning C4324: 'strata::kernels::cpu::ActQ': structure was padded due to alignment specifier
+C:\strata\include\strata/kernels/cpu/pool.hpp(267): warning C4324: 'strata::kernels::cpu::ExpertPool': structure was padded due to alignment specifier
+C:\strata\include\strata/kernels/cpu/pool.hpp(268): warning C4324: 'strata::kernels::cpu::ExpertPool': structure was padded due to alignment specifier
+C:\strata\include\strata/kernels/cpu/pool.hpp(269): warning C4324: 'strata::kernels::cpu::ExpertPool': structure was padded due to alignment specifier
+C:\strata\include\strata/kernels/cpu/pool.hpp(270): warning C4324: 'strata::kernels::cpu::ExpertPool': structure was padded due to alignment specifier
+C:\strata\include\strata/kernels/cpu/pool.hpp(271): warning C4324: 'strata::kernels::cpu::ExpertPool': structure was padded due to alignment specifier
+C:\strata\include\strata/kernels/cpu/pool.hpp(274): warning C4324: 'strata::kernels::cpu::ExpertPool': structure was padded due to alignment specifier
+[9/20] Building CXX object CMakeFiles\strata_engine.dir\src\core\conversation_state.cpp.obj
+C:\strata\include\strata/kernels/cpu/expert.hpp(74): warning C4324: 'strata::kernels::cpu::ActQ': structure was padded due to alignment specifier
+C:\strata\include\strata/kernels/cpu/pool.hpp(267): warning C4324: 'strata::kernels::cpu::ExpertPool': structure was padded due to alignment specifier
+C:\strata\include\strata/kernels/cpu/pool.hpp(268): warning C4324: 'strata::kernels::cpu::ExpertPool': structure was padded due to alignment specifier
+C:\strata\include\strata/kernels/cpu/pool.hpp(269): warning C4324: 'strata::kernels::cpu::ExpertPool': structure was padded due to alignment specifier
+C:\strata\include\strata/kernels/cpu/pool.hpp(270): warning C4324: 'strata::kernels::cpu::ExpertPool': structure was padded due to alignment specifier
+C:\strata\include\strata/kernels/cpu/pool.hpp(271): warning C4324: 'strata::kernels::cpu::ExpertPool': structure was padded due to alignment specifier
+C:\strata\include\strata/kernels/cpu/pool.hpp(274): warning C4324: 'strata::kernels::cpu::ExpertPool': structure was padded due to alignment specifier
+[10/20] Building CXX object CMakeFiles\strata_engine.dir\src\core\mtp.cpp.obj
+C:\strata\include\strata/kernels/cpu/expert.hpp(74): warning C4324: 'strata::kernels::cpu::ActQ': structure was padded due to alignment specifier
+C:\strata\include\strata/kernels/cpu/pool.hpp(267): warning C4324: 'strata::kernels::cpu::ExpertPool': structure was padded due to alignment specifier
+C:\strata\include\strata/kernels/cpu/pool.hpp(268): warning C4324: 'strata::kernels::cpu::ExpertPool': structure was padded due to alignment specifier
+C:\strata\include\strata/kernels/cpu/pool.hpp(269): warning C4324: 'strata::kernels::cpu::ExpertPool': structure was padded due to alignment specifier
+C:\strata\include\strata/kernels/cpu/pool.hpp(270): warning C4324: 'strata::kernels::cpu::ExpertPool': structure was padded due to alignment specifier
+C:\strata\include\strata/kernels/cpu/pool.hpp(271): warning C4324: 'strata::kernels::cpu::ExpertPool': structure was padded due to alignment specifier
+C:\strata\include\strata/kernels/cpu/pool.hpp(274): warning C4324: 'strata::kernels::cpu::ExpertPool': structure was padded due to alignment specifier
+C:\strata\include\strata/core/coupled_draft.hpp(59): warning C4996: 'getenv': This function or variable may be unsafe. Consider using _dupenv_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+C:\strata\include\strata/core/coupled_draft.hpp(69): warning C4996: 'getenv': This function or variable may be unsafe. Consider using _dupenv_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+C:\strata\include\strata/core/spec_prob.hpp(47): warning C4996: 'getenv': This function or variable may be unsafe. Consider using _dupenv_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+C:\strata\include\strata/core/spec_prob.hpp(57): warning C4996: 'getenv': This function or variable may be unsafe. Consider using _dupenv_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+C:\strata\include\strata/core/spec_prob.hpp(69): warning C4996: 'getenv': This function or variable may be unsafe. Consider using _dupenv_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+C:\strata\src\core\mtp.cpp(61): warning C4996: 'getenv': This function or variable may be unsafe. Consider using _dupenv_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+C:\strata\src\core\mtp.cpp(110): warning C4996: 'fopen': This function or variable may be unsafe. Consider using fopen_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+C:\strata\src\core\mtp.cpp(421): warning C4996: 'getenv': This function or variable may be unsafe. Consider using _dupenv_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+C:\strata\src\core\mtp.cpp(301): warning C4996: 'fopen': This function or variable may be unsafe. Consider using fopen_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+C:\strata\src\core\mtp.cpp(455): warning C4996: 'getenv': This function or variable may be unsafe. Consider using _dupenv_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+C:\strata\src\core\mtp.cpp(461): warning C4996: 'getenv': This function or variable may be unsafe. Consider using _dupenv_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+C:\strata\src\core\mtp.cpp(488): warning C4996: 'fopen': This function or variable may be unsafe. Consider using fopen_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+C:\strata\src\core\mtp.cpp(732): warning C4996: 'getenv': This function or variable may be unsafe. Consider using _dupenv_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+C:\strata\src\core\mtp.cpp(850): warning C4996: 'getenv': This function or variable may be unsafe. Consider using _dupenv_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+C:\strata\src\core\mtp.cpp(857): warning C4996: 'getenv': This function or variable may be unsafe. Consider using _dupenv_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+C:\strata\src\core\mtp.cpp(867): warning C4996: 'getenv': This function or variable may be unsafe. Consider using _dupenv_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+C:\strata\src\core\mtp.cpp(893): warning C4127: conditional expression is constant
+C:\strata\src\core\mtp.cpp(893): note: consider using 'if constexpr' statement instead
+C:\strata\src\core\mtp.cpp(914): warning C4996: 'getenv': This function or variable may be unsafe. Consider using _dupenv_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+C:\strata\src\core\mtp.cpp(918): warning C4127: conditional expression is constant
+C:\strata\src\core\mtp.cpp(918): note: consider using 'if constexpr' statement instead
+C:\strata\src\core\mtp.cpp(927): warning C4127: conditional expression is constant
+C:\strata\src\core\mtp.cpp(927): note: consider using 'if constexpr' statement instead
+C:\strata\src\core\mtp.cpp(1155): warning C4996: 'getenv': This function or variable may be unsafe. Consider using _dupenv_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+[11/20] Linking CXX static library strata_kernels_cpu.lib
+[12/20] Building CXX object CMakeFiles\strata_engine.dir\src\core\expert_source.cpp.obj
+C:\strata\include\strata/kernels/cpu/expert.hpp(74): warning C4324: 'strata::kernels::cpu::ActQ': structure was padded due to alignment specifier
+C:\strata\include\strata/kernels/cpu/pool.hpp(267): warning C4324: 'strata::kernels::cpu::ExpertPool': structure was padded due to alignment specifier
+C:\strata\include\strata/kernels/cpu/pool.hpp(268): warning C4324: 'strata::kernels::cpu::ExpertPool': structure was padded due to alignment specifier
+C:\strata\include\strata/kernels/cpu/pool.hpp(269): warning C4324: 'strata::kernels::cpu::ExpertPool': structure was padded due to alignment specifier
+C:\strata\include\strata/kernels/cpu/pool.hpp(270): warning C4324: 'strata::kernels::cpu::ExpertPool': structure was padded due to alignment specifier
+C:\strata\include\strata/kernels/cpu/pool.hpp(271): warning C4324: 'strata::kernels::cpu::ExpertPool': structure was padded due to alignment specifier
+C:\strata\include\strata/kernels/cpu/pool.hpp(274): warning C4324: 'strata::kernels::cpu::ExpertPool': structure was padded due to alignment specifier
+C:\strata\src\core\expert_source.cpp(524): warning C4100: 'exact': unreferenced parameter
+C:\strata\src\core\expert_source.cpp(1196): warning C4996: 'getenv': This function or variable may be unsafe. Consider using _dupenv_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+C:\strata\src\core\expert_source.cpp(1424): warning C4996: 'getenv': This function or variable may be unsafe. Consider using _dupenv_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+C:\strata\src\core\expert_source.cpp(1526): warning C4996: 'getenv': This function or variable may be unsafe. Consider using _dupenv_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+C:\strata\src\core\expert_source.cpp(2133): warning C4996: 'getenv': This function or variable may be unsafe. Consider using _dupenv_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+C:\strata\src\core\expert_source.cpp(2377): warning C4996: 'getenv': This function or variable may be unsafe. Consider using _dupenv_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+C:\strata\src\core\expert_source.cpp(2465): warning C4996: 'getenv': This function or variable may be unsafe. Consider using _dupenv_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+C:\strata\src\core\expert_source.cpp(2471): warning C4996: 'getenv': This function or variable may be unsafe. Consider using _dupenv_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+C:\strata\src\core\expert_source.cpp(2450): warning C4996: 'strerror': This function or variable may be unsafe. Consider using strerror_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+C:\strata\src\core\expert_source.cpp(2765): warning C4996: 'getenv': This function or variable may be unsafe. Consider using _dupenv_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+C:\strata\src\core\expert_source.cpp(3267): warning C4996: 'getenv': This function or variable may be unsafe. Consider using _dupenv_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+C:\strata\src\core\expert_source.cpp(3270): warning C4996: 'getenv': This function or variable may be unsafe. Consider using _dupenv_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+C:\strata\src\core\expert_source.cpp(3128): warning C4996: 'getenv': This function or variable may be unsafe. Consider using _dupenv_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+C:\strata\src\core\expert_source.cpp(3808): warning C4996: 'fopen': This function or variable may be unsafe. Consider using fopen_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+C:\strata\src\core\expert_source.cpp(4051): warning C4127: conditional expression is constant
+C:\strata\src\core\expert_source.cpp(4051): note: consider using 'if constexpr' statement instead
+C:\strata\src\core\expert_source.cpp(4055): warning C4127: conditional expression is constant
+C:\strata\src\core\expert_source.cpp(4055): note: consider using 'if constexpr' statement instead
+C:\strata\src\core\expert_source.cpp(3977): warning C4996: 'getenv': This function or variable may be unsafe. Consider using _dupenv_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+C:\strata\src\core\expert_source.cpp(4041): warning C4996: 'getenv': This function or variable may be unsafe. Consider using _dupenv_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+C:\strata\src\core\expert_source.cpp(4057): warning C4996: 'fopen': This function or variable may be unsafe. Consider using fopen_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+C:\strata\src\core\expert_source.cpp(4403): warning C4996: 'getenv': This function or variable may be unsafe. Consider using _dupenv_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+C:\strata\src\core\expert_source.cpp(4394): warning C4996: 'getenv': This function or variable may be unsafe. Consider using _dupenv_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+C:\strata\src\core\expert_source.cpp(4397): warning C4996: 'getenv': This function or variable may be unsafe. Consider using _dupenv_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+[13/20] Building CXX object CMakeFiles\strata_engine.dir\src\core\peer_experts.cpp.obj
+C:\strata\include\strata/kernels/cpu/expert.hpp(74): warning C4324: 'strata::kernels::cpu::ActQ': structure was padded due to alignment specifier
+C:\strata\include\strata/kernels/cpu/pool.hpp(267): warning C4324: 'strata::kernels::cpu::ExpertPool': structure was padded due to alignment specifier
+C:\strata\include\strata/kernels/cpu/pool.hpp(268): warning C4324: 'strata::kernels::cpu::ExpertPool': structure was padded due to alignment specifier
+C:\strata\include\strata/kernels/cpu/pool.hpp(269): warning C4324: 'strata::kernels::cpu::ExpertPool': structure was padded due to alignment specifier
+C:\strata\include\strata/kernels/cpu/pool.hpp(270): warning C4324: 'strata::kernels::cpu::ExpertPool': structure was padded due to alignment specifier
+C:\strata\include\strata/kernels/cpu/pool.hpp(271): warning C4324: 'strata::kernels::cpu::ExpertPool': structure was padded due to alignment specifier
+C:\strata\include\strata/kernels/cpu/pool.hpp(274): warning C4324: 'strata::kernels::cpu::ExpertPool': structure was padded due to alignment specifier
+C:\strata\src\core\peer_experts.cpp(101): warning C4996: 'getenv': This function or variable may be unsafe. Consider using _dupenv_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+C:\strata\src\core\peer_experts.cpp(189): warning C4996: 'getenv': This function or variable may be unsafe. Consider using _dupenv_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+[14/20] Building CXX object CMakeFiles\exchange_storage_test.dir\tests\core\exchange_storage_test.cpp.obj
+[15/20] Building CXX object CMakeFiles\strata_engine.dir\src\core\verify.cpp.obj
+C:\strata\include\strata/kernels/cpu/expert.hpp(74): warning C4324: 'strata::kernels::cpu::ActQ': structure was padded due to alignment specifier
+C:\strata\include\strata/kernels/cpu/pool.hpp(267): warning C4324: 'strata::kernels::cpu::ExpertPool': structure was padded due to alignment specifier
+C:\strata\include\strata/kernels/cpu/pool.hpp(268): warning C4324: 'strata::kernels::cpu::ExpertPool': structure was padded due to alignment specifier
+C:\strata\include\strata/kernels/cpu/pool.hpp(269): warning C4324: 'strata::kernels::cpu::ExpertPool': structure was padded due to alignment specifier
+C:\strata\include\strata/kernels/cpu/pool.hpp(270): warning C4324: 'strata::kernels::cpu::ExpertPool': structure was padded due to alignment specifier
+C:\strata\include\strata/kernels/cpu/pool.hpp(271): warning C4324: 'strata::kernels::cpu::ExpertPool': structure was padded due to alignment specifier
+C:\strata\include\strata/kernels/cpu/pool.hpp(274): warning C4324: 'strata::kernels::cpu::ExpertPool': structure was padded due to alignment specifier
+C:\strata\include\strata/core/dma_batch.hpp(32): warning C4996: 'getenv': This function or variable may be unsafe. Consider using _dupenv_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+C:\strata\include\strata/core/spec_prob.hpp(47): warning C4996: 'getenv': This function or variable may be unsafe. Consider using _dupenv_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+C:\strata\include\strata/core/spec_prob.hpp(57): warning C4996: 'getenv': This function or variable may be unsafe. Consider using _dupenv_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+C:\strata\include\strata/core/spec_prob.hpp(69): warning C4996: 'getenv': This function or variable may be unsafe. Consider using _dupenv_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+C:\strata\src\core\verify.cpp(65): warning C4996: 'getenv': This function or variable may be unsafe. Consider using _dupenv_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+C:\strata\src\core\verify.cpp(66): warning C4996: 'getenv': This function or variable may be unsafe. Consider using _dupenv_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+C:\strata\src\core\verify.cpp(95): warning C4996: 'getenv': This function or variable may be unsafe. Consider using _dupenv_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+C:\strata\src\core\verify.cpp(96): warning C4996: 'getenv': This function or variable may be unsafe. Consider using _dupenv_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+C:\strata\src\core\verify.cpp(101): warning C4996: 'getenv': This function or variable may be unsafe. Consider using _dupenv_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+C:\strata\src\core\verify.cpp(102): warning C4996: 'getenv': This function or variable may be unsafe. Consider using _dupenv_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+C:\strata\src\core\verify.cpp(103): warning C4996: 'getenv': This function or variable may be unsafe. Consider using _dupenv_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+C:\strata\src\core\verify.cpp(107): warning C4996: 'getenv': This function or variable may be unsafe. Consider using _dupenv_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+C:\strata\src\core\verify.cpp(108): warning C4996: 'getenv': This function or variable may be unsafe. Consider using _dupenv_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+C:\strata\src\core\verify.cpp(125): warning C4996: 'getenv': This function or variable may be unsafe. Consider using _dupenv_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+C:\strata\src\core\verify.cpp(146): warning C4996: 'getenv': This function or variable may be unsafe. Consider using _dupenv_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+C:\strata\src\core\verify.cpp(166): warning C4996: 'getenv': This function or variable may be unsafe. Consider using _dupenv_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+C:\strata\src\core\verify.cpp(178): warning C4996: 'getenv': This function or variable may be unsafe. Consider using _dupenv_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+C:\strata\src\core\verify.cpp(268): warning C4996: 'getenv': This function or variable may be unsafe. Consider using _dupenv_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+C:\strata\src\core\verify.cpp(581): warning C4996: 'getenv': This function or variable may be unsafe. Consider using _dupenv_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+C:\strata\src\core\verify.cpp(619): warning C4996: 'getenv': This function or variable may be unsafe. Consider using _dupenv_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+C:\strata\src\core\verify.cpp(637): warning C4996: 'getenv': This function or variable may be unsafe. Consider using _dupenv_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+C:\strata\src\core\verify.cpp(654): warning C4996: 'getenv': This function or variable may be unsafe. Consider using _dupenv_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+C:\strata\src\core\verify.cpp(714): warning C4996: 'getenv': This function or variable may be unsafe. Consider using _dupenv_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+C:\strata\src\core\verify.cpp(831): warning C4996: 'getenv': This function or variable may be unsafe. Consider using _dupenv_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+C:\strata\src\core\verify.cpp(840): warning C4996: 'getenv': This function or variable may be unsafe. Consider using _dupenv_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+C:\strata\src\core\verify.cpp(875): warning C4996: 'getenv': This function or variable may be unsafe. Consider using _dupenv_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+C:\strata\src\core\verify.cpp(1077): warning C4996: 'getenv': This function or variable may be unsafe. Consider using _dupenv_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+C:\strata\src\core\verify.cpp(1148): warning C4456: declaration of 'st' hides previous local declaration
+C:\strata\src\core\verify.cpp(1043): note: see declaration of 'st'
+C:\strata\src\core\verify.cpp(1277): warning C4996: 'getenv': This function or variable may be unsafe. Consider using _dupenv_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+C:\strata\src\core\verify.cpp(1405): warning C4996: 'getenv': This function or variable may be unsafe. Consider using _dupenv_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+C:\strata\src\core\verify.cpp(1704): warning C4996: 'getenv': This function or variable may be unsafe. Consider using _dupenv_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+C:\strata\src\core\verify.cpp(2108): warning C4996: 'getenv': This function or variable may be unsafe. Consider using _dupenv_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+C:\strata\src\core\verify.cpp(2241): warning C4996: 'getenv': This function or variable may be unsafe. Consider using _dupenv_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+C:\strata\src\core\verify.cpp(2259): warning C4996: 'getenv': This function or variable may be unsafe. Consider using _dupenv_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+[16/20] Linking CXX executable exchange_storage_test.exe
+[17/20] Building CXX object CMakeFiles\file_expert_source_test.dir\tests\core\file_expert_source_test.cpp.obj
+C:\strata\include\strata/kernels/cpu/expert.hpp(74): warning C4324: 'strata::kernels::cpu::ActQ': structure was padded due to alignment specifier
+C:\strata\include\strata/kernels/cpu/pool.hpp(267): warning C4324: 'strata::kernels::cpu::ExpertPool': structure was padded due to alignment specifier
+C:\strata\include\strata/kernels/cpu/pool.hpp(268): warning C4324: 'strata::kernels::cpu::ExpertPool': structure was padded due to alignment specifier
+C:\strata\include\strata/kernels/cpu/pool.hpp(269): warning C4324: 'strata::kernels::cpu::ExpertPool': structure was padded due to alignment specifier
+C:\strata\include\strata/kernels/cpu/pool.hpp(270): warning C4324: 'strata::kernels::cpu::ExpertPool': structure was padded due to alignment specifier
+C:\strata\include\strata/kernels/cpu/pool.hpp(271): warning C4324: 'strata::kernels::cpu::ExpertPool': structure was padded due to alignment specifier
+C:\strata\include\strata/kernels/cpu/pool.hpp(274): warning C4324: 'strata::kernels::cpu::ExpertPool': structure was padded due to alignment specifier
+C:\strata\tests\core\file_expert_source_test.cpp(118): warning C4996: 'getenv': This function or variable may be unsafe. Consider using _dupenv_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+[18/20] Building CUDA object CMakeFiles\strata_engine.dir\src\core\remote_expert_opt.cu.obj
+C:/strata/include\strata/core/expert_source.hpp(471): warning #611-D: overloaded virtual function "strata::core::ExpertSource::prefetch" is only partially overridden in class "strata::core::FileExpertSource"
+  class FileExpertSource : public ExpertSource {
+        ^
+
+Remark: The warnings can be suppressed with "-diag-suppress <warning-number>"
+
+C:/strata/include\strata/core/expert_source.hpp(814): warning #611-D: overloaded virtual function "strata::core::ExpertSource::prefetch" is only partially overridden in class "strata::core::ArenaExpertSource"
+  class ArenaExpertSource : public ExpertSource {
+        ^
+
+C:/strata/include\strata/core/expert_source.hpp(471): warning #611-D: overloaded virtual function "strata::core::ExpertSource::prefetch" is only partially overridden in class "strata::core::FileExpertSource"
+  class FileExpertSource : public ExpertSource {
+        ^
+
+Remark: The warnings can be suppressed with "-diag-suppress <warning-number>"
+
+C:/strata/include\strata/core/expert_source.hpp(814): warning #611-D: overloaded virtual function "strata::core::ExpertSource::prefetch" is only partially overridden in class "strata::core::ArenaExpertSource"
+  class ArenaExpertSource : public ExpertSource {
+        ^
+
+remote_expert_opt.cu
+tmpxft_0001f6cc_00000000-7_remote_expert_opt.cudafe1.cpp
+C:/strata/include\strata/kernels/cpu/expert.hpp(74): warning C4324: 'strata::kernels::cpu::ActQ': structure was padded due to alignment specifier
+C:/strata/include\strata/kernels/cpu/pool.hpp(267): warning C4324: 'strata::kernels::cpu::ExpertPool': structure was padded due to alignment specifier
+C:/strata/include\strata/kernels/cpu/pool.hpp(268): warning C4324: 'strata::kernels::cpu::ExpertPool': structure was padded due to alignment specifier
+C:/strata/include\strata/kernels/cpu/pool.hpp(269): warning C4324: 'strata::kernels::cpu::ExpertPool': structure was padded due to alignment specifier
+C:/strata/include\strata/kernels/cpu/pool.hpp(270): warning C4324: 'strata::kernels::cpu::ExpertPool': structure was padded due to alignment specifier
+C:/strata/include\strata/kernels/cpu/pool.hpp(271): warning C4324: 'strata::kernels::cpu::ExpertPool': structure was padded due to alignment specifier
+C:/strata/include\strata/kernels/cpu/pool.hpp(274): warning C4324: 'strata::kernels::cpu::ExpertPool': structure was padded due to alignment specifier
+<USER_HOME>\AppData\Local\Temp\tmpxft_0001f6cc_00000000-7_remote_expert_opt.cudafe1.stub.c(25): warning C4211: nonstandard extension used: redefined extern to static
+<USER_HOME>\AppData\Local\Temp\tmpxft_0001f6cc_00000000-7_remote_expert_opt.cudafe1.stub.c(16): warning C4211: nonstandard extension used: redefined extern to static
+
+[19/20] Linking CXX static library strata_engine.lib
+[20/20] Linking CXX executable file_expert_source_test.exe
+Test project C:/strata/local-setup/target-80/build-cuda86-main
+    Start 7: exchange_storage_test
+1/2 Test #7: exchange_storage_test ............   Passed    0.58 sec
+    Start 8: file_expert_source_test
+2/2 Test #8: file_expert_source_test ..........   Passed    0.33 sec
+
+100% tests passed out of 2
+
+Total Test time (real) =   1.12 sec
+FileExpertSource: available RAM 114.09 GiB, 114.09 GiB after the mapped experts left the process working set (#467)
+FileExpertSource: RAM budget 0.00 GiB: 2 of the 0.00 GiB of experts the GPU cache does not hold, by profile rank; the rest are read from the files
+FileExpertSource: allocating 0.00 GiB page-locked cache complement
+FileExpertSource: before complement allocation: requested 0.00 GiB, available RAM 114.09 GiB, available commit 117.19 GiB (limit 135.81 GiB), available virtual address space 130939.40 GiB
+FileExpertSource: copied cache complement through layer 1/1 (0.00 GiB, 0 s)
+FileExpertSource: mapped pinned cache complement ready: resident 0.00 GiB, pinned 0.00 GiB in 0 s; page-locked and mapped
+FileExpertSource: available RAM 114.09 GiB, 114.09 GiB after the mapped experts left the process working set (#467)
+FileExpertSource: RAM budget 0.00 GiB: 2 of the 0.00 GiB of experts the GPU cache does not hold, by profile rank; the rest are read from the files
+FileExpertSource: allocating 0.00 GiB page-locked cache complement
+FileExpertSource: before complement allocation: requested 0.00 GiB, available RAM 114.09 GiB, available commit 117.19 GiB (limit 135.81 GiB), available virtual address space 130939.40 GiB
+FileExpertSource: copied cache complement through layer 1/1 (0.00 GiB, 0 s)
+FileExpertSource: mapped pinned cache complement ready: resident 0.00 GiB, pinned 0.00 GiB in 0 s; page-locked and mapped
+FileExpertSource: exchange buffer rotation enabled: 2 buffers, 1382400 bytes each; no host commit memcpy
+FileExpertSource: available RAM 114.09 GiB, 114.09 GiB after the mapped experts left the process working set (#467)
+FileExpertSource: RAM budget 0.00 GiB: 2 of the 0.00 GiB of experts the GPU cache does not hold, by profile rank; the rest are read from the files
+FileExpertSource: allocating 0.00 GiB pageable resident cache complement
+FileExpertSource: before complement allocation: requested 0.00 GiB, available RAM 114.09 GiB, available commit 117.19 GiB (limit 135.81 GiB), available virtual address space 130939.40 GiB
+FileExpertSource: copied cache complement through layer 1/1 (0.00 GiB, 0 s)
+FileExpertSource: pageable resident cache complement ready: resident 0.00 GiB, pinned 0.00 GiB in 0 s
+FileExpertSource: exchange rotation unavailable; retaining copy path: requires equal-size expert blocks and a fully mapped/pinned RAM complement
+rotation integration: rotate=0 pinned=1 exchanges=64 commit_ms=6.2761 exact_bytes=PASS
+rotation integration: rotate=1 pinned=1 exchanges=64 commit_ms=0.0058 exact_bytes=PASS
+rotation integration: rotate=1 pinned=0 exchanges=64 commit_ms=4.3787 exact_bytes=PASS
+file_expert_source_test: PASS

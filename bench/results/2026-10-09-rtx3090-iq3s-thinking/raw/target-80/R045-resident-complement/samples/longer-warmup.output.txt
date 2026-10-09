@@ -1,0 +1,25 @@
+We need answer user's request. Need produce final answer detailed >=1200 words. User asks: Benchmark identifier... ignore. Read existing design requirements before implementing cache: long list rules 0-63 each key item_x lifetime 30+ x seconds and size 64 + 3x bytes; expiration must remove stale entries, access update LRU order. Implement thread-safe Python TTLCache class using OrderedDict and monotonic clock. Include set, get, delete, clear, len, expiration, capacity eviction, unit tests with injected fake clock, detailed explanation thread safety and complexity. Complete code, tests, explain design. No abbreviate. At least 1200 words.
+
+Need satisfy. Need probably incorporate existing rules: maybe preload existing cache rules? We need implement cache that supports those rules. Could show class and maybe configuration of existing rules using set or helper load_existing_rules. Key has size? Need capacity eviction by size? Existing rules mention size bytes. TTLCache likely capacity eviction based on total byte size? The prompt says using OrderedDict, monotonic clock, set get delete clear len expiration capacity eviction. Existing cache rules have key, lifetime, size. So capacity eviction should account for entry size. Need maybe class accepts max_size (bytes) and max_entries? LRU eviction when capacity exceeded. Also expiration remove stale entries. Access updates LRU order. Use OrderedDict move_to_end. Thread-safe: RLock, maybe operations atomic, purge expired. Need injected fake clock: constructor takes clock=time.monotonic. For tests fake clock returns controlled time. Need unit tests with unittest. Need detailed explanation >1200 words total.
+
+Need ensure code complete not abbreviated. Need probably include imports. Need implement TTLCache.
+
+Let's design:
+
+from collections import OrderedDict
+import threading
+import time
+
+class Entry:
+    __slots__ = ('value','size','expires_at')
+    def __init__(...)
+
+class TTLCache:
+    def __init__(self, max_size=0, max_entries=None, clock=time.monotonic, default_lifetime=None, default_size=0):
+       self._lock=threading.RLock()
+       self._store=OrderedDict() # key -> Entry
+       self._max_size=max_size? bytes; if <=0 unlimited? Capacity eviction if max_size>0. max_entries optional.
+       self._current_size=0
+       self._clock=clock
+       self._default_lifetime=default_lifetime
+       self

@@ -1,0 +1,14 @@
+....E
+======================================================================
+ERROR: test_requested_rotation_requires_activation (__main__.ResidentModeTests.test_requested_rotation_requires_activation)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "C:\strata\local-setup\target-80\test-resident-mode-guard.py", line 32, in test_requested_rotation_requires_activation
+    guard.require_resident_startup(self.good, require_rotation=True)
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+TypeError: require_resident_startup() got an unexpected keyword argument 'require_rotation'
+
+----------------------------------------------------------------------
+Ran 5 tests in 0.001s
+
+FAILED (errors=1)

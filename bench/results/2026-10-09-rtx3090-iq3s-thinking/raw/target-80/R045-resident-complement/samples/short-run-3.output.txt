@@ -1,0 +1,13 @@
+We need answer user's request. Need produce final detailed answer at least 1200 words. Need implement thread-safe Python TTLCache using OrderedDict and monotonic clock. Include set, get, delete, clear, len, expiration, capacity eviction, unit tests with injected fake clock, detailed explanation thread safety complexity. Complete code, tests, explain design. No abbreviate implementation. Ignore identifier.
+
+Need think carefully. We need provide code. Python. Thread-safe: use RLock? OrderedDict not thread-safe. TTL expiration on get, purge expired entries. Need maybe count len? Need define len includes only unexpired? Usually len after expiration maybe should remove expired? User says include len, expiration, capacity eviction. We can implement __len__ purges expired? But purging in len might be side-effect. Could define live_count purges expired and returns len. Or standard __len__ returns current unexpired count by purging expired. Need be consistent. We can have _purge_expired under lock.
+
+Need use monotonic clock injected. Maybe Clock protocol: now() returns float. Default time.monotonic. Thread-safe clock? fake clock not thread-safe but okay in tests maybe lock? Need injected fake clock. Need implement fake clock that increments and can sleep? For tests: fake clock with set_now, advance. TTLCache uses clock.now().
+
+Capacity eviction: LRU using OrderedDict move_to_end on get/set. On insertion, if capacity exceeded, popitem(last=False). Also if ttl <=0 maybe expire immediately? Should handle None no TTL? TTL maybe optional; if None no expiration. Could allow ttl=None. If ttl negative? treat expired immediately maybe. set with ttl: expiration = None if ttl is None else now + ttl; if ttl <= 0? Could not store? More consistent: if ttl <= 0, remove key and return? But maybe store with expired entry then purge on get. For capacity avoid storing if expired? Need decide.
+
+Need thread-safe. Use threading.RLock. Since public methods acquire lock. Internal methods assume lock held. For nested calls? set may call _evict, _purge_expired etc. RLock allows reentrant. Could avoid reentrancy by private methods no lock. Use RLock simpler.
+
+Need potential issue with OrderedDict: popitem, move_to_end thread-safe if only under lock.
+
+Need unit tests with fake clock. Could use unittest. Need cover set/get, expiration, delete, clear, len capacity, LRU eviction
