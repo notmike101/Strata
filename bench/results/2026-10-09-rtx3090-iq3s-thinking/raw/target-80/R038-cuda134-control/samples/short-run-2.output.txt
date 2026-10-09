@@ -1,0 +1,19 @@
+We need answer user's request. Need produce final detailed answer at least 1200 words, complete code, tests, explanation thread safety complexity. User says benchmark identifier ignore. Implement thread-safe Python TTLCache class using OrderedDict and monotonic clock. Include set, get, delete, clear, len, expiration, capacity eviction, unit tests with injected fake clock, detailed explanation. Do not abbreviate implementation. Need likely provide code fully. Need think about design.
+
+Need satisfy: thread-safe Python TTLCache class using OrderedDict and monotonic clock. Need injected fake clock. Methods: set, get, delete, clear, len, expiration, capacity eviction. Unit tests. Could include Python code with collections.OrderedDict, threading.RLock, time.monotonic. Use fake clock by passing clock callable. Need handle TTL maybe seconds. Need expiration. Methods: get default? set(key, value, ttl=None). get(key, default=None). delete(key). clear(). __len__. Maybe expiry(key) returns remaining? They asked include expiration perhaps method expires? Could implement _purge_expired and __contains__, remaining_ttl? We can include method ttl_remaining(key). But user says include set, get, delete, clear, len, expiration. Could method get_expiration? Maybe define method expires(key) or ttl_remaining(key). Need detailed explanation.
+
+Need ensure thread safety: RLock around operations, copy? OrderedDict move_to_end. Eviction when len > capacity after inserting: popitem(last=False). Need consider expired eviction? On set, purge expired before insert. For len: should purge expired to report live count. Capacity eviction: maxsize. Use OrderedDict insertion order; on get move to end to approximate LRU if TTL same? For TTL eviction capacity. Also maybe maxsize None? For simplicity require maxsize positive. Need handle ttl: if ttl <= 0 maybe remove? If ttl None use default_ttl. If ttl 0 immediate expiration. Clock: callable returning float monotonic. Default time.monotonic. Need avoid time.time. Fake clock can advance.
+
+Potential code:
+
+from collections import OrderedDict
+import threading
+import time
+from typing import Any, Callable, Optional
+
+class TTLCache:
+    def __init__(self, maxsize: int, ttl: float, clock: Callable[[], float] = time.monotonic):
+        if maxsize <= 0: raise ValueError
+        if ttl < 0: raise ValueError
+        self._lock = threading.RLock()
+       

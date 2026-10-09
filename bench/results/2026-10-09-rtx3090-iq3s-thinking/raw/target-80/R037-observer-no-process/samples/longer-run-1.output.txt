@@ -1,0 +1,20 @@
+We need answer user's request. Need produce final detailed answer at least 1200 words. User asks: Benchmark identifier ignore. Read existing design requirements before implementing cache: many existing cache rules with lifetimes increasing 30 sec for item_000 size 64 etc. Need implement thread-safe Python TTLCache class using OrderedDict and monotonic clock. Include set, get, delete, clear, len, expiration, capacity eviction, unit tests with injected fake clock, detailed explanation of thread safety and complexity. Complete code, tests, explain design. Do not abbreviate. At least 1200 words.
+
+We need likely incorporate existing design requirements: keys item_000 to item_063 have lifetime and size; expiration remove stale entries, access update LRU. Maybe need mention rules? Could seed cache with these? The request says read existing design requirements before implementing cache. Could implement generic TTLCache but also maybe ensure those entries can be added and obey rules. Need perhaps include constants for initial cache rules? But not required? It says existing cache rule... Might expect we respect lifetimes and sizes? TTLCache normally capacity and default ttl. Sizes are byte size maybe capacity is number entries or bytes? Need design: capacity eviction. Use OrderedDict. Sizes maybe used for byte-capacity eviction? They mention size 64 bytes etc. Could implement max_size in bytes, not entries. But "capacity eviction" could be maxsize items; but sizes given indicate byte-size accounting. Better implement both entry capacity and byte capacity? Thread-safe TTLCache with maxsize and max_bytes? OrderedDict LRU. Need include get/set/delete/clear/len/expiration. Expiration could remove stale entries. Could expose evict_expired. Need fake clock injected.
+
+Need produce complete code and tests. We can implement a class TTLCache:
+
+from collections import OrderedDict
+from typing import Optional, Any, Hashable
+import threading
+import time
+
+class FakeClock: now monotonic
+RealClock
+
+class Entry: value, expires_at, size maybe? Use __slots__
+class TTLCache:
+   def __init__(self, capacity: int, max_bytes: Optional[int]=None, clock=None, default_ttl=None): if capacity <=0 ValueError; if max_bytes set and max_bytes <=0; lock RLock.
+   _entries OrderedDict key -> Entry
+   _current_bytes int
+   _set: set(key, value, ttl=None, size=None): with lock: now

@@ -1,0 +1,13 @@
+We need answer user's request. Need produce final answer at least 1200 words, complete code, tests, explanation. Need consider "Existing cache rules" maybe just context: many items with lifetimes/sizes. They ask implement thread-safe Python TTLCache class using OrderedDict and monotonic clock. Include set, get, delete, clear, len, expiration, capacity eviction, unit tests with injected fake clock, detailed explanation of thread safety and complexity. Do not abbreviate. Probably incorporate rules? Maybe design supports per-key lifetimes? Existing rules maybe keys item_000 lifetime 30 seconds size 64 bytes etc. Need implement cache with sizes? Existing rule says key item_x lifetime and size; expiration must remove stale entries, access must update LRU order. It doesn't explicitly ask support per-entry size or capacity in bytes? It says using OrderedDict and monotonic clock, include capacity eviction. Could include maxsize in entries and maybe bytes? Existing rules mention size bytes. Should implement supports maxsize (entries) and optional max_bytes? Need likely satisfy: key lifetimes and sizes. The existing rules imply each item has lifetime and size; maybe cache must store metadata. We can implement TTLCache supporting maxsize entries and max_bytes bytes, per-key TTL and size. If not provided, defaults. Use OrderedDict for LRU. Thread-safe with RLock? Need careful. Monotonic clock injection via time_func. Expiration can be lazy on get and active purge method. Need complete code, tests with fake clock, detailed explanation >1200 words.
+
+Need decide API.
+
+Possible class:
+class TTLCache:
+  def __init__(self, maxsize=..., max_bytes=None, default_ttl=..., clock=None):
+    self._entries: OrderedDict[str, CacheEntry]
+    self._maxsize, self._max_bytes, _default_ttl
+    self._lock = RLock()
+    self._now = time.monotonic if clock is None else clock
+  @dataclass: value, expires_at, size
+ set(key,value, ttl=None, size=None, *, size_hint) -> bool? If size > max_bytes false? Maybe replace, delete old entry, insert newest. Evict expired then LRU until fits size and maxsize. Need ensure thread safe. get(key, default=None): with lock, purge_expired? Need not remove all expired every time? To bound work, maybe remove expired at start of operation? Could purge all

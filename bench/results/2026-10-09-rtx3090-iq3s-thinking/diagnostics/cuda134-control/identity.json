@@ -1,0 +1,39 @@
+{
+  "source_head": "646f1cf6",
+  "production_source_modified": false,
+  "compiler": "CUDA13.4.92",
+  "host_compiler": "MSVC19.44.35228.0",
+  "architecture": 86,
+  "portable": true,
+  "configuration": "Release",
+  "files": {
+    "CMakeLists.txt": {
+      "sha256": "3e0ee60e71c68e02905098e1ccac7af46a2af2b8e3f83efe74b5486d21f3e8f9",
+      "bytes": 105144
+    },
+    "src/kernels/cuda/native_mmvq.cu": {
+      "sha256": "555384ee4a66889079c780024401d6776d3b1384ddc0a28796b00c2d90df2c96",
+      "bytes": 125182
+    },
+    "src/kernels/cpu/iq_avx2.cpp": {
+      "sha256": "fbc7a05f66ba7230945eae7a17aff172df412d1162aa7aec84ae30cdb868f168",
+      "bytes": 30026
+    },
+    "src/kernels/cpu/pool.cpp": {
+      "sha256": "e54f0c2fe6a297c4aa49a3a9efabab3166d8644f05385b9f7e2fa5e5d34f8eff",
+      "bytes": 39994
+    },
+    "engine": {
+      "sha256": "ee908fc32b1a7d86ad349785d533086cfcacdf5df7886342d1d955ef54be494c",
+      "bytes": 52241920
+    },
+    "CMakeCache": {
+      "sha256": "3afe03204de82aac26d147bc7ec1518b74b131bfec6591e452b2fe66aba539ca",
+      "bytes": 50806
+    },
+    "c021_diagnostic": {
+      "sha256": "32e0493da6e6fe56b135f40be77f4c529cd3eb849bdab554e6dbf16a02008864",
+      "bytes": 15771648
+    }
+  }
+}

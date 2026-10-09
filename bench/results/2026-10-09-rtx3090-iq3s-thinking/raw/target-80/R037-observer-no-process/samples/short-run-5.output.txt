@@ -1,0 +1,30 @@
+We need answer user's request. Need produce final answer detailed >=1200 words. Need implement thread-safe Python TTLCache using OrderedDict and monotonic clock. Include set, get, delete, clear, len, expiration, capacity eviction, unit tests with injected fake clock, detailed explanation thread safety and complexity. Do not abbreviate implementation. Need ensure code complete. Need maybe mention identifier ignored? Probably not necessary. Need produce code then tests then explanation. Need likely use threading.RLock, OrderedDict, collections. TTLCache with default_ttl, capacity, clock=monotonic. Need methods set(key,value,ttl=None), get(key,default=None), delete, clear, len via __len__, maybe items. Need expiration: lazy on get/set plus purge expired. OrderedDict LRU? Use move_to_end. Thread safety: RLock reentrant for methods calling other methods; avoid exposing internal lock. Need tests: unittest with FakeClock (now attribute), manual time. Tests for ttl, expiry, get updates? Usually TTL based on set time not access? Could implement TTL fixed from set, not sliding. OrderedDict for LRU eviction. Need capacity eviction when len exceeds maxsize after insertion, evict oldest items. Need also purge expired before len, set. Need delete. Need __contains__? include len. Need maybe context manager? Not required.
+
+Need ensure code correct. Let's design.
+
+TTLCache:
+```
+import threading
+from collections import OrderedDict
+from time import monotonic
+
+class TTLCache:
+    def __init__(self, maxsize=0, default_ttl=None, clock=monotonic):
+       if maxsize < 0: raise ValueError
+       self._maxsize = maxsize
+       self._default_ttl = default_ttl
+       self._clock = clock
+       self._entries = OrderedDict() # key -> (value, expires_at or None)
+       self._lock = threading.RLock()
+
+    def set(self, key, value, ttl=None):
+       ttl = self._default_ttl if ttl is None else ttl
+       if ttl is not None and ttl < 0: raise ValueError
+       now = self._clock()
+       expires_at = None if ttl is None else now + ttl
+       with self._lock:
+           self._purge_expired(now)
+           if key in self._entries:
+              self._entries[key] = (value, expires_at)
+              self._entries.move_to_end(key)
+          

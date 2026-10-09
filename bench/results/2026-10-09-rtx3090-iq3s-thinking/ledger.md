@@ -494,3 +494,62 @@ Resource observation: minimum available physical RAM31,149,924,352bytes(29.011Gi
 The existing supervisor only aborted for available physical RAM<16GiB. Corrected it to check both physical RAM and available commit before launch, after readiness and every second during requests, failing closed on read errors. A boundary test first failed on low commit despite ample physical RAM, then passed independent physical/commit floors including zero and exactly16GiB. No contract relaxation, quality-gate change or launcher-default change.
 
 The resource observer itself consumed63.578CPU-seconds over353.329wall seconds, versus0.375/160.446,R030;0.453/171.469,R031;0.422/200.728,R032;14.797/233.530,R033. Therefore 'lightweight observer' is not established for the slow arms. Observer API blocking/cost could be a symptom or contributor. Before another compiler/kernel comparison, isolate NVML/PDH/process-enumeration costs and compare a safely guarded control without that observer, keeping request/sampling/model/context unchanged. Preserve the instrumented arms and do not silently exclude them from earlier reports. Further kernel work is deferred until measurement interference is understood.
+
+
+## E052 / isolate monitoring cost; safe abort of reproduced stalls
+
+R035 removed the NVML/PDH/psutil observer, preserving a one-second GlobalMemoryStatusEx physical/commit safety guard through model loading and requests. No model/config/request/seed/sampler change. One excluded warmup plus five measured512-token runs per size. Ordinary medians89.2short/82.1longer server_decode_tps;202.1/496.9prompt tok/s. No severe stall. Minimum available physical64,100,835,328bytes and commit42,511,769,600bytes. Full tree cleanup verified. This is a safe control result below the goal, not proof that monitoring caused earlier stalls and not a production optimization.
+
+The observer audit timed its API groups individually. Without a loaded model, process enumeration plus memory queries took about2.15ms median, while other groups were sub-millisecond. R036 repeated the same workload with the full observer and per-group timers. The short five-run cell completed. Longer measured runs1/2 were13.5/18.0decode tok/s; longer-run3 was deliberately interrupted by the guard at22:47:11.314UTC, available commit17,007,628,288bytes below17,179,869,184(16GiB). Available physical41,077,157,888bytes. All completed raw runs and the interrupted request are retained. The incomplete longer cell has no qualifying median and is not exported as a completed arm. The exact launcher, two Python layers, text engine and vision tree were stopped and GPU usage returned585MiB.
+
+R036 audit: process-enumeration/memory group max2779.7615ms wall and2281.25ms CPU per poll;25.828CPU seconds total,50calls above100ms. Other group maxima: NVML memory2.4685ms, global memory0.8152ms, PDH paging1.0679ms, clocks0.5029ms, power0.3192ms, temperature0.0907ms, clock reasons0.1296ms. This narrows the costly observer activity to the process group but does not yet distinguish enumeration from GetProcessMemoryInfo or prove the call caused memory pressure. A post-model idle audit returned about2.15ms for the process group. psutil7.2.2 source maps memory_info to PROCESS_MEMORY_COUNTERS with a slower permission-error fallback; no permission-error attribution has been demonstrated.
+
+R037 is the controlled follow-up: the same monitored workload with only process enumeration/memory queries omitted, retaining NVML,PDH and physical/commit safety. Its result is pending. Source changes so far are benchmark supervision/observation only. The supervisor now records its source per arm and forcibly stops its own observer if it does not exit within10seconds after model cleanup. No new engine/launcher defaults. The Q6_K row-grouping plan is recorded but queued behind this audit and the unchanged-source CUDA13.4 build.
+
+Relevant primary API reference: https://learn.microsoft.com/en-us/windows/win32/api/psapi/nf-psapi-getprocessmemoryinfo . It documents returned process counters and required query rights, not a performance guarantee or explanation for this local slowdown. NVIDIA's NVML documentation describes WDDM-managed memory; allocation snapshots alone still do not establish residency transitions.
+
+
+## E053 / retain low-cost monitoring; proceed to compiler comparison
+
+R037 omitted only the process-enumeration/memory-query group from the timed observer. NVML memory, clocks, power, temperature and clock reasons; PDH paging; and the independent physical/commit guard remained active. Same retained engine, model, context, vision, MTP, request JSON, five seeds and 512-token cap as R035/R036. It completed both five-run cells and both excluded warmups: ordinary decode medians 87.5 short / 83.9 longer tok/s; prompt medians 198.8 / 496.5 tok/s. No severe stall or memory-floor breach. Minimum available physical RAM 64,349,507,584 bytes and commit 42,742,296,576 bytes. All remaining timed observer calls together consumed 0.015625 CPU seconds; the maximum individual wall time was 0.4551 ms. Full launcher/server/model/vision cleanup passed.
+
+Interpretation: the slow process-query group is avoidable monitoring overhead and is associated with the reproduced stalls. R035 (safety guard only) and R037 (all other observer groups) were stable; R036 with process queries stalled and was safely aborted. This narrows the problem but does not distinguish process enumeration from a particular memory API, nor prove a driver mechanism. Earlier stalls without this observer are still retained. No claim that all historical instability is solved. Process memory queries will be kept outside timed generation; system memory and GPU telemetry remain available, and missing per-process peak measurements will be stated. Repeat this measurement policy during subsequent paired trials.
+
+The unchanged-source CUDA 13.4.92 control build C022 is now underway in its own build directory, using sm86, portable Release, MSVC and the existing pinned ggml source. This is a toolchain candidate, not a launcher promotion. The retained CUDA 13.3 executable remains unchanged. After build checks, compare it under the stable measurement policy and record actual loaded libraries separately from the compiler version. The C021 row-grouping harness has been written with a deliberately incorrect stub; it has not yet been compiled or claimed correct. No production kernel source changed.
+
+
+## E054 / updated compiler built; exact row-grouping candidate rejected
+
+C022 built unchanged retained source with CUDA13.4.92, MSVC19.44.35228.0, sm86, portable Release and the existing pinned ggml source. Engine SHA256 ee908fc32b1a7d86ad349785d533086cfcacdf5df7886342d1d955ef54be494c, 52,241,920 bytes. All15 selected CPU dispatch/parity tests passed. The initial GPU test command referenced native_mmvq_multi, whose optional bench source is absent in this checkout; that command failed and is retained. Corrected selection built and passed all4 applicable GPU tests: mmvq_multi_parity, native_multi_parity, kv_stream_parity and verify_batch_parity. This covers tested matrix formats including Q6_K, routing/combining, KV streaming and batched verification; it is not full served quality qualification. Test PATH prioritizes the same existing production CUDA DLL directory; compiler and runtime identities remain separate.
+
+C021 standalone actual-head test first failed with its deliberately wrong candidate stub (reference00000000 versus ffffffff on the first zero-input row). Implemented2/4/8rows per128-thread CTA with the original per-row block stride, DP4A/FMA/reduction sequence and lane-zero result. It passed168cases and6,021,840finite bitwise float comparisons, including odd output tails and unchanged guard values. Original Q6_K head bytes521,472,000; no weight repacking or extra weight buffer. This is a sampled parity proof for the prototype, not a whole-model quality result.
+
+Timing: one excluded warmup per variant,11rounds,16calls per timed CUDA-event interval, alternating forward/reverse variant order. Every raw timing is retained. Ordinary median milliseconds per full head:
+
+- 1 row(s)/CTA: 0.604220 ms, range 0.585714-0.609784; speedup 1.0000x versus original.
+
+- 2 row(s)/CTA: 0.649920 ms, range 0.616064-0.657786; speedup 0.9297x versus original.
+
+- 4 row(s)/CTA: 0.727340 ms, range 0.679040-0.741888; speedup 0.8307x versus original.
+
+- 8 row(s)/CTA: 1.065906 ms, range 1.033856-1.073216; speedup 0.5669x versus original.
+
+All grouped variants were slower. Reject C021; do not integrate, rerun serving or promote this kernel. Prototype, red/green logs, build flags and all event timings are archived. Production kernel source and launcher remain unchanged. GPU memory returned585MiB used after the diagnostic.
+
+R038 is now comparing the unchanged-source CUDA13.4 engine under the same fixed served workload, changing only executable/toolchain and preserving existing runtime library paths. No process-memory queries during generation; remaining telemetry and both16GiB safety guards remain. Its result is pending. Q007 and the full90tok/s matrix remain unqualified.
+
+
+## E055 / compiler-only CUDA 13.4 served comparison does not justify promotion
+
+R038 completed both original TTLCache streaming cache-miss cells, in longer-then-short order: one excluded warmup and five measured seeds 101-105 per cell, exactly 512 generated tokens per measured request. Fixed sampler, high/xhigh reasoning, 262144 context, INT8 KV, CPU F16 vision, MTP4/min-p0.70 and PCIe fraction0.20 were preserved. Only executable/compiler changed relative to the retained configuration. Loaded cuBLAS, cuBLASLt and NVIDIA driver DLL hashes exactly match R037; this is not a runtime-library trial.
+
+| Workload | Server decode median (range), tok/s | Prompt median, tok/s | Request E2E median, tok/s | Stream total median, tok/s | TTFT median, s |
+|---|---:|---:|---:|---:|---:|
+| Short | 86.5 (83.7-88.8) | 205.6 | 75.5981 | 75.6114 | 0.8433 |
+| Approximately 3K | 84.2 (82.8-85.0) | 495.7 | 41.8972 | 41.9003 | 6.1647 |
+
+Same-day retained controls R035 and R037 produced short/longer decode medians 89.2/82.1 and 87.5/83.9, respectively. The new compiler is within this mixed range and does not meet 90 in either cell. No severe stalls occurred. This does not establish a reproducible performance winner, nor does it replace the random-coding, quality or real-use gates. Q007 remains 3/5 completed coding answers passing their tests and 2/5 capped without a final answer.
+
+Minimum available physical memory 64,233,795,584 bytes; minimum available commit 42,596,917,248 bytes. Peak sampled GPU use 25,260,417,024 bytes. Both 16 GiB floors passed. Observer total CPU time 0.000 ms; maximum individual observer call 0.4519 ms. Per-process peak memory was deliberately not queried during requests. Full launcher, server, engine and vision tree cleanup passed; a subsequent idle check read 585 MiB GPU used. Original configuration was restored.
+
+Disposition: compiler candidate unpromoted; production launcher unchanged. Next, isolate the newly downloaded CUDA runtime libraries using the same CUDA13.4 executable, with library-name-based identity capture and an explicit configured-directory guard. If that also lacks a clear gain, leave the retained compiler/runtime stack in place and move to broader serving/scheduling alternatives. All raw measured seeds and failed arms remain public evidence.

@@ -2277,5 +2277,119 @@
       89.6,
       75.7
     ]
+  },
+  {
+    "campaign": "target-80",
+    "arm": "R035-safety-only-control",
+    "workload": "longer",
+    "runs": 5,
+    "decode_median": 82.1,
+    "decode_min": 78.7,
+    "decode_max": 83.8,
+    "e2e_median": 41.43356945697158,
+    "stream_total_median": 41.43758172080434,
+    "ttft_median_seconds": 6.145414600003278,
+    "raw_decode": [
+      83.8,
+      81.1,
+      78.7,
+      82.1,
+      83.5
+    ]
+  },
+  {
+    "campaign": "target-80",
+    "arm": "R035-safety-only-control",
+    "workload": "short",
+    "runs": 5,
+    "decode_median": 89.2,
+    "decode_min": 86.3,
+    "decode_max": 90.4,
+    "e2e_median": 77.43323466814365,
+    "stream_total_median": 77.45228572361314,
+    "ttft_median_seconds": 0.8649147000105586,
+    "raw_decode": [
+      89.2,
+      88.2,
+      89.2,
+      86.3,
+      90.4
+    ]
+  },
+  {
+    "campaign": "target-80",
+    "arm": "R037-observer-no-process",
+    "workload": "longer",
+    "runs": 5,
+    "decode_median": 83.9,
+    "decode_min": 79.7,
+    "decode_max": 84.4,
+    "e2e_median": 41.83915204392604,
+    "stream_total_median": 41.84242083836265,
+    "ttft_median_seconds": 6.154030399979092,
+    "raw_decode": [
+      83.9,
+      79.7,
+      84.4,
+      84.3,
+      82.3
+    ]
+  },
+  {
+    "campaign": "target-80",
+    "arm": "R037-observer-no-process",
+    "workload": "short",
+    "runs": 5,
+    "decode_median": 87.5,
+    "decode_min": 84.4,
+    "decode_max": 95.1,
+    "e2e_median": 76.21499882022539,
+    "stream_total_median": 76.22920334830535,
+    "ttft_median_seconds": 0.8727324999927077,
+    "raw_decode": [
+      89.4,
+      86.1,
+      84.4,
+      87.5,
+      95.1
+    ]
+  },
+  {
+    "campaign": "target-80",
+    "arm": "R038-cuda134-control",
+    "workload": "longer",
+    "runs": 5,
+    "decode_median": 84.2,
+    "decode_min": 82.8,
+    "decode_max": 85.0,
+    "e2e_median": 41.89719328903735,
+    "stream_total_median": 41.900293880619245,
+    "ttft_median_seconds": 6.164697500003967,
+    "raw_decode": [
+      84.9,
+      82.8,
+      84.2,
+      84.2,
+      85.0
+    ]
+  },
+  {
+    "campaign": "target-80",
+    "arm": "R038-cuda134-control",
+    "workload": "short",
+    "runs": 5,
+    "decode_median": 86.5,
+    "decode_min": 83.7,
+    "decode_max": 88.8,
+    "e2e_median": 75.59810875988491,
+    "stream_total_median": 75.6113640276938,
+    "ttft_median_seconds": 0.8432925999804866,
+    "raw_decode": [
+      88.0,
+      88.8,
+      86.5,
+      85.0,
+      83.7
+    ]
   }
 ]

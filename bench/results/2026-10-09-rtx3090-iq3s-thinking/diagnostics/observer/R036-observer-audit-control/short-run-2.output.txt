@@ -1,0 +1,19 @@
+We need answer user's request. Need produce final detailed answer at least 1200 words, complete code, tests, explanation thread safety complexity. User says benchmark identifier ignore. Implement thread-safe Python TTLCache class using OrderedDict and monotonic clock. Include set, get, delete, clear, len, expiration, capacity eviction, unit tests with injected fake clock, detailed explanation. Do not abbreviate implementation. Need likely provide code fully. Need think about design.
+
+Need ensure thread-safe. Use OrderedDict. Monotonic clock injected fake clock. Python threading.RLock. TTLCache maybe with default_ttl. set/get/delete/clear/len? __len__? expiration cleanup. capacity eviction. Fake clock tests. Need complete code then tests then explanation. At least 1200 words. Need not too short. We can include imports. Potential pitfalls: Thread-safe len: if __len__ returns len after pruning? If pruning mutates under lock. get prunes expired. capacity eviction: if maxsize 0? handle. Need OrderedDict move_to_end on get for LRU. TTL: expires_at = clock() + ttl. If ttl <=0? Could immediately expire. set with ttl maybe None uses default_ttl; if None infinite? But TTL cache maybe always expires. Could support ttl=None as no expiry? User says TTLCache, expiration. Maybe default_ttl required? Use None no expiry? But monotonic clock. For TTLCache, maybe default_ttl >0. We can allow ttl=None meaning indefinite. But tests fake clock.
+
+Need thread-safe with reentrant lock. Need not expose lock? Fine.
+
+Need ensure fake clock injected: constructor accepts clock: Callable[[], float]. default time.monotonic. Tests use FakeClock. Unit tests with unittest. Need deterministic.
+
+Implementation details:
+class TTLCache:
+    def __init__(self, maxsize=128, default_ttl=60.0, clock=None):
+       if maxsize <0 raise; if default_ttl is not None and default_ttl <0 raise? Could allow 0.
+       self._data = OrderedDict() # key -> (value, expires_at) tuple. For no expiry maybe None.
+       self._lock = threading.RLock()
+       self._clock = clock or time.monotonic
+       self._maxsize = maxsize
+       self._default_ttl = default_ttl
+
+    def _now(self): return self._clock() maybe under lock? No need but ensure

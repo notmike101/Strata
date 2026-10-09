@@ -1,0 +1,17 @@
+We need answer user's request. Need produce final answer with complete code, tests, detailed explanation at least 1200 words. Need think fully.
+
+Task: Implement thread-safe Python TTLCache class using OrderedDict and monotonic clock. Include set, get, delete, clear, len, expiration, capacity eviction, unit tests with injected fake clock, detailed explanation of thread safety and complexity. Write complete code, then tests, then explain design. Do not abbreviate implementation. At least 1200 words.
+
+Need produce Python code. Need be careful thread-safe. Use OrderedDict, threading.Lock, monotonic clock injected. TTLCache with maxsize, ttl default? Could support default_ttl? get with default None. set(key, value, ttl=None). delete(key). clear. __len__. Expiration: lazy cleanup and maybe periodic purge? Need capacity eviction: LRU? OrderedDict can move_to_end. TTL cache maybe also least recently used eviction. Use monotonic clock to avoid system clock jumps. Use time.monotonic by default, allow clock argument.
+
+Need include unit tests with fake clock. Use unittest. Need ensure tests deterministic. Could use FakeClock with now() and advance().
+
+Need complete implementation not abbreviate. Include type hints maybe.
+
+Potential details:
+- Use collections.OrderedDict, import threading, time, typing.
+- Internal storage maps key -> (value, expires_at). Maybe store expires_at as float or None if no TTL? But class TTLCache needs expiration. Could allow ttl=None no expiration? But name TTLCache; perhaps all entries expire unless ttl is None. Include maxsize.
+- Lock: threading.Lock. Use context manager with self._lock.
+- Clock: Callable[[], float]. Default time.monotonic.
+- Validate maxsize > 0, ttl >= 0? default_ttl maybe None or positive. set ttl can be None no expiration? If ttl=0 immediate expire? TTL maybe >0; allow 0? Could treat ttl <=0 immediate deletion on set? We can require ttl >=0 if not None. For set ttl None use default_ttl; if default_ttl None no expiry.
+- Expiration: need purge expired entries. On get: if expired remove. On set: purge? If capacity exceeded, evict LRU expired or oldest. Need ensure length counts only unexpired. Need len: purge expired then return len. But purge under lock. If purge iterates entire OrderedDict O(n). For get/set

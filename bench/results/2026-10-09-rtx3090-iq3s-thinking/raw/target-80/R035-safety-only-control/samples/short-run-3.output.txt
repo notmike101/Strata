@@ -1,0 +1,29 @@
+We need answer user's request. Need produce final detailed answer at least 1200 words. Need implement thread-safe Python TTLCache using OrderedDict and monotonic clock. Include set, get, delete, clear, len, expiration, capacity eviction, unit tests with injected fake clock, detailed explanation thread safety complexity. Complete code, tests, explanation. Do not abbreviate implementation. Also Benchmark identifier ignored. Need likely no need to mention identifier. Need ensure code is complete. Could include imports, classes, tests using unittest maybe parameterized? Fake clock injected. Need design explanation. Need ensure thread safety: locks around operations, maybe RLock. Need handle capacity eviction, expired entries. OrderedDict for LRU? User says TTLCache using OrderedDict; likely LRU capacity eviction. Need monotonic clock; inject clock callable. Need methods: set, get, delete, clear, len (maybe __len__), expiration maybe purge expired? Could include contains? Need complete.
+
+Potential implementation:
+
+from __future__ import annotations
+import threading
+import time
+from collections import OrderedDict
+from typing import Any, Callable, Optional, Hashable, Iterator? 
+
+class TTLCache:
+    """Thread-safe cache with TTL and LRU eviction."""
+    _MISSING = object() maybe sentinel.
+    def __init__(self, maxsize, ttl, clock=None):
+       if maxsize <0 raise ValueError
+       if ttl <0 raise? maybe allow 0 immediate expiration.
+       self._maxsize = maxsize
+       self._ttl = float(ttl)
+       self._clock = clock or time.monotonic
+       self._data = OrderedDict() key -> (value, expires_at)
+       self._lock = threading.RLock() maybe for reentrancy if methods call each other? Simpler use threading.Lock and avoid nested calls; but if clear calls purge? Use RLock safe. But with RLock, can call public methods inside. Need careful len with purge may lock.
+
+    def set(self, key, value, ttl=None):
+       if ttl is None: ttl=self._ttl else float(ttl) maybe validate? if ttl <0 raise ValueError.
+       with self._lock:
+          now = self._clock()
+          expires = now + ttl if ttl is finite? float. if ttl==inf? maybe.
+          if key in self._data:
+             # update expires and move to end? If value exists, remove/reinsert to mark recently

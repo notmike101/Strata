@@ -1,0 +1,12 @@
+We need answer user's request. Need produce detailed answer at least 1200 words. User asks: Benchmark identifier ignore. Implement thread-safe Python TTLCache class using OrderedDict and monotonic clock. Include set, get, delete, clear, len, expiration, capacity eviction, unit tests with injected fake clock, detailed explanation thread safety and complexity. Write complete code, then tests, then explain design. Do not abbreviate implementation.
+
+Need produce final with code and tests and explanation. Need ensure complete code not abbreviated. Need probably use Python 3.12? But maybe no typing Self. Need thread-safe using RLock or Lock. Use OrderedDict for LRU and TTL. Monotonic clock injected. Need implement len maybe counts unexpired entries? Need expiration/capacity eviction. Methods set, get, delete, clear, len (perhaps __len__). Also maybe items? Could include keys, values? Not required. Unit tests with fake clock. Could use unittest. Need complete code. Need avoid abbreviating. Need at least 1200 words. Need final answer with sections.
+
+Need think design. Class:
+import threading
+from collections import OrderedDict
+from time import monotonic
+from typing import Callable, Any, Optional
+
+class TTLCache:
+    def __init__(self, maxsize: int, ttl: float | None = None, clock: Callable[[], float] = monotonic): validate maxsize >0, ttl positive or None? Store OrderedDict values tuple (value, expires_at) maybe. lock: threading.RLock? Use RLock for reentrancy. Methods _monotonic = clock. For set(key,value,ttl=None): if maxsize <=0 raise? If ttl provided override default; must be >0? Could ttl=0 immediate expiration? Use ttl None means no expiration? TTLCache maybe default ttl required. If ttl is None, entry never expires. Need expiration if ttl=0: expires_at = now, get should expire if now >= expires_at. Use strict < for alive. set: if key exists? Need pop old to update order; if ttl provided. Eviction before or after insertion? With maxsize, if new entry and len >= maxsize, evict oldest (first item) using OrderedDict. If existing key and updating, no capacity change. Need remove expired entries during set? Could remove expired on access and on set. Also could _evict_expired() method. But careful capacity eviction after removing expired. If maxsize

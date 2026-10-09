@@ -1,0 +1,12 @@
+We need answer user's request. Need produce final detailed answer at least 1200 words, complete code, tests, explanation design. Need implement thread-safe Python TTLCache class using OrderedDict and monotonic clock. Include set, get, delete, clear, len, expiration, capacity eviction, unit tests with injected fake clock, detailed explanation thread safety and complexity. Do not abbreviate implementation. Benchmark identifier ignore. Need likely provide full code, tests, explanation. Need ensure length >=1200 words. Let's plan.
+
+Need maybe mention monotonic clock injectable. Python class:
+import threading, time
+from collections import OrderedDict
+from typing import Any, Optional, Callable, Optional
+
+class TTLCache:
+  def __init__(self, capacity, default_ttl=..., clock=time.monotonic, ttl=None?)
+Better parameters: capacity, default_ttl, clock. Use OrderedDict for LRU? The request says using OrderedDict and monotonic clock; capacity eviction. Does it require LRU eviction? capacity eviction can evict oldest inserted or least recently used. OrderedDict supports LRU if move_to_end on get. Need decide. Could implement LRU eviction. Include expiration. Thread safe: use RLock? For methods. Since get may mutate ordering and cleanup expired entries. Use threading.RLock for reentrancy. But if methods call internal _purge? Use with self._lock.
+
+Need avoid race: multiple operations atomic. For set, clean expired, insert/update, move_to_end, enforce capacity. For get, lock, check expired, return default and delete? Or return None? If get(key, default=None), if expired delete and return default. But maybe user wants get. len should not count expired? It says len and expiration. len should reflect logical number of live entries. To avoid O(n) each len? Could maintain size by purging expired? If len called after expirations without access, it might return stale unless purge. Could implement len purges expired? That is O(n). Or maintain count? Need accurate len without full scan? Could lazily purge expired on operations; len could be O(1) with count if we don't count expired? But expired entries remain. Need expiration. If len must be accurate without scan, either purge expired periodically or track heap of expirations. But requirement likely simple: len method can evict expired entries in O(n) or return number including expired? The prompt says include len, expiration. It likely expects len of

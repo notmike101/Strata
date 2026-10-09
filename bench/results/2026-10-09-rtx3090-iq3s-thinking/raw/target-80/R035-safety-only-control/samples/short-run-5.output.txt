@@ -1,0 +1,20 @@
+We need answer user's request. Need produce final answer at least 1200 words. Need implement thread-safe Python TTLCache using OrderedDict monotonic clock, include set, get, delete, clear, len, expiration, capacity eviction, unit tests with injected fake clock, detailed explanation thread safety and complexity. Do not abbreviate implementation. Need ignore benchmark identifier. Need likely provide code, tests, explanation. Need ensure complete code. Could use threading.RLock. OrderedDict move_to_end. Need fake clock injection. Unit tests perhaps unittest. Need detailed. Let's craft final with code. Need be careful about thread safety: RLock protects all mutations/reads. Expiration on access and maybe periodic purge in set. Need capacity eviction: when capacity reached, evict oldest? With OrderedDict and TTL, can store key, value, expire_at. Use OrderedDict from key to (value, expires_at). Need move_to_end on get/update for LRU capacity eviction. Monotonic clock default time.monotonic, inject fake clock. Need handle ttl None? Could support None for no expiration? But TTLCache maybe ttl required? Include optional ttl? The request says set, get, delete, clear, len, expiration, capacity eviction. Could allow ttl argument in constructor default? We'll implement per-cache ttl or per-set optional? Simpler: TTLCache(capacity, default_ttl, clock=time.monotonic). set(key, value, ttl=None) uses default_ttl if None; if ttl <=0 maybe delete? Need unit tests. Thread safe.
+
+Potential issues: len: count non-expired entries? If len returns len(self._entries) may overcount expired. Need expiration: purge expired. Should len return current valid entries? It says len, expiration. Probably __len__ purge expired then len. Need avoid infinite. Need maybe iter expired.
+
+Implementation:
+from collections import OrderedDict
+import threading, time
+from typing import Optional, Any, Tuple
+
+class TTLCache:
+    def __init__(self, capacity, ttl=None, clock=None):
+        if capacity < 0? if capacity==0 allowed; if negative raise ValueError.
+        self.capacity = int(capacity)
+        if ttl is not None and ttl <0 raise.
+        self._clock = clock or time.monotonic
+        self._entries = OrderedDict()
+        self._lock = threading.RLock()
+
+    def _now(self): return self._clock()
+    def _is_expired(self, expires_at

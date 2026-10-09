@@ -1,0 +1,25 @@
+**********************************************************************
+** Visual Studio 2022 Developer Command Prompt v17.14.36
+** Copyright (c) 2025 Microsoft Corporation
+**********************************************************************
+[1/8] Building CXX object CMakeFiles\mmvq_multi_parity.dir\src\kernels\mmvq_multi_parity.cpp.obj
+[2/8] Building CXX object CMakeFiles\verify_batch_parity.dir\src\kernels\verify_batch_parity.cpp.obj
+[3/8] Building CXX object CMakeFiles\native_multi_parity.dir\src\kernels\native_multi_parity.cpp.obj
+[4/8] Linking CXX executable mmvq_multi_parity.exe
+[5/8] Building CXX object CMakeFiles\kv_stream_parity.dir\src\kernels\kv_stream_parity.cpp.obj
+[6/8] Linking CXX executable verify_batch_parity.exe
+[7/8] Linking CXX executable native_multi_parity.exe
+[8/8] Linking CXX executable kv_stream_parity.exe
+Test project C:/strata/local-setup/target-80/build-cuda134-control
+    Start 20: mmvq_multi_parity
+1/4 Test #20: mmvq_multi_parity ................   Passed    0.77 sec
+    Start 43: native_multi_parity
+2/4 Test #43: native_multi_parity ..............   Passed    0.27 sec
+    Start 55: kv_stream_parity
+3/4 Test #55: kv_stream_parity .................   Passed   13.56 sec
+    Start 58: verify_batch_parity
+4/4 Test #58: verify_batch_parity ..............   Passed    0.25 sec
+
+100% tests passed out of 4
+
+Total Test time (real) =  15.06 sec

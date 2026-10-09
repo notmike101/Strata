@@ -1,0 +1,25 @@
+We need answer user's request. Need produce final answer with complete code, tests, detailed explanation at least 1200 words. Need think fully.
+
+Task: Implement thread-safe Python TTLCache class using OrderedDict and monotonic clock. Include set, get, delete, clear, len, expiration, capacity eviction, unit tests with injected fake clock, detailed explanation of thread safety and complexity. Write complete code, then tests, then explain design. Do not abbreviate implementation. At least 1200 words.
+
+Need produce Python code. Need be careful thread-safe. Use OrderedDict, threading.Lock, monotonic clock injected. TTLCache: maxsize, ttl. Methods set(key,value, ttl? maybe optional). get(key, default). delete(key). clear(). __len__? Expiration maybe purge expired keys. Maybe `purge()` or `expire()` method. Use OrderedDict move_to_end on get to implement LRU eviction? The requirement says capacity eviction but not necessarily LRU? Using OrderedDict likely insertion order or recency. Could implement LRU. Need thread-safe: all operations under lock, clock call under lock? If injected fake clock, ensure monotonic? We can store expiry time = clock() + ttl. On get: check if expired; if expired delete and return default. Need maybe `keys`, `items`, `values`? Not asked. But could include. Need tests with unittest and FakeClock. Need ensure fake clock thread-safe? Tests can be single threaded but maybe show concurrent test? Could include concurrency tests? Maybe unit tests with fake clock, also thread safety tests. Need complete. Need avoid abbreviating implementation.
+
+Potential code:
+
+from __future__ import annotations
+import threading
+from collections import OrderedDict
+from typing import Any, Generic, Hashable, Iterator, Optional, TypeVar
+
+K = TypeVar('K', bound=Hashable)
+V = TypeVar('V')
+
+class TTLCache(Generic[K, V]):
+    def __init__(self, maxsize: int, ttl: float = 300.0, clock: Optional[Callable[[], float]] = None):
+       if maxsize < 0: raise...
+       if ttl < 0: raise? If ttl 0 immediate expiry.
+       self._maxsize=maxsize
+       self._ttl=ttl
+       self._clock = clock or time.monotonic
+       self._data = OrderedDict()
+       self._lock = threading.RLock()
