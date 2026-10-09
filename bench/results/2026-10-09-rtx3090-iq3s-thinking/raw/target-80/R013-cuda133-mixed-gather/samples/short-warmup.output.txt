@@ -1,0 +1,14 @@
+We need answer user's request. Need produce final answer with complete code, tests, detailed explanation at least 1200 words. Need satisfy Benchmark identifier ignored? It says Benchmark identifier ... Ignore this identifier. We should ignore. Need implement thread-safe Python TTLCache using OrderedDict and monotonic clock. Include set, get, delete, clear, len, expiration, capacity eviction, unit tests with injected fake clock, detailed explanation of thread safety and complexity. Do not abbreviate implementation. Detailed answer >=1200 words.
+
+Need think carefully. Python TTLCache class. Thread-safe. Use OrderedDict. Monotonic clock. Need set, get, delete, clear, len, expiration, capacity eviction. Unit tests injected fake clock. Could have fake clock class with now() and advance(). Thread safety via RLock or Lock, consistency. Need complexity. Need complete code no abbreviations. Need likely include imports: time, threading, collections OrderedDict, Optional, Any. Define TTLCache class. Methods: __init__(maxsize=128, ttl=..., clock=time.monotonic), set(key, value, ttl=None), get(key, default=None), delete(key), clear(), __len__, maybe __contains__, keys/items? Need expiration. Capacity eviction. TTLCache stores OrderedDict key->value, expiration dict? Need ensure thread safe. If using OrderedDict and values store (value, expires_at). Or two dicts? Better OrderedDict maps key to (value, expires_at). On get check expiry. Lazy expiration. Also maybe prune expired before capacity? Need if capacity eviction, evict oldest by insertion/update order? LRU? OrderedDict move_to_end on get/set. Capacity eviction: if maxsize > 0 and len > maxsize, popitem(last=False). But must handle expired entries? We can clean expired entries at set? Need robust.
+
+Possible implementation:
+
+class TTLCache:
+    def __init__(self, maxsize=128, ttl=60.0, clock=time.monotonic):
+       self._lock=threading.RLock()
+       self._store=OrderedDict()
+       self._maxsize=maxsize; self._default_ttl=ttl; self._clock=clock
+    def _is_expired(self, key, entry): return entry[1] is not None and entry[1] <= self._clock()
+But if clock called multiple times. Use now.
+    def _remove_if_expired(self, key, entry, now): ...

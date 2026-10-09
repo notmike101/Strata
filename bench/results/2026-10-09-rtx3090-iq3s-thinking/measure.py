@@ -18,6 +18,7 @@ parser.add_argument('--config', required=True)
 parser.add_argument('--root', type=Path, required=True)
 parser.add_argument('--base-url', required=True)
 parser.add_argument('--runs', type=int, default=5)
+parser.add_argument('--git-helper', type=Path, default=Path.home() / 'github-agent/identity.mjs')
 parser.add_argument('--tune', default='{}')
 parser.add_argument('--sweep', action='store_true')
 args = parser.parse_args()
@@ -112,7 +113,8 @@ manifest = {
     'config_sha256': hashlib.sha256(CONFIG_BYTES).hexdigest(),
     'health': health, 'models': models,
     'props': {k:props.get(k) for k in ['default_generation_settings','model_alias','model_path','build_info','total_slots']},
-    'git_commit': subprocess.check_output(['git','-C',str(ROOT),'rev-parse','HEAD'], text=True).strip(),
+    'git_commit': subprocess.check_output(['node',str(args.git_helper),'--repo','notmike101/Strata',
+                                          'git','-C',str(ROOT),'rev-parse','HEAD'], text=True).strip(),
     'gpu_before': subprocess.check_output(['nvidia-smi','--query-gpu=name,driver_version,memory.used,memory.total,utilization.gpu,temperature.gpu,power.draw','--format=csv'], text=True),
     'contract': {'route': '/v1/chat/completions', 'stream': True, 'max_tokens': 512,
                  'concurrency': 1, 'sampling_and_thinking': PROFILE, 'hardware_tune': TUNE,
