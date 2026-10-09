@@ -1232,8 +1232,32 @@ if(STRATA_NATIVE_EXPERTS)
   add_executable(iq_avx2_parity src/kernels/cpu/iq_avx2_parity.cpp)
   target_link_libraries(iq_avx2_parity PRIVATE strata_kernels_cpu)
   if(STRATA_BUILD_TESTS)
+    add_executable(iq_avx2_dispatch_test src/kernels/cpu/iq_avx2_dispatch_test.cpp)
+    target_link_libraries(iq_avx2_dispatch_test PRIVATE strata_kernels_cpu)
+    # Empty values inherit the core/global setting. Each test starts a fresh process.
+    function(strata_iq_dispatch_test name global xxs s two expected_xxs expected_s expected_two)
+      add_test(NAME iq_dispatch_${name} COMMAND ${CMAKE_COMMAND} -E env
+        "STRATA_IQ256_GATHER=${global}" "STRATA_IQ256_GATHER_IQ3_XXS=${xxs}"
+        "STRATA_IQ256_GATHER_IQ3_S=${s}" "STRATA_IQ256_GATHER_IQ2_S=${two}"
+        $<TARGET_FILE:iq_avx2_dispatch_test> ${expected_xxs} ${expected_s} ${expected_two})
+      set_tests_properties(iq_dispatch_${name} PROPERTIES SKIP_RETURN_CODE 77)
+    endfunction()
+    strata_iq_dispatch_test(auto "" "" "" "" -1 -1 -1)
+    strata_iq_dispatch_test(global_off 0 "" "" "" 0 0 0)
+    strata_iq_dispatch_test(global_on 1 "" "" "" 1 1 1)
+    strata_iq_dispatch_test(mixed 1 "" "" 0 1 1 0)
+    strata_iq_dispatch_test(xxs_on 0 1 "" "" 1 0 0)
+    strata_iq_dispatch_test(s_on 0 "" 1 "" 0 1 0)
+    strata_iq_dispatch_test(two_on 0 "" "" 1 0 0 1)
+    strata_iq_dispatch_test(xxs_off 1 0 "" "" 0 1 1)
+    strata_iq_dispatch_test(s_off 1 "" 0 "" 1 0 1)
+    strata_iq_dispatch_test(invalid_off 0 junk 01 2 0 0 0)
+    strata_iq_dispatch_test(invalid_on 1 junk 01 2 1 1 1)
     add_test(NAME iq_avx2_parity COMMAND iq_avx2_parity)
     add_test(NAME iq_avx2_parity_iq3s_mt1 COMMAND ${CMAKE_COMMAND} -E env STRATA_IQ3S_MT1=1 $<TARGET_FILE:iq_avx2_parity>)
+    add_test(NAME iq_avx2_parity_mixed_gather COMMAND ${CMAKE_COMMAND} -E env
+      STRATA_IQ256_GATHER=1 STRATA_IQ256_GATHER_IQ2_S=0 STRATA_IQ256_GATHER_IQ3_XXS=1
+      STRATA_IQ256_GATHER_IQ3_S=1 STRATA_IQ_MT_MIN=1 $<TARGET_FILE:iq_avx2_parity>)
   endif()
   # the AVX-2 Q8_K activation quantizer against ggml's, byte for byte (--bench: its time)
   add_executable(q8k_quant_parity src/kernels/cpu/q8k_quant_parity.cpp)

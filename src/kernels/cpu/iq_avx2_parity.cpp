@@ -264,6 +264,21 @@ int check_gate_up(int type) {
                     type_name(type), variant_name(v).c_str(), differ, variant_name(0).c_str());
         if (differ) ++failures;
     }
+    // Exercise the public environment-selected wrappers as well as explicit variants.
+    size_t dispatch_differ = 0;
+    std::vector<float> g(kMaxT * R), ff(kMaxT * R);
+    for (int nt = 1; nt <= kMaxT; ++nt) {
+        float* gp[kMaxT];
+        float* fp[kMaxT];
+        for (int t = 0; t < nt; ++t) { gp[t] = &g[t * R]; fp[t] = &ff[t * R]; }
+        cpu::iq256_rows(type, blob.data(), f.gu_row, (int) kH, a.gup, nt, gp, 0, (int) R);
+        cpu::iq256_gu_rows(type, blob.data(), f.gu_row, f.up_off, (int) kH, a.gup, nt, fp, 0, (int) R);
+        for (int t = 0; t < nt; ++t)
+            dispatch_differ += rows_differ(gp[t], &one_g[t * R], R) + rows_differ(fp[t], &one_ff[t * R], R);
+    }
+    std::printf("  %-8s public dispatch 1..8 tokens: %zu rows differ from scalar one-token rows\n",
+                type_name(type), dispatch_differ);
+    if (dispatch_differ) ++failures;
     return failures;
 }
 
