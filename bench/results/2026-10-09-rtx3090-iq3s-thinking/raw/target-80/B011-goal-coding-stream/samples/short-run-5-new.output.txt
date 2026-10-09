@@ -1,0 +1,14 @@
+We need answer user's request. Need produce final only complete function in Python code block. Need ensure requirements:
+Implement topological_order(nodes, edges) in Python. nodes list unique strings; edges list (before, after) pairs. Return lexicographically smallest topological ordering, include isolated nodes, ignore duplicate edges. Raise ValueError for edge endpoint absent from nodes or a cycle. Do not mutate either input. Use no imports. Return only complete function in a Python code block.
+
+Need think details. Lexicographically smallest topological ordering among all valid orders? For DAG, to get lexicographically smallest sequence of node labels, use Kahn with min-heap by node string. But no imports? heapq is import not allowed. Can use list and min selection O(n^2) okay? Or sort candidates. Need no imports. Use built-in min or sort.
+
+Need ignore duplicate edges. Validate endpoints present. Do not mutate inputs: do not modify nodes/edges. Could copy nodes to set. Need be careful if nodes is list of unique strings but could be iterator? Spec says list. But no mutation. We can create set from nodes. Build adjacency dict and indegree dict from copies. Need if duplicate edges: use adjacency set per node; indegree count only once if pair new. Need if endpoint absent raise ValueError. Also what if edge is None? It's pair maybe invalid tuple unpack raises TypeError? Should maybe raise ValueError? Requirement says raise ValueError for endpoint absent. If malformed edge? Not specified. Could robustly require edge length 2? But might tests expect ValueError for missing endpoints only. If edge is not iterable, TypeError from unpack; maybe okay? But maybe they want ValueError for invalid edge? Could catch exceptions and raise ValueError. But must not use imports.
+
+Need include isolated nodes.
+
+Potential issue: duplicate edge with self-loop? Edge (a,a) should cause cycle? In topological, self-loop cycle. If indegree increments, adjacency has self. Kahn will fail -> ValueError. If duplicate self-loop ignore duplicate but still cycle. If endpoint missing raise ValueError. If nodes contains duplicates? unique strings, but if not, set handles maybe. Could also detect? Not necessary but can raise ValueError if duplicate? Spec unique. Not mutate.
+
+Need lexicographically smallest: Using min of zero indegree nodes each step. Since node strings can be compared lexicographically. If labels not comparable (all strings) fine.
+
+Could optimize by using sorted list of available? But no imports.

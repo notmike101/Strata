@@ -1,0 +1,13 @@
+We need answer user's request. Need implement function topological_order(nodes, edges) in Python. Return only complete function in Python code block. No imports. Must not mutate inputs. nodes list unique strings; edges list pairs. Lexicographically smallest topological ordering: include isolated nodes, ignore duplicate edges. Raise ValueError for edge endpoint absent from nodes or cycle. Need complete function code only. Need think carefully about algorithm.
+
+Need lexicographically smallest topological order among valid topological sorts. Standard Kahn's algorithm with min-heap yields lexicographically smallest if processing by string order at each step. But cannot import heapq? Use no imports. Could implement heap manually or use sorted list. Since no imports, simplest: maintain available list, repeatedly pick min(available), remove. That is O(V*(V+E)) but acceptable? Problem no constraints. Could also sort adjacency and in-degrees, but min available easier. Must ignore duplicate edges: use set for edges? Need not mutate inputs. Could construct adjacency sets to ignore duplicates. Validate endpoints: if before not in nodes_set or after not in nodes_set raise ValueError. Also cycle detection: if order length != len(nodes) raise ValueError. Self-loop? Edge endpoint present. Self-loop causes cycle: in-degree not decrement? Let's test: self-loop (a,a). If we add edge once, indegree[a]=1, available initially excludes a. If no others, length != len => ValueError. Good. But duplicate self-loop ignored? Should ignore duplicate edges: set of (b,a). If multiple self-loop ignored, still cycle.
+
+Need handle empty inputs. nodes unique strings? assume. Need maybe if nodes has duplicates? Spec says unique; not need validate but could handle. Must not mutate either input. Creating sets doesn't mutate. Use nodes_set = set(nodes). Need preserve nodes? Not needed for lex order. Edges iteration no mutation. Need maybe use tuple pair. Edges may be lists? pairs. Use for before, after in edges. If before not in nodes_set or after not in nodes_set raise ValueError.
+
+Need avoid mutating edges if edges list has lists? We just iterate, no mutate.
+
+Implementation no imports:
+
+def topological_order(nodes, edges):
+    node_set = set(nodes)
+    # maybe if len(node_set) != len(nodes): raise ValueError? Spec unique. Could be robust but may reject duplicate? Not asked. Do not mutate. Might not want to raise for duplicate nodes because invalid input

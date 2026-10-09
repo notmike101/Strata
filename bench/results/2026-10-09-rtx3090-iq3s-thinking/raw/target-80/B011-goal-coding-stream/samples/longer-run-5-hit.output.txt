@@ -1,0 +1,16 @@
+We need answer user wants only complete function in Python code block. Need analyze task. Need produce final only code block.
+
+Implement topological_order(nodes, edges). nodes unique strings, edges list of pairs before after. Return lexicographically smallest topological ordering, include isolated nodes, ignore duplicate edges. Raise ValueError for endpoint absent or cycle. Do not mutate inputs. No imports. Return only complete function in Python code block.
+
+Need ensure lexicographically smallest topological ordering. Standard Kahn with min-heap. Without imports, can use list and sort or manual heap? No imports means no heapq. Could use sorted each iteration O(V^2 log V) maybe acceptable? Need deterministic. We can implement heap manually? Simpler: maintain available sorted list and pop(0) maybe O(V^2) but fine unless large. Could implement binary heap manually no imports. Need robust.
+
+Need not mutate inputs. Need consider inputs might be non-list? Maybe validate? They say nodes list unique strings; edges list pairs. But we can not overvalidate. Edge duplicate ignore. Need detect endpoints absent: before or after not in nodes set. Need ensure if edge invalid type? Could raise ValueError if not iterable pair? maybe not necessary. But to be safe: convert tuple? Need not mutate. Use nodes_set = set(nodes). Validate edges endpoints in nodes_set. Also self-loop? If before==after then absent? endpoint present, but creates cycle. Need raise ValueError. If duplicate ignore. For cycle detection, Kahn count. Need include isolated nodes. Lexicographically smallest: at each step choose smallest available. Need consider duplicates in edges: when adding to indegree and adjacency, avoid double counting. Use adjacency dict from before set of after maybe. But not mutate input. Could build:
+adj = {node: [] for node in nodes}; indeg = {node:0 for node in nodes}
+seen_edges=set()
+for edge in edges:
+  try: before, after = edge
+  except: raise ValueError? But endpoint absent? If edge is string of length 2? Could be. Use if len(edge)!=2? Strings? Maybe avoid overcomplication.
+  if before not in nodes_set or after not in nodes_set: raise ValueError
+  if before == after: raise ValueError? Could be cycle. If self loop, indeg self + adjacency, Kahn won't process, detect. But could raise earlier.
+  key=(before, after)
+  if key in seen

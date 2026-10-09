@@ -1,0 +1,22 @@
+We need answer user wants code only? "Return only the complete function in a Python code block." Need implement topological_order(nodes, edges) with requirements:
+- nodes list unique strings.
+- edges list of (before, after) pairs.
+- Return lexicographically smallest topological ordering.
+- include isolated nodes.
+- ignore duplicate edges.
+- Raise ValueError for edge endpoint absent from nodes or cycle.
+- Do not mutate either input.
+- Use no imports.
+- Return only complete function in Python code block.
+
+Need think about implementation. Need lexicographically smallest topological ordering. Usually Kahn's algorithm with min-heap gives lexicographically smallest if using nodes strings and min available. But no imports: cannot use heapq. Need implement without imports. Could maintain sorted list? Need performance maybe unspecified. We can implement simple selection min from ready set/list each iteration. Since nodes unique strings, edges unique ignored duplicates. Need avoid mutate inputs. Build adjacency set? We can construct dict sets with copies? Since nodes not mutated? Building new structures doesn't mutate input. Use no imports. Need handle duplicate edges: adjacency sets. indegree dict.
+
+Need ensure if edge endpoint absent nodes raise ValueError. Should check before or during. Use set for nodes for O(1) membership: node_set = set(nodes). But set() doesn't mutate nodes. If nodes list has duplicates? says unique. If not? Could ignore? We can assume.
+
+Duplicate edges: ignore duplicates. If edge same pair, indegree should increment once. If edge duplicate, using set. Also self-loop? edge (a,a): endpoint present, duplicate ignored? Self-loop cycle; Kahn will detect cycle (indegree never zero). Raise ValueError. Good.
+
+Need lexicographically smallest. For topological sorting lexicographically smallest sequence among valid topological orders: choose smallest currently available node at each step. Need prove. Yes.
+
+Implementation without heap: ready = sorted(initial zero indegree). Then while ready: pick index? If ready kept sorted, pop(0) O(n). n unknown but okay? Could implement binary insertion to keep sorted and use pop(0). O(n^2) but no imports. Better implement min scanning from ready list. For lexicographically smallest, at each step remove minimum among ready. Could use min(ready) then ready.remove(min). O(n^2). Fine.
+
+But if many nodes maybe need better? Without imports, can implement own heap maybe

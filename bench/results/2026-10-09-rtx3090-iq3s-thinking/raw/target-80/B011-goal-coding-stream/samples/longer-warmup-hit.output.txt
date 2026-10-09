@@ -1,0 +1,16 @@
+We need answer user's final request. Need produce final only code block complete function. Need ensure implement topological_order(nodes, edges): nodes list unique strings, edges list pairs. Return lexicographically smallest topological ordering. Include isolated nodes, ignore duplicate edges. Raise ValueError for edge endpoint absent from nodes or cycle. Do not mutate inputs. No imports. Return only complete function in Python code block.
+
+Need think about lexicographically smallest topological ordering. For DAG with node labels strings, standard algorithm using min-heap of zero indegree nodes yields lexicographically smallest topological order. Can't import heapq. Implement own min selection or sort list each time. nodes unique but maybe unsorted. Need avoid mutating inputs. Can use sets and lists. Need validate edges: for each pair, if before not in node_set or after not in node_set raise ValueError. Also duplicate edges ignored: if edge before->after already processed, do not add adjacency/degree again. Need self-loop? edge (a,a) is cycle, should raise ValueError. If using indegree and adjacency, self-loop increments indegree and adjacency self; cycle detected when len order < n. But if self-loop and indegree, it never zero, raise. Good.
+
+Lexicographically smallest: Python string lex order. Need choose min among currently indegree 0. Without imports, can maintain sorted list of available nodes and pop(0) then add neighbors; after decrement if indegree 0 insert in sorted position. Complexity okay? unknown. Simpler: each step scan available list for min, remove. But if we keep available list sorted and use bisect? no imports but can manual insert. Or use list.sort each step? O(n^2 log n). acceptable maybe. But better implement available = sorted(initial zero indegree). Each pop min via available.pop(0) O(n). When adding new zero nodes, insert at sorted position using loop or use bisect_left manual. But duplicates? nodes unique, available unique. Use manual insertion:
+
+def _insert_sorted(lst, x):
+    lo, hi=0,len(lst)
+    while lo<hi:
+      mid=(lo+hi)//2
+      if lst[mid] < x: lo=mid+1 else hi=mid
+    lst.insert(lo,x)
+
+No imports.
+
+Need not mutate inputs: do not alter nodes or edges. We'll create node_set = set(nodes) (if nodes list unhashable? strings). But if

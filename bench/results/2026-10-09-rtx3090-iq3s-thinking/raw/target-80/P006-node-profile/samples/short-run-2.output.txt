@@ -1,0 +1,11 @@
+We need answer user's request. Need produce final detailed answer at least 1200 words, complete code, tests, explanation thread safety complexity. User says Benchmark identifier ignore. Implement thread-safe Python TTLCache class using OrderedDict and monotonic clock. Include set, get, delete, clear, len, expiration, capacity eviction, unit tests with injected fake clock, detailed explanation. Do not abbreviate implementation. Need likely provide code for TTLCache with OrderedDict, threading.Lock, maybe RLock? Need think carefully about thread safety: OrderedDict operations not atomic under multithreading; use lock for all public operations and expiration scans. Need monotonic clock injection. Need capacity eviction: maxsize LRU? likely OrderedDict with move_to_end on access. TTL per item. Expiration: remove expired entries on get, maybe len, delete, clear. Need thread safety: no inconsistent state, avoid nested lock issues, use lock consistently. Need tests with fake clock: can use unittest. Need maybe context? Let's design robust.
+
+TTLCache class:
+- __init__(self, maxsize, ttl, time_func=None)
+ validate maxsize >0? ttl >0? time_func default time.monotonic.
+ self._store = OrderedDict() mapping key -> (expires_at, value)
+ self._lock = threading.Lock()
+ self._maxsize = maxsize
+ self._ttl = ttl
+ self._time = time_func or time.monotonic
+ Could support per-entry ttl? User says set with TTL? Include set(key, value, ttl=None) default self._ttl. That's nice. set should expire if ttl <= 0? Could remove. For capacity: when inserting, evict if len >= maxsize. If key exists: update value, expires, move_to_end, no capacity increase. If new and len >= maxsize: evict oldest. Need also prune expired before insert? If expired entries count toward len, but len should not include expired. We can _evict_expired_locked before operations? For performance, full scan on every op can be O(n). But simple. Need complexity explanation: with full expiration scan on each access O(n) worst-case; if use expiration heap O(log n). But requirement using OrderedDict and monotonic. We can design with lazy expiration: only evict expired entries when accessed by key; len may return length after _expire_now? Full scan for len O(n). Capacity eviction if full but many expired, could evict expired instead of LRU

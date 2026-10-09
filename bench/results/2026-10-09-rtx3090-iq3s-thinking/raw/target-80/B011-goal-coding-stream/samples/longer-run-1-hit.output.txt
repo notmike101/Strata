@@ -1,0 +1,19 @@
+We need answer user wants implement topological_order in Python, only complete function in code block. Need think. Need satisfy: input nodes list unique strings; edges list pairs before, after. Return lexicographically smallest topological ordering include isolated nodes, ignore duplicate edges. Raise ValueError for edge endpoint absent from nodes or cycle. Do not mutate either input. No imports. Return only complete function in Python code block.
+
+Need design robust deterministic. Lexicographically smallest topological order: standard Kahn with min-heap, but no imports. Could implement heap manually or sort available list each iteration. n small unknown. No imports allowed. We can implement without heapq by maintaining sorted list and selecting min using min() maybe O(n^2) ok. Need not mutate inputs: create local sets/lists. Edges could be tuples/list pairs. Duplicate edges ignore. Need validate edge endpoints present in nodes. Since nodes unique strings, can create set from nodes. But if nodes includes not hashable? It says strings. OK.
+
+Cycle detection: if processed length < len(nodes) raise ValueError.
+
+Do not mutate either input: don't modify nodes list or edges list. But if edges contains mutable lists? We unpack, no mutate. Creating new structures.
+
+Lexicographically smallest: Kahn selecting smallest available node among zero indegree. Need ignore duplicate edges: build indegree counts unique? If duplicates appear and we decrement per edge, duplicates would over-decrement. So either use set of edges to deduplicate before graph. Edges endpoint validation: if endpoint absent raise. Duplicates ignored. Since pairs might be tuples or lists length maybe. Should we validate edge has length 2? User doesn't specify, but robust: if edge cannot unpack maybe raise ValueError? Could catch TypeError and raise ValueError. But raising ValueError for cycle/missing endpoint; malformed edge perhaps ValueError. But don't overcomplicate.
+
+Need not use imports. Could use builtins set, list, min.
+
+Approach:
+def topological_order(nodes, edges):
+    # validate nodes? list, unique already; but create node_set = set(nodes). Need if nodes not iterable? But spec list. 
+    node_set = set(nodes)
+    # Need preserve original nodes order? For isolated nodes, lexicographic among available. Use nodes for all nodes.
+    graph = {node: [] for node in nodes}? But dict with string keys. Need deterministic? not necessary.
+    indegree = {node: 0 for node in

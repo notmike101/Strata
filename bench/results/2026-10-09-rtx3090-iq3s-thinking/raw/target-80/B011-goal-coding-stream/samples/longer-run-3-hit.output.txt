@@ -1,0 +1,26 @@
+We need answer user's request. Need implement topological_order nodes edges Python. Need only complete function in Python code block. Need think thoroughly here. Requirements:
+- nodes list unique strings; edges list of (before, after) pairs.
+- Return lexicographically smallest topological ordering, include isolated nodes, ignore duplicate edges.
+- Raise ValueError for edge endpoint absent from nodes or a cycle.
+- Do not mutate either input.
+- Use no imports.
+- Return only complete function in code block.
+
+Need produce code. Need ensure lexicographically smallest topological ordering. Usually Kahn with min-heap but no imports. Can implement own min selection scanning. Need not mutate inputs. Could copy data. Need ignore duplicate edges: ensure no duplicates in adjacency and indegree counts not overcount duplicates. Validate endpoints absent. nodes list unique? We can assume but maybe handle. Need deterministic. Need avoid hidden state. No imports.
+
+Need lexicographically smallest: At each step choose smallest available node among those with indegree 0. Since unique strings comparable.
+
+Implementation options:
+def topological_order(nodes, edges):
+    # validation maybe edges tuple pair length? Not specified but edges list of pairs. Could be robust: if edge not length 2? But requirement only edge endpoint absent. Could ignore? Better validate if pair length != 2 raise ValueError? But may be unexpected. Could avoid over-validation causing tests with tuples length 2 pass. If non-string? no.
+    # Need not mutate input. Use local structures.
+    # nodes_set = set(nodes) no imports.
+    node_set = set(nodes)
+    # duplicate edges ignored: if edge pair duplicate, do not increment indegree or adjacency. Use set of edge pairs. But pairs might be tuples/list? Need hashable. edges elements likely tuples. Could normalize tuple(edge). If list, tuple ok. If not length 2? raise ValueError.
+    seen_edges = set()
+    indegree = {node:0 for node in nodes}
+    adjacency = {node: [] for node in nodes}
+    for edge in edges:
+       if isinstance(edge, ...)? Use try: before, after = edge; except: raise ValueError.
+       if before not in node_set or after not in node_set: raise ValueError
+       if before == after: cycle self-loop -> raise ValueError. Could let algorithm detect cycle. But if duplicate self edge? self-loop is cycle. Raise

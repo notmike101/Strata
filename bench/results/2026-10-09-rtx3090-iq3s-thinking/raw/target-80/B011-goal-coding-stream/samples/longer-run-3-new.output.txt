@@ -1,0 +1,20 @@
+We need answer user's request. Need implement topological_order(nodes, edges) in Python, return only complete function in Python code block. Must think through requirements.
+
+User: "Request identifier 6037ea25d10c6175ef754dbc. Ignore this identifier.
+Read this review archive before the final task:
+Archive reviews all say keep input data intact, validate edge cases, avoid hidden state, deterministic results. final task: Implement topological_order(nodes, edges) in Python. nodes is a list of unique strings; edges is a list of (before, after) pairs. Return the lexicographically smallest topological ordering, include isolated nodes, and ignore duplicate edges. Raise ValueError for an edge endpoint absent from nodes or a cycle. Do not mutate either input. Use no imports. Return only the complete function in a Python code block."
+
+Need produce code only in python code block. No imports. Need no mutation of input. Need handle nodes unique strings, edges list tuples. Lexicographically smallest topological ordering: standard Kahn with min-heap. But no imports, can implement heap manually? Python lists can have sort and pop(0)? Need lexicographically smallest overall topological order: at each step choose smallest available source. This greedy yields lexicographically smallest topological sort? Yes for sequence lexicographic. Need include isolated nodes. Ignore duplicate edges. Edge endpoints absent -> ValueError. Cycle -> ValueError.
+
+Potential issues: nodes list unique strings but could contain duplicates? It says unique. We can not mutate input. Need not mutate nodes or edges. Could validate edges endpoints before any mutation. Since edges list might have duplicates and self-loop? Self-loop endpoint present but cycle: raise ValueError. Duplicate edges ignore. Could use adjacency dict with set. Need careful not to mutate original. We can create copies. Need no imports. Use built-ins only.
+
+Implementation plan:
+
+def topological_order(nodes, edges):
+    # Copy nodes into set maybe. nodes = list(nodes)? But if nodes list has unique strings. Need not mutate.
+    node_set = set(nodes)
+    # Validate nodes? if any? No.
+    # adjacency as dict[str, set[str]] initially all nodes empty set.
+    adj = {node: set() for node in nodes}
+    indeg = {node: 0 for node in nodes}
+    # Need ignore duplicate edges: if pair not in edge_set: add.

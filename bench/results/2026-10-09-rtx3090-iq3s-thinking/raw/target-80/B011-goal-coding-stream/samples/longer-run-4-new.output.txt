@@ -1,0 +1,18 @@
+We need answer user wants implement topological_order in Python, return only complete function in Python code block. Need think through requirements. We did. Need final only code block. Need ensure lexicographically smallest topological ordering, include isolated nodes, ignore duplicate edges. Raise ValueError for edge endpoint absent from nodes or cycle. Do not mutate inputs. No imports. Need handle nodes list unique strings but shouldn't trust maybe validate? Requirement nodes is list unique strings, edges list pairs. We can be robust. Need lexicographically smallest topological ordering. For Kahn with min-heap would need import heapq not allowed. Could repeatedly select min among available nodes. Since no imports, use built-in min. Complexity O(V*(E+V)) fine maybe. Need ignore duplicate edges. Need not mutate input: don't modify nodes/edges. Use copies. Need validate edge endpoints absent from nodes. Duplicate edges: count indegree once. Self-loop is cycle (edge u,u). Should raise ValueError. Cycle detection: if after Kahn result length != len(nodes). But need maybe if duplicate edges ignored, adjacency sets. Need lexicographically smallest: At each step choose smallest label among nodes with indegree 0. This yields lexicographically smallest topological order? Yes for labeled strings compare lexicographic. Need include isolated nodes: indegree 0 initially or after removals.
+
+Potential issue: If nodes empty and edges empty: return []. If edges have endpoint absent raise ValueError. If edge is tuple length not 2? Not required, but could handle? Could assume valid. But robust. Need not use imports. Implementation:
+
+def topological_order(nodes, edges):
+    # Build set of node names without mutating
+    try:
+       node_set = set(nodes)
+    except TypeError: maybe nodes iterable. But nodes is list. If duplicate? input says unique. If duplicate, set collapses. But output unique? Maybe preserve order? If nodes duplicates? Requirement unique; no need.
+    adj = {}
+    indeg = {}
+    for node in nodes:
+        adj[node] = []? or set for duplicates. To avoid duplicate edges, adj[node] = set()
+        indeg[node] = 0
+    for edge in edges:
+        if not isinstance(edge, tuple) or len(edge)!=2: raise ValueError? Could not import typing. Fine.
+        before, after = edge
+        if before not in node_set or after not in node_set: raise ValueError

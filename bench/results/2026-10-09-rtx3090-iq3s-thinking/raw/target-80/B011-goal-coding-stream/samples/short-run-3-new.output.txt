@@ -1,0 +1,16 @@
+We need answer user: "Implement topological_order(nodes, edges) in Python. nodes is a list of unique strings; edges is a list of (before, after) pairs. Return the lexicographically smallest topological ordering, include isolated nodes, and ignore duplicate edges. Raise ValueError for an edge endpoint absent from nodes or a cycle. Do not mutate either input. Use no imports. Return only the complete function in a Python code block."
+
+Need produce final only code block with function. Need ensure no imports. Need lexicographically smallest topological ordering. Usually Kahn with min-heap but no imports. Can sort candidates each iteration or use list min. Need ignore duplicate edges, do not mutate inputs. Input nodes list unique strings, edges list tuples. Need validate edge endpoints absent -> ValueError. Cycle -> ValueError.
+
+Need consider duplicate edges: if multiple same (before, after), in-degree increment only once. So build adjacency set or dict of sets. Since nodes unique, maybe convert nodes to list, but do not mutate. Use set for node membership. Build indegree dict initialized 0 for all nodes. adjacency dict: {n: []? or set}. For each edge (a,b), if a not in node_set or b not in node_set: raise ValueError. If b not in adj[a] (using set), add b, indegree[b]+=1. If self-loop: b in adj[a]? if a==b and no prior, add, indegree[a]+=1. Cycle detection: Kahn will not include all nodes, raise. If duplicate self-loop ignored but still cycle. If duplicate edge, ignore.
+
+Lexicographically smallest topological ordering: With unique strings, use sorted list of available nodes each step, choose min. We need stable? Lexicographically smallest sequence among all topological orderings. Standard: at each step pick smallest available node. Need prove? Yes. Since all nodes equal constraints, greedy min among zero indegree yields lexicographically smallest. Need isolated nodes included: indegree zero and no outgoing.
+
+Potential issue: If edges have duplicate endpoints and self-loop, duplicate ignore but cycle remains. If nodes not unique? Spec says unique. Could still handle? maybe no need.
+
+No imports. Need complete function. Could be:
+
+def topological_order(nodes, edges):
+    node_set = set(nodes)
+    adj = {node: set() for node in nodes}
+    indegree = {node: 0 for node in nodes}

@@ -1,0 +1,12 @@
+We need respond to user with complete function in Python code block only. Need reason. Need ensure satisfy: topological_order(nodes, edges): nodes list unique strings, edges list pairs before after. Return lexicographically smallest topological ordering, include isolated nodes, ignore duplicate edges. Raise ValueError for edge endpoint absent or cycle. Do not mutate inputs. No imports.
+
+Need produce final only code block. Need maybe use Kahn's algorithm with min selection. But need lexicographically smallest topological order over all topological sorts. Standard: at each step choose smallest available node among indegree zero. Need include isolated nodes indegree 0. Duplicate edges ignore: if duplicate, indegree should count once. We can build adjacency sets for each node, indegree dict. Validate endpoints. Do not mutate nodes or edges. We can copy? Need avoid modifying input lists. Sets/dicts fine.
+
+Important lexicographically smallest among topological orderings of all nodes, including isolated. If duplicate edges ignored. If self-loop? Edge (a,a) endpoint present, creates cycle. Should raise ValueError. Duplicate self-loop also cycle. If edge absent raise ValueError before cycle? Yes.
+
+Need no imports. To pick min available, maintain set of zero indegree nodes. Since no heapq, could do while available: min(available) O(n^2) okay unless large. Could implement without imports using sorted? sorted available each iteration O(n log n) or repeated min. Need deterministic. Could use list and pop min. But if no imports, min built-in. We can use a sorted list? But need efficient not specified. Maybe maintain available set and min. Simpler.
+
+Potential subtlety: lexicographically smallest topological order with all nodes sorted by string; Kahn with min available yields lexicographically smallest. Correct proof? Yes. But need ensure duplicate edges: build adjacency_set then indegree counts after unique. For each edge, if duplicate, add to set then indegree +=1 only when new? Could add endpoints then after build adjacency sets, indegree = count incoming? Let's design.
+
+function topological_order(nodes, edges):
+    if not isinstance? Not required but could validate? Could be safe but not necessary. Need no mutation. If nodes list has duplicates? says unique. We can still validate? Maybe if duplicates? We can check len(set(nodes)) != len(nodes): ValueError? But input guaranteed unique; adding check may be okay, but could be hidden tests? It says nodes

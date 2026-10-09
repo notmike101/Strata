@@ -1,0 +1,24 @@
+We need answer user wants implement topological_order(nodes, edges) in Python. Need return only complete function in Python code block. We need think through requirements.
+
+User: Request identifier... ignore. Read review archive... ignore? Need final only function.
+
+Requirements:
+- Implement topological_order(nodes, edges) in Python.
+- nodes list of unique strings; edges list of (before, after) pairs.
+- Return lexicographically smallest topological ordering.
+- Include isolated nodes.
+- ignore duplicate edges.
+- Raise ValueError for edge endpoint absent from nodes or a cycle.
+- Do not mutate either input.
+- Use no imports.
+- Return only complete function in a Python code block.
+
+Need provide code only in code block. Need ensure deterministic lex smallest. Standard Kahn with min-heap but no imports. Could use sorted list of available nodes each iteration? For deterministic lex smallest among all valid topological orders? Need lexicographically smallest sequence. For DAG, algorithm: repeatedly select smallest source (indegree 0) yields lexicographically smallest topological order? Yes for lex order of sequences (compare first differing element), choosing smallest available at each step is optimal. Need maintain indegree and adjacency sets to ignore duplicate edges and not mutate input.
+
+Need validate endpoints absent. Need cycle detection: after processing count < len(nodes) raise ValueError.
+
+Potential issue: edges endpoint absent from nodes. We can create set nodes_set. For each edge (before, after), check if both in nodes_set. If missing raise ValueError. Need ensure edge tuple unpacking maybe raises? We can assume list of pairs but robust? If malformed maybe TypeError? Not required. But can handle len.
+
+No mutation: create indeg = {node:0 for node in nodes}. adjacency = {node: set() for node in nodes}. For each edge, if not duplicate add to adj[before] and indeg[after]+=1. This doesn't mutate inputs. It mutates new sets/dicts.
+
+Need avoid hidden state deterministic. No imports: implement min extraction. Use available list of indegree zero. For lex smallest, use sorted(available) initially and at each iteration remove first? Could maintain sorted available list and insert new zero nodes sorted? Need ensure lex smallest. Simpler: available = sorted(n for n in nodes if indeg[n] == 0). While available: node = available.pop(0); append; decrement. If neighbor indeg becomes 0,

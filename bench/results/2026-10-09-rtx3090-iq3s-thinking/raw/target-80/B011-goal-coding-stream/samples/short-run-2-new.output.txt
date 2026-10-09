@@ -1,0 +1,19 @@
+We need answer user wants code only. Need implement function. Need ensure no imports. Let's analyze requirements.
+
+Implement topological_order(nodes, edges) in Python. nodes list of unique strings, edges list of (before, after) pairs. Return lexicographically smallest topological ordering, include isolated nodes, ignore duplicate edges. Raise ValueError for edge endpoint absent from nodes or a cycle. Do not mutate either input. Use no imports. Return only complete function in Python code block.
+
+Need produce final only code block. Need consider lexicographically smallest topological ordering among all topological sorts, with string node names compare default. Kahn's algorithm selecting smallest available node yields lexicographically smallest? For total lexicographic order of sequence, at each position pick smallest node that can appear next in some topological order. The set of available nodes (in-degree 0 in current graph) is exactly nodes that can be next; picking smallest yields lexicographically smallest sequence. Need duplicate edges ignored. Endpoint absent raise ValueError. Cycle detect. Input not mutated: don't modify nodes or edges. We can use sets/dicts lists. Avoid imports: no heapq. Need smallest available. Could sort available each iteration O(V^2 log V) fine unless constraints? Not specified. Implement simple with set and min. Need ignore duplicate edges. Need careful with duplicate edges: if duplicate edge, should not increment indegree multiple times. Use set of edges or adjacency set. Since edges can have arbitrary hashable strings; endpoints strings. Could first convert nodes to set. Validate nodes unique? Not necessary; input guaranteed unique but can still use set; if duplicate? Could preserve first? But unique. For cycle, after process len result != len(node_set) raise.
+
+Potential issue lexicographically smallest topological ordering includes isolated nodes: Kahn includes them when indegree 0.
+
+Implementation:
+def topological_order(nodes, edges):
+    node_set = set(nodes)
+    # maybe ensure all nodes strings? not needed
+    adj = {node: set() for node in node_set}
+    indegree = {node: 0 for node in node_set}
+    edge_set = set()
+    for before, after in edges:
+        if before not in node_set or after not in node_set:
+            raise ValueError(...)
+        if before == after? self-loop causes cycle? topological order no. Need detect cycle. Duplicate edges ignored. self-loop duplicate: add indegree once, but cycle

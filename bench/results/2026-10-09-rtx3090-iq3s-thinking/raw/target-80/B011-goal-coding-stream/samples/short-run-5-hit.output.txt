@@ -1,0 +1,13 @@
+We need answer user's request: Implement topological_order(nodes, edges) Python. Need return only complete function in Python code block. Need consider requirements: nodes list unique strings; edges list of (before, after). Return lexicographically smallest topological ordering, include isolated nodes, ignore duplicate edges. Raise ValueError for edge endpoint absent from nodes or a cycle. Do not mutate either input. Use no imports. Return only complete function in code block.
+
+Need produce final only code block. Need design function.
+
+Topological order lexicographically smallest: Usually use Kahn's algorithm with min-heap. But no imports, so cannot use heapq? They say use no imports. Could implement own min-selection using list and min each iteration, okay. Need not mutate inputs. Need ignore duplicate edges. Need check endpoints. Need cycle ValueError. Need include isolated nodes. Nodes unique strings but we should not rely? Could use set. Don't mutate input. Need maybe nodes could not be sorted? Return lexicographically smallest over all topological orderings. Kahn with choosing smallest available node at each step yields lexicographically smallest topological order for DAG (assuming nodes compared lexicographically). Need handle duplicate edges: if same edge repeated, indegree shouldn't double and adjacency shouldn't duplicate.
+
+Approaches:
+- validate edges endpoints: for each (u,v) in edges: if u not in nodes_set or v not in nodes_set: raise ValueError. Also maybe self-loop? A self-loop is cycle, should raise ValueError. With self-loop duplicate, indegree increments if using set edges. Need detect cycle.
+- Build adjacency dict and indegree dict from nodes. Use set for outgoing neighbors per node to ignore duplicates. But we can't mutate edges; creating sets ok. Since no imports. For each edge, add v to set u. After building, indegree[v] = number of unique incoming edges. Then compute available = [n for n in nodes if indegree[n]==0]. At each step select min available (lexicographically). Remove from available list. Decrement indegree for neighbors in adjacency[u], if zero append to available. Need ensure not mutate inputs. We mutate local structures and maybe available. That's fine. Need not mutate nodes list? If use sorted? We can copy. Need not mutate edges.
+
+Lexicographically smallest: choose min available each step. Need if cycle: if output length < len(nodes): raise ValueError.
+
+Need no imports. Need handle nodes empty? nodes

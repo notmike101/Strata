@@ -1,0 +1,15 @@
+We need answer user's request. Need implement function topological_order(nodes, edges) in Python. Return only complete function in Python code block. Need think details.
+
+Requirements:
+- nodes list unique strings; edges list of (before, after) pairs.
+- Return lexicographically smallest topological ordering.
+- Include isolated nodes.
+- Ignore duplicate edges.
+- Raise ValueError for edge endpoint absent from nodes or a cycle.
+- Do not mutate either input.
+- Use no imports.
+- Return only complete function in Python code block.
+
+Need produce only code block. Need ensure no imports. Lexicographically smallest topological ordering: for DAG with nodes strings, choose smallest available (in-degree zero) at each step. Need duplicate edges ignored: need adjacency sets and in-degree count unique predecessors? If duplicate edge before, after appears multiple times, in-degree should count once. Could build adj as set per node? Need no imports; can use dict of set. Input not mutated: don't modify nodes or edges. We can copy nodes to list, create adj dict from nodes. Need ensure duplicate edges not double counted. Validate endpoints in nodes. nodes unique but could use set for membership? Use nodes_set = set(nodes) does not mutate. But no imports, set built-in ok. If nodes not list? says list. Unique strings. Need cycle detection. Kahn's algorithm: if processed len < len(nodes) raise ValueError cycle.
+
+Potential nuance: lexicographically smallest topological ordering with strings: At each step choose min among zero in-degree. Since nodes unique strings, using list min. We can keep available list. Initial available = [n for n in nodes if indegree[n] == 0]? But nodes order may not be sorted; for lexicographic smallest need sorted initial and maintain sorted. Could use sorted(nodes) but need not sort all each step? We can maintain list and choose min each step O(n^2) fine. Or use heap but no imports (heapq import not allowed). Could manually min. If we set available = sorted([n for n...]) then min is first; after removing one, when adding new nodes we need insert in sorted order or append and sort each step. Simpler: available list, each step min_idx = min(range(len(available)), key=lambda x: available[x]) etc. Or maintain sorted by sorting each iteration? Could do available = sorted(...); at each step node = available.pop(0), then

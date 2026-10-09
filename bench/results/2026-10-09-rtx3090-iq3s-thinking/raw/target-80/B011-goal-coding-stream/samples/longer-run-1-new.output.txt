@@ -1,0 +1,28 @@
+We need answer user wants implement topological_order in Python, only complete function in code block. Need think. Need satisfy: return lexicographically smallest topological ordering, include isolated nodes, ignore duplicate edges. Raise ValueError for edge endpoint absent from nodes or cycle. Do not mutate inputs. No imports. Return only complete function in Python code block.
+
+Need design robust. Lexicographically smallest topological ordering among all valid topological orders for directed acyclic graph with node strings. Standard Kahn using min-heap gives lexicographically smallest if at each step choose smallest available node. But no imports? Could implement min by scanning available list since no imports. Need avoid mutating inputs: do not sort nodes in-place maybe create copy. edges ignore duplicates. Validate endpoints.
+
+Input nodes unique strings but maybe empty list? edges maybe list of pairs. Duplicate edges ignored. If edge endpoint absent raise ValueError. If cycle raise ValueError. Need include isolated nodes. Lexicographic comparison standard Python string ordering.
+
+Algorithm:
+def topological_order(nodes, edges):
+    # maybe validate nodes list? no mutation.
+    # create set of nodes
+    node_set = set(nodes)
+    # validate all nodes? unique assumed.
+    # adjacency dict: node -> set of successors, indegree dict.
+    indegree = {node:0 for node in nodes}
+    successors = {node:set() for node in nodes}
+    seen_edges=set()
+    for edge in edges: maybe ensure iterable pair. If not length 2? Not specified but could raise? Might use try unpack.
+        if len(edge)!=2: maybe TypeError? But not necessary. If edge endpoints absent raise ValueError.
+        before, after = edge
+        if before not in node_set or after not in node_set: raise ValueError
+        if before == after: self-loop cycle? Should raise ValueError. Duplicate edges ignored; if not seen add edge.
+        key = (before, after)
+        if key not in seen_edges:
+            seen_edges.add(key)
+            successors[before].add(after)
+            indegree[after] += 1
+    # initial available: all indegree 0. Need lexicographically smallest. Could sort list of node_set. Use sorted(nodes) returns new list. But if we repeatedly pop smallest from available via min scanning, can maintain sorted available list.
+    available = sorted(node_set) ? Need filter indegree zero. sorted(nodes) okay.

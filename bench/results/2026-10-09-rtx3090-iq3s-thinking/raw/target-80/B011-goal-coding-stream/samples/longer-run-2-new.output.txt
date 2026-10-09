@@ -1,0 +1,14 @@
+We need respond to user with complete function in Python code block only. Need satisfy: implement topological_order(nodes, edges). nodes list unique strings; edges list pairs. Return lexicographically smallest topological ordering, include isolated nodes, ignore duplicate edges. Raise ValueError for edge endpoint absent from nodes or cycle. Do not mutate either input. No imports. Return only complete function in Python code block.
+
+Need design deterministic lexicographically smallest topological order. Usually Kahn with min-heap but no imports. Need no imports, can implement custom min-heap or sort. Input lists, unique strings. edges list of pairs maybe any strings. Need duplicate edges ignored. Need no mutation. Could build indegree counts and adjacency sets/lists avoiding duplicates. Need endpoints validation: for each edge (before, after) ensure both in nodes set. If not raise. Duplicate edges ignored; if edge (a,b) duplicates, should not increase indegree multiple times. Also maybe self-loop edge (a,a) is cycle? Edge endpoints present; self-loop should raise cycle. Need detect cycle.
+
+Lexicographically smallest topological order among nodes. Standard: at each step choose smallest available node with indegree 0. Without imports, implement priority queue or sort available list each time. Need deterministic. We can use list available and select min each iteration. Complexity O(n^2) but okay? Could implement heap manually to be efficient but no imports allowed; can implement heappush/heappop ourselves. But simpler: available = sorted([n for n in nodes if indegree[n]==0]), then for each pop index 0; append. Decrement neighbors; if indegree zero insert into available in sorted position. Need maintain no duplicates in adjacency to avoid duplicate decrement issues. Could also use set adjacency. Need be careful not mutate input sets. Build node_set=set(nodes). For edges: ensure tuple of len 2? Maybe if invalid pair? Could raise ValueError? User only says edge endpoint absent; cycle. But robust: try unpack pair else raise ValueError. Need no mutation of input: if nodes contains lists? Strings only. Using sorted(nodes) maybe does not mutate original; set(nodes) okay.
+
+Lexicographically smallest topological ordering with duplicate edges ignored. Approach:
+
+def topological_order(nodes, edges):
+    node_set = set(nodes)
+    adjacency = {}
+    indegree = {node: 0 for node in nodes}
+    seen_edges = set()
+    for edge in edges:

@@ -1,0 +1,12 @@
+We need answer user wants only complete function in Python code block. Need produce final only code block. Need implement topological_order(nodes, edges). Requirements:
+- nodes unique strings; edges list pairs before, after.
+- Return lexicographically smallest topological ordering. Include isolated nodes.
+- Ignore duplicate edges.
+- Raise ValueError for edge endpoint absent from nodes or a cycle.
+- Do not mutate either input.
+- Use no imports.
+Need ensure deterministic. Lexicographically smallest among valid topo orders. Standard Kahn with min selection of zero indegree nodes. Need avoid mutation: don't mutate nodes/edges inputs. But can create copies / local structures. nodes list may contain unique strings. edges list pairs. Need validate edges endpoints present. Duplicate edges ignored. Need handle self-loop? Edge (x,x) endpoint present but cycle. Should raise ValueError. Duplicate self-loop ignored but still cycle. Need Kahn or DFS. For lexicographically smallest, at each step pick smallest available node. If use heap requires import heapq disallowed. Could sort nodes initially and repeatedly pick min from available set. Since no imports, can maintain sorted available list and remove index 0. Complexity O(V^2) fine. Or implement min via min(available) then remove. Need careful duplicate edges not affect indegree. Need create indegree dict for all nodes initially 0. adjacency dict with sets or sorted lists. To avoid mutating, make local. For each edge validate both endpoints in nodes_set. If not raise ValueError. For duplicates: if after in adj[before] skip; else add and indegree[after]+=1. self-loop: edge from x to x: if not duplicate, indegree[x]++; adj[x] includes x; then Kahn will not include if cycle. But for self-loop, zero indegree maybe? indegree[x] >0, no predecessor. It's cycle raise.
+Need ensure if edge endpoints absent but duplicate? validate all edges. Need nodes are unique? Assumed. If nodes empty and no edges return [].
+Lexicographically smallest: Kahn with always choosing min zero indegree. Is that sufficient? Yes for DAG lexicographically smallest topological order can be obtained by repeatedly choosing smallest available source.
+No hidden state? function pure.
+Potential issue input nodes list not sorted; available = [n for n in nodes if indegree[n]==0]; Need initial available sorted lexicographically. But if nodes order arbitrary, sort. Then while len(order)
