@@ -1,0 +1,13 @@
+We need answer user's request. Need produce final answer with complete code, tests, detailed explanation at least 1200 words. Need think fully.
+
+Task: Implement thread-safe Python TTLCache class using OrderedDict and monotonic clock. Include set, get, delete, clear, len, expiration, capacity eviction, unit tests with injected fake clock, detailed explanation of thread safety and complexity. Write complete code, then tests, then explain design. Do not abbreviate implementation. At least 1200 words.
+
+Need produce robust code. Let's design.
+
+TTLCache: thread-safe. Use OrderedDict. Need monotonic clock injected. Maybe constructor: maxsize, ttl, clock=None? Use time.monotonic default. Include _lock = threading.RLock? Since operations can call public methods? We can implement methods acquire lock. Need avoid deadlock if get calls expire? We'll keep internal methods under lock? If public methods acquire RLock and internal do not acquire again? Simpler: public set/get/delete/clear/len acquire lock, then call internal helpers no lock? But internal called only while holding lock. Use RLock okay. Need len thread-safe? len(self) via __len__ under lock? Could implement __len__ and len(). User requested len maybe __len__. Also maybe len method? We can implement __len__.
+
+Key points: expiration: entries store value and expiry timestamp. On get, if expired delete and return default. On set, cleanup expired entries perhaps, then insert. OrderedDict move_to_end on get hit for LRU? Need capacity eviction. If maxsize and len >= maxsize after removing expired, evict oldest (FIFO? TTLCache often LRU: OrderedDict move_to_end on access). Need define. Include capacity eviction: when inserting and full, pop first (oldest). If get access moves to end to make LRU. set updates existing refreshes TTL and moves to end. If new insert evicts least recently used.
+
+Need handle maxsize <=0. TTL: default ttl in constructor; set(key, value, ttl=None) if None use default; ttl=0 means immediate expire? For monotonic. Need handle negative? Maybe raise ValueError for maxsize? Could allow None no maxsize. But requested capacity eviction, so maxsize. For clarity maxsize int >0 or None. ttl can be float >=0. clock callable returns float.
+
+Potential issue: len after expiring: if we call __len__ just count

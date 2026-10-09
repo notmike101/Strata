@@ -1,0 +1,12 @@
+We need answer user's request. Need produce complete code, tests, explanation >=1200 words. Need think thoroughly.
+
+User: Implement thread-safe Python TTLCache class using OrderedDict and monotonic clock. Include set, get, delete, clear, len, expiration, capacity eviction, unit tests with injected fake clock, detailed explanation of thread safety and complexity. Write complete code, then tests, then explain design. Do not abbreviate implementation. Detailed answer at least 1200 words.
+
+Need craft final with code blocks. Need no abbreviations? Means don't ellipsize code. Need complete code. Use threading.Lock, collections.OrderedDict, time.monotonic maybe inject clock. TTLCache supports maxsize, ttl. Need thread-safe.
+
+Design considerations:
+- TTLCache using OrderedDict mapping key -> expiration time or store entry value and expiry? Could store values as tuple(value, expires_at). Or maintain key -> value, and expires_at separately? Need len and expiration. Use OrderedDict to maintain LRU? TTLCache typically evicts expired entries and least recently used when full. Use OrderedDict move_to_end for recency. On get if expired delete and return default. On set remove expired entries? Since using monotonic clock and TTL. Thread-safe with reentrant lock? Need ensure no race. Could use threading.Lock. If operations nested? Could use RLock. Use single lock for all public methods. Use internal helpers without lock.
+
+API:
+class TTLCache:
+    def __init__(self, maxsize, ttl, clock=time.monotonic, default=None? maybe sentinel?). Could also use sentinel default. For get(key, default=None). But if key expired return default. set(key, value, ttl=None)? Could allow per-key ttl override. But user didn't request. Include set(key, value, ttl=None). If ttl <= 0? Need decide: If ttl <= 0 immediate expiration. Use now = clock(); expires_at = now + ttl. If ttl is None use self._ttl. If ttl <= 0, not store maybe delete key? But expiration should remove when get/len. We can store expired. For maxsize <=0 maybe no store? Better raise ValueError for maxsize <=0 and ttl<0? Need complete. For maxsize=0 maybe no entries. Let's allow maxsize >= 0, ttl >= 0. If ttl ==0, set stores? It will expire at now; len after set? If not

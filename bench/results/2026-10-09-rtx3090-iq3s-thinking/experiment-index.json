@@ -929,6 +929,54 @@
   },
   {
     "campaign": "target-80",
+    "arm": "P005-stage-thermal",
+    "workload": "longer",
+    "runs": 10,
+    "decode_median": 85.35,
+    "decode_min": 80.1,
+    "decode_max": 87.9,
+    "e2e_median": 42.20889722840353,
+    "stream_total_median": 42.21430017486111,
+    "ttft_median_seconds": 6.152154950003023,
+    "raw_decode": [
+      85.7,
+      86.8,
+      85.9,
+      80.1,
+      80.5,
+      85.9,
+      82.4,
+      85.0,
+      87.9,
+      83.0
+    ]
+  },
+  {
+    "campaign": "target-80",
+    "arm": "P005-stage-thermal",
+    "workload": "short",
+    "runs": 10,
+    "decode_median": 87.55,
+    "decode_min": 81.9,
+    "decode_max": 89.3,
+    "e2e_median": 76.52595012386806,
+    "stream_total_median": 76.54047060600041,
+    "ttft_median_seconds": 0.8751786000066204,
+    "raw_decode": [
+      88.0,
+      88.6,
+      87.1,
+      88.4,
+      86.7,
+      86.1,
+      84.9,
+      89.0,
+      89.3,
+      81.9
+    ]
+  },
+  {
+    "campaign": "target-80",
     "arm": "R001-host-last",
     "workload": "longer",
     "runs": 3,
@@ -1435,6 +1483,146 @@
       18.7,
       31.0,
       85.3
+    ]
+  },
+  {
+    "campaign": "target-80",
+    "arm": "R022-tasks60-host-last",
+    "workload": "longer",
+    "runs": 3,
+    "decode_median": 84.0,
+    "decode_min": 81.6,
+    "decode_max": 85.6,
+    "e2e_median": 41.89778985064054,
+    "stream_total_median": 41.903590069644395,
+    "ttft_median_seconds": 6.143140900006983,
+    "raw_decode": [
+      81.6,
+      85.6,
+      84.0
+    ]
+  },
+  {
+    "campaign": "target-80",
+    "arm": "R022-tasks60-host-last",
+    "workload": "short",
+    "runs": 3,
+    "decode_median": 86.1,
+    "decode_min": 83.4,
+    "decode_max": 88.5,
+    "e2e_median": 74.30590376360462,
+    "stream_total_median": 74.31858997644163,
+    "ttft_median_seconds": 0.8683282000129111,
+    "raw_decode": [
+      83.4,
+      88.5,
+      86.1
+    ]
+  },
+  {
+    "campaign": "target-80",
+    "arm": "R023-workers8-tasks30",
+    "workload": "longer",
+    "runs": 3,
+    "decode_median": 82.6,
+    "decode_min": 76.8,
+    "decode_max": 83.6,
+    "e2e_median": 41.47308879715794,
+    "stream_total_median": 41.47629862433442,
+    "ttft_median_seconds": 6.172112600004766,
+    "raw_decode": [
+      83.6,
+      82.6,
+      76.8
+    ]
+  },
+  {
+    "campaign": "target-80",
+    "arm": "R023-workers8-tasks30",
+    "workload": "short",
+    "runs": 3,
+    "decode_median": 85.7,
+    "decode_min": 84.6,
+    "decode_max": 85.9,
+    "e2e_median": 74.62280322760937,
+    "stream_total_median": 74.77762638233268,
+    "ttft_median_seconds": 0.9122759999881964,
+    "raw_decode": [
+      84.6,
+      85.9,
+      85.7
+    ]
+  },
+  {
+    "campaign": "target-80",
+    "arm": "R024-adapt-every8",
+    "workload": "longer",
+    "runs": 3,
+    "decode_median": 84.9,
+    "decode_min": 84.5,
+    "decode_max": 85.2,
+    "e2e_median": 42.0647623329554,
+    "stream_total_median": 42.06928423287059,
+    "ttft_median_seconds": 6.153988100006245,
+    "raw_decode": [
+      85.2,
+      84.9,
+      84.5
+    ]
+  },
+  {
+    "campaign": "target-80",
+    "arm": "R024-adapt-every8",
+    "workload": "short",
+    "runs": 3,
+    "decode_median": 87.4,
+    "decode_min": 86.6,
+    "decode_max": 89.5,
+    "e2e_median": 76.26099491396147,
+    "stream_total_median": 76.2722918435001,
+    "ttft_median_seconds": 0.8822043999971356,
+    "raw_decode": [
+      86.6,
+      87.4,
+      89.5
+    ]
+  },
+  {
+    "campaign": "target-80",
+    "arm": "R025-reserve1100",
+    "workload": "longer",
+    "runs": 5,
+    "decode_median": 26.4,
+    "decode_min": 12.5,
+    "decode_max": 80.3,
+    "e2e_median": 19.987000486103867,
+    "stream_total_median": 19.98817722740967,
+    "ttft_median_seconds": 6.576866400020663,
+    "raw_decode": [
+      26.4,
+      17.2,
+      12.5,
+      40.7,
+      80.3
+    ]
+  },
+  {
+    "campaign": "target-80",
+    "arm": "R025-reserve1100",
+    "workload": "short",
+    "runs": 5,
+    "decode_median": 86.2,
+    "decode_min": 83.3,
+    "decode_max": 88.3,
+    "e2e_median": 75.74315201299385,
+    "stream_total_median": 75.75358878565535,
+    "ttft_median_seconds": 0.8689987999969162,
+    "raw_decode": [
+      86.2,
+      87.6,
+      83.3,
+      86.0,
+      88.3
     ]
   }
 ]

@@ -1,0 +1,43 @@
+iq_avx2_parity: Intel(R) Core(TM) i9-10900KF CPU @ 3.70GHz (avx2 1, avx512 0), CPU 2, core type 00h
+  STRATA_IQ256_GATHER 1, STRATA_NO_AVXVNNI -, STRATA_IQ_MT_MIN 1, STRATA_IQ_PREFETCH 2048
+  variants this CPU runs: gather; this thread's: gather
+
+iq2_s/iq4_nl: 136 experts of 1.88 MB (256 MB), one thread
+  1 token ms per expert, median of 5 (min): gate/up, down, total
+    kernels        0.243 (0.233)    0.097 (0.095)    0.340 (0.327)
+    ggml           0.301 (0.298)    0.102 (0.101)    0.403 (0.399)
+    engine         0.240 (0.234)    0.096 (0.093)    0.336 (0.327)
+  2 tokens ms per expert, median of 5 (min): gate/up, down, total
+    kernels        0.313 (0.303)    0.139 (0.136)    0.452 (0.439)
+    ggml           0.606 (0.589)    0.187 (0.183)    0.793 (0.771)
+    engine         0.314 (0.303)    0.139 (0.135)    0.453 (0.438)
+
+iq3_xxs/iq4_nl: 123 experts of 2.08 MB (255 MB), one thread
+  1 token ms per expert, median of 5 (min): gate/up, down, total
+    kernels        0.296 (0.288)    0.094 (0.092)    0.390 (0.380)
+    ggml           0.360 (0.356)    0.101 (0.099)    0.461 (0.454)
+    engine         0.290 (0.287)    0.093 (0.091)    0.382 (0.378)
+  2 tokens ms per expert, median of 5 (min): gate/up, down, total
+    kernels        0.331 (0.323)    0.134 (0.131)    0.466 (0.454)
+    ggml           0.719 (0.687)    0.182 (0.178)    0.901 (0.865)
+    engine         0.323 (0.321)    0.132 (0.131)    0.455 (0.452)
+
+iq3_s/iq4_nl: 115 experts of 2.22 MB (255 MB), one thread
+  1 token ms per expert, median of 5 (min): gate/up, down, total
+    kernels        0.333 (0.322)    0.095 (0.092)    0.428 (0.414)
+    ggml           0.562 (0.553)    0.101 (0.100)    0.664 (0.653)
+    engine         0.326 (0.323)    0.093 (0.092)    0.419 (0.415)
+  2 tokens ms per expert, median of 5 (min): gate/up, down, total
+    kernels        0.413 (0.395)    0.136 (0.131)    0.550 (0.526)
+    ggml           1.103 (1.081)    0.181 (0.177)    1.284 (1.258)
+    engine         0.396 (0.393)    0.132 (0.131)    0.528 (0.524)
+
+iq4_xs/iq4_nl: 100 experts of 2.54 MB (254 MB), one thread
+  1 token ms per expert, median of 5 (min): gate/up, down, total
+    kernels        0.269 (0.258)    0.096 (0.091)    0.364 (0.350)
+    ggml           0.222 (0.215)    0.101 (0.099)    0.323 (0.315)
+    engine         0.259 (0.257)    0.092 (0.091)    0.350 (0.349)
+  2 tokens ms per expert, median of 5 (min): gate/up, down, total
+    kernels        0.315 (0.311)    0.135 (0.133)    0.449 (0.444)
+    ggml           0.394 (0.384)    0.178 (0.175)    0.571 (0.561)
+    engine         0.313 (0.304)    0.135 (0.130)    0.447 (0.434)

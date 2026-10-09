@@ -1,0 +1,32 @@
+{
+  "exe_sha256": "690a0732a08b35982cede79453e5cab42d0e7cd5c9dcf896560c416d9b377ad7",
+  "args": [
+    "<STRATA_ROOT>\\local-setup\\target-80\\build-cuda86\\iq_avx2_parity.exe",
+    "--bench",
+    "--dispatch",
+    "--cpu",
+    "2",
+    "--nt",
+    "1,2",
+    "--mb",
+    "256",
+    "--reps",
+    "5",
+    "--pairs",
+    "iq2_s/iq4_nl,iq3_xxs/iq4_nl,iq3_s/iq4_nl,iq4_xs/iq4_nl"
+  ],
+  "env": {
+    "STRATA_IQ256_GATHER": "1",
+    "STRATA_IQ_MT_MIN": "1",
+    "STRATA_IQ256_GATHER_IQ2_S": "0",
+    "STRATA_ADAPT_LAG": "2"
+  },
+  "order": [
+    2048,
+    0,
+    4096,
+    1024,
+    2048
+  ],
+  "note": "Synthetic expert blocks, CPU diagnostic only; no served throughput or quality claim."
+}

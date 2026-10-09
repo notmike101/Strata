@@ -1,0 +1,25 @@
+We need answer user's request. Need produce final answer with complete code, tests, explanation at least 1200 words. Need implement thread-safe Python TTLCache using OrderedDict and monotonic clock. Include set,get,delete,clear,len, expiration, capacity eviction, unit tests injected fake clock, detailed explanation thread safety and complexity. Do not abbreviate implementation. Also user gave many existing cache rules; likely ignore? They say read existing design requirements before implementing the cache, list rules 0-63. Need maybe incorporate? Benchmark identifier ignore. Could be noise. Need maybe ensure class supports lifetime and size? Existing cache rules specify lifetime and size per key. Maybe design should support per-entry lifetime and maybe capacity based on bytes? Requirement says capacity eviction. Existing rules have size 64 bytes incrementing by 3. Need implement perhaps cache rule metadata? The request: Implement a thread-safe Python TTLCache class using OrderedDict and monotonic clock. Include set,get,delete,clear,len, expiration, capacity eviction, unit tests with injected fake clock, detailed explanation. Write complete code, then tests, then explain design. At least 1200 words. Existing cache rules: maybe they expect we read requirements and implement generic TTLCache not specifically prepopulated? Could mention that rules define existing entries; the cache can be initialized from these rules? Maybe include a helper to load initial rules? Need decide.
+
+Need produce code with no abbreviations. Include unit tests maybe using unittest, fake clock. Could implement:
+
+import threading, time
+from collections import OrderedDict
+from typing import Optional, Any, Hashable
+
+class FakeClock:
+    def __init__(self, now=0.0): self._now=now
+    def now(self): return self._now
+    def advance(self, seconds): self._now += seconds
+
+class Clock:
+   def now(self): return time.monotonic()
+
+class TTLCache:
+    def __init__(self, capacity=128, default_ttl=30.0, clock=None, max_size_bytes=None):
+        self._capacity = max(0,int(capacity))
+        self._default_ttl=float(default_ttl)
+        self._clock = clock or Clock()
+        self._data = OrderedDict() # key -> (value, expires_at, size)
+        self._size_bytes=0
+        self._lock=threading.RLock()
+        self._expiration_lock? Maybe use RLock. Need avoid

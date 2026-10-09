@@ -1,0 +1,20 @@
+{
+  "started_utc": "2026-10-09T18:31:29.013114+00:00",
+  "before": [
+    {
+      "index": 0,
+      "policy": 0,
+      "target": 30
+    },
+    {
+      "index": 1,
+      "policy": 0,
+      "target": 30
+    }
+  ],
+  "requested_percent": 100,
+  "applied": [],
+  "restored": [],
+  "finished_utc": "2026-10-09T18:31:29.013199+00:00",
+  "outcome": "Not run: first fan-setting API returned NVML_ERROR_NO_PERMISSION (4). No fan changed; no throughput request sent."
+}

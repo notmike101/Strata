@@ -1,0 +1,17 @@
+We need answer user's request. Need produce final answer at least 1200 words, complete code, tests, explanation. Need implement thread-safe Python TTLCache using OrderedDict and monotonic clock. Include set, get, delete, clear, len, expiration, capacity eviction, unit tests with injected fake clock, detailed explanation thread safety and complexity. Ignore benchmark identifier. Need likely no abbreviation. Need careful code. Need maybe include context manager? Ensure thread safety with RLock? OrderedDict not thread-safe. Use lock. TTLCache with capacity, ttl, clock callable. Methods: set(key, value, ttl=None), get(key, default=None), delete(key), clear(), __len__, maybe items? Need expiration: lazy eviction on get/set/len? Need capacity eviction: LRU? Using OrderedDict move_to_end on access. Monotonic clock. Fake clock for tests. Need maybe maxsize None? capacity positive int. ttl non-negative. Use deque? OrderedDict enough.
+
+Need consider thread safety details: lock guards all public ops. But monotonic clock called while lock? Could use clock while lock. Avoid deadlocks? no nested locks. Use contextlib? Could expose context manager? Maybe not.
+
+Need tests: unittest or pytest? Complete. FakeClock with time attribute, advance. Use injected clock. Tests for basic get/set, expiration, capacity eviction LRU, delete, clear, len expiration, thread safety maybe simple concurrent test? Unit tests with fake clock. Could include concurrency stress with threading for deterministic? Need maybe demonstrate thread-safe with lock: set/get concurrently, len not negative. Could test no exceptions, correct count. But concurrency timing flaky? We can do deterministic interleaving using barrier? But with fake clock and lock. Could test concurrent set unique keys count equals. Also concurrent get/expire. Need be robust.
+
+Need ensure code length enough. Could implement with __setitem__, __getitem__? User asks set, get, delete, clear, len, expiration, capacity eviction. Use methods.
+
+Potential code:
+from collections import OrderedDict
+import threading
+from typing import Any, Optional, Callable
+
+class TTLCache:
+    def __init__(self, capacity=1024, ttl=60.0, *, clock=None, lock=None):
+        if capacity <=0 ...; ttl <0 ...
+        self._capacity=capacity; self._default_ttl=float(ttl); self._clock=clock or time.monotonic; self._lock=lock or

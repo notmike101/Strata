@@ -1,0 +1,12 @@
+We need answer user's request. Need produce complete code, tests, explanation >=1200 words. Need think in English because user English. Need design thread-safe TTLCache Python using OrderedDict monotonic clock, injected fake clock for tests. Need not abbreviate implementation. Must include set, get, delete, clear, len, expiration, capacity eviction, unit tests with fake clock, detailed explanation thread safety and complexity.
+
+Need likely provide code only? User says write complete code, then tests, then explain design. Need at least 1200 words total. Could use sections. Ensure implementation robust.
+
+Consider TTLCache:
+- thread-safe: use threading.Lock (or RLock). Need careful with OrderedDict, capacity, expiration.
+- monotonic clock: time.monotonic.
+- class TTLCache:
+    def __init__(self, capacity, ttl, clock=None):
+       if capacity <=0: maybe ValueError? or allow maxsize None? But requirement capacity eviction. Let's support capacity positive int, ttl non-negative float. clock callable returns monotonic seconds. Use OrderedDict for insertion order. Internal mapping key -> (value, expiry). But OrderedDict stores key->value? To avoid double storage and for len, OrderedDict[key] = entry tuple. Entry maybe (value, expires_at). Need update move_to_end on set and get? TTL cache with capacity eviction LRU? OrderedDict insertion order. If capacity full evict oldest inserted. Could also move_to_end on access for LRU. Requirement doesn't specify LRU or FIFO. OrderedDict and capacity eviction commonly evict oldest insertion (FIFO). get with expiration returns value or None. On set if existing update ttl. If capacity full evict oldest. Also purge expired before get/set/len? For correctness len should not count expired entries. But len O(n) if purge all. Could implement purge_all() O(n) to clean expired, and len triggers purge_all? Complexity: len O(n) worst-case. Could maintain heap for O(1) amortized? But user asks OrderedDict and monotonic clock; len could be O(1) but expired stale not removed until accessed. Need mention. Unit tests with fake clock.
+
+Need thread safety: lock around all public methods. Avoid lock during clock calls? clock should be thread-safe? We can call clock within lock but fake clock simple. If user clock blocks? Could call before acquiring? Need consistency. Use internal _now() = self._clock(). Could call outside lock
