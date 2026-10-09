@@ -72,10 +72,11 @@ The 80 tok/s target is **server decode TPS**, ordinary median of all qualifying 
 | target-80 R001 host-core last, three runs | 61.1 | 59.5 | 54.63 | 32.55 | Not promoted; environment discrepancy |
 | target-80 B002 restored control, three runs | 62.8 | 60.4 | 56.32 | 32.82 | Control failed to recover; investigate |
 | target-80 B003 quiet control, three runs | 63.1 | 58.0 | 56.39 | 32.17 | Profiler-agent cleanup did not restore baseline |
+| target-80 B004 recovery control, three runs | 73.7 | 71.4 | 65.38 | 37.98 | Prior performance range recovered; cause of transient slowdown unresolved |
 
 Rates are tok/s; ordinary medians. `experiment-index.json` contains every completed workload's raw seed rates, medians, spread, E2E, streaming total and TTFT. `all-runs.csv` includes warmups. The raw JSON files preserve full timing fields and draft counters.
 
-**Unresolved:** after Nsight profiling, the restored unmodified configuration also measures substantially below B001. Therefore the entire drop in R001 cannot be attributed to moving the host thread. R001 is not a valid demonstration of a 19% placement regression. It is slightly slower than the subsequent three-run control, but promotion is suspended until the environment discrepancy is reproduced and explained. The current serving config has been restored to the original control. B003 reproduced the slowdown after exact cleanup of a leftover profiler agent; the cause remains unresolved.
+**Unresolved:** after Nsight profiling, the restored unmodified configuration also measures substantially below B001. Therefore the entire drop in R001 cannot be attributed to moving the host thread. R001 is not a valid demonstration of a 19% placement regression. It is slightly slower than the subsequent three-run control, but promotion is suspended until the environment discrepancy is reproduced and explained. The current serving config has been restored to the original control. B003 reproduced the slowdown after exact cleanup of a leftover profiler agent; the cause remains unresolved. A later uninstrumented B004 control recovered to73.7/71.4 without a tuning change, so the low-throughput controls must not be used to inflate subsequent improvement claims.
 
 ## Evidence layout and reproduction
 
