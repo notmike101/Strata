@@ -277,6 +277,16 @@ RTX 5070, against ~3 tokens/s before these changes.
   `STRATA_KEEP_EMPTY_TURNS=1` and `STRATA_TOPK_STREAM=0` in [TROUBLESHOOTING.md](TROUBLESHOOTING.md).
 
 
+**Per-format AVX2 gather overrides (opt-in):** `STRATA_IQ256_GATHER_IQ3_XXS=0/1`,
+`STRATA_IQ256_GATHER_IQ3_S=0/1` and `STRATA_IQ256_GATHER_IQ2_S=0/1` override the gather choice for that
+weight format only. Unset, empty or invalid values inherit `STRATA_IQ256_GATHER` or its automatic per-core
+choice. Settings are read on first use; restart the engine after changing them. They select existing kernels
+with the same output bits and do not change AVX-VNNI selection, weights, routing or sampling. Defaults are unchanged.
+Mixed-format packs can benefit from different choices: on an i9-10900KF, a five-repeat, 256 MiB single-thread
+microbenchmark measured IQ2_S/IQ4_NL one-token experts at 0.332 ms scalar versus 0.448 ms gathered, while
+IQ3_XXS/IQ4_NL measured 0.414 versus 0.380 ms. These are kernel diagnostics, not served token rates or a
+recommendation for other CPUs. Benchmark the actual model before selecting overrides.
+
 **Read-ahead at start (Linux):** the weights, the native dense matrices, the GPU cache's fill from the profile, the
 resident RAM copy and the MTP draft files are asked for ahead of their reads (madvise / posix_fadvise WILLNEED in
 128 KiB steps), so the drive sees a deep queue instead of one page fault at a time. Measured on a Gen3 NVMe (RTX 5090,

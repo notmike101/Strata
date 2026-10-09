@@ -23,8 +23,11 @@ void iq256_rows(int ggml_type, const uint8_t* w, size_t row_bytes, int n, const 
 /// kIq256Vnni: AVX-VNNI's vpdpwssd / vpdpbusd, every format and iq4nl256_down_rows (cpu_avxvnni_ok).
 inline constexpr int kIq256Gather = 1;
 inline constexpr int kIq256Vnni = 2;
-/// The variant iq256_gu_rows / iq256_rows take on the calling thread.
+/// The legacy global/core variant on the calling thread, before per-format overrides.
 int iq256_variant() noexcept;
+/// Variant used by iq256_gu_rows / iq256_rows. STRATA_IQ256_GATHER_IQ3_XXS,
+/// STRATA_IQ256_GATHER_IQ3_S or STRATA_IQ256_GATHER_IQ2_S=0/1 overrides only that format's gather bit.
+int iq256_variant_for(int ggml_type) noexcept;
 /// Every variant bit this build and this CPU can run (tests and benches).
 int iq256_variants() noexcept;
 /// iq256_gu_rows / iq256_rows in a given variant (tests and benches; only bits of iq256_variants()).
