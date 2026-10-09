@@ -1,0 +1,41 @@
+{
+  "response": {
+    "id": "chatcmpl-fb53d2e57976484fb72deac8",
+    "object": "chat.completion",
+    "created": 1791566243,
+    "model": "qwen3.8-flash-next-iq3_s",
+    "choices": [
+      {
+        "index": 0,
+        "message": {
+          "role": "assistant",
+          "content": "CALIBRATION_OK",
+          "reasoning_content": "We need to respond to user: \"Reply with exactly CALIBRATION_OK and nothing else. Do not use any tools.\" Need final exactly CALIBRATION_OK. Ensure no extra.\n"
+        },
+        "finish_reason": "stop"
+      }
+    ],
+    "usage": {
+      "prompt_tokens": 69,
+      "completion_tokens": 45,
+      "total_tokens": 114,
+      "prompt_tokens_details": {
+        "cached_tokens": 0
+      }
+    },
+    "timings": {
+      "cache_n": 0,
+      "prompt_n": 69,
+      "prompt_ms": 910.9,
+      "prompt_per_token_ms": 13.201,
+      "prompt_per_second": 75.7,
+      "predicted_n": 45,
+      "predicted_ms": 558.3,
+      "predicted_per_token_ms": 12.407,
+      "predicted_per_second": 80.6,
+      "draft_n": 33,
+      "draft_n_accepted": 32
+    }
+  },
+  "wall_seconds": 1.4741143999854103
+}

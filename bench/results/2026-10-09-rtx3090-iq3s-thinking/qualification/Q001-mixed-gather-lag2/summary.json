@@ -1,0 +1,34 @@
+{
+  "passed": true,
+  "code_tests": [
+    {
+      "seed": 101,
+      "code_pass": true
+    },
+    {
+      "seed": 102,
+      "code_pass": true
+    },
+    {
+      "seed": 103,
+      "code_pass": true
+    },
+    {
+      "seed": 104,
+      "code_pass": true
+    },
+    {
+      "seed": 105,
+      "code_pass": true
+    }
+  ],
+  "health": {
+    "status": "ok",
+    "max_context": 262144,
+    "model": "qwen3.8-flash-next-iq3_s",
+    "images": true,
+    "api_key": false,
+    "loaded": true,
+    "service": "strata"
+  }
+}

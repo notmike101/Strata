@@ -1,0 +1,106 @@
+{
+  "request": {
+    "model": "qwen3.8-flash-next-iq3_s",
+    "messages": [
+      {
+        "role": "user",
+        "content": "Use lookup_ticket to look up ticket TASK-105. After the tool returns, reply with only its status string."
+      },
+      {
+        "role": "assistant",
+        "content": null,
+        "reasoning_content": "We need to respond by calling tool lookup_ticket with ticket_id TASK-105. Then after tool returns, reply with only its status string. Need use analysis? final only status string. Let's call.\n",
+        "tool_calls": [
+          {
+            "id": "call_d1b420b48a964ab19610a3be",
+            "type": "function",
+            "function": {
+              "name": "lookup_ticket",
+              "arguments": "{\"ticket_id\":\"TASK-105\"}"
+            }
+          }
+        ]
+      },
+      {
+        "role": "tool",
+        "tool_call_id": "call_d1b420b48a964ab19610a3be",
+        "content": "{\"status\": \"READY_FOR_REVIEW\"}"
+      }
+    ],
+    "max_tokens": 2048,
+    "seed": 105,
+    "temperature": 1.0,
+    "top_p": 0.95,
+    "top_k": 20,
+    "min_p": 0.0,
+    "presence_penalty": 0.0,
+    "repetition_penalty": 1.0,
+    "frequency_penalty": 0.0,
+    "reasoning_effort": "high",
+    "reasoning_budget_tokens": 0,
+    "chat_template_kwargs": {
+      "enable_thinking": true,
+      "preserve_thinking": true
+    },
+    "tools": [
+      {
+        "type": "function",
+        "function": {
+          "name": "lookup_ticket",
+          "description": "Look up the current status of a ticket.",
+          "parameters": {
+            "type": "object",
+            "properties": {
+              "ticket_id": {
+                "type": "string"
+              }
+            },
+            "required": [
+              "ticket_id"
+            ],
+            "additionalProperties": false
+          }
+        }
+      }
+    ]
+  },
+  "response": {
+    "id": "chatcmpl-f51688ce1e7c4fbb8c1a2bd8",
+    "object": "chat.completion",
+    "created": 1791567049,
+    "model": "qwen3.8-flash-next-iq3_s",
+    "choices": [
+      {
+        "index": 0,
+        "message": {
+          "role": "assistant",
+          "content": "READY_FOR_REVIEW",
+          "reasoning_content": "We need final only status string: READY_FOR_REVIEW. Ensure no extra.\n"
+        },
+        "finish_reason": "stop"
+      }
+    ],
+    "usage": {
+      "prompt_tokens": 433,
+      "completion_tokens": 24,
+      "total_tokens": 457,
+      "prompt_tokens_details": {
+        "cached_tokens": 409
+      }
+    },
+    "timings": {
+      "cache_n": 409,
+      "prompt_n": 24,
+      "prompt_ms": 168.8,
+      "prompt_per_token_ms": 7.033,
+      "prompt_per_second": 142.2,
+      "predicted_n": 24,
+      "predicted_ms": 219.0,
+      "predicted_per_token_ms": 9.125,
+      "predicted_per_second": 109.6,
+      "draft_n": 23,
+      "draft_n_accepted": 16
+    }
+  },
+  "wall_seconds": 0.39291910000611097
+}

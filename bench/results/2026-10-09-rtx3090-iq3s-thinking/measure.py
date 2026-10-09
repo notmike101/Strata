@@ -18,6 +18,7 @@ parser.add_argument('--config', required=True)
 parser.add_argument('--root', type=Path, required=True)
 parser.add_argument('--base-url', required=True)
 parser.add_argument('--runs', type=int, default=5)
+parser.add_argument('--reverse-order', action='store_true', help='Run longer before short; payloads and seeds are unchanged')
 parser.add_argument('--git-helper', type=Path, default=Path.home() / 'github-agent/identity.mjs')
 parser.add_argument('--tune', default='{}')
 parser.add_argument('--sweep', action='store_true')
@@ -124,6 +125,7 @@ manifest = {
                  'cache_state': 'Unique opening nonce per request; actual cache_n reported',
                  'warmup': 'One request per workload, excluded from measured results',
                  'measured_runs_per_workload': args.runs, 'model_loading_included': False,
+                 'workload_order': ['longer', 'short'] if args.reverse_order else ['short', 'longer'],
                  'vision': 'Remains loaded; requests are text only',
                  'network': 'Client is this PC, connecting through its LAN IP; remote-device latency is not measured'}}
 save('identity.json', manifest)
@@ -137,7 +139,7 @@ REFERENCE = '\n'.join(
     'expiration must remove stale entries, and access must update least-recently-used order.'
     for i in range(64))
 rows = []
-for workload in ['short', 'longer']:
+for workload in (['longer', 'short'] if args.reverse_order else ['short', 'longer']):
     for run, arm_name, arm_tune in [(r,name,tune) for r in range(args.runs+1) for name,tune in (ARMS if r%2==0 else ARMS[::-1])]:
         base_label = f'{workload}-' + ('warmup' if run == 0 else f'run-{run}')
         label = base_label + ('-'+arm_name if args.sweep else '')
@@ -165,6 +167,7 @@ for workload in ['short', 'longer']:
         if KEY:
             headers['Authorization'] = 'Bearer ' + KEY
         req = Request(BASE + '/v1/chat/completions', data=json.dumps(payload).encode(), headers=headers)
+        started_utc = datetime.now(timezone.utc).isoformat()
         started = time.perf_counter()
         first = last_token = None
         chunks = []
@@ -193,7 +196,7 @@ for workload in ['short', 'longer']:
         assert final and first and final.get('timings'), 'Missing measured timing fields'
         t = final['timings']
         n = final['usage']['completion_tokens']
-        row = {'label':label, 'workload':workload_key, 'warmup':run == 0,
+        row = {'label':label, 'workload':workload_key, 'warmup':run == 0, 'request_started_utc':started_utc,
                'prompt_tokens':final['usage']['prompt_tokens'], 'fresh_prompt_tokens':t['prompt_n'],
                'cached_tokens':t['cache_n'], 'completion_tokens':n,
                'server_decode_tps':t['predicted_per_second'], 'prompt_tps':t['prompt_per_second'],

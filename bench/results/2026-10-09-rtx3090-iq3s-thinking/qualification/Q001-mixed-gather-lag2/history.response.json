@@ -1,0 +1,41 @@
+{
+  "response": {
+    "id": "chatcmpl-ebcb6474345649498e7e7e35",
+    "object": "chat.completion",
+    "created": 1791566261,
+    "model": "qwen3.8-flash-next-iq3_s",
+    "choices": [
+      {
+        "index": 0,
+        "message": {
+          "role": "assistant",
+          "content": "LATEST_OK",
+          "reasoning_content": "We need to respond to user: \"Ignore the archived item counts. Reply with exactly LATEST_OK.\" Need final exactly LATEST_OK. No extra. Ensure no analysis.\n"
+        },
+        "finish_reason": "stop"
+      }
+    ],
+    "usage": {
+      "prompt_tokens": 615,
+      "completion_tokens": 42,
+      "total_tokens": 657,
+      "prompt_tokens_details": {
+        "cached_tokens": 0
+      }
+    },
+    "timings": {
+      "cache_n": 0,
+      "prompt_n": 615,
+      "prompt_ms": 1825.6,
+      "prompt_per_token_ms": 2.968,
+      "prompt_per_second": 336.9,
+      "predicted_n": 42,
+      "predicted_ms": 512.6,
+      "predicted_per_token_ms": 12.205,
+      "predicted_per_second": 81.9,
+      "draft_n": 29,
+      "draft_n_accepted": 25
+    }
+  },
+  "wall_seconds": 2.344761299988022
+}

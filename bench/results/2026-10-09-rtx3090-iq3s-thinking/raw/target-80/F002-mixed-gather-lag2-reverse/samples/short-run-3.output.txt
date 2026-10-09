@@ -1,0 +1,13 @@
+We need answer user's request. Need produce final detailed answer at least 1200 words. Need implement thread-safe Python TTLCache using OrderedDict and monotonic clock. Include set, get, delete, clear, len, expiration, capacity eviction, unit tests with injected fake clock, detailed explanation thread safety complexity. Complete code, tests, explanation. Do not abbreviate implementation. Also mentions Benchmark identifier ignore. Need likely include code blocks. Need ensure at least 1200 words. Need think through design.
+
+Need code robust: TTLCache class with maxsize, ttl. Uses OrderedDict for LRU? OrderedDict and monotonic clock. Thread-safe with RLock? Use threading.RLock to protect. Injected fake clock: allow clock callable. Methods: set(key, value, ttl=None) maybe ttl per key, default. get(key, default=None) returns None? Delete maybe returns bool or raises? Need include expiration: purge expired entries maybe internal, on access, set. Len: number of live entries. Capacity eviction: when maxsize exceeded, popitem(last=False) maybe least-recently used? For TTL maybe evict expired first then LRU? User says using OrderedDict and monotonic clock; capacity eviction. We can implement TTLCache with TTL expiration and capacity eviction. OrderedDict for insertion order or LRU if move_to_end on get. Need choose. For capacity eviction maybe LRU: OrderedDict with move_to_end. Expiration can be by per-key expires_at. On set, remove expired? Implementation:
+
+from collections import OrderedDict
+import threading, time
+
+class TTLCache:
+  def __init__(self, maxsize=128, ttl=300.0, clock=time.monotonic): validate non-negative. self._entries = OrderedDict() mapping key to tuple(value, expires_at). self._lock=threading.RLock(). self._clock = clock. maxsize maybe None? Keep int >=0. ttl float >=0.
+
+Need handle maxsize=0: no entries. set should not store? If maxsize=0 maybe return. But len zero. get None. delete False. Could validate maxsize non-negative. If maxsize None unlimited? But capacity eviction? Could support None. But simpler: maxsize positive. But include maxsize=0 possible. For unlimited maxsize maybe allow None. Need not too complex. But detailed.
+
+set(key, value, ttl=None): with lock: if ttl None use self.ttl. If ttl

@@ -1,0 +1,41 @@
+{
+  "response": {
+    "id": "chatcmpl-05d9b43780654d4d93dfc84f",
+    "object": "chat.completion",
+    "created": 1791566236,
+    "model": "qwen3.8-flash-next-iq3_s",
+    "choices": [
+      {
+        "index": 0,
+        "message": {
+          "role": "assistant",
+          "content": "def merge_intervals(intervals):\n    result = []\n    for start, end in sorted(intervals):\n        if not result or start > result[-1][1]:\n            result.append((start, end))\n        elif end > result[-1][1]:\n            result[-1] = (result[-1][0], end)\n    return result",
+          "reasoning_content": "We need answer user wants only Python code. Need produce code only. Need think about requirements. Function merge_intervals(intervals): merge list of closed integer intervals including equal endpoints. Merge only when next_start <= current_end, never bridge gap of 1. Return sorted list of tuples. Do not mutate input. Empty input returns []. Include no imports, tests, annotations, explanation. Need likely handle intervals list maybe iterable? \"list\". Need sort without mutating input: sorted(intervals). Each interval maybe sequence length 2. We can do result = []; for start, end in sorted((s,e) for s,e in intervals): if not result or start > result[-1][1]: result.append((start,end)) else if end > result[-1][1]: result[-1] = (result[-1][0], end). This handles inclusive closed. Gap of 1 means [1,2] and [3,4] not merge because next_start <= current_end? 3 <= 2 false, so no. Equal endpoints [1,2] [2,3] merge because 2<=2. Need include no annotations. Only code. Could be:\ndef merge_intervals(intervals):\n    result = []\n    for start, end in sorted(intervals):\n        if not result or start > result[-1][1]:\n            result.append((start, end))\n        elif end > result[-1][1]:\n            result[-1] = (result[-1][0], end)\n    return result\nNeed sorted(intervals) won't mutate. If intervals contains list [1,2], result tuple. If unsorted and intervals maybe list of lists. sorted works. Need if empty returns []. Good. Ensure no imports. Output only code. Need no markdown? User says Write only Python code. So no fences? Probably just code. Ensure final only code. Done.\n"
+        },
+        "finish_reason": "stop"
+      }
+    ],
+    "usage": {
+      "prompt_tokens": 119,
+      "completion_tokens": 472,
+      "total_tokens": 591,
+      "prompt_tokens_details": {
+        "cached_tokens": 0
+      }
+    },
+    "timings": {
+      "cache_n": 0,
+      "prompt_n": 119,
+      "prompt_ms": 710.7,
+      "prompt_per_token_ms": 5.972,
+      "prompt_per_second": 167.4,
+      "predicted_n": 472,
+      "predicted_ms": 5808.1,
+      "predicted_per_token_ms": 12.305,
+      "predicted_per_second": 81.3,
+      "draft_n": 304,
+      "draft_n_accepted": 252
+    }
+  },
+  "wall_seconds": 6.5510358000174165
+}

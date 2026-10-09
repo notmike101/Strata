@@ -1,0 +1,15 @@
+We need answer user's request. Need produce final answer with complete code, tests, detailed explanation at least 1200 words. Need think fully.
+
+Task: Implement thread-safe Python TTLCache class using OrderedDict and monotonic clock. Include set, get, delete, clear, len, expiration, capacity eviction, unit tests with injected fake clock, detailed explanation of thread safety and complexity. Write complete code, then tests, then explain design. Do not abbreviate implementation. Produce detailed answer at least 1200 words.
+
+Need likely include imports threading, time, OrderedDict, maybe typing. Need thread-safe. Use monotonic clock by default time.monotonic, injectable clock. OrderedDict. Need expiration on get, lazy expiration; also maybe purge expired on set/len. Need capacity eviction: LRU? They just say capacity eviction. OrderedDict can move_to_end for LRU; eviction oldest when exceeding maxsize. Need ensure thread safe with RLock perhaps. TTLCache class. Methods set, get, delete, clear, __len__, maybe keys? Need expiration method? Maybe _purge_expired, expire. Need unit tests with fake clock. Need no abbreviations.
+
+Need answer length >1200 words. Code and explanation can count? likely yes. Need complete code, tests, then explain. Could make code lengthy. Need ensure robust: TTL cache with maxsize, ttl, clock. OrderedDict stores key -> (value, expires_at). Use lock. Thread-safe: one RLock protects all public methods; internal methods assume lock held. Need monotonic clock. If ttl <=0 maybe immediately expired? Could define. maxsize <=0? maybe no capacity? Let's design: maxsize positive int. If maxsize is None or <=0? Better require maxsize >=0? If 0, set raises? Could have maxsize=0 means cache always empty? Simpler maxsize positive. But robust: if maxsize < 0 raise ValueError; if maxsize == 0, set just delete key and return None? Could implement. But likely maxsize positive. TTL maybe None? no expiration? But TTLCache needs ttl positive. Could ttl=None mean no ttl? But class TTLCache, ttl required. If ttl <=0 then items expire immediately. Use float.
+
+Implementation:
+import threading, time
+from collections import OrderedDict
+from typing import Any, Optional, Callable, Iterator, Dict? 
+
+class TTLCache:
+    def __init__(self, max

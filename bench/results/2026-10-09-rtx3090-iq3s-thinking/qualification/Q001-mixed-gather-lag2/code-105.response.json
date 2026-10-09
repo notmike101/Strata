@@ -1,0 +1,41 @@
+{
+  "response": {
+    "id": "chatcmpl-ba55c592eefc407aa283ba63",
+    "object": "chat.completion",
+    "created": 1791566246,
+    "model": "qwen3.8-flash-next-iq3_s",
+    "choices": [
+      {
+        "index": 0,
+        "message": {
+          "role": "assistant",
+          "content": "def merge_intervals(intervals):\n    if not intervals:\n        return []\n\n    ordered = sorted(intervals)\n    merged = []\n    current_start, current_end = ordered[0]\n\n    for start, end in ordered[1:]:\n        if start <= current_end:\n            if end > current_end:\n                current_end = end\n        else:\n            merged.append((current_start, current_end))\n            current_start, current_end = start, end\n\n    merged.append((current_start, current_end))\n    return merged",
+          "reasoning_content": "We need answer user's request: \"Write only Python code for merge_intervals(intervals): merge a list of closed integer intervals, including equal endpoints. Merge only when next_start <= current_end, never bridge a gap of 1; return a sorted list of tuples. Do not mutate the input. Empty input returns []. Include no imports, tests, annotations, or explanation.\"\n\nNeed provide only Python code. Need ensure no annotations. Function merge_intervals(intervals): sort copy, handle empty. closed integer intervals, including equal endpoints. Merge only when next_start <= current_end, never bridge a gap of 1. So intervals like (1,2),(3,4) do not merge because 3 <= 2 false. (1,2),(2,3) merge. Input maybe list of lists or tuples? Return sorted list of tuples. Do not mutate input: use sorted(intervals) returns list. Need maybe if intervals elements mutable lists? sorted copies outer list, inner lists not mutated if we create new tuples. Need maybe if current_end equal. Implementation:\ndef merge_intervals(intervals):\n    if not intervals:\n        return []\n    ordered = sorted(intervals)\n    merged = []\n    current_start, current_end = ordered[0]\n    for start, end in ordered[1:]:\n        if start <= current_end:\n            if end > current_end:\n                current_end = end\n        else:\n            merged.append((current_start, current_end))\n            current_start, current_end = start, end\n    merged.append((current_start, current_end))\n    return merged\n\nNo imports, annotations. Need only code block? User says write only Python code. Could output plain code without markdown? \"Write only Python code\" likely no explanation; code block okay? They said include no imports, tests, annotations, explanation. Code block fences are not code? To be safe output raw code only, no fences. Ensure only function. Could unpack tuple: start, end = ordered[0]; if input is e.g. [ [1,2] ] unpack works. Return tuples. Sorted intervals: If intervals have equal endpoints and start order. Sorting by start then end.\n\nPotential issue: if intervals contain None? no.\n\nNeed satisfy \"Merge only when next_start <= current_end, never bridge a gap of 1\". This exactly. \"closed integer intervals, including equal endpoints\" means intervals [a,b], if [1,1] [2,2] not merge (gap 1? Actually gap between 1 and2? For closed integer intervals, [1,1] and [2,2] adjacent integer endpoints no gap? They say never bridge a gap of 1. If next_start=2 current_end=1, difference 1, gap? They likely mean intervals [1,2] and [3,4] (gap of 1 integer not covered? There's no integer gap between 2 and3? But closed integer intervals [1,2] includes 1,2; [3,4] includes 3,4; union covers all integers? Gap? If continuous real intervals, gap length 1 between 2 and3. They want not merge when next_start == current_end + 1. So condition next_start <= current_end. OK.\n\nNeed no annotations. Use `def merge_intervals(intervals):`.\n\nDouble-check \"including equal endpoints\" maybe input interval endpoints can be equal: (1,1). Works.\n\nShould we handle invalid where start > end? Not specified. Could normalize? Not asked. Keep simple. If an interval (b,a) maybe sorted order not meaningful; but assume valid closed intervals.\n\nFinal output raw code. Ensure no tests.\n"
+        },
+        "finish_reason": "stop"
+      }
+    ],
+    "usage": {
+      "prompt_tokens": 119,
+      "completion_tokens": 895,
+      "total_tokens": 1014,
+      "prompt_tokens_details": {
+        "cached_tokens": 0
+      }
+    },
+    "timings": {
+      "cache_n": 0,
+      "prompt_n": 119,
+      "prompt_ms": 666.0,
+      "prompt_per_token_ms": 5.597,
+      "prompt_per_second": 178.7,
+      "predicted_n": 895,
+      "predicted_ms": 11394.5,
+      "predicted_per_token_ms": 12.731,
+      "predicted_per_second": 78.5,
+      "draft_n": 577,
+      "draft_n_accepted": 466
+    }
+  },
+  "wall_seconds": 12.064778200001456
+}

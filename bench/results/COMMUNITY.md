@@ -11,7 +11,7 @@ How to read the table:
 
 | Folder | Hardware | Model | Prompt tok/s | Output tok/s | Strata | PR |
 |---|---|---|---|---|---|---|
-| [2026-10-09-rtx3090-iq3s-thinking](2026-10-09-rtx3090-iq3s-thinking/) | RTX 3090 24 GiB, i9-10900KF, 128 GiB | GSQ-RCO IQ3_S, 262K configured, xhigh thinking | B001 188.4 / 482.7 (165-168 / 3033-3035 tokens) | B001 75.1 / 71.3; all candidate medians/ranges in report | 0.1.41 release; source-build trials separately labeled | Personal fork campaign; no upstream PR |
+| [2026-10-09-rtx3090-iq3s-thinking](2026-10-09-rtx3090-iq3s-thinking/) | RTX 3090 24 GiB, i9-10900KF, 128 GiB | GSQ-RCO IQ3_S, 262K configured, xhigh thinking | B001 188.4 / 482.7 (165-168 / 3033-3035 tokens) | B00175.1/71.3; finalist87.35/83.30 (same short/3K prompts;259K recall2.6) | 0.1.41 release; source-build trials separately labeled | Fork campaign; no upstream PR |
 | [2026-10-01-0.1.31-release](2026-10-01-0.1.31-release/) | RX 7900 XTX 24 GB, Ryzen 7 7700X | Coder IQ1_M | 545 to 900 median (0.1.30 to 0.1.31) | 16-34 to 17-65 | 0.1.30 / 0.1.31 | #404 |
 | [2026-10-01-community-2x-rtx-pro-4500](2026-10-01-community-2x-rtx-pro-4500/) | 2x RTX PRO 4500 32 GB, Threadripper 7960X | Swift IQ3_XXS | 1,428 / 2,454 / 2,785 | 115 / 120 / 93 | 0.1.30 | #418 |
 | [2026-10-02-community-2x-rtx-pro-4500-engine-0.1.36](2026-10-02-community-2x-rtx-pro-4500-engine-0.1.36/) | 2x RTX PRO 4500 32 GB, Threadripper 7960X | Swift IQ3_XXS | 2,960 / 5,065 / 5,762 | 127 / 130 / 105 | 0.1.36 | #418 |

@@ -1,0 +1,64 @@
+{
+  "request": {
+    "model": "qwen3.8-flash-next-iq3_s",
+    "messages": [
+      {
+        "role": "user",
+        "content": "Reply with exactly LEVEL_OK."
+      }
+    ],
+    "max_tokens": 2048,
+    "seed": 106,
+    "temperature": 1.0,
+    "top_p": 0.95,
+    "top_k": 20,
+    "min_p": 0.0,
+    "presence_penalty": 0.0,
+    "repetition_penalty": 1.0,
+    "frequency_penalty": 0.0,
+    "reasoning_effort": "off",
+    "reasoning_budget_tokens": 0,
+    "chat_template_kwargs": {
+      "enable_thinking": false,
+      "preserve_thinking": true
+    }
+  },
+  "response": {
+    "id": "chatcmpl-ca65268a9ecd46469000814c",
+    "object": "chat.completion",
+    "created": 1791567061,
+    "model": "qwen3.8-flash-next-iq3_s",
+    "choices": [
+      {
+        "index": 0,
+        "message": {
+          "role": "assistant",
+          "content": "LEVEL_OK"
+        },
+        "finish_reason": "stop"
+      }
+    ],
+    "usage": {
+      "prompt_tokens": 18,
+      "completion_tokens": 3,
+      "total_tokens": 21,
+      "prompt_tokens_details": {
+        "cached_tokens": 0
+      }
+    },
+    "timings": {
+      "cache_n": 0,
+      "prompt_n": 18,
+      "prompt_ms": 143.2,
+      "prompt_per_token_ms": 7.956,
+      "prompt_per_second": 125.7,
+      "predicted_n": 3,
+      "predicted_ms": 45.6,
+      "predicted_per_token_ms": 15.2,
+      "predicted_per_second": 65.8,
+      "draft_n": 3,
+      "draft_n_accepted": 3
+    }
+  },
+  "wall_seconds": 0.20818630000576377
+}

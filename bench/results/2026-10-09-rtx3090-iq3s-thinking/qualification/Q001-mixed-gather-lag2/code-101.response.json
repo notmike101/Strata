@@ -1,0 +1,41 @@
+{
+  "response": {
+    "id": "chatcmpl-2b98c548c0c54d339b6793bd",
+    "object": "chat.completion",
+    "created": 1791566181,
+    "model": "qwen3.8-flash-next-iq3_s",
+    "choices": [
+      {
+        "index": 0,
+        "message": {
+          "role": "assistant",
+          "content": "def merge_intervals(intervals):\n    if not intervals:\n        return []\n\n    merged = []\n    for start, end in sorted(intervals):\n        if merged and start <= merged[-1][1]:\n            if end > merged[-1][1]:\n                merged[-1] = (merged[-1][0], end)\n        else:\n            merged.append((start, end))\n\n    return merged",
+          "reasoning_content": "We need answer user wants only Python code. We need produce final only code. Need ensure function merge_intervals(intervals): merge closed integer intervals including equal endpoints? Actually closed integer intervals: [a,b] and [c,d] merge if next_start <= current_end? User explicitly: Merge only when next_start <= current_end, never bridge a gap of 1. That implies intervals with equal endpoints or overlapping merge; adjacent (gap of 1) not merge. Need return sorted list of tuples. Don't mutate input. Empty input []. No imports, tests, annotations, explanation.\n\nNeed consider input possibly list of intervals maybe tuples/lists. Do not mutate input: sort a copy. Need maybe handle invalid? Not specified. Could assume list of two-element. Need only code:\n\ndef merge_intervals(intervals):\n    if not intervals:\n        return []\n    result = []\n    for start, end in sorted(intervals):\n       if not result or start > result[-1][1]:\n          result.append((start,end))\n       elif start >? Merge condition next_start <= current_end: start <= end? Need current_end may extend max.\n       else:\n          if end > result[-1][1]: result[-1] = (result[-1][0], end)\n    return result\n\nBut if intervals list mutated? sorted returns new list if intervals is list. If intervals is iterator? sorted consumes. Don't mutate. But sorted(intervals) works for any iterable? Yes if comparable. Need maybe copy if input not list? sorted is fine. If input contains lists, unpack ok.\n\nPotential issue: closed integer intervals and gap of 1: [1,2], [3,4] -> next_start=3 <= current_end=2 false, don't merge. Equal endpoints [1,2],[2,3] -> merge (touch at point) since next_start <= current_end true. Good.\n\nNeed ensure sort by start then end. Return sorted list of tuples. result tuples.\n\nCould also use:\ndef merge_intervals(intervals):\n    out=[]\n    for start,end in sorted(intervals):\n       if out and start <= out[-1][1]:\n           if end > out[-1][1]: out[-1]=(out[-1][0],end)\n       else:\n           out.append((start,end))\n    return out\n\nIf intervals empty returns []. Good.\n\nNeed final only code block? User says Write only Python code. Could output code without fences? Maybe only code. Ensure no explanation. Need no annotations. Could include no import. Need maybe docstring? No. Only code. Final:\ndef merge_intervals(intervals):\n    if not intervals:\n        return []\n    merged = []\n    for start, end in sorted(intervals):\n        if merged and start <= merged[-1][1]:\n            if end > merged[-1][1]:\n                merged[-1] = (merged[-1][0], end)\n        else:\n            merged.append((start, end))\n    return merged\n\nCheck if start > merged[-1][1] not merge. If interval contained inside: end <= end, no change. If nested with start <= and end bigger, update. Good.\n\nBut phrase \"including equal endpoints\" might mean merge when intervals have equal endpoints? Our condition handles equal endpoints. \"Merge only when next_start <= current_end, never bridge a gap of 1\" done.\n\nNeed maybe avoid input mutation: sorted creates list; but if intervals is custom? okay. But if intervals contains tuples, output tuples. Need return sorted list. If input list contains nested lists and we return tuples. Fine.\n\nPotential subtlety: If input contains unhashable? no.\n\nNeed final no code fence? The user says Write only Python code. Usually acceptable code fence. But \"only\" may be safest plain code. Final just code. Ensure no tests.\n"
+        },
+        "finish_reason": "stop"
+      }
+    ],
+    "usage": {
+      "prompt_tokens": 119,
+      "completion_tokens": 917,
+      "total_tokens": 1036,
+      "prompt_tokens_details": {
+        "cached_tokens": 0
+      }
+    },
+    "timings": {
+      "cache_n": 0,
+      "prompt_n": 119,
+      "prompt_ms": 1006.8,
+      "prompt_per_token_ms": 8.461,
+      "prompt_per_second": 118.2,
+      "predicted_n": 917,
+      "predicted_ms": 11793.0,
+      "predicted_per_token_ms": 12.86,
+      "predicted_per_second": 77.8,
+      "draft_n": 545,
+      "draft_n_accepted": 447
+    }
+  },
+  "wall_seconds": 12.804803000006359
+}

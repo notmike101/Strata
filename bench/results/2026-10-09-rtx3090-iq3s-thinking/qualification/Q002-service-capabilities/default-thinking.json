@@ -1,0 +1,51 @@
+{
+  "request": {
+    "model": "qwen3.8-flash-next-iq3_s",
+    "messages": [
+      {
+        "role": "user",
+        "content": "Reply with exactly DEFAULTS_OK."
+      }
+    ],
+    "max_tokens": 2048
+  },
+  "response": {
+    "id": "chatcmpl-4c013c986da3467cb1ace2b8",
+    "object": "chat.completion",
+    "created": 1791566447,
+    "model": "qwen3.8-flash-next-iq3_s",
+    "choices": [
+      {
+        "index": 0,
+        "message": {
+          "role": "assistant",
+          "content": "DEFAULTS_OK",
+          "reasoning_content": "We need to respond to user: \"Reply with exactly DEFAULTS_OK.\" Need final exactly DEFAULTS_OK. Ensure no extra.\n"
+        },
+        "finish_reason": "stop"
+      }
+    ],
+    "usage": {
+      "prompt_tokens": 59,
+      "completion_tokens": 33,
+      "total_tokens": 92,
+      "prompt_tokens_details": {
+        "cached_tokens": 0
+      }
+    },
+    "timings": {
+      "cache_n": 0,
+      "prompt_n": 59,
+      "prompt_ms": 901.2,
+      "prompt_per_token_ms": 15.275,
+      "prompt_per_second": 65.5,
+      "predicted_n": 33,
+      "predicted_ms": 248.7,
+      "predicted_per_token_ms": 7.536,
+      "predicted_per_second": 132.7,
+      "draft_n": 23,
+      "draft_n_accepted": 23
+    }
+  },
+  "wall_seconds": 1.183104399999138
+}

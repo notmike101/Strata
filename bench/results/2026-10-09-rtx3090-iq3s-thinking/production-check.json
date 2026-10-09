@@ -1,0 +1,21 @@
+{
+  "health": {
+    "status": "ok",
+    "max_context": 262144,
+    "model": "qwen3.8-flash-next-iq3_s",
+    "images": true,
+    "api_key": false,
+    "loaded": true,
+    "service": "strata"
+  },
+  "candidate_config_matches": true,
+  "engine_hash_verified": true,
+  "environment": {
+    "STRATA_IQ256_GATHER": "1",
+    "STRATA_IQ_MT_MIN": "1",
+    "STRATA_IQ256_GATHER_IQ2_S": "0",
+    "STRATA_ADAPT_LAG": "2"
+  },
+  "idle_gpu_snapshot": "memory.used [MiB], memory.free [MiB], utilization.gpu [%], temperature.gpu, power.draw [W]\n23863 MiB, 460 MiB, 0 %, 44, 20.61 W\n",
+  "note": "Post-qualification idle snapshot, not peak. Existing production launcher retains this configuration."
+}

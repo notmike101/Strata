@@ -1,0 +1,21 @@
+We need answer user's request. Need produce detailed answer at least 1200 words. User: "Benchmark identifier ... Ignore. Implement a thread-safe Python TTLCache class using an OrderedDict and a monotonic clock. Include set, get, delete, clear, len, expiration, capacity eviction, unit tests with an injected fake clock, and a detailed explanation of thread safety and complexity. Write complete code, then tests, then explain the design. Do not abbreviate the implementation. Produce a detailed answer of at least 1200 words."
+
+We need output complete code, tests, explanation. Need likely mention ignore identifier. Need be thorough. Need implement TTLCache thread-safe using OrderedDict and monotonic clock. Include injected fake clock for tests. Need maybe type hints. Need expiration and capacity eviction. Need unit tests. Need detailed explanation of thread safety and complexity. At least 1200 words. Let's design robust code.
+
+Potential implementation:
+
+import threading
+from collections import OrderedDict
+from time import monotonic
+from typing import Any, Optional, Hashable, Callable, Iterator? 
+
+class TTLCache:
+    def __init__(self, maxsize: int = 0, ttl: Optional[float] = None, clock: Callable[[], float] = monotonic):
+        validate maxsize non-negative? ttl non-negative.
+        self._maxsize = maxsize
+        self._ttl = ttl
+        self._clock = clock
+        self._lock = threading.RLock()
+        self._data: OrderedDict[Hashable, tuple[Any, Optional[float]]] = OrderedDict()
+
+Maybe support per-key ttl in set: ttl parameter optional. Store expiry = now + ttl if ttl is not None else None. But global ttl default. If ttl=0, expires immediately? We can define ttl=None no expiration, 0 immediate. For set(key, value, ttl=None) uses default if ttl None? But cannot distinguish default None vs explicit no TTL. Could use sentinel? Better set(key, value, ttl: Optional[float] = None) where None means use default_ttl? But if default_ttl=None, None means no expiration. If user wants explicit no expiration while default has TTL, use ttl=math.inf? Simpler: set(key, value, ttl: Optional[float] = None) where if ttl is None: ttl=self._ttl; if None then no expiry. Not support overriding to no ttl when default ttl set unless ttl=float('inf') maybe.

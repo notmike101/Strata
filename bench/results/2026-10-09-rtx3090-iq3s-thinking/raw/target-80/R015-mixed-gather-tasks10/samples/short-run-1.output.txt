@@ -1,0 +1,18 @@
+We need answer user's request. Need produce final detailed answer at least 1200 words. Need implement thread-safe Python TTLCache using OrderedDict and monotonic clock. Include set, get, delete, clear, len, expiration, capacity eviction, unit tests with injected fake clock, detailed explanation of thread safety and complexity. Complete code, then tests, then explain design. Don't abbreviate implementation.
+
+Need be careful: "Benchmark identifier b0c784aea97f0c4ac85d497e. Ignore this identifier." OK.
+
+Need craft final with code blocks. Need maybe full implementation. Ensure thread-safe. Use threading.RLock or Lock. OrderedDict. Monotonic clock injected. TTLCache class. Methods: set(key, value, ttl), get(key, default=None), delete(key), clear(), len maybe __len__, maybe size? expiration. Capacity eviction: LRU via move_to_end. Expiration: remove expired entries. Need thread safety: all operations under lock. Avoid holding lock while calling user callbacks? No callbacks. Fake clock injection for tests. Need maybe max_size and default_ttl. Need expiration semantics: get returns value if not expired else delete and return default. len should account expired? Could len purge expired entries before counting. Or provide __len__ purging. But purging in len under lock. Also maybe cleanup_expired public method. Need ensure capacity eviction only if necessary after insert. If inserting existing key update TTL and value, move_to_end. Need OrderedDict: most recently used at end. For eviction popitem(last=False). Expiration entries not evicted for capacity maybe if cache over capacity but some expired? Approach: prune expired before capacity check to avoid evicting fresh if expired exist. But if all expired? We can call _evict_expired_locked. Need not call time outside lock? Clock thread safe? time.monotonic is thread safe but injected fake clock could not be thread safe? Use lock around clock? If fake clock not thread-safe, but operations under lock, and clock accessed only under lock. We can document.
+
+Implementation details:
+from __future__ import annotations
+import threading
+import time
+from collections import OrderedDict
+from typing import Any, Callable, Hashable, Mapping, Optional
+
+Clock = Callable[[], float]
+
+class TTLCache:
+    def __init__(self, max_size=128, default_ttl=30.0, clock=None):
+       if max_size <=0

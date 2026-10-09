@@ -1,0 +1,11 @@
+We need answer user's request. Need produce final answer detailed >=1200 words. Need implement thread-safe Python TTLCache using OrderedDict and monotonic clock. Include set, get, delete, clear, len, expiration, capacity eviction, unit tests with injected fake clock, detailed explanation thread safety and complexity. Do not abbreviate implementation. Need ensure code complete. Need likely use threading.RLock, OrderedDict, time.monotonic. TTLCache: capacity max size, ttl default? Need expiration. OrderedDict for LRU? capacity eviction likely evict least recently used when exceeding capacity. Expiration: on get check expiry; maybe purge expired on set; length should maybe active len excluding expired? Need thread safety: all public methods acquire lock. Clock injection: constructor takes clock=time.monotonic. Tests: use unittest and fake clock incrementing. Need detailed design and complexity. Could include __getitem__, __contains__? User asks include set, get, delete, clear, len, expiration, capacity eviction. Maybe implement set/get/delete/clear/__len__. Could also implement __setitem__/__getitem__/__delitem__/__contains__ convenience. Need no abbreviation. Need at least 1200 words final. We can write with headings: Implementation, Tests, Design explanation. Include import unittest, threading, OrderedDict. Need ensure code not abbreviate. Need tests with fake clock. Let's think correctness.
+
+Implementation details:
+class TTLCache:
+    def __init__(self, capacity: int, default_ttl: Optional[float]=None, clock: Callable[[], float]=time.monotonic):
+        if capacity <=0 raise ValueError. if default_ttl is not None and default_ttl <0 raise ValueError.
+        self._capacity=capacity; self._default_ttl=default_ttl; self._clock=clock; self._cache=OrderedDict(); self._lock=threading.RLock()
+    def _now(self): return self._clock()
+    def _is_expired(self, entry, now): return entry.expiry is not None and entry.expiry <= now
+    Could store (value, expires_at). For LRU, on get: with lock, entry=cache.get(key); if missing return default; if expired: delete entry return default; move_to_end(key); return value.
+    set: with lock: now=self._now(); ttl = ttl if ttl is not None else self._default_ttl; expires_at = None if ttl is None else now + ttl; if

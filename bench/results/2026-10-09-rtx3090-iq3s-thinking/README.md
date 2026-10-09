@@ -1,10 +1,10 @@
 # RTX 3090 / i9-10900KF: IQ3_S thinking-mode optimization ledger
 
-Status: **active investigation; 80 tok/s has not been demonstrated under the current contract.**
+Status: **80 tok/s server-decode target demonstrated on both established coding cells.** Two fresh-process five-seed repeats, in opposite workload order, produced 20/20 measured runs above80. Combined medians: **87.35 short / 83.30 longer**; client end-to-end **75.29 / 41.67** tok/s. The fixed recommended thinking sampler is unchanged. At258901 input tokens, a separate successful recall check measured only **2.6 decode tok/s**. This is not an80tok/s end-to-end or full-context claim.
 
 Measured on 2026-10-09 by notmike101. This report follows [the community report guide](../../../docs/COMMUNITY_BENCHMARKS.md) and is listed in [the community index](../COMMUNITY.md). [RESULTS.md](RESULTS.md) contains the guide's complete results table for every completed cell: actual/fresh/reused/generated tokens, repetitions, prompt/decode throughput, TTFT and client total latency, with ordinary medians and full ranges. The compact table below is an overview, not a replacement for the all-run evidence.
 
-This report records the local setup, every completed throughput experiment, rejected configurations, profiler observations, validation coverage, and unresolved measurement problems. It is a fork campaign, not an upstream performance claim. The source baseline is `fb58e0dbc8399662c0e47c76578c6e878b14f6cf` and the installed release engine is 0.1.41. Git fetch and the GitHub release API on 2026-10-09 found no newer Strata source or release to install. The optional per-format CPU dispatch candidate [2f8f36b](https://github.com/notmike101/Strata/commit/2f8f36b) was merged into the sole working branch `perf/rtx3090-thinking-80` at [98250e0](https://github.com/notmike101/Strata/commit/98250e0), as requested by the user. Its temporary branch and worktree were cleaned up. Build and validation details are in E013 of the ledger; production promotion remains subject to served throughput and quality checks.
+This report records the local setup, every completed throughput experiment, rejected configurations, profiler observations, validation coverage, and unresolved measurement problems. It is a fork campaign, not an upstream performance claim. The source baseline is `fb58e0dbc8399662c0e47c76578c6e878b14f6cf` and the installed release engine is 0.1.41. Git fetch and the GitHub release API on 2026-10-09 found no newer Strata source or release to install. The optional per-format CPU dispatch candidate [1fb2fc6](https://github.com/notmike101/Strata/commit/1fb2fc6b303423784b6c10a3cb88021d749383df) was merged into the sole working branch `perf/rtx3090-thinking-80` at [e3aef5f](https://github.com/notmike101/Strata/commit/e3aef5fe6f78c3f4ea8734e1a41f65d1e06250bb), as requested by the user. Its temporary branch and worktree were cleaned up. Build and validation details are in E013 of the ledger; the finalist is retained after repeated served throughput and the documented correctness checks.
 
 ## Hardware and invariant configuration
 
@@ -25,6 +25,19 @@ Exact model files are `Qwen3.8-Flash-Next-GSQ-RCO-IQ3_S-00001-of-00002.gguf` and
 Per-arm `identity.json` contains every engine argument, environment override, sampling default, vision device and loaded backend hash. The launch pattern is `python -m serve.server --engine strata --config <STRATA_ROOT>/strata-iq3_s.json --host 0.0.0.0 --port 8080`; production config binds `0.0.0.0:8080`, with one request and the settings above. Exact local launcher paths are omitted from public evidence. Source-build options and compiler changes are recorded in the chronological ledger separately from release-binary trials.
 
 ## Frozen thinking and sampling contract
+
+The finalist uses the locally built CUDA 13.3/sm86 engine with the opt-in per-format CPU dispatch patch. Its SHA256 is `6048736d7674d8f3c66ce50060f11ca6623df33d3e885030941a6ef9e62f427c`. The compatible F16 vision encoder stays loaded on the CPU, freeing VRAM for 8409 expert slots (about 15.95 GiB). CPU image encoding has an explicit latency tradeoff: the earlier paired OCR requests took 3.752 s CPU versus 2.538 s GPU, with slightly different generated token counts; these are total request times, not isolated encoder timings.
+
+Finalist environment, in addition to the invariant arguments above:
+
+```text
+STRATA_IQ256_GATHER=1
+STRATA_IQ_MT_MIN=1
+STRATA_IQ256_GATHER_IQ2_S=0
+STRATA_ADAPT_LAG=2
+```
+
+IQ3 formats use gathered AVX2 loads while IQ2_S retains the faster scalar-load path on this CPU. Adaptive expert copies are admitted one generation window later, retaining synchronization. QFUSE, the 10-task override and diagnostic timing flags are absent. No tensor precision, model, sampler, reasoning, KV precision or context limit is reduced.
 
 `sampling.json` is the exact profile used by the thinking campaigns:
 
@@ -62,7 +75,7 @@ The 80 tok/s target is **server decode TPS**, ordinary median of all qualifying 
 - `server_decode_tps`: server generation count / generation interval. `request_e2e_tps`: completion count / request-start to response-complete. `stream_total_tps`: completion count / request-start to last content token. TTFT is request-start to first reasoning/content chunk.
 - All measured runs, slow seeds, warmups, failures and losing arms are retained. No favorable seed subset, upper median, changed model or disabled-thinking result can complete the target.
 
-The expert cache is prefilled from the same ranking profile at each process start, then retained within an arm. **Correction:** the startup cache-policy banner says PROFILE/no eviction, but the separate adaptive tier remains enabled by source defaults: `--adapt-every 4 --adapt-swaps 96 --adapt-decay 0.7 --adapt-async 0`. It can swap expert residency during requests. Calling the complete engine cache static based on that banner was incorrect. These defaults are unchanged across current arms; prefix reuse is independently measured. A fresh process precedes each arm; the excluded warmup also builds CUDA graphs. Client total latency includes HTTP transport, any queueing and prompt processing; startup/model loading is excluded. Text speed requests do not invoke image encoding, although vision remains loaded. The vision comparison includes image encoding in total request time. TTFT observes the first nonempty reasoning or answer delta and ignores keep-alives/empty deltas; it is not answer-only latency.
+The expert cache is prefilled from the same ranking profile at each process start, then retained within an arm. **Correction:** the startup cache-policy banner says PROFILE/no eviction, but the separate adaptive tier remains enabled by source defaults: `--adapt-every 4 --adapt-swaps 96 --adapt-decay 0.7 --adapt-async 0`. It can swap expert residency during requests. Calling the complete engine cache static based on that banner was incorrect. These defaults are unchanged across arms; R016/F001/F002 change only admission lag from1 to2 windows. Prefix reuse is independently measured. A fresh process precedes each arm; the excluded warmup also builds CUDA graphs. Client total latency includes HTTP transport, any queueing and prompt processing; startup/model loading is excluded. Text speed requests do not invoke image encoding, although vision remains loaded. The vision comparison includes image encoding in total request time. TTFT observes the first nonempty reasoning or answer delta and ignores keep-alives/empty deltas; it is not answer-only latency.
 
 `memory-snapshots.json` preserves before/after GPU snapshots, not inference peaks. Readiness headroom and Windows large-page failures are recorded in the ledger. Peak RAM/VRAM and OS paging were not continuously measured; low-headroom warnings are evidence of risk, not proof of paging. Codex and normal desktop services remained present. Earlier browser/profiler confounds are identified by arm; current benchmark requests do not overlap compilation or another model.
 
@@ -87,6 +100,13 @@ The expert cache is prefilled from the same ranking profile at each process star
 | target-80 R006 reserve1200, three runs | 71.3 | 67.4 | 63.35 | 36.61 | Rejected: smaller expert cache costs throughput |
 | target-80 R007 CPU vision, three runs | 80.2 | 72.9 | 70.36 | 38.89 | Candidate; F16 vision stays loaded on CPU, OCR passed |
 | target-80 R008 CPU vision + QFUSE, three runs | 82.4 | 75.0 | 73.49 | 39.55 | Provisional gain; wide short spread, longer below80 |
+| target-80 R013 mixed-format CPU gather, three runs | 79.3 | 76.9 | 70.06 | 39.95 | Longer improves vs normal control; target unmet |
+| target-80 R014 mixed gather + QFUSE, three runs | 80.8 | 71.9 | 72.01 | 38.67 | Rejected combination |
+| target-80 R015 mixed gather + 10 tasks, three runs | 78.1 | 72.0 | See full table | See full table | Rejected task granularity |
+| target-80 R016 mixed gather + adaptive lag2, three runs | 86.3 | 81.1 | 74.97 | 41.14 | Candidate; slow warmups and one slow measured seed retained |
+| target-80 F001 same candidate, five runs | 88.0 | 82.2 | 76.43 | 41.41 | All ten measured runs >80 |
+| target-80 F002 fresh process, reversed order, five runs | 84.4 | 85.4 | 73.52 | 42.13 | All ten measured runs >80; checks passed |
+| F001 + F002, ten runs per cell | 87.35 | 83.30 | 75.29 | 41.67 | Retained production configuration |
 
 Rates are tok/s; ordinary medians. `experiment-index.json` contains every completed workload's raw seed rates, medians, spread, E2E, streaming total and TTFT. `all-runs.csv` includes warmups. The raw JSON files preserve full timing fields and draft counters.
 
@@ -102,7 +122,7 @@ Rates are tok/s; ordinary medians. `experiment-index.json` contains every comple
 - `artifact-manifest.json`: SHA256 and byte count for each public evidence file.
 - `replay.py`: lightweight replay of an exact example payload. It does not perform the full identity/cold-start protocol; use it for reproduction, not as automatic proof of a speed claim.
 - `measure.py`: full Windows campaign measurement script, with only root/config/server address changed to command-line arguments and the profile filename changed to `sampling.json`. Process discovery was corrected before B005's first request to accept the configured executable filename and Windows PowerShell 5.1 singleton arrays. Earlier successful release-binary measurements used the same timing, prompt and seed logic.
-- The current script obtains workspace Git metadata through the user's GitHub App identity helper (`--git-helper`, default `~/github-agent/identity.mjs`). It requires that local helper and Node.js; this affects provenance collection only, not requests or timing. Future repository contributions use `agent-notmike101[bot]`. Earlier commits retain the identity authorized when they were created.
+- The current script obtains workspace Git metadata through the user's GitHub App identity helper (`--git-helper`, default `~/github-agent/identity.mjs`). It requires that local helper and Node.js; this affects provenance collection only, not requests or timing. Repository contributions use `agent-notmike101[bot]`. A separately coordinated identity correction changed seven earlier personal author/committer pairs while preserving all source trees, messages, timestamps and merge topology. Historical artifact IDs remain unchanged; `identity-rewrite-commit-map.txt` maps them to current history.
 - `engine-timings.txt`: verbatim prompt/decode timing lines from the cumulative engine log, with original line numbers. Includes warmups and capability tests; associate with the per-run token counts, TPS and draft counters instead of pooling the log into a single result.
 - `raw/*/*/samples/`: exact synthetic request payloads and generated output text for completed fixed-thinking arms. Raw SSE remains local; timing/draft counters and text are published.
 - `failures.json`: pre-request and incomplete measurement attempts, excluded from successful throughput summaries. `TRIMMED.md` identifies larger/private artifacts retained locally and measurements not available.
@@ -110,7 +130,8 @@ Rates are tok/s; ordinary medians. `experiment-index.json` contains every comple
 ```powershell
 python replay.py --base-url http://YOUR_HOST:8080 --request requests/short.json
 python replay.py --base-url http://YOUR_HOST:8080 --request requests/longer.json
-python measure.py --root C:/Strata --config C:/Strata/strata-iq3_s.json --base-url http://YOUR_HOST:8080 --out ./new-run --runs 3
+python measure.py --root C:/Strata --config C:/Strata/strata-iq3_s.json --base-url http://YOUR_HOST:8080 --out ./new-run --runs 5
+# Restart the same configuration, then repeat into another directory with --reverse-order.
 ```
 
 A repeated example may hit cache; inspect `timings.cache_n`. For paired new-prompt tests, vary the opening nonce identically across arms, preserve the seed list and every other payload field, and retain all runs. Starting a second engine concurrently invalidates memory and timing comparisons.
@@ -119,7 +140,7 @@ A repeated example may hit cache; inspect `timings.cache_n`. For paired new-prom
 
 Five completed sampled coding outputs compiled and passed objective interval-merging tests in the previous thinking campaign. Exact-output instructions with/without unused tools, natural stop, multi-turn latest instruction, prompt-cache reuse, default high thinking, and F16 image OCR passed. An initial historical test failure involved ambiguous adjacent intervals; the prompt was clarified identically for control and candidate and the failed output was retained.
 
-A historical 52,542-token exact retrieval check passed; that check predates the fixed-thinking campaign. Full 262,144 occupied context has not yet been stress-tested. Neither successful allocation nor one retrieval sample proves universal long-context quality or 80 tok/s at full occupancy. The CPU dispatch candidate passed dispatch and numerical parity tests; it has not yet passed a new full served-answer regression matrix.
+A historical 52,542-token exact retrieval check passed; that check predates the fixed-thinking campaign. Fixed-thinking Q003 passed at258901 input tokens with three correct retrieval codes,162 output tokens and natural stop; prompt1067.0tok/s, decode2.6tok/s and306.267s total. Neither successful allocation nor one retrieval sample proves universal long-context quality or 80 tok/s at full occupancy. The CPU dispatch candidate passed dispatch and numerical parity tests. Q001 repeated the completed coding, exact-output, history and prefix-reuse checks on the finalist and passed. Q002 and final-process Q005 verified live sampler defaults, keyless LAN service, F16 vision OCR and all four remote reasoning levels. Q004 passed five structured-tool round trips. Qualification requests, responses and scripts are in `qualification/`; broader quality equivalence is not established by these smoke tests.
 
 The additional restart check in the early hardware campaign was blocked by automatic approval review at that time; the report retains that limitation. Later authorized campaigns did perform fresh starts. No upstream issue/PR has been opened and no upstream branch is modified by this ledger.
 

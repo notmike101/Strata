@@ -1,0 +1,41 @@
+{
+  "response": {
+    "id": "chatcmpl-489ac5b0573445e48968d9d7",
+    "object": "chat.completion",
+    "created": 1791566263,
+    "model": "qwen3.8-flash-next-iq3_s",
+    "choices": [
+      {
+        "index": 0,
+        "message": {
+          "role": "assistant",
+          "content": "PINE-7319",
+          "reasoning_content": "We need to respond to user: \"The reference code is PINE-7319. Reply with only that code.\" They want only that code. Final should be PINE-7319 only. Ensure no extra.\n"
+        },
+        "finish_reason": "stop"
+      }
+    ],
+    "usage": {
+      "prompt_tokens": 70,
+      "completion_tokens": 59,
+      "total_tokens": 129,
+      "prompt_tokens_details": {
+        "cached_tokens": 0
+      }
+    },
+    "timings": {
+      "cache_n": 0,
+      "prompt_n": 70,
+      "prompt_ms": 608.6,
+      "prompt_per_token_ms": 8.694,
+      "prompt_per_second": 115.0,
+      "predicted_n": 59,
+      "predicted_ms": 643.3,
+      "predicted_per_token_ms": 10.903,
+      "predicted_per_second": 91.7,
+      "draft_n": 41,
+      "draft_n_accepted": 40
+    }
+  },
+  "wall_seconds": 1.2626468999951612
+}

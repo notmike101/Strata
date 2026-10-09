@@ -1,0 +1,24 @@
+{
+  "model": "qwen3.8-flash-next-iq3_s",
+  "messages": [
+    {
+      "role": "user",
+      "content": "Write only Python code for merge_intervals(intervals): merge a list of closed integer intervals, including equal endpoints. Merge only when next_start <= current_end, never bridge a gap of 1; return a sorted list of tuples. Do not mutate the input. Empty input returns []. Include no imports, tests, annotations, or explanation."
+    }
+  ],
+  "max_tokens": 8192,
+  "seed": 102,
+  "temperature": 1.0,
+  "top_p": 0.95,
+  "top_k": 20,
+  "min_p": 0.0,
+  "presence_penalty": 0.0,
+  "repetition_penalty": 1.0,
+  "frequency_penalty": 0.0,
+  "reasoning_effort": "high",
+  "reasoning_budget_tokens": 0,
+  "chat_template_kwargs": {
+    "enable_thinking": true,
+    "preserve_thinking": true
+  }
+}

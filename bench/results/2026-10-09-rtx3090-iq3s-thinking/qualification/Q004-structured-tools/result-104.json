@@ -1,0 +1,106 @@
+{
+  "request": {
+    "model": "qwen3.8-flash-next-iq3_s",
+    "messages": [
+      {
+        "role": "user",
+        "content": "Use lookup_ticket to look up ticket TASK-104. After the tool returns, reply with only its status string."
+      },
+      {
+        "role": "assistant",
+        "content": null,
+        "reasoning_content": "We need to respond to user: \"Use lookup_ticket to look up ticket TASK-104. After the tool returns, reply with only its status string.\"\n\nNeed call lookup_ticket with ticket_id TASK-104. Then final only status string. Need ensure final only status. Let's call.\n",
+        "tool_calls": [
+          {
+            "id": "call_d1d84beab7ad4c56ac5e3928",
+            "type": "function",
+            "function": {
+              "name": "lookup_ticket",
+              "arguments": "{\"ticket_id\":\"TASK-104\"}"
+            }
+          }
+        ]
+      },
+      {
+        "role": "tool",
+        "tool_call_id": "call_d1d84beab7ad4c56ac5e3928",
+        "content": "{\"status\": \"READY_FOR_REVIEW\"}"
+      }
+    ],
+    "max_tokens": 2048,
+    "seed": 104,
+    "temperature": 1.0,
+    "top_p": 0.95,
+    "top_k": 20,
+    "min_p": 0.0,
+    "presence_penalty": 0.0,
+    "repetition_penalty": 1.0,
+    "frequency_penalty": 0.0,
+    "reasoning_effort": "high",
+    "reasoning_budget_tokens": 0,
+    "chat_template_kwargs": {
+      "enable_thinking": true,
+      "preserve_thinking": true
+    },
+    "tools": [
+      {
+        "type": "function",
+        "function": {
+          "name": "lookup_ticket",
+          "description": "Look up the current status of a ticket.",
+          "parameters": {
+            "type": "object",
+            "properties": {
+              "ticket_id": {
+                "type": "string"
+              }
+            },
+            "required": [
+              "ticket_id"
+            ],
+            "additionalProperties": false
+          }
+        }
+      }
+    ]
+  },
+  "response": {
+    "id": "chatcmpl-82051fb11e3542629c9a5def",
+    "object": "chat.completion",
+    "created": 1791567047,
+    "model": "qwen3.8-flash-next-iq3_s",
+    "choices": [
+      {
+        "index": 0,
+        "message": {
+          "role": "assistant",
+          "content": "READY_FOR_REVIEW",
+          "reasoning_content": "We must reply only status string: READY_FOR_REVIEW.\n"
+        },
+        "finish_reason": "stop"
+      }
+    ],
+    "usage": {
+      "prompt_tokens": 453,
+      "completion_tokens": 20,
+      "total_tokens": 473,
+      "prompt_tokens_details": {
+        "cached_tokens": 429
+      }
+    },
+    "timings": {
+      "cache_n": 429,
+      "prompt_n": 24,
+      "prompt_ms": 184.6,
+      "prompt_per_token_ms": 7.692,
+      "prompt_per_second": 130.0,
+      "predicted_n": 20,
+      "predicted_ms": 202.4,
+      "predicted_per_token_ms": 10.12,
+      "predicted_per_second": 98.8,
+      "draft_n": 16,
+      "draft_n_accepted": 12
+    }
+  },
+  "wall_seconds": 0.3933355000044685
+}

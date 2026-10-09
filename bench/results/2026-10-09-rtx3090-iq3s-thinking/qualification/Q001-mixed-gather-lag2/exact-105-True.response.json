@@ -1,0 +1,41 @@
+{
+  "response": {
+    "id": "chatcmpl-f1c07ddd7a3c4bbdb9693889",
+    "object": "chat.completion",
+    "created": 1791566259,
+    "model": "qwen3.8-flash-next-iq3_s",
+    "choices": [
+      {
+        "index": 0,
+        "message": {
+          "role": "assistant",
+          "content": "CALIBRATION_OK",
+          "reasoning_content": "We need answer exactly CALIBRATION_OK, no tools. Need final.\n"
+        },
+        "finish_reason": "stop"
+      }
+    ],
+    "usage": {
+      "prompt_tokens": 295,
+      "completion_tokens": 23,
+      "total_tokens": 318,
+      "prompt_tokens_details": {
+        "cached_tokens": 0
+      }
+    },
+    "timings": {
+      "cache_n": 0,
+      "prompt_n": 295,
+      "prompt_ms": 1366.1,
+      "prompt_per_token_ms": 4.631,
+      "prompt_per_second": 215.9,
+      "predicted_n": 23,
+      "predicted_ms": 327.8,
+      "predicted_per_token_ms": 14.252,
+      "predicted_per_second": 70.2,
+      "draft_n": 21,
+      "draft_n_accepted": 15
+    }
+  },
+  "wall_seconds": 1.698921099974541
+}

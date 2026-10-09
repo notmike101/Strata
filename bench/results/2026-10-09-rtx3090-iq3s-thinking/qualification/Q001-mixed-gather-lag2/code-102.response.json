@@ -1,0 +1,41 @@
+{
+  "response": {
+    "id": "chatcmpl-dbcf5d7944b745a3b5085495",
+    "object": "chat.completion",
+    "created": 1791566197,
+    "model": "qwen3.8-flash-next-iq3_s",
+    "choices": [
+      {
+        "index": 0,
+        "message": {
+          "role": "assistant",
+          "content": "def merge_intervals(intervals):\n    merged = []\n    for interval in sorted(intervals, key=lambda item: (item[0], item[1])):\n        start, end = interval\n        if not merged or start > merged[-1][1]:\n            merged.append((start, end))\n        elif end > merged[-1][1]:\n            merged[-1] = (merged[-1][0], end)\n    return merged",
+          "reasoning_content": "We need answer user's request: \"Write only Python code for merge_intervals(intervals): merge a list of closed integer intervals, including equal endpoints. Merge only when next_start <= current_end, never bridge a gap of 1; return a sorted list of tuples. Do not mutate the input. Empty input returns []. Include no imports, tests, annotations, or explanation.\"\n\nWe need produce only Python code. Need ensure function only? Probably code snippet:\n\ndef merge_intervals(intervals):\n    if not intervals:\n        return []\n    ordered = sorted(intervals, key=lambda interval: (interval[0], interval[1]))\n    merged = []\n    for start, end in ordered:\n        if not merged or start > merged[-1][1]:\n            merged.append((start, end))\n        elif end > merged[-1][1]:\n            merged[-1] = (merged[-1][0], end)\n    return merged\n\nNeed careful: closed integer intervals, equal endpoints merge. Merge only when next_start <= current_end, never bridge a gap of 1. That means if current_end=1, next_start=2, should not merge. condition start > current_end new. If start <= current_end merge. For gap 1 start = current_end+1, start > current_end => no merge. Good.\n\nDo not mutate input: sorted returns new list. But if input list contains lists? It returns tuples. Could copy? sorted is fine doesn't mutate. If intervals is iterable? Maybe list. Use sorted(intervals, key=lambda x: (x[0], x[1])). If intervals empty return []. If intervals contain invalid length no need.\n\nNeed no imports, annotations, tests, explanation. Final only code. Ensure not use annotations.\n\nPotential nuance: If intervals not list but tuple? sorted doesn't mutate. Good. If intervals elements lists, merging assigns tuples into merged. Good.\n\nCould use sorted(list(intervals), ...) to guarantee not mutate if intervals is generator? sorted consumes iterable no mutation. Good.\n\nReturn sorted list of tuples. If input contains tuple intervals sorted by start then end. Need sorted list of tuples. Good.\n\nCould code:\ndef merge_intervals(intervals):\n    if not intervals:\n        return []\n    result = []\n    for start, end in sorted(intervals, key=lambda item: (item[0], item[1])):\n        if not result or start > result[-1][1]:\n            result.append((start, end))\n        elif end > result[-1][1]:\n            result[-1] = (result[-1][0], end)\n    return result\n\nOne nuance: if input is empty iterable not list, if not intervals fails for generator? But empty input returns [] likely list. Could avoid truthiness? We can do:\ndef merge_intervals(intervals):\n    merged = []\n    for interval in sorted(intervals, key=lambda i: (i[0], i[1])):\n        start, end = interval\n        if not merged or start > merged[-1][1]:\n            merged.append((start, end))\n        elif end > merged[-1][1]:\n            merged[-1] = (merged[-1][0], end)\n    return merged\n\nThis returns [] for empty sorted. No if not needed. That's fine.\n\nNeed only Python code. Final no markdown? \"Write only Python code\" likely no code fence? They say include no explanation. Usually can output code only without fences. Need decide. To be safe, plain code no fences. Final:\ndef merge_intervals(intervals):\n    merged = []\n    for interval in sorted(intervals, key=lambda item: (item[0], item[1])):\n        start, end = interval\n        if not merged or start > merged[-1][1]:\n            merged.append((start, end))\n        elif end > merged[-1][1]:\n            merged[-1] = (merged[-1][0], end)\n    return merged\n\nCheck gap: intervals [(1,1),(2,2)] sorted, merged [(1,1)], start=2 >1 append => not bridge. Good. Equal endpoints [(1,2),(2,3)] start=2 <=2 merge => end 3. Good. Contained [(1,5),(2,3)] no update because end 3 >5 false. Good.\n\nCould there be intervals where next_start <= current_end but next_end less than current_end; do nothing. Good.\n\nNeed no annotations. Good.\n"
+        },
+        "finish_reason": "stop"
+      }
+    ],
+    "usage": {
+      "prompt_tokens": 119,
+      "completion_tokens": 1065,
+      "total_tokens": 1184,
+      "prompt_tokens_details": {
+        "cached_tokens": 0
+      }
+    },
+    "timings": {
+      "cache_n": 0,
+      "prompt_n": 119,
+      "prompt_ms": 678.3,
+      "prompt_per_token_ms": 5.7,
+      "prompt_per_second": 175.4,
+      "predicted_n": 1065,
+      "predicted_ms": 12409.5,
+      "predicted_per_token_ms": 11.652,
+      "predicted_per_second": 85.8,
+      "draft_n": 707,
+      "draft_n_accepted": 603
+    }
+  },
+  "wall_seconds": 13.09293409998645
+}

@@ -1,0 +1,184 @@
+{
+  "model": "qwen3.8-flash-next-iq3_s",
+  "messages": [
+    {
+      "role": "user",
+      "content": "Archive item 0: blue widgets were counted."
+    },
+    {
+      "role": "assistant",
+      "content": "Recorded."
+    },
+    {
+      "role": "user",
+      "content": "Archive item 1: blue widgets were counted."
+    },
+    {
+      "role": "assistant",
+      "content": "Recorded."
+    },
+    {
+      "role": "user",
+      "content": "Archive item 2: blue widgets were counted."
+    },
+    {
+      "role": "assistant",
+      "content": "Recorded."
+    },
+    {
+      "role": "user",
+      "content": "Archive item 3: blue widgets were counted."
+    },
+    {
+      "role": "assistant",
+      "content": "Recorded."
+    },
+    {
+      "role": "user",
+      "content": "Archive item 4: blue widgets were counted."
+    },
+    {
+      "role": "assistant",
+      "content": "Recorded."
+    },
+    {
+      "role": "user",
+      "content": "Archive item 5: blue widgets were counted."
+    },
+    {
+      "role": "assistant",
+      "content": "Recorded."
+    },
+    {
+      "role": "user",
+      "content": "Archive item 6: blue widgets were counted."
+    },
+    {
+      "role": "assistant",
+      "content": "Recorded."
+    },
+    {
+      "role": "user",
+      "content": "Archive item 7: blue widgets were counted."
+    },
+    {
+      "role": "assistant",
+      "content": "Recorded."
+    },
+    {
+      "role": "user",
+      "content": "Archive item 8: blue widgets were counted."
+    },
+    {
+      "role": "assistant",
+      "content": "Recorded."
+    },
+    {
+      "role": "user",
+      "content": "Archive item 9: blue widgets were counted."
+    },
+    {
+      "role": "assistant",
+      "content": "Recorded."
+    },
+    {
+      "role": "user",
+      "content": "Archive item 10: blue widgets were counted."
+    },
+    {
+      "role": "assistant",
+      "content": "Recorded."
+    },
+    {
+      "role": "user",
+      "content": "Archive item 11: blue widgets were counted."
+    },
+    {
+      "role": "assistant",
+      "content": "Recorded."
+    },
+    {
+      "role": "user",
+      "content": "Archive item 12: blue widgets were counted."
+    },
+    {
+      "role": "assistant",
+      "content": "Recorded."
+    },
+    {
+      "role": "user",
+      "content": "Archive item 13: blue widgets were counted."
+    },
+    {
+      "role": "assistant",
+      "content": "Recorded."
+    },
+    {
+      "role": "user",
+      "content": "Archive item 14: blue widgets were counted."
+    },
+    {
+      "role": "assistant",
+      "content": "Recorded."
+    },
+    {
+      "role": "user",
+      "content": "Archive item 15: blue widgets were counted."
+    },
+    {
+      "role": "assistant",
+      "content": "Recorded."
+    },
+    {
+      "role": "user",
+      "content": "Archive item 16: blue widgets were counted."
+    },
+    {
+      "role": "assistant",
+      "content": "Recorded."
+    },
+    {
+      "role": "user",
+      "content": "Archive item 17: blue widgets were counted."
+    },
+    {
+      "role": "assistant",
+      "content": "Recorded."
+    },
+    {
+      "role": "user",
+      "content": "Archive item 18: blue widgets were counted."
+    },
+    {
+      "role": "assistant",
+      "content": "Recorded."
+    },
+    {
+      "role": "user",
+      "content": "Archive item 19: blue widgets were counted."
+    },
+    {
+      "role": "assistant",
+      "content": "Recorded."
+    },
+    {
+      "role": "user",
+      "content": "Ignore the archived item counts. Reply with exactly LATEST_OK."
+    }
+  ],
+  "max_tokens": 2048,
+  "seed": 101,
+  "temperature": 1.0,
+  "top_p": 0.95,
+  "top_k": 20,
+  "min_p": 0.0,
+  "presence_penalty": 0.0,
+  "repetition_penalty": 1.0,
+  "frequency_penalty": 0.0,
+  "reasoning_effort": "high",
+  "reasoning_budget_tokens": 0,
+  "chat_template_kwargs": {
+    "enable_thinking": true,
+    "preserve_thinking": true
+  }
+}

@@ -1,0 +1,41 @@
+{
+  "response": {
+    "id": "chatcmpl-3eb850918f0a4f578c6aeae4",
+    "object": "chat.completion",
+    "created": 1791566233,
+    "model": "qwen3.8-flash-next-iq3_s",
+    "choices": [
+      {
+        "index": 0,
+        "message": {
+          "role": "assistant",
+          "content": "CALIBRATION_OK",
+          "reasoning_content": "We need to respond exactly CALIBRATION_OK and nothing else. User explicitly says no tools. Need final only.\n"
+        },
+        "finish_reason": "stop"
+      }
+    ],
+    "usage": {
+      "prompt_tokens": 69,
+      "completion_tokens": 31,
+      "total_tokens": 100,
+      "prompt_tokens_details": {
+        "cached_tokens": 0
+      }
+    },
+    "timings": {
+      "cache_n": 0,
+      "prompt_n": 69,
+      "prompt_ms": 993.2,
+      "prompt_per_token_ms": 14.394,
+      "prompt_per_second": 69.5,
+      "predicted_n": 31,
+      "predicted_ms": 510.9,
+      "predicted_per_token_ms": 16.481,
+      "predicted_per_second": 60.7,
+      "draft_n": 20,
+      "draft_n_accepted": 18
+    }
+  },
+  "wall_seconds": 1.509228400012944
+}

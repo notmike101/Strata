@@ -1,0 +1,102 @@
+{
+  "metric": "server_decode_tps",
+  "arms": [
+    "F001-mixed-gather-lag2",
+    "F002-mixed-gather-lag2-reverse"
+  ],
+  "warmups_excluded": true,
+  "cells": {
+    "short": {
+      "runs": 10,
+      "decode_raw": [
+        84.3,
+        87.9,
+        88.0,
+        90.6,
+        93.7,
+        82.6,
+        81.4,
+        86.9,
+        87.8,
+        84.4
+      ],
+      "server_decode_tps": {
+        "median": 87.35,
+        "min": 81.4,
+        "max": 93.7
+      },
+      "prompt_tps": {
+        "median": 191.55,
+        "min": 174.0,
+        "max": 201.6
+      },
+      "request_e2e_tps": {
+        "median": 75.28594731448649,
+        "min": 70.53253954636534,
+        "max": 80.78332943843972
+      },
+      "stream_total_tps": {
+        "median": 75.29568257384139,
+        "min": 70.5415274663757,
+        "max": 80.79842860929436
+      },
+      "ttft_seconds": {
+        "median": 0.9122245499893324,
+        "min": 0.8422241000225767,
+        "max": 1.0206273999938276
+      },
+      "request_seconds": {
+        "median": 6.801695000001928,
+        "min": 6.337941300007515,
+        "max": 7.259060900018085
+      }
+    },
+    "longer": {
+      "runs": 10,
+      "decode_raw": [
+        83.4,
+        82.2,
+        85.4,
+        82.2,
+        81.6,
+        85.4,
+        82.2,
+        85.4,
+        86.3,
+        83.2
+      ],
+      "server_decode_tps": {
+        "median": 83.30000000000001,
+        "min": 81.6,
+        "max": 86.3
+      },
+      "prompt_tps": {
+        "median": 495.15,
+        "min": 494.3,
+        "max": 497.0
+      },
+      "request_e2e_tps": {
+        "median": 41.66970020195288,
+        "min": 41.19467717780892,
+        "max": 42.4399496264459
+      },
+      "stream_total_tps": {
+        "median": 41.675328705425244,
+        "min": 41.20019416549378,
+        "max": 42.444878382599356
+      },
+      "ttft_seconds": {
+        "median": 6.164349649989163,
+        "min": 6.145969800010789,
+        "max": 6.184932500007562
+      },
+      "request_seconds": {
+        "median": 12.287110950011993,
+        "min": 12.06410479999613,
+        "max": 12.428790200006915
+      }
+    }
+  },
+  "payload_bytes_identical_between_repeats": true,
+  "limitation": "Short/3K coding speed probes, not 80 tok/s end-to-end or at 259K occupied context; historical transient slowdowns remain unexplained."
+}

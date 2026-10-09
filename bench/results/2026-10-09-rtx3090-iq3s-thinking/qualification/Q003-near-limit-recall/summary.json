@@ -1,0 +1,29 @@
+{
+  "passed": true,
+  "wall_seconds": 306.26669990000664,
+  "usage": {
+    "prompt_tokens": 258901,
+    "completion_tokens": 162,
+    "total_tokens": 259063,
+    "prompt_tokens_details": {
+      "cached_tokens": 0
+    }
+  },
+  "timings": {
+    "cache_n": 0,
+    "prompt_n": 258901,
+    "prompt_ms": 242651.8,
+    "prompt_per_token_ms": 0.937,
+    "prompt_per_second": 1067.0,
+    "predicted_n": 162,
+    "predicted_ms": 63087.1,
+    "predicted_per_token_ms": 389.427,
+    "predicted_per_second": 2.6,
+    "draft_n": 133,
+    "draft_n_accepted": 101
+  },
+  "answer": "CEDAR-7421, ORBIT-5836, MAPLE-9164",
+  "finish_reason": "stop",
+  "config_unchanged": true,
+  "limitation": "One synthetic recall input; does not establish long-context coding quality or 80 tok/s at depth."
+}

@@ -1,0 +1,102 @@
+{
+  "request": {
+    "model": "qwen3.8-flash-next-iq3_s",
+    "messages": [
+      {
+        "role": "user",
+        "content": "Use lookup_ticket to look up ticket TASK-101. After the tool returns, reply with only its status string."
+      }
+    ],
+    "max_tokens": 2048,
+    "seed": 101,
+    "temperature": 1.0,
+    "top_p": 0.95,
+    "top_k": 20,
+    "min_p": 0.0,
+    "presence_penalty": 0.0,
+    "repetition_penalty": 1.0,
+    "frequency_penalty": 0.0,
+    "reasoning_effort": "high",
+    "reasoning_budget_tokens": 0,
+    "chat_template_kwargs": {
+      "enable_thinking": true,
+      "preserve_thinking": true
+    },
+    "tools": [
+      {
+        "type": "function",
+        "function": {
+          "name": "lookup_ticket",
+          "description": "Look up the current status of a ticket.",
+          "parameters": {
+            "type": "object",
+            "properties": {
+              "ticket_id": {
+                "type": "string"
+              }
+            },
+            "required": [
+              "ticket_id"
+            ],
+            "additionalProperties": false
+          }
+        }
+      }
+    ],
+    "tool_choice": {
+      "type": "function",
+      "function": {
+        "name": "lookup_ticket"
+      }
+    }
+  },
+  "response": {
+    "id": "chatcmpl-3c436de5ced240c0a8b6ae3a",
+    "object": "chat.completion",
+    "created": 1791567035,
+    "model": "qwen3.8-flash-next-iq3_s",
+    "choices": [
+      {
+        "index": 0,
+        "message": {
+          "role": "assistant",
+          "content": null,
+          "reasoning_content": "We need to respond to user: use lookup_ticket to look up ticket TASK-101. After tool returns, reply with only its status string. Need call tool. Then final only status string. Need ensure after tool returns only status string. Let's call.\n",
+          "tool_calls": [
+            {
+              "id": "call_6e5a8512afd34b9eba66337e",
+              "type": "function",
+              "function": {
+                "name": "lookup_ticket",
+                "arguments": "{\"ticket_id\":\"TASK-101\"}"
+              }
+            }
+          ]
+        },
+        "finish_reason": "tool_calls"
+      }
+    ],
+    "usage": {
+      "prompt_tokens": 331,
+      "completion_tokens": 89,
+      "total_tokens": 420,
+      "prompt_tokens_details": {
+        "cached_tokens": 0
+      }
+    },
+    "timings": {
+      "cache_n": 0,
+      "prompt_n": 331,
+      "prompt_ms": 1949.2,
+      "prompt_per_token_ms": 5.889,
+      "prompt_per_second": 169.8,
+      "predicted_n": 89,
+      "predicted_ms": 1176.5,
+      "predicted_per_token_ms": 14.348,
+      "predicted_per_second": 69.7,
+      "draft_n": 58,
+      "draft_n_accepted": 54
+    }
+  },
+  "wall_seconds": 3.133777300012298
+}
