@@ -35,6 +35,8 @@ ROOT = args.root
 CONFIG_PATH = Path(args.config)
 CONFIG_BYTES = CONFIG_PATH.read_bytes()
 CONFIG = json.loads(CONFIG_BYTES)
+EXPERT_PROFILE_PATH = Path(CONFIG['args'][CONFIG['args'].index('--expert-profile') + 1])
+EXPERT_PROFILE_BYTES = EXPERT_PROFILE_PATH.read_bytes()
 EXPECTED_CONTEXT = int(CONFIG['args'][CONFIG['args'].index('--max-context') + 1])
 KEY = CONFIG.get('api_key', '')
 BASE = args.base_url.rstrip('/')
@@ -112,6 +114,8 @@ manifest = {
     'projector_sha256': sha(CONFIG['vision']['mmproj']), 'shards': shards,
     'config': {k:v for k,v in CONFIG.items() if k != 'api_key'},
     'config_sha256': hashlib.sha256(CONFIG_BYTES).hexdigest(),
+    'expert_profile_sha256': hashlib.sha256(EXPERT_PROFILE_BYTES).hexdigest(),
+    'expert_profile_filename': EXPERT_PROFILE_PATH.name,
     'health': health, 'models': models,
     'props': {k:props.get(k) for k in ['default_generation_settings','model_alias','model_path','build_info','total_slots']},
     'git_commit': subprocess.check_output(['node',str(args.git_helper),'--repo','notmike101/Strata',
@@ -148,6 +152,7 @@ for workload in (['longer', 'short'] if args.reverse_order else ['short', 'longe
         assert current['ProcessId'] == initial_listener['ProcessId'], 'Server identity changed'
         assert CONFIG_PATH.read_bytes() == CONFIG_BYTES, 'Server config changed'
         assert PROFILE_PATH.read_bytes() == PROFILE_BYTES, 'Frozen sampling contract changed'
+        assert EXPERT_PROFILE_PATH.read_bytes() == EXPERT_PROFILE_BYTES, 'Frozen expert profile changed'
         h = get('/health')
         assert h['model'] == CONFIG['model_name'] and h['loaded']
         nonce = hashlib.sha256((('sweep-' if args.sweep else '')+base_label).encode()).hexdigest()[:24]

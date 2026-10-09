@@ -1,0 +1,65 @@
+{
+  "request": {
+    "model": "qwen3.8-flash-next-iq3_s",
+    "messages": [
+      {
+        "role": "user",
+        "content": "Independent coding-profile preparation item 2.\nReview a PostgreSQL order processing schema. Design an idempotent transaction for inventory reservation under concurrent requests, with SQL and isolation-level analysis."
+      }
+    ],
+    "max_tokens": 512,
+    "seed": 203,
+    "temperature": 1.0,
+    "top_p": 0.95,
+    "top_k": 20,
+    "min_p": 0.0,
+    "presence_penalty": 0.0,
+    "repetition_penalty": 1.0,
+    "frequency_penalty": 0.0,
+    "reasoning_effort": "high",
+    "reasoning_budget_tokens": 0,
+    "chat_template_kwargs": {
+      "enable_thinking": true,
+      "preserve_thinking": true
+    }
+  },
+  "response": {
+    "id": "chatcmpl-ea166c2d08744c729857da72",
+    "object": "chat.completion",
+    "created": 1791568747,
+    "model": "qwen3.8-flash-next-iq3_s",
+    "choices": [
+      {
+        "index": 0,
+        "message": {
+          "role": "assistant",
+          "content": null,
+          "reasoning_content": "We need answer user: \"Independent coding-profile preparation item 2. Review a PostgreSQL order processing schema. Design an idempotent transaction for inventory reservation under concurrent requests, with SQL and isolation-level analysis.\"\n\nNeed produce detailed answer likely in English. Need design idempotent transaction for inventory reservation under concurrent requests in PostgreSQL. Need SQL and isolation-level analysis. Could include schema, tables: orders, order_items, products/inventory, reservations, idempotency_keys. Use advisory locks? SELECT FOR UPDATE, row locking, unique constraints, idempotency. Need discuss concurrency issues: overselling, duplicate processing, deadlock. Transaction steps: ensure order status; begin; optional lock reservation row/idempotency key; acquire idempotency record using ON CONFLICT; if exists return prior result; lock inventory rows with ORDER BY for deadlock prevention; check qty; insert reservation; decrement available? Need idempotent design.\n\nCould present two alternatives: (1) pessimistic locking with row locks at serializable? (2) optimistic with version + conditional update. But need \"idempotent transaction\" under concurrent requests. Could include a function/procedure.\n\nNeed be careful: If request with same idempotency key retried after transaction commit? Need persist reservation response. Use idempotency_keys table keyed by client + key, status, result payload, created_at, expires_at. In transaction: upsert idempotency row? If using INSERT ... ON CONFLICT DO NOTHING and then check whether processed. But if transaction fails, no record. If crash before commit, no side effects. For concurrent duplicate, first transaction inserts key, second ON CONFLICT DO NOTHING and then maybe wait? If insert conflict returns nothing, need know if other transaction committed. If second sees existing key but status='IN_PROGRESS'? Since idempotency row inserted in uncommitted transaction not visible. If second tries conflict, it will block on unique index until first commits/rolls back? Actually if second inserts conflicting row, it waits for first transaction's lock. If first commits, second insert conflict does nothing; then can read committed idempotency result. If first rolls back, second can insert? Need handle. But if first transaction fails after insert but before commit, second will wait then insert after rollback, retry. Good. However if first transaction is long and second duplicate comes, blocking may be okay; could return 202. For idempotency, we can use advisory lock or row lock."
+        },
+        "finish_reason": "length"
+      }
+    ],
+    "usage": {
+      "prompt_tokens": 88,
+      "completion_tokens": 512,
+      "total_tokens": 600,
+      "prompt_tokens_details": {
+        "cached_tokens": 0
+      }
+    },
+    "timings": {
+      "cache_n": 0,
+      "prompt_n": 88,
+      "prompt_ms": 684.2,
+      "prompt_per_token_ms": 7.775,
+      "prompt_per_second": 128.6,
+      "predicted_n": 512,
+      "predicted_ms": 6154.8,
+      "predicted_per_token_ms": 12.021,
+      "predicted_per_second": 83.2,
+      "draft_n": 212,
+      "draft_n_accepted": 161
+    }
+  },
+  "wall_seconds": 6.848683899996104
+}

@@ -1,0 +1,65 @@
+{
+  "request": {
+    "model": "qwen3.8-flash-next-iq3_s",
+    "messages": [
+      {
+        "role": "user",
+        "content": "Independent coding-profile preparation item 3.\nImplement a C++ bounded producer-consumer queue with graceful shutdown. Discuss ownership, condition variables, exception safety, and tests."
+      }
+    ],
+    "max_tokens": 512,
+    "seed": 204,
+    "temperature": 1.0,
+    "top_p": 0.95,
+    "top_k": 20,
+    "min_p": 0.0,
+    "presence_penalty": 0.0,
+    "repetition_penalty": 1.0,
+    "frequency_penalty": 0.0,
+    "reasoning_effort": "high",
+    "reasoning_budget_tokens": 0,
+    "chat_template_kwargs": {
+      "enable_thinking": true,
+      "preserve_thinking": true
+    }
+  },
+  "response": {
+    "id": "chatcmpl-982e68a3d2584cc79528492d",
+    "object": "chat.completion",
+    "created": 1791568754,
+    "model": "qwen3.8-flash-next-iq3_s",
+    "choices": [
+      {
+        "index": 0,
+        "message": {
+          "role": "assistant",
+          "content": null,
+          "reasoning_content": "We need answer user: \"Independent coding-profile preparation item 3.\nImplement a C++ bounded producer-consumer queue with graceful shutdown. Discuss ownership, condition variables, exception safety, and tests.\"\n\nNeed produce final likely detailed. Need think. User asks implement C++ bounded producer-consumer queue with graceful shutdown. Discuss ownership, condition variables, exception safety, tests. We need provide code maybe C++17/20, BoundedQueue template, mutex, two condition variables (notFull/notEmpty), shutdown semantics. Need handle ownership: values? unique_ptr? generic T. Maybe bounded queue of std::optional<T>, size cap. Graceful shutdown: close queue -> no more inserts, drain existing items, pop returns optional nullopt when closed and empty. Interrupt waiting consumers. Thread-safe. Maybe also producer can block until queue not full or closed. Provide push returns bool false if closed? push waits if full and open. Maybe try_push? Provide pop returns optional. Need discuss condition variables, spurious wakeups. Exception safety: push can throw copying/moving T, maintain state; no lost wakeup; use lock_guard; maybe noexcept? For T move only? Use std::optional. If push allocation? std::queue<T> push may throw if T's copy/move constructor throws after lock? We can provide strong guarantee? Implement using deque and try_emplace? For arbitrary T, if construction throws, maybe state inconsistent if using queue.push? queue.push takes rvalue? It may move/copy. Strong guarantee if push_back uses T&& with move and no allocation? For T move may throw? Could use std::optional<T> and emplace? Need discuss limitations. Maybe use std::deque<T> which may throw. For strong guarantee, use std::deque and push_front? It can allocate memory and throw; state not modified. But if element move constructor throws? In emplace_back? std::optional emplace could destroy? Better discuss: For copyable/movable types with nothrow move, safe. For strong guarantee, preallocate? Use std::vector with size, but move may throw. Alternatively provide bounded queue for pointer-owned elements unique_ptr to avoid copy issues and ownership. User asks discuss ownership; could show two APIs: value queue and pointer queue. Need maybe implement a class template BoundedQueue<T>. Ownership: If T is std::unique_ptr<T>, queue owns pointers until consumed; producer transfers ownership via move; consumer receives unique_ptr; close drains remaining pointers? On"
+        },
+        "finish_reason": "length"
+      }
+    ],
+    "usage": {
+      "prompt_tokens": 86,
+      "completion_tokens": 512,
+      "total_tokens": 598,
+      "prompt_tokens_details": {
+        "cached_tokens": 0
+      }
+    },
+    "timings": {
+      "cache_n": 0,
+      "prompt_n": 86,
+      "prompt_ms": 642.9,
+      "prompt_per_token_ms": 7.476,
+      "prompt_per_second": 133.8,
+      "predicted_n": 512,
+      "predicted_ms": 6100.8,
+      "predicted_per_token_ms": 11.916,
+      "predicted_per_second": 83.9,
+      "draft_n": 187,
+      "draft_n_accepted": 132
+    }
+  },
+  "wall_seconds": 6.753589900006773
+}

@@ -1,0 +1,16 @@
+We need answer user's request. Need produce detailed answer at least 1200 words. User asks: Benchmark identifier ignore. Implement thread-safe Python TTLCache class using OrderedDict and monotonic clock. Include set, get, delete, clear, len, expiration, capacity eviction, unit tests with injected fake clock, detailed explanation thread safety and complexity. Write complete code, then tests, then explain design. Do not abbreviate implementation.
+
+Need produce final with code blocks. Need likely include imports, class, maybe threading.RLock? Use OrderedDict move_to_end. Fake clock in unit tests. Must ensure thread-safe. Complexity.
+
+Let's design TTLCache:
+from collections import OrderedDict
+import threading
+import time
+Maybe TypeVar? Could include.
+
+class TTLCache:
+    def __init__(self, capacity, ttl=..., default clock time.monotonic, maxsize?) 
+Need support expiration, capacity eviction. Should expire entries on get and also maybe prune expired on operations. Use OrderedDict where insertion/refresh order for LRU? For TTL cache, OrderedDict can track expiration order? There are choices:
+- Simple approach: store values and expires_at. OrderedDict for LRU eviction. On set, if key present, delete then set new, move_to_end. Evict least recently used when capacity exceeded. Expiration: remove expired entries when get, or prune on operations. For accurate len, need account expired entries? User includes len, expiration. len should return number of non-expired entries? If we keep expired entries in internal, len should prune expired first. Or store expiration in dict and clean when get only but len wrong. Best: maintain expired pruning. But with monotonic clock and OrderedDict LRU, pruning all expired entries O(N) if many. Could instead maintain min-heap for expirations but user explicitly using OrderedDict. Could use OrderedDict with expiry values and on set/get/delete/clear/len call _purge_expired. That is O(n) worst-case. But can be okay. Complexity O(1) amortized if expired are near? Maybe not if expired at front? But OrderedDict not keyed by expiration unless we arrange.
+
+Alternative OrderedDict can maintain expiration order: use OrderedDict where keys are sorted by expiration? But updates change expiration, reinsert. Could store expires_at as value and maintain OrderedDict ordered by expiration insertion? Need eviction capacity? For capacity eviction, LRU? User didn't specify eviction policy. "OrderedDict and monotonic clock" maybe common TTLCache implementation with

@@ -1,0 +1,11 @@
+We need answer user's request. Need produce final answer with complete code, tests, detailed explanation at least 1200 words. Need think fully.
+
+Task: Implement thread-safe Python TTLCache class using OrderedDict and monotonic clock. Include set, get, delete, clear, len, expiration, capacity eviction, unit tests with injected fake clock, detailed explanation of thread safety and complexity. Write complete code, then tests, then explain design. Do not abbreviate implementation. Produce detailed answer at least 1200 words.
+
+Need likely include imports threading, time, collections.OrderedDict, typing maybe. TTLCache class: __init__(maxsize, ttl, clock=time.monotonic?). Thread-safe lock. OrderedDict for LRU? User says using OrderedDict and monotonic clock; include expiration, capacity eviction. Does len include expired entries? Need define. Probably len should count non-expired entries, may purge expired on access or periodically? Need implement thread safe.
+
+Important: If len() purges expired, should be thread safe. Could have helper _purge_expired under lock. For each set, check expired? For get, check expiration and delete if expired. For delete, remove. clear.
+
+Capacity eviction: when adding new key not existing, if maxsize >0, if len after considering expired >= maxsize, evict oldest? Need capacity eviction and TTL. OrderedDict supports move_to_end. If using LRU, get should move_to_end. set should also move_to_end. Eviction: while len(data) >= maxsize after adding? But len may include expired; should purge first. If maxsize 0? Could allow zero capacity: set deletes or not store? We can raise ValueError for maxsize <0. If maxsize 0, set can return? Simpler: allow 0, clear immediately? In _set_locked, if maxsize == 0: store? no. Could implement: if maxsize <= 0: clear? But if set then len 0. For new item with maxsize 0, remove it before insert? Better: if maxsize == 0: return (no storage). Need document. But tests can avoid or include.
+
+Injected fake clock: tests use simple fake clock object with monotonic property? We can accept clock: callable. class FakeClock: def __init__(self, value=0): self._value=value; def __call__(self): return self._value; def advance(self, seconds): self

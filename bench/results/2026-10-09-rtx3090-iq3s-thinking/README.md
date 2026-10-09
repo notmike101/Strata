@@ -1,5 +1,7 @@
 # RTX 3090 / i9-10900KF: IQ3_S thinking-mode optimization ledger
 
+Follow-up campaign: the user now requests **90 tok/s short / 85 tok/s at approximately 3K input**, with no loss of prompt-read throughput or quality. This investigation is active; see [the fixed contract](contract-90-85.md) and ledger E021 onward. The fresh unchanged B008 control reproduced historical intermittent stalls; the prior successful measurements below are retained, not a guarantee of every future run.
+
 Status: **80 tok/s server-decode target demonstrated on both established coding cells.** Two fresh-process five-seed repeats, in opposite workload order, produced 20/20 measured runs above80. Combined medians: **87.35 short / 83.30 longer**; client end-to-end **75.29 / 41.67** tok/s. The fixed recommended thinking sampler is unchanged. At258901 input tokens, a separate successful recall check measured only **2.6 decode tok/s**. This is not an80tok/s end-to-end or full-context claim.
 
 Measured on 2026-10-09 by notmike101. This report follows [the community report guide](../../../docs/COMMUNITY_BENCHMARKS.md) and is listed in [the community index](../COMMUNITY.md). [RESULTS.md](RESULTS.md) contains the guide's complete results table for every completed cell: actual/fresh/reused/generated tokens, repetitions, prompt/decode throughput, TTFT and client total latency, with ordinary medians and full ranges. The compact table below is an overview, not a replacement for the all-run evidence.

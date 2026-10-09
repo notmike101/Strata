@@ -1,0 +1,65 @@
+{
+  "request": {
+    "model": "qwen3.8-flash-next-iq3_s",
+    "messages": [
+      {
+        "role": "user",
+        "content": "Independent coding-profile preparation item 5.\nDesign a Go HTTP retry client with deadlines, jitter and idempotency rules. Explain cancellation and implement deterministic tests."
+      }
+    ],
+    "max_tokens": 512,
+    "seed": 206,
+    "temperature": 1.0,
+    "top_p": 0.95,
+    "top_k": 20,
+    "min_p": 0.0,
+    "presence_penalty": 0.0,
+    "repetition_penalty": 1.0,
+    "frequency_penalty": 0.0,
+    "reasoning_effort": "high",
+    "reasoning_budget_tokens": 0,
+    "chat_template_kwargs": {
+      "enable_thinking": true,
+      "preserve_thinking": true
+    }
+  },
+  "response": {
+    "id": "chatcmpl-a13c32e6ddd845d59233a933",
+    "object": "chat.completion",
+    "created": 1791568767,
+    "model": "qwen3.8-flash-next-iq3_s",
+    "choices": [
+      {
+        "index": 0,
+        "message": {
+          "role": "assistant",
+          "content": null,
+          "reasoning_content": "We need answer user: \"Independent coding-profile preparation item 5. Design a Go HTTP retry client with deadlines, jitter and idempotency rules. Explain cancellation and implement deterministic tests.\"\n\nNeed produce thorough response: design Go HTTP retry client with deadlines, jitter, idempotency rules. Explain cancellation and implement deterministic tests. Likely need provide code. Need maybe profile? It's coding profile prep. We need produce Go code with retry client. Need deterministic tests, cancellation explanation. Need include package, types, functions. Need ensure Go syntax plausible. Need design decisions: context deadlines, per-attempt deadline, backoff with jitter (deterministic tests using injectable rand or clock), idempotency: only retry idempotent methods (GET/HEAD/OPTIONS, maybe PUT/DELETE? and retry-safe POST with Idempotency-Key header if configured), body replayability (must implement BodyReplay), avoid retry after headers sent? HTTP client retry after connection closed? Need handle deadlines: outer deadline from context, attempt deadline <= remaining, stop if deadline exceeded, maybe per-attempt timeout, overall deadline. Jitter: full jitter / equal jitter, deterministic with source. Cancellation: context cancel during sleep/backoff/attempt; attempt cancellation via context.WithTimeout per attempt; if parent canceled, abort; distinguish context deadline vs cancellation; retry sleep select ctx.Done vs timer. Need implement deterministic tests with fake clock? Could use injectable sleepFunc, randFunc. Maybe use testing with injected clock and random source. Need provide complete tests: success after N retries, non-retryable 500 for non-idempotent POST, POST with idempotency header retried, context cancel during backoff stops, deadline per attempt, jitter deterministic, no retry on 4xx, exponential backoff schedule deterministic. Need use net/http/httptest.\n\nNeed decide code structure.\n\nCould include:\n\npackage httpretry\n\ntype Clock interface { Now time.Time; After <-chan; Sleep(ctx context.Context, d time.Duration) error }\nMaybe simpler inject now func time.Time; sleep func(ctx,d) error; rand func() float64 or rand.Source. For deterministic tests use deterministic backoff: jitter factor from randFunc. But tests need schedule known. Implement backoff:\n\nfunc (r *Retrier) nextBackoff(attempt int, base time.Duration, jitter float64) time.Duration {\n  // exponential: base * 2^(attempt) capped max\n "
+        },
+        "finish_reason": "length"
+      }
+    ],
+    "usage": {
+      "prompt_tokens": 85,
+      "completion_tokens": 512,
+      "total_tokens": 597,
+      "prompt_tokens_details": {
+        "cached_tokens": 0
+      }
+    },
+    "timings": {
+      "cache_n": 0,
+      "prompt_n": 85,
+      "prompt_ms": 609.7,
+      "prompt_per_token_ms": 7.173,
+      "prompt_per_second": 139.4,
+      "predicted_n": 512,
+      "predicted_ms": 6225.3,
+      "predicted_per_token_ms": 12.159,
+      "predicted_per_second": 82.2,
+      "draft_n": 216,
+      "draft_n_accepted": 155
+    }
+  },
+  "wall_seconds": 6.860293500008993
+}

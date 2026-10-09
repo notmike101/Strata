@@ -1,0 +1,65 @@
+{
+  "request": {
+    "model": "qwen3.8-flash-next-iq3_s",
+    "messages": [
+      {
+        "role": "user",
+        "content": "Independent coding-profile preparation item 1.\nImplement a TypeScript dependency graph topological sorter that reports cycles with a readable path. Explain correctness and test disconnected components."
+      }
+    ],
+    "max_tokens": 512,
+    "seed": 202,
+    "temperature": 1.0,
+    "top_p": 0.95,
+    "top_k": 20,
+    "min_p": 0.0,
+    "presence_penalty": 0.0,
+    "repetition_penalty": 1.0,
+    "frequency_penalty": 0.0,
+    "reasoning_effort": "high",
+    "reasoning_budget_tokens": 0,
+    "chat_template_kwargs": {
+      "enable_thinking": true,
+      "preserve_thinking": true
+    }
+  },
+  "response": {
+    "id": "chatcmpl-71b1fe580bb64a60a141aa4a",
+    "object": "chat.completion",
+    "created": 1791568740,
+    "model": "qwen3.8-flash-next-iq3_s",
+    "choices": [
+      {
+        "index": 0,
+        "message": {
+          "role": "assistant",
+          "content": null,
+          "reasoning_content": "We need answer user's request: \"Independent coding-profile preparation item 1.\nImplement a TypeScript dependency graph topological sorter that reports cycles with a readable path. Explain correctness and test disconnected components.\"\n\nWe need provide implementation TypeScript, correctness explanation, test disconnected components. Need likely code with graph types, topological sort maybe DFS or Kahn's. Requirement reports cycles with readable path. Need explain correctness and test disconnected components. We can provide code and tests. Need be thorough. Now compose final.\n\nNeed think design.\n\nTypes:\nexport type Graph<T> = Record<T, T[]>? Or adjacency list Map<T, T[]>.\nTopological sort result: {order: T[]} or {cycle: T[]}. Need readable path maybe ['A','B','C','A'].\n\nImplement iterative? Recursion could stack overflow; can implement iterative DFS with color states and parent map to reconstruct cycle. Or Kahn's algorithm and if remaining nodes, extract cycle? Kahn doesn't directly give readable path easily, but can use DFS. Need handle disconnected components: iterate all nodes including isolated, stable/deterministic order maybe sorted keys or insertion order.\n\nNeed cycles with readable path: In DFS, when visiting edge u->v and state[v] == visiting, cycle path from v to u plus v. Use prev map to reconstruct: start at u, follow prev until v, then add v? Need careful.\n\nStates: unvisited = 0, visiting = 1, visited = 2.\n\nPseudo:\nexport type TopoResult<T> = { ok:true; order:T[] } | { ok:false; cycle:T[]; };\nfunction topoSort<T>(nodes: Iterable<T>, edges: Iterable<[T,T]>): TopoResult<T> {\n const adj = new Map<T, Set<T>>(); // or array preserving duplicates? Duplicates don't affect topo except cycles? Duplicate edge okay.\n for n nodes: adj.set(n, [])\n for [from,to] edges: add to, ensure keys exist.\n const color = new Map<T, number>();\n const predecessor = new Map<T, T | null>();\n const order: T[] = [];\n // deterministic maybe iterate nodes order from input? Use nodes array and adj insertion order. Map preserves insertion; for node iteration use allNodes array to ensure all.\n const allNodes: T[] = [];\n for node of nodes: if !adj.has(node) {adj.set(node, new Set()); all"
+        },
+        "finish_reason": "length"
+      }
+    ],
+    "usage": {
+      "prompt_tokens": 84,
+      "completion_tokens": 512,
+      "total_tokens": 596,
+      "prompt_tokens_details": {
+        "cached_tokens": 0
+      }
+    },
+    "timings": {
+      "cache_n": 0,
+      "prompt_n": 84,
+      "prompt_ms": 635.2,
+      "prompt_per_token_ms": 7.562,
+      "prompt_per_second": 132.2,
+      "predicted_n": 512,
+      "predicted_ms": 5835.5,
+      "predicted_per_token_ms": 11.397,
+      "predicted_per_second": 87.7,
+      "draft_n": 273,
+      "draft_n_accepted": 192
+    }
+  },
+  "wall_seconds": 6.4810795999947
+}

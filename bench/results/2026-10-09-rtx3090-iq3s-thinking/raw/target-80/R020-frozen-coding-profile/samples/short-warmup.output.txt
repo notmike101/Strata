@@ -1,0 +1,11 @@
+We need answer user's request. Need produce final answer with complete code, tests, detailed explanation at least 1200 words. Need think fully.
+
+Task: Implement thread-safe Python TTLCache class using OrderedDict and monotonic clock. Include set, get, delete, clear, len, expiration, capacity eviction, unit tests with injected fake clock, detailed explanation of thread safety and complexity. Write complete code, then tests, then explain design. Do not abbreviate implementation. Produce detailed answer at least 1200 words.
+
+Need likely include imports threading, time, OrderedDict, maybe typing. Need thread-safe. Use monotonic clock by default but inject fake clock for tests. Need TTL expiration lazy? Could do lazy expiration on get plus periodic purge? Requirement includes expiration. We can implement lazy and maybe purge on operations to remove expired entries. Need capacity eviction: LRU eviction. Use OrderedDict move_to_end. Thread-safe: RLock or Lock. Need consider deadlock if user-provided clock called under lock? Better snapshot current time outside lock? But if using injected clock, avoid calling inside lock? Let's design: TTLCache(maxsize, ttl, clock=time.monotonic). Store values and expires_at. Need thread safe.
+
+Implementation details:
+class TTLCache:
+    __slots__ maybe.
+    def __init__(self, maxsize: int, ttl: float, clock: Callable[[], float] = time.monotonic): validate maxsize >0 ttl >=0, clock callable. self._lock=threading.RLock? If operations don't call each other maybe Lock. RLock safe. self._entries = OrderedDict() key -> (value, expires_at). self._maxsize, self._ttl, self._clock.
+But for expiration, get returns value if not expired, else delete and maybe continue? Because OrderedDict may have expired entries; for len, if we call len without purging, returns stale. Requirement include len and expiration. Need len should return number of unexpired entries. Implement purge_expired() removes expired. But purge uses self._clock. Calling under lock? Need ensure thread-safe. If clock is not thread-safe? But monotonic is fine. Injected fake clock likely not thread-safe; we can document avoid changing fake clock concurrently or make it thread-safe in test? Could call clock outside lock? But if call clock inside lock, fake clock can be simple function. Simpler: use Lock, call self._clock() inside methods under lock.

@@ -1,0 +1,15 @@
+We need answer user's request. Need produce final detailed answer at least 1200 words. User asks: Benchmark identifier ignore. Read existing design requirements before implementing cache: many existing cache rules 0-63 key item_x has lifetime 30+x seconds and size 64+3x bytes? Let's check pattern: 0 30/64; 1 31/67; increment lifetime +1 size +3. They likely want implement TTLCache using OrderedDict monotonic clock. Include set, get, delete, clear, len, expiration, capacity eviction, unit tests with injected fake clock, detailed explanation thread safety and complexity. Complete code, tests, explanation. Do not abbreviate implementation. At least 1200 words.
+
+Need consider "existing design requirements" maybe incorporate these rules? It says read these existing design requirements before implementing the cache. Could be a prompt injection-ish with many rules but relevant to cache. We can incorporate by perhaps seeding or documenting rules? It might expect implementation supports per-key TTL and size? The rules: key item_000 has lifetime 30 seconds and size 64 bytes; expiration remove stale entries; access updates LRU. This suggests cache rules are entries with lifetimes/sizes. Maybe they expect implementation can represent those rules or seed with them? The class TTLCache maybe capacity? They didn't specify capacity. Need include capacity eviction. Could implement weighted sizes? Existing rules include size bytes, maybe capacity by bytes? TTLCache with OrderedDict and monotonic clock. Include set/get/delete/clear/len/expiration/capacity eviction. Unit tests fake clock. Detailed explanation.
+
+Need decide implementation features:
+- Thread-safe with RLock.
+- OrderedDict for LRU order.
+- Each entry: value, expires_at (monotonic timestamp), size (weight bytes) perhaps, ttl.
+- set(key, value, ttl=None, size=1): insert/update, move to end (most recently used), evict expired then capacity by size if max_size set or entries count.
+- get(key, default=None): remove expired first, if hit move_to_end, return value.
+- delete(key): remove entry, decrement size.
+- clear.
+- len: after removing expired? Should count live entries. Implement _purge_expired then len.
+- expiration? Maybe method to expire/remove stale entries. Could include expire(now=None) returns removed count.
+- capacity eviction

@@ -1,0 +1,11 @@
+We need answer user's request. Need produce final answer with complete code, tests, detailed explanation at least 1200 words. Need think fully.
+
+Task: Implement thread-safe Python TTLCache class using OrderedDict and monotonic clock. Include set, get, delete, clear, len, expiration, capacity eviction, unit tests with injected fake clock, detailed explanation of thread safety and complexity. Write complete code, then tests, then explain design. Do not abbreviate implementation. Produce detailed answer at least 1200 words.
+
+Need likely include imports threading, time, OrderedDict, maybe typing. Need thread-safe. Use OrderedDict. TTL expiration: store values with expires_at maybe tuple (value, expiry). On set: if ttl None -> never expire? Or default ttl? Could implement set(key,value,ttl=None). Capacity: maxsize, if len > maxsize evict oldest? With OrderedDict, insertion order. For cache maybe move_to_end on get? Use LRU-like? They mention capacity eviction using OrderedDict. OrderedDict can be LRU: move_to_end on get. Expiration: need maybe lazy expiration on get and len? Need correct len excluding expired. Thread-safe: lock. Use monotonic clock: time.monotonic() by default; inject clock callable returning float. Unit tests with fake clock.
+
+Need ensure TTLCache thread-safe: all mutating/reading with lock. But len needs not mutate? It may need remove expired entries? If len should reflect unexpired items, can do purge under lock. Need avoid lock reentry? We can implement internal _purge_expired no lock? Public methods acquire lock and call helper that assumes lock held. Or use RLock to simplify. But for performance maybe RLock. But if public methods call _purge which uses clock? OK.
+
+Need capacity eviction. If maxsize is None, unlimited. If set new entry: if key exists, replace and move_to_end. If new and len + maybe expired? We can purge expired first. Then if maxsize is not None and len(store) >= maxsize: popitem(last=False) to evict least recently used. Then insert.
+
+Need ensure TTL default maybe default_ttl. __init__(maxsize=128, ttl=None, clock=None). clock = time.monotonic. Use OrderedDict as data: key -> (value, expires_at or None). get: with lock: entry = store.get(key); if None return default? Need handle sentinel for missing. If expires_at

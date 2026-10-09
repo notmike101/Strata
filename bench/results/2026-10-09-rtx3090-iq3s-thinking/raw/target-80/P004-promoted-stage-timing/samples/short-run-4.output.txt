@@ -1,0 +1,17 @@
+We need answer user's request. Need produce complete code, tests, explanation design, at least 1200 words. Need implement thread-safe Python TTLCache using OrderedDict and monotonic clock. Include set, get, delete, clear, len, expiration, capacity eviction, unit tests with injected fake clock. Detailed explanation thread safety and complexity. No abbreviation. Need likely use threading.RLock? OrderedDict thread-safety? Need ensure atomic operations. Could use collections.OrderedDict, time.monotonic as default clock, injected fake clock. TTL per item? We can have per-key expiration and max capacity. Methods set, get, delete, clear, len, expiration. Maybe __len__, __contains__, __getitem__, __setitem__? User asks include set, get, delete, clear, len, expiration, capacity eviction. Need maybe len() returns valid count not expired. But OrderedDict length includes expired until pruned; need maintain count? Could prune expired lazily in get, set, len, delete, expiration? For len exact, scan/prune. Could implement __len__ prune expired. Also maybe maxsize and ttl default. Thread safety: use lock around all operations. OrderedDict operations themselves under GIL? But composite operations need lock. Monotonic clock avoids wall-clock jumps. Fake clock injectable: clock() callable returning float. Need tests using unittest. FakeClock class with monotonic now, maybe advance. Tests: set/get, expiration, capacity eviction, delete, clear, len excludes expired, thread safety? Maybe concurrent test? We can include simple concurrent correctness? Could test lock usage? We can include unit tests with fake clock. Need detailed explanation >1200 words. Need no abbreviation. Need code complete. Let's design robust.
+
+Potential implementation:
+
+from collections import OrderedDict
+import threading
+import time
+from typing import Any, Callable, Optional, Tuple
+
+class TTLCache:
+    def __init__(self, maxsize=128, ttl=300.0, clock=time.monotonic):
+       if maxsize <=0: raise ValueError
+       if ttl <=0? maybe 0 means immediate? Usually ttl >0. But allow 0? TTL positive? For expiration, if ttl=0 entries expire immediately? Could allow >=0. Need maxsize positive.
+       self._lock = threading.Lock()
+       self._entries = OrderedDict() # key -> (value, expire_at)
+       self._clock = clock
+       self

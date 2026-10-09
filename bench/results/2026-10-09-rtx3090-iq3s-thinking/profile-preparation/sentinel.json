@@ -1,0 +1,64 @@
+{
+  "request": {
+    "model": "qwen3.8-flash-next-iq3_s",
+    "messages": [
+      {
+        "role": "user",
+        "content": "Reply with exactly PROFILE_READY."
+      }
+    ],
+    "max_tokens": 256,
+    "seed": 209,
+    "temperature": 1.0,
+    "top_p": 0.95,
+    "top_k": 20,
+    "min_p": 0.0,
+    "presence_penalty": 0.0,
+    "repetition_penalty": 1.0,
+    "frequency_penalty": 0.0,
+    "reasoning_effort": "high",
+    "reasoning_budget_tokens": 0,
+    "chat_template_kwargs": {
+      "enable_thinking": true,
+      "preserve_thinking": true
+    }
+  },
+  "response": {
+    "id": "chatcmpl-c692e84a565f459583be9b37",
+    "object": "chat.completion",
+    "created": 1791568788,
+    "model": "qwen3.8-flash-next-iq3_s",
+    "choices": [
+      {
+        "index": 0,
+        "message": {
+          "role": "assistant",
+          "content": "PROFILE_READY",
+          "reasoning_content": "We need answer user: \"Reply with exactly PROFILE_READY.\" Need final exactly PROFILE_READY. Ensure no extra.\n"
+        },
+        "finish_reason": "stop"
+      }
+    ],
+    "usage": {
+      "prompt_tokens": 58,
+      "completion_tokens": 28,
+      "total_tokens": 86,
+      "prompt_tokens_details": {
+        "cached_tokens": 0
+      }
+    },
+    "timings": {
+      "cache_n": 0,
+      "prompt_n": 58,
+      "prompt_ms": 679.3,
+      "prompt_per_token_ms": 11.712,
+      "prompt_per_second": 85.4,
+      "predicted_n": 28,
+      "predicted_ms": 436.4,
+      "predicted_per_token_ms": 15.586,
+      "predicted_per_second": 64.2,
+      "draft_n": 20,
+      "draft_n_accepted": 17
+    }
+  }
+}

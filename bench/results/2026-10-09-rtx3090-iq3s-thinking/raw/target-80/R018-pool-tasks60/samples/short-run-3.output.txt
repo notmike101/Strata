@@ -1,0 +1,17 @@
+We need answer user's request. Need produce final detailed answer at least 1200 words. Need implement thread-safe Python TTLCache using OrderedDict and monotonic clock. Include set, get, delete, clear, len, expiration, capacity eviction, unit tests with injected fake clock, detailed explanation thread safety complexity. Complete code, then tests, then explain design. Do not abbreviate.
+
+Need think through design. We need provide code. Could use threading.Lock or RLock. OrderedDict for LRU? TTL cache likely store value and expires_at. Use monotonic time. Need expiration: lazy expiration on get, maybe purge expired during operations. Capacity eviction: OrderedDict popitem(last=False) if capacity exceeded. Thread safety: use lock to protect OrderedDict and size. Need avoid holding lock during arbitrary user code? If values have methods? Not relevant. Could use RLock if _now method under lock? Could pass clock. Need fake clock injectable. For deterministic tests.
+
+Need complete implementation, not abbreviated. Include imports, exceptions maybe. Need tests. Could use unittest. FakeClock class. Need maybe support ttl <=0: immediately expires? Or if ttl is None no expiry. But requirement TTLCache; maybe ttl positive. Include expiration capacity eviction. We can implement class TTLCache:
+
+class TTLCache:
+    def __init__(self, maxsize=128, ttl=60.0, clock=time.monotonic):
+        if maxsize <=0 raise ValueError
+        if ttl <=0 maybe allow? But TTL zero should expire immediately. But if ttl None for no expiry? The prompt says TTLCache, could require ttl >0. Include optional None? Could make ttl=None no expiration, but tests. Need monotonic clock injected. Use OrderedDict[str, tuple[Any, float]]: value, expires_at.
+
+Methods:
+- set(key, value, ttl=None?) Could support key,value,ttl=None overrides default ttl. If ttl is None uses default. If ttl == 0 expires immediately maybe not store? But set should store and maybe if ttl <=0 not store? But for tests fake clock, easier to allow storing expired entry then get returns None. But capacity behavior? If ttl <=0, maybe delete existing and not insert to avoid capacity eviction of expired? But unit tests can show expired after advancing. Need deterministic with fake clock.
+
+Maybe set(key, value, ttl=None):
+ with self._lock:
+   self._expire_keys()? We could implement _purge

@@ -1,0 +1,24 @@
+We need answer user's request. Need produce final detailed answer at least 1200 words. Need implement thread-safe Python TTLCache class using OrderedDict and monotonic clock. Include set, get, delete, clear, len, expiration, capacity eviction, unit tests with injected fake clock, detailed explanation thread safety and complexity. Complete code, then tests, then explain design. No abbreviation implementation. Need likely include imports OrderedDict, threading, time, Optional, Any, maybe typing. Thread-safe: use RLock or Lock. Need avoid deadlock with _maybe_expire? All public methods use lock. For expiration, lazy expiration on get/set, maybe purge on len? len thread-safe and can purge expired. Need capacity eviction: move_to_end on get and set, popitem(last=False) when full. Need TTL seconds. monotonic clock via time.monotonic() but injected fake clock for tests: constructor clock=time.monotonic maybe Callable. Need fake clock in unit tests using unittest. Need detailed explanation. Ensure code not abbreviated. Need at least 1200 words. Let's craft with headings.
+
+Need think about subtle concurrency: using OrderedDict is not thread-safe, so all mutations under lock. Read-only? get under lock because may update recency and expiration. len under lock to purge expired and return. delete/clear under lock. Need monotonic clock avoids system time jumps. Need possible race: two threads get same expired item, one deletes. Lock prevents. Need no external callbacks? Maybe __setitem__ not included? User specifically include set, get, delete, clear, len, expiration, capacity eviction. Maybe use methods __len__. Need maybe context? We can provide full implementation.
+
+Potential implementation:
+
+from collections import OrderedDict
+import threading
+import time
+from typing import Any, Callable, Optional, Tuple
+
+_MISSING = object()
+
+class TTLCache:
+    def __init__(self, capacity:int, default_ttl:float, clock:Callable[[], float]=time.monotonic):
+        if capacity < 1: raise ValueError...
+        if default_ttl < 0: raise ValueError... # zero immediate expiry? TTL zero maybe expire. Allow zero? If default_ttl <0 invalid. TTL zero expires immediately. 
+        self._lock = threading.Lock()
+        self._data = OrderedDict() # key -> (value, expires_at)
+        self._capacity = capacity
+        self._default_ttl = float(default_ttl)
+        self._clock = clock
+
+   

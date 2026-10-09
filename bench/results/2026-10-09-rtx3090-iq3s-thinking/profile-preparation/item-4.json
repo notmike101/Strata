@@ -1,0 +1,65 @@
+{
+  "request": {
+    "model": "qwen3.8-flash-next-iq3_s",
+    "messages": [
+      {
+        "role": "user",
+        "content": "Independent coding-profile preparation item 4.\nWrite Python code for a JSON Pointer evaluator with strict escape handling and informative failures. Explain edge cases and include unit tests."
+      }
+    ],
+    "max_tokens": 512,
+    "seed": 205,
+    "temperature": 1.0,
+    "top_p": 0.95,
+    "top_k": 20,
+    "min_p": 0.0,
+    "presence_penalty": 0.0,
+    "repetition_penalty": 1.0,
+    "frequency_penalty": 0.0,
+    "reasoning_effort": "high",
+    "reasoning_budget_tokens": 0,
+    "chat_template_kwargs": {
+      "enable_thinking": true,
+      "preserve_thinking": true
+    }
+  },
+  "response": {
+    "id": "chatcmpl-7ebd77b20ed1433c8a3cdd6c",
+    "object": "chat.completion",
+    "created": 1791568761,
+    "model": "qwen3.8-flash-next-iq3_s",
+    "choices": [
+      {
+        "index": 0,
+        "message": {
+          "role": "assistant",
+          "content": null,
+          "reasoning_content": "We need answer user: \"Independent coding-profile preparation item 4. Write Python code for a JSON Pointer evaluator with strict escape handling and informative failures. Explain edge cases and include unit tests.\"\n\nNeed produce final with Python code JSON Pointer evaluator, strict escape handling, informative failures. Explain edge cases and include unit tests. Need think.\n\nJSON Pointer RFC 6901: string representation referencing value in JSON. Path segments separated by /, empty string means entire document. Escapes: ~0 is ~, ~1 is /. Need strict escape handling. Informative failures. Need maybe support arrays, objects, maybe numeric indexing, negative? Strict: RFC does not support leading zeros? Actually array index should be string of digits? RFC says array index should be value, e.g. [0]. Leading zeros? JSON arrays index string can be \"01\"? In URI fragment, path segments. Need decide strict. \"strict escape handling\" likely rejects invalid escape sequences, rejects leading zeros? Also informative failures maybe custom exception with pointer context, position. Need write Python code.\n\nNeed include unit tests. Could include doctest? Use unittest. Need robust. Need evaluator evaluate(document, pointer) -> value.\n\nJSON Pointer string must start with / except empty string. Segments are URI-encoded? RFC 6901 says JSON pointer is a string containing URI fragment identifier representation. The escape sequence ~0 -> ~ and ~1 -> /. It also mentions URI fragment may contain percent-encoding. But strict? We can treat JSON Pointer string as after decoding? If evaluator gets pointer string, should it decode percent-encoded? In practice python jsonpointer maybe unquote? Strict escape handling could reject percent signs? But JSON Pointer string representation can include percent-encoded UTF-8 characters. In RFC: The JSON Pointer syntax uses URI fragment identifier, so percent-encoding is used. But unescaped slash? A JSON Pointer is a string: segments separated by solidus, and the only escape sequence for special chars is ~0 ~1. Percent encoding might be for transport URI. If evaluating from pointer string, often don't percent-decode. Need decide and document. Could support optional percent decoding? Strict says raw pointer must not contain percent-encoded escapes? But maybe strict handling of ~ escapes. User says strict escape handling informative failures, not necessarily URI percent encoding. Could implement strict for JSON Pointer token escapes: '~' must be followed by '0' or '1'; otherwise JSONPointerError; no unescaped ~. Also no segment empty"
+        },
+        "finish_reason": "length"
+      }
+    ],
+    "usage": {
+      "prompt_tokens": 85,
+      "completion_tokens": 512,
+      "total_tokens": 597,
+      "prompt_tokens_details": {
+        "cached_tokens": 0
+      }
+    },
+    "timings": {
+      "cache_n": 0,
+      "prompt_n": 85,
+      "prompt_ms": 638.8,
+      "prompt_per_token_ms": 7.515,
+      "prompt_per_second": 133.1,
+      "predicted_n": 512,
+      "predicted_ms": 6155.3,
+      "predicted_per_token_ms": 12.022,
+      "predicted_per_second": 83.2,
+      "draft_n": 199,
+      "draft_n_accepted": 145
+    }
+  },
+  "wall_seconds": 6.803095300012501
+}
