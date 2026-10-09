@@ -1,0 +1,4 @@
+Traceback (most recent call last):
+  File "C:\strata\local-setup\target-80\test-memory-guard.py", line 10, in <module>
+    raise AssertionError(f'unsafe headroom accepted: physical={physical},commit={commit}')
+AssertionError: unsafe headroom accepted: physical=34359738368,commit=17179869183

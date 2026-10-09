@@ -1,6 +1,6 @@
 # All completed workload cells
 
-Ordinary medians and full ranges, excluding only explicitly labeled warmups. Historical campaigns have different contracts and are not pooled. P002 has one measured run per cell and is diagnostic only. Units: tokens, tok/s, and seconds. These are short and approximately 3K prompts, not the index's usual 4K/32K/128K sweep.
+Ordinary medians and full ranges, excluding only explicitly labeled warmups. Historical campaigns have different contracts and are not pooled. P002 and P009 have one measured run per cell and are diagnostic only. Units: tokens, tok/s, and seconds. These are short and approximately 3K prompts, not the index's usual 4K/32K/128K sweep.
 
 | Configuration / workload | Actual prompt tokens | Fresh tokens | Reused tokens | Generated tokens | Runs | Prompt tok/s median (range) | Decode tok/s median (range) | TTFT seconds median (range) | Client total seconds median (range) |
 | --- | ---: | ---: | ---: | ---: | ---: | --- | --- | --- | --- |
@@ -75,6 +75,7 @@ Ordinary medians and full ranges, excluding only explicitly labeled warmups. His
 | [target-80/P007-graph-profile](raw/target-80/P007-graph-profile/runs.json) / longer | 3033-3035 | 3033-3035 | 0 | 512 | 5 | 494.20 (490.80-494.80) | 78.20 (67.50-80.60) | 6.201 (6.196-6.285) | 12.696 (12.554-13.804) |
 | [target-80/P007-graph-profile](raw/target-80/P007-graph-profile/runs.json) / short | 165-168 | 165-168 | 0 | 512 | 5 | 128.40 (125.70-198.50) | 80.60 (74.80-89.10) | 1.357 (0.869-1.427) | 7.662 (6.836-8.229) |
 | [target-80/P008-short-profile](raw/target-80/P008-short-profile/runs.json) / short | 167 | 167 | 0 | 512 | 1 | 181.70 (181.70-181.70) | 56.10 (56.10-56.10) | 0.988 (0.988-0.988) | 10.058 (10.058-10.058) |
+| [target-80/P009-short-profile](raw/target-80/P009-short-profile/runs.json) / short | 167 | 167 | 0 | 512 | 1 | 178.10 (178.10-178.10) | 69.80 (69.80-69.80) | 1.026 (1.026-1.026) | 8.323 (8.323-8.323) |
 | [target-80/Q007-goal-coding](raw/target-80/Q007-goal-coding/runs.json) / quality/coding | 148 | 148 | 0 | 4121-8192 | 5 | 163.00 (139.20-182.10) | 79.20 (77.70-79.40) | 0.943 (0.852-1.092) | 102.957 (52.755-105.372) |
 | [target-80/R001-host-last](raw/target-80/R001-host-last/runs.json) / longer | 3034-3035 | 3034-3035 | 0 | 512 | 3 | 427.10 (426.90-427.30) | 59.50 (56.80-60.90) | 7.141 (7.140-7.154) | 15.729 (15.516-16.126) |
 | [target-80/R001-host-last](raw/target-80/R001-host-last/runs.json) / short | 165-168 | 165-168 | 0 | 512 | 3 | 179.00 (170.50-182.00) | 61.10 (60.70-63.70) | 0.970 (0.934-1.018) | 9.373 (8.945-9.378) |
@@ -128,3 +129,5 @@ Ordinary medians and full ranges, excluding only explicitly labeled warmups. His
 | [target-80/R032-compact-enabled-reverse](raw/target-80/R032-compact-enabled-reverse/runs.json) / short | 165-168 | 165-168 | 0 | 512 | 5 | 197.90 (187.80-206.30) | 85.90 (83.90-90.80) | 0.885 (0.853-0.914) | 6.838 (6.485-6.928) |
 | [target-80/R033-compact-control-reverse](raw/target-80/R033-compact-control-reverse/runs.json) / longer | 3033-3035 | 3033-3035 | 0 | 512 | 5 | 495.10 (458.70-495.20) | 44.90 (16.90-82.20) | 6.172 (6.154-6.977) | 17.545 (12.359-36.878) |
 | [target-80/R033-compact-control-reverse](raw/target-80/R033-compact-control-reverse/runs.json) / short | 165-168 | 165-168 | 0 | 512 | 5 | 202.30 (195.10-204.00) | 86.80 (83.50-89.50) | 0.862 (0.854-0.891) | 6.750 (6.557-6.973) |
+| [target-80/R034-cleanup-control](raw/target-80/R034-cleanup-control/runs.json) / longer | 3033-3035 | 3033-3035 | 0 | 512 | 5 | 474.40 (405.70-495.80) | 18.80 (6.90-82.30) | 6.562 (6.152-8.505) | 33.670 (12.386-81.711) |
+| [target-80/R034-cleanup-control](raw/target-80/R034-cleanup-control/runs.json) / short | 165-168 | 165-168 | 0 | 512 | 5 | 200.00 (194.60-210.00) | 83.80 (75.70-89.60) | 0.867 (0.843-0.905) | 6.990 (6.561-7.586) |

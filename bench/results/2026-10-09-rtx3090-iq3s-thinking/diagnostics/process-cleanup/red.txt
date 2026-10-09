@@ -1,0 +1,7 @@
+FAIL: orphan launcher with no listener was left running
+At C:\strata\local-setup\target-80\test-server-cleanup.ps1:30 char:39
++ ... ains 50001){throw 'FAIL: orphan launcher with no listener was left ru ...
++                 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : OperationStopped: (FAIL: orphan la...as left running:String) [], RuntimeException
+    + FullyQualifiedErrorId : FAIL: orphan launcher with no listener was left running
+ 

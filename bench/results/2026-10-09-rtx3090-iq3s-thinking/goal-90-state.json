@@ -3,14 +3,14 @@
   "target_tps": 90,
   "metric": "server_decode_tps",
   "contract": "goal-90-contract.md",
-  "current": "Tool updates verified side-by-side: CUDA13.4.92, Systems2026.5.1.161; Compute counters restricted. Production source restored, no model resident.",
+  "current": "Launcher-tree cleanup verified in live R034. No model resident. R034 has severe stalls, low commit and unexpectedly costly resource observer;90unqualified.",
   "next": [
-    "Capture unchanged retained production request using updated Systems and validate completeness.",
-    "Rebuild/test unchanged source with new compiler separately; test exact Q6_K grouping if supported by evidence.",
-    "Preserve full fixed qualification matrix and quality gate;90unqualified."
+    "Audit resource observer NVML/PDH/process API costs and pair guarded observer-free/control runs without changing model requests or sampler.",
+    "Retain16GiB physical+commit guard and exact launcher/server/model/vision cleanup.",
+    "After reliable measurement, compare unchanged-source CUDA13.4 build and exact Q6_K grouping; Q007/full90quality gates remain."
   ],
   "promoted": "The previously qualified format-gather engine with IQ2_S gather disabled and adaptive lag2; no changes this turn.",
   "stopping_rule": "Leave goal active until all fixed qualification cells pass. No benchmark model resident at handoff.",
   "quality": "Q007: 3/5 compiled and passed72 tests each, 2/5 no final answer at8192 tokens. Goal unqualified.",
-  "last_checkpoint": "E049"
+  "last_checkpoint": "E051"
 }

@@ -1,0 +1,204 @@
+{
+  "nsight_version": "2026.5.1.161",
+  "kernel_records": 759910,
+  "first_kernel_seconds": 1.34508023,
+  "last_kernel_seconds": 9.61532471,
+  "capture_seconds": 9.715,
+  "diagnostics": [
+    [
+      0,
+      1,
+      3,
+      1,
+      "Profiling has started.",
+      -144115188075855872
+    ],
+    [
+      9714507000,
+      1,
+      3,
+      1,
+      "Profiling has stopped.",
+      -144115188075855872
+    ],
+    [
+      -73242623000,
+      1,
+      2,
+      1,
+      "Process 287216 was launched by the profiler",
+      286293661581312
+    ],
+    [
+      -73095371161,
+      1,
+      1,
+      1,
+      "Common injection library initialized successfully.",
+      286293661581312
+    ],
+    [
+      -72298295769,
+      1,
+      1,
+      1,
+      "Common injection library initialized successfully.",
+      286069517975552
+    ],
+    [
+      -72244453356,
+      1,
+      1,
+      1,
+      "Common injection library initialized successfully.",
+      287011994861568
+    ],
+    [
+      -71479946322,
+      1,
+      1,
+      1,
+      "Common injection library initialized successfully.",
+      286967099031552
+    ],
+    [
+      -71469373807,
+      1,
+      1,
+      1,
+      "Buffers holding CUDA trace data will be flushed on CudaProfilerStop() call. See --flush-on-cudaprofilerstop to control this behavior.",
+      286967099031552
+    ],
+    [
+      -71440019131,
+      1,
+      1,
+      1,
+      "Loaded CUPTI library: C:\\strata\\.tools\\n5\\ProgramFiles64Folder\\NVIDIA Corporation\\Nsight Systems 2026.5.1\\target-windows-x64\\cupti64_134.dll",
+      286967099031552
+    ],
+    [
+      -71439604000,
+      1,
+      1,
+      1,
+      "Enabling trace for device graph launch",
+      286967099031552
+    ],
+    [
+      -71426966280,
+      1,
+      1,
+      1,
+      "CUDA injection initialized successfully.",
+      286967099031552
+    ],
+    [
+      -69871547641,
+      1,
+      1,
+      1,
+      "Common injection library initialized successfully.",
+      286282588618752
+    ],
+    [
+      -69823198054,
+      1,
+      1,
+      1,
+      "Buffers holding CUDA trace data will be flushed on CudaProfilerStop() call. See --flush-on-cudaprofilerstop to control this behavior.",
+      286282588618752
+    ],
+    [
+      -69793609364,
+      1,
+      1,
+      1,
+      "Loaded CUPTI library: C:\\strata\\.tools\\n5\\ProgramFiles64Folder\\NVIDIA Corporation\\Nsight Systems 2026.5.1\\target-windows-x64\\cupti64_134.dll",
+      286282588618752
+    ],
+    [
+      -69793199013,
+      1,
+      1,
+      1,
+      "Enabling trace for device graph launch",
+      286282588618752
+    ],
+    [
+      -69780559702,
+      1,
+      1,
+      1,
+      "CUDA injection initialized successfully.",
+      286282588618752
+    ],
+    [
+      2558361300,
+      2,
+      3,
+      2,
+      "Not all CUDA events might have been collected.",
+      286967099031552
+    ],
+    [
+      2558365100,
+      2,
+      3,
+      2,
+      "No CUDA events collected. Does the process use CUDA?",
+      286967099031552
+    ],
+    [
+      2558366700,
+      2,
+      3,
+      2,
+      "Not all CUDA events might have been collected.",
+      286282588618752
+    ],
+    [
+      2558368100,
+      2,
+      3,
+      1,
+      "Number of CUDA events collected: \t804251.",
+      286282588618752
+    ],
+    [
+      9715329325,
+      1,
+      1,
+      1,
+      "CUDA hardware tracing is not supported on this system. A legacy (software instrumented) trace was collected instead.",
+      286282588618752
+    ],
+    [
+      9715385542,
+      1,
+      1,
+      1,
+      "CUDA legacy/software instrumented trace was collected.",
+      286967099031552
+    ],
+    [
+      9715467704,
+      1,
+      1,
+      1,
+      "Number of CUPTI events produced: \t0, CUPTI buffers: 50.",
+      286967099031552
+    ],
+    [
+      9918023268,
+      1,
+      1,
+      1,
+      "Number of CUPTI events produced: \t855077, CUPTI buffers: 163.",
+      286282588618752
+    ]
+  ],
+  "trace_complete_proven": false,
+  "authoritative": false,
+  "note": "Explicit not-all-CUDA-events-collected warning; no explicit dropped-record count. Never use as complete critical-path attribution."
+}

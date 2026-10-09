@@ -1,0 +1,11 @@
+We need answer user's request. Need produce final detailed answer at least 1200 words, complete code, tests, explanation design. Need implement thread-safe Python TTLCache class using OrderedDict and monotonic clock. Include set, get, delete, clear, len, expiration, capacity eviction, unit tests with injected fake clock, detailed explanation thread safety and complexity. Do not abbreviate implementation. Benchmark identifier ignore. Need likely provide full code, tests, explanation. Need ensure correctness.
+
+Let's design.
+
+Python TTLCache:
+- OrderedDict storing key -> (value, expires_at)
+- Lock maybe threading.Lock or RLock. Since operations call internal methods, need avoid nested locks? If public methods acquire lock and call non-locking internals. Use threading.RLock for safety? Could use Lock and no nested public calls. But len etc should be safe.
+- Clock injected: callable returning float monotonic. Default time.monotonic.
+- maxsize capacity, ttl seconds. If maxsize <=0 invalid. ttl <=0? Could allow immediate expiration? Better ttl positive maybe allow 0 immediate? set ttl >0? We can enforce maxsize >0, ttl >0 or >=0. For TTLCache ttl maybe seconds; if ttl 0 entry expires immediately. But capacity eviction if ttl=0 then set stores then maybe expired? We can define ttl >= 0; if ttl == 0, expires at now, get returns None if expiry <= now? Expiration condition now >= expiry. For set with ttl=0, entry will be removed on get or cleanup. Could be okay.
+- Expiration: internal _purge_expired removes all expired items from end? OrderedDict maintains insertion/access order. We can maintain LRU via move_to_end on get (default) or set. Eviction capacity: OrderedDict.popitem(last=False) least recent. Expiration: We can purge all expired on each operation. Since expiry times arbitrary, cannot stop at first expired unless entries sorted by expiry. OrderedDict order is access/insertion, not expiry. Could store expiry and scan all items to remove expired. Complexity O(n) per op if purge full. Need discuss. Could optimize with min-heap but user specified OrderedDict. So use scan. But if maxsize finite maybe O(maxsize). We'll explain.
+- get(key, default=None): acquire lock; current now. entry? if not exists return default. If expired: del and return default. If not expired: move_to_end;

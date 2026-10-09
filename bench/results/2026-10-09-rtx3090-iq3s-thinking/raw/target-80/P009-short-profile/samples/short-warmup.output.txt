@@ -1,0 +1,13 @@
+We need answer user wants code only? "Return only the complete function in a Python code block." Need implement topological_order(nodes, edges). No imports. Lexicographically smallest topological ordering, include isolated nodes, ignore duplicate edges, raise ValueError for edge endpoint absent from nodes or cycle. Do not mutate either input. Need final only code block.
+
+Need think through requirements. Nodes list unique strings, edges list pairs before after. Need output list lexicographically smallest topological ordering. Standard Kahn with min-heap, but no imports. Can use sorted list and pop min manually, or use heap? heapq is import, no imports. We can maintain available list and sort each iteration? O(N^2 log?) acceptable? Need robust.
+
+Need not mutate inputs. Need copy adjacency maybe. Duplicates ignored: use sets/dicts. Since no imports, can use dict, set. Strings unique.
+
+Edge endpoint absent from nodes -> ValueError. Need check endpoints: if before not in node_set or after not in node_set raise ValueError. Could check all edges first? If edge endpoint absent, raise regardless cycle. Also if duplicate edges ignore. What about self-loop? edge (a,a) absent? endpoint present but cycle (self-loop). Should raise ValueError. Duplicates ignore but self-loop cycle. Need detect.
+
+Topological sort lexicographically smallest: With all nodes (including isolated). At each step choose smallest string among nodes with indegree 0. Need ensure lexicographic smallest overall ordering? For topological orders, greedily choosing smallest available node yields lexicographically smallest sequence (strings comparable). Yes.
+
+Implementation without mutating input: nodes input list not mutated. We can iterate. Need create node_set = set(nodes). But if nodes contains unhashable? spec strings. Edges may not be iterable pairs? Could handle? Not needed. But if edges is tuple list? We won't mutate.
+
+Need avoid mutating edges. We can create adjacency = {node: set() for node in nodes}, indegree = {node: 0 for node in nodes}. For each edge: maybe edge length not 2? Could raise ValueError? Spec endpoints absent from nodes or cycle. Might unpack; if malformed, unpack raises ValueError? In Python unpack raises ValueError too, maybe okay. But if edge not 2 items, ValueError. But message? Not specified. We can explicit if len(edge)!=2 raise ValueError. But if edge is not sequence? We can try before, after = edge. For
