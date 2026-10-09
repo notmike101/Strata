@@ -1,0 +1,26 @@
+{
+  "attempts": [
+    {
+      "arm": "B006-cuda133-repeat",
+      "stage": "restart before measurement",
+      "error": "Port 8080 occupied immediately after terminating verified server tree",
+      "generated_requests": 0,
+      "resolution": "Confirmed listener and GPU processes exited and memory returned to 371 MiB, then restarted successfully. Added listener-release waiting and renamed-engine detection to the restart helper."
+    },
+    {
+      "arm": "B005-cuda133-cpuvision",
+      "stage": "pre-request identity check, initial attempt",
+      "error": "TypeError: string indices must be integers, not str",
+      "cause": "Process discovery assumed strata.exe; the preserved control has a distinct filename. Windows PowerShell serialized the only matching vision process as one object.",
+      "generated_requests": 0,
+      "resolution": "Resolve the configured executable path uniquely and serialize an explicit process array. No benchmark requests or timings were changed."
+    },
+    {
+      "arm": "B005-cuda133-cpuvision",
+      "stage": "pre-request identity check, first repair attempt",
+      "error": "ConvertTo-Json -AsArray unavailable in Windows PowerShell 5.1",
+      "generated_requests": 0,
+      "resolution": "Use ConvertTo-Json -InputObject @(...) for compatibility. The subsequent measurement run started successfully."
+    }
+  ]
+}

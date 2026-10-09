@@ -1,0 +1,27 @@
+We need answer user's request. Need produce final answer at least 1200 words, detailed implementation thread-safe Python TTLCache using OrderedDict monotonic clock. Include set, get, delete, clear, len, expiration, capacity eviction, unit tests with injected fake clock, detailed explanation of thread safety and complexity. Do not abbreviate implementation. Also mention ignore benchmark identifier? They said ignore. Need likely not mention existing rules? Could maybe incorporate? The existing rules are filler. Need not implement them. Need produce complete code then tests then explanation. Need be thorough. Ensure no hidden chain in final. Need answer only. Need think about design.
+
+We need write a TTLCache. Requirements:
+- Thread-safe Python TTLCache class using OrderedDict and monotonic clock.
+- Include set, get, delete, clear, len, expiration, capacity eviction.
+- unit tests with injected fake clock.
+- detailed explanation of thread safety and complexity.
+- Write complete code, then tests, then explain design.
+- Do not abbreviate implementation.
+- At least 1200 words.
+
+Need code robust:
+```
+import threading
+import time
+from collections import OrderedDict
+from typing import Any, Optional, Callable
+
+class TTLCache:
+    def __init__(self, capacity: int, clock: Callable[[], float] = time.monotonic):
+       if capacity <=0 raise
+       self._capacity = int(capacity)
+       self._clock = clock
+       self._lock = threading.RLock()
+       self._entries = OrderedDict() # key -> (value, expires_at)
+```
+Need capacity in bytes? Existing rules mention size bytes. But generic cache capacity? Could implement capacity as max bytes with item size? They request set/get etc and capacity eviction. They didn't specify byte size in interface but existing rules mention size bytes. We might implement capacity in bytes and sizes in bytes to align. But simple TTL cache capacity maybe number of entries. The prompt says existing rules have size bytes and expiration, LRU. It asks thread-safe Python TTLCache using OrderedDict, include len. It might not require byte capacity. But to be safe, implement byte-size aware cache: `set(key, value, ttl, size=1)` and `capacity` max total bytes. `len` returns number of entries. Eviction when total size exceeds capacity evict oldest LRU. This aligns rules. But tests simpler? Need not overcomplicate? User says

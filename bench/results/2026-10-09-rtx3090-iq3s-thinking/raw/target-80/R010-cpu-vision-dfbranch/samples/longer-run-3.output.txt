@@ -1,0 +1,22 @@
+We need answer user's request. Need produce final answer with complete code, tests, explanation at least 1200 words. Need implement thread-safe Python TTLCache using OrderedDict and monotonic clock. Include set,get,delete,clear,len, expiration, capacity eviction, unit tests injected fake clock, detailed explanation thread safety and complexity. Do not abbreviate. Need maybe mention existing cache rules? Probably ignore identifier. Could incorporate that existing rules are examples not requiring hardcoded. We need ensure detailed. Need maybe write code with Lock, OrderedDict. Need think through implementation correctness.
+
+Need produce answer in English? User English. Need maybe include benchmark ignored. Need not mention. Need ensure at least 1200 words. Let's design thorough.
+
+Potential code:
+import threading
+from collections import OrderedDict
+import time
+from typing import Optional, Callable, Hashable, Any, Generic, TypeVar
+
+K=TypeVar('K', bound=Hashable); V=TypeVar('V')
+DEFAULT_CAPACITY=128
+DEFAULT_TTL=60
+class TTLCache(Generic[K,V]):
+    def __init__(self, capacity=DEFAULT_CAPACITY, default_ttl=DEFAULT_TTL, time_func=time.monotonic, cleanup_on_get=True):
+        if capacity <1: raise ValueError
+        if default_ttl is not None and default_ttl <0: raise ValueError
+        self._capacity=capacity
+        self._default_ttl=default_ttl
+        self._time_func=time_func
+        self._lock=threading.RLock? Need avoid reentrant? If public methods call private while lock held. Use threading.Lock and private unlocked helpers, public wrappers. If use RLock can be easier but potential reentry. For thread-safety, use Lock. Need get calls expire while holding lock. Use OrderedDict.
+        self._entries = OrderedDict() key -> (value, expires_at, size?) maybe include size for capacity? Existing rules size? User didn't explicitly ask size-based eviction? Existing cache rules include size bytes, but class maybe capacity eviction. Should we include size? "capacity eviction" could be max entries or weighted by size. Existing rules include size bytes and lifetime. Need maybe implement weighted capacity? They asked OrderedDict and monotonic clock. Include expiration, capacity eviction. Could be max_entries. But existing rules size bytes suggests maybe cache entries have size, and capacity eviction could use max_size bytes? Let's parse: Existing cache rule lists key lifetime size. Requirements for implementation: thread

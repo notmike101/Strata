@@ -1,0 +1,21 @@
+We need answer user's request. Need produce final answer at least 1200 words. Need implement thread-safe Python TTLCache using OrderedDict monotonic clock, include set, get, delete, clear, len, expiration, capacity eviction, unit tests with injected fake clock, detailed explanation thread safety and complexity. Do not abbreviate implementation. Need ignore benchmark identifier. Need likely provide code, tests, explanation. Need ensure complete code. Could use threading.RLock. OrderedDict move_to_end. Expiration lazily on access, plus maybe purge_expired. Capacity eviction using maxsize. Thread-safe: all public methods lock. Need careful with len: expiration should account? If len should reflect non-expired? Yes len should return number of non-expired entries, maybe prune expired. Need avoid recursion? Implement with OrderedDict mapping key to (value, expires_at). If maxsize None? Could allow no capacity. Use monotonic clock injected; default time.monotonic. ttl None no expiration? TTL maybe seconds. If ttl<=0? Could set immediately expired? Need decide. Use float. For get, check if expired; if expired delete and return default. set evict capacity after insert? If key already exists, move_to_end and update; if maxsize is not None and len(self._cache)>maxsize: remove oldest. But if expired entries count? Need eviction based on actual stored entries? Thread-safety. Need unit tests with fake clock. Need complete code maybe one file? Could include class and tests. Could use unittest. Tests injected fake clock. Need maybe show example.
+
+Need ensure code not abbreviated. Need at least 1200 words. Could include imports, class, methods, tests. Need detailed explanation of thread safety and complexity. Let's think about exact implementation.
+
+Class:
+import threading
+import time
+from collections import OrderedDict
+from typing import Any, Optional, Callable, Hashable, Iterator
+
+class TTLCache:
+    def __init__(self, maxsize=None, default_ttl=None, clock=time.monotonic):
+         self.maxsize = maxsize
+         self.default_ttl = default_ttl
+         self._clock = clock
+         self._cache = OrderedDict()
+         self._lock = threading.RLock()
+         if default_ttl is not None and default_ttl < 0: raise ValueError? TTL nonnegative maybe.
+    def set(self, key, value, ttl=None):
+         with self._lock:
+             ttl = self.default_ttl if

@@ -1,0 +1,20 @@
+We need answer user's request. Need produce complete code, tests, explanation design, at least 1200 words. Need likely in final. Need ensure no abbreviated implementation. Need thread-safe TTLCache class using OrderedDict and monotonic clock. Include set, get, delete, clear, len, expiration, capacity eviction, unit tests with injected fake clock, detailed explanation thread safety and complexity.
+
+Need craft final answer. Need maybe include Python code. Need think details.
+
+Requirements:
+- Thread-safe Python TTLCache class.
+- using OrderedDict and monotonic clock.
+- include set, get, delete, clear, len, expiration, capacity eviction, unit tests with injected fake clock.
+- detailed explanation of thread safety and complexity.
+- Write complete code, then tests, then explain design.
+- Do not abbreviate implementation.
+- at least 1200 words.
+
+Need benchmark identifier ignore.
+
+Need design:
+class TTLCache:
+    __slots__? Could include.
+    init(max_size=128, default_ttl=300, clock=time.monotonic, lock=threading.RLock?)
+Need thread-safe. Could use reentrant lock? OrderedDict operations not thread safe. Use self._lock = threading.RLock() to allow internal method calls under lock. If public methods call helper under lock. Need avoid deadlock by not calling public under lock or use RLock. Use monotonic clock. Expiration: store expiry timestamp for each key. OrderedDict maintain insertion/update order for capacity eviction. Need LRU? OrderedDict with move_to_end on get/set for capacity eviction. Expiration: on get check if expired; if expired delete and raise KeyError or return default? For TTLCache get(key, default=None) return default if missing/expired. set(key, value, ttl=None). delete(key), clear(), len(). Need maybe __len__, __contains__? User says len method maybe include len(self) via __len__. Include expiration: maybe purge expired keys before len. Capacity eviction: if len > max_size, popitem(last=False) after evict expired? Need capacity counts only non-expired? Better purge expired before length and eviction. But expensive O(n). Could lazy expiration: get removes expired. For len and capacity need accurate? If max_size, if expired entries remain and not removed, could falsely evict fresh entries or len includes expired. To make expiration and capacity deterministic, can purge expired when needed: set and len call _

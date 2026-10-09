@@ -1,0 +1,19 @@
+We need answer user's request. Need produce final answer with complete code, tests, detailed explanation at least 1200 words. Need think fully.
+
+Task: Implement thread-safe Python TTLCache class using OrderedDict and monotonic clock. Include set, get, delete, clear, len, expiration, capacity eviction, unit tests with injected fake clock, detailed explanation of thread safety and complexity. Write complete code, then tests, then explain design. Do not abbreviate implementation. At least 1200 words.
+
+Need produce Python code. Need be careful thread-safe. Use OrderedDict, threading.Lock or RLock. TTLCache: maxsize, ttl. clock injectable. Methods: set, get, delete, clear, __len__ maybe len(), expiration? Maybe method to count active? Also maybe __contains__, set default? Need complete.
+
+Need unit tests with fake clock. Could use unittest. Use fake clock with advance. Test insertion, retrieval, default, TTL expiry, capacity eviction LRU? TTLCache from cachetools evicts least-recently-used after expiration cleanup? We'll implement OrderedDict for LRU. Need thread-safe. Complexity: set/get/delete O(1) amortized? cleanup expired keys O(number expired) potentially. len triggers cleanup O(expired) but active O(1) maybe. Eviction capacity O(1). Monotonic clock.
+
+Need design details: OrderedDict stores key -> (value, expires_at). On get: lock; entry = dict.get; if None? Need allow None values? Could use sentinel MISSING. For key not present but expired? OrderedDict.pop? Need handle None.
+
+Implementation:
+from collections import OrderedDict
+import threading
+import time
+
+class TTLCache:
+    __slots__ = ("_data", "_lock", "_maxsize", "_ttl", "_clock")? If using OrderedDict cannot slots with internal? yes.
+    def __init__(self, maxsize=128, ttl=300.0, clock=None): if clock is None use time.monotonic.
+        if maxsize < 1? maybe allow 0? maxsize=0 means cache nothing? OrderedDict with size 0? If maxsize < 0 ValueError; ttl >=0. If ttl=0 immediate expire? yes maybe ttl 0 means expires at same time; get checks expiry. If maxsize=0, set will evict all? Need decide. maxsize can be 0? Maybe set max

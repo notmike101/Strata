@@ -1,0 +1,20 @@
+We need answer user's request. Need produce detailed answer at least 1200 words. User asks: Benchmark identifier ignore. Implement thread-safe Python TTLCache class using OrderedDict and monotonic clock. Include set, get, delete, clear, len, expiration, capacity eviction, unit tests with injected fake clock, detailed explanation thread safety and complexity. Write complete code, then tests, then explain design. Do not abbreviate implementation.
+
+Need produce final with code complete, tests complete, explanation. Need ensure code uses OrderedDict, threading lock maybe RLock? TTL cache with max size and ttl? Thread-safe. Need decide API. Class TTLCache(OrderedDict?) Maybe implement wrapper with OrderedDict internal. Methods set, get, delete, clear, len maybe __len__, expire? Include expiration maybe cleanup method? User says Include set, get, delete, clear, len, expiration, capacity eviction, unit tests with injected fake clock, detailed explanation. Could provide methods set(key, value, ttl=None), get(key, default=None), delete(key), clear(), __len__, cleanup_expired, maybe expire? Expiration: lazy expiration on access + periodic purge? Could include __getitem__? But request says set get delete clear len expiration. Need code complete not abbreviated.
+
+Potential implementation:
+from collections import OrderedDict
+import threading
+import time
+from typing import Any, Optional, Callable
+
+class TTLCache:
+    def __init__(self, maxsize: int = 128, ttl: float = 30.0, clock: Optional[Callable[[], float]] = None):
+       if maxsize <1? maybe raise ValueError? Could allow <=0? If maxsize < 1 maybe ValueError. ttl non-negative? clock default monotonic.
+       self._lock = threading.RLock()
+       self._entries = OrderedDict() # key -> (expires_at, value)
+       self._maxsize = int(maxsize)
+       self._ttl = float(ttl)
+       self._clock = clock or time.monotonic
+Need handle maxsize=0? Maybe if maxsize <=0 raises ValueError to keep capacity. Or if maxsize=0, set clears and doesn't store? Simpler require positive. But capacity eviction: pop oldest.
+_set: if ttl None use default; if ttl <= 0 maybe store with immediate expiry? Or not store? TTL zero could immediately expire? Better allow ttl = 0 and it expires now; but if ttl negative raise

@@ -1,0 +1,20 @@
+We need answer user's request: implement thread-safe Python TTLCache class using OrderedDict and monotonic clock. Include set, get, delete, clear, len, expiration, capacity eviction, unit tests with injected fake clock, detailed explanation thread safety and complexity. Complete code, tests, explain design. At least 1200 words. Ignore benchmark identifier. Need final only. Need ensure complete code no abbreviation. Need likely include imports, dataclass? Thread-safe using RLock? Need OrderedDict. Monotonic clock injected via clock=monotonic. Need len counts non-expired? Include expiration and capacity eviction. Thread safety: lock around all operations, maybe use RLock if internal methods call public. Need ensure no deadlocks. TTLCache: set(key, value, ttl) with default ttl? get(key, default=None). delete(key). clear. __len__, maybe __contains__, keys? Could include items? User requested set, get, delete, clear, len, expiration, capacity eviction. Need unit tests with injected fake clock. We can provide code with unittest. Need maybe include class with _Clock = Callable. Use collections.OrderedDict. Expiration: store expires_at = clock() + ttl. On get, if expired delete return default. On len, clean expired? Need thread-safe len? We can clean under lock. But cleaning all expired on len could be O(n) per call. Complexity: get/set/delete/clear O(1) average. len O(n) if purging expired because need count non-expired; alternatively maintain count with timer impossible. Explain. Could include _purge_locked method that iterates OrderedDict, removes expired. Since OrderedDict supports pop, values? But deleting while iterating not safe. Need collect expired keys then remove. But OrderedDict values? Since entries store value and expiry maybe tuple. Need careful.
+
+Potential design:
+
+import threading
+from collections import OrderedDict
+from time import monotonic
+from typing import Callable, Any, Optional, Tuple
+
+class TTLCache:
+    def __init__(self, maxsize=128, ttl=60.0, clock=monotonic):
+        if maxsize <=0 raise ValueError
+        if ttl <0 raise ValueError
+        self._maxsize = maxsize
+        self._default_ttl = ttl
+        self._clock = clock
+        self._data: OrderedDict[str/Any, Tuple[Any, float]] = OrderedDict()
+        self._lock = threading.RLock()
+
+    def set

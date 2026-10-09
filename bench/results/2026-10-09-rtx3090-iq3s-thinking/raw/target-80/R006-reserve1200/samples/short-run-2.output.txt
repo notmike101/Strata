@@ -1,0 +1,12 @@
+We need answer user's request. Need produce final detailed answer at least 1200 words, complete code, tests, explanation thread safety complexity. User says benchmark identifier ignore. Implement thread-safe Python TTLCache class using OrderedDict and monotonic clock. Include set, get, delete, clear, len, expiration, capacity eviction, unit tests with injected fake clock, detailed explanation. Do not abbreviate implementation. Need likely provide code fully. Need ensure at least 1200 words. Need maybe include imports threading, collections.OrderedDict, time.monotonic optional? Use injected clock callable returning monotonic value. Thread-safe with RLock maybe. Need design: TTLCache class, default_capacity, default_ttl, clock. Use OrderedDict for LRU? They specifically OrderedDict and expiration capacity eviction. Could implement OrderedDict storing entries: key -> (value, expires_at, size?) Maybe simple. Need set, get, delete, clear, len. len returns number of unexpired entries? likely yes. Need expiration: remove expired on access/set? Could include purge. Need capacity eviction: when size > capacity after insertion, pop oldest item (LRU). For thread safety: use threading.RLock. Methods: __init__, set, get, delete, clear, len, maybe __len__, __contains__, purge. Fake clock for tests. Need unit tests with unittest. Ensure complete code, no abbreviation. Could include type hints. Need explain. Need maybe discuss monotonic clock injected: default uses time.monotonic to avoid system clock jumps. Fake clock increments.
+
+Need at least 1200 words. I can write around 1700-2200. Ensure no markdown weird? Provide code blocks. Need complete code. Let's design robust TTLCache.
+
+Implementation details:
+- import threading, time, collections.OrderedDict, typing optional.
+- class _CacheEntry maybe namedtuple? Could use tuple (value, expires_at). OrderedDict key -> (value, expires_at).
+- TTLCache:
+    def __init__(self, capacity=128, default_ttl=60.0, clock=None):
+         if capacity <= 0 raise ValueError; default_ttl <0? allow 0 immediate expiration? maybe >=0. clock defaults time.monotonic. _lock = threading.RLock(); _store = OrderedDict(); self._clock=clock; etc.
+    def _now(self): return self._clock()
+    def _is_expired(self, key

@@ -1,0 +1,27 @@
+We need answer user's request. Need produce final answer with complete code, tests, detailed explanation at least 1200 words. Need think fully.
+
+Task: Implement thread-safe Python TTLCache class using OrderedDict and monotonic clock. Include set, get, delete, clear, len, expiration, capacity eviction, unit tests with injected fake clock, detailed explanation of thread safety and complexity. Write complete code, then tests, then explain design. Do not abbreviate implementation. At least 1200 words.
+
+Need produce Python code. Need be careful thread-safe. Use OrderedDict, threading.RLock maybe. TTLCache: capacity, default_ttl maybe. Clock injectable. Methods set(key,value,ttl=None), get(key,default=None), delete(key), clear(), __len__, maybe keys? Need expiration: on get if expired delete and return default. Also maybe lazy expiration; but also could purge expired entries? Need ensure len counts live entries not expired. OrderedDict maintains insertion/access order for LRU eviction. Thread-safe with RLock. Need avoid deadlocks; all public methods acquire lock; internal helpers called under lock. Monotonic clock: default time.monotonic, injected fake clock. Use collections.OrderedDict. Use dataclass? Maybe not. Need no abbreviate. Could implement full code.
+
+Consider details:
+```
+import threading
+import time
+from collections import OrderedDict
+from typing import Any, Hashable, Optional, Callable
+
+class TTLCache:
+    __slots__? Maybe not necessary. 
+    def __init__(self, capacity=128, default_ttl=300.0, clock=None):
+       if capacity <=0 raise ValueError
+       if default_ttl is not None and default_ttl <0 raise ValueError
+       self._capacity=capacity
+       self._default_ttl=default_ttl
+       self._clock=clock if clock is not None else time.monotonic
+       self._entries=OrderedDict()
+       self._lock=threading.RLock()
+```
+Each entry: (expires_at, value) maybe OrderedDict key->tuple. But to update expiration on set. For get: with lock; entry=...; now=clock(); if entry expires_at is not None and expires_at <= now: del entries[key]; return default. else entries.move_to_end(key); return value.
+
+set: if ttl None use default_ttl; if ttl is not None: if ttl <0 error; if ttl==0? Should item be immediately

@@ -1,0 +1,26 @@
+{
+  "model": "qwen3.8-flash-next-iq3_s",
+  "messages": [
+    {
+      "role": "user",
+      "content": "Benchmark identifier 7046794d39f4edcef55f8317. Ignore this identifier.\nImplement a thread-safe Python TTLCache class using an OrderedDict and a monotonic clock. Include set, get, delete, clear, len, expiration, capacity eviction, unit tests with an injected fake clock, and a detailed explanation of thread safety and complexity. Write complete code, then tests, then explain the design. Do not abbreviate the implementation. Produce a detailed answer of at least 1200 words."
+    }
+  ],
+  "max_tokens": 512,
+  "stream": true,
+  "temperature": 1.0,
+  "top_p": 0.95,
+  "top_k": 20,
+  "min_p": 0.0,
+  "presence_penalty": 0.0,
+  "repetition_penalty": 1.0,
+  "frequency_penalty": 0.0,
+  "reasoning_effort": "high",
+  "reasoning_budget_tokens": 0,
+  "chat_template_kwargs": {
+    "enable_thinking": true,
+    "preserve_thinking": true
+  },
+  "seed": 101,
+  "strata_checkpoint": false
+}

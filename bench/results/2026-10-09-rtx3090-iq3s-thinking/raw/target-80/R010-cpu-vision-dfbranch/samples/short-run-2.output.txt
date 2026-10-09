@@ -1,0 +1,17 @@
+We need answer user's request. Need produce final detailed answer at least 1200 words, complete code, tests, explanation design. Need implement thread-safe Python TTLCache class using OrderedDict and monotonic clock. Include set, get, delete, clear, len, expiration, capacity eviction, unit tests with injected fake clock, detailed explanation thread safety and complexity. Ignore benchmark identifier? User says ignore identifier. We can mention? No need.
+
+Need think through implementation. Use OrderedDict for LRU? TTLCache typically TTL plus capacity. Need thread-safe. Use threading.Lock. Monotonic clock: default time.monotonic, inject clock. Methods: __init__(capacity, ttl, clock=None). set(key, value, ttl=None?) Should include set. get(key, default=None). delete(key). clear(). len -> __len__. expiration. Need expire? Could implement _purge_expired on operations. Need capacity eviction. OrderedDict move_to_end for LRU on get/set. Use OrderedDict.popitem(last=False) to evict LRU. TTL: store expiry timestamp. If ttl=None? Could be cache-level default ttl; set can override ttl maybe None means no expiration? Need decide. Better allow ttl=None to mean use default; negative/zero? validate. capacity maybe None? But requirement capacity eviction; maybe capacity positive int. Could allow None for unlimited? Simpler require int >=1. But maybe include optional capacity None. Thread-safe: lock for mutations, and get may remove expired. Need ensure consistent snapshot for len? len under lock. Expiration: private _expired(now) returns bool. _refresh_ttl? If get extends expiration? TTLCache often expiration not refreshed unless explicitly. Maybe include `get` with `extend=False`? User wants expiration. Could include set updates expiration. Need unit tests with fake clock. Could use unittest. Need complete code and tests.
+
+Need detailed explanation of thread safety and complexity. At least 1200 words. Need code not abbreviated. Let's design robust.
+
+Class:
+
+import threading
+import time
+from collections import OrderedDict
+from typing import Any, Optional, Callable, Hashable, Tuple, Iterator
+
+class TTLCache:
+    __slots__ = ("_capacity", "_default_ttl", "_clock", "_store", "_lock")? _store not in slots? yes.
+    def __init__(self, capacity: int, ttl: Optional[float], clock: Optional[Callable[[], float]]=None):
+       if capacity <

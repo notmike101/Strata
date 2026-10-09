@@ -1,0 +1,14 @@
+We need answer user's request. Need implement thread-safe Python TTLCache using OrderedDict and monotonic clock. Include set, get, delete, clear, len, expiration, capacity eviction, unit tests with injected fake clock, detailed explanation thread safety and complexity. Complete code, then tests, then explain design. Do not abbreviate implementation. At least 1200 words.
+
+We need produce final answer with code blocks. Need ensure code correct. Let's design.
+
+Thread-safe TTLCache:
+- uses collections.OrderedDict.
+- monotonic clock injectable via callable returning float seconds.
+- Lock: maybe threading.RLock for reentrancy. Use with self._lock.
+- Internal entry store values and expiry timestamp.
+- OrderedDict for LRU eviction? The request says capacity eviction. We can use LRU by move_to_end on access and set. For capacity eviction remove oldest. Also expiration on set, get, maybe len and clear. Need expiration method? Include expiration: maybe prune expired entries. Provide public method? Could include `expire()`? The request says expiration, capacity eviction. We'll include internal `_prune_expired`, public `expire`? Maybe `prune_expired`.
+- Methods: set(key, value, ttl), get(key, default=None), delete(key), clear(), __len__, __contains__, keys? Could include values/items? But user specified len. Need maybe `len()` built-in calls __len__.
+- Need handle ttl: None or infinite? TTL non-negative? If ttl=0 means expires immediately? Monotonic clock: time.now(). expiration timestamp. Need avoid clock going back? monotonic doesn't. Use max(now, now+ttl)? If ttl None no expiry. ttl float.
+- Need get: with lock: now=clock(); entry = OrderedDict.get; if entry is sentinel? For key exists with sentinel value. Could store Entry dataclass or tuple (value, expires_at). Since OrderedDict maps key -> (value, expires_at). For default maybe sentinel. If expired: del and return default.
+- Need set: acquire lock: remove expired entries (or prune all) before? If new key and capacity? Need if key exists update and move_to_end. If not, remove expired first; if len == capacity: popitem(last=False) evicts LRU. Then insert with expiry. If ttl not None: expiry=now+ttl else None. If ttl == 0? entry expired immediately? If expiry ==

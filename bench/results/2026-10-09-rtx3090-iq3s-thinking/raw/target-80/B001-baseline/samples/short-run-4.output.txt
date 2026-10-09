@@ -1,0 +1,20 @@
+We need answer user's request. Need produce complete code, tests, explanation design at least 1200 words. User says benchmark identifier ignore. Need implement thread-safe Python TTLCache class using OrderedDict and monotonic clock. Include set, get, delete, clear, len, expiration, capacity eviction, unit tests with injected fake clock, detailed explanation of thread safety and complexity. Write complete code, then tests, then explain design. Do not abbreviate implementation.
+
+Need think through implementation details.
+
+We need deliver answer with code blocks likely one file? "Write complete code, then tests, then explain the design." Could present cache.py with imports and class. Tests maybe separate file. Need ensure complete code not abbreviated. Include fake clock injection. Thread-safe: use threading.RLock maybe. OrderedDict with move_to_end on get. Store expiry timestamp (monotonic float). set stores value and expiry? Need expiration lazy deletion. Capacity eviction: OrderedDict maintains LRU? They didn't specify LRU but OrderedDict typical for LRU. We can mention order by insertion/access; when capacity exceeded evict oldest non-expired? But if expired entries remain, eviction should evict oldest, possibly expired, fine. Could also prune expired on operations. Need get: if not found return default; if expired delete and return default. set: delete existing key to update order and expiry; insert; if len exceeds capacity evict. Need maybe capacity maxsize; if <=0? Could set capacity 0? We can handle.
+
+Thread safety: single lock protects _entries OrderedDict and metadata; all public methods acquire lock. FakeClock injectable with time() method. Use monotonic clock default. Need ensure default factory? Avoid using time.monotonic? In Python time.monotonic. Could import time. For default: if clock is None: self._clock = time.monotonic. But tests inject FakeClock with time method. For class:
+
+from __future__ import annotations
+import threading
+import time
+from collections import OrderedDict
+from typing import Any, Optional, Callable, Hashable
+
+class TTLCache:
+    __slots__? maybe. Use sentinel _MISSING?
+
+    def __init__(self, maxsize=128, ttl=300.0, clock=None, default=None?) Could have default for get.
+      if maxsize is None? no max? Let's design simple:
+      if maxsize is not None and maxsize <= 0: raise ValueError?

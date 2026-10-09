@@ -1,0 +1,12 @@
+We need answer user's request. Need produce final detailed answer >=1200 words. Need implement thread-safe Python TTLCache class using OrderedDict and monotonic clock. Include set, get, delete, clear, len, expiration, capacity eviction, unit tests with injected fake clock, detailed explanation thread safety and complexity. Complete code, then tests, then explanation. Do not abbreviate. We can write code. Need ignore benchmark identifier. Need ensure correctness.
+
+Let's design TTLCache.
+
+Requirements:
+- Thread-safe Python TTLCache class using OrderedDict and monotonic clock.
+- Include methods: set, get, delete, clear, len (maybe __len__), expiration (maybe get_expiry? set expiration? maybe TTL? "expiration" could be method to check or get expiration time; maybe expose expiry_for? Let's include expiration(key) or is_expired? The user says include set, get, delete, clear, len, expiration, capacity eviction. Maybe expiration means support expiration, or method to retrieve expiration time. We'll include get_expiration(key) returning float or None, and maybe has_expired. Also set(key,value,ttl) and set with explicit expires_at? Need use monotonic clock; injected fake clock in tests. Use threading.Lock or RLock. OrderedDict move_to_end for LRU? TTLCache maybe also capacity eviction. Need choose eviction policy. OrderedDict with LRU eviction is common. Use OrderedDict and monotonic clock. For thread safety, protect all state.
+
+Implementation:
+class FakeClock: maybe monotonic() method; real uses time.monotonic. TTLCache(clock=time.monotonic? Can pass clock function). _clock = clock or time.monotonic.
+Store OrderedDict mapping key -> (value, expires_at, ttl?) Need expiration method return expires_at.
+TTL: set(key, value, ttl=None). If ttl is None means no expiration. If ttl <=0 maybe store with expiry now, so expired immediately? Or not store? Better: if ttl is not None: expires_at = now + ttl. If ttl <=0 set expires_at = now (expired as of now); get returns default and delete. For set: if capacity <=0 maybe don't store? But len? Need capacity eviction. capacity int > 0. On set, after inserting/moving, evict expired entries (maybe opportunistic) and then if len > capacity remove oldest (first in OrderedDict) while len > maxsize. Need maintain LRU: get moves to end if

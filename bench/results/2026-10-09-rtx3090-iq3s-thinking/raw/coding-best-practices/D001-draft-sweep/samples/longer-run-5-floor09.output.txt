@@ -1,0 +1,13 @@
+We need answer user's request. Need implement thread-safe Python TTLCache using OrderedDict and monotonic clock, include set, get, delete, clear, len, expiration, capacity eviction, unit tests with injected fake clock, detailed explanation thread safety and complexity. At least 1200 words. Complete code, tests, explanation. Need think in English? User English. Need satisfy. Also benchmark identifier ignore.
+
+Need produce final with code and tests and explanation. Need ensure thread safe: use threading.RLock maybe. TTL cache using OrderedDict. Monotonic clock injectable. Need detailed. Need not abbreviate. Need include existing rules? They just list cache rule items with key item_000... item_063 lifetimes sizes. Maybe maybe expect cache rules? We can mention preloading those? The request: "Read these existing design requirements before implementing the cache: Existing cache rule 0..." They probably want implement cache that respects per-entry lifetime and size? They say using OrderedDict and monotonic clock. Include set, get, delete, clear, len, expiration, capacity eviction. Existing cache rules have per-key lifetime and size. Should design support per-entry TTL and size? It says lifetime and size. Need maybe store per-entry size and capacity in bytes? Or capacity eviction could be by item count or total bytes? They mention size bytes. Need implement capacity eviction likely by total bytes. Need existing design requirements: key item_XXX has lifetime X seconds and size Y bytes. Could mean each item has its own ttl and size. So set should accept ttl and size? Need tests with fake clock for those? Could include seeding tests with first rule? Need maybe create cache with capacity in bytes (max_size) and default ttl? But each key has lifetime and size. Could design TTLCache(max_size_bytes=..., default_ttl=...) and set(key, value, ttl=None, size_bytes=None). If ttl omitted, can use rule? But cache shouldn't hardcode 64 rules. Could include tests using injected fake clock and rule data. Need maybe mention the listed existing rules as sample input. We can implement `ttl=0 or None`? Need expiration remove stale entries: lazy on access + active purge maybe `purge_expired` method. Need thread-safe.
+
+Potential design:
+```
+from collections import OrderedDict
+import threading
+import time
+from typing import Optional, Hashable, Any, Callable
+
+class TTLCache:
+    def __init__(self, max_size: int =

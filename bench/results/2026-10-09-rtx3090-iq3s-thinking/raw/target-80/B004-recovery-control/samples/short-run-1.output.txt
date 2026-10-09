@@ -1,0 +1,21 @@
+We need answer user's request. Need produce detailed answer at least 1200 words. User asks: Benchmark identifier ignore. Implement thread-safe Python TTLCache class using OrderedDict and monotonic clock. Include set, get, delete, clear, len, expiration, capacity eviction, unit tests with injected fake clock, detailed explanation thread safety and complexity. Write complete code, then tests, then explain design. Do not abbreviate implementation.
+
+Need produce final with code complete, tests, explanation. Need ensure at least 1200 words. Should include Python implementation using collections.OrderedDict? Use OrderedDict for LRU? TTL cache with capacity eviction likely LRU on set/get? Need thread-safe. Use threading.RLock? Monotonic clock injectable. Need get returns None or maybe default. Need handle expiration lazily. Maybe also public expires_in, purge_expired. len should maybe purge expired to return active count? Since thread safe, len acquires lock and prunes expired. Need capacity eviction: when over capacity, pop oldest (LRU) item. Need set default ttl. Need ensure if ttl <=0? Options. Use None for no expiration? Could support ttl=None for no expiry. OrderedDict move_to_end.
+
+Need unit tests with fake clock: class FakeClock: def __init__(self): self.now=0; def monotonic(self): return self.now; def advance(delta): self.now += delta. Injected as clock callable.
+
+Potential pitfalls: if clock callable raises? We'll implement. Thread safety: all operations on OrderedDict under lock. Clock read under lock? For consistent state. Using lock reentrancy for helper internal? Could define public methods acquire _lock; internal helpers assume lock held. Use `with self._lock:`. For get: validate key exists, if expired remove and return default. Need move_to_end on hit. For set: remove existing expired? Use internal `_is_expired`. When setting: if ttl is None and self.default_ttl is None? Need store expiry. Implementation:
+
+from collections import OrderedDict
+import threading
+import numbers
+
+DEFAULT_TTL = 10.0? Better.
+
+class TTLCache:
+    def __init__(self, capacity=128, default_ttl=10.0, clock=time.monotonic):
+       if capacity <=0 raise.
+       self._capacity=capacity
+       self._default_ttl = self._normalize_ttl(default_ttl)
+       self._clock=clock
+       self._store

@@ -1,0 +1,12 @@
+We need answer user's request. Need produce final answer with complete code, tests, detailed explanation at least 1200 words. Need think fully.
+
+Task: Implement thread-safe Python TTLCache class using OrderedDict and monotonic clock. Include set, get, delete, clear, len, expiration, capacity eviction, unit tests with injected fake clock, detailed explanation of thread safety and complexity. Write complete code, then tests, then explain design. Do not abbreviate implementation. Produce detailed answer at least 1200 words.
+
+Need likely include Python code. Need ensure thread-safe. Use threading.RLock? OrderedDict. Monotonic clock injected as callable default time.monotonic. TTL per set maybe default? Need expiration: lazy remove expired on get? Also maybe purge? Could have _remove_expired? Capacity eviction with move_to_end on get/set. Need len: maybe accurate length including expired? Should maybe return count of unexpired entries; but if expired keys remain until get, len would be inaccurate if just len(order). Need thread-safe and expiration. Options: maintain internal expiry timestamp per key? OrderedDict key->(value, expires_at). For len, could compute sum not expired O(n), or maintain exact count of live entries? If expired not removed until access, len inaccurate if using O(1) count. Could either purge expired on len (mutating) to return accurate O(n), or maintain live_count and remove expired on access/eviction? But if expired time passes without any access, live_count cannot update because no event. For exact len, need either timer or O(n) scan. Could implement len as _prune_expired() then len(order), O(n). But thread-safe. For capacity eviction, need ensure not evict expired? Can evict oldest by order, but if expired oldest exists, remove expired first? Let's design robust.
+
+Need monotonic clock. Fake clock for tests. TTLCache(maxsize, ttl=... maybe optional per-set ttl). set(key, value, ttl=None), get(key, default=None), delete(key), clear(), __len__. Could also include pop? Not necessary.
+
+Thread safety: using RLock (or Lock) protecting all operations. Since OrderedDict not thread-safe. No concurrent modification issues. But careful about nested calls: if get calls helper methods need lock. Use RLock to allow reentrant, but simpler use Lock and no nested lock? Could have private methods assume lock held. Use context manager.
+
+Implementation: 
+from

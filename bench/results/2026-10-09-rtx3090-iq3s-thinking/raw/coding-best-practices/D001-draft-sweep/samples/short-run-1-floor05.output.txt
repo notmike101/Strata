@@ -1,0 +1,11 @@
+We need answer user's request. Need implement thread-safe Python TTLCache using OrderedDict and monotonic clock. Include set, get, delete, clear, len, expiration, capacity eviction, unit tests with injected fake clock, detailed explanation thread safety and complexity. Complete code, then tests, then explain design. Do not abbreviate implementation. At least 1200 words.
+
+We need produce final answer with code blocks. Need ensure code correct. Let's design.
+
+Thread-safe TTLCache:
+- class TTLCache:
+  - uses collections.OrderedDict to map key -> value and expiry? Could store tuple(value, expires_at) in OrderedDict. Or two dicts? OrderedDict for LRU and expiry. On set: if key exists, update value and expiry, move_to_end. Else insert and evict if len > capacity? If expired before insert, cleanup? Need handle expired entries on access and len? TTL expiration lazily on get and during set eviction? Need len maybe should return active entries only? User says include len, expiration. Could implement len() removes expired entries then returns count. But thread-safe, can purge. Need avoid O(n) on every len? Could be okay? But for performance we might have lazy cleanup only on get and set, but len needs accurate active count. Options: maintain count and maybe heap of expirations. But request specifically using OrderedDict and monotonic clock. Could implement expiration with purge_expired that iterates. For unit tests fake clock.
+
+Thread safety: use RLock or Lock. Avoid nested locks. Use threading.RLock because len may call _purge etc internal maybe no public calls if internal. If get calls _is_expired with lock? Better design all public methods acquire lock, internal functions assume lock held. Use private _purge_expired_locked(clock). Need clock injected. Default time.monotonic.
+
+TTLCache(capacity, ttl=None, clock=None). ttl default seconds. set(key, value, ttl=None). get(key, default=None). delete(key). clear(). __len__. __getitem__, __contains__ optional. Expiration: expiry = clock + ttl if ttl not None else None. Stored as tuple(value, expiry). OrderedDict insertion order as LRU? On get hit move_to_end, set existing move_to_end. Eviction: when capacity exceeded, pop first item. But if expired items exist, should remove them before capacity? set can _purge_expired_locked then if len > capacity evict. But if capacity zero?

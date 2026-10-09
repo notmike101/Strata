@@ -1,0 +1,15 @@
+We need answer user's request. Need produce final answer with complete code, tests, detailed explanation at least 1200 words. Need think fully.
+
+Task: Implement thread-safe Python TTLCache class using OrderedDict and monotonic clock. Include set, get, delete, clear, len, expiration, capacity eviction, unit tests with injected fake clock, detailed explanation of thread safety and complexity. Write complete code, then tests, then explain design. Do not abbreviate implementation. Produce detailed answer at least 1200 words.
+
+Need likely include Python code. Need ensure thread-safe. Use OrderedDict, threading.RLock, time.monotonic injected. TTLCache class. Methods: set(key,value,ttl=None?) get(key, default=None) delete(key) clear() __len__ __contains__ maybe items? Expiration. Capacity eviction: LRU? OrderedDict can move_to_end. Need thread-safe: use lock around operations. Potential pitfalls: len with expiration cleanup? Should be accurate: remove expired entries in _purge_expired. For len, if calling len should maybe expire entries and return current active count. Need thread-safe. Need avoid recursion with lock? Use RLock.
+
+Need design: OrderedDict stores (value, expires_at) maybe tuple. Use sentinel for never expire? Use monotonic clock. set: validate ttl None or nonnegative. Compute expire = None if ttl is None else clock()+ttl. Under lock: if key exists update value/expire and move_to_end. Else maybe enforce capacity before insert: if maxsize not None and len >= maxsize, evict oldest not expired? If OrderedDict insertion order, with LRU move_to_end on get/set. Capacity eviction should evict least recently used among non-expired? But expired entries may still exist if not accessed. Before evicting purge expired. If still at capacity and maxsize reached, popitem(last=False) oldest. However if oldest expired, purge first. If maxsize is 0? maybe disallow or no storage. Need decide. Implement robust.
+
+Could include `maxsize` default None? TTLCache(capacity, ttl default?). Use `maxsize` int nonnegative, default_ttl float or None. `clock` callable returns monotonic seconds. Methods:
+
+```
+class TTLCache:
+    def __init__(self, maxsize=128, ttl=None, clock=time.monotonic):
+        if maxsize is not None:
+           if maxsize < 0 raise ValueError

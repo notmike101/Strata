@@ -581,6 +581,40 @@
   },
   {
     "campaign": "target-80",
+    "arm": "B005-cuda133-cpuvision",
+    "workload": "longer",
+    "runs": 3,
+    "decode_median": 74.3,
+    "decode_min": 73.0,
+    "decode_max": 76.5,
+    "e2e_median": 39.31636429329639,
+    "stream_total_median": 39.319029730810435,
+    "ttft_median_seconds": 6.169570800004294,
+    "raw_decode": [
+      76.5,
+      73.0,
+      74.3
+    ]
+  },
+  {
+    "campaign": "target-80",
+    "arm": "B005-cuda133-cpuvision",
+    "workload": "short",
+    "runs": 3,
+    "decode_median": 79.2,
+    "decode_min": 41.5,
+    "decode_max": 80.1,
+    "e2e_median": 60.79378660903143,
+    "stream_total_median": 60.8004096047596,
+    "ttft_median_seconds": 2.0570743000134826,
+    "raw_decode": [
+      41.5,
+      80.1,
+      79.2
+    ]
+  },
+  {
+    "campaign": "target-80",
     "arm": "P001-requests",
     "workload": "longer",
     "runs": 1,

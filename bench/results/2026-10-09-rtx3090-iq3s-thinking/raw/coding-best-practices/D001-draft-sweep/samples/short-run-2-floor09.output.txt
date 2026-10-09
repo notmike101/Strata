@@ -1,0 +1,10 @@
+We need answer user's request: implement thread-safe Python TTLCache class using OrderedDict and monotonic clock. Include set, get, delete, clear, len, expiration, capacity eviction, unit tests with injected fake clock, detailed explanation thread safety and complexity. Complete code, tests, explain design. At least 1200 words. Ignore benchmark identifier. Need final only. Need ensure no abbreviations. Need maybe include code with imports. Need design explanation. Need maybe tests using unittest and fake clock. Need thread safety with RLock? Use OrderedDict. TTLCache with maxsize, ttl? Need handle per-key expiry perhaps. Use OrderedDict for LRU eviction. Monotonic clock injected via clock function; default time.monotonic.
+
+Need think thoroughly. Implementation: class TTLCache:
+- __init__(self, maxsize=128, ttl=..., clock=None)
+- if maxsize <=0? raise. ttl maybe float seconds. If ttl <=0? Could make immediate expiration? Better raise for maxsize, ttl must be positive? Maybe allow ttl None? User asked TTLCache class with expiration; likely ttl required. Could allow default ttl=300.
+- Use OrderedDict mapping key -> (value, expires_at)
+- clock: Callable[[], float], default time.monotonic.
+- lock: threading.RLock() to protect internal state; allow recursive? Not necessary but okay.
+- get(key, default=None): acquire lock; entry = self._cache.get(key); if None? But value may be None, need sentinel. entry = self._cache.get(key); if entry is None: if key in? But entries can be (value, exp), tuple always not None. So entry None means missing. Check expiry: if self._clock() >= entry[1]: delete expired? Need remove and maybe evict expired? Then return default. Else move_to_end(key); return entry[0]. But if key exists and expired, remove. Should return default.
+- set(key, value, ttl=None): acquire; compute expires_at = clock + (ttl if ttl is not None else self._ttl). Store. If key existing, remove? OrderedDict assignment preserves order? For LRU, want move to end. So if key in self._cache: self._cache.pop(key, None). Then insert at end. Eviction? capacity. If maxsize==0? disallow. If len(self._cache) > maxsize: popitem(last=False

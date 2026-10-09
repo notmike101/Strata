@@ -1,0 +1,25 @@
+We need answer user's request. Need produce final answer with complete code, tests, detailed explanation at least 1200 words. Need think fully.
+
+Task: Implement thread-safe Python TTLCache class using OrderedDict and monotonic clock. Include set, get, delete, clear, len, expiration, capacity eviction, unit tests with injected fake clock, detailed explanation of thread safety and complexity. Write complete code, then tests, then explain design. Do not abbreviate implementation. Produce detailed answer at least 1200 words.
+
+Need likely include Python code. Need ensure thread-safe. Use threading.RLock? OrderedDict operations need atomic. TTLCache with maxsize, ttl. Use OrderedDict for LRU? User asks capacity eviction; likely eviction by least recently used? Need implement using OrderedDict move_to_end on get and set to preserve LRU. Expiration: lazy expiration on access? Need also maybe purge expired. len? Need define __len__ returns number of active entries after purge? But len is not usually O(1) if purging. Could include __len__ with purge_expired O(n), or active count with lazy? Requirement include len, expiration. We can implement __len__ that purges expired then returns length. Complexity O(n) for len, but typical cache len should maybe active entries. If need efficient len O(1), we can track expired? Hmm. Need use OrderedDict and monotonic clock. Thread-safe.
+
+Design: TTLCache(maxsize, ttl=None, clock=monotonic). set(key,value,ttl=None), get(key, default=None), delete(key) returns bool or raises? clear(), __len__, __contains__ maybe. Need expiration.
+
+Need fake clock unit tests. Use unittest or pytest? Unit tests with injected fake clock. Could write simple test class. Need full tests.
+
+Potential implementation:
+from collections import OrderedDict
+import threading
+from time import monotonic
+
+class TTLCache:
+    def __init__(self, maxsize=128, ttl=None, clock=None):
+         if maxsize < 1: raise ValueError
+         if ttl is not None and ttl < 0: raise ValueError
+         self.maxsize=maxsize
+         self.default_ttl=ttl
+         self.clock = clock or monotonic
+         self._cache=OrderedDict()
+         self._expires=OrderedDict? Maybe store tuple (value, expires_at). Use OrderedDict[str, tuple]. For move_to_end on LRU.
+         self._

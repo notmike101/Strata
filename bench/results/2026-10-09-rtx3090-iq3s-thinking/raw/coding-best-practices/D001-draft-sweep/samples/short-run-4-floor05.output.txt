@@ -1,0 +1,11 @@
+We need answer user's request. Need produce complete code, tests, explanation detailed >=1200 words. User: Benchmark identifier ignore. Implement thread-safe Python TTLCache class using OrderedDict and monotonic clock. Include set, get, delete, clear, len, expiration, capacity eviction, unit tests with injected fake clock, detailed explanation thread safety and complexity. Complete code, then tests, then explain design. Do not abbreviate implementation. At least 1200 words.
+
+Need final only. Need think details. Need ensure Python code correct. Implement TTLCache using OrderedDict, threading.RLock maybe. monotonic clock injectable. Maybe Clock type callable returns float. TTLCache(capacity, ttl, clock=time.monotonic). OrderedDict from collections. Thread safety: all public methods lock. Expiration lazy on get and maybe len? Need capacity eviction on set. Need len returns number of non-expired entries maybe count expired? User says len, expiration. Could define __len__ evicts expired? For thread safety, if len evicts under lock. Need unit tests with fake clock. Need use OrderedDict move_to_end for LRU? TTL cache capacity eviction likely LRU. Need ensure if existing key update moves to end. If capacity zero? Could disallow capacity <=0? Maybe capacity int >0, ttl positive. Could handle capacity 0: set no-op? But OrderedDict no capacity. Better enforce capacity positive, ttl non-negative? If ttl <=0 entries expire immediately? Could allow ttl >0. Tests fake clock.
+
+Need not abbreviate implementation. Code with imports, class, methods, __repr__, maybe popitem. Need ensure thread-safe. Maybe _purge_expired under lock; public methods acquire lock. get(key, default=None) if expired delete return default. If key not found return default. set(key, value, ttl=None). If ttl None use default ttl. If ttl is not None, ttl must >? Could allow negative causing immediate expiration. If capacity exceeded, evict oldest? But need also expire. Algorithm:
+- with self._lock:
+  self._evict_expired_locked()
+  expires_at = self._clock() + ttl
+  if key in self._store: self._store[key] = (value, expires_at); self._store.move_to_end(key)
+  else:
+    self._store[key] = (value, expires_at); self._store.move_to_end(key) # OrderedDict insertion already end? move_to_end safe.

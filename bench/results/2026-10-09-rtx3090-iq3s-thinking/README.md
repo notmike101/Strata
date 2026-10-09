@@ -2,12 +2,15 @@
 
 Status: **active investigation; 80 tok/s has not been demonstrated under the current contract.**
 
+Measured on 2026-10-09 by notmike101. This report follows [the community report guide](../../../docs/COMMUNITY_BENCHMARKS.md) and is listed in [the community index](../COMMUNITY.md). [RESULTS.md](RESULTS.md) contains the guide's complete results table for every completed cell: actual/fresh/reused/generated tokens, repetitions, prompt/decode throughput, TTFT and client total latency, with ordinary medians and full ranges. The compact table below is an overview, not a replacement for the all-run evidence.
+
 This report records the local setup, every completed throughput experiment, rejected configurations, profiler observations, validation coverage, and unresolved measurement problems. It is a personal fork campaign, not an upstream performance claim. The source baseline is `fb58e0dbc8399662c0e47c76578c6e878b14f6cf` and the installed release engine is 0.1.41. Git fetch and the GitHub release API on 2026-10-09 found no newer Strata source or release to install. No engine source changes have been made at this checkpoint.
 
 ## Hardware and invariant configuration
 
 - Windows 11; Intel Core i9-10900KF, 10 physical / 20 logical cores; 128 GiB DDR4-3200.
 - NVIDIA RTX 3090, 24,576 MiB VRAM; PCIe 3.0 x8 on this host; driver 610.88.
+- Selected device GPU 0; 350 W reported power limit, also the device default. C: storage is a KIOXIA KXG60PNV2T04 NVMe SSD, 2,048,408,248,320 bytes. These are live checkpoint observations, not historical per-run telemetry. CPU package power limit was not recorded. See `hardware-supplement.json`.
 - Release CUDA 13.0 engine; CUDA Toolkit 13.3.73 and Nsight Systems 2026.1.3 available for development.
 - Target: `ISTA-DASLab/Qwen3.8-Flash-Next-GSQ-RCO-GGUF`, **IQ3_S**, two GGUF shards. The PLE/ngram shard is always supplied.
 - Compatible Flash-Next **F16** vision projector remains loaded, with 1,024 image tokens. The baseline uses GPU vision; R007 separately tests CPU execution with identical F16 weights and records the latency tradeoff. The initially requested 27B projector was incompatible (5120 vs 2560 embedding width); the compatible Flash-Next projector was selected with user approval.
@@ -16,6 +19,10 @@ This report records the local setup, every completed throughput experiment, reje
 - Model weights, quantization, KV precision, context, vision capability and target sampling must not be reduced to obtain a speed result.
 
 Current retained runtime tuning before this campaign: `--pcie-frac 0.20 --spec-min-p 0.70`, `--spec 4`, default nine worker threads plus the coordinating thread, automatic expert cache and prompt chunking. Prompt lookup can extend verification windows to six tokens even though MTP is capped at four. A startup in this campaign filled 7,882 expert slots, about 14.95 GiB. The CPU arena contains approximately 46.84 GiB of experts. Windows refused large pages (error 1314); ordinary 4 KiB pages were used. This is observed behavior, not a recommendation to alter OS privileges.
+
+Exact model files are `Qwen3.8-Flash-Next-GSQ-RCO-IQ3_S-00001-of-00002.gguf` and `Qwen3.8-Flash-Next-GSQ-RCO-IQ3_S-00002-of-00002.gguf`; setup-verified SHA256 values are in each arm's `identity.json`. The download revision was not recorded. `preparation-hashes.json` identifies the expert ranking profile, native pack layout/index/conversions, MTP layout and draft vocabulary. Large generated pack tensors are not attached. Low-RAM mode and experimental speed projection are disabled. Earlier calibration produced the retained PCIe share and draft threshold; its full sweep is `historical-calibration.json`. The current campaign does not recalibrate between arms.
+
+Per-arm `identity.json` contains every engine argument, environment override, sampling default, vision device and loaded backend hash. The launch pattern is `python -m serve.server --config <STRATA_ROOT>/strata-iq3_s.json`; production config binds `0.0.0.0:8080`, with one request and the settings above. Exact local launcher paths are omitted from public evidence. Source-build options and compiler changes are recorded in the chronological ledger separately from release-binary trials.
 
 ## Frozen thinking and sampling contract
 
@@ -55,6 +62,10 @@ The 80 tok/s target is **server decode TPS**, ordinary median of all qualifying 
 - `server_decode_tps`: server generation count / generation interval. `request_e2e_tps`: completion count / request-start to response-complete. `stream_total_tps`: completion count / request-start to last content token. TTFT is request-start to first reasoning/content chunk.
 - All measured runs, slow seeds, warmups, failures and losing arms are retained. No favorable seed subset, upper median, changed model or disabled-thinking result can complete the target.
 
+The expert cache is prefilled from the same ranking profile at each process start (PROFILE policy, no eviction), then retained within an arm. A fresh process precedes each arm; the excluded warmup also builds CUDA graphs. This differs from prompt-prefix reuse, which is independently measured. Client total latency includes HTTP transport, any queueing and prompt processing; startup/model loading is excluded. Text speed requests do not invoke image encoding, although vision remains loaded. The vision comparison includes image encoding in total request time. TTFT observes the first nonempty reasoning or answer delta and ignores keep-alives/empty deltas; it is not answer-only latency.
+
+`memory-snapshots.json` preserves before/after GPU snapshots, not inference peaks. Readiness headroom and Windows large-page failures are recorded in the ledger. Peak RAM/VRAM and OS paging were not continuously measured; low-headroom warnings are evidence of risk, not proof of paging. Codex and normal desktop services remained present. Earlier browser/profiler confounds are identified by arm; current benchmark requests do not overlap compilation or another model.
+
 ## Results and current uncertainty
 
 | Campaign / arm | Short decode | Longer decode | Short E2E | Longer E2E | Decision |
@@ -90,10 +101,15 @@ Rates are tok/s; ordinary medians. `experiment-index.json` contains every comple
 - `P001-*.csv`: Nsight kernel and CUDA API aggregates. Full `.nsys-rep` (about 55 MiB), SQLite, raw SSE and outputs remain local; no profiler throughput is used as a headline.
 - `artifact-manifest.json`: SHA256 and byte count for each public evidence file.
 - `replay.py`: lightweight replay of an exact example payload. It does not perform the full identity/cold-start protocol; use it for reproduction, not as automatic proof of a speed claim.
+- `measure.py`: full Windows campaign measurement script, with only root/config/server address changed to command-line arguments and the profile filename changed to `sampling.json`. Process discovery was corrected before B005's first request to accept the configured executable filename and Windows PowerShell 5.1 singleton arrays. Earlier successful release-binary measurements used the same timing, prompt and seed logic.
+- `engine-timings.txt`: verbatim prompt/decode timing lines from the cumulative engine log, with original line numbers. Includes warmups and capability tests; associate with the per-run token counts, TPS and draft counters instead of pooling the log into a single result.
+- `raw/*/*/samples/`: exact synthetic request payloads and generated output text for completed fixed-thinking arms. Raw SSE remains local; timing/draft counters and text are published.
+- `failures.json`: pre-request and incomplete measurement attempts, excluded from successful throughput summaries. `TRIMMED.md` identifies larger/private artifacts retained locally and measurements not available.
 
 ```powershell
 python replay.py --base-url http://YOUR_HOST:8080 --request requests/short.json
 python replay.py --base-url http://YOUR_HOST:8080 --request requests/longer.json
+python measure.py --root C:/Strata --config C:/Strata/strata-iq3_s.json --base-url http://YOUR_HOST:8080 --out ./new-run --runs 3
 ```
 
 A repeated example may hit cache; inspect `timings.cache_n`. For paired new-prompt tests, vary the opening nonce identically across arms, preserve the seed list and every other payload field, and retain all runs. Starting a second engine concurrently invalidates memory and timing comparisons.

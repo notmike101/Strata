@@ -1,0 +1,21 @@
+We need answer user's request. Need produce detailed answer at least 1200 words. User asks: Benchmark identifier ignore. Implement thread-safe Python TTLCache class using OrderedDict and monotonic clock. Include set, get, delete, clear, len, expiration, capacity eviction, unit tests with injected fake clock, detailed explanation thread safety and complexity. Write complete code, then tests, then explain design. Do not abbreviate implementation.
+
+Need produce final with code complete, tests, explanation. Need ensure at least 1200 words. Should include Python implementation using collections.OrderedDict, threading.RLock maybe, time.monotonic injected via clock callable. Need thread-safe. TTLCache: capacity, default_ttl, clock. OrderedDict stores key -> (value, expires_at). Need maybe LRU? It says OrderedDict and capacity eviction. Use OrderedDict to evict least-recently used. Need get: check expired, return None default? Need handle default value. Could use sentinel for default. Need delete, clear, len (len returns current number of entries after purge? Maybe len() method purges expired). Expiration method returns expired? Need include maybe size(), purge_expired().
+
+Need unit tests with fake clock. Tests: basic set/get, expiration, get with default, delete, clear, len purges expired, capacity eviction LRU, thread safety maybe test concurrent get/set no corruption, fake clock injection. Need complete tests likely use unittest.
+
+Need avoid abbreviating implementation. Include all methods, internal helpers. Should mention thread safety: locks, atomic operations, monotonic clock. Complexity: set/get/delete amortized O(1) for hits/miss, expired cleanup O(expired_count) per operation if lazy purge; could be O(n) worst-case if many expired in one op. len purge may O(n). capacity eviction O(1). Memory O(capacity).
+
+Need detailed answer >=1200 words. Could write long explanation. Need code no ellipsis. Need ensure Python code correct. Let's design:
+
+from collections import OrderedDict, namedtuple? We can import threading, time, typing.
+
+SENTINEL = object()
+
+class TTLCache:
+    def __init__(self, capacity, default_ttl=None, clock=time.monotonic):
+       if capacity <=0: raise ValueError
+       if default_ttl is not None and default_ttl <0: raise ValueError
+       self.capacity = capacity
+       self.default_ttl = default_ttl
+       self._clock = clock

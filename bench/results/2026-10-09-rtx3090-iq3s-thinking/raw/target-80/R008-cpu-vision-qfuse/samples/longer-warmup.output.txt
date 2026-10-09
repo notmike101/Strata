@@ -1,0 +1,95 @@
+We need answer user's request. Need produce final answer detailed answer >=1200 words with complete code, tests, explanation. User provided benchmark identifier ignore, existing cache rule? The prompt: ignore benchmark identifier ignore. Need read existing cache rules are just noise.
+
+Implement thread-safe Python TTLCache using OrderedDict monotonic clock include set, get, delete, clear, len, expiration, capacity eviction, unit tests with injected fake clock, detailed explanation thread safety and complexity. Complete code, tests, explain design. Do not abbreviate implementation. Detailed >=1200 words.
+
+Need consider design answer can include code.
+
+Need be careful: TTLCache: thread-safe. Use OrderedDict operations. Implement a lock. Need a safe. OrderedDict Python  monotonic clock injected fake clock. Need maybe support inject clock injection.
+
+Design:
+
+```
+class TTLCache:
+ def __init__(capacity, *, default=capacity, capacity, maxsize=128, ttl300, clock= time.monotonic):
+ raise ValueError
+ if None
+ lockthreading?): self _threading default, lock threading.RLock
+ def __init()
+ data OrderedDict
+
+ def _entries:
+    _data OrderedDict) _entries dict?
+ def _data:
+ _total_size 0, _size_bytes
+ def now clock
+
+def set(key, now = ttl None, def __missing? maybe total_size, now = self._expire_now():
+```
+```
+
+    return now self._capacity = _capacity capacity, ,
+...
+```
+def _
+```
+
+```
+```
+   if  # OrderedDict, .__getitem_noop_lock
+ return _entry
+ capacity if in self._lock
+```
+
+def  _capacity = None return now
+
+def set default_ttl _size
+
+ _entry_classmethod name? capacity capacity self._size += size = None:
+```
+
+, size
+ _ now
+
+    _now
+...
+```
+def set(key, value, ttl=None)
+```
+self._lock acquire:
+```
+```
+```
+    def with self._
+
+```
+```
+ with```
+def get(key,
+```
+ self._
+
+ def get
+ self._get(self,key default_ttl = now:
+
+,
+ return
+ def delete(key
+
+ _now
+
+```
+ self._
+
+ return
+```
+    self._```
+
+```
+
+ def _
+ return False
+
+def get(key, value)
+
+```
+    self._

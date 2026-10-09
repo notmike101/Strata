@@ -1,0 +1,23 @@
+We need answer user's request. Need produce final detailed answer at least 1200 words. Need implement thread-safe Python TTLCache using OrderedDict and monotonic clock. Include set, get, delete, clear, len, expiration, capacity eviction, unit tests with injected fake clock, detailed explanation thread safety complexity. Complete code, tests, explanation. Do not abbreviate implementation. Also Benchmark identifier ignored. Need likely provide Python code. Need ensure thread-safe. Could use threading.RLock. OrderedDict for LRU? Need decide capacity eviction: when exceeding capacity, evict oldest? TTLCache usually capacity and expiration; OrderedDict can maintain insertion/access order. Use move_to_end on get/set. Expiration on get or lazy purge. len should not count expired? User says len, expiration. Need perhaps len() returns number of active non-expired entries, maybe purge expired first. clear. Maybe support maxsize capacity, ttl default. Thread-safe with lock. Fake clock: time.monotonic normally. Use monotonic_clock callable returns float. Could use time.monotonic as default. But tests injected fake clock. Need maybe not mock time but pass clock. Need complete code. Use typing. Consider TTLCache with __setitem__, __getitem__, __delitem__, __contains__, __len__. Also methods set, get, delete, clear. Need capacity eviction: if maxsize <=0 raise ValueError? If ttl <=0? Could allow None infinite? Need maybe ttl seconds. Need detailed explanation. Need ensure no abbreviation.
+
+Let's design class:
+
+import threading
+from collections import OrderedDict
+from typing import Any, Callable, Optional, Tuple
+import time
+
+class TTLCache:
+    def __init__(self, maxsize: int, ttl: float, clock: Callable[[], float] = time.monotonic):
+        if maxsize <=0: raise ValueError
+        if ttl < 0: maybe raise ValueError; ttl None? If ttl=0 immediate expire? Let's make ttl float >=0. If ttl=0, entries expire immediately. clock callable.
+        self._maxsize = maxsize
+        self._ttl = float(ttl)
+        self._clock = clock
+        self._lock = threading.RLock()
+        self._cache = OrderedDict()  # key -> (value, expires_at)
+
+    def _now(self): return self._clock()
+    def _is_expired(self, expires_at, now): return expires_at <= now
+
+Need careful: if

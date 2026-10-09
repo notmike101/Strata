@@ -1,0 +1,25 @@
+We need answer user's request. Need produce final answer with complete code, tests, detailed explanation at least 1200 words. Need think fully.
+
+Task: Implement thread-safe Python TTLCache class using OrderedDict and monotonic clock. Include set, get, delete, clear, len, expiration, capacity eviction, unit tests with injected fake clock, detailed explanation of thread safety and complexity. Write complete code, then tests, then explain design. Do not abbreviate implementation. Produce detailed answer at least 1200 words.
+
+Need likely include Python code. Need ensure thread-safe. Use threading.RLock? OrderedDict operations need atomic. Need monotonic clock injection. TTLCache: set(key,value,ttl=None or default), get(key, default=None), delete, clear, len maybe current non-expired count. Expiration on access? Also maybe purge expired entries on set/len/get. Capacity eviction: if len exceeds maxsize evict LRU? Need ordered dict: set moves to end, get moves to end, delete removes, capacity evict first (oldest least recently used). TTL absolute expiry: monotonic time + ttl. Could store (value, expires_at). If ttl None means no expiration? User likely TTLCache default ttl? Include maxsize, ttl default, timer function default time.monotonic. Thread safe: lock around all public ops and internal operations. Need avoid deadlocks. Maybe use context manager. Need tests with fake clock: class FakeClock with tick, now() returns monotonic. Injected clock. Need unit tests likely unittest or pytest? Complete code and tests. Could put tests in separate code block with unittest. Need no abbreviations.
+
+Need decide exact API.
+
+Possible implementation:
+
+import threading
+import time
+from collections import OrderedDict
+from typing import Any, Callable, Hashable, Optional, Tuple, Union
+
+class TTLCache:
+    def __init__(self, maxsize: int = 128, ttl: Optional[float] = None, timer: Callable[[], float] = time.monotonic):
+         if maxsize <= 0: raise ValueError
+         if ttl is not None and ttl < 0: raise ValueError
+         self._lock = threading.RLock()
+         self._data = OrderedDict()
+         self._maxsize = int(maxsize)
+         self._default_ttl = float(ttl) if ttl is not None else None
+         self._timer = timer
+         self._hits = 0

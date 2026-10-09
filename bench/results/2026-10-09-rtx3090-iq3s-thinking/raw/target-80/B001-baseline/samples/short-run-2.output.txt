@@ -1,0 +1,16 @@
+We need answer user's request. Need produce final detailed answer at least 1200 words, complete code, tests, explanation design. Need implement thread-safe Python TTLCache class using OrderedDict and monotonic clock. Include set, get, delete, clear, len, expiration, capacity eviction, unit tests with injected fake clock, detailed explanation thread safety and complexity. Ignore benchmark identifier. Need no abbreviation. Need likely provide code in final. Need ensure correctness.
+
+Let's design TTLCache.
+
+Requirements:
+- thread-safe Python TTLCache class using OrderedDict and monotonic clock.
+- methods set, get, delete, clear, len, expiration, capacity eviction.
+- unit tests with injected fake clock.
+- detailed explanation thread safety and complexity.
+- complete code, then tests, then explain design. At least 1200 words.
+
+Need think implementation details.
+
+TTLCache: maxsize capacity, ttl optional default. Use OrderedDict. Need thread-safe via threading.RLock or Lock. Since public methods need acquire lock. Use OrderedDict move_to_end on get if LRU. Capacity eviction when maxsize reached: popitem(last=False) removes oldest (least recently used) because get moves to end and set moves/updates to end. Expiration: lazy expiration on get and len? For len need maybe purge expired to report accurate len. For set, may need cleanup expired before eviction? Could implement _purge_expired under lock. Expiration method? Maybe expose expires_at or remaining time? User says include expiration. Could mean expiration of entries; maybe methods: get_expiry, expire? They mention expiration and capacity eviction. We can include method expiration(key) or get_expires_at. We can include `expiration(key)` returning seconds remaining or None? Or method `_expire` internal. To be safe include public methods: `expires_at(key)` returning absolute time, `expiration(key)` remaining seconds, and `purge_expired()` / `expire()`? But they ask include set, get, delete, clear, len, expiration, capacity eviction. So class should have `expiration` method. Could be `expiration(key)` returns seconds until expiration; if expired or missing returns None. Also `_expire` internal to remove expired. Also `expire()` public method to force expire? Maybe.
+
+Use `time.monotonic` default, but inject fake clock by constructor accepting clock=time.monotonic. Need ensure monotonic: fake clock is callable returning float. TTL in seconds. `maxsize=None
