@@ -1,0 +1,17 @@
+diff --git a/src/prefill/prefill.cpp b/src/prefill/prefill.cpp
+index 4e03dc8b..666e4bab 100644
+--- a/src/prefill/prefill.cpp
++++ b/src/prefill/prefill.cpp
+@@ -3042,9 +3042,10 @@ bool Prefill::run_impl(const int64_t* tokens, int64_t n, int64_t pos0, std::stri
+                                 }
+                                 // debug: STRATA_DBG_CPU_GATE=1 prints each reading and what the next layers do
+                                 if (static const bool dbg = std::getenv("STRATA_DBG_CPU_GATE") != nullptr; dbg)
+-                                    std::fprintf(stderr, "cpu gate: layer %d %s, %lld non-resident, %.2f ms (%.4f a expert) -> %s\n",
++                                    std::fprintf(stderr, "cpu gate: layer %d %s, %lld non-resident, %.2f ms (%.4f a expert) -> %s; cpu_share %.6f cpu_ms_per_expert %.6f gpu_ms_per_expert %.6f\n",
+                                                  m.pend_l, m.pend_wall == 2 ? "shared" : "not shared", (long long) m.pend_wall_n,
+-                                                 w_ms, w, m.cpu_gate ? "share" : "do not share");
++                                                 w_ms, w, m.cpu_gate ? "share" : "do not share",
++                                                 m.cpu_share_now, m.cpu_c_ms, m.cpu_g_ms);
+                                 m.last_arm = m.pend_wall;
+                                 m.last_l = m.pend_l;
+                                 m.last_w = w;

@@ -1,0 +1,15 @@
+We need answer user's request. Need produce final detailed answer at least 1200 words. Need implement thread-safe Python TTLCache class using OrderedDict and monotonic clock. Include set, get, delete, clear, len, expiration, capacity eviction, unit tests with injected fake clock, detailed explanation thread safety and complexity. Complete code, then tests, then explain design. No abbreviation. Benchmark identifier ignore.
+
+We need craft comprehensive answer. Need ensure code complete. Need maybe imports: threading, time, OrderedDict. Need TTLCache class with capacity maybe maxsize optional? Requirements len and capacity eviction. Need thread-safe with lock. OrderedDict for LRU? TTL cache. Methods: set(key, value, ttl=None), get(key, default=None), delete(key), clear(), __len__, maybe __contains__, peek? Need expiration. Injected fake clock. We can accept clock=time.monotonic. Internal _now. Need lock and expiration. Use OrderedDict to preserve insertion/access order. For TTL, store value and expiry timestamp. Need on get: check expiry; if expired delete return default. Need also purge expired entries maybe on get or set? For capacity eviction, evict oldest? With OrderedDict, can popitem(last=False). Need capacity eviction perhaps if maxsize. Also len may need exclude expired? Thread-safe: if __len__ counts non-expired, need iterate and delete expired? But expensive. Could count entries including expired but tests maybe expect expired not counted after time passes? Need design: len() can purge expired under lock, O(n), or maintain count? Simpler robust: len purges expired entries while scanning and counts remaining; O(capacity). For maxsize eviction only count all entries? If expired not purged could evict valid if expired entries occupy capacity. On set, purge expired? To avoid expired occupying capacity, on set we can remove expired entries. Need thread-safe complexity. Need unit tests with fake clock. Need not abbreviate implementation.
+
+Potential design:
+class TTLCache:
+    _SENTINEL = object()
+    def __init__(self, maxsize=1024, ttl=None, clock=None):
+        self._lock = threading.RLock()
+        self._cache = OrderedDict()
+        self._clock = clock if clock is not None else time.monotonic
+        if maxsize is not None:
+           if maxsize <=0 raise ValueError
+        self._maxsize = maxsize
+        if ttl is not None and ttl

@@ -2329,3 +2329,246 @@ Keep accepted-row accounting disabled by default as an experimental component wi
 Runtime activation: all12requests in each of R085/R086/R088 logged positive retained/routed counts with rejected rows excluded; full counts in summary.json. This proves accounting activation, not fewer copied bytes. Tests cover all prefix lengths, invalid/duplicate IDs, reset, exception restoration and4096 random48-layer512-expert windows. Post-matrix test strengthening explicitly covers T1..8 and is registered in CMake with assertions enabled in Release. Existing IQ AVX2 parity reports0failures; Windows affinity test passes. CUDA13.3sm86 built; HIP/SYCL not built and no upstream review/merge requested.
 
 Follow-up P016 read-only reproducibility audit: R084/R089 have identical payloads/config/binary but all12output texts differ; common prefixes range57..506characters (warmup included), not a tokenizer-level divergence measurement. Positive seeds are forwarded in serve/server.py:959-961, parsed in generate.cpp, and Verifier::run draws Philox(seed,position). Source also feeds measured round times into DraftPolicy::observe, while CPU/GPU expert arithmetic can round differently (documented at the adaptation barrier). Those are plausible contributors, NOT proof of root cause. Do not change the sampling contract or blame a different nonce. Next bounded diagnostic should isolate the first differing routing/window/logit state using identical fresh-process requests, preserving production and all safety guards.
+
+
+## E136 / P016 finite first-divergence diagnostic
+
+Previous turn was progress: completed C046 six-arm combination and confirmation,
+retained disabled experimental component and published08602c45. Current goal
+remains90/85 with full quality/matrix unresolved. No model resident at entry.
+
+Two fresh processes, P016-A and P016-B, same C0468057ab78... engine with both
+accepted-usage and HC disabled (the exact repeated control that showed divergent
+outputs). Each sends the saved R084 short warmup seed100 and short-run1 seed101,
+byte-identical512-token streaming payloads, unchanged thinking coding parameters,
+262144context, INT8KV/32768resident, CPU F16vision and9workers/30tasks. Sole
+instrumentation: existing --dump-routing and STRATA_DUMP_FIRST_LOGITS. Output
+paths differ per leg; no new engine code or sampling modification. Four requests
+total, one warmup+one diagnostic per leg. NO throughput qualification from these
+instrumented one-run cells. No further legs without new evidence and written plan.
+
+Compare complete first-window logits (248320F32values/request), routed expert IDs,
+window sizes inferred from per-layer trace records, and generated text prefixes.
+Preserve truncated final routing record if abrupt server cleanup leaves one;
+never mistake a truncated tail for an early divergence. Trace records have no
+explicit request boundary; identify fresh T1/layer0 patterns cautiously, compare
+chronological prefix without inventing positions. First divergence localization
+does not establish its root cause. Existing source shows seed forwarding and
+Philox(seed,position); timing-based draft policy plus placement/shape rounding are
+hypotheses. No claim of altered seed or changed nonce. Independent16GiB physical
+AND commit guards and exact cleanup/config restoration per leg. Raw binary
+traces/logits stay private; publish hashes and parsed aggregate diagnostics only.
+
+
+## E137 / P016 result and P017 causal control
+
+P016 two fresh identical-config processes completed with exact cleanup. Both
+requests have248320finite F32 first-window logits. Warmup: all248320values differ,
+maxabs0.718124/meanabs0.101710. Run1: all248320differ,maxabs0.983901/meanabs0.157924.
+Argmax1596matches in both cases. Output common prefixes57/44characters. Both
+startup profiles/cache sizes match (8409experts,2315borrowed prefill slots).
+Routing traces parse completely,54960/55200records; raw first divergence at record26,
+layer6, a swapped ordering of the final2expert IDs. However the trace starts with
+T4capture/warmup work and lacks explicit request boundaries: this record is NOT
+assigned to an actual generated-token position. First-window logit divergence
+is the reliable localization, before decode adaptation can be its sole cause.
+
+Source evidence: prefill.cpp:2986-3040 updates CPU share/gate from measured GPU/CPU
+layer timing; line3083 selects that share. CPU/GPU arithmetic differs by documented
+implementation. This supports but does not yet prove a causal hypothesis.
+
+P017 bounded control: two fresh legs A/B, two exact saved R084 requests each
+(shortwarmup100/run1seed101),512tokens. Same8057ab78... binary/context/model/KV/
+vision/sampling, accepted-usage0/HC0/DMA0. Add only STRATA_PREFILL_CPU_SHARE=0;
+retain existing routing/first-logit instrumentation with leg-specific paths.
+Four diagnostic requests total, no throughput qualification or production
+promotion. Compare first-logit bit identity and text, alongside original P016.
+If first logits still differ, CPU-share timing is not a sufficient explanation;
+investigate earlier prompt state rather than more blind performance sweeps.
+If logits stabilize, retain as localized evidence; do not infer all decode
+reproducibility or quality. GPU-only prompt processing is NOT a candidate winner
+without the unchanged no-prompt-rate-degradation and complete quality gates.
+Independent16GiB physical/commit guards and exact cleanup/config restoration.
+No third pair in this plan. Raw binaries private, summaries/hashes publishable.
+
+
+## E138 / P017 localization and P018 share measurement
+
+P017 two independent fresh-process runs with CPU prompt sharing disabled produced
+bit-identical first-window logits for both saved requests (all248320F32values),
+AND byte-identical entire512-token generated outputs (2391/2446characters).
+P016 auto-sharing had all logits different and divergent texts. Together with
+the timing-based share/gate code, this demonstrates the auto prompt placement as
+a source of variation in this pair; not a claim of deterministic output for all
+models/workloads. Startup model/cache/profile, seeds and numeric sampling match.
+GPU-only prompt processing has diagnostic run1read81.0/81.1tok/s versus P016
+206.9/204.7. It is rejected as a production optimization under no-read-degradation.
+
+P018 is ONE new diagnostic process, original warmup100/run1seed101 only. Existing
+STRATA_DBG_CPU_GATE output is extended with the existing chosen cpu_share and
+measured CPU/GPU milliseconds per expert. Only that opt-in fprintf changes; no
+arithmetic/selection code modified, no sampling/model/context changes. Build
+CUDA13.3sm86 and verify debug format before launch. No HIP/SYCL build/review.
+Use C046 combined stack (accepted usage1,HC1,DMA0) because the next candidate
+will complement it. No routing/logit dump necessary; four earlier raw traces
+already localize the issue. Independent16GiB physical/commit floors, no competing
+model and exact cleanup/config restore. One warmup+one diagnostic request, no
+speed qualification. Extract all share readings, exclude explicitly uncalibrated
+initial values, choose ONE fixed fraction rounded to0.05 from the observed median
+(clamp0.05..0.90), then benchmark it with CPU_SHARE_MAX1024 explicitly fixed so
+the ~3K prompt path is not unintentionally changed by an explicit share flag.
+No arbitrary multi-fraction sweep; further tests need results and a written plan.
+
+
+## E139 / P018 measured share and C047 cumulative fixed-share plan
+
+P018 completed and cleaned up.90calibrated readings, CPU share median0.7870875,
+range0.759230..0.813005. Predeclared rounding selects exactly0.80. No fraction
+sweep. Debug-only engine5d43a376...; all readings and source patch retained.
+The diagnostic printf extension is removed from working source after capture;
+C047 uses the previously tested8057ab78... engine, no debug/routing/logit hooks.
+
+C047 immediate control is C046's EXACT combined stack: HC-fast1, accepted-row
+accounting1,DMA0/deviceplan0, CUDA13.3,IQ3_S,262144context, INT8KV/32768resident,
+CPU F16vision,MTP4/.70,PCIe.20,lag2,9workers30tasks. Only added performance factor
+is fixed CPU prompt share0.80 versus auto (unset). BOTH arms explicitly set
+STRATA_PREFILL_CPU_SHARE_MAX=1024 to keep the ~3K prompt path unchanged. Numeric
+sampling remains thinking high/xhigh unlimited,1/.95/20/0/0/1,frequency0. This
+preserves the user-prioritized complementary stack and isolates the new setting.
+
+Budget: Aauto R090, Bfixed80 R091, Bfixed80 R092, Aauto R093. Each fresh process,
+one excluded warmup+5measured seeds101..105 for BOTH original short/~3K tasks,
+512tokens,cachemiss,concurrency1.40measured requests,8warmups maximum. No profiling,
+builds,Git,GUI or process-memory polling during timing; audit-no-process and
+independent16GiBphysical/commit floors. Exact cleanup and config restoration.
+If B first pass has any prompt median worse>2% or decode/E2E worse>3%, stop this
+candidate without confirmation (diagnostic-only stability does not waive loss).
+Otherwise complete the single reversed B/A confirmation pair. No additional
+pair/sweep. Pool all10qualifying rows per workload/cell with ordinary medians.
+
+Compare exact payload and output hashes for B/B and A/A, MTP offered/accepted,
+cache counters, prompt/decode/client/stream/TTFT and memory. Identical output is
+reproducibility evidence, not a quality proof; fixed-share determinism is not
+assumed from GPU-only P017. No90/85claim without frozen random coding and full
+quality/cold-warm/tool/vision/maxcontext matrix. A smaller reproducible gain may
+remain an unpromoted component. Final no-degradation contract is unchanged;
+screening tolerances only decide whether to spend confirmation requests.
+
+
+## E140 / R090-stack-auto
+
+Same engine and loaded library hashes as R086-usage1-hc1. Config diff is archived. Fixed numeric sampling, high/xhigh reasoning, model/quant, vision, context262144 and INT8KV retained. Original TTLCache streaming cache-miss workloads; one excluded warmup and five measured seeds101-105 per cell,512tokens per measured run. No slow seed excluded.
+
+| Workload | Decode median (range), tok/s | Prompt median, tok/s | E2E median, tok/s | Stream total median, tok/s | TTFT median, s | Draft accepted/offered |
+|---|---:|---:|---:|---:|---:|---:|
+| short | 90.6 (83.9-91.2) | 205.9 | 78.8948 | 78.9101 | 0.8558 | 888/1162 (76.42%) |
+| longer | 85.1 (84.2-87.1) | 495.6 | 42.1018 | 42.1075 | 6.1707 | 979/1295 (75.60%) |
+
+Minimum available physical RAM 62,488,645,632 bytes; available commit 40,813,428,736 bytes. Sampled GPU peak 25,130,110,976 bytes. Both16GiB host floors passed. Per-process peak memory not sampled. Full launcher/server/text/vision cleanup passed and previous config restored.
+
+C047 immediate auto-sharing control:90.6/85.1 decode over5runs/cell, prompt205.9/495.6. This isolated arm clears numeric thresholds but earlier identical-stack results are lower and full quality/matrix are unresolved; not goal qualification.
+
+Next: Measure fixed80 sharing on identical HC-fast+accepted-row stack; apply finite stop/confirmation rule.
+
+
+## E141 / R091-stack-share80
+
+Same engine and loaded library hashes as R090-stack-auto. Config diff is archived. Fixed numeric sampling, high/xhigh reasoning, model/quant, vision, context262144 and INT8KV retained. Original TTLCache streaming cache-miss workloads; one excluded warmup and five measured seeds101-105 per cell,512tokens per measured run. No slow seed excluded.
+
+| Workload | Decode median (range), tok/s | Prompt median, tok/s | E2E median, tok/s | Stream total median, tok/s | TTFT median, s | Draft accepted/offered |
+|---|---:|---:|---:|---:|---:|---:|
+| short | 88.4 (85.2-93.0) | 219.7 | 77.9088 | 77.9204 | 0.8052 | 873/1122 (77.81%) |
+| longer | 83.0 (80.9-86.5) | 496.0 | 41.5991 | 41.6050 | 6.1583 | 893/1218 (73.32%) |
+
+Minimum available physical RAM 62,568,460,288 bytes; available commit 40,969,015,296 bytes. Sampled GPU peak 25,111,236,608 bytes. Both16GiB host floors passed. Per-process peak memory not sampled. Full launcher/server/text/vision cleanup passed and previous config restored.
+
+C047 fixed80 first pass:88.4/83.0 decode versus90.6/85.1 auto. Prompt219.7/496.0 versus205.9/495.6; E2E77.9088/41.5991. Decode losses2.43%/2.47% remain within predeclared3% continuation bounds; do not promote.
+
+Next: Complete exactly one reversed fixed80/auto pair R092/R093 and compare all12output files plus all10measured rows per cell.
+
+
+## E142 / R092-stack-share80
+
+Same engine and loaded library hashes as R090-stack-auto. Config diff is archived. Fixed numeric sampling, high/xhigh reasoning, model/quant, vision, context262144 and INT8KV retained. Original TTLCache streaming cache-miss workloads; one excluded warmup and five measured seeds101-105 per cell,512tokens per measured run. No slow seed excluded.
+
+| Workload | Decode median (range), tok/s | Prompt median, tok/s | E2E median, tok/s | Stream total median, tok/s | TTFT median, s | Draft accepted/offered |
+|---|---:|---:|---:|---:|---:|---:|
+| short | 87.9 (84.6-92.5) | 218.2 | 77.7094 | 77.7220 | 0.8144 | 873/1122 (77.81%) |
+| longer | 84.2 (82.6-90.1) | 496.7 | 41.9516 | 41.9581 | 6.1593 | 1085/1415 (76.68%) |
+
+Minimum available physical RAM 62,568,718,336 bytes; available commit 40,950,386,688 bytes. Sampled GPU peak 25,111,236,608 bytes. Both16GiB host floors passed. Per-process peak memory not sampled. Full launcher/server/text/vision cleanup passed and previous config restored.
+
+C047 fixed80 repeat:87.9/84.2 decode, prompt218.2/496.7. Eight of12outputs exactly match R091: all6short, longer warmup/run1; longer run2 diverges and following outputs differ. Reproducibility improved but incomplete; no promotion.
+
+Next: Complete final R093 automatic-sharing control, pool all10rows/cell, preserve hashes and acceptance.
+
+
+## E143 / R093-stack-auto
+
+Same engine and loaded library hashes as R090-stack-auto. Config diff is archived. Fixed numeric sampling, high/xhigh reasoning, model/quant, vision, context262144 and INT8KV retained. Original TTLCache streaming cache-miss workloads; one excluded warmup and five measured seeds101-105 per cell,512tokens per measured run. No slow seed excluded.
+
+| Workload | Decode median (range), tok/s | Prompt median, tok/s | E2E median, tok/s | Stream total median, tok/s | TTFT median, s | Draft accepted/offered |
+|---|---:|---:|---:|---:|---:|---:|
+| short | 88.2 (86.3-91.2) | 206.2 | 77.2246 | 77.2397 | 0.8543 | 1002/1282 (78.16%) |
+| longer | 83.7 (83.1-84.5) | 496.7 | 41.8051 | 41.8095 | 6.1473 | 895/1233 (72.59%) |
+
+Minimum available physical RAM 62,561,058,816 bytes; available commit 40,943,771,648 bytes. Sampled GPU peak 25,130,110,976 bytes. Both16GiB host floors passed. Per-process peak memory not sampled. Full launcher/server/text/vision cleanup passed and previous config restored.
+
+C047 final auto control:88.2/83.7 decode. Full C047 pooled auto90.00/84.35 versus fixed80 88.15/83.95; fixed prompt improves but decode/E2E decline. Neither full goal nor final no-degradation passes.
+
+Next: Close finite C047, preserve measured prompt/reproducibility component and all raw data; diagnose later divergence before any justified reopening of exact kernels.
+
+
+## E144 / C047 complete comparison and reproducibility evidence
+
+The finite four-arm ABBA comparison completed: 40 measured requests plus eight
+excluded warmups. Every measured request generated 512 tokens with zero cached
+prompt tokens. All 36 cross-arm payload-file comparisons are byte-identical.
+Same engine 8057ab78..., libraries, model, vision, context and sampling. The sole
+factor is fixed 80% CPU prompt share versus auto on the same HC-fast plus
+committed-row-accounting stack; both have CPU_SHARE_MAX=1024.
+
+| All 10 runs per workload | Auto short / ~3K | Fixed80 short / ~3K |
+|---|---|---|
+| server_decode_tps | 90.00 / 84.35 | 88.15 / 83.95 |
+| Prompt tok/s | 206.05 / 495.95 | 218.55 / 496.40 |
+| request_e2e_tps | 78.5048 / 41.9447 | 77.8091 / 41.8843 |
+| stream_total_tps | 78.5225 / 41.9485 | 77.8212 / 41.8881 |
+| TTFT seconds | 0.85517 / 6.16258 | 0.80599 / 6.15881 |
+
+Fixed80 changes short/~3K decode by -2.06%/-0.47%, prompt by +6.07%/+0.091%,
+and client E2E by -0.89%/-0.14%. It is not a no-degradation winner and is NOT
+promoted. The faster prompt path and improved repeatability remain useful
+experimental evidence for a distinct future combination. No extra fraction or
+repeat is run. Auto's isolated R090 passed both numeric thresholds, but the
+paired pooled ~3K median does not. Including the two earlier same-binary C046
+HC1/accepted1 auto passes (R086/R088; implicit rather than explicit identical
+1024-token sharing limit), all 20 runs per workload give 88.2 / 84.0 decode.
+That broader history is not discarded to present a favorable 90 short result.
+Full random-coding quality and real-use matrix remain unresolved; goal active.
+
+Output reproducibility: auto 0/12 byte-identical output pairs; fixed80 8/12.
+All six fixed short outputs and the longer warmup/run1 match, with identical
+draft offered/accepted counts. Longer run2 first diverges; later outputs also
+differ. Fixed80 removes the demonstrated prompt-placement variation in these
+short requests, but is not full serving determinism or a correctness proof.
+P016/P017 separately show first-token logits differing under auto versus fully
+identical logits AND text in two fresh GPU-only prompt controls. GPU-only prompt
+read around81 tok/s is rejected for production. P018's 90 measured calibrated
+share readings selected80% by the predeclared rounding rule, not a sweep.
+
+All four performance arms and five diagnostic processes passed independent
+16 GiB available-physical AND commit guards and exact launcher/server/text/vision
+cleanup. Per-process memory was not polled during generation. Production config
+and executable hashes remain3457fdfe... /6048736d...; idle GPU457MiB. Diagnostic
+prefill log extension was archived and removed, with no retained source change.
+No benchmark model remains resident.
+
+Next investigation: residual variation can propagate through timing-based
+suffix-window selection into cache adaptation scheduled by window count. This
+is a hypothesis, not a diagnosis from the final aggregate counts. Inspect the
+first differing longer window before fixing anything. PR1779's accepted-token
+cache barriers are a larger architectural alternative to the current accepted-
+row heat alone; its published implementation waits at fixed token boundaries
+and must be separately adapted/tested for single-GPU serial serving. Do not
+reuse prior losing intervals or kernels without distinct new mechanism/evidence.

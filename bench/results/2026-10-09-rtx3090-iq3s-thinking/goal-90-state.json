@@ -3,15 +3,15 @@
   "target_tps": 90,
   "metric": "server_decode_tps",
   "contract": "goal-90-contract.md",
-  "current": "Retain as unpromoted experimental component; no target or no-degradation qualification. Finite matrix closed. Production unchanged.",
+  "current": "Not promoted: fixed80 improves prompt/TTFT and partial reproducibility but loses decode and E2E. Retain experimental component; finite comparison closed.",
   "next": [
-    "P016 first-divergence diagnosis with identical fresh-process fixed-sampling requests; then next justified complementary stack."
+    "Localize first differing longer window under fixed80; assess accepted-token adaptation barriers as distinct architecture."
   ],
   "promoted": "The previously qualified format-gather engine with IQ2_S gather disabled and adaptive lag2; no changes this turn.",
   "stopping_rule": "Leave goal active until all fixed qualification cells pass. No benchmark model resident at handoff.",
   "quality": "Q007: 3/5 compiled and passed72 tests each, 2/5 no final answer at8192 tokens. Goal unqualified.",
-  "last_checkpoint": "E135",
-  "resume_command": "Read E117-E120 P014/C044. No model resident. Source restored; rebuild build-cuda86-main before any new current-source baseline. PR1368/1525 are deferred prompt-only leads; C043 R077 held.",
-  "safety": "All R074/R075/R076/R078/R079 passed16GiB floors and exact cleanup. GPU457MiB after final cleanup. Production hashes unchanged.",
+  "last_checkpoint": "E144",
+  "resume_command": "Read E136-E144/P016-P018/C047. No model resident. Source restored to08602c45; current source build tree holds debug P018 objects, so rebuild before using it as a source control.",
+  "safety": "Four C047 arms and five P016-P018 diagnostics passed16GiB floors and exact cleanup. Production hashes unchanged.",
   "goal_tool_status_at_entry": "active, verified get_goal"
 }

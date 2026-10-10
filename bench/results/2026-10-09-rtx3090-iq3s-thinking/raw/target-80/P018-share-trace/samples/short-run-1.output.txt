@@ -1,0 +1,14 @@
+We need answer user's request. Need produce detailed answer at least 1200 words. User asks: Benchmark identifier ignore. Implement thread-safe Python TTLCache class using OrderedDict and monotonic clock. Include set, get, delete, clear, len, expiration, capacity eviction, unit tests with injected fake clock, detailed explanation thread safety and complexity. Write complete code, then tests, then explain design. Do not abbreviate implementation.
+
+Need produce final with code complete, tests, explanation. Need ensure at least 1200 words. Should include imports OrderedDict, monotonic? Use typing, threading, time, collections, dataclasses maybe. TTLCache class with ttl default, maxsize, clock injection. Thread safety with RLock? Need len, expiration, capacity eviction. Need design. Tests with injected fake clock. Could implement FakeClock, test suite using unittest. Need complete code, not abbreviated. Could provide one script including cache and tests, or separate sections. Need detailed explanation. Need maybe use OrderedDict for LRU? User says using OrderedDict and monotonic clock. Capacity eviction likely LRU or insertion order? OrderedDict typical. We'll implement LRU? set moves to end; get moves to end. Evict first. Or capacity eviction by oldest insertion if not moving on get. But OrderedDict often LRU. Need include expiration. Need thread-safe: lock all public operations. Internal helpers under lock. Avoid calling user code while lock. Use time.monotonic by default; injected clock. Need fake clock tests. Include TTL=0 maybe expiration immediate. Need len: remove expired items then return length. get with default=None? Need expiration: public maybe expires_in? Or method is_expired? User says include set, get, delete, clear, len, expiration, capacity eviction. Could implement __len__, and maybe expiration property? Better implement get_expiration(key) returns monotonic expiration time? Or expiration(seconds) returns TTL? We can add expires_at(key) and maybe time_to_live(key). But phrase "expiration" could mean expire expired entries. Implement _prune_expired internal and also public method expire() returns number expired; maybe expires_at. Also __contains__ optional.
+
+Need ensure tests pass. Need code complete. Let's design:
+
+from __future__ import annotations
+import threading, time
+from collections import OrderedDict
+from dataclasses import dataclass
+from typing import Any, Hashable, Iterator, Optional
+
+class TTLCache:
+    def __init__(self, maxsize: int

@@ -1,0 +1,20 @@
+We need answer user's request. Need produce complete code, tests, explanation detailed at least 1200 words. User says benchmark identifier ignore. Need implement thread-safe Python TTLCache class using OrderedDict and monotonic clock. Include set, get, delete, clear, len, expiration, capacity eviction, unit tests with injected fake clock, detailed explanation of thread safety and complexity. Write complete code, then tests, then explain design. Do not abbreviate implementation. At least 1200 words.
+
+Need final only answer. Need include code. Must be thread-safe. Use collections.OrderedDict, time.monotonic, threading.Lock/Rlock. Methods: set(key, value, ttl=None), get(key, default=None), delete(key), clear(), __len__, maybe contains, keys, items? Need expiration: lazy expiration on get/set/len? Could implement _is_expired, _remove_expired, cleanup during operations. Capacity eviction: OrderedDict move_to_end, popitem(last=True) for LRU? Need capacity eviction with TTL maybe expire expired first. Need len: should reflect unexpired count? Could count all entries? Better len returns number of active entries, pruning expired. Complexity amortized? Need be careful len O(n) if pruning all entries. Could maintain active_count? But expiration times arbitrary. To support O(1) len maybe need heap of expirations. User specifically using OrderedDict only? says using OrderedDict and monotonic clock. Could len prune expired O(n). But maybe acceptable? They ask complexity detailed. Could implement optional min-heap for efficient len? But "using an OrderedDict" doesn't forbid auxiliary heap. But likely expected simple. But for thread-safe, len with _prune_expired O(n) maybe. Need complete not abbreviate.
+
+Need unit tests with fake clock. Use unittest. FakeClock with monotonic method advancing. TTLCache constructor accepts clock=time.monotonic, default_ttl, maxsize, maybe enable_timer? Need no background thread? Thread-safe.
+
+Potential implementation:
+
+import threading
+from collections import OrderedDict
+from typing import Any, Optional
+import time
+
+class TTLCache:
+    def __init__(self, maxsize=128, default_ttl=None, clock=time.monotonic):
+        if maxsize < 1: raise ValueError
+        self._maxsize = int(maxsize)
+        self._default_ttl = None if default_ttl is None else float(default_ttl)
+        self._clock = clock
+        self._

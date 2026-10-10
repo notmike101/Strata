@@ -1,0 +1,11 @@
+We need answer user's request. Need produce final detailed answer at least 1200 words. Need implement thread-safe Python TTLCache using OrderedDict and monotonic clock. Include set, get, delete, clear, len, expiration, capacity eviction, unit tests with injected fake clock, detailed explanation thread safety complexity. Complete code, tests, explanation. Do not abbreviate implementation. Also Benchmark identifier irrelevant ignore. Need likely include code blocks. Need ensure at least 1200 words. Need think through design. Need be robust.
+
+We need produce final with Python code. Requirements:
+- thread-safe TTLCache class using OrderedDict and monotonic clock.
+- methods: set, get, delete, clear, len, expiration? Maybe method to remove expired entries? "expiration" perhaps method expires or cleanup? Need include expiration handling. Could implement _purge_expired? Also perhaps maxsize capacity. Use OrderedDict move_to_end for LRU? TTL cache eviction capacity likely LRU based on access. Need thread-safe. Use threading.RLock? For OrderedDict operations, use lock. Monotonic clock injectable fake clock: constructor clock=time.monotonic. Need fake clock unit tests: can increment manually. Use monotonic but tests fake.
+
+Implementation details:
+- OrderedDict stores (value, expires_at) maybe key -> Entry.
+- For TTL: if ttl is None maybe no expiration? Need support. set(key, value, ttl=None). If ttl <=0 maybe immediate? Could treat ttl <=0 as already expired or set no TTL? Better: ttl is seconds, if ttl is None no expiry; if ttl <=0 entry immediately expired? But set might still store and then purge. Simpler: if ttl is None: expires_at=None. else expires_at=clock()+ttl. If ttl<=0, expired immediately. get returns None default if missing/expired. Need delete, clear, len, __len__. Expiration: could have method expire() or _evict_expired. Maybe public method purge_expired(), or `expire()`? User says include set, get, delete, clear, len, expiration. Could implement `remove_expired` / `purge_expired` and call internally before operations. Also maybe `remaining_ttl(key)`? "expiration" ambiguous. Could mean expiration logic. Need include method for checking expiry maybe `is_expired`, `remaining_ttl`.
+
+Need unit tests with fake clock. Use unittest. FakeClock class with now attribute and advance method, __call__. But monotonic clock

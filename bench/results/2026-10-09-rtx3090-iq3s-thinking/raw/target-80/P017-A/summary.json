@@ -1,0 +1,41 @@
+{
+  "short": {
+    "runs": 1,
+    "completion_tokens": [
+      512
+    ],
+    "prompt_tokens": [
+      165
+    ],
+    "server_decode_tps": {
+      "median": 88.1,
+      "min": 88.1,
+      "max": 88.1
+    },
+    "prompt_tps": {
+      "median": 81.0,
+      "min": 81.0,
+      "max": 81.0
+    },
+    "request_e2e_tps": {
+      "median": 65.06698964308391,
+      "min": 65.06698964308391,
+      "max": 65.06698964308391
+    },
+    "stream_total_tps": {
+      "median": 65.07788583641947,
+      "min": 65.07788583641947,
+      "max": 65.07788583641947
+    },
+    "ttft_seconds": {
+      "median": 2.080584599985741,
+      "min": 2.080584599985741,
+      "max": 2.080584599985741
+    },
+    "request_seconds": {
+      "median": 7.868813399982173,
+      "min": 7.868813399982173,
+      "max": 7.868813399982173
+    }
+  }
+}

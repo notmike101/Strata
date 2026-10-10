@@ -1,0 +1,14 @@
+We need answer user's request. Need produce final answer detailed >=1200 words. User asks: Benchmark identifier... ignore. Read existing design requirements before implementing cache: long list rules 0-63 each key item_xxx lifetime increasing 30+ rule idx? size 64+3*idx? Expiration remove stale, access update LRU order. Implement thread-safe Python TTLCache class using OrderedDict and monotonic clock. Include set, get, delete, clear, len, expiration, capacity eviction, unit tests with injected fake clock, detailed explanation thread safety and complexity. Complete code, tests, explain design. No abbreviate. At least 1200 words.
+
+Need satisfy: likely mention existing rules? Need maybe include configuration from existing rules? They say read existing design requirements before implementing cache. We should implement class supports per-key ttl and max_bytes? Existing rules have lifetimes and sizes. Need capacity eviction. Need maybe demonstrate with those rules? Could include constants for initial data? But TTLCache class should be generic. Need ensure access update LRU order: move_to_end on get and set. Expiration remove stale entries. Thread safe: use RLock. Monotonic clock injected. Size maybe track bytes and max_bytes capacity? Need capacity eviction can be max entries and/or max bytes. Existing rules have size bytes. Need implement size-aware LRU? Requirements: expiration must remove stale entries, and access must update least-recently-used order. Implement TTLCache using OrderedDict and monotonic clock. Include set, get, delete, clear, len, expiration, capacity eviction. Need perhaps capacity based on max_bytes. Need maybe handle size 0? Let's design.
+
+Key requirements:
+- Thread-safe Python TTLCache class using OrderedDict and monotonic clock.
+- methods: set(key, value, ttl=None, size=1), get(key, default=None), delete(key), clear(), len (__len__), expiration maybe remove_expired() or purge()? Need include expiration method. Maybe also capacity eviction.
+- unit tests with injected fake clock.
+- detailed explanation thread safety and complexity.
+- Complete code, then tests, then explain design.
+- At least 1200 words.
+- No abbreviation.
+
+Need think of existing cache rules: maybe need include those initial entries? Could show that the implementation can be seeded with the 64 existing rules, maybe a helper `seed_existing_rules` or test. They specifically list 64 rules.

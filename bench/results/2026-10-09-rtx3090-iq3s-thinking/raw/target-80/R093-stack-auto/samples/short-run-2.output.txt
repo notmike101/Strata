@@ -1,0 +1,26 @@
+We need answer user's request. Need produce final detailed answer at least 1200 words, complete code, tests, explanation design. Need implement thread-safe Python TTLCache class using OrderedDict and monotonic clock. Include set, get, delete, clear, len, expiration, capacity eviction, unit tests with injected fake clock, detailed explanation thread safety and complexity. Do not abbreviate implementation. Benchmark identifier ignore.
+
+Need think about design. Use OrderedDict. Thread-safe: likely use threading.RLock. Monotonic clock injectable clock function default time.monotonic. TTLCache has maxsize, default ttl optional? Need set(key,value,ttl=None), get(key, default=None), delete, clear, __len__, maybe values, keys, items? User only includes set, get, delete, clear, len. Could include helper _expire_entry, _ensure_capacity. Expiration: lazy on get and set maybe prune expired entries. Use OrderedDict move_to_end on get for LRU? TTLCache often uses LRU for capacity eviction; OrderedDict supports move_to_end. Need thread safety details: all operations lock, lock granularity, avoid nested lock issues. RLock allows reentrant if internal methods assume lock held. But careful not calling public methods under lock causing lock? If RLock okay. Could use lock with helper methods not public.
+
+Need complete code. Maybe use typing. Provide file structure? Could present code in one block, then tests. Need ensure Python compatibility. Use collections.OrderedDict.
+
+Possible code:
+
+import threading
+from collections import OrderedDict
+import time
+from typing import Any, Callable, Hashable, Optional
+
+Clock = Callable[[], float]
+
+class TTLCache:
+    __slots__ = ...?
+    def __init__(self, maxsize=128, default_ttl=None, clock=None):
+        if maxsize <=0 raise ValueError
+        if default_ttl is not None and default_ttl <0 raise ValueError
+        self._maxsize = maxsize
+        self._default_ttl = default_ttl
+        self._clock = clock or time.monotonic
+        self._data = OrderedDict() # key -> (value, expires_at)
+        self._lock = threading.RLock()
+        self._expired_removed? Maybe need count? For len after expiry. Need len thread-safe. If lazy expiration, __len__ needs either clean expired keys or maintain count? Could prune on len too, but expensive O(n) if many expired. But okay for

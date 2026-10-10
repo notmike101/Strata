@@ -1,0 +1,14 @@
+We need answer user's request. Need produce final detailed answer at least 1200 words, complete code, tests, explanation design. Need implement thread-safe Python TTLCache class using OrderedDict and monotonic clock. Include set, get, delete, clear, len, expiration, capacity eviction, unit tests with injected fake clock, detailed explanation thread safety and complexity. Do not abbreviate implementation. Benchmark identifier ignore. Need likely provide full code, tests, explanation. Need ensure length >=1200 words. Let's plan.
+
+Need maybe mention monotonic clock but inject fake clock. Implementation should be detailed and robust.
+
+Design:
+- TTLCache class.
+- Internal OrderedDict mapping key -> value? Need expiration. Store entries as dataclass Entry(value, expires_at) or tuple. OrderedDict preserves insertion/access order. For TTL expiration: Could store expiration in value. For capacity eviction: use OrderedDict move_to_end on access? Need eviction of oldest? For cache, LRU perhaps. User says capacity eviction not specifically LRU? TTLCache with OrderedDict can evict oldest inserted/accessed. We'll implement LRU capacity eviction: on get, move_to_end; on set, move_to_end. Evict first item when exceed maxsize. Also expiration lazy: purge expired on get/set/len maybe. Could also maintain expiration heap? But requirement using OrderedDict and monotonic clock; lazy purge is okay. But len should not include expired. Need expiration. Use clock: time.monotonic by default. _monotonic_clock = clock or time.monotonic.
+
+Thread safety: Use threading.RLock around all public operations. Since internal operations call each other maybe reentrant. Could avoid public _purge etc. Need no deadlocks. OrderedDict is not thread-safe; all reads/writes protected. Need not use locks per item. Need ensure time.monotonic outside lock? Could call inside lock or outside. Better call inside lock to maintain deterministic? If clock is fake not thread-safe? Need fake clock tests. Use injected clock function. For thread safety, public methods acquire lock. For operations that call internal methods, use private methods assuming lock held. Ensure no external callbacks called while holding lock? Maybe not.
+
+Implementation details:
+- class TTLCache:
+    __slots__? Maybe not needed but can include.
+    def __init__(self, ttl=None, maxsize=None, clock=None): ttl positive or None? If None no TTL? maxsize positive or None? Validate. ttl

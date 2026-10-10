@@ -1,0 +1,156 @@
+ggml_cuda_init: failed to initialize CUDA: no CUDA-capable device is detected
+load_hparams: Qwen-VL models require at minimum 1024 image tokens to function correctly on grounding tasks
+load_hparams: if you encounter problems with accuracy, try adding --image-min-tokens 1024
+load_hparams: more info: https://github.com/ggml-org/llama.cpp/issues/16842
+
+strata-vision: model files loaded in 1.1 s
+strata-vision: on the CPU, 10 threads, no warm-up
+[strata] 2026-10-10 00:40:35 engine started: C:\strata\engine\strata-cuda133-share-trace.exe --serve --pack C:\models\Qwen3.8-Flash-Next\Strata\packs\iq3_s --native C:\models\Qwen3.8-Flash-Next\IQ3_S\Qwen3.8-Flash-Next-GSQ-RCO-IQ3_S-00001-of-00002.gguf --ple-gguf C:\models\Qwen3.8-Flash-Next\IQ3_S\Qwen3.8-Flash-Next-GSQ-RCO-IQ3_S-00002-of-00002.gguf --expert-profile C:\strata\data\expert-profile.bin --expert-cache auto --prefill auto --spec 4 --spec-min-p 0.70 --mtp C:\models\Qwen3.8-Flash-Next\Strata\mtp\rt --max-context 262144 --kv int8 --kv-resident 32768 --vision --vram-reserve-mib 700 --pcie-frac 0.20
+strata generate: this CPU has no AVX-512: the expert kernels run on AVX-2 (multi-token for the i-quant gate/up rows)
+strata generate: native pack: C:\models\Qwen3.8-Flash-Next\Strata\packs\iq3_s experts (largest blob 2.66 MB), token embedding IQ4_XS in mapped host memory (322 MiB, 0.8 s)
+strata generate: 1466 MiB of weights loaded from C:\models\Qwen3.8-Flash-Next\Strata\packs\iq3_s in 0.6 s (302 canonical tensors skipped: served natively)
+strata generate: 300 native projection matrices, 2018.88 MiB of weights, in 3.4 s
+strata generate: the SSD is kept awake while rows are read: one page of the table after 100 ms without a read, until 60 s after the last request (STRATA_SSD_KEEPALIVE=0 turns it off)
+strata generate: profile C:\strata\data\expert-profile.bin: 24576 ranked pairs, built for 24576 slots
+strata generate: KV streaming: 32768 of 262144 cells per QSA layer in VRAM, the K/V in 3.09 GiB of pinned RAM
+strata generate: PLE on, table 320001536 rows of C:\models\Qwen3.8-Flash-Next\IQ3_S\Qwen3.8-Flash-Next-GSQ-RCO-IQ3_S-00002-of-00002.gguf
+strata mtp: draft layer loaded, 835 MiB of VRAM (experts 675, dense 111), files read in 0.44 s (1787 MiB/s)
+strata generate: experimental native Q5_K head, 521472000 bytes, in 0.8 s
+strata generate: GPU 0: NVIDIA GeForce RTX 3090, compute capability 8.6
+strata generate: expert arena read unbuffered (1 of 16 probe reads from the file cache; 60.2 GiB available, 51.1 GiB of files)
+strata generate: expert arena: cudaHostRegister PORTABLE ok; large pages refused for 50295996416 B (GetLargePageMinimum=2097152, VirtualAlloc error 1314); using 4 KB pages
+strata generate: loaded 46.84 GiB at 1.43 GiB/s
+strata generate: CPU pool tasks/phase: 30 (automatic), participating threads: 10
+strata generate: 9 pool workers on logical processors 2,4,6,8,10,12,14,16,18, the host thread on 0 (draining too) (--host-core first)
+strata generate: expert cache auto: 16.85 GiB free, 700 MiB reserved (+218 MiB for the draft head) -> 6432 slots
+strata generate: expert cache 8409 slots, 15.95 GiB of VRAM; policy is
+strata generate: the GPU computes the experts in the cache; it rounds differently from the CPU,
+                 so a reply can differ slightly from a run without the cache (same quality:
+                 bench/results/2026-09-27-cache-parity).
+                 PROFILE, ranked by routing frequency, no eviction.
+strata generate: pre-filled 8409 of 8409 slots from the profile in 2.7 s (6259 MB/s); slot 0 verified
+strata generate: R4 hit path ON - resident experts are computed on the GPU
+strata generate: 9 expert-pool workers + the host thread
+strata generate: session is up (engine 0.1.41)
+strata generate: token graph hit path: 8409 resident experts, decided on the device
+prefill: the CPU share is ON by default for prompt chunks below 1024 tokens (the idle CPU takes some of the experts the GPU would stream; answers can differ slightly from 0.1.40.3, mean KL ~0.004). STRATA_PREFILL_CPU_SHARE=0 turns it off.
+strata serve: prompt chunk auto: 8192 tokens, a 384-slot ring
+strata serve: the prompt path borrows 2315 CUDA0 cache slots (4.38 GiB)
+strata hc: CUDA0: the hyper-connection read runs as staged (the norm per token and stream, the down projection's activations staged ahead by cp.async); checked bit for bit against the plain read on this card (STRATA_HC_SPLIT=1 or 0 for the earlier ones)
+strata verify: window up to 6 tokens, 75.8 MiB of device buffers
+strata mtp: draft head over 106299 tokens (212.9 MiB)
+strata serve: accepted-row adaptive usage enabled (serial, committed inputs only)
+strata serve: 460 MiB of VRAM free with everything loaded
+strata serve: that is little room for the verify windows' buffers under WDDM; if the engine exits right after this line, --prefill auto:8192 (a smaller prompt chunk borrows fewer cache slots) or a larger --vram-reserve-mib leaves more
+cpu gate: layer 2 not shared, 123 non-resident, 38.33 ms (0.3116 a expert) -> do not share; cpu_share 0.785676 cpu_ms_per_expert 0.065048 gpu_ms_per_expert 0.238455
+cpu gate: layer 4 not shared, 89 non-resident, 28.06 ms (0.3153 a expert) -> do not share; cpu_share 0.759230 cpu_ms_per_expert 0.082534 gpu_ms_per_expert 0.260258
+cpu gate: layer 5 shared, 107 non-resident, 9.20 ms (0.0860 a expert) -> share; cpu_share 0.770518 cpu_ms_per_expert 0.081861 gpu_ms_per_expert 0.274859
+cpu gate: layer 6 not shared, 105 non-resident, 32.85 ms (0.3128 a expert) -> share; cpu_share 0.770518 cpu_ms_per_expert 0.081861 gpu_ms_per_expert 0.274859
+cpu gate: layer 7 shared, 119 non-resident, 10.46 ms (0.0879 a expert) -> share; cpu_share 0.779338 cpu_ms_per_expert 0.083299 gpu_ms_per_expert 0.294199
+cpu gate: layer 8 not shared, 100 non-resident, 24.32 ms (0.2432 a expert) -> share; cpu_share 0.779338 cpu_ms_per_expert 0.083299 gpu_ms_per_expert 0.294199
+cpu gate: layer 9 shared, 93 non-resident, 7.79 ms (0.0838 a expert) -> share; cpu_share 0.781982 cpu_ms_per_expert 0.084228 gpu_ms_per_expert 0.302106
+cpu gate: layer 10 shared, 106 non-resident, 7.24 ms (0.0683 a expert) -> share; cpu_share 0.778707 cpu_ms_per_expert 0.081963 gpu_ms_per_expert 0.288419
+cpu gate: layer 11 shared, 90 non-resident, 9.72 ms (0.1079 a expert) -> share; cpu_share 0.780704 cpu_ms_per_expert 0.083583 gpu_ms_per_expert 0.297560
+cpu gate: layer 12 shared, 98 non-resident, 21.69 ms (0.2213 a expert) -> share; cpu_share 0.779638 cpu_ms_per_expert 0.082959 gpu_ms_per_expert 0.293509
+cpu gate: layer 13 shared, 106 non-resident, 7.88 ms (0.0743 a expert) -> share; cpu_share 0.773055 cpu_ms_per_expert 0.082817 gpu_ms_per_expert 0.282105
+cpu gate: layer 14 shared, 119 non-resident, 13.06 ms (0.1097 a expert) -> share; cpu_share 0.783770 cpu_ms_per_expert 0.082644 gpu_ms_per_expert 0.299560
+cpu gate: layer 15 shared, 77 non-resident, 8.43 ms (0.1095 a expert) -> share; cpu_share 0.785411 cpu_ms_per_expert 0.082979 gpu_ms_per_expert 0.303710
+cpu gate: layer 16 shared, 81 non-resident, 8.04 ms (0.0993 a expert) -> share; cpu_share 0.781166 cpu_ms_per_expert 0.088699 gpu_ms_per_expert 0.316627
+cpu gate: layer 17 shared, 131 non-resident, 12.77 ms (0.0975 a expert) -> share; cpu_share 0.777562 cpu_ms_per_expert 0.094615 gpu_ms_per_expert 0.330741
+cpu gate: layer 18 shared, 115 non-resident, 10.48 ms (0.0911 a expert) -> share; cpu_share 0.778823 cpu_ms_per_expert 0.095765 gpu_ms_per_expert 0.337213
+cpu gate: layer 19 shared, 124 non-resident, 11.25 ms (0.0907 a expert) -> share; cpu_share 0.779245 cpu_ms_per_expert 0.094137 gpu_ms_per_expert 0.332293
+cpu gate: layer 20 shared, 115 non-resident, 9.01 ms (0.0783 a expert) -> share; cpu_share 0.774647 cpu_ms_per_expert 0.092717 gpu_ms_per_expert 0.318714
+cpu gate: layer 21 shared, 99 non-resident, 7.85 ms (0.0793 a expert) -> share; cpu_share 0.775374 cpu_ms_per_expert 0.091420 gpu_ms_per_expert 0.315568
+cpu gate: layer 22 shared, 116 non-resident, 10.65 ms (0.0918 a expert) -> share; cpu_share 0.775696 cpu_ms_per_expert 0.095161 gpu_ms_per_expert 0.329088
+cpu gate: layer 23 shared, 105 non-resident, 9.15 ms (0.0871 a expert) -> share; cpu_share 0.778949 cpu_ms_per_expert 0.093132 gpu_ms_per_expert 0.328183
+cpu gate: layer 24 shared, 96 non-resident, 8.23 ms (0.0858 a expert) -> share; cpu_share 0.780375 cpu_ms_per_expert 0.092711 gpu_ms_per_expert 0.329423
+cpu gate: layer 25 shared, 113 non-resident, 10.40 ms (0.0920 a expert) -> share; cpu_share 0.786867 cpu_ms_per_expert 0.092444 gpu_ms_per_expert 0.341296
+cpu gate: layer 26 shared, 119 non-resident, 9.56 ms (0.0803 a expert) -> share; cpu_share 0.785985 cpu_ms_per_expert 0.091357 gpu_ms_per_expert 0.335515
+cpu gate: layer 27 shared, 121 non-resident, 13.39 ms (0.1106 a expert) -> share; cpu_share 0.779818 cpu_ms_per_expert 0.097367 gpu_ms_per_expert 0.344844
+cpu gate: layer 29 not shared, 129 non-resident, 47.04 ms (0.3646 a expert) -> share; cpu_share 0.783006 cpu_ms_per_expert 0.097462 gpu_ms_per_expert 0.351683
+cpu gate: layer 30 shared, 169 non-resident, 12.28 ms (0.0727 a expert) -> share; cpu_share 0.780144 cpu_ms_per_expert 0.093862 gpu_ms_per_expert 0.333062
+cpu gate: layer 31 shared, 115 non-resident, 10.54 ms (0.0916 a expert) -> share; cpu_share 0.785529 cpu_ms_per_expert 0.092263 gpu_ms_per_expert 0.337927
+cpu gate: layer 32 shared, 101 non-resident, 9.17 ms (0.0908 a expert) -> share; cpu_share 0.783251 cpu_ms_per_expert 0.092361 gpu_ms_per_expert 0.333758
+cpu gate: layer 33 shared, 147 non-resident, 12.46 ms (0.0847 a expert) -> share; cpu_share 0.783794 cpu_ms_per_expert 0.093253 gpu_ms_per_expert 0.338063
+cpu gate: layer 34 shared, 129 non-resident, 10.63 ms (0.0824 a expert) -> share; cpu_share 0.782694 cpu_ms_per_expert 0.093023 gpu_ms_per_expert 0.335052
+cpu gate: layer 35 shared, 143 non-resident, 13.62 ms (0.0953 a expert) -> share; cpu_share 0.779328 cpu_ms_per_expert 0.097453 gpu_ms_per_expert 0.344168
+cpu gate: layer 36 shared, 141 non-resident, 8.93 ms (0.0633 a expert) -> share; cpu_share 0.779812 cpu_ms_per_expert 0.090263 gpu_ms_per_expert 0.319671
+cpu gate: layer 37 shared, 107 non-resident, 9.66 ms (0.0903 a expert) -> share; cpu_share 0.783469 cpu_ms_per_expert 0.090718 gpu_ms_per_expert 0.328244
+cpu gate: layer 38 shared, 128 non-resident, 11.11 ms (0.0868 a expert) -> share; cpu_share 0.790990 cpu_ms_per_expert 0.088879 gpu_ms_per_expert 0.336358
+cpu gate: layer 39 shared, 101 non-resident, 8.14 ms (0.0806 a expert) -> share; cpu_share 0.795999 cpu_ms_per_expert 0.085868 gpu_ms_per_expert 0.335054
+cpu gate: layer 40 shared, 121 non-resident, 10.42 ms (0.0861 a expert) -> share; cpu_share 0.795788 cpu_ms_per_expert 0.088466 gpu_ms_per_expert 0.344740
+cpu gate: layer 41 shared, 144 non-resident, 11.51 ms (0.0799 a expert) -> share; cpu_share 0.798884 cpu_ms_per_expert 0.087315 gpu_ms_per_expert 0.346839
+cpu gate: layer 42 shared, 147 non-resident, 11.93 ms (0.0812 a expert) -> share; cpu_share 0.799977 cpu_ms_per_expert 0.087449 gpu_ms_per_expert 0.349745
+cpu gate: layer 43 shared, 123 non-resident, 10.29 ms (0.0836 a expert) -> share; cpu_share 0.798066 cpu_ms_per_expert 0.088714 gpu_ms_per_expert 0.350608
+cpu gate: layer 44 shared, 125 non-resident, 10.81 ms (0.0865 a expert) -> share; cpu_share 0.797320 cpu_ms_per_expert 0.090982 gpu_ms_per_expert 0.357911
+cpu gate: layer 45 shared, 132 non-resident, 11.30 ms (0.0856 a expert) -> share; cpu_share 0.798207 cpu_ms_per_expert 0.091628 gpu_ms_per_expert 0.362442
+cpu gate: layer 46 shared, 142 non-resident, 11.32 ms (0.0797 a expert) -> share; cpu_share 0.799900 cpu_ms_per_expert 0.090059 gpu_ms_per_expert 0.360010
+strata verify: capturing the 4-token window (404 MiB of VRAM free)
+strata verify: captured the 4-token window (upload no error, sync no error)
+strata verify: capturing the 1-token window (388 MiB of VRAM free)
+strata verify: captured the 1-token window (upload no error, sync no error)
+strata verify: capturing the 2-token window (372 MiB of VRAM free)
+strata verify: captured the 2-token window (upload no error, sync no error)
+strata verify: capturing the 6-token window (354 MiB of VRAM free)
+strata verify: captured the 6-token window (upload no error, sync no error)
+strata verify: capturing the 3-token window (334 MiB of VRAM free)
+strata verify: captured the 3-token window (upload no error, sync no error)
+strata verify: capturing the 5-token window (318 MiB of VRAM free)
+strata verify: captured the 5-token window (upload no error, sync no error)
+strata accepted usage: 246240 retained of 267360 routed entries
+strata serve: prompt 165 tokens = 0 reused + 165 read in 1279 ms (129.0 tok/s), 512 generated in 6526 ms (78.5 tok/s), drafts accepted 160 of 204, 1 checkpoints
+strata serve: decode expert cache hit rate: 87.6% (232592 hits / 265520 lookups); 1840 more read by the GPU over PCIe or from another GPU (0.7% of all 267360 routed)
+strata serve: KV streaming: 99.71% of 705708 block reads hit VRAM, 8.2 MiB read from RAM
+strata serve: suffix drafts: 5 windows, 15 of 22 drafts accepted
+cpu gate: layer 47 shared, 116 non-resident, 10.91 ms (0.0940 a expert) -> share; cpu_share 0.805290 cpu_ms_per_expert 0.091180 gpu_ms_per_expert 0.377105
+cpu gate: layer 1 shared, 108 non-resident, 6.79 ms (0.0629 a expert) -> share; cpu_share 0.803838 cpu_ms_per_expert 0.084265 gpu_ms_per_expert 0.345304
+cpu gate: layer 2 shared, 131 non-resident, 9.25 ms (0.0706 a expert) -> share; cpu_share 0.805674 cpu_ms_per_expert 0.081689 gpu_ms_per_expert 0.338682
+cpu gate: layer 3 shared, 84 non-resident, 6.50 ms (0.0774 a expert) -> share; cpu_share 0.807756 cpu_ms_per_expert 0.081490 gpu_ms_per_expert 0.342396
+cpu gate: layer 4 shared, 80 non-resident, 6.50 ms (0.0812 a expert) -> share; cpu_share 0.813005 cpu_ms_per_expert 0.080340 gpu_ms_per_expert 0.349298
+cpu gate: layer 5 shared, 99 non-resident, 8.45 ms (0.0853 a expert) -> share; cpu_share 0.802664 cpu_ms_per_expert 0.084109 gpu_ms_per_expert 0.342114
+cpu gate: layer 6 shared, 110 non-resident, 8.24 ms (0.0749 a expert) -> share; cpu_share 0.805932 cpu_ms_per_expert 0.081391 gpu_ms_per_expert 0.338005
+cpu gate: layer 7 shared, 107 non-resident, 8.56 ms (0.0800 a expert) -> share; cpu_share 0.807251 cpu_ms_per_expert 0.082068 gpu_ms_per_expert 0.343711
+cpu gate: layer 8 shared, 91 non-resident, 6.77 ms (0.0744 a expert) -> share; cpu_share 0.800244 cpu_ms_per_expert 0.080776 gpu_ms_per_expert 0.323598
+cpu gate: layer 9 shared, 69 non-resident, 5.71 ms (0.0827 a expert) -> share; cpu_share 0.803623 cpu_ms_per_expert 0.080536 gpu_ms_per_expert 0.329574
+cpu gate: layer 10 not shared, 104 non-resident, 25.03 ms (0.2407 a expert) -> share; cpu_share 0.803623 cpu_ms_per_expert 0.080536 gpu_ms_per_expert 0.329574
+cpu gate: layer 11 shared, 81 non-resident, 7.43 ms (0.0918 a expert) -> share; cpu_share 0.795156 cpu_ms_per_expert 0.085987 gpu_ms_per_expert 0.333779
+cpu gate: layer 12 shared, 103 non-resident, 7.26 ms (0.0704 a expert) -> share; cpu_share 0.794481 cpu_ms_per_expert 0.083571 gpu_ms_per_expert 0.323063
+cpu gate: layer 13 shared, 89 non-resident, 6.97 ms (0.0783 a expert) -> share; cpu_share 0.787308 cpu_ms_per_expert 0.083353 gpu_ms_per_expert 0.308544
+cpu gate: layer 14 shared, 111 non-resident, 10.18 ms (0.0917 a expert) -> share; cpu_share 0.790581 cpu_ms_per_expert 0.084788 gpu_ms_per_expert 0.320083
+cpu gate: layer 15 shared, 68 non-resident, 6.30 ms (0.0927 a expert) -> share; cpu_share 0.789823 cpu_ms_per_expert 0.086025 gpu_ms_per_expert 0.323275
+cpu gate: layer 16 shared, 63 non-resident, 7.25 ms (0.1151 a expert) -> share; cpu_share 0.791577 cpu_ms_per_expert 0.087326 gpu_ms_per_expert 0.331658
+cpu gate: layer 17 shared, 112 non-resident, 11.59 ms (0.1034 a expert) -> share; cpu_share 0.784176 cpu_ms_per_expert 0.094023 gpu_ms_per_expert 0.341623
+cpu gate: layer 18 shared, 109 non-resident, 10.36 ms (0.0950 a expert) -> share; cpu_share 0.782627 cpu_ms_per_expert 0.095915 gpu_ms_per_expert 0.345332
+cpu gate: layer 19 shared, 119 non-resident, 9.58 ms (0.0805 a expert) -> share; cpu_share 0.782499 cpu_ms_per_expert 0.094323 gpu_ms_per_expert 0.339344
+cpu gate: layer 20 shared, 118 non-resident, 8.24 ms (0.0698 a expert) -> share; cpu_share 0.782838 cpu_ms_per_expert 0.089827 gpu_ms_per_expert 0.323815
+cpu gate: layer 21 shared, 113 non-resident, 10.31 ms (0.0913 a expert) -> share; cpu_share 0.772711 cpu_ms_per_expert 0.093641 gpu_ms_per_expert 0.318350
+cpu gate: layer 22 shared, 124 non-resident, 11.08 ms (0.0894 a expert) -> share; cpu_share 0.782373 cpu_ms_per_expert 0.090977 gpu_ms_per_expert 0.327062
+cpu gate: layer 23 shared, 92 non-resident, 7.41 ms (0.0805 a expert) -> share; cpu_share 0.786211 cpu_ms_per_expert 0.088776 gpu_ms_per_expert 0.326474
+cpu gate: layer 24 shared, 95 non-resident, 8.11 ms (0.0854 a expert) -> share; cpu_share 0.788916 cpu_ms_per_expert 0.087955 gpu_ms_per_expert 0.328726
+cpu gate: layer 25 shared, 99 non-resident, 9.02 ms (0.0911 a expert) -> share; cpu_share 0.793786 cpu_ms_per_expert 0.089165 gpu_ms_per_expert 0.343224
+cpu gate: layer 26 shared, 118 non-resident, 9.49 ms (0.0804 a expert) -> share; cpu_share 0.792182 cpu_ms_per_expert 0.088445 gpu_ms_per_expert 0.337142
+cpu gate: layer 27 shared, 110 non-resident, 11.92 ms (0.1084 a expert) -> share; cpu_share 0.791618 cpu_ms_per_expert 0.091274 gpu_ms_per_expert 0.346738
+cpu gate: layer 28 shared, 138 non-resident, 13.04 ms (0.0945 a expert) -> share; cpu_share 0.787551 cpu_ms_per_expert 0.095450 gpu_ms_per_expert 0.353833
+cpu gate: layer 29 shared, 116 non-resident, 12.37 ms (0.1067 a expert) -> share; cpu_share 0.788848 cpu_ms_per_expert 0.096259 gpu_ms_per_expert 0.359617
+cpu gate: layer 30 shared, 161 non-resident, 11.60 ms (0.0720 a expert) -> share; cpu_share 0.784813 cpu_ms_per_expert 0.092765 gpu_ms_per_expert 0.338326
+cpu gate: layer 31 shared, 100 non-resident, 8.71 ms (0.0871 a expert) -> share; cpu_share 0.788899 cpu_ms_per_expert 0.091480 gpu_ms_per_expert 0.341867
+cpu gate: layer 32 shared, 82 non-resident, 7.76 ms (0.0946 a expert) -> share; cpu_share 0.786116 cpu_ms_per_expert 0.091574 gpu_ms_per_expert 0.336574
+cpu gate: layer 33 shared, 138 non-resident, 13.36 ms (0.0968 a expert) -> share; cpu_share 0.786809 cpu_ms_per_expert 0.091983 gpu_ms_per_expert 0.339475
+cpu gate: layer 34 shared, 131 non-resident, 10.84 ms (0.0828 a expert) -> share; cpu_share 0.787545 cpu_ms_per_expert 0.090321 gpu_ms_per_expert 0.334808
+cpu gate: layer 35 shared, 141 non-resident, 12.31 ms (0.0873 a expert) -> share; cpu_share 0.789426 cpu_ms_per_expert 0.091823 gpu_ms_per_expert 0.344239
+cpu gate: layer 36 shared, 140 non-resident, 9.14 ms (0.0653 a expert) -> share; cpu_share 0.786838 cpu_ms_per_expert 0.086545 gpu_ms_per_expert 0.319460
+cpu gate: layer 37 shared, 123 non-resident, 10.11 ms (0.0822 a expert) -> share; cpu_share 0.792724 cpu_ms_per_expert 0.085532 gpu_ms_per_expert 0.327115
+cpu gate: layer 38 shared, 129 non-resident, 10.88 ms (0.0843 a expert) -> share; cpu_share 0.796123 cpu_ms_per_expert 0.085802 gpu_ms_per_expert 0.335050
+cpu gate: layer 39 not shared, 94 non-resident, 29.73 ms (0.3163 a expert) -> share; cpu_share 0.796123 cpu_ms_per_expert 0.085802 gpu_ms_per_expert 0.335050
+cpu gate: layer 40 shared, 116 non-resident, 9.91 ms (0.0855 a expert) -> share; cpu_share 0.800967 cpu_ms_per_expert 0.085797 gpu_ms_per_expert 0.345272
+cpu gate: layer 41 shared, 128 non-resident, 10.40 ms (0.0813 a expert) -> share; cpu_share 0.800212 cpu_ms_per_expert 0.086680 gpu_ms_per_expert 0.347182
+cpu gate: layer 42 shared, 144 non-resident, 11.59 ms (0.0805 a expert) -> share; cpu_share 0.800743 cpu_ms_per_expert 0.087233 gpu_ms_per_expert 0.350560
+cpu gate: layer 43 shared, 121 non-resident, 9.77 ms (0.0807 a expert) -> share; cpu_share 0.801015 cpu_ms_per_expert 0.087626 gpu_ms_per_expert 0.352740
+cpu gate: layer 44 shared, 113 non-resident, 9.44 ms (0.0836 a expert) -> share; cpu_share 0.802100 cpu_ms_per_expert 0.088901 gpu_ms_per_expert 0.360320
+cpu gate: layer 45 shared, 133 non-resident, 11.68 ms (0.0878 a expert) -> share; cpu_share 0.800197 cpu_ms_per_expert 0.091059 gpu_ms_per_expert 0.364684
+cpu gate: layer 46 shared, 134 non-resident, 10.80 ms (0.0806 a expert) -> share; cpu_share 0.799655 cpu_ms_per_expert 0.090723 gpu_ms_per_expert 0.362108
+strata accepted usage: 246240 retained of 278400 routed entries
+strata serve: prompt 165 tokens = 0 reused + 165 read in 797 ms (207.0 tok/s), 512 generated in 5701 ms (89.8 tok/s), drafts accepted 186 of 253, 1 checkpoints
+strata serve: decode expert cache hit rate: 91.6% (253990 hits / 277381 lookups); 1019 more read by the GPU over PCIe or from another GPU (0.4% of all 278400 routed)
+strata serve: KV streaming: 99.72% of 738156 block reads hit VRAM, 8.2 MiB read from RAM
+strata serve: suffix drafts: 7 windows, 10 of 17 drafts accepted

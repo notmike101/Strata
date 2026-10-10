@@ -1,0 +1,24 @@
+We need answer user's request. Need produce detailed answer at least 1200 words. User: "Benchmark identifier ... Ignore. Implement a thread-safe Python TTLCache class using an OrderedDict and a monotonic clock. Include set, get, delete, clear, len, expiration, capacity eviction, unit tests with an injected fake clock, and a detailed explanation of thread safety and complexity. Write complete code, then tests, then explain the design. Do not abbreviate the implementation. Produce a detailed answer of at least 1200 words."
+
+We need output complete code, tests, explanation. Need likely mention ignore identifier. Need be careful thread-safe with OrderedDict. Need implement TTLCache. Use threading.RLock maybe. OrderedDict LRU? Need capacity eviction: when exceed maxsize evict oldest? OrderedDict can maintain insertion order; get with default move? TTL cache often LRU? Need specify eviction policy. Capacity eviction: evict least recently used if get moves item to end? If set updates existing key moves to end. Expire by deleting expired keys. Could do lazy expiration on get and before set/capacity. Need len includes expired? Usually should not count expired. Need thread safety complexity.
+
+Need write code not abbreviated. Maybe class:
+from collections import OrderedDict
+import threading
+import time
+
+class TTLCache:
+    def __init__(self, maxsize=0, ttl=None, clock=None):
+       if maxsize <0 raise...
+       if ttl is not None and ttl <0 raise
+       self.maxsize = maxsize
+       self.ttl = ttl
+       self.clock = clock or time.monotonic
+       self._cache = OrderedDict()
+       self._lock = threading.RLock()
+       # expiration tuple (expires_at, value)
+    def _now(self): return self.clock()
+    def _is_expired(self, expires_at, now): return expires_at is not None and expires_at <= now
+    def _purge_expired(self, now=None):
+        if now is None: now = self._now()
+        # since entries sorted by insertion not expiration? If all same ttl and insert order equals expiration order, can pop from start until not expired. But if different ttl, expiration order not guaranteed. Could remove all expired scanning O(n). Need complexity? If single TTL same per item insertion order = expiration order because set uses current time; updating resets expiration to same relative order? If get doesn't update expiration, order by

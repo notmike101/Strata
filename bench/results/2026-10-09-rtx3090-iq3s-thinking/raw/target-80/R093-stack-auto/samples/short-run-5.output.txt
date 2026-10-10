@@ -1,0 +1,22 @@
+We need answer user's request. Need produce final answer at least 1200 words. Need implement thread-safe Python TTLCache using OrderedDict monotonic clock, include set, get, delete, clear, len, expiration, capacity eviction, unit tests with injected fake clock, detailed explanation thread safety and complexity. Do not abbreviate implementation. Need probably no external dependencies. Need ensure complete code. Need maybe use threading.RLock? OrderedDict thread-safe? Need lock for compound operations. Need monotonic clock by default time.monotonic, inject fake clock. TTLCache with capacity, default ttl? Need len should reflect current valid entries? Need expiration lazy + explicit purge. Complexity. Tests with unittest. Need fake clock. Need detailed answer. Ensure >=1200 words. Need maybe mention identifier ignored? No need maybe mention ignored identifier. Let's design.
+
+Need code robust:
+
+import threading, time
+from collections import OrderedDict
+
+class TTLCache:
+    def __init__(self, capacity, default_ttl=None, clock=time.monotonic):
+        if capacity <=0 raise ValueError
+        if default_ttl is not None and default_ttl <0? ttl can be 0 immediate expire; negative invalid? Could raise.
+        self._capacity=capacity
+        self._default_ttl=default_ttl
+        self._clock=clock
+        self._lock=threading.RLock()
+        self._cache=OrderedDict() # key -> value? Need store expiration separately maybe dict key -> (value, expires_at). Use OrderedDict values as Entry namedtuple? Simpler values tuple(value, expires_at). OrderedDict move_to_end for LRU. 
+
+Need thread safety: all public methods acquire lock. But if clock is user-supplied and may call? Should be nonblocking? mention clock should be cheap and not acquire this lock. For RLock allows reentrant if internal methods call? Public methods call _purge maybe assume lock held.
+
+Methods:
+    def _purge_expired(self, now=None): with lock? If called internally under lock, no acquire; maybe implement _purge_expired_locked(now). Public calls with lock. Iterate over list(self._cache.items()) because mutating dict while iterating unsafe. Remove if expires_at <= now. Return number removed.
+    def _enforce_capacity_locked(self): while len(self._cache) > self.capacity: popped = self._cache.popitem(last=False) (FIFO/eviction oldest). Need decide eviction order: OrderedDict insertion order and move_to_end
