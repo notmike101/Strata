@@ -1725,6 +1725,25 @@
   },
   {
     "campaign": "target-80",
+    "arm": "Q015-prefix-preserve-quality",
+    "workload": "quality/coding",
+    "runs": 5,
+    "decode_median": 78.9,
+    "decode_min": 77.3,
+    "decode_max": 80.5,
+    "e2e_median": 78.56881181068789,
+    "stream_total_median": 78.56921761929947,
+    "ttft_median_seconds": 0.9312746000359766,
+    "raw_decode": [
+      78.9,
+      77.3,
+      78.9,
+      80.5,
+      78.9
+    ]
+  },
+  {
+    "campaign": "target-80",
     "arm": "R001-host-last",
     "workload": "longer",
     "runs": 3,
@@ -5369,6 +5388,234 @@
       87.7,
       92.4,
       90.0
+    ]
+  },
+  {
+    "campaign": "target-80",
+    "arm": "R116-prefix-control",
+    "workload": "longer",
+    "runs": 5,
+    "decode_median": 88.7,
+    "decode_min": 78.1,
+    "decode_max": 90.8,
+    "e2e_median": 43.027738958055416,
+    "stream_total_median": 43.03097478826683,
+    "ttft_median_seconds": 6.14913539995905,
+    "raw_decode": [
+      78.1,
+      90.8,
+      84.6,
+      88.7,
+      90.8
+    ]
+  },
+  {
+    "campaign": "target-80",
+    "arm": "R116-prefix-control",
+    "workload": "short",
+    "runs": 5,
+    "decode_median": 91.5,
+    "decode_min": 90.1,
+    "decode_max": 98.7,
+    "e2e_median": 80.17979316367102,
+    "stream_total_median": 80.19931534869424,
+    "ttft_median_seconds": 0.8495503999874927,
+    "raw_decode": [
+      90.5,
+      92.9,
+      98.7,
+      90.1,
+      91.5
+    ]
+  },
+  {
+    "campaign": "target-80",
+    "arm": "R117-prefix-stage",
+    "workload": "longer",
+    "runs": 5,
+    "decode_median": 89.7,
+    "decode_min": 86.5,
+    "decode_max": 91.2,
+    "e2e_median": 43.59032234908351,
+    "stream_total_median": 43.59496216970466,
+    "ttft_median_seconds": 6.056420599983539,
+    "raw_decode": [
+      86.6,
+      90.6,
+      89.7,
+      86.5,
+      91.2
+    ]
+  },
+  {
+    "campaign": "target-80",
+    "arm": "R117-prefix-stage",
+    "workload": "short",
+    "runs": 5,
+    "decode_median": 89.7,
+    "decode_min": 88.0,
+    "decode_max": 91.1,
+    "e2e_median": 79.4938601084908,
+    "stream_total_median": 79.51033312839797,
+    "ttft_median_seconds": 0.8266315999790095,
+    "raw_decode": [
+      89.7,
+      90.5,
+      91.1,
+      89.1,
+      88.0
+    ]
+  },
+  {
+    "campaign": "target-80",
+    "arm": "R118-preserve-control",
+    "workload": "longer",
+    "runs": 5,
+    "decode_median": 87.6,
+    "decode_min": 85.2,
+    "decode_max": 89.1,
+    "e2e_median": 42.71752223283322,
+    "stream_total_median": 42.721979169201134,
+    "ttft_median_seconds": 6.149442099966109,
+    "raw_decode": [
+      87.6,
+      85.6,
+      88.5,
+      85.2,
+      89.1
+    ]
+  },
+  {
+    "campaign": "target-80",
+    "arm": "R118-preserve-control",
+    "workload": "short",
+    "runs": 5,
+    "decode_median": 89.5,
+    "decode_min": 88.1,
+    "decode_max": 94.8,
+    "e2e_median": 78.83675627050154,
+    "stream_total_median": 78.84839698571929,
+    "ttft_median_seconds": 0.847472800000105,
+    "raw_decode": [
+      89.5,
+      94.8,
+      88.1,
+      89.0,
+      90.9
+    ]
+  },
+  {
+    "campaign": "target-80",
+    "arm": "R119-prefix-preserve",
+    "workload": "longer",
+    "runs": 5,
+    "decode_median": 89.5,
+    "decode_min": 86.0,
+    "decode_max": 91.2,
+    "e2e_median": 43.33323253279739,
+    "stream_total_median": 43.336611680415515,
+    "ttft_median_seconds": 6.117563599953428,
+    "raw_decode": [
+      91.2,
+      89.5,
+      86.0,
+      86.7,
+      90.4
+    ]
+  },
+  {
+    "campaign": "target-80",
+    "arm": "R119-prefix-preserve",
+    "workload": "short",
+    "runs": 5,
+    "decode_median": 90.1,
+    "decode_min": 89.1,
+    "decode_max": 93.0,
+    "e2e_median": 79.18836993861566,
+    "stream_total_median": 79.20285911207448,
+    "ttft_median_seconds": 0.7960635999916121,
+    "raw_decode": [
+      90.9,
+      93.0,
+      89.5,
+      90.1,
+      89.1
+    ]
+  },
+  {
+    "campaign": "target-80",
+    "arm": "R120-prefix-preserve-reverse",
+    "workload": "longer",
+    "runs": 5,
+    "decode_median": 88.0,
+    "decode_min": 83.4,
+    "decode_max": 88.3,
+    "e2e_median": 43.01882341562118,
+    "stream_total_median": 43.02223359641444,
+    "ttft_median_seconds": 6.107356799999252,
+    "raw_decode": [
+      83.4,
+      85.1,
+      88.0,
+      88.0,
+      88.3
+    ]
+  },
+  {
+    "campaign": "target-80",
+    "arm": "R120-prefix-preserve-reverse",
+    "workload": "short",
+    "runs": 5,
+    "decode_median": 90.0,
+    "decode_min": 87.3,
+    "decode_max": 94.2,
+    "e2e_median": 79.19725783173388,
+    "stream_total_median": 79.20813768295396,
+    "ttft_median_seconds": 0.7844576999777928,
+    "raw_decode": [
+      89.4,
+      94.2,
+      87.3,
+      90.0,
+      90.3
+    ]
+  },
+  {
+    "campaign": "target-80",
+    "arm": "R121-preserve-control-reverse",
+    "workload": "longer",
+    "runs": 5,
+    "decode_median": 84.4,
+    "decode_min": 82.9,
+    "decode_max": 87.2,
+    "e2e_median": 41.913824178741905,
+    "stream_total_median": 41.91712489911123,
+    "ttft_median_seconds": 6.164986899995711,
+    "raw_decode": [
+      84.4,
+      83.7,
+      82.9,
+      86.2,
+      87.2
+    ]
+  },
+  {
+    "campaign": "target-80",
+    "arm": "R121-preserve-control-reverse",
+    "workload": "short",
+    "runs": 5,
+    "decode_median": 88.0,
+    "decode_min": 84.6,
+    "decode_max": 89.9,
+    "e2e_median": 77.23585078793815,
+    "stream_total_median": 77.25034051659587,
+    "ttft_median_seconds": 0.8676370999892242,
+    "raw_decode": [
+      88.0,
+      89.9,
+      89.5,
+      86.1,
+      84.6
     ]
   }
 ]

@@ -3953,3 +3953,182 @@ Code investigation: generate.cpp request_chunk rounds each prompt buffer capacit
 Q014 corrected coding gate5/5 is supported by frozen-output tests, standard-Python diagnostic parity, and the one-builtin TypeError repair. Original v1 score4/5 is preserved alongside v2; all36 stored answers were rechecked and only Q014seed105 changes. Legacy cap failures remain failures. Future quality client goal90-quality-expanded-v2.py is a separately versioned copy selecting the v2 checker, recording its hash, saving its source and asserting it cannot change during a run. Private supervisor adds explicit --goal-quality-expanded-v2 with the same7200s timeout and memory/cleanup guards. Original clients/checker remain available unchanged. New helper syntax checks pass; no additional model generation for this correction.
 
 The goal remains unqualified: C054 numeric original streaming-miss medians90.15/87.15 meet90/85, but short-prompt non-degradation is unproven; selected-coding speed, nonstream/cache-hit confirmations and real-use gates remain missing for this combination. No source or launcher promotion. P021/P022 exact trees cleaned up, production config3457fdfe restored, idleGPU457MiB/0percent. Both16GiB physical/commit floors passed. Next: quantify short-buffer opportunity before implementation, then test only an evidence-backed change or complete missing workload gates; never waive the prompt-loss condition.
+
+
+## E205 / C055 temporary KV staging hypothesis and implementation plan
+
+The C054 paired trace localized the short prompt loss to compute; it did not prove a root cause. A separate structural opportunity can reduce prompt work without changing context or sampling. Exact allocation counting at the current model geometry, native pack metadata, pinned-share1, CPU share enabled, INT8 KV and262144 context gives634726144bytes for256-token capacity.192-token capacity gives616738304bytes: only17987840bytes saved. Capacity rounding alone is abandoned as insufficiently promising; no inference arm was run for it.
+
+The same counter with a diagnostic fake session page count limited to192 cells gives358104832bytes at unchanged256-token capacity, saving276621312bytes (263.806MiB). Full one-layer temporary INT8 staging costs276825088bytes (264MiB). At3072-token capacity, full-stage2681003776bytes versus3072-cell-stage2407423744bytes saves273580032bytes. These are allocation counts, not measured TPS or live slot counts. Uniform-max-blob slot estimates in CSV are not actual sized-cache slots. Original fake-session diagnostic sources and raw CSV are retained; no real session metadata or model was modified by the diagnostic.
+
+C055 design: an opt-in STRATA_PREFILL_STAGE_PREFIX=1 bounds only the borrowed temporary staging pool to the absolute full request end, including cached prefix and all checkpoint segments. Keep session max_cells, full host KV, resident window, quant, page table, prompt chunk, model and numeric sampler unchanged. Use the same page-rounding helper in allocation counting and carving; require relayout when the bound changes even if chunk and first borrowed slot do not. Refuse out-of-bound prompt ranges before any device work, using overflow-safe subtraction. Zero retains the prior full allocation. Reject batch/multi-GPU/owned-staging combinations; CUDA is the only intended experimental runtime. The default launchers are unchanged.
+
+Risk: fewer lent slots can change expert placement and CPU/GPU floating-point rounding, so this is not claimed to preserve seeded text bit-for-bit. Require completed-answer quality and all original workload/context/memory gates. Prefix restore, split prompt segments, short-after-long and long-after-short requests require explicit validation. Stage lifetime remains synchronized across compute, expert-copy and KV-copy streams before relayout. Full maximum-context memory sizing at startup stays conservative.
+
+TDD: the standalone bounds test first failed because the new header did not exist. After implementation, MSVC compiled and executed boundary, cached-prefix, exact-end, invalid-page, negative-range and INT64 overflow checks successfully. This is only a host helper test, not GPU correctness proof. Next: build CUDA13.3sm86, compare the new counter with original allocation counts, audit caller bounds, then run a same-binary off/on paired screen with unchanged512-token workloads. If promising, require reverse-order confirmation, corrected-v2 five-answer quality at32768, and remaining real-use gates. No promotion or success claim from an allocation estimate. HIP/SYCL are not built or validated and no review is requested.
+
+
+## E206 / R116-prefix-control
+
+Explicitly verified candidate engine SHA256 844b86e6703c2376383ab2952494d1be70eb9e895f790a6a20889f0bd6a1df29; loaded library hashes match R113-coupled-stack. This is a new-binary control comparison, not a same-binary claim. Config diff is archived. Fixed numeric sampling, high/xhigh reasoning, model/quant, vision, context262144 and INT8KV retained. Original TTLCache streaming cache-miss workloads; one excluded warmup and five measured seeds101-105 per cell,512tokens per measured run. No slow seed excluded.
+
+| Workload | Decode median (range), tok/s | Prompt median, tok/s | E2E median, tok/s | Stream total median, tok/s | TTFT median, s | Draft accepted/offered |
+|---|---:|---:|---:|---:|---:|---:|
+| short | 91.5 (90.1-98.7) | 205.2 | 80.1798 | 80.1993 | 0.8496 | 934/1168 (79.97%) |
+| longer | 88.7 (78.1-90.8) | 495.5 | 43.0277 | 43.0310 | 6.1491 | 954/1246 (76.57%) |
+
+Minimum available physical RAM 62,441,938,944 bytes; available commit 41,705,377,792 bytes. Sampled GPU peak 25,125,916,672 bytes. Both16GiB host floors passed. Per-process peak memory not sampled. Full launcher/server/text/vision cleanup passed and previous config restored.
+
+Same-day C055 control, prefix staging disabled. All five short and longer runs retained. No promotion; first paired screen pending.
+
+Next: Compare the matched R117 prefix-stage candidate.
+
+
+## E207 / R117-prefix-stage
+
+Same engine and loaded library hashes as R116-prefix-control. Config diff is archived. Fixed numeric sampling, high/xhigh reasoning, model/quant, vision, context262144 and INT8KV retained. Original TTLCache streaming cache-miss workloads; one excluded warmup and five measured seeds101-105 per cell,512tokens per measured run. No slow seed excluded.
+
+| Workload | Decode median (range), tok/s | Prompt median, tok/s | E2E median, tok/s | Stream total median, tok/s | TTFT median, s | Draft accepted/offered |
+|---|---:|---:|---:|---:|---:|---:|
+| short | 89.7 (88.0-91.1) | 213.2 | 79.4939 | 79.5103 | 0.8266 | 885/1145 (77.29%) |
+| longer | 89.7 (86.5-91.2) | 503.7 | 43.5903 | 43.5950 | 6.0564 | 976/1217 (80.20%) |
+
+Minimum available physical RAM 62,381,109,248 bytes; available commit 41,623,449,600 bytes. Sampled GPU peak 25,125,916,672 bytes. Both16GiB host floors passed. Per-process peak memory not sampled. Full launcher/server/text/vision cleanup passed and previous config restored.
+
+C055 mixed screen: short prompt +3.90percent but decode -1.97percent and E2E -0.86percent. Longer prompt +1.65percent, decode +1.13percent. Not promoted; completed-answer quality and reverse-order confirmation not run. Next mechanism preserves logical expert placement while reducing overwritten and refilled slots.
+
+Next: C056: preserve old placement and skip refill only for provably untouched slots. Preserve the original C055 patch and results.
+
+
+## E208 / C056 preserve logical placement, skip only untouched-slot copies
+
+C055's first matched pair is mixed, not a verified winner: short decode91.5control/89.7candidate, prompt205.2/213.2, E2E80.1798/79.4939; longer decode88.7/89.7, prompt495.5/503.7, E2E43.0277/43.5903. All five seeds per cell remain included. No reverse confirmation or completed-answer quality was run for C055; no promotion. Its precise prototype patch, added helper/test, allocation calculation, build log and first-pair comparison are archived. Runtime marker proves the opt-in active. Minimum physical/commit floors and exact cleanup passed for both arms; production3457fdfe restored. No model remains from C055.
+
+C056 changes the prefix-staging algorithm to separate logical expert placement from scratch writes. Compute the original full-stage loan boundary and mask the same experts as the control for prompt computation. Carve scratch only in the smaller prefix-stage tail. At refill, restore residency for every masked expert, but skip H2D refill for slots strictly below the actual scratch boundary: their bytes were never lent or overwritten. Refill slots at or above the scratch boundary normally, synchronize as before, and release only the source pages actually used for refill. Trace refill counts now count physical copies, while lent counts remain logical masks. Fail if the reduced scratch region would exceed the original loan. This retains the original initial CPU/GPU placement; it does not claim universal seeded-text identity under adaptive timing.
+
+Source audit: ExpertCache::fill_slot_queued/blocking writes bytes and increments its fills counter; it does not change expert identity or routing. All scratch carve pointers, GEMM rebind and scratch-region aliases are rebased by relayout. The request's absolute full token count bounds staging; cached prefixes are included. Shared-header API compatibility repaired by retaining the original relayout/bytes_needed/bytes_needed_impl signatures and adding overloads used only by the CUDA path. The separate SYCL source continues to define its original signatures. HIP/SYCL were not built or performance-tested; no review request.
+
+TDD: untouched-slot decision tests failed with missing stage_slot_needs_refill, then compiled and passed after implementation, covering every slot around the actual boundary and default behavior. Original page/range/overflow tests still pass. CUDA13.3sm86 rebuilt successfully. A new same-binary0/1 pair R118/R119 will use the unchanged original fixed workloads, one warmup plus five measured seeds each,512tokens, numeric thinking sampler,262144 context and16GiB physical/commit floors. This is a revised mechanism, not selective repetition of C055. Require all original prompt/decode/E2E/quality gates before any promotion. No launcher change.
+
+
+## E209 / R118-preserve-control
+
+Explicitly verified candidate engine SHA256 cc85c6c787beed24c113a3a5c7fe7bb376bd07f04bc48f3e58264dec701b3c91; loaded library hashes match R116-prefix-control. This is a new-binary control comparison, not a same-binary claim. Config diff is archived. Fixed numeric sampling, high/xhigh reasoning, model/quant, vision, context262144 and INT8KV retained. Original TTLCache streaming cache-miss workloads; one excluded warmup and five measured seeds101-105 per cell,512tokens per measured run. No slow seed excluded.
+
+| Workload | Decode median (range), tok/s | Prompt median, tok/s | E2E median, tok/s | Stream total median, tok/s | TTFT median, s | Draft accepted/offered |
+|---|---:|---:|---:|---:|---:|---:|
+| short | 89.5 (88.1-94.8) | 211.5 | 78.8368 | 78.8484 | 0.8475 | 858/1104 (77.72%) |
+| longer | 87.6 (85.2-89.1) | 495.8 | 42.7175 | 42.7220 | 6.1494 | 950/1266 (75.04%) |
+
+Minimum available physical RAM 62,380,498,944 bytes; available commit 41,629,007,872 bytes. Sampled GPU peak 25,123,819,520 bytes. Both16GiB host floors passed. Per-process peak memory not sampled. Full launcher/server/text/vision cleanup passed and previous config restored.
+
+C056 same-day control with prefix staging disabled: short89.5/longer87.6 decode. Original masks and full-stage refill. No promotion.
+
+Next: Compare R119, then reverse workload order in a second pair if promising.
+
+
+## E210 / R119-prefix-preserve
+
+Same engine and loaded library hashes as R118-preserve-control. Config diff is archived. Fixed numeric sampling, high/xhigh reasoning, model/quant, vision, context262144 and INT8KV retained. Original TTLCache streaming cache-miss workloads; one excluded warmup and five measured seeds101-105 per cell,512tokens per measured run. No slow seed excluded.
+
+| Workload | Decode median (range), tok/s | Prompt median, tok/s | E2E median, tok/s | Stream total median, tok/s | TTFT median, s | Draft accepted/offered |
+|---|---:|---:|---:|---:|---:|---:|
+| short | 90.1 (89.1-93.0) | 221.7 | 79.1884 | 79.2029 | 0.7961 | 848/1110 (76.40%) |
+| longer | 89.5 (86.0-91.2) | 499.2 | 43.3332 | 43.3366 | 6.1176 | 1026/1344 (76.34%) |
+
+Minimum available physical RAM 62,386,991,104 bytes; available commit 41,617,395,712 bytes. Sampled GPU peak 25,128,013,824 bytes. Both16GiB host floors passed. Per-process peak memory not sampled. Full launcher/server/text/vision cleanup passed and previous config restored.
+
+C056 first pair improves all measured medians: decode90.1/89.5 versus89.5/87.6, prompt221.7/499.2 versus211.5/495.8, E2E79.1884/43.3332 versus78.8368/42.7175. Promising screen only; no full quality or matrix qualification.
+
+Next: Run candidate R120 then control R121, each longer workload first, retaining all ten measured runs per cell across both pairs.
+
+
+## E211 / R120-prefix-preserve-reverse
+
+Same engine and loaded library hashes as R118-preserve-control. Config diff is archived. Fixed numeric sampling, high/xhigh reasoning, model/quant, vision, context262144 and INT8KV retained. Original TTLCache streaming cache-miss workloads; one excluded warmup and five measured seeds101-105 per cell,512tokens per measured run. No slow seed excluded.
+
+| Workload | Decode median (range), tok/s | Prompt median, tok/s | E2E median, tok/s | Stream total median, tok/s | TTFT median, s | Draft accepted/offered |
+|---|---:|---:|---:|---:|---:|---:|
+| short | 90.0 (87.3-94.2) | 220.7 | 79.1973 | 79.2081 | 0.7845 | 866/1073 (80.71%) |
+| longer | 88.0 (83.4-88.3) | 499.6 | 43.0188 | 43.0222 | 6.1074 | 943/1245 (75.74%) |
+
+Minimum available physical RAM 62,296,956,928 bytes; available commit 41,527,312,384 bytes. Sampled GPU peak 25,117,528,064 bytes. Both16GiB host floors passed. Per-process peak memory not sampled. Full launcher/server/text/vision cleanup passed and previous config restored.
+
+C056 reverse-order candidate: decode90.0short/88.0longer, prompt220.7/499.6. One warmup and five measured runs per cell retained. Pool with R119 and both controls; no promotion.
+
+Next: Complete pooled ABBA accounting and then the corrected five-answer quality gate if numeric gates pass.
+
+
+## E212 / R121-preserve-control-reverse
+
+Same engine and loaded library hashes as R118-preserve-control. Config diff is archived. Fixed numeric sampling, high/xhigh reasoning, model/quant, vision, context262144 and INT8KV retained. Original TTLCache streaming cache-miss workloads; one excluded warmup and five measured seeds101-105 per cell,512tokens per measured run. No slow seed excluded.
+
+| Workload | Decode median (range), tok/s | Prompt median, tok/s | E2E median, tok/s | Stream total median, tok/s | TTFT median, s | Draft accepted/offered |
+|---|---:|---:|---:|---:|---:|---:|
+| short | 88.0 (84.6-89.9) | 201.4 | 77.2359 | 77.2503 | 0.8676 | 830/1126 (73.71%) |
+| longer | 84.4 (82.9-87.2) | 495.3 | 41.9138 | 41.9171 | 6.1650 | 883/1207 (73.16%) |
+
+Minimum available physical RAM 62,373,826,560 bytes; available commit 41,620,852,736 bytes. Sampled GPU peak 25,117,528,064 bytes. Both16GiB host floors passed. Per-process peak memory not sampled. Full launcher/server/text/vision cleanup passed and previous config restored.
+
+C056 reverse-order control: decode88.0short/84.4longer, prompt201.4/495.3. Slower control retained, no omission or replacement. All-run ABBA pooled statistics remain separate from complete goal qualification.
+
+Next: Run Q015 with unchanged corrected-v2 checker, frozen coding prompt and five seeds at the approved32768 quality cap if pooled numeric gates pass.
+
+
+## E213 / C056 complete original-workload ABBA timing result
+
+R118control/R119candidate short-first, then R120candidate/R121control longer-first completed with fresh processes. Exact engine SHA256cc85c6c787beed24c113a3a5c7fe7bb376bd07f04bc48f3e58264dec701b3c91 and loaded libraries match; configs differ only by STRATA_PREFILL_STAGE_PREFIX0/1. Every one of the12request payload files is byte-identical across all four arms. One excluded warmup and five measured512-token cache-miss requests per cell per arm. Ordinary pooled medians below include all ten measured values, including the slower second control. No selective deletion, substitution or favorable-subset median.
+
+| Workload | Metric | Control | Candidate | Change |
+|---|---|---:|---:|---:|
+| short | server_decode_tps | 89.25000 | 90.05000 | +0.896% |
+| short | prompt_tps | 205.55000 | 221.20000 | +7.614% |
+| short | request_e2e_tps | 77.72713 | 79.19281 | +1.886% |
+| short | stream_total_tps | 77.74002 | 79.20550 | +1.885% |
+| short | ttft_seconds | 0.85968 | 0.79026 | -8.075% |
+| short | request_seconds | 6.58717 | 6.46523 | -1.851% |
+| longer | server_decode_tps | 85.90000 | 88.00000 | +2.445% |
+| longer | prompt_tps | 495.50000 | 499.35000 | +0.777% |
+| longer | request_e2e_tps | 42.32524 | 43.02415 | +1.651% |
+| longer | stream_total_tps | 42.32902 | 43.02803 | +1.651% |
+| longer | ttft_seconds | 6.16107 | 6.11338 | -0.774% |
+| longer | request_seconds | 12.09681 | 11.90029 | -1.625% |
+
+Both candidate fresh-process decode medians meet their cell thresholds: R11990.1/89.5 and R12090.0/88.0. Pooled90.05short/88.0longer meets90/85. Short prompt221.2versus205.55 and longer499.35versus495.5 also pass the no-degradation comparison; E2E79.19281/43.02415versus77.72713/42.32524 passes. Margin above90 is small; this is finite workload evidence, not a universal speed guarantee or statistical certainty. The control's drift is retained and disclosed. Server decode is not real-world TPS. Client E2E runs on the server PC's loopback endpoint, not the remote LAN harness. Thinking tokens count toward512. Cold process loading and first warmup are recorded separately, excluded from these warm medians.
+
+All four safety floors and exact launcher/server/text/vision cleanup passed; production config3457fdfe restored after each. No model remained at the end of R121. The original C055 mixed screen is preserved and not pooled with this revised mechanism. Bounds/refill unit tests and CUDA13.3sm86 build pass; HIP/SYCL are not built or validated. Original shared-header method signatures are retained through overloads for the separate SYCL implementation. No production launcher promotion.
+
+Next Q015 evaluates the frozen selected coding fixture with seeds101-105, natural-stop answers, approved32768cap and corrected-v2 checker hash, same72objective cases and numeric thinking sampler. The512-token speed contract is unchanged. Remaining required selected-coding speed, nonstream/repeated-prefix, tools, vision, reasoning-levels, cancellation, mixed history and near-limit memory checks still apply to C056 itself; historical configurations cannot satisfy them. Goal remains active and unqualified as a whole.
+
+
+## E214 / Q015-prefix-preserve-quality approved expanded quality
+
+Seed101: 23770tokens, finishstop, passed=True; {"passed": true, "compiled": true, "cases": 72, "test_seed": 904001}
+
+Seed102: 11122tokens, finishstop, passed=True; {"passed": true, "compiled": true, "cases": 72, "test_seed": 904001}
+
+Seed103: 20449tokens, finishstop, passed=True; {"passed": true, "compiled": true, "cases": 72, "test_seed": 904001}
+
+Seed104: 3356tokens, finishstop, passed=True; {"passed": true, "compiled": true, "cases": 72, "test_seed": 904001}
+
+Seed105: 14812tokens, finishstop, passed=True; {"passed": true, "compiled": true, "cases": 72, "test_seed": 904001}
+
+Pass count5/5 with user-approved32768 cap. All five requests equal the originalQ007 requests except max_tokens. Configuration, executable, libraries, expert profile and vision hashes matchR119-prefix-preserve; fixture hash matchesQ011. Natural-stop passing answers compile and pass72tests each. Zero prompt reuse. Legacy8192 failures remain unchanged. Variable-length quality answers do not satisfy the512-token speed target.
+
+Minimum physical62476095488 and commit41755369472bytes;16GiB floors pass. Exact cleanup verified and production3457fdfe restored. No promotion; other workload, stability and real-use requirements remain.
+
+
+## E215 / C056 timing plus completed-answer quality checkpoint
+
+C056 original TTL streaming-miss ABBA timing passes the agreed90short/85approximately3K decode targets at pooled90.05/88.00tok/s, with paired prompt and client-E2E medians also improved. This checkpoint preserves every slower run and the earlier C055 mixed failure to improve all metrics. It does not satisfy the entire goal: the selected topological coding512-token speed matrix, nonstream/cache-hit confirmations and real-use/near-limit gates have not yet been run for C056. Do not borrow R110/R111 or other configurations' results. No production launcher promotion.
+
+Q015 uses exactly R119's executable, configuration, libraries, profile and vision, with the frozen selected coding fixture, numeric thinking sampler and five seeds101-105. All five naturally stopped and each passed all72checks under the unchanged corrected-v2 checker:23770,11122,20449,3356,14812completion tokens. All final answers were inspected: coherent Kahn topological sorts with min-heap ordering, endpoint validation, duplicate-edge handling and cycle detection. No imports; fixture inputs are copied into local structures. This is finite objective-test coverage, not a claim of universal quality equivalence. The checker hash is saved and revalidated; the original v1 outcomes and earlier cap failures remain intact. These variable-length answers are excluded from speed qualification.
+
+Allocation regression check against the rebuilt C056 library: stage_cells0 and full262144 give identical counts at capacities192/256/3072:616738304/634726144/2681003776bytes. Every previously measured positive-prefix count also matches. No actual session max_cells, n_pages, hostKV or resident-window metadata changes in the new implementation. The original public API signatures remain available. CUDA build and standalone bounds/refill tests pass. HIP/SYCL were not built or validated; no external review or merge request is made. The source remains an opt-in experiment on the existing working branch.
+
+Q015 minimum available physical RAM62476095488bytes and commit41755369472bytes both exceed16GiB. Supervisor completion exit0, complete launcher/server/text/vision tree cleanup, restored production configuration SHA2563457fdfe7d69fbf6651e2031320cdebf88a9d8d269ebbe459db7fdd885e8c9f0, no live strata/llama/nsys process and idleGPU457MiB/0percent verified. Candidate executable remains engine/strata-cuda133-prefix-preserve.exe SHA256cc85c6c787beed24c113a3a5c7fe7bb376bd07f04bc48f3e58264dec701b3c91. The earlier prototype engine is not a promotion candidate.
+
+Next: use the guarded supervisor's --goal-coding selector for C056 selected-coding streaming miss, fixed512tokens and both workload orders, comparing matched controls where necessary. Continue with nonstream/reused-prefix and remaining tools/vision/remote-reasoning/cancellation/mixed-history/near-limit checks. Keep the goal active, the sampling profile unchanged and no benchmark model resident between checkpoints. Production config and launcher stay unchanged until every required condition passes.
+
+
+Publication check: the first staged whitespace check flagged unified-diff blank-context lines and diagnostic helper blank EOF lines. Archived patches are now losslessly encoded as JSON under *.patch.json (decode the patch field to reconstruct the unified diff); helper EOF formatting is normalized. No benchmark result or executable code changed.

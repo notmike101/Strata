@@ -1,0 +1,24 @@
+We need answer user: wants implement thread-safe Python TTLCache class using OrderedDict and monotonic clock. Include set, get, delete, clear, len, expiration, capacity eviction, unit tests with injected fake clock, detailed explanation thread safety and complexity. Complete code, then tests, then explain design. Do not abbreviate implementation. Detailed answer at least 1200 words.
+
+Need produce final with code and tests and explanation. Need likely use Python standard library. Need thread-safe. Use OrderedDict, threading.RLock perhaps. Need injected fake clock. Monotonic clock default time.monotonic. TTLCache class methods set, get, delete, clear, __len__. Expiration: on set/get/delete/clear maybe prune expired entries. Capacity eviction: LRU? Using OrderedDict move_to_end on get and set. If maxsize exceeded evict oldest (FIFO/LRU) after moving to end. Need thread safe. Could use lock. Need monotonic clock. Tests with fake clock: class FakeClock that returns time and can advance. Use unittest maybe. Need ensure no abbreviation: complete implementation. Could include type hints. Need maybe handle maxsize <=0? Should we allow maxsize=0? Could set raise ValueError. Need ttl None? TTL maybe required? Could support default_ttl. Need maybe keys hashable.
+
+Let's design robust class:
+
+import threading, time
+from collections import OrderedDict
+from typing import Any, Hashable, Optional, Callable, Tuple
+
+class TTLCache:
+    def __init__(self, maxsize: int, ttl: Optional[float] = None, clock: Callable[[], float] = time.monotonic):
+        if maxsize < 0? If maxsize <=0 raise ValueError. ttl can be None for indefinite? User says TTLCache but include expiration. Could allow ttl None no expiration? But class TTL maybe positive. If ttl is not None and ttl <0 raise ValueError.
+        self.maxsize = maxsize
+        self.default_ttl = ttl
+        self._clock = clock
+        self._entries = OrderedDict() # key -> value, expiry float or None
+        self._lock = threading.RLock()
+
+    def _now(self): return self._clock()
+
+    def _is_expired(self, expiry): return expiry is not None and expiry <= now? If ttl can be 0 immediate expire. If expiry <= now. For monotonic. 
+
+    def _prune(self, now=None): iterate over list(self._

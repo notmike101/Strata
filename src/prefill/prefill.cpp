@@ -1,5 +1,6 @@
 // src/prefill/prefill.cpp - see include/strata/prefill/prefill.hpp.
 #include "strata/prefill/prefill.hpp"
+#include "strata/prefill/stage_bounds.hpp"
 #include "mmq_resident_sort.hpp"
 #include "wmma_gemm.h"
 #include "strata/core/mtp.hpp"
@@ -682,6 +683,7 @@ struct Prefill::Impl {
     const core::ExpertCache* cache = nullptr;
     const int32_t* host_res = nullptr;
     int64_t T = 0, T_max = 0;
+    int64_t stage_cells = 0;  // zero: full staging, positive: absolute prompt end
     bool borrowed = false;
     cudaStream_t cs = nullptr, copy = nullptr;
     Gemm gemm;
@@ -806,14 +808,16 @@ namespace {
 // rounds differently: without this an A/B compares two expert placements as well as two KV placements)
 bool stage_own() { static const bool v = std::getenv("STRATA_KV_STAGE_OWN") != nullptr; return v; }
 void take_stage(Alloc& o_borrowed, const core::SessionState& ss, const strata::kernels::QsaShapes& s,
-                strata::kernels::KvHostPools& st, bool& ok) {
+                strata::kernels::KvHostPools& st, bool& ok, int64_t stage_cells = 0) {
     const core::QsaState& q0 = ss.qsa_states[ss.qsa_primary()];
     if (q0.kv_mode != 1) return;
     if (stage_own() && o_borrowed.count_only) return;
     Alloc own;
     own.owned = o_borrowed.owned;
     Alloc& o = stage_own() ? own : o_borrowed;
-    const size_t rows = (size_t) q0.n_pages * s.n_head_kv * s.page_size;
+    const int64_t pages = stage_page_count(stage_cells, q0.n_pages, s.page_size);
+    if (pages < 0) { ok = false; return; }
+    const size_t rows = (size_t) pages * s.n_head_kv * s.page_size;
     if (q0.kv_hybrid) {   // K8V4: the three runs of kKvHybrid; pools_of() then reads as the hybrid pools (mode 3)
         st.k_q = o.take<int8_t>(rows * s.head_dim, ok);
         st.k_scale = o.take<uint16_t>(rows * (s.head_dim / 64), ok);
@@ -1232,15 +1236,23 @@ bool Prefill::carve(size_t T, void* alloc) {
     }
     m.ple_emb = o.take<float>(T * N, ok);
     m.ple_norm = o.take<float>((size_t) strata::kernels::NG_HC_DIM, ok);
-    take_stage(o, ss, s, m.stage, ok);
+    take_stage(o, ss, s, m.stage, ok, m.stage_cells);
     m.T = (int64_t) T;
     return ok;
 }
 
 bool Prefill::relayout(int64_t chunk, void* borrow, uint64_t borrow_bytes, std::string& err) {
+    return relayout(chunk, borrow, borrow_bytes, err, 0);
+}
+
+bool Prefill::relayout(int64_t chunk, void* borrow, uint64_t borrow_bytes, std::string& err, int64_t stage_cells) {
     Impl& m = *impl_;
     if (!m.borrowed || borrow == nullptr || chunk <= 0 || chunk > m.T_max) {
         err = "prefill: relayout needs borrowed buffers and a chunk of at most " + std::to_string(m.T_max);
+        return false;
+    }
+    if (stage_cells < 0 || stage_cells > m.ss->max_cells || (stage_cells > 0 && stage_own())) {
+        err = "prefill: invalid temporary KV stage bound or incompatible owned staging";
         return false;
     }
     if (cudaStreamSynchronize(m.cs) != cudaSuccess || cudaStreamSynchronize(m.copy) != cudaSuccess ||
@@ -1249,6 +1261,7 @@ bool Prefill::relayout(int64_t chunk, void* borrow, uint64_t borrow_bytes, std::
         return false;
     }
     bool ok = true;
+    m.stage_cells = stage_cells;
     Alloc o;
     o.base = (uint8_t*) borrow;
     o.cap = borrow_bytes;
@@ -1747,6 +1760,11 @@ uint64_t Prefill::bytes_needed(const core::ModelGeometry& g, const core::Session
     return bytes_needed_impl(g, ss, chunk, false);
 }
 
+uint64_t Prefill::bytes_needed(const core::ModelGeometry& g, const core::SessionState& ss, int64_t chunk,
+                               int64_t stage_cells) {
+    return bytes_needed_impl(g, ss, chunk, false, stage_cells);
+}
+
 // What `init` really allocates when the prompt path owns its buffers (no loan): every cudaMalloc rounds up to a 2 MiB
 // page, and the ring is one allocation (carve).  `bytes_needed` stays the borrowed region's sum.
 uint64_t Prefill::bytes_needed_owned(const core::ModelGeometry& g, const core::SessionState& ss, int64_t chunk) {
@@ -1755,6 +1773,12 @@ uint64_t Prefill::bytes_needed_owned(const core::ModelGeometry& g, const core::S
 
 uint64_t Prefill::bytes_needed_impl(const core::ModelGeometry& g, const core::SessionState& ss, int64_t chunk,
                                     bool owned_pages) {
+    return bytes_needed_impl(g, ss, chunk, owned_pages, 0);
+}
+
+uint64_t Prefill::bytes_needed_impl(const core::ModelGeometry& g, const core::SessionState& ss, int64_t chunk,
+                                    bool owned_pages, int64_t stage_cells) {
+    if (stage_cells < 0 || stage_cells > ss.max_cells) return uint64_t(-1);
     // the same allocation sequence as `init`, counted
     const size_t T = (size_t) chunk;
     bool ok = true;
@@ -1806,7 +1830,8 @@ uint64_t Prefill::bytes_needed_impl(const core::ModelGeometry& g, const core::Se
     f(T * N);
     f((size_t) strata::kernels::NG_HC_DIM);
     strata::kernels::KvHostPools stage;
-    take_stage(o, ss, s, stage, ok);
+    take_stage(o, ss, s, stage, ok, stage_cells);
+    if (!ok) return uint64_t(-1);
     return o.used + (8u << 20);   // alignment slack
 }
 
@@ -1965,6 +1990,10 @@ struct PeTimer {
 bool Prefill::run_impl(const int64_t* tokens, int64_t n, int64_t pos0, std::string& err) {
     err.clear();
     Impl& m = *impl_;
+    if (m.stage_cells > 0 && !stage_range_fits(pos0, n, m.stage_cells)) {
+        err = "prefill: prompt exceeds temporary KV stage bound";
+        return false;
+    }
     const core::OnDevice on_device(m.device);
     const core::ModelGeometry& g = *m.g;
     core::SessionState& ss = *m.ss;

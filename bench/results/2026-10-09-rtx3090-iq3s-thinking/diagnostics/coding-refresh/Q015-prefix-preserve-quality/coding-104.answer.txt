@@ -1,0 +1,89 @@
+```python
+def topological_order(nodes, edges):
+    node_set = set(nodes)
+
+    adjacency = {node: [] for node in node_set}
+    indegree = {node: 0 for node in node_set}
+    seen_edges = set()
+
+    for edge in edges:
+        try:
+            before, after = edge
+        except (TypeError, ValueError):
+            raise ValueError("Each edge must be a pair.")
+
+        if before not in node_set or after not in node_set:
+            raise ValueError("Edge endpoint absent from nodes.")
+
+        pair = (before, after)
+        if pair in seen_edges:
+            continue
+
+        seen_edges.add(pair)
+        adjacency[before].append(after)
+        indegree[after] += 1
+
+    heap = [node for node, degree in indegree.items() if degree == 0]
+
+    def _sift_down(heap, index):
+        item = heap[index]
+        size = len(heap)
+
+        while True:
+            left = 2 * index + 1
+            right = left + 1
+
+            if left >= size:
+                break
+
+            child = left
+            if right < size and heap[right] < heap[left]:
+                child = right
+
+            if heap[child] >= item:
+                break
+
+            heap[index] = heap[child]
+            index = child
+
+        heap[index] = item
+
+    def _sift_up(heap, index):
+        item = heap[index]
+
+        while index > 0:
+            parent = (index - 1) // 2
+            if heap[parent] <= item:
+                break
+
+            heap[index] = heap[parent]
+            index = parent
+
+        heap[index] = item
+
+    for i in range(len(heap) // 2 - 1, -1, -1):
+        _sift_down(heap, i)
+
+    order = []
+
+    while heap:
+        node = heap[0]
+        last = heap.pop()
+
+        if heap:
+            heap[0] = last
+            _sift_down(heap, 0)
+
+        order.append(node)
+
+        for neighbor in adjacency[node]:
+            indegree[neighbor] -= 1
+            if indegree[neighbor] == 0:
+                heap.append(neighbor)
+                _sift_up(heap, len(heap) - 1)
+
+    if len(order) != len(node_set):
+        raise ValueError("Cycle detected.")
+
+    return order
+```

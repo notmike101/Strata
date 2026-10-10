@@ -1,0 +1,11 @@
+We need answer user: wants implement thread-safe Python TTLCache class using OrderedDict and monotonic clock. Include set, get, delete, clear, len, expiration, capacity eviction, unit tests with injected fake clock, detailed explanation thread safety and complexity. Complete code, then tests, then explain design. Do not abbreviate implementation. Detailed answer at least 1200 words.
+
+Need produce final with code and tests and explanation. Need likely use Python standard library. Need thread-safe. Use OrderedDict, threading.RLock perhaps. Need injected fake clock. Monotonic clock default time.monotonic. TTLCache class methods set, get, delete, clear, __len__, maybe items? Expiration lazily on get and maybe set? Need capacity eviction. Need avoid race. Implementation details:
+
+class TTLCache:
+    def __init__(self, ttl=..., capacity=None, clock=time.monotonic): ttl optional None? If ttl None items no expiration? Could support default_ttl, per-key ttl. But user likely simple ttl per cache. Need maybe include default_ttl and capacity. Methods:
+- set(key, value, ttl=None): remove old entry, add new at end, set expiry = clock()+ttl if ttl not None; evict oldest until len>capacity; also maybe purge expired entries? Need careful: If capacity is 0? Maybe capacity None unlimited.
+- get(key, default=None): with lock, if key not in _store return default. If expired delete and return default. Else move_to_end(key) and return value. Need ensure move_to_end if OrderedDict maybe key not in? yes.
+- delete(key): if exists delete return True else False.
+- clear.
+- __len__: Should reflect live count? Need thread safe. If expiration lazy, len may count expired. Could define len returns number of items including expired until cleaned. But user mentions expiration and capacity eviction. Could also provide purge() to remove expired. If len should be logical? Maybe __len__ with lock: maybe not purge all by default O(n). If len must be correct, we can purge all expired O(n). Could implement __len__ calls _purge_expired_locked? That may be expensive O(n) but gives correct logical length. Or store expiration count? Simpler: len includes expired? But tests likely expect len after expiration? Need include unit tests. Could implement len purges expired by iterating all items and deleting expired. That ensures correct. But complexity O(n). Could

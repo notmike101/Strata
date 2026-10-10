@@ -1,0 +1,14 @@
+We need answer user's request. Need produce final detailed answer >=1200 words. Need implement thread-safe Python TTLCache class using OrderedDict and monotonic clock. Include set, get, delete, clear, len, expiration, capacity eviction, unit tests with injected fake clock, detailed explanation thread safety and complexity. Complete code, tests, explain design. Do not abbreviate implementation. Need likely provide code blocks. Need ensure identifier ignored. Need maybe not use external deps? Use threading, time, collections.OrderedDict, contextlib? Fake clock injectable. Need robust TTLCache.
+
+Need think through design. Requirements: thread-safe, OrderedDict and monotonic clock. Methods set, get, delete, clear, len, expiration, capacity eviction. "len" maybe __len__, len returns current number not including expired? Need expiration method maybe purge expired entries? Could have __contains__, __setitem__, __getitem__, __delitem__, clear, purge_expired. Need injected fake clock for tests. Monotonic clock default time.monotonic. Use a lock (RLock? maybe threading.Lock). OrderedDict thread-safe? Not inherently; use lock around all operations. Need capacity eviction: when adding causes len > capacity, evict oldest (LRU) perhaps while len > capacity. TTLCache can be TTL + LRU? OrderedDict with move_to_end on access = LRU. Expiration: store (value, expires_at). On get check expiration; if expired delete and return default or raise? Need include set, get, delete, clear, len, expiration, capacity eviction. Could implement __len__ purges expired? But purging on len may have side effect. Maybe method expire_expired() / _purge_expired_locked. len counts non-expired. Need get default. Need maybe set with ttl seconds; if ttl <=0? Could delete? Or immediate expiry. Need capacity maybe 0? Should handle.
+
+Fake clock: class FakeMonotonicClock: now() returns self._t; advance(delta). Need inject clock=Callable[[], float]. Default time.monotonic. Need thread safe clock? fake not thread-safe but for tests. Implementation must not abbreviate. Unit tests with unittest, fake clock. Need detailed explanation. Need answer at least 1200 words. Could produce a long explanation.
+
+Need be careful not too verbose? Desired oververbosity 9. So comprehensive.
+
+Potential code:
+
+import threading
+import time
+from collections import OrderedDict
+from typing import Any

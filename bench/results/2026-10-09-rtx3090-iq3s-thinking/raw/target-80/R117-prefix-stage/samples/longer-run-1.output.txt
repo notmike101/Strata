@@ -1,0 +1,14 @@
+We need answer user's request. Need produce final answer: detailed answer at least 1200 words. Need implement thread-safe Python TTLCache class using OrderedDict and monotonic clock. Include set, get, delete, clear, len, expiration, capacity eviction, unit tests with injected fake clock, detailed explanation thread safety and complexity. Complete code, tests, explain design. Also user provided many existing cache rules maybe red herring? They say benchmark identifier ignore. Read these existing design requirements before implementing the cache: existing cache rule 0... key item_000 lifetime 30 sec size 64 bytes etc. Need likely account for per-key lifetimes? Existing cache rules mention key item_000 has lifetime and size; expiration remove stale entries, access update LRU. Could integrate as seed initial cache? They likely expect maybe these as existing requirements? Need implement generic TTLCache; maybe also show how existing rules can be loaded/initialized. Need maybe mention existing rules are data-driven lifetimes, not affecting core algorithm except per-key TTL and size? Could include initial rules? But code can be generic. Need likely include size bytes? TTLCache with capacity bytes? It says size 64 bytes etc. Cache has size (bytes) and capacity eviction maybe based on total size? Need implement with total byte-size eviction? The rules specify size bytes. Need capacity eviction likely capacity in bytes? The prompt says size and capacity eviction. Existing cache rule key item has size bytes. Need support size property and capacity maybe total bytes. Need thread-safe. Need OrderedDict + monotonic clock. Use threading.RLock? Need ensure expiration on get/set? Could lazy expiration plus maybe cleanup. For thread safety, single lock around critical sections. Fake clock injection.
+
+Need produce at least 1200 words. Need not abbreviate implementation. Need complete code. Could include full code block with implementation, tests. Also detailed explanation. Need maybe include unit tests using unittest.
+
+Need think about implementation details.
+
+TTLCache class:
+- from collections import OrderedDict
+- import threading, time
+- class FakeClock: __init__(now=0); now(); advance(delta)
+- class TTLCache:
+  __init__(self, capacity_bytes=None, max_entries=None, clock=time.monotonic, default_lifetime=60.0, cleanup_on_access=True, max_cleanup_entries=??):
+    capacity: total bytes. max_entries optional.
+    default lifetime for items without explicit.

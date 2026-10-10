@@ -1,0 +1,15 @@
+We need answer user's request. Need produce final answer at least 1200 words, complete code, tests, explanation. Need no abbreviation. Need include Benchmark identifier? User says Benchmark identifier ... Ignore this identifier. So ignore. Need implement thread-safe Python TTLCache using OrderedDict and monotonic clock. Include set,get,delete,clear,len, expiration, capacity eviction, unit tests with injected fake clock, detailed explanation thread safety and complexity. Complete code then tests then explain design.
+
+Need think details. Python code. Could use threading.RLock. OrderedDict for LRU? TTLCache. Need monotonic clock injection. Maybe default time.monotonic. Class TTLCache(maxsize, ttl, clock=time.monotonic, thread_safe=True?). OrderedDict stores key -> (value, expires_at). Use OrderedDict with move_to_end on get to maintain LRU? But TTL eviction could be separate. User says using an OrderedDict and monotonic clock. Include capacity eviction. Use OrderedDict as ordered by insertion/access (LRU) and also check expirations. For expiration: on get/set/clear/len maybe purge expired. Need thread-safe: use Lock or RLock. Need avoid deadlock: RLock simpler for calls. For len, purge expired under lock? If len returns non-expired count but OrderedDict may contain expired. Could implement len purge. Need capacity eviction: if maxsize exceeded, pop oldest LRU. TTLCache may have maxsize None? We can require positive int. 
+
+Need tests with injected fake clock. Use unittest. FakeClock with now. Tests: set/get, expiry, delete, clear, len, maxsize eviction, thread safety? Could include multithreaded smoke test. Need injected fake clock. Since monotonic default maybe time.monotonic; for tests use FakeClock.
+
+Potential issue: OrderedDict.popitem(last=False) removes oldest inserted/accessed. On get we move_to_end to refresh LRU but not TTL unless set moves? Should TTL be refreshed on get? Usually TTL fixed from set, not sliding. We can not refresh TTL on access, but LRU move_to_end. Need note.
+
+Expiration: Need handle if ttl None? User TTLCache, maybe ttl seconds, can be None for no expiration? Could support. But with OrderedDict. If ttl is None no expiration. Could use ttl=0. But need simple.
+
+Implementation details:
+
+class TTLCache:
+    def __init__(self, maxsize, ttl=None, clock=None):
+        if max

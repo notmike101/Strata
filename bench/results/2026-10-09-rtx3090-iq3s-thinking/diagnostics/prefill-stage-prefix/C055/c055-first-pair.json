@@ -1,0 +1,111 @@
+{
+  "arms": [
+    "R116-prefix-control",
+    "R117-prefix-stage"
+  ],
+  "engine_sha256": "844b86e6703c2376383ab2952494d1be70eb9e895f790a6a20889f0bd6a1df29",
+  "promoted": false,
+  "full_goal_pass": false,
+  "cells": {
+    "short": {
+      "metrics": {
+        "server_decode_tps": {
+          "control": 91.5,
+          "candidate": 89.7,
+          "percent_change": -1.967213114754096
+        },
+        "prompt_tps": {
+          "control": 205.2,
+          "candidate": 213.2,
+          "percent_change": 3.898635477582846
+        },
+        "request_e2e_tps": {
+          "control": 80.17979316367102,
+          "candidate": 79.4938601084908,
+          "percent_change": -0.8554936700572835
+        },
+        "stream_total_tps": {
+          "control": 80.19931534869424,
+          "candidate": 79.51033312839797,
+          "percent_change": -0.8590874090391942
+        },
+        "ttft_seconds": {
+          "control": 0.8495503999874927,
+          "candidate": 0.8266315999790095,
+          "percent_change": -2.6977563672291427
+        },
+        "request_seconds": {
+          "control": 6.385648800001945,
+          "candidate": 6.440749000001233,
+          "percent_change": 0.8628755154726164
+        }
+      },
+      "raw_decode": [
+        [
+          90.5,
+          92.9,
+          98.7,
+          90.1,
+          91.5
+        ],
+        [
+          89.7,
+          90.5,
+          91.1,
+          89.1,
+          88.0
+        ]
+      ]
+    },
+    "longer": {
+      "metrics": {
+        "server_decode_tps": {
+          "control": 88.7,
+          "candidate": 89.7,
+          "percent_change": 1.1273957158962844
+        },
+        "prompt_tps": {
+          "control": 495.5,
+          "candidate": 503.7,
+          "percent_change": 1.6548940464177653
+        },
+        "request_e2e_tps": {
+          "control": 43.027738958055416,
+          "candidate": 43.59032234908351,
+          "percent_change": 1.3074900160952252
+        },
+        "stream_total_tps": {
+          "control": 43.03097478826683,
+          "candidate": 43.59496216970466,
+          "percent_change": 1.310654439535508
+        },
+        "ttft_seconds": {
+          "control": 6.14913539995905,
+          "candidate": 6.056420599983539,
+          "percent_change": -1.5077696935430596
+        },
+        "request_seconds": {
+          "control": 11.899300599994604,
+          "candidate": 11.745726399996784,
+          "percent_change": -1.2906153492574957
+        }
+      },
+      "raw_decode": [
+        [
+          78.1,
+          90.8,
+          84.6,
+          88.7,
+          90.8
+        ],
+        [
+          86.6,
+          90.6,
+          89.7,
+          86.5,
+          91.2
+        ]
+      ]
+    }
+  }
+}

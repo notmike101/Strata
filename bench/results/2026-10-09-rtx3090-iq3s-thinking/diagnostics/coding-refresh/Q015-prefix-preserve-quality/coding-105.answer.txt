@@ -1,0 +1,86 @@
+```python
+def topological_order(nodes, edges):
+    node_set = set(nodes)
+
+    outgoing = {node: [] for node in node_set}
+    indegree = {node: 0 for node in node_set}
+    seen_edges = set()
+
+    for edge in edges:
+        try:
+            before, after = edge
+        except (TypeError, ValueError):
+            raise ValueError("each edge must contain exactly two nodes")
+
+        try:
+            missing_endpoint = before not in node_set or after not in node_set
+        except TypeError:
+            missing_endpoint = True
+
+        if missing_endpoint:
+            raise ValueError("edge endpoint absent from nodes")
+
+        pair = (before, after)
+        if pair not in seen_edges:
+            seen_edges.add(pair)
+            outgoing[before].append(after)
+            indegree[after] += 1
+
+    def sift_down(heap, index):
+        size = len(heap)
+        while True:
+            left = 2 * index + 1
+            right = 2 * index + 2
+            smallest = index
+
+            if left < size and heap[left] < heap[smallest]:
+                smallest = left
+            if right < size and heap[right] < heap[smallest]:
+                smallest = right
+
+            if smallest == index:
+                return
+
+            heap[index], heap[smallest] = heap[smallest], heap[index]
+            index = smallest
+
+    def heapify(heap):
+        for i in range(len(heap) // 2 - 1, -1, -1):
+            sift_down(heap, i)
+
+    def heappush(heap, item):
+        heap.append(item)
+        index = len(heap) - 1
+        while index > 0:
+            parent = (index - 1) // 2
+            if heap[index] >= heap[parent]:
+                break
+            heap[index], heap[parent] = heap[parent], heap[index]
+            index = parent
+
+    def heappop(heap):
+        root = heap[0]
+        last = heap.pop()
+        if heap:
+            heap[0] = last
+            sift_down(heap, 0)
+        return root
+
+    ready = [node for node in node_set if indegree[node] == 0]
+    heapify(ready)
+
+    order = []
+    while ready:
+        current = heappop(ready)
+        order.append(current)
+
+        for successor in outgoing[current]:
+            indegree[successor] -= 1
+            if indegree[successor] == 0:
+                heappush(ready, successor)
+
+    if len(order) != len(node_set):
+        raise ValueError("cycle detected")
+
+    return order
+```

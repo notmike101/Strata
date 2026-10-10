@@ -59,6 +59,7 @@
 #include "strata/core/verify.hpp"
 #include "strata/core/mtp.hpp"
 #include "strata/prefill/prefill.hpp"
+#include "strata/prefill/stage_bounds.hpp"
 #include "strata/core/native_dense.hpp"
 #include "strata/program/logits_selection.hpp"
 #include "strata/program/conv_cache.hpp"
@@ -6271,6 +6272,7 @@ int main(int argc, char** argv) {
             int32_t first = -1;            // the first slot it may lend, for the chunk that was chosen
             int32_t first_now = -1;        // where its buffers are laid out now
             int64_t lent_chunk = 0;
+            int64_t stage_cells_now = 0;
             std::vector<std::pair<int32_t, int32_t>> lent;
         };
         // bytes -> slots for one cache: exact when it knows its per-slot offsets (a native pack's blobs differ
@@ -6285,8 +6287,23 @@ int main(int argc, char** argv) {
             const int64_t blob = (int64_t) strata::kernels::cpu::expert_layout().max_blob;
             return (int64_t) ((need + (uint64_t) blob - 1) / (uint64_t) blob);
         };
-        auto part_slots = [&](const PfPart& p, int64_t c) -> int64_t {
-            return cache_slots_for(*p.cache, strata::prefill::Prefill::bytes_needed(g, *p.ses, c));
+        const bool stage_prefix = [] {
+            const char* e = std::getenv("STRATA_PREFILL_STAGE_PREFIX");
+            return e && std::atoi(e) != 0;
+        }();
+        if (stage_prefix && (multi_gpu || o.batch > 0 || std::getenv("STRATA_KV_STAGE_OWN"))) {
+            std::fprintf(stderr, "strata: prefix staging requires serial single-GPU borrowed buffers without STRATA_KV_STAGE_OWN\n");
+            return 2;
+        }
+#if defined(STRATA_USE_HIP) || defined(STRATA_HIP_GFX906)
+        if (stage_prefix) {
+            std::fprintf(stderr, "strata: prefix staging is currently a CUDA-only experiment\n");
+            return 2;
+        }
+#endif
+        if (stage_prefix) std::fprintf(stderr, "strata serve: prefix-bounded temporary KV staging enabled; full context retained; original expert placement retained\n");
+        auto part_slots = [&](const PfPart& p, int64_t c, int64_t stage_cells = 0) -> int64_t {
+            return cache_slots_for(*p.cache, strata::prefill::Prefill::bytes_needed(g, *p.ses, c, stage_cells));
         };
         auto part_bytes = [&](const PfPart& p, int32_t first) -> uint64_t {
             strata::core::ExpertCache& xc = *p.cache;
@@ -9628,6 +9645,11 @@ int main(int argc, char** argv) {
                 tr("refill start", (long long) p.lent.size());
                 const strata::core::OnDevice on(p.dev);
                 for (const auto& [i, slot] : p.lent) {   // D-4: queued, one wait (STRATA_REFILL_BLOCKING=1: each)
+                    if (!strata::prefill::stage_slot_needs_refill(stage_prefix, slot, p.first_now)) {
+                        // Logically masked to preserve prompt placement, but outside every scratch write.
+                        host_res[(size_t) i] = slot;
+                        continue;
+                    }
                     const uint8_t* b = srcp->blob_stable(i / g.n_expert, i % g.n_expert);
                     const int64_t nb = (int64_t) strata::kernels::cpu::expert_layout().blob_bytes(i / g.n_expert);
                     if (b == nullptr || !(refill_blocking() ? p.cache->fill_slot_blocking(slot, b, e, nb)
@@ -9643,7 +9665,8 @@ int main(int argc, char** argv) {
 #if defined(_WIN32)
                 // The copies have landed: the file pages touched by the loan need not stay in the working set.
                 for (const auto& [i, slot] : p.lent)
-                    srcp->release(i / g.n_expert, i % g.n_expert);
+                    if (strata::prefill::stage_slot_needs_refill(stage_prefix, slot, p.first_now))
+                        srcp->release(i / g.n_expert, i % g.n_expert);
 #endif
                 p.lent.clear();
                 p.lent_chunk = 0;
@@ -9661,7 +9684,13 @@ int main(int argc, char** argv) {
                 const auto t_rf = Clock::now();
                 int64_t n_lent = 0, n_parts = 0;
                 for (PfPart& p : pf_parts)
-                    if (!p.lent.empty()) { n_lent += (int64_t) p.lent.size(); ++n_parts; }
+                    if (!p.lent.empty()) {
+                        if (stage_prefix) {
+                            for (const auto& row : p.lent)
+                                n_lent += strata::prefill::stage_slot_needs_refill(true, row.second, p.first_now);
+                        } else n_lent += (int64_t) p.lent.size();
+                        ++n_parts;
+                    }
                 if (n_parts > 1 && !refill_serial) {
                     for (PfPart& p : pf_parts)
                         if (!p.lent.empty() && !refill_issue(p, e)) return false;
@@ -9689,6 +9718,9 @@ int main(int argc, char** argv) {
                 // what this segment needs, capped by the configured chunk: a request lends only what its own
                 // prompt needs, so a large chunk costs a short prompt nothing
                 const int64_t want_full = equal_chunk(tokens, o.prefill_chunk);
+                // Include the cached prefix and every segment of this request.
+                // The loan may be reused between segments, but never bounds by fresh tokens alone.
+                const int64_t stage_cells = stage_prefix ? n : 0;
                 // #340: a short enough request reads in the stages' own S-token chunks (nothing lent)
                 const int64_t want = split_small > 0 && tokens <= split_small_max ? std::min(want_full, split_small)
                                                                                  : want_full;
@@ -9700,22 +9732,30 @@ int main(int argc, char** argv) {
                 for (PfPart& p : pf_parts) {
                     if (p.first < 0) continue;
                     if (!p.lent.empty()) {
-                        if (want <= p.lent_chunk) continue;            // its current loan already covers this
+                        if (want <= p.lent_chunk && stage_cells == p.stage_cells_now) continue;
                         // ONLY this participant's loan goes back: `refill` would return the other participants'
                         // loans too, and their buffers are still laid out in their caches - marking those slots
                         // resident again would hand the next window a prompt buffer in place of an expert
                         if (!refill_one(p, e)) return false;
                     }
                     const strata::core::OnDevice on(p.dev);
-                    const int32_t first = std::max<int32_t>(p.first, (int32_t) (p.cache->slots() - part_slots(p, want)));
-                    if (want != p.sp->chunk() || first != p.first_now) {
-                        if (!p.sp->relayout(want, p.cache->device_slot(first), part_bytes(p, first), e)) return false;
+                    const int32_t first = std::max<int32_t>(p.first, (int32_t) (p.cache->slots() - part_slots(p, want, stage_cells)));
+                    if (want != p.sp->chunk() || first != p.first_now || stage_cells != p.stage_cells_now) {
+                        if (!p.sp->relayout(want, p.cache->device_slot(first), part_bytes(p, first), e, stage_cells)) return false;
                         p.first_now = first;
+                        p.stage_cells_now = stage_cells;
+                    }
+                    // Keep the original CPU/GPU expert assignments while using fewer slots for scratch.
+                    const int32_t logical_first = stage_prefix
+                        ? std::max<int32_t>(p.first, (int32_t) (p.cache->slots() - part_slots(p, want))) : first;
+                    if (logical_first > first) {
+                        e = "prefill: prefix staging exceeds the original loan";
+                        return false;
                     }
                     for (int64_t l = p.lb; l < p.le; ++l)              // THIS participant's layers only
                         for (int64_t ex = 0; ex < g.n_expert; ++ex) {
                             const size_t i = (size_t) (l * g.n_expert + ex);
-                            if (host_res[i] >= first) {
+                            if (host_res[i] >= logical_first) {
                                 p.lent.emplace_back((int32_t) i, host_res[i]);
                                 host_res[i] = strata::core::kNotResident;
                                 any = true;

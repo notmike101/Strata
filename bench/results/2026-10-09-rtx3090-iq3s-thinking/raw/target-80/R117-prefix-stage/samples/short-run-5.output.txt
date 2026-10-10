@@ -1,0 +1,12 @@
+We need answer user asks implement thread-safe Python TTLCache class using OrderedDict and monotonic clock. Include set, get, delete, clear, len, expiration, capacity eviction, unit tests with injected fake clock, detailed explanation of thread safety and complexity. Write complete code, then tests, then explain design. Do not abbreviate. Produce detailed answer >=1200 words.
+
+Need produce final only. Need ensure complete implementation. Let's design.
+
+Class TTLCache:
+- thread-safe: use threading.Lock (RLock maybe) around all public operations.
+- OrderedDict stores key -> entry. Entry could be tuple(value, expires_at) or dataclass.
+- Clock: injected callable returning float seconds monotonic. default time.monotonic.
+- capacity: maxsize int >0; ttl seconds >0 maybe default ttl. Support per-call ttl? Could have default_ttl optional. For set(key, value, ttl=None). If ttl None use default_ttl? Could make ttl mandatory? User says TTLCache class. Include set, get, delete, clear, len, expiration, capacity eviction. len: return count of live entries (not expired). Need handle expiration lazy. Also perhaps cleanup on operations.
+- Eviction policy: OrderedDict insertion order. On set existing key: remove old entry then add new at end. If new insert and len live > capacity, evict oldest (FIFO? OrderedDict first). But len is live after expiration. Need ensure before eviction purge expired? Yes call _purge_expired() then if len(self._entries) > capacity evict oldest entries. If existing key, if capacity full, not evict because replace same key, but remove old then insert. If existing expired? Treat as expired, remove and insert new; capacity check after.
+- get: with lock; entry = entries.get(key); if missing None. if expired: delete and return sentinel? Could use _MISS sentinel? get returns None if missing or expired. If value can be None, maybe use sentinel default parameter. For cache get(key, default=None). Use entries.pop if expired. Return value.
+- set: with lock; validate ttl non-negative? If ttl == 0: expires immediately. Could allow. Need compute expires_at = now + ttl. If ttl maybe None default. Remove old. Insert. Then _purge_expired(); while len(entries)>capacity: entries.popitem(last=False). But if capacity maybe 0? maxsize must >0. Or if capacity=0

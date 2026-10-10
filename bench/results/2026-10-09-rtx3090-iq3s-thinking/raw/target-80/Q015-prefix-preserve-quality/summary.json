@@ -1,0 +1,66 @@
+{
+  "passed": true,
+  "checks": [
+    {
+      "seed": 101,
+      "finish_reason": "stop",
+      "completion_tokens": 23770,
+      "returncode": 0,
+      "stdout": "{\"passed\": true, \"compiled\": true, \"cases\": 72, \"test_seed\": 904001}\n",
+      "stderr": "",
+      "passed": true
+    },
+    {
+      "seed": 102,
+      "finish_reason": "stop",
+      "completion_tokens": 11122,
+      "returncode": 0,
+      "stdout": "{\"passed\": true, \"compiled\": true, \"cases\": 72, \"test_seed\": 904001}\n",
+      "stderr": "",
+      "passed": true
+    },
+    {
+      "seed": 103,
+      "finish_reason": "stop",
+      "completion_tokens": 20449,
+      "returncode": 0,
+      "stdout": "{\"passed\": true, \"compiled\": true, \"cases\": 72, \"test_seed\": 904001}\n",
+      "stderr": "",
+      "passed": true
+    },
+    {
+      "seed": 104,
+      "finish_reason": "stop",
+      "completion_tokens": 3356,
+      "returncode": 0,
+      "stdout": "{\"passed\": true, \"compiled\": true, \"cases\": 72, \"test_seed\": 904001}\n",
+      "stderr": "",
+      "passed": true
+    },
+    {
+      "seed": 105,
+      "finish_reason": "stop",
+      "completion_tokens": 14812,
+      "returncode": 0,
+      "stdout": "{\"passed\": true, \"compiled\": true, \"cases\": 72, \"test_seed\": 904001}\n",
+      "stderr": "",
+      "passed": true
+    }
+  ],
+  "task": "topological_order",
+  "sampling": {
+    "temperature": 1.0,
+    "top_p": 0.95,
+    "top_k": 20,
+    "min_p": 0.0,
+    "presence_penalty": 0.0,
+    "repetition_penalty": 1.0,
+    "frequency_penalty": 0.0,
+    "reasoning_effort": "high",
+    "reasoning_budget_tokens": 0,
+    "chat_template_kwargs": {
+      "enable_thinking": true,
+      "preserve_thinking": true
+    }
+  }
+}

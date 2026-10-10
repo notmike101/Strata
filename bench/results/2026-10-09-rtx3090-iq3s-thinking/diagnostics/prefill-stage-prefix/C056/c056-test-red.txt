@@ -1,0 +1,10 @@
+**********************************************************************
+** Visual Studio 2022 Developer Command Prompt v17.14.36
+** Copyright (c) 2025 Microsoft Corporation
+**********************************************************************
+test_prefill_stage_bounds.cpp
+C:\Strata\tools\test_prefill_stage_bounds.cpp(28): error C2039: 'stage_slot_needs_refill': is not a member of 'strata::prefill'
+C:\Strata\include\strata/prefill/stage_bounds.hpp(4): note: see declaration of 'strata::prefill'
+C:\Strata\tools\test_prefill_stage_bounds.cpp(28): error C2873: 'stage_slot_needs_refill': symbol cannot be used in a using-declaration
+C:\Strata\tools\test_prefill_stage_bounds.cpp(30): error C3861: 'stage_slot_needs_refill': identifier not found
+C:\Strata\tools\test_prefill_stage_bounds.cpp(31): error C3861: 'stage_slot_needs_refill': identifier not found

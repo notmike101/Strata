@@ -1,0 +1,16 @@
+We need answer user: implement thread-safe Python TTLCache class using OrderedDict and monotonic clock. Include set, get, delete, clear, len, expiration, capacity eviction, unit tests with injected fake clock, detailed explanation thread safety and complexity. Complete code, tests, then explain design. Do not abbreviate implementation. At least 1200 words. Need produce final only. Need think thoroughly. Need likely include imports collections OrderedDict, time, threading, typing. Need fake clock for tests. TTLCache class.
+
+Need ensure correct details.
+
+Need design:
+
+class Clock: interface now monotonic.
+
+TTLCache: __init__(maxsize, ttl, clock=None). Use OrderedDict storing entries: (value, expires_at) maybe value + expiry. For thread safety use RLock? Use threading.Lock. Monotonic clock injected for tests, default time.monotonic. Methods:
+- set(key, value, ttl=None): with lock: now = self._clock.now(); expiry = now + (ttl if ttl is not None else self._ttl); if key in data: pop? Then data[key] = Entry(value, expiry). self._evict_if_needed(); maybe if maxsize 0? Need define maxsize positive? Could allow maxsize <=0 clear? Better require positive.
+- get(key, default=None): with lock: self._evict_expired(); entry = data.get(key); if entry and entry.expires_at > now? Need if expired remove return default. Then if entry valid move_to_end to mark recent; return value. Should we use <=? If expiry time equals now treat expired: if now >= expires_at delete return default. Use < valid.
+- delete(key): pop.
+- clear: clear.
+- len: implement __len__? User says include len. We can implement __len__ that evicts expired first and returns len(self._data). Thread-safe.
+- expiration? maybe method expire? Could include __iter__? Need expiration. Could implement remove_expired? Method __len__ triggers evict. Also public remove_expired() returns number removed. Or __contains__. Could implement __getitem__, __setitem__, __delitem__, __len__ for dict-like. Need include set, get, delete, clear, len, expiration, capacity eviction. Use names: set, get, delete, clear, __len__, remove_expired.
+- capacity eviction: when adding if len > maxsize, popitem(last=False) (least
