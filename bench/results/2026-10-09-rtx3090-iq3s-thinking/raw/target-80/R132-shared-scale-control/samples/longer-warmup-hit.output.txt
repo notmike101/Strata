@@ -1,0 +1,20 @@
+We need answer user wants code only in Python code block. Need analyze. Need produce final only code block. Need ensure function correct.
+
+Problem: topological_order(nodes, edges): nodes list unique strings; edges list pairs before, after. Return lexicographically smallest topological ordering, include isolated nodes, ignore duplicate edges. Raise ValueError for edge endpoint absent from nodes or a cycle. Do not mutate either input. No imports. Complete function only.
+
+Need design deterministic lexicographically smallest topological order. Given directed acyclic graph nodes strings. Need Kahn's algorithm with min-heap? No imports. Could use sorted list repeatedly (lexicographic min among current zero indegree) O(N^2 log?) N unknown. We can implement without heapq via selecting min using min(). Need avoid mutation. Use copies. Edges duplicate ignored: need set of edges? But cannot mutate input. Can create seen_edges set. Validate endpoints. Count indegree only for unique edges. If duplicate edge ignore but if multiple duplicates, set prevents multiple indegree.
+
+Potential issue: lexicographically smallest topological ordering for strings. Use Python default string lex order. Need include isolated nodes. Kahn's min selection: always choose smallest available zero-indegree node. This yields lexicographically smallest topological order for total order? Yes with lexicographic sequence comparison if choices are smallest at each step among available minimal nodes. Is that always true for topological order? I think yes: at first position, smallest possible first element must be minimal in indegree zero; choosing smallest available leads to lexicographically smallest. Induction.
+
+Cycle detection: If processed count < len(nodes) after Kahn, cycle. But careful if graph has self-loop: indegree nonzero never zero -> cycle.
+
+Validation: edge endpoint absent from nodes. nodes unique but maybe not sorted? Input nodes list unique strings. Need use nodes_set = set(nodes). If nodes has duplicates? Problem says unique, but robust? If duplicate nodes? It says unique. Could validate? Not required. But maybe we can handle duplicates? "nodes is a list of unique strings" no duplicates. If duplicates, maybe should not mutate. Could still set. But order? Not needed.
+
+Need not mutate either input. So don't sort in place. Use sorted? It returns new list. Use copies where needed.
+
+No imports: no collections? We can avoid.
+
+Pseudo:
+
+def topological_order(nodes, edges):
+    node_set = set(nodes)

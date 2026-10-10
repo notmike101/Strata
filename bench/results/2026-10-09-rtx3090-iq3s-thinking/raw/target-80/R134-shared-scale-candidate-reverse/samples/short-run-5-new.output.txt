@@ -1,0 +1,14 @@
+We need answer user's request. Need produce final with only complete function in Python code block. Need implement topological_order(nodes, edges). Requirements:
+- nodes list unique strings
+- edges list of (before, after) pairs
+- return lexicographically smallest topological ordering
+- include isolated nodes
+- ignore duplicate edges
+- Raise ValueError for edge endpoint absent from nodes or a cycle
+- Do not mutate either input
+- Use no imports
+- Return only complete function in Python code block.
+
+Need think carefully about lexicographically smallest topological order. Given directed graph edges before -> after. We want lexicographically smallest sequence among all topological orders. Standard algorithm: Kahn with min-heap selecting available nodes with indegree zero yields lexicographically smallest topological order if comparing list lexicographically by node strings. Without imports: cannot use heapq? Could implement min selection manually. Need not use imports. Need not mutate input: we can copy? Could avoid mutating nodes/edges; edges may be list of tuples; we can build adjacency and indegree without modifying. Need ignore duplicate edges: use set for edges or adjacency sets. Need endpoint validation: if before or after not in node_set raise ValueError. If duplicate edges ignore: should not increment indegree twice. We can use seen_edges set while building.
+
+Potential edge cases: self-loop is cycle (endpoint present) -> indegree never zero maybe raise. Disconnected/isolated included. Lexicographically smallest: choose smallest available at each step. Need ensure for graph with multiple edges duplicate. Need ensure no mutation of inputs: building local copies of adjacency dict values maybe sets; okay. If input is tuple? nodes is list but could accept iterable? Use list(nodes) maybe copies. But no import. If nodes contains non-string? spec strings; not needed. Need maybe preserve nodes if list. For do not mutate either input: don't sort nodes in place; use sorted(node_set) for initial heap? But no heapq, use available list. Need efficient enough? We can implement manual selection: available = sorted(nodes without indegree). While available: pop min by finding index min. That's O(V^2). Could implement heap manually? No imports. Simpler: available list, use available.sort() each iteration O(V^2 log V) but okay. But if want lexicographically smallest, at each step choose min available. Using sorted initial available and sort after adding? We can maintain available sorted by using insertion? Not necessary.

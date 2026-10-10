@@ -1,0 +1,24 @@
+We need answer user's request. Need implement topological_order in Python. Need return only complete function in Python code block. Need satisfy constraints: no imports, no mutate input, lexicographically smallest topological ordering include isolated nodes, ignore duplicate edges, raise ValueError for edge endpoint absent from nodes or cycle. Need likely Kahn with min-heap? Can't import heapq. Can implement by selecting min among available manually. Need ensure lexicographically smallest: at each step pick smallest node among nodes with in-degree zero. Need not mutate inputs: copy nodes list, build counts etc. Need ignore duplicate edges: use set of edge pairs. But edges list of tuples; could have duplicate exact tuples. Need endpoint absent: before or after not in nodes. nodes unique strings; maybe validate nodes? Could assume unique. Need not mutate edges. Build in_degree dict from nodes 0, adjacency dict from nodes set/list. For edges in edges: tuple length? Maybe robust: unpack pair; if invalid raise? Not specified but edge endpoints absent. Could if not iterable length 2 raise? But no hidden state. Deterministic. Use set for adjacency to ignore duplicates. For edge in edges: try before, after = edge except raise? Probably raise ValueError for invalid edges? Spec only endpoint absent or cycle. Could still raise TypeError naturally? But safer to raise ValueError? Not necessary maybe. Need no imports. Implementation:
+
+def topological_order(nodes, edges):
+    # no mutation
+    original_nodes = list(nodes)
+    if len(set(original_nodes)) != len(original_nodes): maybe not mutate but duplicate nodes? Spec unique; can ignore or raise? No need.
+    node_set = set(original_nodes)
+    adjacency = {node: set() for node in original_nodes}
+    indegree = {node: 0 for node in original_nodes}
+    seen_edges = set()
+    for edge in edges:
+        # robust unpack
+        if not isinstance(edge, tuple) or len(edge) != 2? edge may list. Just try before, after = edge.
+        before, after = edge
+        if before not in node_set or after not in node_set:
+            raise ValueError(...)
+        pair = (before, after)
+        if pair not in seen_edges:
+            seen_edges.add(pair)
+            adjacency[before].add(after)
+            indegree[after] += 1
+    # Kahn
+    order = []
+    available = [node for

@@ -1,0 +1,9 @@
+## E246 / C062 staged vector-combine screen
+
+Previous goal turn was progress: C059 state fix and C060/C061 evidence were published atcd872326 on the existing branch. Entry revalidated that exact HEAD, clean tracked state and no CodeGraph index. Goal remains active; no new upstream release has been asserted.
+
+C062 tests the actual staged baseline native_moe_combine_multi K10 vector path plus the verbatim precise sigmoid-scale kernel. Candidate copies that vector reduction and folds shared scaling into its epilogue. First build the unrounded product as a negative control; retain its complete failed corpus. Then replace only the four products with explicit rounded multiplies. This is a new staged-path applicability check, not a rerun seeking favorable C061 timing.
+
+Parity matrix: T1..8, five deterministic seeds, eight distributions =320 full-output cases. Ordinary, small, large, saturated-gate, subnormal, exact cancellation, signed-zero/edge and first-normal/saturation cases; graph replay twice, all active bytes equal, finite, inactive canaries unchanged. Only if every case passes, time all eight token widths with one excluded warmup, seven paired alternating measured rounds and200 repetitions/graph; equal input-restoration copies included in both. Predeclared gate: at least5percent geometric duration reduction, no slower median cell. This is not a TPS or end-to-end claim.
+
+If the gate passes, integrate a CUDA-only, default-off scale-only path using the unchanged shared gate GEMV, explicit raw-gate output and new vector combine. Keep existing LFUSE and QFUSE disabled; staged/CPU/PCIe expert contributions remain combined in the original order. T1 may be benchmarked here but integration must verify the single-token caller before enabling it. No model loaded for this screen;16GiB physical/commit guard and exact cleanup. Full contract and C056 failed cache screen unchanged.

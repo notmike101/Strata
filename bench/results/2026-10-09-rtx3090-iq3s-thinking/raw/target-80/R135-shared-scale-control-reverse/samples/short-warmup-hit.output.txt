@@ -1,0 +1,24 @@
+We need answer to user: implement topological_order in Python, only complete function in code block, no imports. Need analyze requirements.
+
+Function topological_order(nodes, edges). nodes list unique strings; edges list of (before, after) pairs. Return lexicographically smallest topological ordering, include isolated nodes, ignore duplicate edges. Raise ValueError for edge endpoint absent from nodes or a cycle. Do not mutate either input. Use no imports. Return only complete function in Python code block.
+
+Need produce final code block only likely.
+
+Algorithm: Kahn's algorithm with sorted available nodes. Need lexicographically smallest topological ordering for DAG with string nodes. Without imports (no heapq). Can maintain sorted list of zero indegree nodes; choose min each iteration. Need handle duplicates in edges: ignore duplicates. Need detect invalid endpoints: if before not in node_set or after not in node_set raise ValueError. Also maybe edge endpoints same? Self-loop endpoint present but creates cycle. Should detect cycle via result length < len(nodes). Duplicate edges: need not increment indegree multiple times. Need not mutate inputs: don't sort nodes in place, don't modify edges. Use copies of structures: set, dict indegree, adjacency sets/lists.
+
+Need ensure lexicographically smallest topological ordering. Standard Kahn selecting smallest currently available yields lexicographically smallest topological order (for total order). Proof yes for strings.
+
+Implementation details:
+
+def topological_order(nodes, edges):
+    node_set = set(nodes)
+    # maybe check duplicate nodes? Spec unique; no need. But if duplicate? Could still set; but maybe result length issue. We could treat as invalid? Not required. Use set nodes.
+    indegree = {node:0 for node in node_set}
+    adjacency = {node: set() for node in node_set}
+    seen_edges=set()
+    for before, after in edges:
+        if before not in node_set or after not in node_set: raise ValueError(...)
+        if before == after: cycle? Could immediately raise ValueError? Self-loop is cycle. But can let indegree and no removal detect cycle. If duplicate self-loop ignored? First self-loop creates cycle; Kahn detects length mismatch. But if self-loop with edge endpoints present, adjacency set includes itself, indegree before +1. available excludes it; cycle detected. OK.
+        edge = (before, after)
+        if edge in seen_edges: continue
+        seen_edges.add(edge)

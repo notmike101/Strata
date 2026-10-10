@@ -1,0 +1,13 @@
+We need answer user wants code only: complete function in Python code block. Need implement topological_order(nodes, edges). Requirements: nodes list unique strings, edges list of (before, after) pairs. Return lexicographically smallest topological ordering, include isolated nodes, ignore duplicate edges. Raise ValueError for edge endpoint absent from nodes or cycle. Do not mutate inputs. No imports. Return only complete function in Python code block.
+
+Need think carefully. Lexicographically smallest topological ordering. Nodes are strings, ordering lexicographic by string. Need Kahn's algorithm with min-heap? No imports allowed. Could use list and pick min each step. Complexity maybe okay unspecified. Need not mutate inputs. Need duplicate edges ignored: indegree count should count unique directed edges only. If duplicates, ignore duplicates. Could maintain set of edges to avoid counting duplicate. But set of tuples of strings okay. Need not mutate inputs. We can make local structures.
+
+Potential ambiguity: lexicographically smallest topological ordering among all valid topological orders. Using priority queue of available nodes by lex order yields lexicographically smallest sequence? For DAG, yes if at each step choose smallest available (where available = all prerequisites removed) yields lexicographically smallest topological sort. Need prove? Standard.
+
+Cycle detection: if len(result) != len(nodes), cycle. But careful: if duplicate edges, ignore. If edge endpoints absent, raise ValueError before cycle? yes.
+
+Do not mutate either input: don't sort nodes in place, don't modify edges. Can create node set, adjacency lists. Need nodes unique but no need validate. Isolated nodes included: nodes with no edges included. Initial indegree zero includes them.
+
+Potential problem: lex smallest topological ordering when nodes are strings maybe default string comparison. Need choose min available. Could maintain sorted_nodes? We need efficiently get min available. Without heapq? heapq is import not allowed. Could build available list and use min each time, then remove chosen. That's fine. But if nodes many O(n^2). Accept? likely. Could implement custom min-heap with list? But heap operations require code no imports. Could use min on available and remove. Or sort available each iteration? min+remove fine. Need ensure available remains list not set? Sets are not ordered; picking min then remove from list. Use list of available. Since no imports, okay.
+
+Need not mutate input: If we copy nodes? Use nodes as iterable but not mutate. `node_set =

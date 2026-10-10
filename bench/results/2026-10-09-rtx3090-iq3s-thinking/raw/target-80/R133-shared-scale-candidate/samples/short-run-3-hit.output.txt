@@ -1,0 +1,21 @@
+We need answer user wants code only: complete function in Python code block. Need implement topological_order(nodes, edges). Requirements: nodes list unique strings, edges list of (before, after) pairs. Return lexicographically smallest topological ordering, include isolated nodes, ignore duplicate edges. Raise ValueError for edge endpoint absent from nodes or cycle. Do not mutate inputs. No imports. Return only complete function in Python code block.
+
+Need think carefully. Lexicographically smallest topological ordering. Nodes are strings, ordering lexicographic by string. Need Kahn's algorithm with min-heap? No imports allowed. Could use list and pick min each step. Complexity maybe okay. Need not mutate inputs: avoid modifying nodes, edges. Use local copies/sets.
+
+Implementation details:
+- Validate edges endpoints in nodes. nodes list unique strings. If duplicate edges ignore. Need ignore self-loop? Self-loop is cycle? Edge (u,u) means before itself, impossible. Should raise ValueError cycle. Need consider if endpoints absent before cycle. Raise for absent endpoint. Also if nodes empty return [].
+- Need no mutation of either input: don't sort nodes in place; don't append to edges. Use set(nodes) or sorted list.
+- Lexicographically smallest topological order: At each step choose available node with smallest string. For deterministic, use `min(available)` and remove from available, update indegree. Or maintain heap without heapq. Since no imports, we can implement manual selection. Could do:
+```
+def topological_order(nodes, edges):
+    order = []
+    node_set = set(nodes)
+    indegree = {node: 0 for node in nodes}
+    adj = {node: [] for node in nodes}
+    seen = set()
+    for before, after in edges:
+        if before not in node_set or after not in node_set:
+            raise ValueError(...)
+        if before == after: maybe cycle? Duplicate? If duplicate edges ignored. Need self-loop should raise cycle. Could add to seen? If (u,u), add? If ignore duplicates before cycle detection: if edge in seen continue? If (u,u) duplicate, should raise? Yes self-loop cycle. Could simply if before == after: raise ValueError("cycle")? But if absent? validate first. Duplicate self-loop also cycle. If duplicate edges ignore duplicates, but cycle still cycle.
+        if (before, after) in seen: continue
+        seen.add((

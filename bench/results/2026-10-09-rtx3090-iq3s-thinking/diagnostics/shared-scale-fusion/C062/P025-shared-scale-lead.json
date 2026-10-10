@@ -1,0 +1,21 @@
+{
+  "source_sha256": "0e9d29844308e03a051e9bc72ba678dd73388117136d074d65ecbebdf00da11e",
+  "scope": "P025 stream19 graph-launch groups with exactly48 scales and48 combines, paired by temporal ordinal under the serial unsplit48-layer source structure. Instrumented diagnostic, not a dependency reconstruction.",
+  "qualified_graph_groups": 668,
+  "excluded_groups": [],
+  "pairs": 32064,
+  "scale_summed_ms": 115.912845,
+  "scale_end_to_combine_start_us": {
+    "min": 3.424,
+    "median": 17.952,
+    "max": 15547.2,
+    "positive": 32064,
+    "nonpositive": 0
+  },
+  "limitations": [
+    "Nsight reports these graph nodes on the same streamId; this does not recover original capture-stream dependencies.",
+    "A positive lead is not proof all scale duration was overlapped or removable.",
+    "Recorded event completeness warning and profiling overhead from P025 remain.",
+    "No served speed or causal explanation is proven by this timing audit alone."
+  ]
+}

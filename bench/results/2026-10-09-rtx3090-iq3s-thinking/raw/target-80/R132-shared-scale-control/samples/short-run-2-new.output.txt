@@ -1,0 +1,16 @@
+We need answer user: "Request identifier ... Ignore this identifier. Implement topological_order(nodes, edges) in Python. nodes is a list of unique strings; edges is a list of (before, after) pairs. Return the lexicographically smallest topological ordering, include isolated nodes, and ignore duplicate edges. Raise ValueError for an edge endpoint absent from nodes or a cycle. Do not mutate either input. Use no imports. Return only the complete function in a Python code block."
+
+Need provide final only code block with complete function. Need think requirements. Implement Kahn's algorithm lexicographically smallest: initialize indegree for all nodes. Need ignore duplicate edges: set of directed edges or adjacency set. Validate endpoints in nodes. Do not mutate inputs: do not modify nodes or edges lists; can create new structures. nodes unique but no need. Edges may include pairs not length? probably just use unpack? Edge endpoints absent raise ValueError. Could also if edge not iterable? not specified. Maybe raise ValueError for endpoints absent from nodes; for malformed could let error? Better validate tuple unpacking? Edges list of pairs. We can catch TypeError? But no imports. Maybe do: for before, after in edges: if before not in node_set or after not in node_set: raise ValueError. Then ignore self-loop? If before == after endpoint present but cycle; indegree and adj cause cycle detection raising ValueError. Duplicate edges ignored: use adjacency dict of sets or set of pairs. Need ensure nodes isolated included. Lexicographically smallest topological ordering. We can use min-heap? no imports, so can sort available list each iteration. Complexity okay. Implementation:
+
+def topological_order(nodes, edges):
+    node_set = set(nodes)
+    indegree = {node: 0 for node in nodes}
+    adjacency = {node: set() for node in nodes}
+    seen_edges = set()
+    for edge in edges:
+        # Ensure pair? If len not 2: maybe raise ValueError? Problem says edges is list of (before, after) pairs, so can assume. But robust: try: before, after = edge; except TypeError? no imports. But maybe not needed. If edge is string length 2? It unpacks. OK.
+        before, after = edge
+        if before not in node_set or after not in node_set:
+            raise ValueError("Edge endpoint absent from nodes")
+        if before == after:
+            # self-loop is cycle

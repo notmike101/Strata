@@ -1,0 +1,22 @@
+We need answer user wants code only: complete function in Python code block. Need implement topological_order(nodes, edges). Requirements: nodes list unique strings, edges list of (before, after). Return lexicographically smallest topological ordering, include isolated nodes, ignore duplicate edges. Raise ValueError for edge endpoint absent from nodes or a cycle. Do not mutate either input. No imports. Return only complete function in Python code block.
+
+Need think carefully. Lexicographically smallest topological ordering. Nodes are strings, ordering lexicographic by string. Need Kahn's algorithm with min-heap? No imports allowed. Could use list and pick min each step. Complexity maybe okay. Need not mutate inputs. Need handle duplicate edges. Need raise ValueError if any endpoint absent from nodes. Also if cycle. Duplicate edges ignore. Need avoid mutating input: nodes list can be copied; edges iterated no mutation. Internal adjacency sets? Need ensure if duplicate edges, no double indegree. Use set for adjacency. Need consider if edges list has non-tuple? probably can unpack. But robust? If edge malformed could raise ValueError? Spec says edges list of pairs; could raise ValueError for endpoint absent. Maybe if not iterable pair raise ValueError? not necessary.
+
+Implement function:
+
+def topological_order(nodes, edges):
+    # maybe validate nodes unique? spec says unique. No need? Could if duplicate? But nodes unique strings. But can ignore.
+    node_set = set(nodes)
+    # Need order original? for lexicographic sort.
+    # Build indegree dict for all nodes: 0
+    indegree = {node:0 for node in nodes}
+    successors = {node:set() for node in nodes}
+    for edge in edges:
+       # If edge not length 2? Try before, after = edge except? We can raise ValueError? But spec endpoints absent. If malformed, TypeError maybe. To be safe: if len(edge)!=2 raise ValueError? But len(edge) may not work for iterator. Could: try: before, after = edge except ValueError: raise ValueError("..."). But not necessary? Could include.
+       before, after = edge
+       if before not in node_set or after not in node_set: raise ValueError
+       if after not in successors[before]:
+          successors[before].add(after)
+          indegree[after]+=1
+    # Kahn:
+    remaining = [node for node in nodes if indegree[node]==0]

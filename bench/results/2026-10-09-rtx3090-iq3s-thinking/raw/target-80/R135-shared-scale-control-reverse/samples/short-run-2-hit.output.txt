@@ -1,0 +1,12 @@
+We need answer user: "Request identifier ... Ignore this identifier. Implement topological_order(nodes, edges) in Python. nodes is a list of unique strings; edges is a list of (before, after) pairs. Return the lexicographically smallest topological ordering, include isolated nodes, and ignore duplicate edges. Raise ValueError for an edge endpoint absent from nodes or a cycle. Do not mutate either input. Use no imports. Return only the complete function in a Python code block."
+
+Need provide final only code block with complete function. Need think requirements. Implement Kahn's algorithm lexicographically smallest: repeatedly choose smallest string among zero indegree. But must not mutate inputs. nodes list of unique strings, edges list of tuples. Duplicate edges ignored for indegree and adjacency. Need validate endpoints present. Raise ValueError for missing endpoint or cycle. No imports. Lexicographically smallest topological ordering among all topological sorts? For DAG with strings, greedy using min heap/min available yields lexicographically smallest (comparing sequences element-wise). Since no imports, can use list and min() each iteration or maintain sorted list? Need efficiency okay. Could use heap from heapq? no imports, so cannot use heapq. Use list available and min each time. Complexity maybe okay.
+
+Need be careful not mutate inputs. If nodes list passed, we need copy. Edges iterate. Build node_set = set(nodes). Validate each edge: if not all endpoints in set raise ValueError. Duplicate edges ignore: maintain set of pairs (before, after). adjacency dict: node -> list or set of outgoing unique neighbors. indegree dict: node -> int. Start with all nodes in indegree dict 0. For each unique edge, if before == after? This is self-loop cycle. Edge endpoint present. Duplicate ignore. Add edge: if (u,v) not seen. If u==v, cycle immediate. Add v to adjacency[u], indegree[v] +=1.
+
+Then available = [node for node in nodes if indegree[node]==0] maybe in sorted order? Need not rely on nodes order for lexicographic; can start with all zero indegree, but each time min. To ensure lexicographically smallest, after removing, add neighbors with indegree zero, then choose min. If available list contains all available. Could sort initial and then pop min by scanning. Simpler:
+
+available = [n for n in node_set if indegree[n] == 0]
+result = []
+while available:
+   

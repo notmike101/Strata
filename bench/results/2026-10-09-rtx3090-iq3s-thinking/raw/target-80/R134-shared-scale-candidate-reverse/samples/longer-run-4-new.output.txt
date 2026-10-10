@@ -1,0 +1,15 @@
+We need answer user's request. Need implement topological_order(nodes, edges) in Python. Return only complete function in Python code block. Need ensure lexicographically smallest topological ordering among all topological sorts? Usually with unique string nodes, edges (before, after), isolated nodes included, duplicate edges ignored, raise ValueError for missing endpoint or cycle, no mutation, no imports. Need likely use Kahn with min-heap but no imports. Can implement own heap or just sort available list each time. Need lexicographically smallest topological order: at each step choose smallest node among currently zero indegree. With string lex order. Need no mutation: copy nodes? Avoid hidden state. Deterministic. Need validate edge endpoints absent from nodes. Duplicate edges ignored: build adjacency set and indegree counts only once for unique edges. Need cycle detection: if output length != len(nodes). Need consider self-loop edge (a,a): endpoint present but cycle. Duplicate self-loop ignore but still self-loop cycle; indegree self and adjacency, no zero? If nodes only self-loop, indegree >0 -> cycle. Need no imports. Complete function in code block only. Need likely include type hints? Not required. Could implement robust.
+
+Consider lexicographically smallest topological ordering. Is it achieved by repeatedly picking min zero indegree? For total order lex smallest yes (greedy). Need if graph disconnected with isolated nodes: included as zero indegree.
+
+Implementation details:
+
+def topological_order(nodes, edges):
+    # Validate? nodes list unique strings? Input says unique strings, but maybe we can check? It says nodes is list of unique strings; maybe don't need validate duplicates? But could if duplicates? To be safe: if len(set(nodes)) != len(nodes) maybe ValueError? But spec only edge endpoints/cycle. If nodes duplicate, topological order? Unique expected. We can ignore? If duplicate, set could lose duplicates; but expected unique. Maybe not raise for duplicate nodes. But if nodes contains non-strings? No spec.
+    node_set = set(nodes) # if nodes contains unhashable? no.
+    # Build adjacency dict sets and indegree dict.
+    adj = {n: set() for n in nodes}
+    indeg = {n: 0 for n in nodes}
+    seen_edges = set()? Could use adjacency set to avoid duplicate indegree increments:
+      if u not in node_set or v not in node_set: raise ValueError
+     

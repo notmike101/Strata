@@ -1,0 +1,16 @@
+We need answer user's request. Need produce final with only complete function in Python code block. Need implement topological_order(nodes, edges). Requirements:
+- nodes list unique strings
+- edges list of (before, after) pairs
+- return lexicographically smallest topological ordering
+- include isolated nodes
+- ignore duplicate edges
+- Raise ValueError for edge endpoint absent from nodes or a cycle
+- Do not mutate either input
+- Use no imports
+- Return only complete function in Python code block.
+
+Need think carefully about lexicographically smallest topological order. Given directed graph edges before -> after. We want lexicographically smallest sequence among all topological orders. Standard algorithm: Kahn with min-heap selecting available nodes with indegree zero yields lexicographically smallest topological order if comparing list lexicographically by node strings. Without imports: cannot use heapq? Could implement min selection manually. Need not use imports. Need not mutate input: we can copy? Could avoid mutating nodes/edges; edges may be list of tuples; we can build adjacency sets/lists, indegree. Need ignore duplicates: if edge duplicates, do not increment indegree multiple times. Need validate endpoints: if before or after not in nodes -> ValueError. Cycle -> ValueError. Also if self-loop? That's cycle? Edge (a,a): endpoint exists, duplicate, but self-loop creates cycle (indegree never zero). Should raise ValueError. Kahn detects.
+
+Potential issue lexicographically smallest among topological order with arbitrary partial order. Greedy pick smallest available zero indegree is correct. Need compare strings lexicographically, default string ordering. Need include isolated nodes: they have indegree 0 and no outgoing, become available.
+
+Implementation constraints: no imports. Need code block only. Function only. Could use sets. Need not mutate input: don't modify nodes or edges. But if use set(nodes) that reads. Build adjacency as dict mapping node to list of neighbors and indegree dict. But if duplicate edge, need check. Need efficient. For each edge in edges: validate tuple? Edges list of pairs; assume. Check before, after in node_set. Use adjacency dict: {node: []}, indeg {node:0}. Need duplicate edge ignoring: could use set of pairs seen_edges; if pair already in seen_edges: continue. But if use set of tuples maybe fine. Need ensure no mutation of input? Creating new set of nodes? set(nodes) doesn't mutate. Copy? Could also sort?

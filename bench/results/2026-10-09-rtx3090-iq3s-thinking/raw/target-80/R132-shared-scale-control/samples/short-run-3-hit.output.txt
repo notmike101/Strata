@@ -1,0 +1,13 @@
+We need answer user wants code only: complete function in Python code block. Need implement topological_order(nodes, edges). Requirements: nodes list unique strings, edges list of (before, after) pairs. Return lexicographically smallest topological ordering, include isolated nodes, ignore duplicate edges. Raise ValueError for edge endpoint absent from nodes or cycle. Do not mutate inputs. No imports. Return only complete function in Python code block.
+
+Need think carefully. Lexicographically smallest topological ordering. Nodes are strings, ordering lexicographic by string. Need Kahn's algorithm with min-heap would be lexicographically smallest? For unique elements, always pick smallest available (in-degree zero) yields lexicographically smallest topological order under standard sequence lexicographic? Yes for total order of elements, greedy choosing smallest available at each step yields lexicographically smallest topo order. But cannot import heapq. Need implement without imports. Could use sorted list and pop smallest available each time O(n^2), fine. Or implement heap manually no imports. Simplicity: available = sorted(set nodes with indegree 0), loop: available.sort() then pick smallest? Need include isolated nodes. Duplicates ignored: use set of edges.
+
+Input edges: list of pairs. Need not mutate inputs. If edges tuple? Iterate. Need detect endpoints not in nodes before cycle? Yes. Need validate endpoints absent -> ValueError. Should ignore duplicate edges. But what about invalid duplicate? If duplicate invalid endpoints also ValueError? Validate all edges. Need handle self-loop? Edge (a,a) endpoint present, indegree increment? Self-loop forms cycle; should raise ValueError. Kahn will produce cycle if self-loop because indegree >0 never zero. But duplicates? If self-loop duplicate, set edge. fine. Could explicit self-loop check. Need ensure no mutation: nodes list may contain duplicates? Spec unique. But maybe use set. Do not mutate. If nodes has duplicates? unique strings. But if duplicates, we need maybe handle? Not required but set could dedupe. If duplicate nodes and edges endpoints? Topological ordering unique strings? Might output unique? But spec unique, not worry. But if using set(nodes), order? Need lex smallest includes all nodes. Use set for membership. For nodes list order irrelevant due lex.
+
+Potential issue: lexicographically smallest topological ordering with strings, but if nodes contain non-comparable? strings comparable.
+
+Implementation:
+
+def topological_order(nodes, edges):
+    node_set = set(nodes)
+   

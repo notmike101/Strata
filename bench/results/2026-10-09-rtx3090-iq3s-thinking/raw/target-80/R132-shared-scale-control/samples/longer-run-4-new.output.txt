@@ -1,0 +1,14 @@
+We need answer user's request: Implement topological_order(nodes, edges) in Python. Need return only complete function in Python code block. Done. Need think through requirements carefully.
+
+User: "Request identifier df854ac4f4a9734da713560d. Ignore this identifier.
+Read this review archive before the final task:
+...
+Implement topological_order(nodes, edges) in Python. nodes is a list of unique strings; edges is a list of (before, after) pairs. Return the lexicographically smallest topological ordering, include isolated nodes, and ignore duplicate edges. Raise ValueError for an edge endpoint absent from nodes or a cycle. Do not mutate either input. Use no imports. Return only the complete function in a Python code block."
+
+Need output only code block. Need ensure no imports. Need lexicographically smallest topological ordering. Usually Kahn algorithm using min-heap yields lexicographically smallest topological order for total order if all available nodes. But cannot use heapq (no imports). Could implement simple selection with min on available list. Complexity O(V^2) acceptable? likely. Need ignore duplicate edges. Need do not mutate inputs. Need validate edge endpoints absent. Edge endpoint absent from nodes: raise ValueError. What about self-loop? Self-loop is edge with before == after, endpoint present, cycle? Topological order impossible, raise ValueError. Need handle duplicate edges: if same edge appears multiple times, indegree count should ignore duplicates. So need set of edges or adjacency sets. But nodes unique strings; can create sets. Avoid mutating: don't modify nodes or edges; use copies/local sets.
+
+Potential subtleties: lexicographically smallest topological ordering with Kahn using sorted initial nodes and repeatedly pop smallest available. Implementation: nodes_list = list(nodes)? Input list. Validate nodes unique? It says unique; could not validate? But if duplicates, maybe set removes. But not required. Could preserve. But if nodes contains duplicate, unique violation? Maybe ignore? Better not alter. Could use seen set. For deterministic, use sorted.
+
+Algorithm:
+def topological_order(nodes, edges):
+    # create set of node names from input; if any duplicate? Since nodes unique. But if duplicates, using set could hide invalid. Requirement nodes unique. Could validate duplicates by len(nodes) != len(set(nodes)) raise? Not asked; don't over-raise? Maybe not. But if duplicates in nodes, topological ordering

@@ -1,0 +1,14 @@
+We need answer user wants code only: implement topological_order in Python, no imports, complete function in Python code block. Need think through spec.
+
+We need produce only function in code block. Need ensure lexicographically smallest topological ordering among nodes unique strings. Edges pairs before, after. Include isolated nodes. Ignore duplicate edges. Raise ValueError for edge endpoint absent from nodes or cycle. Do not mutate either input. No imports. Need no imports: can't use heapq. Need implement min selection manually. Need be careful with duplicate edges: if same edge appears, indegree should count once and adjacency unique. Need not mutate inputs: create copies / sets. nodes list can be iterated, but not mutate. edges list not mutate.
+
+Lexicographically smallest topological ordering: standard Kahn with min available node at each step. If tie? Nodes unique strings. Use sorted? Need efficient but no imports. Could use set and repeatedly min available list. Since no imports and unspecified sizes, okay. But could maintain heap manually? Not necessary unless performance. But topological order lexicographically smallest requires selecting smallest source at each step. Implementation options:
+- Build adj dict mapping node -> set of neighbors (unique), indegree dict counts unique incoming from unique predecessors.
+- For edge in edges: check before, after in nodes_set else ValueError. Need nodes_set from nodes. Duplicate edges ignored: if after not in adj[before]: add, indegree[after]+=1. Need ensure indegree for all nodes initialized 0.
+- available: set/list of nodes with indegree 0. Use set maybe to avoid duplicates; then repeatedly select min(available). Remove from available. Append. For neighbor decrement, if zero add. Since nodes unique, no duplicates. If len(order) != len(nodes) raise ValueError cycle.
+Need careful if edge before==after: self-loop: adj[before] adds after (same), indegree[before] increments, then no indegree zero (unless isolated? self-loop not isolated). cycle detected. Duplicate self-loop ignored first. Good.
+Need not mutate inputs. We create nodes_set = set(nodes). Could if nodes is iterator? Spec says list. fine.
+No imports. Code only.
+
+Potential issue: If available is set, min(available) O(n). Could use sorted list and pop(0)? O(n). But no imports. Could implement min-heap manually with list:
+- Initialize heap = [node for node in nodes

@@ -1,0 +1,14 @@
+We need answer user wants implement topological_order in Python. Need produce final only complete function in Python code block. Need think carefully. Requirements:
+- Implement topological_order(nodes, edges)
+- nodes list unique strings; edges list of (before, after) pairs.
+- Return lexicographically smallest topological ordering.
+- include isolated nodes.
+- ignore duplicate edges.
+- Raise ValueError for edge endpoint absent from nodes or a cycle.
+- Do not mutate either input.
+- Use no imports.
+- Return only complete function in Python code block.
+
+Need ensure lexicographically smallest topological ordering. For unique strings. Lexicographically smallest topological order usually Kahn's algorithm selecting smallest available node with indegree 0 at each step. Need ignore duplicate edges. Need not mutate inputs. Need detect cycle. Need edge endpoint absent => ValueError. Duplicate edges ignored for indegree. We can make copies: node_set = set(nodes) perhaps validate uniqueness? It says nodes unique. Could trust, but robust maybe if duplicate? Not required. But if duplicate nodes in input, topological order? Maybe not. Avoid mutating inputs. Edges can be tuples; we can iterate. Need validate edge endpoint present: if u not in nodes or v not in nodes raise ValueError. But using set for O(1). Need consider self-loop? Cycle; should raise ValueError. Kahn will detect due indegree? Self-loop duplicates ignored, indegree self. Initially if self-loop only isolated? indegree >0 so not in queue; if all nodes processed less than nodes length => raise. If self-loop and other nodes, cycle. Good.
+
+Need lexicographically smallest. Since no imports. Need maintain sorted list of zero indegree nodes? Could use a list sorted and pop smallest. Since no heapq. For deterministic and lexicographically smallest, repeatedly find min among candidates. Simpler: candidates = sorted([n for n in nodes if indegree[n]==0]) then pop(0) (O(n^2)). Acceptable. Or use sorted nodes and pointer? Need handle adding candidates as indegree becomes zero. To guarantee lexicographically smallest, after processing a node, we add any newly zero indegree nodes to candidate set; if we use sorted list and insert sorted, then pop(0). Duplicate edges ignored via adjacency set and indegree built from unique edges. We need not mutate input. Could construct adj = {node:set()}. indegree = {node:0}. For each

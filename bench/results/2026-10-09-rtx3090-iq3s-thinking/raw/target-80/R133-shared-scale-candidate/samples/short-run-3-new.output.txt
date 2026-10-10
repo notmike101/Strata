@@ -1,0 +1,21 @@
+We need answer user wants code only: implement topological_order in Python, no imports, complete function in Python code block. Need think through spec.
+
+We need produce only function in code block. Need ensure lexicographically smallest topological ordering among nodes unique strings. Edges pairs before, after. Include isolated nodes. Ignore duplicate edges. Raise ValueError for edge endpoint absent from nodes or cycle. Do not mutate either input. No imports. Need no imports: can't use heapq. Need implement min selection manually. Need be careful with duplicate edges: if same edge appears, indegree should count once and adjacency unique. Need not mutate inputs: create copies / sets.
+
+Need lexicographically smallest topological order for DAG: Kahn's algorithm selecting smallest available node each time. Since nodes are strings, use sorted list of available and remove min. Need O(V^2) ok. Need detect cycle if len order != len nodes. Need endpoints absent raise ValueError. Since nodes list unique strings. Need consider edges maybe list of tuples/lists length 2? Should support pair. Need ignore duplicate edges. Need no mutation: don't modify nodes or edges. But can iterate.
+
+Potential edge cases:
+- edge (a,a): self-loop -> cycle. Need detect. If a in nodes. Duplicate ignored but self-loop remains edge. Kahn cycle.
+- absent endpoint: raise ValueError. Which error type ValueError. Maybe include missing node.
+- Duplicate edges: ignore.
+- Isolated nodes: indegree zero.
+- Lexicographically smallest ordering: Kahn with min. Need ensure when duplicate edges ignored, indegree is count of unique predecessors. Need build unique adjacency. Without imports can use dict of sets? Set not import. Could use dict mapping node to list and set? Need check duplicates: Could use edges_unique = set() but elements are tuples. If edge maybe list, convert tuple. But if endpoints strings, fine. Need not import. Use edges_unique = set(); if pair not in set: add. But pair might be list [a,b], unhashable. Could convert to tuple(pair). But if pair not length 2? Not spec. Could do before, after = pair.
+
+Implementation:
+
+def topological_order(nodes, edges):
+    node_set = set(nodes)
+    for edge in edges:
+        before, after = edge
+        if before not in node_set or after not in node_set:
+            raise ValueError(f"edge endpoint absent from nodes: {before

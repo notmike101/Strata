@@ -1,0 +1,14 @@
+We need answer user's request. Need produce final only complete function in Python code block. Need ensure no imports. Implement topological_order(nodes, edges). Nodes list unique strings; edges list pairs before, after. Return lexicographically smallest topological ordering, include isolated nodes, ignore duplicate edges. Raise ValueError for edge endpoint absent from nodes or a cycle. Do not mutate either input. Use no imports.
+
+Need think carefully about lexicographically smallest topological order. For DAG with partial order constraints before->after. To get lexicographically smallest ordering among all topological sorts, standard Kahn with min-heap of available nodes (all nodes with indegree 0, pick smallest available). Since no imports, can implement min selection manually using sorted list? Need deterministic. Could sort initial zero indegree and maintain sorted list using bisect? No imports? bisect is import; can implement with sorted list insert O(n^2), acceptable? Need robust. Could use list of available and each step take min by scanning, O(n^2), okay unless huge but no constraints. Or use heap? heapq import not allowed. So manual min is fine.
+
+Need not mutate inputs. Use copies. Need ignore duplicate edges: if same edge repeated, don't increment indegree multiple times. Need detect edges duplicate. But also multiple edges can affect indegree? ignore duplicates. Need validate endpoints present. Need avoid mutating nodes or edges. nodes list of unique strings but we should not rely? Unique strings but okay. If nodes contains non-string? Not specified. Could use in set? fine. If nodes unhashable? strings are hashable. Need ensure ValueError for missing endpoint. If edge malformed? not specified. Could unpack pairs. But maybe should not overcomplicate. Raise ValueError if endpoint not in nodes. If cycle, raise ValueError. Need lexicographically smallest. If nodes empty return [].
+
+Potential nuance: lex ordering with strings: use Python default ordering. Need include isolated nodes. Initial zero indegree includes isolated. Kahn with min available yields lexicographically smallest topological order for total order comparison? Yes: greedy picking smallest currently available at each position yields lexicographically smallest topological sort. Need maybe if nodes have ties? yes.
+
+Implementation details:
+
+def topological_order(nodes, edges):
+    # create node_set = set(nodes) maybe preserves no. Need no mutation. If nodes not list but iterable? Spec list. Could handle.
+    node_set = set(nodes)
+    adj =

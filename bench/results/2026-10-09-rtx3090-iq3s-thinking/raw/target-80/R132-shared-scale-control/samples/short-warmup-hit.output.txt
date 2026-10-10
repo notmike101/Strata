@@ -1,0 +1,15 @@
+We need answer to user: implement topological_order in Python, only complete function in code block, no imports. Need analyze requirements.
+
+Function topological_order(nodes, edges). nodes list unique strings; edges list of (before, after) pairs. Return lexicographically smallest topological ordering, include isolated nodes, ignore duplicate edges. Raise ValueError for edge endpoint absent from nodes or a cycle. Do not mutate either input. Use no imports. Return only complete function in Python code block.
+
+Need produce final code block only likely.
+
+Algorithm: Kahn's algorithm with sorted availability? Lexicographically smallest topological order: nodes are strings, lexicographic order. We can repeatedly pick smallest available node with indegree zero among not processed. Need handle duplicates in edges: ignore duplicate edges to avoid indegree overcount. Do not mutate inputs.
+
+Need no imports. Since nodes list, unique strings but maybe need validate endpoints. Could create node_set = set(nodes) (does not mutate). If duplicates? spec unique but ignore? If duplicates in nodes? Not necessary. If duplicate nodes could cause output duplicates? Maybe not.
+
+Edges list pairs; if not tuple? likely (before, after). Ignore duplicate edges. Need not mutate edges or nodes. Can create dict indegree = {n:0 for n in nodes}; adj = {n:set() for n in nodes}. To ignore duplicates: for before, after in edges: if before not in node_set or after not in node_set: raise ValueError. If before == after? This is self-loop; cycle. Could treat as duplicate? self-loop causes cycle. But if add edge from node to itself, indegree++ and cannot process. Cycle detection catches. But for lexicographically maybe raise ValueError. Need if duplicate self-loop ignored after first, still cycle. OK.
+
+Potential issue if nodes contains non-strings? Strings compare lexicographically. Use sorted. If nodes not comparable? assume strings. Need no imports.
+
+Kahn: available = sorted(n for n in nodes if indegree[n]==0). result = [] while available: n = available.pop(0)? That is O(n^2) but okay. But lexicographically smallest can be achieved by min-heap, but no imports so can implement min by sorted? To be efficient, use sorted list and pop index 0 maybe okay. But can implement custom min-heap without imports? Could use heapq? That's import no. Could use sorted list insert? Or just use heap

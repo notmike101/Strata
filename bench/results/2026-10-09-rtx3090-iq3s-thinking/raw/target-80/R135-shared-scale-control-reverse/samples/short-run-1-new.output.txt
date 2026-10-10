@@ -1,0 +1,16 @@
+We need answer user's request: Implement topological_order(nodes, edges) in Python. Need return only complete function in Python code block. Need ensure lexicographically smallest topological ordering, include isolated nodes, ignore duplicate edges. Raise ValueError for edge endpoint absent from nodes or cycle. Do not mutate either input. Use no imports. Need no identifier mention. Need likely pure Python.
+
+We need craft final code only in Python block. Need consider lexicographically smallest topological order. Nodes list of unique strings, but input could any order. Need not mutate inputs. Use no imports. Kahn algorithm with heap? No imports; can use list and min selection O(n^2) acceptable? Need lexicographically smallest: at each step choose smallest available node (indegree zero) among current. Could sort all nodes initially and maintain sorted structure? Without heapq. Use simple: create set of available nodes, each iteration pick min(available), remove it. For each neighbor decrement indegree and if zero add. Complexity O(n^2) if min each time but fine for likely. But could be optimized with sorted list? No imports. Simpler robust.
+
+Need ignore duplicate edges: ensure edges are counted once. We can maintain set of edge tuples seen while building adjacency and indegree. If duplicate, skip. Edge endpoint absent: for each edge check both endpoints in nodes_set. Should raise ValueError. Duplicate edges with absent endpoint? still raise. If nodes unique strings; could ignore duplicates in nodes? It's guaranteed unique. Need not mutate: iterate without modifying nodes list or edges list. Create node_set = set(nodes). Note if nodes includes non-strings? doesn't matter.
+
+Cycle detection: Kahn: if produced count != len(nodes) raise ValueError. Need consider self-loop? Edge endpoint same node, if (a,a) then indegree never zero? If self-loop, edge is valid if endpoint present; it creates cycle. Duplicate ignore: set includes (a,a); indegree++. If only node with self-loop, not produced, cycle raise. Good.
+
+Lexicographically smallest topological ordering among all valid topological orders. Kahn min available works for lexicographically smallest? Yes for DAG, greedy choose smallest zero indegree node at each position yields lexicographically smallest sequence. Need proof not needed.
+
+Potential nuance: lexicographically smallest with string comparison. Use min.
+
+Need no imports. Could implement:
+
+def topological_order(nodes, edges):
+    node_set = set(nodes)

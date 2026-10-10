@@ -1,0 +1,20 @@
+We need answer user wants implement topological_order in Python. Need produce final only complete function in Python code block. Need think carefully. Requirements:
+- Implement topological_order(nodes, edges)
+- nodes list unique strings; edges list of (before, after) pairs.
+- Return lexicographically smallest topological ordering.
+- include isolated nodes.
+- ignore duplicate edges.
+- Raise ValueError for edge endpoint absent from nodes or a cycle.
+- Do not mutate either input.
+- Use no imports.
+- Return only complete function in Python code block.
+
+Need ensure lexicographically smallest topological ordering. For unique string nodes, typical Kahn with min-heap. But no imports -> can't use heapq. Could implement manual min selection O(V^2) using list and min. Since nodes unique strings. Need not import. Could avoid mutating input: don't modify nodes or edges list. Need handle duplicate edges: ignore duplicate. Need detect absent endpoints before processing. Need detect cycle.
+
+Potential issue lexicographically smallest topological order: Kahn selecting smallest available node each step. This yields lexicographically smallest sequence among all topological orderings for total order strings? Yes if graph is DAG and we select minimal zero indegree. Need prove? Yes standard greedy. Need be careful duplicate edges: indegree count unique edges only. So need normalize edges to set? Could iterate edges and add to adjacency set/dict. Need not import. Since nodes unique strings but maybe nodes not sorted. We need output sorted lexicographically. Can sort nodes with sorted(nodes). sorted is builtin no imports. Need avoid mutating input; copying nodes fine.
+
+Data structures:
+- node_set = set(nodes)
+- validate each edge: if not (u in node_set and v in node_set): raise ValueError
+Maybe check edges elements length? Assume pairs. Could robustly unpack. If edge has non-pair, unpack raises? Maybe ValueError? Not required. Could catch? If edge not iterable or wrong length, unpack error maybe TypeError. But spec only endpoints absent or cycle. Could raise ValueError? To be safe: try: before, after = edge except Exception: raise ValueError("..."). But no hidden? OK.
+- duplicate edges ignored: adjacency = {node: []? Need unique edges. Use adjacency = {node: set() for node in nodes}. indegree = {node:0 for node in nodes}. For each unique edge: if v not in adjacency[u]: adjacency[u].

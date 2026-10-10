@@ -1,0 +1,14 @@
+We need answer user wants code only in Python code block. Need implement topological_order. Need think thoroughly. We need produce final only complete function code block, no imports.
+
+Requirements:
+- topological_order(nodes, edges)
+- nodes list unique strings; edges list of (before, after) pairs
+- return lexicographically smallest topological ordering, include isolated nodes, ignore duplicate edges.
+- raise ValueError for edge endpoint absent from nodes or cycle.
+- Do not mutate either input.
+- no imports.
+- Return only complete function in Python code block.
+
+Need decide algorithm. Lexicographically smallest topological order among strings. Use Kahn's algorithm selecting smallest available node. Need duplicate edges ignored. Need not mutate nodes or edges. Need validate edges endpoints before set. Since edges may be generator? Problem says list but could accept iterable. Do not mutate either input; iterating okay. Need duplicate edges. Could build set for edges to ignore duplicates. Need adjacency list and indegree counts unique edges. Need avoid mutating input list. Could create node_set = set(nodes); if duplicates? says unique but maybe if duplicates? It says nodes is list unique strings. Could not handle duplicates? If duplicate nodes, set loses; but probably fine. Need output ordering all nodes exactly once? If nodes duplicates? topological order nodes unique, but if duplicates, maybe ValueError? Not requested. Could include all? But unique guarantee.
+
+Potential issue lexicographically smallest among topological orderings with unique strings. Using min-heap if no imports. Need no imports; cannot use heapq. Could implement with sorted list or repeatedly min available. For correctness: use available list sorted and pop smallest. But after processing node, new available maybe inserted and need keep sorted; simple: initialize available = sorted(nodes with indegree 0), then each step pop(0), process adj, if indegree becomes 0 insert into available maintaining sorted order. Need efficient maybe not specified. Could use min(heap) each time? Without imports can do: available = set; choose min(available) each iteration. That's O(V^2 log? min O(V)). Fine. Simpler: ready = [n for n in nodes if indeg==0] and each iteration node = min(ready); remove; update; if zero append. But min scans ready. Need maintain ready unsorted with min. Need remove selected: can ready.remove(node) but duplicates? nodes unique; ready unique. But if node not in ready due

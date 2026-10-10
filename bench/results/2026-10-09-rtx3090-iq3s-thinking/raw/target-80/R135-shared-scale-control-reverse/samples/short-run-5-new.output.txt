@@ -1,0 +1,20 @@
+We need answer user wants code only in Python code block. Need implement topological_order. Need think thoroughly. We need produce final only complete function code block, no imports.
+
+Requirements:
+- topological_order(nodes, edges)
+- nodes list unique strings; edges list of (before, after) pairs
+- return lexicographically smallest topological ordering, include isolated nodes, ignore duplicate edges.
+- Raise ValueError for edge endpoint absent from nodes or cycle.
+- Do not mutate either input.
+- Use no imports.
+- Return only complete function in Python code block.
+
+Need ensure lexicographically smallest topological ordering. Standard Kahn with min selection: maintain indegree, adjacency unique. Need not mutate inputs: copy nodes? We can create set from nodes, dict adjacency sets, indegree. Duplicate edges: if edge duplicates ignore for indegree and adjacency. Could use sets for adjacency to ignore duplicate and avoid mutating inputs. Need raise ValueError if endpoint not in nodes. What about non-string? not specified; can assume strings but can use in set.
+
+Lexicographically smallest: At each step choose smallest label among currently zero indegree nodes. Since strings comparable. Use list as min-heap without imports? We can use sorted list with bisect? No imports; could implement heap manually? Simpler: maintain available list, at each iteration select min(available), remove. Complexity O(n^2) maybe acceptable? Could implement custom heap to be robust. No imports means no heapq. We can implement simple heap operations: push, heappop on list. Or use sorted available and pop first each time; O(n^2) fine for small but can do heap.
+
+Need no imports. Complete function. Need not mutate input: We do not modify nodes or edges lists. Creating new structures is fine. Need include isolated nodes: all nodes initial indegree zero and in heap.
+
+Potential tricky: edges list may contain duplicate pairs and same pair reversed causing cycle? Duplicate ignore. Self-loop? If edge (a,a) present: endpoint present, it creates indegree +1? Cycle. Need detect cycle. With adjacency sets: if a==b, indegree b increment if not duplicate. Kahn will have indegree>0, eventually no available? If other nodes maybe not include all -> cycle. ValueError.
+
+Need if cycle exists: if len(order) != len(nodes) raise ValueError. But if nodes contains duplicates? Input says unique. Could still handle? We can create node_set

@@ -1,0 +1,12 @@
+We need answer user's request: Implement topological_order(nodes, edges) in Python. Need return only complete function in Python code block. Done. Need think through requirements carefully.
+
+User: "Request identifier df854ac4f4a9734da713560d. Ignore this identifier.
+Read this review archive before the final task:
+...
+Implement topological_order(nodes, edges) in Python. nodes is a list of unique strings; edges is a list of (before, after) pairs. Return the lexicographically smallest topological ordering, include isolated nodes, and ignore duplicate edges. Raise ValueError for an edge endpoint absent from nodes or a cycle. Do not mutate either input. Use no imports. Return only the complete function in a Python code block."
+
+Need output only code block. Need ensure no imports. Need lexicographically smallest topological ordering for given DAG. Use Kahn with min-heap? But no imports, so can sort each time or implement heap manually? No imports, can use list.sort and pop(0) perhaps okay. Need lexicographically smallest topological order overall: standard Kahn: always pick smallest available node (lexicographically) among zero in-degree nodes. Need include isolated nodes initially zero indegree. Ignore duplicate edges: if duplicate edge, indegree should count once, and adjacency set/dict with unique destinations.
+
+Need not mutate inputs. We can build local copies. nodes unique strings; but we don't rely maybe. edges list of pairs. If endpoint absent from nodes raise ValueError. Need handle invalid pair length? Could validate len ==2 maybe. If edge not iterable? Maybe not necessary but robust. Since no imports. Need use sets. Input nodes list; create set nodes. Validate endpoints. If edge endpoints in nodes. Duplicate edges ignored. Use adjacency dict: for n in nodes: adj[n]=set(); indegree dict n:0. For each edge in edges: before, after = pair? If invalid raise ValueError? Could let unpack raise, but ValueError perhaps? Requirements only endpoint absent or cycle. We can do try except? Might mutate? no.
+
+Cycle detection: After processing all nodes, if length result != len(nodes), raise ValueError. Since nodes unique? If duplicates? They say unique strings. If not, len(nodes) might count duplicates. But topological order should maybe unique nodes? We'll assume unique. If duplicate nodes in input? not required. But if nodes not unique, set length

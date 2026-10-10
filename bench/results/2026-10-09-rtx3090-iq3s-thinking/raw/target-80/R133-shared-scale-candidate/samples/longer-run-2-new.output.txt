@@ -1,0 +1,14 @@
+We need answer user wants implement topological_order in Python. Need produce final only complete function in Python code block. Need think carefully. Requirements:
+- Implement topological_order(nodes, edges)
+- nodes list unique strings; edges list of (before, after) pairs.
+- Return lexicographically smallest topological ordering.
+- include isolated nodes.
+- ignore duplicate edges.
+- Raise ValueError for edge endpoint absent from nodes or a cycle.
+- Do not mutate either input.
+- Use no imports.
+- Return only complete function in Python code block.
+
+Need ensure lexicographically smallest topological ordering. For unique strings. Need no imports. Need avoid hidden state, deterministic, don't mutate input. Need handle duplicate edges. Need cycle detection. Endpoint absent ValueError. Cycle ValueError. Could use Kahn's algorithm with min selection. But lexicographically smallest topological order for general DAG? Is greedily selecting smallest available node yields lexicographically smallest sequence? For topological order under partial order, yes selecting minimal available smallest at each step yields lexicographically smallest sequence (assuming total order comparison on sequence). Need verify. Lexicographically smallest means compare first element: choose smallest node that can appear first in some topo order. Nodes with indegree zero can be first; smallest among them is candidate. If choose it, does any valid order exist after? Yes any indegree-zero node can be placed first in some topological sort of DAG. Then recursively. So min-heap/heapq needed but no imports. We can implement manual min selection with sorted? Since no imports, can sort available list each time. Complexity O(V^2 log V) maybe okay. Or implement heap manually. Need robust. Since only function, no imports. Can use built-in sorted. Need ensure don't mutate input. Need ignore duplicate edges: use set of edge pairs maybe set of strings? If nodes strings, can set((u,v)). If edges contains unhashable? endpoints are strings? Could be tuple? Requirement pairs. We can assume hashable strings. Need validate edges endpoints exist. Need if edge endpoints absent before building adjacency? Do loop over edges. But if edges is generator? It says list; still can iterate once. We don't want mutate. Could copy nodes? Since unique, can create node_set = set(nodes). Do not mutate. Need maybe nodes can be empty: return [] unless invalid edges. If edge has endpoint absent from nodes and nodes empty raise ValueError.
+
+Need duplicate edges

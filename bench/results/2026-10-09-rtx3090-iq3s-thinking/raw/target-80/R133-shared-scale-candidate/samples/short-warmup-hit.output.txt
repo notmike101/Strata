@@ -1,0 +1,17 @@
+We need answer user: "Implement topological_order(nodes, edges) in Python. nodes is a list of unique strings; edges is a list of (before, after) pairs. Return the lexicographically smallest topological ordering, include isolated nodes, and ignore duplicate edges. Raise ValueError for an edge endpoint absent from nodes or a cycle. Do not mutate either input. Use no imports. Return only the complete function in a Python code block."
+
+Need produce final only code block with function. Need ensure no imports. Need think carefully. Requirements:
+- nodes list unique strings. edges list of pairs.
+- Return lexicographically smallest topological ordering. Include isolated nodes. Ignore duplicate edges. Raise ValueError for edge endpoint absent from nodes or cycle.
+- Do not mutate either input.
+- No imports.
+
+Algorithm: Kahn's algorithm using min-heap? But no imports. Could use list and min selection each iteration O(n^2) fine. Need duplicate edges ignored to prevent indegree overcount. Need do not mutate inputs: copy nodes? Since nodes list unique but maybe order not sorted. Need use set for membership. edges can be iterated; don't mutate. Need handle duplicate edges: can use set of tuples. But if edges contains non-hashable? pairs presumably tuples. Could use set. If duplicate edge appears, indegree only once.
+
+Lexicographically smallest topological ordering among nodes: strings, lexicographic by Python string comparison. Kahn: maintain available nodes indegree 0. Repeatedly select smallest lexicographically among available, append, decrement neighbors. Include isolated nodes (no edges) initially indegree 0.
+
+Cycle detection: if processed length < len(nodes): ValueError. Need edge endpoint absent: for each (u,v) check if u not in node_set or v not in node_set raise ValueError. Should we validate edges are pairs length 2? Not required; but maybe safe? If not pair, unpacking raises TypeError; acceptable? They asked endpoint absent -> ValueError. Could explicitly if len(edge)!=2? But not required.
+
+Potential issue: duplicate self-loop? Edge (a,a). Should raise cycle? Since self-loop creates cycle. Our indegree will be indegree a +=1, neighbors a includes a; not zero; no process -> processed len < len -> ValueError. Good.
+
+Need ensure ignore duplicate edges but not mutate input. Use seen_edges=set(); adjacency = {node: []}. Since need sorted? We'll select min from

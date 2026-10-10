@@ -1,0 +1,17 @@
+We need answer to user: implement topological_order in Python, only complete function in code block, no imports. Need analyze requirements.
+
+Function topological_order(nodes, edges). nodes list unique strings; edges list of (before, after) pairs. Return lexicographically smallest topological ordering, include isolated nodes, ignore duplicate edges. Raise ValueError for edge endpoint absent from nodes or a cycle. Do not mutate either input. Use no imports. Return only complete function in Python code block.
+
+Need produce final code block only likely.
+
+Algorithm: need lexicographically smallest topological order. Use Kahn's algorithm with min-heap, but no imports. Need implement heap ourselves? Could sort each time? Need O((n+m) log n?) Without imports. Could use heapq? No imports. Need use no imports. Can implement manual heap or simply maintain sorted list by min() selection. Since no constraint on efficiency? Could be acceptable but better implement heap functions.
+
+Input validation: endpoints absent raise ValueError. Duplicate edges ignore. Do not mutate either input: nodes is list unique strings. Edges may be list of tuples. Need not mutate edges. But we need process edges: can collect set of pairs. If edge is tuple/list? Use before, after = edge maybe tuple unpack. Validate both in nodes. Since nodes unique, build set. Then adjacency set and indegree dict. Duplicate edges: set of edges avoids duplicates. We should not mutate edges list or nodes. Creating new containers okay. If nodes list has duplicates? Problem says unique, but we can robustly not care. Use set(nodes). If edges contain duplicate, adding to set. But if edge endpoints same self-loop: cycle -> ValueError.
+
+Lexicographically smallest topological order: at each step select smallest string among zero indegree nodes. Need compare strings lexicographically by default. Need isolated nodes: include in indegree zero.
+
+Implement min-heap: functions _heappush, _heappop maybe nested. Since no imports. But code in function. Or simpler: maintain list zero_nodes sorted? Could sort zero_nodes initially and use heapq implemented? Need no imports. Could manually pop min via min? For correctness simple, but performance maybe less. Problem unspecified; likely prefer robust with manual heap. Could implement using Python lists.
+
+Potential issue: lexicographically smallest among strings: if strings can be case-sensitive default. Fine.
+
+Need ensure if edge endpoints missing raise ValueError. Should we validate all endpoints first? If a cycle

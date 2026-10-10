@@ -4620,3 +4620,145 @@ Applicability audit: existing LFUSE requires ar_on(), meaning all experts reside
 Next controlled design: test a standalone corrected fused VECTOR combine against the actual staged native_moe_combine_multi reference. Preserve K10 first rounded product, ordered FMA accumulation, separately rounded shared multiplication and final addition, including signed-zero/subnormal and cancellation cases. Gate it before integration using the same all-cell screen. If it passes, introduce a default-off scale-only path for the current staged verifier that keeps the existing shared gate GEMV and skips only the sigmoid-scale launch. It must not depend on all-resident mode or import the untested router-aux/pair fusions. Prove activation, same-day served A/B and exact quality before any promotion. C061 by itself does not authorize a launcher change.
 
 Lowest sampled headroom in C060: physical112.619GiB, commit116.853GiB. C061: physical112.528GiB, commit116.548GiB. Both above16GiB, exact fixture children exited; no model loaded. Post-screenGPU457MiB/0percent. Production configuration hash remains3457fdfe7d69fbf6651e2031320cdebf88a9d8d269ebbe459db7fdd885e8c9f0. The branch contains only the C059 state-policy correctness change plus tests/report; C061 candidate stays a published reproducible diagnostic. Goal active, no benchmark resident.
+
+
+## E246 / C062 staged vector-combine screen
+
+Previous goal turn was progress: C059 state fix and C060/C061 evidence were published atcd872326 on the existing branch. Entry revalidated that exact HEAD, clean tracked state and no CodeGraph index. Goal remains active; no new upstream release has been asserted.
+
+C062 tests the actual staged baseline native_moe_combine_multi K10 vector path plus the verbatim precise sigmoid-scale kernel. Candidate copies that vector reduction and folds shared scaling into its epilogue. First build the unrounded product as a negative control; retain its complete failed corpus. Then replace only the four products with explicit rounded multiplies. This is a new staged-path applicability check, not a rerun seeking favorable C061 timing.
+
+Parity matrix: T1..8, five deterministic seeds, eight distributions =320 full-output cases. Ordinary, small, large, saturated-gate, subnormal, exact cancellation, signed-zero/edge and first-normal/saturation cases; graph replay twice, all active bytes equal, finite, inactive canaries unchanged. Only if every case passes, time all eight token widths with one excluded warmup, seven paired alternating measured rounds and200 repetitions/graph; equal input-restoration copies included in both. Predeclared gate: at least5percent geometric duration reduction, no slower median cell. This is not a TPS or end-to-end claim.
+
+If the gate passes, integrate a CUDA-only, default-off scale-only path using the unchanged shared gate GEMV, explicit raw-gate output and new vector combine. Keep existing LFUSE and QFUSE disabled; staged/CPU/PCIe expert contributions remain combined in the original order. T1 may be benchmarked here but integration must verify the single-token caller before enabling it. No model loaded for this screen;16GiB physical/commit guard and exact cleanup. Full contract and C056 failed cache screen unchanged.
+
+
+## E247 / C062 integration verified; fixed served ABBA screen declared
+
+C062 unrounded vector epilogue failed180/320 cases. The explicit-rounded version passed320/320 and all eight timing cells, geometric duration ratio0.756797820 (24.3202percent lower duration). Raw seven-round medians and every row are retained. The integration negative control then failed all eight actual shared_expert_multi pipeline cases because bit4 had no scale-deferral implementation. After implementing it, those8/8 pipeline cases and320/320 epilogue cases pass. All seven selected CUDA test targets passed. These fixtures use synthetic Q8_0 projection weights for dataflow, not a substitute for the production model's quantized-layer quality gate.
+
+The new STRATA_SHARED_SCALE_FUSE option is default-off and CUDA-only. It applies only to staged, nonbatch verifier windows T2..8, K10 aligned rows, native BF16 gate, no remote helper and LFUSEoff. The existing gate GEMV computes its raw logit; bit4 defers only the sigmoid-scale step into a new vector combine with explicit rounded products. CPU/PCIe expert rows, reduction FMA order, gate calculation, quantizers and sampler are retained. T1 keeps its old production path. The previous ungated kernels remain untouched. HIP/SYCL not built or qualified; no upstream review requested.
+
+Fresh executable strata-cuda133-shared-scale.exe SHA256 8b33c464e9ef9fd033bef4b4232fb1c9cd74955d56f79b7f17155a8eef745283. C059 correctness fix is common to both arms; QFUSE remains off. The served screen uses this SAME executable for both, exact C056 prefix-preserve stack with only STRATA_SHARED_SCALE_FUSE0/1 changing. This isolates the new mechanism; C056's earlier regression against its older control is NOT erased and must still be resolved before promotion.
+
+Declared sequence: R132 control short-first, R133 candidate short-first, R134 candidate longer-first, R135 control longer-first. Four fresh processes; each runs one warmup new/repeat pair and five measured new/repeat pairs per prompt length. Total96 requests,80 measured,16 warmups;10 values per config/cell. Frozen random coding prompt, roughly3K padded variant, byte-identical repeat payloads, seeds101..105,512 generated tokens, stream mode, one concurrent request,262144context,IQ3_S,INT8KV,CPUvision unchanged. Thinking sampler1/.95/20/min-p0/presence0/repetition1, MTP4/.70,PCIe.20 unchanged. Client samePC via LAN IP, not remote-network latency.
+
+Retain server decode, fresh prompt rate/count, TTFT, E2E, stream-total, total latency, accepted/drafted tokens, memory and all failures separately. Pool ordinary all-run medians. Require90short/85long server decode in each process and pooled; no pooled prompt/decode/client-rate regression or latency increase versus same-day control. New/hit cache identity and512length must pass. No rerun-until-favorable. Warmup first-request rows remain separately recorded, not cold qualification. If the mechanism fails, do not run expensive completed-answer/full real-use qualification or change launchers.
+
+The supervisor additionally rejects a candidate arm without the actual graph-capture marker after all requests.16GiB physical/commit floor every second; audit observer excludes process-memory polling; exact child cleanup and production config restoration per arm. This is a revised code stack, permitting a new declared cache comparison; prior C056 failures remain published.
+
+
+## E248 / R132-shared-scale-control complete
+
+longer/stream/hit: all decode values[95.7, 92.6, 91.6, 88.6, 95.0], ordinary median92.6; prompt80.0; client E2E91.391274; TTFT{'median': 0.09374839998781681, 'min': 0.08908569999039173, 'max': 0.10322610003640875}; stream-total{'median': 91.41239633224912, 'min': 87.30432151605302, 'max': 94.25369811398076}. Fresh/cached counts[(5, 3133), (5, 3129), (5, 3130), (5, 3130), (5, 3129)].
+
+longer/stream/new: all decode values[86.3, 83.2, 89.4, 87.0, 84.8], ordinary median86.3; prompt511.7; client E2E42.442641; TTFT{'median': 6.164093200000934, 'min': 6.144902399973944, 'max': 6.17177570000058}; stream-total{'median': 42.44606315735847, 'min': 41.62583385105012, 'max': 43.208561803603814}. Fresh/cached counts[(3138, 0), (3134, 0), (3135, 0), (3135, 0), (3134, 0)].
+
+short/stream/hit: all decode values[95.6, 92.3, 91.3, 92.2, 91.5], ordinary median92.2; prompt75.2; client E2E91.016307; TTFT{'median': 0.09535330004291609, 'min': 0.08814059995347634, 'max': 0.10575950000202283}; stream-total{'median': 91.04273880440304, 'min': 90.12773053357694, 'max': 94.30875056635611}. Fresh/cached counts[(5, 162), (5, 161), (5, 160), (5, 160), (5, 163)].
+
+short/stream/new: all decode values[93.4, 95.8, 93.1, 92.7, 91.3], ordinary median93.1; prompt219.8; client E2E81.618186; TTFT{'median': 0.7895479000289924, 'min': 0.7604166999808513, 'max': 0.8088100999593735}; stream-total{'median': 81.6299329309036, 'min': 80.297750331554, 'max': 84.12621192727603}. Fresh/cached counts[(167, 0), (166, 0), (165, 0), (165, 0), (168, 0)].
+
+All24 requests retained,20 measured and4 warmups. Cache/512length gate=True. Same declared binary/config/fixture and fixed sampler verified. Actual capture marker=False, matching requested flag. Minimum memory bytes{'physical_available': 61996453888, 'commit_available': 40722354176}, both16GiB floors pass. Exact cleanup and production config restoration verified. Capped responses do not replace completed-answer quality. No individual-arm promotion or full-goal claim; complete the declared ABBA sequence and assess all pooled medians.
+
+
+## E249 / R133-shared-scale-candidate complete
+
+longer/stream/hit: all decode values[87.0, 93.1, 92.8, 91.8, 93.6], ordinary median92.8; prompt79.4; client E2E91.592352; TTFT{'median': 0.0908081000088714, 'min': 0.08062059996882454, 'max': 0.10366080002859235}; stream-total{'median': 91.60776111720418, 'min': 85.89943782988189, 'max': 92.53451921706406}. Fresh/cached counts[(5, 3133), (5, 3129), (5, 3130), (5, 3130), (5, 3129)].
+
+longer/stream/new: all decode values[91.3, 91.1, 89.1, 87.1, 89.2], ordinary median89.2; prompt512.1; client E2E43.158533; TTFT{'median': 6.154739299963694, 'min': 6.145434399950318, 'max': 6.16396249999525}; stream-total{'median': 43.16216071832178, 'min': 42.60105004435083, 'max': 43.607468732980564}. Fresh/cached counts[(3138, 0), (3134, 0), (3135, 0), (3135, 0), (3134, 0)].
+
+short/stream/hit: all decode values[95.0, 90.9, 93.7, 90.6, 91.5], ordinary median91.5; prompt75.6; client E2E90.228298; TTFT{'median': 0.09652870002901182, 'min': 0.08606719999806955, 'max': 0.09999509999761358}; stream-total{'median': 90.24224844207052, 'min': 89.4681063413091, 'max': 93.61333960861782}. Fresh/cached counts[(5, 162), (5, 161), (5, 160), (5, 160), (5, 163)].
+
+short/stream/new: all decode values[89.4, 95.5, 91.5, 92.8, 93.7], ordinary median92.8; prompt220.4; client E2E81.390318; TTFT{'median': 0.7932480999734253, 'min': 0.7775324000394903, 'max': 0.8199117999756709}; stream-total{'median': 81.4072800174215, 'min': 78.46714674086283, 'max': 83.47927668582784}. Fresh/cached counts[(167, 0), (166, 0), (165, 0), (165, 0), (168, 0)].
+
+All24 requests retained,20 measured and4 warmups. Cache/512length gate=True. Same declared binary/config/fixture and fixed sampler verified. Actual capture marker=True, matching requested flag. Minimum memory bytes{'physical_available': 62313799680, 'commit_available': 41567936512}, both16GiB floors pass. Exact cleanup and production config restoration verified. Capped responses do not replace completed-answer quality. No individual-arm promotion or full-goal claim; complete the declared ABBA sequence and assess all pooled medians.
+
+
+## E250 / R134-shared-scale-candidate-reverse complete
+
+longer/stream/hit: all decode values[91.0, 92.6, 93.4, 93.0, 94.3], ordinary median93.0; prompt80.9; client E2E91.792802; TTFT{'median': 0.08861710003111511, 'min': 0.0846707999589853, 'max': 0.1103747000452131}; stream-total{'median': 91.81350940369488, 'min': 89.82244348412436, 'max': 93.07992735195567}. Fresh/cached counts[(5, 3133), (5, 3129), (5, 3130), (5, 3130), (5, 3129)].
+
+longer/stream/new: all decode values[87.2, 90.0, 91.8, 89.0, 84.3], ordinary median89.0; prompt512.1; client E2E43.096056; TTFT{'median': 6.149319600022864, 'min': 6.1413821000023745, 'max': 6.160717100021429}; stream-total{'median': 43.09936743515024, 'min': 41.977270111738164, 'max': 43.73840334328392}. Fresh/cached counts[(3138, 0), (3134, 0), (3135, 0), (3135, 0), (3134, 0)].
+
+short/stream/hit: all decode values[92.3, 89.3, 89.5, 93.7, 94.2], ordinary median92.3; prompt76.2; client E2E90.881360; TTFT{'median': 0.10447750001912937, 'min': 0.09154210000997409, 'max': 0.10841200000140816}; stream-total{'median': 90.89633443478094, 'min': 87.97017481245726, 'max': 92.70802159003948}. Fresh/cached counts[(5, 162), (5, 161), (5, 160), (5, 160), (5, 163)].
+
+short/stream/new: all decode values[90.9, 92.8, 93.7, 92.8, 89.0], ordinary median92.8; prompt219.1; client E2E81.335979; TTFT{'median': 0.7932608000119217, 'min': 0.7633134999778122, 'max': 0.8002321000094526}; stream-total{'median': 81.35428572682106, 'min': 78.52603322854583, 'max': 82.193272245763}. Fresh/cached counts[(167, 0), (166, 0), (165, 0), (165, 0), (168, 0)].
+
+All24 requests retained,20 measured and4 warmups. Cache/512length gate=True. Same declared binary/config/fixture and fixed sampler verified. Actual capture marker=True, matching requested flag. Minimum memory bytes{'physical_available': 62219571200, 'commit_available': 41536692224}, both16GiB floors pass. Exact cleanup and production config restoration verified. Capped responses do not replace completed-answer quality. No individual-arm promotion or full-goal claim; complete the declared ABBA sequence and assess all pooled medians.
+
+
+## E251 / R135-shared-scale-control-reverse complete
+
+longer/stream/hit: all decode values[87.9, 92.3, 94.3, 93.2, 91.2], ordinary median92.3; prompt81.8; client E2E91.153527; TTFT{'median': 0.08859559998381883, 'min': 0.08429679996334016, 'max': 0.10483470000326633}; stream-total{'median': 91.18198115851952, 'min': 86.80822975215526, 'max': 93.1418187157869}. Fresh/cached counts[(5, 3133), (5, 3129), (5, 3130), (5, 3130), (5, 3129)].
+
+longer/stream/new: all decode values[88.0, 87.9, 86.1, 84.3, 87.3], ordinary median87.3; prompt513.0; client E2E42.712700; TTFT{'median': 6.149677400011569, 'min': 6.132807999965735, 'max': 6.154652700002771}; stream-total{'median': 42.71607171916864, 'min': 42.017035675859006, 'max': 42.837461410167094}. Fresh/cached counts[(3138, 0), (3134, 0), (3135, 0), (3135, 0), (3134, 0)].
+
+short/stream/hit: all decode values[94.6, 94.3, 92.2, 91.4, 92.8], ordinary median92.8; prompt79.6; client E2E91.313279; TTFT{'median': 0.0926640999969095, 'min': 0.08253979997243732, 'max': 0.10760799999115989}; stream-total{'median': 91.32843632178447, 'min': 90.09463984408663, 'max': 93.35815444600337}. Fresh/cached counts[(5, 162), (5, 161), (5, 160), (5, 160), (5, 163)].
+
+short/stream/new: all decode values[89.6, 93.7, 91.7, 95.7, 90.0], ordinary median91.7; prompt216.2; client E2E80.578907; TTFT{'median': 0.7873965000035241, 'min': 0.7450970999780111, 'max': 0.8193122000084259}; stream-total{'median': 80.59567507898107, 'min': 78.58237156068977, 'max': 83.50992747106262}. Fresh/cached counts[(167, 0), (166, 0), (165, 0), (165, 0), (168, 0)].
+
+All24 requests retained,20 measured and4 warmups. Cache/512length gate=True. Same declared binary/config/fixture and fixed sampler verified. Actual capture marker=False, matching requested flag. Minimum memory bytes{'physical_available': 62326411264, 'commit_available': 41632452608}, both16GiB floors pass. Exact cleanup and production config restoration verified. Capped responses do not replace completed-answer quality. No individual-arm promotion or full-goal claim; complete the declared ABBA sequence and assess all pooled medians.
+
+
+## E252 / C062 complete served cache screen
+
+R132 control and R133 candidate ran short-first; R134 candidate and R135 control ran longer-first. Same executable and exact C056 stack, only STRATA_SHARED_SCALE_FUSE0/1 differs. All96 requests retained:80 measured,16 warmups,10 measured values per config/cell. Each new/hit request pair is byte-identical. All new prompts have zero reuse, repeats have positive reuse, and every response produced512completion tokens. Capture markers prove the candidate branch was captured; controls have none. Each arm passed the16GiB physical/commit guard and exact cleanup, with production config restored. Fixed sampling,262144context,IQ3_S,vision,MTP4/.70,PCIe.20 unchanged.
+
+These interleaved new/hit results remain separate from the earlier pure-miss matrix. Hit prompt speed concerns only five fresh tokens, not the entire cached prefix. Loading and identity checks precede request timing. Client runs on thisPC through itsLAN address, not a remote client. Ordinary medians use every measured value; no selection or repeat-until-favorable. First requests are separately retained as warmups, not cold qualification.
+
+| Cell | Metric | Control | Candidate | Change |
+|---|---|---:|---:|---:|
+| longer/stream/hit | server_decode_tps | 92.450000 | 92.900000 | +0.487% |
+| longer/stream/hit | prompt_tps | 80.450000 | 80.500000 | +0.062% |
+| longer/stream/hit | request_e2e_tps | 91.272401 | 91.636226 | +0.399% |
+| longer/stream/hit | stream_total_tps | 91.297189 | 91.653863 | +0.391% |
+| longer/stream/hit | ttft_seconds | 0.092212 | 0.089713 | -2.711% |
+| longer/stream/hit | request_seconds | 5.609591 | 5.587311 | -0.397% |
+| longer/stream/new | server_decode_tps | 86.650000 | 89.150000 | +2.885% |
+| longer/stream/new | prompt_tps | 512.500000 | 512.100000 | -0.078% |
+| longer/stream/new | request_e2e_tps | 42.499906 | 43.141394 | +1.509% |
+| longer/stream/new | stream_total_tps | 42.504203 | 43.144849 | +1.507% |
+| longer/stream/new | ttft_seconds | 6.153060 | 6.150697 | -0.038% |
+| longer/stream/new | request_seconds | 12.047107 | 11.867954 | -1.487% |
+| short/stream/hit | server_decode_tps | 92.250000 | 91.900000 | -0.379% |
+| short/stream/hit | prompt_tps | 78.650000 | 75.750000 | -3.687% |
+| short/stream/hit | request_e2e_tps | 91.114499 | 90.554829 | -0.614% |
+| short/stream/hit | stream_total_tps | 91.146602 | 90.569291 | -0.633% |
+| short/stream/hit | ttft_seconds | 0.094009 | 0.099586 | +5.933% |
+| short/stream/hit | request_seconds | 5.619304 | 5.654107 | +0.619% |
+| short/stream/new | server_decode_tps | 92.900000 | 92.800000 | -0.108% |
+| short/stream/new | prompt_tps | 218.000000 | 219.750000 | +0.803% |
+| short/stream/new | request_e2e_tps | 81.586202 | 81.363149 | -0.273% |
+| short/stream/new | stream_total_tps | 81.600556 | 81.380783 | -0.269% |
+| short/stream/new | ttft_seconds | 0.788472 | 0.793254 | +0.607% |
+| short/stream/new | request_seconds | 6.275572 | 6.292776 | +0.274% |
+
+Failed declared gates: longer/stream/new: prompt_no_degradation; short/stream/hit: stream_no_degradation; short/stream/hit: decode_no_degradation; short/stream/hit: prompt_no_degradation; short/stream/hit: e2e_no_degradation; short/stream/hit: latency_no_degradation; short/stream/hit: ttft_no_degradation; short/stream/new: stream_no_degradation; short/stream/new: decode_no_degradation; short/stream/new: e2e_no_degradation; short/stream/new: latency_no_degradation; short/stream/new: ttft_no_degradation.
+
+The mechanism fails the declared all-cell non-degradation/target screen. Do not promote or run expanded quality as if it were a winner. Preserve the evidence and assess whether a distinct, profiler-supported correction exists; do not rerun the unchanged arm hoping for favorable medians. The standalone24.32percent operation-duration gain does not establish a served improvement.
+
+Raw per-run values/ranges, MTP accepted/offered tokens, client times and prompt counts remain attached. These observed medians are not a statistical certainty claim. Goal remains active, launcher unchanged and no benchmark model resident.
+
+
+## E253 / C062 failed served screen; main-stream cost diagnosis
+
+The full R132-R135 comparison fails12 declared gates. The small short decode differences(-0.108percent new,-0.379percent hit) and other client/prompt regressions remain failures under the fixed contract, not statistical proof of a universal slowdown. Fresh~3K decode rises2.885percent but prompt throughput regresses. No promotion, no expanded-quality campaign and no unchanged served rerun.
+
+One structural hypothesis explains why summing serial kernel durations was insufficient: the original sigmoid-scale executes on the forked shared stream, where expert work may hide it, while the fused combine executes on the main stream after joining. Fusion removes an auxiliary launch but adds arithmetic on the main stream. C062-combine-only times the two actual library combine entry points with equivalent pre-scaled/raw shared inputs; reference scaling is prepared outside timing. Keep all eight widths, one warmup and seven alternating rounds of200 graph calls. No model,16GiB memory guards and exact cleanup. This can identify added combine cost, but cannot establish how much scaling overlapped in the served runs; a timeline would be needed for that claim.
+
+After recording this diagnostic, remove the unqualified C062 engine integration from the working source. Preserve its exact patch, regression source, executable hash, configs and all evidence for reproduction. C059 remains committed. A T1 extension is not automatically justified by a serial microbenchmark; require a critical-path theory before another served trial.
+
+
+## E254 / C062 closed and integration removed; architecture reassessment
+
+Final ordinary server-decode medians over10 measured values per configuration/cell: fresh short92.90control versus92.80candidate; short repeat92.25versus91.90; fresh~3K86.65versus89.15;~3Krepeat92.45versus92.90. Candidate process medians all meet90short/85long, but12 fixed non-degradation gates fail. Fresh~3K prompt512.50versus512.10tok/s (-0.078percent), short-hit prompt78.65versus75.75 (-3.687percent); short-hit E2E91.114499versus90.554829 (-0.614percent). Keep these metrics separate; decode is not end-to-end speed. No full-quality or promotion claim.
+
+The subsequent actual-library combine-only diagnostic finds geometric candidate/control duration ratio1.051749824, or5.1750percent MORE time, with every T1..8 cell slower. ExampleT2 1.807040 versus1.913600microseconds. It excludes the original scale operation from timing because that operation can run on the shared branch. This does not invalidate the earlier serial combined-operation24.32percent reduction; it explains why that microbenchmark was insufficient to predict the server critical path. Minimum physical112.605GiB and commit116.875GiB; child exited with no model loaded.
+
+Offline P025 timeline audit retains the original database SHA and event-completeness limitations. In668 graph-launch groups with exactly48 scales and48 combines, ordinal pairing under the serial48-layer structure yields32,064 pairs, none with the scale finishing after its paired combine begins. End-of-scale to start-of-combine lead: minimum3.424microseconds, median17.952microseconds; maximum15,547.2microseconds includes intervening waits/work. Nsight labels these nodes with one graph execution streamID; it does not recover capture-stream dependency edges. These lead times are NOT proof all scaling was overlapped, removable time, or a causal explanation of each served rate difference. Source dataflow and the more expensive main-stream combine support rejecting a T1 extension based solely on serial microbenchmarks.
+
+C062 integration has been removed from the working tree: six tracked source/build/header files restored exactly tocd872326, and only the newly created shared_scale_fusion test source removed after archiving it. C059 state fix remains committed. Full C062 patch, test source, generation/build helpers, executable hash, raw328case proof,96served requests,80 measured rows and diagnostic timing are preserved. Named C062 executable remains a reproduction artifact, not production. The build-cuda86-main directory still contains the C062 build and is STALE relative to restored source: rebuild before using it for any new source claim. Do not accidentally benchmark its strata.exe as restored-source code. Production config3457fdfe and launcher remain unchanged; GPU457MiB/0percent and exact model cleanup verified.
+
+Next architectural hypothesis, NOT an implemented or approved winner: replace synchronous host checkpoint save/restore transfers with a bounded GPU-resident running-state checkpoint tier while retaining existing turn-boundary semantics and host fallback. E239 rejected ADDING a synchronous full-prompt host checkpoint because it adds~18ms transfer work and has tail-eviction risk. A GPU tier is different: it could replace that existing transfer with a device copy, then retain a full-prompt state without removing the current turn checkpoint. First inspect checkpoint ownership/lifetime, CUDA copy ordering and graph pointer assumptions; calculate the exact extra VRAM without reducing expert residency, context, KV precision or the safety reserve. If no safe capacity exists or kernel state cannot be retained exactly, reject before model runs. Keep all earlier prefix/cache failures recorded. This targets prompt/TTFT costs and does not itself promise a decode gain; the final stack must still prove every90/85 decoding and quality condition.
+
+No C063 prototype or experiment exists yet. This turn made progress by testing a complete new source path, discovering its served limitations, removing it, and preserving a falsifiable next architecture. Goal stays active, no benchmark model resident, same working branch.

@@ -1,0 +1,24 @@
+We need answer user's request. Need implement topological_order in Python. Need return only complete function in Python code block. Need satisfy constraints: no imports, no mutate input, lexicographically smallest topological ordering include isolated nodes, ignore duplicate edges, raise ValueError for edge endpoint absent from nodes or cycle. Need likely Kahn with min-heap? Can't import heapq. Can implement by selecting min among available manually. Need ensure lexicographically smallest: at each step pick smallest node among nodes with in-degree zero. Need not mutate inputs: copy nodes list, build counts etc. Need ignore duplicate edges: use set of edge pairs. But edges list of tuples maybe could include duplicate; set okay. Edge endpoints absent: raise ValueError. Also cycle after processing all edges? If len(result)<len(nodes) raise ValueError. Need consider nodes unique strings but should maybe validate? Not required but can assume. Edges list pairs maybe not tuple length? Could robustly validate len(edge)==2? If edge endpoint absent. Need lexicographically smallest with Python string comparison. Need no imports. Code only function in code block.
+
+Potential implementation:
+
+def topological_order(nodes, edges):
+    node_set = set(nodes)
+    # maybe check for non-string? not necessary.
+    indegree = {node: 0 for node in nodes}
+    adjacency = {node: [] for node in nodes}
+    seen_edges = set()
+    for edge in edges:
+        if not isinstance(edge, tuple)? But edges list of pairs. Could be list too. Use try: before, after = edge except TypeError: raise ValueError(...). But if edge is string length 2? Could unpack string weird. Maybe robust: if isinstance(edge, str) or len(edge)!=2: raise ValueError.
+        if before not in node_set or after not in node_set: raise ValueError
+        if (before, after) in seen_edges: continue
+        seen_edges.add((before, after))
+        adjacency[before].append(after)
+        indegree[after] += 1
+    available = [node for node in nodes if indegree[node]==0]
+    result=[]
+    while available:
+        # find min by min(available) O(n^2) but fine no imports.
+        # But if we use available.sort() initially and each iteration pop(0)? Need maintain sorted. Simpler: min then remove.
+        best = min(available)
+        available

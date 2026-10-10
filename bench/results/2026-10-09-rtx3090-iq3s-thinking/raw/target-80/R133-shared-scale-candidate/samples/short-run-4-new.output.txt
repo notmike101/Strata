@@ -1,0 +1,11 @@
+We need answer user's request: "Implement topological_order(nodes, edges) in Python. nodes is a list of unique strings; edges is a list of (before, after) pairs. Return the lexicographically smallest topological ordering, include isolated nodes, and ignore duplicate edges. Raise ValueError for an edge endpoint absent from nodes or a cycle. Do not mutate either input. Use no imports. Return only the complete function in a Python code block."
+
+Need provide final code block only. Need think through implementation. Need no imports. Lexicographically smallest topological order for nodes strings. Kahn's algorithm with min-heap normally, but no imports. Need no imports means no heapq. Can implement using sorted list? Nodes strings unique. Need lexicographically smallest topological ordering. We can repeatedly select smallest available node among those indegree zero. To avoid imports, can maintain list/set of ready and sort each step or use min. Complexity okay unspecified. Need ignore duplicate edges. Need not mutate inputs. Edge endpoint absent raises ValueError. Cycle raises ValueError.
+
+Details: edges list of (before, after) pairs. Could be tuples/lists. Need duplicate edges ignored: if multiple edges A->B count indegree once. Need ensure endpoints in nodes. Since nodes unique but not necessarily sorted. Need isolated nodes included.
+
+Implementation options:
+- Create set node_set = set(nodes) (no imports). If len? If duplicate nodes? problem says unique, but maybe if not? Could ignore or validate? Not required. Need not mutate inputs: don't modify nodes/edges. Use local structures.
+- adjacency dict: {n: []}. Need ensure duplicates ignored. Could use adj_sets = {n: set() for n in nodes}; indegree = {n:0}. Iterate edges:
+   try unpack pair? If invalid pair? not specified. Could for before, after in edges. If before not in node_set or after not in node_set: raise ValueError. If after already in adj_sets[before]: continue; add; indegree[after]+=1.
+- Kahn: ready = [n for n in nodes if indegree[n]==0] maybe include isolated. To get lexicographically smallest, sort initially? At each step choose min ready, remove, append. To avoid O(n^2) but okay. Simpler: use list ready, sort, and pop(0) expensive. Or maintain sorted ready by insertion and use min each step. With n small maybe fine. But

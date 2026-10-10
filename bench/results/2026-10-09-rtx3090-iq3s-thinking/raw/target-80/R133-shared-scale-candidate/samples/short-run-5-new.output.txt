@@ -1,0 +1,14 @@
+We need answer user's request. Need produce final with only complete function in Python code block. Need implement topological_order(nodes, edges). Requirements:
+- nodes list unique strings
+- edges list of (before, after) pairs
+- return lexicographically smallest topological ordering
+- include isolated nodes
+- ignore duplicate edges
+- Raise ValueError for edge endpoint absent from nodes or a cycle
+- Do not mutate either input
+- Use no imports
+- Return only complete function in Python code block.
+
+Need think carefully about lexicographically smallest topological order. Given directed graph edges before -> after. We want lexicographically smallest sequence among all topological orders. Standard algorithm: Kahn with min-heap of available nodes yields lexicographically smallest. No imports means cannot use heapq? Could implement manually using min() from available list. nodes unique strings. Need not mutate inputs: copy nodes? We can use sets and dicts, list copies. Need ignore duplicate edges. Validate edge endpoints in nodes; raise ValueError. Need cycle detection; if not all processed then ValueError.
+
+Potential lexicographically smallest with Kahn: initialize indegree counts (unique edges). For each node with indegree 0, sort them; repeatedly select min from candidate set, append, decrement indegree of successors; if zero add. Since node strings lex order, use min() among candidates. Could maintain list and min selection. Need avoid duplicate edges causing duplicate decrements. Use set of edges. But edges elements are pairs; could convert to set if all hashable strings. edges is list of pairs of strings? endpoint absent from nodes; if endpoints not strings? Probably strings. But if tuple malformed? Need not handle? Could robustly unpack pairs; if cannot unpack? Raise ValueError? Could do for edge in edges: try before, after = edge except: raise ValueError. But if before or after not hashable? endpoints absent from nodes if not in nodes set. Need if edge not length 2? ValueError maybe. Also duplicate edges: use set of (before, after). Need ensure no mutation. Use nodes_set = set(nodes). But if nodes contains non-hashable? strings unique so ok. Use dict adjacency: {node: set()}. indeg: {node:0}. For each unique edge: if before not in nodes_set or after not in nodes_set raise ValueError. Add adjacency[before].add(after); after set avoids duplicate edges but still maybe duplicates in edge set. We can either build adjacency with sets and indegree

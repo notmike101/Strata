@@ -1,0 +1,13 @@
+We need answer user's request. Need implement topological_order in Python. Need return only complete function in Python code block. Need satisfy constraints: no imports, no mutate input, lexicographically smallest topological ordering include isolated nodes, ignore duplicate edges, raise ValueError for edge endpoint absent from nodes or cycle. Need likely Kahn algorithm with min-heap. But no imports => can implement heap manually or use sorted lists. Need ensure lexicographically smallest: repeatedly choose smallest available node among indegree 0. Since nodes unique strings but maybe not sorted. Need deterministic. Could use heap without imports by manual heap functions. Or use list with bisect? No imports. Manual heap okay. Or simpler: maintain available list sorted and use list.pop(0) but O(n^2). Accept likely. But need lexicographically smallest topological ordering. Using sorted available list each step O(n^2 log n) okay unless performance? No constraints. Could use heap manually efficient. But code must be complete function only. Need not mutate inputs. Need copy? nodes list not mutated if not modifying; edges not mutated. If we build indegree dict from nodes. For duplicate edges ignore duplicate. Need detect invalid endpoint before cycle? Yes raise ValueError for missing. Need handle duplicate edges: use set of edge pairs to not increment indegree/outdegree multiple times. But edges might contain unhashable? endpoints strings, pair hashable. If edges list contains list? spec pairs likely tuples. Could convert to tuple? If edge endpoint absent raise ValueError maybe if pair not length 2? Need not overdo. Need ensure don't mutate: if nodes is list, we can iterate, no mutate. If nodes contains unhashable? spec strings. Good.
+
+Potential algorithm:
+def topological_order(nodes, edges):
+    # validate nodes unique? spec unique but could validate? maybe not. If duplicates, dict overwritten but ordering? not required. Could raise? not specified. Avoid hidden state? no imports.
+    order_set = set(nodes)
+    indegree = {node:0 for node in nodes}
+    adj = {node: set() for node in nodes} # set of strings. Isolated nodes included.
+    seen_edges = set()
+    for edge in edges:
+        if not isinstance(edge, (list, tuple)) or len(edge) != 2: raise ValueError(...)
+        before, after = edge
+        if before not in order_set or after not in order_set: raise

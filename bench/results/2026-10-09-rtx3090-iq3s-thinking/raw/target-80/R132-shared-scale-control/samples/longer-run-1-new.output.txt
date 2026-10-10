@@ -1,0 +1,13 @@
+We need answer user's request. Need implement topological_order in Python. Need return only complete function in Python code block. Need satisfy constraints: no imports, no mutate input, lexicographically smallest topological ordering include isolated nodes, ignore duplicate edges, raise ValueError for edge endpoint absent from nodes or cycle. Need likely Kahn algorithm with min-heap but no imports. Need no imports, can implement own min-heap or use list min popping. Lexicographically smallest: repeatedly select smallest available node (indegree zero). Need efficient? Nodes strings unique, edges list pairs. Duplicate edges ignore. Need not mutate inputs: don't modify nodes/edges. Could create set for nodes, indegree counts, adjacency sets. Need validate edges endpoints before modifying? If edges contains duplicate, duplicate should not increment indegree multiple times. Need ignore duplicate edges. Could build adjacency as dict of set, indegree dict. Since nodes list maybe contains non-string? Spec says strings, but okay. Need ensure edge endpoint absent from nodes raise ValueError. Cycle detection: if processed length != len(nodes) raise ValueError.
+
+Need lexicographically smallest among all topological sorts. With unique strings, standard min available. Need no imports: can implement heapq? no imports, but heapq is stdlib import not allowed. Could use `min` on zero-indegree list each iteration O(V^2) but simpler and no imports. Or implement heap. Given code only function. Need deterministic, no hidden state.
+
+Potential issue: nodes can be empty? edges with empty? Return [] if no nodes no edges. Validate edges endpoints absent; if nodes empty but edges nonempty, raise ValueError. If edges empty, return sorted(nodes) (include isolated). Duplicate edges: using set or building seen set. Need preserve input intact: not mutate lists/dicts. Building new collections okay.
+
+Need maybe if edges is not list? Not required.
+
+Implementation choices:
+
+def topological_order(nodes, edges):
+    node_set = set(nodes)
+    # maybe validate uniqueness? Spec unique. Could not need. If duplicates in nodes? unique strings. But if not unique? Could preserve? Not necessary. Could raise ValueError if len(set(nodes)) != len(nodes) to avoid hidden issues. But spec unique; adding validation may not harm? It changes behavior for invalid input. But if tests include duplicate nodes maybe expected? Not specified. Could keep len_nodes = len(nodes) and output length should len nodes. If duplicates in nodes, topological order of list

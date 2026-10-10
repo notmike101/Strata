@@ -1,0 +1,12 @@
+We need answer user's request: Implement topological_order(nodes, edges) in Python. Need return only complete function in Python code block. Need ensure lexicographically smallest topological ordering, include isolated nodes, ignore duplicate edges. Raise ValueError for edge endpoint absent from nodes or cycle. Do not mutate either input. Use no imports. Need no identifier mention. Need produce final with code block only. Need design robust function.
+
+Requirements:
+- nodes list of unique strings (could be empty? assume unique but validate maybe). Need not mutate nodes or edges. We can copy.
+- edges list of (before, after) pairs. Duplicate edges ignored.
+- Return lexicographically smallest topological ordering. For partial order with arbitrary strings, lexicographically smallest total order consistent with DAG. Kahn's algorithm with min-heap. But no imports, so implement heap manually or choose min each time. Need no imports (no heapq). Could use sorted list of available and pop min with list.pop(index) O(n^2) but okay? Need efficient? Could implement heap with standard list operations. Since strings have <. But for lexicographically smallest, using a priority queue of available nodes yields correct.
+
+Need edge validation: if edge endpoint absent from nodes raise ValueError. Need not mutate inputs. Need duplicate edges ignored: if we build indegree using set of edges to avoid duplicates, or use set per child? Need avoid mutating edges. Use sets/dicts. Could store adjacency: dict mapping before -> set of after. indegree: dict node -> int. For each edge, validate endpoints in node_set. if before==after? Edge self-loop absent? If before == after present, that's cycle; should raise ValueError cycle. If we add duplicate self-loop maybe indegree 1 and adj to itself causing cycle. Need detect cycle: if processed len != len(nodes) raise ValueError.
+
+But duplicate edges ignored: if we simply add adjacency set and if edge not in set then indegree++. Need ensure we don't increment for duplicates. If use adjacency[before].add(after), need know if new. Could use pair set. Or for each edge: if after not in adj[before]: add and indegree[after] +=1. That ignores duplicate. But need validate endpoints. Could use a set of seen_pairs to be simpler.
+
+Need not mutate inputs. Use list(nodes) maybe. Node uniqueness? It says unique. Could not validate? We can use set for membership. If nodes contains duplicates

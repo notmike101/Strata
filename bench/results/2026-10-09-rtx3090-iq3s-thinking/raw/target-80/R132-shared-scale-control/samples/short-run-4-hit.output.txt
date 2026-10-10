@@ -1,0 +1,16 @@
+We need answer user's request: "Implement topological_order(nodes, edges) in Python. nodes is a list of unique strings; edges is a list of (before, after) pairs. Return the lexicographically smallest topological ordering, include isolated nodes, and ignore duplicate edges. Raise ValueError for an edge endpoint absent from nodes or a cycle. Do not mutate either input. Use no imports. Return only the complete function in a Python code block."
+
+Need provide final code block only. Need think through implementation. Need no imports. Lexicographically smallest topological order for nodes strings. Kahn's algorithm with min-heap normally, but no imports. Need no imports means no heapq. Can implement using sorted list? Nodes strings unique. Need lexicographically smallest among valid topological orderings: At each step, among all zero-indegree nodes, choose smallest string. Could use min() repeatedly or maintain sorted available list. Since no imports, implement custom. Need avoid mutating inputs. nodes is list, edges list. We need build graph and indegree. Ignore duplicate edges: avoid counting duplicate indegree and adjacency duplicates. Need validate endpoints exist. Need cycle detection: if processed count < len(nodes) raise ValueError.
+
+Potential pitfalls: lexicographically smallest topological ordering: using min available at each step yields lexicographically smallest sequence? Yes for topological sorts with total order on labels, greedy picking smallest currently available produces lexicographically smallest topological order. Need prove mentally. Since first element must be minimal among sources to get lexicographically smallest. Then recursively. Fine.
+
+Implementation choices:
+def topological_order(nodes, edges):
+    node_set = set(nodes)
+    graph = {n: [] for n in nodes}
+    indegree = {n:0 for n in nodes}
+    seen_edges = set()
+    for before, after in edges:
+        if before not in node_set or after not in node_set: raise ValueError...
+        if before == after? self-loop? Edge endpoint present; edge (n,n) forms cycle; should raise ValueError. Our algorithm will detect cycle if indegree not decremented? If self-loop: indegree[n] =1, never zero unless no self? If no self? If all nodes self loop maybe cycle. If self loop on node with incoming from others, after processing all others indegree remains 1, processed < len -> cycle. OK. But if duplicate self ignored once.
+        edge=(before, after

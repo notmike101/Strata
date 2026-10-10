@@ -1,0 +1,18 @@
+We need answer to user: implement topological_order in Python, only complete function in code block, no imports. Need analyze requirements.
+
+Function topological_order(nodes, edges). nodes list unique strings; edges list of (before, after) pairs. Return lexicographically smallest topological ordering, include isolated nodes, ignore duplicate edges. Raise ValueError for edge endpoint absent from nodes or a cycle. Do not mutate either input. Use no imports. Return only complete function in Python code block.
+
+Need produce final code block only likely.
+
+Algorithm: need lexicographically smallest topological order. Use Kahn's algorithm with min-heap, but no imports. Need implement heap ourselves? Could sort each time? Need O((n+m) log n?) Without imports. Could use heapq? No imports. Need use no imports. Can implement manual heap or simply maintain sorted list by min() selection. Since no constraint on efficiency? Could be O(n^2) acceptable. But robust. Need ignore duplicate edges. Do not mutate inputs. Need validate endpoints absent raise ValueError. Also cycle detection: if processed length != len(nodes), raise. Need handle duplicate edges to avoid indegree increments multiple times. Need avoid mutating inputs. Use sets/dicts.
+
+Potential approach:
+def topological_order(nodes, edges):
+    node_set = set(nodes)
+    indegree = {n:0 for n in nodes}
+    successors = {n:set() for n in nodes}
+    for before, after in edges:
+        if before not in node_set or after not in node_set: raise ValueError(...)
+        if before == after: maybe self-loop cycle; successor set ignores duplicate but self-loop indegree? If before==after and edge present, if we add to successors and indegree after increment, cycle detection works if only once: self-loop indegree >0, processed len < n. Good. But if duplicate self-loop ignored after set, still cycle. But need ignore duplicate edges. Use if after not in successors[before]: successors[before].add(after); indegree[after]+=1. For self-loop, after in successors? initially no, add indegree increment. okay.
+    available = [n for n in nodes if indegree[n] == 0]
+    Need lexicographically smallest. If we just use list and pop min each time. To not mutate input nodes but create list okay. available = sorted([ ... ]) maybe sorted built-in no import. Then each time pick

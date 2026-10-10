@@ -1,0 +1,13 @@
+We need answer user: "Request identifier ... Ignore this identifier. Implement topological_order(nodes, edges) in Python. nodes is a list of unique strings; edges is a list of (before, after) pairs. Return the lexicographically smallest topological ordering, include isolated nodes, and ignore duplicate edges. Raise ValueError for an edge endpoint absent from nodes or a cycle. Do not mutate either input. Use no imports. Return only the complete function in a Python code block."
+
+Need provide final only code block with complete function. Need think requirements. Implement Kahn's algorithm lexicographically smallest: repeatedly choose smallest available node (indegree zero). But nodes list strings. Need not mutate inputs. Use no imports. Avoid heapq? heap would be import, but can sort available list each iteration. Edges list may be tuple pairs? Could be any iterable? Need not mutate inputs. Need validate endpoints absent -> ValueError. Duplicate edges ignore: if using set of edge pairs, but if edges contains non-hashable? Edges pairs likely tuple strings. We can create set of pairs. But must not mutate input. Need maybe validate each edge is pair? Not specified. Could use for before, after in edges: if before not in node_set or after not in node_set raise ValueError. If before == after cycle self-loop? Should raise ValueError. Duplicate edges: add to set, update adjacency only once? Need ignore duplicate edges. Need detect cycle: if result length != len(nodes) after Kahn, raise ValueError.
+
+Lexicographically smallest topological ordering among nodes unique strings. Use min each iteration O(n^2) maybe okay. Could maintain sorted list? But no imports, could use available = [n for n in nodes if indegree ==0]; each iteration available.sort(); next = available.pop(0) (pop(0) O(n)). Better use index pointer? Need remove node. Could keep set and find min? Or sort each iteration. But to be efficient maybe use available list sorted, use index? But adding nodes during process can insert in sorted order or just re-sort. Since no import, can sort available each loop.
+
+Potential issue: If duplicate edges ignored before indegree count. Need ensure duplicate edges do not cause indegree double count. Approach:
+
+def topological_order(nodes, edges):
+    node_set = set(nodes)
+    adjacency = {node: [] for node in nodes}
+    indegree = {node: 0 for node in nodes}
+    seen_edges =

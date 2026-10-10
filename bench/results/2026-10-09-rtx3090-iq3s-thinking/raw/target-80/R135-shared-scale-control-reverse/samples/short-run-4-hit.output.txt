@@ -1,0 +1,14 @@
+We need answer user's request: "Implement topological_order(nodes, edges) in Python. nodes is a list of unique strings; edges is a list of (before, after) pairs. Return the lexicographically smallest topological ordering, include isolated nodes, and ignore duplicate edges. Raise ValueError for an edge endpoint absent from nodes or a cycle. Do not mutate either input. Use no imports. Return only the complete function in a Python code block."
+
+Need provide final code block only. Need think through implementation. Need no imports. Lexicographically smallest topological order for nodes strings. Kahn's algorithm with min-heap normally, but no imports. Need no imports means no heapq. Can implement using sorted list? Nodes strings unique. Need lexicographically smallest among valid topological orderings: At each step, among all zero-indegree nodes, choose smallest string. Could use min() repeatedly or maintain sorted available list. Since no imports, implement custom. Need avoid mutating inputs. nodes is list, edges list. We need build in_degree dict and adjacency set or dict of sets to ignore duplicates. Need ignore duplicate edges: if use set of neighbors, duplicate no effect. Need check endpoints absent from nodes: raise ValueError. Need cycle: if resulting order length < len(nodes). Need not mutate inputs: do not sort nodes in place, do not modify edges. Use local collections but no imports: can use list, dict, set literals? Builtins allowed. Could use set() and dict() no imports.
+
+Potential issue: lexicographically smallest topological ordering. Standard greedy choosing smallest available zero-indegree at each step yields lexicographically smallest topological order? For total order with precedence constraints, yes, choosing smallest feasible at each position is greedy and optimal lexicographically. Need prove but code.
+
+Implementation details:
+
+def topological_order(nodes, edges):
+    # maybe validate nodes list unique? They say unique strings; not required. Could not assume? Could handle duplicates? Might not. But if duplicate nodes? Could ignore? But unique.
+    # Validate edges endpoints absent. Need if edge not tuple of length 2? Could unpack. Maybe if invalid format raise ValueError? User only says edge endpoint absent. Could let error? Better robust: try unpack, if length invalid maybe ValueError. But not mutate.
+    node_set = set(nodes)
+    indeg = {node: 0 for node in nodes}
+    adj = {node: set() for node in nodes}

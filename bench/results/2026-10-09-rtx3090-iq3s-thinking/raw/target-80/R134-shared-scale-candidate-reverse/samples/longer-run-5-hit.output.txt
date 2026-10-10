@@ -1,0 +1,23 @@
+We need respond to user: "Implement topological_order(nodes, edges) in Python... Return only the complete function in a Python code block." Need produce final only code block. Need ensure no imports. Need handle nodes list unique strings, edges list of (before, after). Return lexicographically smallest topological ordering. Include isolated nodes. Ignore duplicate edges. Raise ValueError for edge endpoint absent from nodes or cycle. Do not mutate inputs.
+
+Need craft robust deterministic Kahn with min-heap? Without imports can't use heapq? Could implement min selection manually or sort candidates each step. Since no imports. Need not mutate input. Need probably validate edges endpoints. Duplicate edges: ignore duplicate pairs. Cycle detection. Lexicographically smallest among nodes strings. Kahn: compute indegree only for unique edges. Need ensure no mutation of nodes/edges. nodes list unique strings, edges list of tuples. If edges contain tuples length 2? likely assume? But validate endpoint absent. If tuple not len2, could IndexError? Maybe raise ValueError for invalid edge? Not specified. Could check if len(edge)!=2: raise ValueError. But if user expects only pairs. Good.
+
+Implementation choices:
+def topological_order(nodes, edges):
+    # maybe copy nodes to preserve input but not mutate original.
+    node_set = set(nodes)
+    # ensure unique? not necessary. But if nodes contains non-hashable? Strings unique. set ok.
+    unique_edges = set()
+    indegree = {node:0 for node in nodes}
+    adjacency = {node: set() for node in nodes}
+    for edge in edges:
+       try: before, after = edge
+       except TypeError: raise ValueError(...)
+       if len(edge?) if edge not iterable? maybe try unpack. If unpack succeeds, but edge may be string length 2? (e.g., "ab" would unpack to 'a','b'). But edges list of tuples. Fine.
+       if before not in node_set or after not in node_set: raise ValueError
+       if before == after? self-loop -> cycle. Could ignore duplicate but self edge creates cycle. In topological sort, self-loop cycle. Raise.
+       if (before, after) not in unique_edges:
+           unique_edges.add((before,after))
+           adjacency[before].add(after)
+           indegree[after] += 1
+    candidates = [n for n in nodes if indegree[n]==0]

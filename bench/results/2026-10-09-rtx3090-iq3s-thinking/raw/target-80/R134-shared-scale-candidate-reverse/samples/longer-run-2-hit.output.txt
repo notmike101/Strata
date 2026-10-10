@@ -1,0 +1,18 @@
+We need answer user wants implement topological_order in Python. Need produce final only complete function in Python code block. Need think carefully. Requirements:
+- Implement topological_order(nodes, edges)
+- nodes list unique strings; edges list (before, after) pairs.
+- Return lexicographically smallest topological ordering, include isolated nodes, ignore duplicate edges.
+- Raise ValueError for edge endpoint absent from nodes or cycle.
+- Do not mutate either input.
+- Use no imports.
+- Return only complete function in code block.
+
+Need design deterministic. Lexicographically smallest topological ordering of graph with node strings. Need handle duplicates. Not mutate inputs. No imports, so can't use heapq? Could implement min selection manually. Since no imports, use list and min? O(n^2) okay likely. Could implement Kahn with adjacency sets and indegree dict. Need ensure inputs not mutated: edges list pairs; tuples immutable. But if edges could be lists? It says pairs. But avoid mutating input anyway. Need not modify nodes. Make copies. Validate endpoint absent: each edge endpoint must be in nodes. nodes unique; could rely? Maybe handle duplicates? unique strings. If nodes not hashable? strings. Need ignore duplicate edges. If duplicate edge before, after, don't increment indegree multiple times. Could store adjacency set per node and indegree dict. To avoid mutating inputs: create node_set = set(nodes) but nodes unique. If nodes contains duplicates? problem says unique. We can still handle. Need include isolated nodes. If no nodes: return []? Likely. If cycle: ValueError.
+
+Lexicographically smallest topological order: Kahn algorithm selecting smallest available node at each step. Need ensure lexicographically smallest among all topological sorts. For directed acyclic graph with total lexicographic over node labels, yes greedy min available works (assuming standard). Need careful: if duplicate edges ignored. Build indegrees from unique edges.
+
+Potential issue with isolated nodes: indegree 0, available. Good.
+
+Need not mutate input: if edges contains tuple, fine. If edges contains list? We don't mutate. Could iterate. If edges is tuple of lists, no mutation. If nodes is tuple? okay. Use set(nodes) but if nodes has duplicate, node_set smaller than nodes; but unique guarantee. If want preserve maybe nodes list. We don't mutate.
+
+Need code only. Could include function and helpers. No imports. Need maybe type hints? Not

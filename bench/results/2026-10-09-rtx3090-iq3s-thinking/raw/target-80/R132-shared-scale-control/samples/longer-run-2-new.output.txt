@@ -1,0 +1,16 @@
+We need answer user wants implement topological_order in Python. Need provide only complete function in Python code block. Done. Need think thoroughly. Problem: nodes list unique strings, edges list pairs. Return lexicographically smallest topological ordering, include isolated nodes, ignore duplicate edges. Raise ValueError for edge endpoint absent from nodes or a cycle. Do not mutate either input. Use no imports. Return only complete function in a Python code block.
+
+Need produce code. Need ensure lexicographically smallest topological ordering (lexicographic sequence of node names) among all valid topological orders. Standard Kahn using min-heap of nodes with indegree zero. But no imports allowed, cannot use heapq? Can implement manual heap or sorted list. Need not mutate inputs. Need ignore duplicate edges. Need validate edges. Need no imports. Could implement O((n+m)^2) with selecting min available using min(). For topological ordering, repeated pick smallest node among current zero indegree. Does greedy picking smallest available at each step produce lexicographically smallest topological order? Yes for total order lexicographically: choose smallest possible first among zero indegree nodes. Then recursively choose smallest from remaining available. This yields lexicographically smallest topological ordering. Need ensure duplicate edges ignored. If duplicate edges, indegree shouldn't double count. Could use set of edges for adjacency and indegrees; but sets are okay no imports. Need not mutate nodes or edges. But building set from edges doesn't mutate. Need maybe nodes not sorted for initial set.
+
+Potential pitfalls: if duplicate edge appears with different? If duplicate identical edge ignore. If edges has endpoint not in nodes raise ValueError before cycle? Yes. Need maybe validate pairs are tuples? Could just unpack. If endpoint absent raise ValueError. What if nodes empty? Return [].
+
+Need ensure lexicographically smallest. If nodes are strings unique, min works. For n maybe small? Could be large but no imports. Implement min over avail. Complexity okay. If want more efficient heap manual with list and heapq? No imports. Could implement heap manually. But simpler min scanning available. Need no imports. Need deterministic.
+
+But hidden tests? Could expect function returns list. Need not mutate. Need handle duplicate edges without mutation. Need edge endpoint absent. Could edges be list of lists? pairs can unpack. Duplicate edge with same endpoints; using adjacency dict of sets. indegree dict.
+
+Need avoid hidden state, deterministic.
+
+Implementation options:
+
+def topological_order(nodes, edges):
+   

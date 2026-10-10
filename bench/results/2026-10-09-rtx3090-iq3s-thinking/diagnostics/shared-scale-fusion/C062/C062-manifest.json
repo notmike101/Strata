@@ -1,0 +1,15 @@
+{
+  "id": "C062",
+  "source_sha256": "45940b697cfde1d8032bd42ef206de548756429c0c472a61766837986224cc77",
+  "reference": "actual staged native_moe_combine_multi K10 vectorized library plus precise sigmoid-scale",
+  "parity_cases": 320,
+  "timing_cells": 8,
+  "rounds": 7,
+  "warmups": 1,
+  "calls_per_graph": 200,
+  "gate": "All exact/finite/canary cases; geometric candidate/control duration <=0.95 and no slower median cell. Diagnostic only.",
+  "executable_sha256": "508be9b673fe66b64797f397c46a22870ce50c6db31c7ab6b009e852b78b5752",
+  "harness_sha256": "7928db29d73b1fbd6be56a46fe3fef32ecc2b9591adc1e40c14da2df068c9b70",
+  "utc": "2026-10-10T12:36:01.611637+00:00",
+  "exit_code": 0
+}

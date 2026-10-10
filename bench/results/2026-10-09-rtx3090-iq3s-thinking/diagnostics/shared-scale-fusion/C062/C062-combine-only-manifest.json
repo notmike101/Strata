@@ -1,0 +1,8 @@
+{
+  "id": "C062-combine-only",
+  "scope": "Actual built native ungated versus gated combine only; original shared sigmoid-scale prepared outside timing. One warmup,seven alternating rounds,200 graph calls,all T1..8. This diagnoses critical-stream cost, not total model latency or TPS.",
+  "executable_sha256": "378b228b79dbf5697914a4338b7dec5d2f664d60dca5afa82e5978d57e4dd7a6",
+  "harness_sha256": "00e4554fabd93b6b33b54f5239f138225808b12e4d33692380df1353649a1ff9",
+  "utc": "2026-10-10T13:02:08.860759+00:00",
+  "exit_code": 0
+}

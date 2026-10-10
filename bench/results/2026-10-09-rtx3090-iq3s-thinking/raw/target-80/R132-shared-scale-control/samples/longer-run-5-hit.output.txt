@@ -1,0 +1,26 @@
+We need respond to user: "Implement topological_order(nodes, edges) in Python... Return only the complete function in a Python code block." Need produce final only code block. Need ensure no imports. Need handle nodes list unique strings, edges list of pairs (before, after). Return lexicographically smallest topological ordering, include isolated nodes, ignore duplicate edges. Raise ValueError for edge endpoint absent from nodes or cycle. Do not mutate either input. Use no imports. Need think implementation.
+
+Need lexicographically smallest topological ordering among strings. Standard Kahn with min-heap. No imports, so implement heap manually or sort selection. Since no imports, cannot heapq. Could use sorted available list each time O(V^2 logV) fine, or implement heap. Need deterministic. Input lists not mutated. Need avoid hidden state? likely pure.
+
+Algorithm:
+def topological_order(nodes, edges):
+    # copy nodes? do not mutate inputs. We can make node set. Since nodes unique strings but could validate? Not required but maybe validate edge endpoints absent. Need maybe handle nodes non-list? Not necessary.
+    node_set = set(nodes)
+    # validate all nodes? maybe if nodes contains non-string? ignore.
+    # Need ignore duplicate edges. Could build adjacency set and indegree dict from node_set initialized 0.
+    indegree = {node:0 for node in nodes}
+    adj = {node:set() for node in nodes}
+    for edge in edges:
+       # Need if edge not iterable? assume.
+       before, after = edge
+       if before not in node_set or after not in node_set: raise ValueError
+       if after not in adj[before]:
+          adj[before].add(after); indegree[after]+=1
+    available = sorted([n for n in nodes if indegree[n]==0])
+    result=[]
+    while available:
+       # pick lexicographically smallest from available, remove first
+       node = available.pop(0) # O(n) but ok. Could find index and pop.
+       result.append(node)
+       # For each neighbor in sorted? For deterministic, adding newly zero indegree to available and then sort. Need sort each iteration or use insertion sort.
+       for neighbor in adj[node]: # set iteration nondeterministic due hash randomization. Need sort neighbors before processing to maintain deterministic? If we sort available each iteration, neighbor iteration order doesn't matter as long

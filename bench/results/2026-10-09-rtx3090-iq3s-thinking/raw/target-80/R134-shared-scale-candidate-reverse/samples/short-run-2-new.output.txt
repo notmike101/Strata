@@ -1,0 +1,18 @@
+We need answer user: "Request identifier ... Ignore this identifier. Implement topological_order(nodes, edges) in Python. nodes is a list of unique strings; edges is a list of (before, after) pairs. Return the lexicographically smallest topological ordering, include isolated nodes, and ignore duplicate edges. Raise ValueError for an edge endpoint absent from nodes or a cycle. Do not mutate either input. Use no imports. Return only the complete function in a Python code block."
+
+Need provide final only code block with complete function. Need think requirements. Implement Kahn's algorithm lexicographically smallest: repeatedly choose smallest string among zero indegree. But must not mutate inputs. nodes list of unique strings, edges list of tuples. Duplicate edges ignored for indegree and adjacency. Need validate endpoints present. Raise ValueError for missing endpoint or cycle. No imports. Lexicographically smallest topological ordering among all topological sorts? For DAG, using min-heap of sources gives lexicographically smallest sequence if all nodes comparable? Yes standard: choose smallest currently available node yields lexicographically smallest topological order (by node string). Need ignore duplicate edges: if same edge appears multiple times, indegree should count once. Also if edge (a,b) duplicate, ignore.
+
+Need no imports, so implement sorted available list perhaps O(n^2) okay. Or heap without imports by using sorted and pop(0). But must ensure lexicographically smallest: at each step from available sorted list pick min. Could maintain set of available nodes and sort each iteration. Since nodes unique strings but not necessarily sorted. Need not mutate inputs: don't modify nodes or edges. Build data structures from them.
+
+Potential corner cases: nodes empty -> [] unless edges nonempty with missing endpoints? Validate edges: if endpoint absent, raise ValueError. If edges empty: return sorted(nodes). Cycle detection: if processed length < len(nodes), raise ValueError. Duplicate edges: if edge duplicate, don't increment indegree. Also edges may be tuples/list? assume pair. Need maybe edges not list but iterable? "list" but could iterate. Avoid mutating.
+
+Need choose robust:
+
+def topological_order(nodes, edges):
+    node_set = set(nodes)
+    adjacency = {node: set() for node in nodes}
+    indegree = {node: 0 for node in nodes}
+    for before, after in edges:
+        if before not in node_set or after not in node_set:
+            raise ValueError(...)
+       

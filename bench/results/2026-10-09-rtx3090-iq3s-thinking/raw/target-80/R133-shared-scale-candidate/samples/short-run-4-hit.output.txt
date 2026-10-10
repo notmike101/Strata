@@ -1,0 +1,11 @@
+We need answer user's request: "Implement topological_order(nodes, edges) in Python. nodes is a list of unique strings; edges is a list of (before, after) pairs. Return the lexicographically smallest topological ordering, include isolated nodes, and ignore duplicate edges. Raise ValueError for an edge endpoint absent from nodes or a cycle. Do not mutate either input. Use no imports. Return only the complete function in a Python code block."
+
+Need provide final code block only. Need think through implementation. Need no imports. Lexicographically smallest topological order for nodes strings. Kahn's algorithm with min-heap normally, but no imports. Need no imports means no heapq. Can implement using sorted list? Nodes strings unique. Need lexicographically smallest among valid topological orderings: At each step, among all zero-indegree nodes, choose smallest string. Could use simple selection sort scanning available set/list each iteration O(n^2). n unspecified but okay. Need not mutate inputs: nodes is list, edges list of tuples. We can create copy or use sorted nodes? Need include isolated nodes.
+
+Validate edge endpoints absent from nodes: Raise ValueError. Duplicate edges ignore: count indegree unique pairs. Need cycle detection: if processed length != len(nodes) raise ValueError. Need handle if nodes empty: edges with endpoints invalid? If edges empty return [].
+
+Need no mutation: not modify input lists or tuples. We'll create node_set = set(nodes), maybe if nodes has unique but can trust. adjacency set to dedupe: adj = {node: set() for node in nodes}; indeg = {node:0 for node in nodes}. For each edge (before, after) in edges, if before not in node_set or after not in node_set raise ValueError. If after not in adj[before]: add indeg[after]+=1. If self-loop? Edge (a,a) means endpoint present. Topological ordering with self-loop is a cycle. Our algorithm: adj[a] includes a, indeg[a]++ so a never zero? But if there are other nodes, cycle detected. If only a with self-loop: indeg a=1 so no available => processed 0 <1 => ValueError. Good.
+
+But duplicate self-loop ignored, still indeg 1.
+
+For lexicographically smallest: If we use available list initially sorted([n for n in nodes if indeg[n]==0]). Then while available: take first via min? If list sorted and we pop

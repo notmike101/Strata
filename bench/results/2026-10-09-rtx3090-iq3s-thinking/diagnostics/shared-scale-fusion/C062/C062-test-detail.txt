@@ -1,0 +1,528 @@
+Start testing: Oct 10 07:39 Central Daylight Time
+----------------------------------------------------------
+29/116 Testing: shared_expert_parity
+29/116 Test: shared_expert_parity
+Command: "C:/strata/local-setup/target-80/build-cuda86-main/shared_expert_parity.exe" "--selftest"
+Directory: C:/strata/local-setup/target-80/build-cuda86-main
+"shared_expert_parity" start time: Oct 10 07:39 Central Daylight Time
+Output:
+----------------------------------------------------------
+  silu-on-gate vs silu-on-up is observable yes (100.00% apart)
+  structure vs reference                   worst rel 3.461e-04 over 256 outputs (mean |ref| 4716.8804)
+  the fixture's SwiGLU stays in fp16 range yes (max |h| 677.2, fp16 max 65504)
+  native shared scalar gate: pass (ref rel 0.000e+00, BF16 separation 1.048e-03, missing input refused)
+  native shared captured selection: byte-identical
+  restored shared default: byte-identical
+  routed sum left UNWEIGHTED is observable   yes  (90.68% apart)
+  shared output router-WEIGHTED is observable yes  (93.32% apart)
+  moe_combine vs reference                   rel 0.000e+00
+  a null `shared` is observable              yes (98.49% apart - null shared really omits it)
+
+shared_expert: 0 failures
+shared_expert_parity OK
+<end of output>
+Test time =   0.22 sec
+----------------------------------------------------------
+Test Passed.
+"shared_expert_parity" end time: Oct 10 07:39 Central Daylight Time
+"shared_expert_parity" time elapsed: 00:00:00
+----------------------------------------------------------
+
+30/116 Testing: verify_parity
+30/116 Test: verify_parity
+Command: "C:/strata/local-setup/target-80/build-cuda86-main/verify_parity.exe" "--selftest"
+Directory: C:/strata/local-setup/target-80/build-cuda86-main
+"verify_parity" start time: Oct 10 07:39 Central Daylight Time
+Output:
+----------------------------------------------------------
+argmax_rows, row_top_prob_split: bitwise equal to the one-block kernels (ties, NaN, -inf, 1-8 rows on one scratch)
+verify_parity: PASS
+<end of output>
+Test time =   0.31 sec
+----------------------------------------------------------
+Test Passed.
+"verify_parity" end time: Oct 10 07:39 Central Daylight Time
+"verify_parity" time elapsed: 00:00:00
+----------------------------------------------------------
+
+31/116 Testing: qfuse_gdn_test
+31/116 Test: qfuse_gdn_test
+Command: "C:/strata/local-setup/target-80/build-cuda86-main/qfuse_gdn_test.exe"
+Directory: C:/strata/local-setup/target-80/build-cuda86-main
+"qfuse_gdn_test" start time: Oct 10 07:39 Central Daylight Time
+Output:
+----------------------------------------------------------
+QFUSE GDN: 64 cases, 0 failures
+COMMIT full_qfuse=1 enabled=1 fused_output=1 T=1 captured=0 skipped=0 state_bytes_differ=0 output_bytes_differ=0
+COMMIT full_qfuse=0 enabled=1 fused_output=1 T=1 captured=1 skipped=1 state_bytes_differ=0 output_bytes_differ=0
+COMMIT full_qfuse=0 enabled=0 fused_output=1 T=1 captured=0 skipped=0 state_bytes_differ=0 output_bytes_differ=0
+COMMIT full_qfuse=0 enabled=1 fused_output=0 T=1 captured=1 skipped=1 state_bytes_differ=0 output_bytes_differ=0
+<end of output>
+Test time =   0.32 sec
+----------------------------------------------------------
+Test Passed.
+"qfuse_gdn_test" end time: Oct 10 07:39 Central Daylight Time
+"qfuse_gdn_test" time elapsed: 00:00:00
+----------------------------------------------------------
+
+32/116 Testing: shared_scale_fusion_test
+32/116 Test: shared_scale_fusion_test
+Command: "C:/strata/local-setup/target-80/build-cuda86-main/shared_scale_fusion_test.exe"
+Directory: C:/strata/local-setup/target-80/build-cuda86-main
+"shared_scale_fusion_test" start time: Oct 10 07:39 Central Daylight Time
+Output:
+----------------------------------------------------------
+CASE T=1 seed=0 distribution=0 differing_floats=0 nonfinite=0 canary_failures=0 max_abs_error=0
+CASE T=1 seed=0 distribution=1 differing_floats=0 nonfinite=0 canary_failures=0 max_abs_error=0
+CASE T=1 seed=0 distribution=2 differing_floats=0 nonfinite=0 canary_failures=0 max_abs_error=0
+CASE T=1 seed=0 distribution=3 differing_floats=0 nonfinite=0 canary_failures=0 max_abs_error=0
+CASE T=1 seed=0 distribution=4 differing_floats=0 nonfinite=0 canary_failures=0 max_abs_error=0
+CASE T=1 seed=0 distribution=5 differing_floats=0 nonfinite=0 canary_failures=0 max_abs_error=0
+CASE T=1 seed=0 distribution=6 differing_floats=0 nonfinite=0 canary_failures=0 max_abs_error=0
+CASE T=1 seed=0 distribution=7 differing_floats=0 nonfinite=0 canary_failures=0 max_abs_error=0
+CASE T=1 seed=1 distribution=0 differing_floats=0 nonfinite=0 canary_failures=0 max_abs_error=0
+CASE T=1 seed=1 distribution=1 differing_floats=0 nonfinite=0 canary_failures=0 max_abs_error=0
+CASE T=1 seed=1 distribution=2 differing_floats=0 nonfinite=0 canary_failures=0 max_abs_error=0
+CASE T=1 seed=1 distribution=3 differing_floats=0 nonfinite=0 canary_failures=0 max_abs_error=0
+CASE T=1 seed=1 distribution=4 differing_floats=0 nonfinite=0 canary_failures=0 max_abs_error=0
+CASE T=1 seed=1 distribution=5 differing_floats=0 nonfinite=0 canary_failures=0 max_abs_error=0
+CASE T=1 seed=1 distribution=6 differing_floats=0 nonfinite=0 canary_failures=0 max_abs_error=0
+CASE T=1 seed=1 distribution=7 differing_floats=0 nonfinite=0 canary_failures=0 max_abs_error=0
+CASE T=1 seed=2 distribution=0 differing_floats=0 nonfinite=0 canary_failures=0 max_abs_error=0
+CASE T=1 seed=2 distribution=1 differing_floats=0 nonfinite=0 canary_failures=0 max_abs_error=0
+CASE T=1 seed=2 distribution=2 differing_floats=0 nonfinite=0 canary_failures=0 max_abs_error=0
+CASE T=1 seed=2 distribution=3 differing_floats=0 nonfinite=0 canary_failures=0 max_abs_error=0
+CASE T=1 seed=2 distribution=4 differing_floats=0 nonfinite=0 canary_failures=0 max_abs_error=0
+CASE T=1 seed=2 distribution=5 differing_floats=0 nonfinite=0 canary_failures=0 max_abs_error=0
+CASE T=1 seed=2 distribution=6 differing_floats=0 nonfinite=0 canary_failures=0 max_abs_error=0
+CASE T=1 seed=2 distribution=7 differing_floats=0 nonfinite=0 canary_failures=0 max_abs_error=0
+CASE T=1 seed=3 distribution=0 differing_floats=0 nonfinite=0 canary_failures=0 max_abs_error=0
+CASE T=1 seed=3 distribution=1 differing_floats=0 nonfinite=0 canary_failures=0 max_abs_error=0
+CASE T=1 seed=3 distribution=2 differing_floats=0 nonfinite=0 canary_failures=0 max_abs_error=0
+CASE T=1 seed=3 distribution=3 differing_floats=0 nonfinite=0 canary_failures=0 max_abs_error=0
+CASE T=1 seed=3 distribution=4 differing_floats=0 nonfinite=0 canary_failures=0 max_abs_error=0
+CASE T=1 seed=3 distribution=5 differing_floats=0 nonfinite=0 canary_failures=0 max_abs_error=0
+CASE T=1 seed=3 distribution=6 differing_floats=0 nonfinite=0 canary_failures=0 max_abs_error=0
+CASE T=1 seed=3 distribution=7 differing_floats=0 nonfinite=0 canary_failures=0 max_abs_error=0
+CASE T=1 seed=4 distribution=0 differing_floats=0 nonfinite=0 canary_failures=0 max_abs_error=0
+CASE T=1 seed=4 distribution=1 differing_floats=0 nonfinite=0 canary_failures=0 max_abs_error=0
+CASE T=1 seed=4 distribution=2 differing_floats=0 nonfinite=0 canary_failures=0 max_abs_error=0
+CASE T=1 seed=4 distribution=3 differing_floats=0 nonfinite=0 canary_failures=0 max_abs_error=0
+CASE T=1 seed=4 distribution=4 differing_floats=0 nonfinite=0 canary_failures=0 max_abs_error=0
+CASE T=1 seed=4 distribution=5 differing_floats=0 nonfinite=0 canary_failures=0 max_abs_error=0
+CASE T=1 seed=4 distribution=6 differing_floats=0 nonfinite=0 canary_failures=0 max_abs_error=0
+CASE T=1 seed=4 distribution=7 differing_floats=0 nonfinite=0 canary_failures=0 max_abs_error=0
+CASE T=2 seed=0 distribution=0 differing_floats=0 nonfinite=0 canary_failures=0 max_abs_error=0
+CASE T=2 seed=0 distribution=1 differing_floats=0 nonfinite=0 canary_failures=0 max_abs_error=0
+CASE T=2 seed=0 distribution=2 differing_floats=0 nonfinite=0 canary_failures=0 max_abs_error=0
+CASE T=2 seed=0 distribution=3 differing_floats=0 nonfinite=0 canary_failures=0 max_abs_error=0
+CASE T=2 seed=0 distribution=4 differing_floats=0 nonfinite=0 canary_failures=0 max_abs_error=0
+CASE T=2 seed=0 distribution=5 differing_floats=0 nonfinite=0 canary_failures=0 max_abs_error=0
+CASE T=2 seed=0 distribution=6 differing_floats=0 nonfinite=0 canary_failures=0 max_abs_error=0
+CASE T=2 seed=0 distribution=7 differing_floats=0 nonfinite=0 canary_failures=0 max_abs_error=0
+CASE T=2 seed=1 distribution=0 differing_floats=0 nonfinite=0 canary_failures=0 max_abs_error=0
+CASE T=2 seed=1 distribution=1 differing_floats=0 nonfinite=0 canary_failures=0 max_abs_error=0
+CASE T=2 seed=1 distribution=2 differing_floats=0 nonfinite=0 canary_failures=0 max_abs_error=0
+CASE T=2 seed=1 distribution=3 differing_floats=0 nonfinite=0 canary_failures=0 max_abs_error=0
+CASE T=2 seed=1 distribution=4 differing_floats=0 nonfinite=0 canary_failures=0 max_abs_error=0
+CASE T=2 seed=1 distribution=5 differing_floats=0 nonfinite=0 canary_failures=0 max_abs_error=0
+CASE T=2 seed=1 distribution=6 differing_floats=0 nonfinite=0 canary_failures=0 max_abs_error=0
+CASE T=2 seed=1 distribution=7 differing_floats=0 nonfinite=0 canary_failures=0 max_abs_error=0
+CASE T=2 seed=2 distribution=0 differing_floats=0 nonfinite=0 canary_failures=0 max_abs_error=0
+CASE T=2 seed=2 distribution=1 differing_floats=0 nonfinite=0 canary_failures=0 max_abs_error=0
+CASE T=2 seed=2 distribution=2 differing_floats=0 nonfinite=0 canary_failures=0 max_abs_error=0
+CASE T=2 seed=2 distribution=3 differing_floats=0 nonfinite=0 canary_failures=0 max_abs_error=0
+CASE T=2 seed=2 distribution=4 differing_floats=0 nonfinite=0 canary_failures=0 max_abs_error=0
+CASE T=2 seed=2 distribution=5 differing_floats=0 nonfinite=0 canary_failures=0 max_abs_error=0
+CASE T=2 seed=2 distribution=6 differing_floats=0 nonfinite=0 canary_failures=0 max_abs_error=0
+CASE T=2 seed=2 distribution=7 differing_floats=0 nonfinite=0 canary_failures=0 max_abs_error=0
+CASE T=2 seed=3 distribution=0 differing_floats=0 nonfinite=0 canary_failures=0 max_abs_error=0
+CASE T=2 seed=3 distribution=1 differing_floats=0 nonfinite=0 canary_failures=0 max_abs_error=0
+CASE T=2 seed=3 distribution=2 differing_floats=0 nonfinite=0 canary_failures=0 max_abs_error=0
+CASE T=2 seed=3 distribution=3 differing_floats=0 nonfinite=0 canary_failures=0 max_abs_error=0
+CASE T=2 seed=3 distribution=4 differing_floats=0 nonfinite=0 canary_failures=0 max_abs_error=0
+CASE T=2 seed=3 distribution=5 differing_floats=0 nonfinite=0 canary_failures=0 max_abs_error=0
+CASE T=2 seed=3 distribution=6 differing_floats=0 nonfinite=0 canary_failures=0 max_abs_error=0
+CASE T=2 seed=3 distribution=7 differing_floats=0 nonfinite=0 canary_failures=0 max_abs_error=0
+CASE T=2 seed=4 distribution=0 differing_floats=0 nonfinite=0 canary_failures=0 max_abs_error=0
+CASE T=2 seed=4 distribution=1 differing_floats=0 nonfinite=0 canary_failures=0 max_abs_error=0
+CASE T=2 seed=4 distribution=2 differing_floats=0 nonfinite=0 canary_failures=0 max_abs_error=0
+CASE T=2 seed=4 distribution=3 differing_floats=0 nonfinite=0 canary_failures=0 max_abs_error=0
+CASE T=2 seed=4 distribution=4 differing_floats=0 nonfinite=0 canary_failures=0 max_abs_error=0
+CASE T=2 seed=4 distribution=5 differing_floats=0 nonfinite=0 canary_failures=0 max_abs_error=0
+CASE T=2 seed=4 distribution=6 differing_floats=0 nonfinite=0 canary_failures=0 max_abs_error=0
+CASE T=2 seed=4 distribution=7 differing_floats=0 nonfinite=0 canary_failures=0 max_abs_error=0
+CASE T=3 seed=0 distribution=0 differing_floats=0 nonfinite=0 canary_failures=0 max_abs_error=0
+CASE T=3 seed=0 distribution=1 differing_floats=0 nonfinite=0 canary_failures=0 max_abs_error=0
+CASE T=3 seed=0 distribution=2 differing_floats=0 nonfinite=0 canary_failures=0 max_abs_error=0
+CASE T=3 seed=0 distribution=3 differing_floats=0 nonfinite=0 canary_failures=0 max_abs_error=0
+CASE T=3 seed=0 distribution=4 differing_floats=0 nonfinite=0 canary_failures=0 max_abs_error=0
+CASE T=3 seed=0 distribution=5 differing_floats=0 nonfinite=0 canary_failures=0 max_abs_error=0
+CASE T=3 seed=0 distribution=6 differing_floats=0 nonfinite=0 canary_failures=0 max_abs_error=0
+CASE T=3 seed=0 distribution=7 differing_floats=0 nonfinite=0 canary_failures=0 max_abs_error=0
+CASE T=3 seed=1 distribution=0 differing_floats=0 nonfinite=0 canary_failures=0 max_abs_error=0
+CASE T=3 seed=1 distribution=1 differing_floats=0 nonfinite=0 canary_failures=0 max_abs_error=0
+CASE T=3 seed=1 distribution=2 differing_floats=0 nonfinite=0 canary_failures=0 max_abs_error=0
+CASE T=3 seed=1 distribution=3 differing_floats=0 nonfinite=0 canary_failures=0 max_abs_error=0
+CASE T=3 seed=1 distribution=4 differing_floats=0 nonfinite=0 canary_failures=0 max_abs_error=0
+CASE T=3 seed=1 distribution=5 differing_floats=0 nonfinite=0 canary_failures=0 max_abs_error=0
+CASE T=3 seed=1 distribution=6 differing_floats=0 nonfinite=0 canary_failures=0 max_abs_error=0
+CASE T=3 seed=1 distribution=7 differing_floats=0 nonfinite=0 canary_failures=0 max_abs_error=0
+CASE T=3 seed=2 distribution=0 differing_floats=0 nonfinite=0 canary_failures=0 max_abs_error=0
+CASE T=3 seed=2 distribution=1 differing_floats=0 nonfinite=0 canary_failures=0 max_abs_error=0
+CASE T=3 seed=2 distribution=2 differing_floats=0 nonfinite=0 canary_failures=0 max_abs_error=0
+CASE T=3 seed=2 distribution=3 differing_floats=0 nonfinite=0 canary_failures=0 max_abs_error=0
+CASE T=3 seed=2 distribution=4 differing_floats=0 nonfinite=0 canary_failures=0 max_abs_error=0
+CASE T=3 seed=2 distribution=5 differing_floats=0 nonfinite=0 canary_failures=0 max_abs_error=0
+CASE T=3 seed=2 distribution=6 differing_floats=0 nonfinite=0 canary_failures=0 max_abs_error=0
+CASE T=3 seed=2 distribution=7 differing_floats=0 nonfinite=0 canary_failures=0 max_abs_error=0
+CASE T=3 seed=3 distribution=0 differing_floats=0 nonfinite=0 canary_failures=0 max_abs_error=0
+CASE T=3 seed=3 distribution=1 differing_floats=0 nonfinite=0 canary_failures=0 max_abs_error=0
+CASE T=3 seed=3 distribution=2 differing_floats=0 nonfinite=0 canary_failures=0 max_abs_error=0
+CASE T=3 seed=3 distribution=3 differing_floats=0 nonfinite=0 canary_failures=0 max_abs_error=0
+CASE T=3 seed=3 distribution=4 differing_floats=0 nonfinite=0 canary_failures=0 max_abs_error=0
+CASE T=3 seed=3 distribution=5 differing_floats=0 nonfinite=0 canary_failures=0 max_abs_error=0
+CASE T=3 seed=3 distribution=6 differing_floats=0 nonfinite=0 canary_failures=0 max_abs_error=0
+CASE T=3 seed=3 distribution=7 differing_floats=0 nonfinite=0 canary_failures=0 max_abs_error=0
+CASE T=3 seed=4 distribution=0 differing_floats=0 nonfinite=0 canary_failures=0 max_abs_error=0
+CASE T=3 seed=4 distribution=1 differing_floats=0 nonfinite=0 canary_failures=0 max_abs_error=0
+CASE T=3 seed=4 distribution=2 differing_floats=0 nonfinite=0 canary_failures=0 max_abs_error=0
+CASE T=3 seed=4 distribution=3 differing_floats=0 nonfinite=0 canary_failures=0 max_abs_error=0
+CASE T=3 seed=4 distribution=4 differing_floats=0 nonfinite=0 canary_failures=0 max_abs_error=0
+CASE T=3 seed=4 distribution=5 differing_floats=0 nonfinite=0 canary_failures=0 max_abs_error=0
+CASE T=3 seed=4 distribution=6 differing_floats=0 nonfinite=0 canary_failures=0 max_abs_error=0
+CASE T=3 seed=4 distribution=7 differing_floats=0 nonfinite=0 canary_failures=0 max_abs_error=0
+CASE T=4 seed=0 distribution=0 differing_floats=0 nonfinite=0 canary_failures=0 max_abs_error=0
+CASE T=4 seed=0 distribution=1 differing_floats=0 nonfinite=0 canary_failures=0 max_abs_error=0
+CASE T=4 seed=0 distribution=2 differing_floats=0 nonfinite=0 canary_failures=0 max_abs_error=0
+CASE T=4 seed=0 distribution=3 differing_floats=0 nonfinite=0 canary_failures=0 max_abs_error=0
+CASE T=4 seed=0 distribution=4 differing_floats=0 nonfinite=0 canary_failures=0 max_abs_error=0
+CASE T=4 seed=0 distribution=5 differing_floats=0 nonfinite=0 canary_failures=0 max_abs_error=0
+CASE T=4 seed=0 distribution=6 differing_floats=0 nonfinite=0 canary_failures=0 max_abs_error=0
+CASE T=4 seed=0 distribution=7 differing_floats=0 nonfinite=0 canary_failures=0 max_abs_error=0
+CASE T=4 seed=1 distribution=0 differing_floats=0 nonfinite=0 canary_failures=0 max_abs_error=0
+CASE T=4 seed=1 distribution=1 differing_floats=0 nonfinite=0 canary_failures=0 max_abs_error=0
+CASE T=4 seed=1 distribution=2 differing_floats=0 nonfinite=0 canary_failures=0 max_abs_error=0
+CASE T=4 seed=1 distribution=3 differing_floats=0 nonfinite=0 canary_failures=0 max_abs_error=0
+CASE T=4 seed=1 distribution=4 differing_floats=0 nonfinite=0 canary_failures=0 max_abs_error=0
+CASE T=4 seed=1 distribution=5 differing_floats=0 nonfinite=0 canary_failures=0 max_abs_error=0
+CASE T=4 seed=1 distribution=6 differing_floats=0 nonfinite=0 canary_failures=0 max_abs_error=0
+CASE T=4 seed=1 distribution=7 differing_floats=0 nonfinite=0 canary_failures=0 max_abs_error=0
+CASE T=4 seed=2 distribution=0 differing_floats=0 nonfinite=0 canary_failures=0 max_abs_error=0
+CASE T=4 seed=2 distribution=1 differing_floats=0 nonfinite=0 canary_failures=0 max_abs_error=0
+CASE T=4 seed=2 distribution=2 differing_floats=0 nonfinite=0 canary_failures=0 max_abs_error=0
+CASE T=4 seed=2 distribution=3 differing_floats=0 nonfinite=0 canary_failures=0 max_abs_error=0
+CASE T=4 seed=2 distribution=4 differing_floats=0 nonfinite=0 canary_failures=0 max_abs_error=0
+CASE T=4 seed=2 distribution=5 differing_floats=0 nonfinite=0 canary_failures=0 max_abs_error=0
+CASE T=4 seed=2 distribution=6 differing_floats=0 nonfinite=0 canary_failures=0 max_abs_error=0
+CASE T=4 seed=2 distribution=7 differing_floats=0 nonfinite=0 canary_failures=0 max_abs_error=0
+CASE T=4 seed=3 distribution=0 differing_floats=0 nonfinite=0 canary_failures=0 max_abs_error=0
+CASE T=4 seed=3 distribution=1 differing_floats=0 nonfinite=0 canary_failures=0 max_abs_error=0
+CASE T=4 seed=3 distribution=2 differing_floats=0 nonfinite=0 canary_failures=0 max_abs_error=0
+CASE T=4 seed=3 distribution=3 differing_floats=0 nonfinite=0 canary_failures=0 max_abs_error=0
+CASE T=4 seed=3 distribution=4 differing_floats=0 nonfinite=0 canary_failures=0 max_abs_error=0
+CASE T=4 seed=3 distribution=5 differing_floats=0 nonfinite=0 canary_failures=0 max_abs_error=0
+CASE T=4 seed=3 distribution=6 differing_floats=0 nonfinite=0 canary_failures=0 max_abs_error=0
+CASE T=4 seed=3 distribution=7 differing_floats=0 nonfinite=0 canary_failures=0 max_abs_error=0
+CASE T=4 seed=4 distribution=0 differing_floats=0 nonfinite=0 canary_failures=0 max_abs_error=0
+CASE T=4 seed=4 distribution=1 differing_floats=0 nonfinite=0 canary_failures=0 max_abs_error=0
+CASE T=4 seed=4 distribution=2 differing_floats=0 nonfinite=0 canary_failures=0 max_abs_error=0
+CASE T=4 seed=4 distribution=3 differing_floats=0 nonfinite=0 canary_failures=0 max_abs_error=0
+CASE T=4 seed=4 distribution=4 differing_floats=0 nonfinite=0 canary_failures=0 max_abs_error=0
+CASE T=4 seed=4 distribution=5 differing_floats=0 nonfinite=0 canary_failures=0 max_abs_error=0
+CASE T=4 seed=4 distribution=6 differing_floats=0 nonfinite=0 canary_failures=0 max_abs_error=0
+CASE T=4 seed=4 distribution=7 differing_floats=0 nonfinite=0 canary_failures=0 max_abs_error=0
+CASE T=5 seed=0 distribution=0 differing_floats=0 nonfinite=0 canary_failures=0 max_abs_error=0
+CASE T=5 seed=0 distribution=1 differing_floats=0 nonfinite=0 canary_failures=0 max_abs_error=0
+CASE T=5 seed=0 distribution=2 differing_floats=0 nonfinite=0 canary_failures=0 max_abs_error=0
+CASE T=5 seed=0 distribution=3 differing_floats=0 nonfinite=0 canary_failures=0 max_abs_error=0
+CASE T=5 seed=0 distribution=4 differing_floats=0 nonfinite=0 canary_failures=0 max_abs_error=0
+CASE T=5 seed=0 distribution=5 differing_floats=0 nonfinite=0 canary_failures=0 max_abs_error=0
+CASE T=5 seed=0 distribution=6 differing_floats=0 nonfinite=0 canary_failures=0 max_abs_error=0
+CASE T=5 seed=0 distribution=7 differing_floats=0 nonfinite=0 canary_failures=0 max_abs_error=0
+CASE T=5 seed=1 distribution=0 differing_floats=0 nonfinite=0 canary_failures=0 max_abs_error=0
+CASE T=5 seed=1 distribution=1 differing_floats=0 nonfinite=0 canary_failures=0 max_abs_error=0
+CASE T=5 seed=1 distribution=2 differing_floats=0 nonfinite=0 canary_failures=0 max_abs_error=0
+CASE T=5 seed=1 distribution=3 differing_floats=0 nonfinite=0 canary_failures=0 max_abs_error=0
+CASE T=5 seed=1 distribution=4 differing_floats=0 nonfinite=0 canary_failures=0 max_abs_error=0
+CASE T=5 seed=1 distribution=5 differing_floats=0 nonfinite=0 canary_failures=0 max_abs_error=0
+CASE T=5 seed=1 distribution=6 differing_floats=0 nonfinite=0 canary_failures=0 max_abs_error=0
+CASE T=5 seed=1 distribution=7 differing_floats=0 nonfinite=0 canary_failures=0 max_abs_error=0
+CASE T=5 seed=2 distribution=0 differing_floats=0 nonfinite=0 canary_failures=0 max_abs_error=0
+CASE T=5 seed=2 distribution=1 differing_floats=0 nonfinite=0 canary_failures=0 max_abs_error=0
+CASE T=5 seed=2 distribution=2 differing_floats=0 nonfinite=0 canary_failures=0 max_abs_error=0
+CASE T=5 seed=2 distribution=3 differing_floats=0 nonfinite=0 canary_failures=0 max_abs_error=0
+CASE T=5 seed=2 distribution=4 differing_floats=0 nonfinite=0 canary_failures=0 max_abs_error=0
+CASE T=5 seed=2 distribution=5 differing_floats=0 nonfinite=0 canary_failures=0 max_abs_error=0
+CASE T=5 seed=2 distribution=6 differing_floats=0 nonfinite=0 canary_failures=0 max_abs_error=0
+CASE T=5 seed=2 distribution=7 differing_floats=0 nonfinite=0 canary_failures=0 max_abs_error=0
+CASE T=5 seed=3 distribution=0 differing_floats=0 nonfinite=0 canary_failures=0 max_abs_error=0
+CASE T=5 seed=3 distribution=1 differing_floats=0 nonfinite=0 canary_failures=0 max_abs_error=0
+CASE T=5 seed=3 distribution=2 differing_floats=0 nonfinite=0 canary_failures=0 max_abs_error=0
+CASE T=5 seed=3 distribution=3 differing_floats=0 nonfinite=0 canary_failures=0 max_abs_error=0
+CASE T=5 seed=3 distribution=4 differing_floats=0 nonfinite=0 canary_failures=0 max_abs_error=0
+CASE T=5 seed=3 distribution=5 differing_floats=0 nonfinite=0 canary_failures=0 max_abs_error=0
+CASE T=5 seed=3 distribution=6 differing_floats=0 nonfinite=0 canary_failures=0 max_abs_error=0
+CASE T=5 seed=3 distribution=7 differing_floats=0 nonfinite=0 canary_failures=0 max_abs_error=0
+CASE T=5 seed=4 distribution=0 differing_floats=0 nonfinite=0 canary_failures=0 max_abs_error=0
+CASE T=5 seed=4 distribution=1 differing_floats=0 nonfinite=0 canary_failures=0 max_abs_error=0
+CASE T=5 seed=4 distribution=2 differing_floats=0 nonfinite=0 canary_failures=0 max_abs_error=0
+CASE T=5 seed=4 distribution=3 differing_floats=0 nonfinite=0 canary_failures=0 max_abs_error=0
+CASE T=5 seed=4 distribution=4 differing_floats=0 nonfinite=0 canary_failures=0 max_abs_error=0
+CASE T=5 seed=4 distribution=5 differing_floats=0 nonfinite=0 canary_failures=0 max_abs_error=0
+CASE T=5 seed=4 distribution=6 differing_floats=0 nonfinite=0 canary_failures=0 max_abs_error=0
+CASE T=5 seed=4 distribution=7 differing_floats=0 nonfinite=0 canary_failures=0 max_abs_error=0
+CASE T=6 seed=0 distribution=0 differing_floats=0 nonfinite=0 canary_failures=0 max_abs_error=0
+CASE T=6 seed=0 distribution=1 differing_floats=0 nonfinite=0 canary_failures=0 max_abs_error=0
+CASE T=6 seed=0 distribution=2 differing_floats=0 nonfinite=0 canary_failures=0 max_abs_error=0
+CASE T=6 seed=0 distribution=3 differing_floats=0 nonfinite=0 canary_failures=0 max_abs_error=0
+CASE T=6 seed=0 distribution=4 differing_floats=0 nonfinite=0 canary_failures=0 max_abs_error=0
+CASE T=6 seed=0 distribution=5 differing_floats=0 nonfinite=0 canary_failures=0 max_abs_error=0
+CASE T=6 seed=0 distribution=6 differing_floats=0 nonfinite=0 canary_failures=0 max_abs_error=0
+CASE T=6 seed=0 distribution=7 differing_floats=0 nonfinite=0 canary_failures=0 max_abs_error=0
+CASE T=6 seed=1 distribution=0 differing_floats=0 nonfinite=0 canary_failures=0 max_abs_error=0
+CASE T=6 seed=1 distribution=1 differing_floats=0 nonfinite=0 canary_failures=0 max_abs_error=0
+CASE T=6 seed=1 distribution=2 differing_floats=0 nonfinite=0 canary_failures=0 max_abs_error=0
+CASE T=6 seed=1 distribution=3 differing_floats=0 nonfinite=0 canary_failures=0 max_abs_error=0
+CASE T=6 seed=1 distribution=4 differing_floats=0 nonfinite=0 canary_failures=0 max_abs_error=0
+CASE T=6 seed=1 distribution=5 differing_floats=0 nonfinite=0 canary_failures=0 max_abs_error=0
+CASE T=6 seed=1 distribution=6 differing_floats=0 nonfinite=0 canary_failures=0 max_abs_error=0
+CASE T=6 seed=1 distribution=7 differing_floats=0 nonfinite=0 canary_failures=0 max_abs_error=0
+CASE T=6 seed=2 distribution=0 differing_floats=0 nonfinite=0 canary_failures=0 max_abs_error=0
+CASE T=6 seed=2 distribution=1 differing_floats=0 nonfinite=0 canary_failures=0 max_abs_error=0
+CASE T=6 seed=2 distribution=2 differing_floats=0 nonfinite=0 canary_failures=0 max_abs_error=0
+CASE T=6 seed=2 distribution=3 differing_floats=0 nonfinite=0 canary_failures=0 max_abs_error=0
+CASE T=6 seed=2 distribution=4 differing_floats=0 nonfinite=0 canary_failures=0 max_abs_error=0
+CASE T=6 seed=2 distribution=5 differing_floats=0 nonfinite=0 canary_failures=0 max_abs_error=0
+CASE T=6 seed=2 distribution=6 differing_floats=0 nonfinite=0 canary_failures=0 max_abs_error=0
+CASE T=6 seed=2 distribution=7 differing_floats=0 nonfinite=0 canary_failures=0 max_abs_error=0
+CASE T=6 seed=3 distribution=0 differing_floats=0 nonfinite=0 canary_failures=0 max_abs_error=0
+CASE T=6 seed=3 distribution=1 differing_floats=0 nonfinite=0 canary_failures=0 max_abs_error=0
+CASE T=6 seed=3 distribution=2 differing_floats=0 nonfinite=0 canary_failures=0 max_abs_error=0
+CASE T=6 seed=3 distribution=3 differing_floats=0 nonfinite=0 canary_failures=0 max_abs_error=0
+CASE T=6 seed=3 distribution=4 differing_floats=0 nonfinite=0 canary_failures=0 max_abs_error=0
+CASE T=6 seed=3 distribution=5 differing_floats=0 nonfinite=0 canary_failures=0 max_abs_error=0
+CASE T=6 seed=3 distribution=6 differing_floats=0 nonfinite=0 canary_failures=0 max_abs_error=0
+CASE T=6 seed=3 distribution=7 differing_floats=0 nonfinite=0 canary_failures=0 max_abs_error=0
+CASE T=6 seed=4 distribution=0 differing_floats=0 nonfinite=0 canary_failures=0 max_abs_error=0
+CASE T=6 seed=4 distribution=1 differing_floats=0 nonfinite=0 canary_failures=0 max_abs_error=0
+CASE T=6 seed=4 distribution=2 differing_floats=0 nonfinite=0 canary_failures=0 max_abs_error=0
+CASE T=6 seed=4 distribution=3 differing_floats=0 nonfinite=0 canary_failures=0 max_abs_error=0
+CASE T=6 seed=4 distribution=4 differing_floats=0 nonfinite=0 canary_failures=0 max_abs_error=0
+CASE T=6 seed=4 distribution=5 differing_floats=0 nonfinite=0 canary_failures=0 max_abs_error=0
+CASE T=6 seed=4 distribution=6 differing_floats=0 nonfinite=0 canary_failures=0 max_abs_error=0
+CASE T=6 seed=4 distribution=7 differing_floats=0 nonfinite=0 canary_failures=0 max_abs_error=0
+CASE T=7 seed=0 distribution=0 differing_floats=0 nonfinite=0 canary_failures=0 max_abs_error=0
+CASE T=7 seed=0 distribution=1 differing_floats=0 nonfinite=0 canary_failures=0 max_abs_error=0
+CASE T=7 seed=0 distribution=2 differing_floats=0 nonfinite=0 canary_failures=0 max_abs_error=0
+CASE T=7 seed=0 distribution=3 differing_floats=0 nonfinite=0 canary_failures=0 max_abs_error=0
+CASE T=7 seed=0 distribution=4 differing_floats=0 nonfinite=0 canary_failures=0 max_abs_error=0
+CASE T=7 seed=0 distribution=5 differing_floats=0 nonfinite=0 canary_failures=0 max_abs_error=0
+CASE T=7 seed=0 distribution=6 differing_floats=0 nonfinite=0 canary_failures=0 max_abs_error=0
+CASE T=7 seed=0 distribution=7 differing_floats=0 nonfinite=0 canary_failures=0 max_abs_error=0
+CASE T=7 seed=1 distribution=0 differing_floats=0 nonfinite=0 canary_failures=0 max_abs_error=0
+CASE T=7 seed=1 distribution=1 differing_floats=0 nonfinite=0 canary_failures=0 max_abs_error=0
+CASE T=7 seed=1 distribution=2 differing_floats=0 nonfinite=0 canary_failures=0 max_abs_error=0
+CASE T=7 seed=1 distribution=3 differing_floats=0 nonfinite=0 canary_failures=0 max_abs_error=0
+CASE T=7 seed=1 distribution=4 differing_floats=0 nonfinite=0 canary_failures=0 max_abs_error=0
+CASE T=7 seed=1 distribution=5 differing_floats=0 nonfinite=0 canary_failures=0 max_abs_error=0
+CASE T=7 seed=1 distribution=6 differing_floats=0 nonfinite=0 canary_failures=0 max_abs_error=0
+CASE T=7 seed=1 distribution=7 differing_floats=0 nonfinite=0 canary_failures=0 max_abs_error=0
+CASE T=7 seed=2 distribution=0 differing_floats=0 nonfinite=0 canary_failures=0 max_abs_error=0
+CASE T=7 seed=2 distribution=1 differing_floats=0 nonfinite=0 canary_failures=0 max_abs_error=0
+CASE T=7 seed=2 distribution=2 differing_floats=0 nonfinite=0 canary_failures=0 max_abs_error=0
+CASE T=7 seed=2 distribution=3 differing_floats=0 nonfinite=0 canary_failures=0 max_abs_error=0
+CASE T=7 seed=2 distribution=4 differing_floats=0 nonfinite=0 canary_failures=0 max_abs_error=0
+CASE T=7 seed=2 distribution=5 differing_floats=0 nonfinite=0 canary_failures=0 max_abs_error=0
+CASE T=7 seed=2 distribution=6 differing_floats=0 nonfinite=0 canary_failures=0 max_abs_error=0
+CASE T=7 seed=2 distribution=7 differing_floats=0 nonfinite=0 canary_failures=0 max_abs_error=0
+CASE T=7 seed=3 distribution=0 differing_floats=0 nonfinite=0 canary_failures=0 max_abs_error=0
+CASE T=7 seed=3 distribution=1 differing_floats=0 nonfinite=0 canary_failures=0 max_abs_error=0
+CASE T=7 seed=3 distribution=2 differing_floats=0 nonfinite=0 canary_failures=0 max_abs_error=0
+CASE T=7 seed=3 distribution=3 differing_floats=0 nonfinite=0 canary_failures=0 max_abs_error=0
+CASE T=7 seed=3 distribution=4 differing_floats=0 nonfinite=0 canary_failures=0 max_abs_error=0
+CASE T=7 seed=3 distribution=5 differing_floats=0 nonfinite=0 canary_failures=0 max_abs_error=0
+CASE T=7 seed=3 distribution=6 differing_floats=0 nonfinite=0 canary_failures=0 max_abs_error=0
+CASE T=7 seed=3 distribution=7 differing_floats=0 nonfinite=0 canary_failures=0 max_abs_error=0
+CASE T=7 seed=4 distribution=0 differing_floats=0 nonfinite=0 canary_failures=0 max_abs_error=0
+CASE T=7 seed=4 distribution=1 differing_floats=0 nonfinite=0 canary_failures=0 max_abs_error=0
+CASE T=7 seed=4 distribution=2 differing_floats=0 nonfinite=0 canary_failures=0 max_abs_error=0
+CASE T=7 seed=4 distribution=3 differing_floats=0 nonfinite=0 canary_failures=0 max_abs_error=0
+CASE T=7 seed=4 distribution=4 differing_floats=0 nonfinite=0 canary_failures=0 max_abs_error=0
+CASE T=7 seed=4 distribution=5 differing_floats=0 nonfinite=0 canary_failures=0 max_abs_error=0
+CASE T=7 seed=4 distribution=6 differing_floats=0 nonfinite=0 canary_failures=0 max_abs_error=0
+CASE T=7 seed=4 distribution=7 differing_floats=0 nonfinite=0 canary_failures=0 max_abs_error=0
+CASE T=8 seed=0 distribution=0 differing_floats=0 nonfinite=0 canary_failures=0 max_abs_error=0
+CASE T=8 seed=0 distribution=1 differing_floats=0 nonfinite=0 canary_failures=0 max_abs_error=0
+CASE T=8 seed=0 distribution=2 differing_floats=0 nonfinite=0 canary_failures=0 max_abs_error=0
+CASE T=8 seed=0 distribution=3 differing_floats=0 nonfinite=0 canary_failures=0 max_abs_error=0
+CASE T=8 seed=0 distribution=4 differing_floats=0 nonfinite=0 canary_failures=0 max_abs_error=0
+CASE T=8 seed=0 distribution=5 differing_floats=0 nonfinite=0 canary_failures=0 max_abs_error=0
+CASE T=8 seed=0 distribution=6 differing_floats=0 nonfinite=0 canary_failures=0 max_abs_error=0
+CASE T=8 seed=0 distribution=7 differing_floats=0 nonfinite=0 canary_failures=0 max_abs_error=0
+CASE T=8 seed=1 distribution=0 differing_floats=0 nonfinite=0 canary_failures=0 max_abs_error=0
+CASE T=8 seed=1 distribution=1 differing_floats=0 nonfinite=0 canary_failures=0 max_abs_error=0
+CASE T=8 seed=1 distribution=2 differing_floats=0 nonfinite=0 canary_failures=0 max_abs_error=0
+CASE T=8 seed=1 distribution=3 differing_floats=0 nonfinite=0 canary_failures=0 max_abs_error=0
+CASE T=8 seed=1 distribution=4 differing_floats=0 nonfinite=0 canary_failures=0 max_abs_error=0
+CASE T=8 seed=1 distribution=5 differing_floats=0 nonfinite=0 canary_failures=0 max_abs_error=0
+CASE T=8 seed=1 distribution=6 differing_floats=0 nonfinite=0 canary_failures=0 max_abs_error=0
+CASE T=8 seed=1 distribution=7 differing_floats=0 nonfinite=0 canary_failures=0 max_abs_error=0
+CASE T=8 seed=2 distribution=0 differing_floats=0 nonfinite=0 canary_failures=0 max_abs_error=0
+CASE T=8 seed=2 distribution=1 differing_floats=0 nonfinite=0 canary_failures=0 max_abs_error=0
+CASE T=8 seed=2 distribution=2 differing_floats=0 nonfinite=0 canary_failures=0 max_abs_error=0
+CASE T=8 seed=2 distribution=3 differing_floats=0 nonfinite=0 canary_failures=0 max_abs_error=0
+CASE T=8 seed=2 distribution=4 differing_floats=0 nonfinite=0 canary_failures=0 max_abs_error=0
+CASE T=8 seed=2 distribution=5 differing_floats=0 nonfinite=0 canary_failures=0 max_abs_error=0
+CASE T=8 seed=2 distribution=6 differing_floats=0 nonfinite=0 canary_failures=0 max_abs_error=0
+CASE T=8 seed=2 distribution=7 differing_floats=0 nonfinite=0 canary_failures=0 max_abs_error=0
+CASE T=8 seed=3 distribution=0 differing_floats=0 nonfinite=0 canary_failures=0 max_abs_error=0
+CASE T=8 seed=3 distribution=1 differing_floats=0 nonfinite=0 canary_failures=0 max_abs_error=0
+CASE T=8 seed=3 distribution=2 differing_floats=0 nonfinite=0 canary_failures=0 max_abs_error=0
+CASE T=8 seed=3 distribution=3 differing_floats=0 nonfinite=0 canary_failures=0 max_abs_error=0
+CASE T=8 seed=3 distribution=4 differing_floats=0 nonfinite=0 canary_failures=0 max_abs_error=0
+CASE T=8 seed=3 distribution=5 differing_floats=0 nonfinite=0 canary_failures=0 max_abs_error=0
+CASE T=8 seed=3 distribution=6 differing_floats=0 nonfinite=0 canary_failures=0 max_abs_error=0
+CASE T=8 seed=3 distribution=7 differing_floats=0 nonfinite=0 canary_failures=0 max_abs_error=0
+CASE T=8 seed=4 distribution=0 differing_floats=0 nonfinite=0 canary_failures=0 max_abs_error=0
+CASE T=8 seed=4 distribution=1 differing_floats=0 nonfinite=0 canary_failures=0 max_abs_error=0
+CASE T=8 seed=4 distribution=2 differing_floats=0 nonfinite=0 canary_failures=0 max_abs_error=0
+CASE T=8 seed=4 distribution=3 differing_floats=0 nonfinite=0 canary_failures=0 max_abs_error=0
+CASE T=8 seed=4 distribution=4 differing_floats=0 nonfinite=0 canary_failures=0 max_abs_error=0
+CASE T=8 seed=4 distribution=5 differing_floats=0 nonfinite=0 canary_failures=0 max_abs_error=0
+CASE T=8 seed=4 distribution=6 differing_floats=0 nonfinite=0 canary_failures=0 max_abs_error=0
+CASE T=8 seed=4 distribution=7 differing_floats=0 nonfinite=0 canary_failures=0 max_abs_error=0
+PIPELINE T=1 differing_floats=0 nonfinite=0
+PIPELINE T=2 differing_floats=0 nonfinite=0
+PIPELINE T=3 differing_floats=0 nonfinite=0
+PIPELINE T=4 differing_floats=0 nonfinite=0
+PIPELINE T=5 differing_floats=0 nonfinite=0
+PIPELINE T=6 differing_floats=0 nonfinite=0
+PIPELINE T=7 differing_floats=0 nonfinite=0
+PIPELINE T=8 differing_floats=0 nonfinite=0
+SUMMARY cases=320 failed=0
+<end of output>
+Test time =   1.87 sec
+----------------------------------------------------------
+Test Passed.
+"shared_scale_fusion_test" end time: Oct 10 07:39 Central Daylight Time
+"shared_scale_fusion_test" time elapsed: 00:00:01
+----------------------------------------------------------
+
+33/116 Testing: gr_parity
+33/116 Test: gr_parity
+Command: "C:/strata/local-setup/target-80/build-cuda86-main/gr_parity.exe" "--selftest"
+Directory: C:/strata/local-setup/target-80/build-cuda86-main
+"gr_parity" start time: Oct 10 07:39 Central Daylight Time
+Output:
+----------------------------------------------------------
+  per-stream RMSNorm vs whole-stack        yes  (86.1097% apart, floor 5.000%)
+  /hc inside the silu vs outside           yes  (7.1852% apart, floor 5.000%)
+  SiLU on lo / sigmoid on gate, swapped    yes  (87.2055% apart, floor 5.000%)
+  mean over streams vs sum                 yes  (300.0000% apart, floor 50.000%)
+  BF16 vs FP32 activation contracts        yes  (0.0978% apart, floor 0.010%)
+
+  mixed vs reference                       worst 1.989e-08 (mean |ref| 0.2165)
+  inject vs reference                      rel 1.423e-08
+  FP32 activations vs reference: pass (mixed 6.352e-08, inject 1.564e-07)
+  restoring default activation contract: byte-identical
+  weight orientation is observable         yes (59.5% apart)
+  null w_inject writes nothing             yes
+  zero injection -> plain residual add     yes (worst rel 5.847e-08)
+  1*sigmoid vs 2*sigmoid is observable     yes (readings 50% apart, kernel within 4.34e-07)
+  every stream adds the same block output  yes (worst rel 9.353e-08)
+
+  real dims 2560/4/320 BF16 pass (mixed 6.622e-08, inject 1.985e-07)
+
+  real dims 2560/4/320 FP32 pass (mixed 1.541e-07, inject 1.591e-07)
+
+  real dims 2560/4/320 native pinned GR pass (mixed 1.690e-07, inject 9.280e-08)
+  fused GR read + q8_1 (STRATA_QFUSE), T 1..8, direct and graph replays: pass
+  fused GR multi max-T=8 LDS launch and changing graph replay pass
+  scalar gamma 1.00000000 BF16 activation/capture pass (mixed 0.614394009, ref 0.614394009)
+  scalar final mixer BF16 pass
+  scalar gamma 1.00000000 FP32 activation/capture pass (mixed 0.614636600, ref 0.614636600)
+  scalar final mixer FP32 pass
+  scalar gamma 1.00000000 native pinned GR activation/capture pass (mixed 0.614636600, ref 0.614636600)
+  scalar final mixer native pinned GR pass
+  scalar gamma 1.00390625 BF16 activation/capture pass (mixed 0.616793990, ref 0.616793990)
+  scalar final mixer BF16 pass
+  scalar gamma 1.00390625 FP32 activation/capture pass (mixed 0.617553174, ref 0.617553174)
+  scalar final mixer FP32 pass
+  scalar gamma 1.00390625 native pinned GR activation/capture pass (mixed 0.617553174, ref 0.617553174)
+  scalar final mixer native pinned GR pass
+
+gr_read/gr_write: 0 failures
+gr_parity OK
+<end of output>
+Test time =   0.41 sec
+----------------------------------------------------------
+Test Passed.
+"gr_parity" end time: Oct 10 07:39 Central Daylight Time
+"gr_parity" time elapsed: 00:00:00
+----------------------------------------------------------
+
+34/116 Testing: gdn_parity
+34/116 Test: gdn_parity
+Command: "C:/strata/local-setup/target-80/build-cuda86-main/gdn_parity.exe" "--selftest"
+Directory: C:/strata/local-setup/target-80/build-cuda86-main
+"gdn_parity" start time: Oct 10 07:39 Central Daylight Time
+Output:
+----------------------------------------------------------
+  modulo vs interleave head pairing          yes  (142.04% apart)
+  decay before vs after the update           yes  (76.93% apart)
+
+  o vs reference                             rel 1.942e-07
+  state (read via (S,h_v,S)) vs reference    rel 4.023e-08
+  gate=beta=0 from a zero state is a no-op   yes
+
+  conv weight layout is observable           yes  (132.6% apart)
+  conv out vs reference                      rel 1.092e-08
+  conv state slide (mapped) vs reference     rel 0.000e+00
+
+  eps on sum vs on mean is observable        yes  (1031.4% apart)
+  l2_norm vs reference                       rel 0.000e+00
+
+  out norm (rms * ssm_norm * sigmoid z)      rel 1.041e-08
+  sigmoid vs SiLU on the gate is observable  yes  (86.78% apart)
+
+  gdn_ab_multi T=1..8 == fused_gdn_ab        bitwise (8 cases)
+  gdn_step_norm_multi T=1..8 == single-token bitwise (47 cases)
+
+gdn: 0 failures
+gdn_parity OK
+<end of output>
+Test time =   0.54 sec
+----------------------------------------------------------
+Test Passed.
+"gdn_parity" end time: Oct 10 07:39 Central Daylight Time
+"gdn_parity" time elapsed: 00:00:00
+----------------------------------------------------------
+
+45/116 Testing: native_multi_parity
+45/116 Test: native_multi_parity
+Command: "C:/strata/local-setup/target-80/build-cuda86-main/native_multi_parity.exe"
+Directory: C:/strata/local-setup/target-80/build-cuda86-main
+"native_multi_parity" start time: Oct 10 07:39 Central Daylight Time
+Output:
+----------------------------------------------------------
+  router multi == single, random logits                bitwise (19 cases)
+  router multi == single, exact ties                   bitwise (19 cases)
+  router multi == single, NaN logits                   bitwise (19 cases)
+  router_top10 on 256 experts (non-512 fallback)       matches the host reference
+  combine k=10 + shared (float4 kernel)                bitwise (9 cases)
+  combine k=10 + shared, output misaligned             bitwise (9 cases)
+  combine k=10 without shared                          bitwise (9 cases)
+  combine k=9 + shared                                 bitwise (9 cases)
+
+native_multi: 0 failures
+native_multi_parity OK
+<end of output>
+Test time =   0.23 sec
+----------------------------------------------------------
+Test Passed.
+"native_multi_parity" end time: Oct 10 07:39 Central Daylight Time
+"native_multi_parity" time elapsed: 00:00:00
+----------------------------------------------------------
+
+End testing: Oct 10 07:39 Central Daylight Time

@@ -1,0 +1,13 @@
+We need answer user's request. Need implement topological_order in Python. Need return only complete function in Python code block. Need satisfy constraints: no imports, no mutate input, lexicographically smallest topological ordering include isolated nodes, ignore duplicate edges, raise ValueError for edge endpoint absent from nodes or cycle. Need likely Kahn with min-heap? Can't import heapq. Can implement by selecting min among available manually. Need ensure lexicographically smallest: at each step pick smallest node among nodes with in-degree zero. Need not mutate inputs: copy nodes list, build counts etc. Need ignore duplicate edges: use set of edge pairs. But edges list of tuples maybe could include duplicate; set okay. Edge endpoints absent: raise ValueError. Also cycle after processing all edges. Need be careful if nodes list unique but could be empty. Return []? Yes.
+
+Potential algorithm:
+def topological_order(nodes, edges):
+    # copy nodes for stable? nodes list unique strings. Need maybe ensure no mutation.
+    node_set = set(nodes)  # if nodes is iterable list; unique. If duplicates? spec unique. But if duplicate in nodes? Could set remove. But input intact. Could not validate duplicates. 
+    indeg = {node: 0 for node in node_set}
+    adj = {node: set() for node in node_set} # set to ignore duplicate edges. Sets no mutation input.
+    for before, after in edges:
+        if before not in node_set or after not in node_set: raise ValueError(...)
+        if before == after? A self-loop is cycle. Need handle. If ignore duplicate edge (a,a) would indeg[a] += 1? adj[a].add(a). Then indeg nonzero cycle detected. Fine. But if duplicate self-loop, set avoid double. 
+        if after in adj[before]: continue? But need indeg not double. Use set to ignore duplicates. But if before==after and already in adj, skip.
+    Then available = sorted? Use list of nodes with indeg == 0, then loop find min. Simpler: available = [n for n in node_set if indeg[n]==0]. Need include isolated nodes. If using set iteration non-deterministic. For lexicographically smallest, when selecting min each step we can sort initially and each step pick min. But if we maintain available list unsorted, min works deterministic. Need update: remove picked node from available. To avoid
