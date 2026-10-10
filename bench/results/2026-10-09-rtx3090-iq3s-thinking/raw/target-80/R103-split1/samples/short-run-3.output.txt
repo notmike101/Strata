@@ -1,0 +1,18 @@
+We need answer user's request. Need produce final detailed answer at least 1200 words. Need implement thread-safe Python TTLCache using OrderedDict and monotonic clock. Include set, get, delete, clear, len, expiration, capacity eviction, unit tests with injected fake clock, detailed explanation thread safety complexity. Complete code, tests, explanation. Do not abbreviate implementation. Also Benchmark identifier ignored. Need likely no need external. Need ensure code correct. Let's design robust TTLCache.
+
+Requirements: thread-safe. Python class using OrderedDict and monotonic clock. injected fake clock for tests. Methods set, get, delete, clear, len, expiration, capacity eviction. Could implement as:
+from collections import OrderedDict
+import threading
+
+class TTLCache:
+    def __init__(self, ttl, maxsize=None, clock=time.monotonic):
+        self.ttl=...
+        self.maxsize=...
+        self._clock=clock
+        self._entries=OrderedDict() # key -> value? or (value, expires_at)
+        self._lock=threading.RLock() maybe Reentrant because methods may call internal.
+        _default_ttl maybe per item.
+
+Need ensure expiration on access, purge expired items, capacity eviction. For len should not count expired? likely len should return live entries. Need handle get returns None for missing or value sentinel to distinguish? Could implement get(key, default=None) and contains? Need expiration method maybe expires(key) returns expiry time or None; maybe method ttl? Include 'expiration' maybe get_expiration(key). Need delete, clear.
+
+Thread safety: using RLock. Need avoid stale expired entries. For capacity eviction: when setting new key, first remove expired maybe ensure live size < maxsize. If maxsize not None: while live count >= maxsize: pop oldest non-expired? OrderedDict insertion order, can popitem(last=False). But if many expired entries, need purge. Could have _purge_expired() while first item expired: pop. But if expired entries not at front? OrderedDict insertion order; TTL same? If per item TTL, expired may be scattered? If same TTL, insertion order correlates expiry (earlier inserted expires earlier). But if per-item ttl, later shorter ttl may expire before older. So purge all? Need maintain. Approach: each item stores expires_at. For get: if expired, delete key. For len: maybe purge expired? Could purge all expired on len. _count_live? Need

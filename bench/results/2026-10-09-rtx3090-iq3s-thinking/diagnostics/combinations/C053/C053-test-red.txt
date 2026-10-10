@@ -1,0 +1,15 @@
+**********************************************************************
+** Visual Studio 2022 Developer Command Prompt v17.14.36
+** Copyright (c) 2025 Microsoft Corporation
+**********************************************************************
+[1/2] Building CXX object CMakeFiles\accepted_usage_test.dir\tests\core\accepted_usage.cpp.obj
+FAILED: CMakeFiles/accepted_usage_test.dir/tests/core/accepted_usage.cpp.obj 
+C:\llama-cpp-src\toolchains\vs-buildtools\VC\Tools\MSVC\14.44.35207\bin\Hostx64\x64\cl.exe  /nologo /TP -DSTRATA_VERSION=\"0.1.41\" -IC:\strata\include /DWIN32 /D_WINDOWS /EHsc /O2 /Ob2 /DNDEBUG -std:c++20 -MT /Zi /showIncludes /FoCMakeFiles\accepted_usage_test.dir\tests\core\accepted_usage.cpp.obj /FdCMakeFiles\accepted_usage_test.dir\ /FS -c C:\strata\tests\core\accepted_usage.cpp
+C:\strata\tests\core\accepted_usage.cpp(17): error C2039: 'enabled_for_request': is not a member of 'strata::core::AcceptedUsage'
+C:\strata\include\strata/core/accepted_usage.hpp(10): note: see declaration of 'strata::core::AcceptedUsage'
+C:\strata\tests\core\accepted_usage.cpp(17): error C3861: 'enabled_for_request': identifier not found
+C:\strata\tests\core\accepted_usage.cpp(17): warning C4805: '==': unsafe mix of type '<error type>' and type 'const bool' in operation
+C:\strata\tests\core\accepted_usage.cpp(26): error C2039: 'enabled_for_request': is not a member of 'strata::core::AcceptedUsage'
+C:\strata\include\strata/core/accepted_usage.hpp(10): note: see declaration of 'strata::core::AcceptedUsage'
+C:\strata\tests\core\accepted_usage.cpp(26): error C3861: 'enabled_for_request': identifier not found
+ninja: build stopped: subcommand failed.

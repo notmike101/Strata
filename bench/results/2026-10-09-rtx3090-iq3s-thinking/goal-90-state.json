@@ -3,15 +3,17 @@
   "target_tps": 90,
   "metric": "server_decode_tps",
   "contract": "goal-90-contract.md",
-  "current": "C051 compatibility guard built/tested; C052 same-binary split-window screen prepared, not run.",
+  "current": "C052 and C053 rejected. Goal contract is90/90; recent90/85 summaries corrected. Source restored toC051 after archiving C053.",
   "next": [
-    "Run guarded R102 control then R103 split-window screen; apply finite stop rule before any reverse confirmation."
+    "Frozen random-coding baseline and separate completion quality on clean-source C051 HC1/accepted1/conditional64 stack."
   ],
   "promoted": "The previously qualified format-gather engine with IQ2_S gather disabled and adaptive lag2; no changes this turn.",
   "stopping_rule": "Leave goal active until all fixed qualification cells pass. No benchmark model resident at handoff.",
   "quality": "Q007: 3/5 compiled and passed72 tests each, 2/5 no final answer at8192 tokens. Goal unqualified.",
-  "last_checkpoint": "E162",
-  "resume_command": "Read E161-E162. engine/strata-cuda133-usage-guard.exe SHA256 0dea69dcbf10b0f925549552ec58c76d64c2acf51276187b60adb1a62b90b4dd. C052 config files prepared. Run .venv/Scripts/python.exe local-setup/target-80/run-c020-arm.py local-setup/target-80/R102-split0.json --out local-setup/target-80/R102-split0 --observer audit-no-process > local-setup/target-80/R102-wrapper.txt 2>&1 after fresh preflight. R102-R105 not run yet. Production unchanged; no model resident.",
-  "safety": "C050 offline parity and timing guard passed; exact children exited. No model server launched; production config unchanged.",
-  "goal_tool_status_at_entry": "active, verified get_goal"
+  "last_checkpoint": "E172",
+  "resume_command": "Read E172 and goal-90-contract.md (90 in both short and~3K cells). No model resident. C053 source restored; native C051 engine0dea69dc is clean-source. R110-random-native.json and R111-random-native-reverse.json prepared but unrun, HC1/accepted1/conditional64. Use run-c020-arm.py CONFIG --out ARM --goal-coding --observer audit-no-process, with --reverse-order only for R111. Inspect and reuse goal90-quality.py for separate Q0088192-token five-seed completion checks under guarded supervisor. Preserve previous Q007 failures; do not relabel512token reasoning as coding quality. Build tree still contains rejected C053 objects; do not silently use its strata.exe as C051.",
+  "safety": "C053 all48requests passed16GiB physical/commit floors and exact process cleanup. Config3457fdfe restored; idleGPU457MiB.",
+  "goal_tool_status_at_entry": "active, verified get_goal",
+  "target_short_tps": 90,
+  "target_longer_tps": 90
 }

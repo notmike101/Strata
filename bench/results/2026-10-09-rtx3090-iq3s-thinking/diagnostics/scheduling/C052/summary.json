@@ -1,0 +1,78 @@
+{
+  "arms": [
+    "R102-split0",
+    "R103-split1"
+  ],
+  "comparison": {
+    "short": {
+      "server_decode_tps": {
+        "control": 90.5,
+        "split": 79.0,
+        "percent": -12.70718232044199
+      },
+      "prompt_tps": {
+        "control": 212.2,
+        "split": 204.9,
+        "percent": -3.4401508011310034
+      },
+      "request_e2e_tps": {
+        "control": 78.62648378329078,
+        "split": 69.80171908296418,
+        "percent": -11.223654264699523
+      },
+      "stream_total_tps": {
+        "control": 78.63762646698375,
+        "split": 69.81642752207786,
+        "percent": -11.217529497294143
+      },
+      "ttft_seconds": {
+        "control": 0.8185025000129826,
+        "split": 0.8618621999630705,
+        "percent": 5.297442579515654
+      },
+      "request_seconds": {
+        "control": 6.511800799984485,
+        "split": 7.335062899976037,
+        "percent": 12.642617998903072
+      }
+    },
+    "longer": {
+      "server_decode_tps": {
+        "control": 84.5,
+        "split": 78.3,
+        "percent": -7.337278106508882
+      },
+      "prompt_tps": {
+        "control": 494.7,
+        "split": 494.9,
+        "percent": 0.04042854255104089
+      },
+      "request_e2e_tps": {
+        "control": 41.98262934268915,
+        "split": 40.31462922464914,
+        "percent": -3.9730720637450423
+      },
+      "stream_total_tps": {
+        "control": 41.98680167858354,
+        "split": 40.31906365020066,
+        "percent": -3.972053030258671
+      },
+      "ttft_seconds": {
+        "control": 6.183139899978414,
+        "split": 6.1666721000219695,
+        "percent": -0.26633393749512235
+      },
+      "request_seconds": {
+        "control": 12.195520100009162,
+        "split": 12.700104399991687,
+        "percent": 4.137456179356769
+      }
+    }
+  },
+  "identical_request_payloads": 12,
+  "safety_minimum_bytes": {
+    "physical_available": 62413287424,
+    "commit_available": 41514856448
+  },
+  "decision": "Rejected; no R104/R105 confirmation, production unchanged."
+}

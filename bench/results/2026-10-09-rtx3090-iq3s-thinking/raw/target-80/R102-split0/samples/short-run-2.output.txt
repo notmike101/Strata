@@ -1,0 +1,15 @@
+We need answer user's request. Need produce final detailed answer >=1200 words, complete code, tests, explanation. User gave benchmark identifier ignore. Need implement thread-safe Python TTLCache using OrderedDict and monotonic clock. Include set, get, delete, clear, len, expiration, capacity eviction, unit tests with injected fake clock, detailed explanation of thread safety and complexity. Complete code no abbreviations. Need likely use threading.Lock, OrderedDict. Need discuss monotonic clock injectable. Need maybe len triggers expiration? Need decide semantics. Need include capacity eviction. Need code not abbreviated. Need unit tests likely with fake clock. Need maybe provide one code block with implementation and tests? They ask write complete code, then tests, then explain design. We can structure: implementation, tests, explanation. Need at least 1200 words. Let's craft robust Python.
+
+Potential implementation:
+from collections import OrderedDict
+from threading import RLock
+from time import monotonic
+from typing import Any, Optional, Callable
+
+class TTLCache:
+    def __init__(self, capacity:int, ttl_seconds:float|None=None, clock:Callable[[],float]=monotonic):
+         validate capacity >0, ttl nonnegative maybe optional.
+         self._lock = RLock()
+         self._data = OrderedDict() # key -> (value, expires_at) maybe expires_at None for no ttl? But TTL cache probably all entries expire; maybe allow ttl override. Use default ttl.
+    _now = clock
+    _purge(self): iterates oldest? OrderedDict not sorted by expiration? Insertion order. Since each item has expiration = now+ttl; insertion order not necessarily expiration order if ttl overrides differ. Could purge all entries each operation O(n) not great. Could maintain OrderedDict for LRU and scan all expired O(n). Or could use min-heap for expiration but request specifically OrderedDict and monotonic clock. Need expiration. Could store expires_at and purge expired entries during get/set/len by scanning all values O(n). Or maintain two structures? But using OrderedDict only? They say using an OrderedDict and monotonic clock. Could just OrderedDict for storage; expiration can be lazy per key and periodic purge. For len accurate need purge all. Need complexity discuss: get O(1) expected plus amortized? If purge all on every op O(n) but perhaps optimized? But request include expiration, capacity eviction. Could implement lazy expiration in get: check if expired and delete. For set

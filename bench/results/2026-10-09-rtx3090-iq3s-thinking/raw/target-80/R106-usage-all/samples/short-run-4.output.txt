@@ -1,0 +1,17 @@
+We need answer user's request. Need produce detailed answer at least 1200 words. User: "Benchmark identifier ... Ignore. Implement a thread-safe Python TTLCache class using an OrderedDict and a monotonic clock. Include set, get, delete, clear, len, expiration, capacity eviction, unit tests with an injected fake clock, and a detailed explanation of thread safety and complexity. Write complete code, then tests, then explain the design. Do not abbreviate the implementation. Produce a detailed answer of at least 1200 words."
+
+We need output complete code, tests, explanation. Need likely mention ignore identifier. Need satisfy >=1200 words. Need ensure implementation thread-safe, OrderedDict, monotonic clock injectable. Include set, get, delete, clear, len, expiration, capacity eviction. Unit tests with fake clock. Maybe use threading.RLock or Lock. Need no abbreviations. Maybe include type hints. Need complete code. Could be one file? Could present implementation and tests. Need at least 1200 words. Need likely not too terse. Need count words? We need ensure >1200. I can write lengthy explanation. Let's draft code robust.
+
+Implementation:
+from __future__ import annotations
+import threading, time
+from collections import OrderedDict
+from typing import Any, Callable, Generic, Optional, TypeVar
+
+Key = TypeVar; Value.
+
+class TTLCache(Generic[K,V]):
+    def __init__(self, maxsize: int = 128, ttl: float | None = None, clock: Callable[[], float] | None = None):
+       if maxsize <=0: raise ValueError? maxsize can be 0? capacity eviction. Better allow maxsize=0? len always 0? But capacity eviction maybe if maxsize=0 delete all. But set with maxsize=0 would store nothing. Could require maxsize >=0. For simplicity maxsize >=1. But robust allow 0. Need capacity eviction: if maxsize=0, clear.
+       self._maxsize = int(maxsize)
+       self._default_ttl = None if ttl is None else float(ttl); negative ttl? treat as expired immediately? maybe allow ttl >=0; None = no expiration. Could set ttl=0 expire immediately on get (expiry time = now + 0 -> not >? Need strict?). If ttl is negative raise? Better allow 0, expire when now >= expires

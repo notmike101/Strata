@@ -1,0 +1,14 @@
+We need answer user's request. Need produce final answer with complete code, tests, detailed explanation at least 1200 words. Need think fully.
+
+Task: Implement thread-safe Python TTLCache class using OrderedDict and monotonic clock. Include set, get, delete, clear, len, expiration, capacity eviction, unit tests with injected fake clock, detailed explanation of thread safety and complexity. Write complete code, then tests, then explain design. Do not abbreviate implementation. Detailed answer >=1200 words.
+
+Need produce Python code. Need consider thread safety: use RLock? OrderedDict operations not thread-safe. Need protect all public methods. TTLCache with capacity, default ttl. Monotonic clock injected fake clock. Use OrderedDict maybe LRU? Need capacity eviction. Need expiration: lazy removal on get? Also active size? len? Need len should return number of live entries, excluding expired. But len on OrderedDict would be O(n) if purge. Requirement include len. Could maintain _live_count with bookkeeping for O(1) len? But capacity eviction and expiration complicate. Simpler: purge expired entries in len, O(n). But maybe we can maintain live_count and expire lazily? Let's design robust.
+
+Need OrderedDict. Store key -> (value, expiry). Need default_ttl? Constructor maxsize (capacity), default_ttl=None seconds. Clock injection: clock=time.monotonic. Thread-safe.
+
+Methods:
+- set(key, value, ttl=None): if maxsize <=0? handle. Under lock: now=clock(); purge_expired(now); if key in store: delete existing? Need update. Then insert. If capacity exceeded, evict oldest entries. OrderedDict order: use move_to_end on set/get for LRU? Not specified but capacity eviction can evict oldest inserted/accessed. Use OrderedDict and move_to_end for LRU. Eviction: while len(store)>maxsize: store.popitem(last=False). Since purged expired, fine.
+- get(key, default=None): now=clock(); if key in store: value, expiry = store[key]; if expiry is not None and now >= expiry: delete, return default; else move_to_end, return value. But need under lock. Should maybe purge? Could not need for get. But if expired and removed. Return default.
+- delete(key): under lock pop, return bool.
+- clear: under lock store.clear(); maybe stats?
+- __len__: under lock now, purge

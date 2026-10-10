@@ -1,0 +1,17 @@
+We need answer user's request. Need produce detailed answer at least 1200 words. User asks: Benchmark identifier ignore. Implement thread-safe Python TTLCache class using OrderedDict and monotonic clock. Include set, get, delete, clear, len, expiration, capacity eviction, unit tests with injected fake clock, detailed explanation thread safety and complexity. Write complete code, then tests, then explain design. Do not abbreviate implementation.
+
+Need produce final with code complete, tests, explanation. Need ensure at least 1200 words. Should include Python implementation using threading.Lock/RLock? OrderedDict. Monotonic clock: time.monotonic by default but inject clock. TTLCache class. Methods set, get, delete, clear, __len__, maybe popitem, contains, items? Need handle expiration and capacity eviction. Thread safe with lock around all mutating/reading operations that update order or access shared state. Consider stale expired entries: On get if expired delete and return default. On set if capacity reached evict expired first? Need define. Use OrderedDict for LRU? User says using OrderedDict and monotonic clock; TTLCache capacity eviction likely LRU eviction. Need include len: should count live entries? Could remove expired in len. Complexity O(1) average, O(k) for expired cleanup if many expired. Need detailed explanation.
+
+Potential implementation:
+
+import threading, time
+from collections import OrderedDict
+from typing import Optional, Any, Callable
+
+class TTLCache:
+    def __init__(self, ttl=..., capacity=None, clock=time.monotonic, default_ttl=None?):
+Need flexible per-set TTL? The request only says TTLCache; likely global TTL. Could support default_ttl and set(key, value, ttl=None) optional. But maybe simpler with ttl parameter. But detailed, include per-entry TTL. Need OrderedDict storing key -> (value, expires_at). Also maybe maintain expired entries count.
+
+Implementation details:
+- lock = threading.RLock() to allow internal methods? Use private helpers _now, _is_expired, _prune_expired (must not acquire lock if called with lock). If public methods acquire lock, private helpers assume locked. Avoid reentrancy if not needed. Use RLock safe.
+- set(key, value, ttl=None): with self._lock: now = self._clock(); if key in data: maybe update. If capacity: while len(data) >= capacity and key not in data: evict. Eviction strategy: first remove expired

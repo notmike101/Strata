@@ -1,0 +1,26 @@
+We need answer user's request. Need produce final answer at least 1200 words. Need implement thread-safe Python TTLCache using OrderedDict monotonic clock, include set, get, delete, clear, len, expiration, capacity eviction, unit tests with injected fake clock, detailed explanation thread safety and complexity. Do not abbreviate implementation. Need ignore benchmark identifier. Need likely provide code, tests, explanation. Need ensure complete code. Could use threading.RLock. OrderedDict move_to_end. Need expiration lazily and explicit maybe _purge_expired. Capacity eviction least recently used? Using OrderedDict: move_to_end on get/set. Evict oldest. Need handle maxsize. Need fake clock injected. Use MonotonicClock wrapper. Need maybe class Clock with now. Default time.monotonic. Need tests use unittest or pytest? likely unittest with fake clock. Include set, get, delete, clear, __len__, maybe __getitem__? Include expiry property? Expiration can mean ttl? Maybe methods: get, set, delete, clear, __len__, maybe keys? Need ensure thread-safe.
+
+Need write detailed answer >1200 words. Ensure no abbreviations. Could include imports: threading, time, OrderedDict. Need thread-safe TTLCache implementation.
+
+Let's design carefully:
+
+from collections import OrderedDict
+import threading
+import time
+
+class MonotonicClock:
+    def now(self): return time.monotonic()
+
+class TTLCache:
+    def __init__(self, maxsize, ttl, clock=None):
+        if maxsize <0? raise ValueError. If ttl <=0? Could allow 0? Cache expires immediately. But ttl should positive? Let's allow ttl >=0. maxsize >0? Use None for unbounded? Request capacity eviction; require maxsize int. If maxsize=0? Could allow 0 no entries. We'll validate maxsize >=0 and ttl >=0.
+        self._lock = threading.RLock()
+        self._cache = OrderedDict() # key -> (value, expires_at)
+        self._clock = clock or MonotonicClock()
+        self._maxsize = maxsize
+        self._default_ttl = ttl
+        self._misses=0? Not necessary but tests. Could include hits, misses, evictions, expirations. Nice but keep complete.
+
+    def set(self, key, value, ttl=None):
+        with self._lock:
+            now = self._clock

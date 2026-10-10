@@ -1,0 +1,27 @@
+We need answer user's request. Need produce final detailed answer at least 1200 words. Need implement thread-safe Python TTLCache using OrderedDict and monotonic clock. Include set, get, delete, clear, len, expiration, capacity eviction, unit tests with injected fake clock, detailed explanation thread safety complexity. Complete code, then tests, then explain design. Do not abbreviate.
+
+Need ensure code correct. Need think through design.
+
+Requirements: thread-safe TTLCache class using OrderedDict and monotonic clock. Operations set, get, delete, clear, len. Expiration: lazy expiration? Maybe active purge? Need capacity eviction LRU? OrderedDict can move to end. TTL cache with expiration and capacity eviction. Thread safety: using threading.RLock maybe. Need injected fake clock for unit tests. Use time.monotonic by default but allow clock callable.
+
+Need define TTLCache maybe:
+import threading, time
+from collections import OrderedDict
+from typing import Any, Callable, Hashable, Optional, Tuple
+
+class TTLCache:
+    def __init__(self, capacity: int, default_ttl: Optional[float]=None, clock: Callable[[], float]=time.monotonic):
+       if capacity < 1: raise ValueError
+       if default_ttl is not None and default_ttl < 0: raise ValueError? TTL zero means expires immediately? Could allow >=0. Negative invalid.
+       self._capacity = capacity
+       self._default_ttl = default_ttl
+       self._clock = clock
+       self._store = OrderedDict() # key -> (value, expires_at)
+       self._lock = threading.RLock()
+
+    def set(self, key, value, ttl=None):
+       if ttl is None: ttl=default_ttl
+       if ttl is None: expires_at=None (never expires?) But TTLCache maybe all TTL? Could support None for no expiration? It says TTL cache. Could require ttl, but include default. Maybe if ttl None no expiration. Need expiration. If ttl < 0 raise.
+       with lock:
+          self._evict_expired_if_needed? Maybe ensure capacity after insertion. But expired entries can occupy capacity. Need capacity eviction. Options:
+          - On set, remove expired entries for key then insert at end; if len > capacity evict expired first, then oldest LRU? Need capacity strict. Could call _purge_expired? If many expired, O(n). Better lazy expiration on get/len? But len expected? Could len

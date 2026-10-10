@@ -1,0 +1,13 @@
+We need answer user's request. Need produce final answer with complete code, tests, detailed explanation at least 1200 words. Need think fully.
+
+Task: Implement thread-safe Python TTLCache class using OrderedDict and monotonic clock. Include set, get, delete, clear, len, expiration, capacity eviction, unit tests with injected fake clock, detailed explanation of thread safety and complexity. Write complete code, then tests, then explain design. Do not abbreviate implementation. Detailed answer >=1200 words.
+
+Need produce code robust. Use threading.RLock maybe. OrderedDict for LRU? TTLCache with capacity and ttl. Methods set, get, delete, clear, __len__, expiration (maybe get expiry, expire?). Need maybe contains? Could include. Use collections.OrderedDict. Clock injected: time.monotonic by default, but fake clock for tests.
+
+Design: Each entry stores value and expires_at (monotonic absolute). On get, check expiration: if expired, delete and miss. On set, if existing key update value, reset expiry, move_to_end. If expired existing, remove first. If capacity exceeded, evict oldest item from OrderedDict (FIFO insertion order) or LRU if get moves to end. User asks using OrderedDict, capacity eviction; can do LRU or FIFO. TTL cache often capacity eviction maybe least-recently used. Need mention. OrderedDict supports move_to_end. Use LRU: get and set move to end, capacity evict next(iter) oldest. This is efficient. But if set updates existing move_to_end. If capacity exceeded, pop oldest.
+
+Thread safety: All public methods acquire lock. Use RLock because _evict_expired? internal methods assume lock held. Avoid calling public methods while locked to prevent deadlock; implement _locked methods. Could expose len, set, get, delete, clear. Need thread safety with monotonic clock injected. Clock can be callable returning float. Need careful if fake clock non-monotonic? It should be monotonic, but if not, could cause weird. Validate? not necessary.
+
+Need complete code no abbreviation. Could include type hints. Maybe from threading import RLock. Maybe Optional from typing.
+
+Need unit tests with fake clock: Python unittest. Use FakeClock. Test set/get, expiration, default value? Could include get(key, default=None). Need expiration: maybe method expires_at(key) returns float or None. Also maybe cleanup method expire? "Include ... expiration" Could add method

@@ -1,0 +1,16 @@
+We need answer user's request. Need produce final answer at least 1200 words. Need implement thread-safe Python TTLCache using OrderedDict monotonic clock, include set, get, delete, clear, len, expiration, capacity eviction, unit tests with injected fake clock, detailed explanation thread safety and complexity. Do not abbreviate implementation. Need ignore benchmark identifier. Need likely provide code, tests, explanation. Need ensure complete code. Could use threading.RLock. OrderedDict move_to_end. Need TTL entries with expiration absolute time. Use time.monotonic? Injectable clock for tests: default time.monotonic. Need maybe maxsize and ttl optional? set(key, value, ttl=None). If ttl missing default? Could support per-entry ttl, default ttl. If maxsize None unlimited? But capacity eviction when full. OrderedDict LRU. get: if key absent -> None or sentinel? delete: if absent no error? clear len. Expiration: purge expired keys maybe when set/get/len? Need thread-safe and deterministic. Need ensure len accurate: remove expired entries before len. But with monotonic clock, expired entries may remain. Could purge on access (get, set, len, delete) and maybe _purge_expired. Capacity eviction: if new key and maxsize reached and purge still full, pop oldest. Need handle updating existing key: move to end, update expiration. Need TTL clock fake. Could define class _FakeClock with now method and advance. But tests should use unittest. Need complete code in one file? Include cache.py and test_cache.py maybe. Need not abbreviate. Need at least 1200 words final. Could include code blocks. Need ensure no bug. Let's design.
+
+class TTLCache:
+    __slots__? But with OrderedDict. Use threading.RLock? RLock safer reentrant. Methods:
+    def __init__(self, maxsize=1024, ttl=5.0, clock=time.monotonic):
+       if maxsize is not None and maxsize <=0: ValueError
+       if ttl is not None and ttl < 0: ValueError
+       self._maxsize = maxsize
+       self._ttl = ttl
+       self._clock = clock
+       self._cache = OrderedDict() # key -> (value, expires_at)
+       self._lock = RLock()
+
+    def set(self, key, value, ttl=None):
+       if ttl is None: ttl = self._ttl
+      

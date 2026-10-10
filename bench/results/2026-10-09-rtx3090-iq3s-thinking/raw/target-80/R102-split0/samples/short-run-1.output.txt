@@ -1,0 +1,21 @@
+We need answer user's request. Need produce complete code, tests, explanation >=1200 words. Need think thoroughly.
+
+User: Implement thread-safe Python TTLCache class using OrderedDict and monotonic clock. Include set, get, delete, clear, len, expiration, capacity eviction, unit tests with injected fake clock, detailed explanation of thread safety and complexity. Write complete code, then tests, then explain design. Do not abbreviate implementation. Detailed answer at least 1200 words.
+
+Need craft final with code blocks. Need no identifier mention likely ignore. We need ensure correct implementation.
+
+Design: TTLCache class. Use threading.RLock? Since public methods call internal helpers, RLock allows reentry. But if methods call get inside set? Avoid. Use Lock perhaps simpler, but with internal _get_entry may need avoid recursion. Thread-safe. Use OrderedDict for LRU? Capacity eviction. Need expiration and lazy and active purge? Need define behavior: set(key, value, ttl=None) ttl seconds. get(key, default=None) returns value if not expired else default and removes expired. delete(key) maybe only if present and not expired. clear() empties. len() returns count of unexpired? But thread-safe. Capacity eviction: on set, purge expired and if len >= maxsize evict least recently used. OrderedDict move_to_end on get? If cache is TTL + LRU? User says OrderedDict and monotonic clock, capacity eviction. Could use OrderedDict as insertion order; if get should make LRU? We should implement LRU: get moves_to_end. set existing moves_to_end; eviction popleft oldest. This is common. Thread safety: RLock because _purge calls? Need careful not to deadlock if method calls another public method while lock held. Use internal nonlocking helpers with leading underscore. Public methods acquire lock and call helpers. Avoid reentry if RLock anyway. But complexity. Could use `threading.RLock` for simplicity. But if using RLock and public get calls _evict? fine. Need unit tests with injected fake clock.
+
+Implementation details:
+
+from __future__ import annotations
+import threading
+from collections import OrderedDict
+from time import monotonic
+from typing import Any, Callable, Optional, Mapping, Iterator
+
+Maybe define _Entry namedtuple? Could store tuple (value, expires_at). Use OrderedDict.
+
+Class:
+class TTLCache:
+    DEFAULT_TTL = ...? Could have constructor maxsize, ttl default, clock=time

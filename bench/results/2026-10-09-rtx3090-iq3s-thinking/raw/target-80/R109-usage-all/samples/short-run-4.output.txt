@@ -1,0 +1,13 @@
+We need answer user's request. Need produce complete code, tests, explanation design, at least 1200 words. Need implement thread-safe Python TTLCache using OrderedDict and monotonic clock. Include set, get, delete, clear, len, expiration, capacity eviction, unit tests with injected fake clock. Detailed explanation thread safety and complexity. No abbreviation. Need likely use threading.RLock? OrderedDict thread-safety? Need ensure monotonic clock injection. Need maybe context manager? Need maybe expiration sweep. Need handle TTL zero? Maybe maxsize <=0? Provide full implementation with type hints, dataclasses? Need use collections.OrderedDict, monotonic as default timefunc. Need ensure thread safety: all public methods lock. get updates order for LRU? TTL cache with OrderedDict: key -> (value, expires_at). On set: with lock, remove old if exists, insert, enforce capacity by evicting first/oldest? OrderedDict move_to_end on get? For TTL cache capacity eviction likely LRU? User says capacity eviction. Using OrderedDict maybe maintain insertion order, or LRU by moving get to end. Need decide. Could implement LRU + TTL. Need len: count not expired maybe also purge expired. Need expiration: purge_expired internal. Also maybe __contains__? Not required but can include. Need fake clock unit tests: unittest, inject clock. Need ensure fake clock only advances. Need code complete, tests complete. Need at least 1200 words. Need maybe not too long but detailed.
+
+Potential implementation:
+import threading
+from collections import OrderedDict
+from time import monotonic
+from typing import Any, Callable, Optional, Tuple, Hashable
+
+class TTLCache:
+    def __init__(self, maxsize=128, ttl=30.0, clock=monotonic):
+       if not callable(clock): raise TypeError
+       if maxsize <= 0: raise ValueError? Maybe maxsize non-negative? If 0 means no entries? Could set maxsize = max(0,int(maxsize)). If ttl negative? ttl >=0. Store maxsize, ttl, clock. self._entries = OrderedDict(); self._lock = threading.RLock();
+    def set(self, key, value, ttl=None): with lock: ttl = self.ttl if ttl is None else ttl; if ttl < 0 raise; if ttl == 0 maybe delete immediately? Usually expire immediately or no insert. Could support ttl 0 as immediate expiration.

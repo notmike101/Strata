@@ -1,0 +1,157 @@
+diff --git a/include/strata/core/accepted_usage.hpp b/include/strata/core/accepted_usage.hpp
+index 52d07721..c8ace48c 100644
+--- a/include/strata/core/accepted_usage.hpp
++++ b/include/strata/core/accepted_usage.hpp
+@@ -12,6 +12,10 @@ class AcceptedUsage {
+     int rows_live_ = 0;
+ public:
+     uint64_t examined = 0, retained = 0;
++    static bool enabled_for_request(bool enabled, bool barrier_only, int64_t interval) {
++        assert(interval >= 0);
++        return enabled && (!barrier_only || interval > 0);
++    }
+     void begin(int n) {
+         assert(n >= 0);
+         if (rows_.size() < (size_t)n) rows_.resize((size_t)n);
+diff --git a/src/program/generate.cpp b/src/program/generate.cpp
+index 3530e0cf..863bfe92 100644
+--- a/src/program/generate.cpp
++++ b/src/program/generate.cpp
+@@ -2337,6 +2337,16 @@ int main(int argc, char** argv) {
+     }
+     const char* accepted_usage_env = std::getenv("STRATA_ACCEPTED_USAGE");
+     const bool accepted_usage_on = accepted_usage_env && std::string(accepted_usage_env) == "1";
++    const char* usage_barrier_env = std::getenv("STRATA_ACCEPTED_USAGE_BARRIER_ONLY");
++    if (usage_barrier_env && std::string(usage_barrier_env) != "0" && std::string(usage_barrier_env) != "1") {
++        std::fprintf(stderr, "strata: STRATA_ACCEPTED_USAGE_BARRIER_ONLY needs 0 or 1\n");
++        return 2;
++    }
++    const bool usage_barrier_only = usage_barrier_env && std::string(usage_barrier_env) == "1";
++    if (usage_barrier_only && !accepted_usage_on) {
++        std::fprintf(stderr, "strata: STRATA_ACCEPTED_USAGE_BARRIER_ONLY needs STRATA_ACCEPTED_USAGE=1\n");
++        return 2;
++    }
+     int64_t adapt_barrier_tokens = 0;
+     if (const char* env = std::getenv("STRATA_SERIAL_ADAPT_TOKENS")) {
+         char* end = nullptr;
+@@ -2347,6 +2357,10 @@ int main(int argc, char** argv) {
+             return 2;
+         }
+     }
++    if (usage_barrier_only && adapt_barrier_tokens == 0) {
++        std::fprintf(stderr, "strata: STRATA_ACCEPTED_USAGE_BARRIER_ONLY needs a positive STRATA_SERIAL_ADAPT_TOKENS\n");
++        return 2;
++    }
+     int64_t adapt_min_prompt = 0;
+     if (const char* env = std::getenv("STRATA_SERIAL_ADAPT_MIN_PROMPT")) {
+         char* end = nullptr;
+@@ -10019,6 +10033,11 @@ int main(int argc, char** argv) {
+             const uint64_t usage_examined0 = accepted_usage.examined, usage_retained0 = accepted_usage.retained;
+             const int64_t request_barrier_tokens = strata::core::TokenBarrier::interval_for_prompt(
+                 adapt_barrier_tokens, adapt_min_prompt, n - resume);
++            const bool request_accepted_usage = strata::core::AcceptedUsage::enabled_for_request(
++                accepted_usage_on, usage_barrier_only, request_barrier_tokens);
++            if (accepted_usage_on)
++                std::fprintf(stderr, "strata accepted usage policy: %lld fresh prompt tokens, active %d, barrier_only %d\n",
++                             (long long)(n - resume), (int)request_accepted_usage, (int)usage_barrier_only);
+             strata::core::TokenBarrier token_barrier(p, request_barrier_tokens);
+             if (adapt_barrier_tokens > 0)
+                 std::fprintf(stderr, "strata serial cache policy: %lld fresh prompt tokens, interval %lld\n",
+@@ -10764,7 +10783,7 @@ int main(int argc, char** argv) {
+                 // STRATA_SPEC_PROB: the MTP drafts' distributions q, judged by rejection sampling (core/spec_prob.hpp);
+                 // a suffix window and the lookup chain's tail are point masses and keep the exact-match rule
+                 if (use_mtp && mtp.prob() && !from_sfx && T_mtp > 1) ver.set_spec_q(mtp.spec_q(), T_mtp - 1);
+-                if (accepted_usage_on) {
++                if (request_accepted_usage) {
+                     accepted_usage.begin(T);
+                     drive.accepted_usage = &accepted_usage;
+                 }
+@@ -10793,7 +10812,7 @@ int main(int argc, char** argv) {
+                 }
+                 int a = 0;
+                 while (a < T - 1 && window[(size_t) a + 1] == outv[(size_t) a]) ++a;
+-                if (accepted_usage_on) accepted_usage.commit(drive.d.usage, a + 1);
++                if (request_accepted_usage) accepted_usage.commit(drive.d.usage, a + 1);
+                 if (from_sfx) { ++sfx_windows; sfx_drafts += T - 1; sfx_ok += a; }
+                 if (chain_n > 0) { ++chain_windows; chain_drafts += chain_n; chain_ok += std::max(0, a - (T_mtp - 1)); }
+                 if (!from_sfx && !first_window)
+@@ -10872,7 +10891,7 @@ int main(int argc, char** argv) {
+             if (request_barrier_tokens > 0)
+                 std::fprintf(stderr, "strata serial cache barriers: %lld updates, %.3f ms total\n",
+                              (long long) barrier_count, barrier_ms);
+-            if (accepted_usage_on)
++            if (request_accepted_usage)
+                 std::fprintf(stderr, "strata accepted usage: %llu retained of %llu routed entries\n",
+                              (unsigned long long)(accepted_usage.retained - usage_retained0),
+                              (unsigned long long)(accepted_usage.examined - usage_examined0));
+diff --git a/tests/core/accepted_usage.cpp b/tests/core/accepted_usage.cpp
+index 0c475cc7..e8ce7adb 100644
+--- a/tests/core/accepted_usage.cpp
++++ b/tests/core/accepted_usage.cpp
+@@ -2,6 +2,7 @@
+ #undef NDEBUG
+ #endif
+ #include "strata/core/accepted_usage.hpp"
++#include "strata/core/token_barrier.hpp"
+ #include <cassert>
+ #include <stdexcept>
+ #include <vector>
+@@ -9,6 +10,29 @@
+ 
+ int main() {
+     using strata::core::AcceptedUsage;
++    for (bool enabled : {false,true}) for (bool barrier_only : {false,true}) {
++        for (int64_t fresh : {1,1024,1025,262144}) {
++            const auto interval = strata::core::TokenBarrier::interval_for_prompt(64,1025,fresh);
++            const bool expected = enabled && (!barrier_only || fresh >= 1025);
++            assert(AcceptedUsage::enabled_for_request(enabled,barrier_only,interval)==expected);
++        }
++    }
++    // Alternating cached suffix/long fresh requests must use the right accounting
++    // rule without leaking previously recorded rows into a later request.
++    AcceptedUsage alternating;
++    std::vector<float> totals(4,0), oracle(4,0);
++    const int32_t ordered[]={0,1,2,3};
++    for (int interval : {0,64,0,64,64,0}) {
++        const bool active=AcceptedUsage::enabled_for_request(true,true,interval);
++        if(active) {
++            alternating.begin(4); alternating.record(0,4,ordered,4,1);
++            alternating.commit(totals,2);
++        } else {
++            for(int id:ordered) ++totals[id]; // ordinary dispatch's all-row rule
++        }
++        for(int t=0;t<(interval?2:4);++t) ++oracle[t];
++        assert(totals==oracle);
++    }
+     AcceptedUsage rows;
+     std::vector<float> usage(12, 2.0f);
+     const int32_t l0[] = {0,1, 2,3, 1,2, 3,0};
+diff --git a/tools/test_accepted_usage_modes.py b/tools/test_accepted_usage_modes.py
+index c39f98d5..2848647d 100644
+--- a/tools/test_accepted_usage_modes.py
++++ b/tools/test_accepted_usage_modes.py
+@@ -41,6 +41,24 @@ def main():
+                 # feature check before the file-open error on an AVX2-only host.
+                 sentinel = missing in output or 'this CPU cannot run the expert kernel' in output
+                 assert result.returncode != 0 and not guarded and sentinel, 'Allowed mode did not reach the no-model sentinel'
++        for enabled, interval, barrier_only, reject in [
++            ('1','0','1',True), ('0','64','1',True),
++            ('1','64','2',True), ('1','64','true',True), ('1','64','',True),
++            ('1','64','1',False), ('1','64','0',False),
++        ]:
++            env.update(STRATA_ACCEPTED_USAGE=enabled, STRATA_SERIAL_ADAPT_TOKENS=interval,
++                       STRATA_ACCEPTED_USAGE_BARRIER_ONLY=barrier_only)
++            command = [str(args.engine.resolve()), '--serve', '--pack', missing,
++                       '--native', missing, '--ple-gguf', missing]
++            result = subprocess.run(command, env=env, capture_output=True, text=True, timeout=20)
++            output = result.stdout + result.stderr
++            guarded = 'STRATA_ACCEPTED_USAGE_BARRIER_ONLY' in output
++            print(f'accepted={enabled} interval={interval} barrier_only={barrier_only!r} exit={result.returncode}\n{output}', flush=True)
++            if reject:
++                assert result.returncode==2 and guarded, 'Invalid barrier-only configuration not rejected'
++            else:
++                sentinel = missing in output or 'this CPU cannot run the expert kernel' in output
++                assert result.returncode!=0 and not guarded and sentinel, 'Allowed barrier-only mode did not reach sentinel'
+     print('PASS accepted-usage split-window guard and allowed-mode controls')
+ 
+ 
