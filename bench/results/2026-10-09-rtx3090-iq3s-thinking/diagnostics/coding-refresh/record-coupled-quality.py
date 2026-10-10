@@ -43,7 +43,7 @@ put(dest/'wrapper.txt',wrapper)
 for seed in range(101,106):
     name=f'coding-{seed}.answer.txt';put(dest/name,(arm/name).read_text(encoding='utf-8'))
 note=f'## {args.checkpoint} / {args.arm} approved expanded quality\n\n'
-for c in checks:note+=f"Seed{c['seed']}: {c['completion_tokens']}tokens, finish{c['finish_reason']}, passed={c['passed']}; "+(c.get('stdout') or c.get('error','')).strip()+'\n\n'
+for c in checks:note+=f"Seed{c['seed']}: {c['completion_tokens']}tokens, finish{c['finish_reason']}, passed={c['passed']}; "+(c.get('stdout') or c.get('error') or c.get('stderr','')).strip()+'\n\n'
 note+=f"Pass count{result['passed_count']}/5 with user-approved32768 cap. All five requests equal the originalQ007 requests except max_tokens. Configuration, executable, libraries, expert profile and vision hashes match{source}; fixture hash matchesQ011. Natural-stop passing answers compile and pass72tests each. Zero prompt reuse. Legacy8192 failures remain unchanged. Variable-length quality answers do not satisfy the512-token speed target.\n\n"
 note+=f"Minimum physical{memory['physical_available']} and commit{memory['commit_available']}bytes;16GiB floors pass. Exact cleanup verified and production3457fdfe restored. No promotion; other workload, stability and real-use requirements remain.\n"
 put(dest/'README.md',note)

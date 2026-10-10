@@ -3876,7 +3876,7 @@ Seed103: 16435tokens, finishstop, passed=True; {"passed": true, "compiled": true
 
 Seed104: 7830tokens, finishstop, passed=True; {"passed": true, "compiled": true, "cases": 72, "test_seed": 904001}
 
-Seed105: 12225tokens, finishstop, passed=False; 
+Seed105: 12225tokens, finishstop, passed=False; original checker v1 raised NameError because TypeError was unavailable. Original stderr is retained in checks.json; the separate E200 evaluation corrects the checker environment.
 
 Pass count4/5 with user-approved32768 cap. All five requests equal the originalQ007 requests except max_tokens. Configuration, executable, libraries, expert profile and vision hashes matchR113-coupled-stack; fixture hash matchesQ011. Natural-stop passing answers compile and pass72tests each. Zero prompt reuse. Legacy8192 failures remain unchanged. Variable-length quality answers do not satisfy the512-token speed target.
 
