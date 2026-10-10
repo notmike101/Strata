@@ -1,0 +1,18 @@
+We need answer user's request. Need produce final answer with complete code, tests, detailed explanation at least 1200 words. Need think fully.
+
+Task: Implement thread-safe Python TTLCache class using OrderedDict and monotonic clock. Include set, get, delete, clear, len, expiration, capacity eviction, unit tests with injected fake clock, detailed explanation of thread safety and complexity. Write complete code, then tests, then explain design. Do not abbreviate implementation. At least 1200 words.
+
+Need produce robust code. Let's design.
+
+TTLCache: thread-safe. Use OrderedDict. Store key -> (value, expires_at) or maybe expiry. Monotonic clock injected: now: Callable[[], float] = time.monotonic. TTL in seconds. capacity maxsize int. Evict least recently used? OrderedDict with move_to_end on access. TTL expiration: on get, check if expired and delete? Also len: number of entries maybe including expired? Usually len counts active entries after purging expired. Need include expiration. Could implement purge_expired in len, maybe also get/set. Thread safety: use RLock. All public methods acquire lock. OrderedDict operations not thread-safe; lock ensures. Avoid reentrancy? RLock allows if internal calls within same thread while lock held. Could use public methods acquire and call private unprefixed assuming lock held. Or simpler public methods acquire and call helper _get_unlocked etc. Need avoid deadlock if use RLock with internal calls. Use _lock = threading.RLock(). Public methods:
+
+class TTLCache:
+    def __init__(self, capacity=128, ttl=300.0, now=time.monotonic): validate capacity >0, ttl >=0? ttl None? Let's require int capacity>0, ttl nonnegative float? Could allow ttl=0 meaning expire immediately? Usually ttl None no expiration? User asks TTLCache, monotonic clock. Simpler: ttl float >0. But tests fake clock can test. Could make ttl=None for no expiration. But capacity eviction.
+
+Fields:
+    self._capacity = capacity
+    self._ttl = ttl
+    self._now = now
+    self._data: OrderedDict[Any, tuple[Any, float|None]] = OrderedDict()
+
+Potential problem: if ttl=0, expires_at == now. Expired if expires_at <= now? If set with ttl=0 then immediately expired. For positive ttl, expiration_at =

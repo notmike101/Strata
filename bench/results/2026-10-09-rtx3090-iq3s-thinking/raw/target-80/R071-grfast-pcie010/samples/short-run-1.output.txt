@@ -1,0 +1,26 @@
+We need answer user's request. Need produce detailed answer at least 1200 words. User asks: Benchmark identifier ignore. Implement thread-safe Python TTLCache class using OrderedDict and monotonic clock. Include set, get, delete, clear, len, expiration, capacity eviction, unit tests with injected fake clock, detailed explanation thread safety and complexity. Write complete code, then tests, then explain design. Do not abbreviate implementation.
+
+Need produce final with code blocks. Need think through implementation. Need ensure complete. Use OrderedDict for LRU? Requirement capacity eviction probably LRU (evict oldest used/inserted?). TTLCache commonly evicts LRU when full, expiration on get and maybe len? Need thread-safe using threading.RLock. Monotonic clock injected as callable. Need handle ttl, default None? Include expiration method. Need complete unit tests likely unittest. Need ensure no abbreviation. Need detailed explanation >1200 words. Could produce code maybe 400 lines? Need satisfy at least 1200 words. Let's design robust.
+
+Potential implementation:
+
+import threading
+from collections import OrderedDict
+
+class TTLCache:
+    def __init__(self, maxsize, ttl, clock=monotonic):
+       if maxsize <=0 raise ValueError
+       if ttl <=0 raise ValueError
+       self._maxsize = int(maxsize)
+       self._ttl = float(ttl)
+       self._clock = clock
+       self._cache = OrderedDict()  # key -> (value, expires_at)
+       self._lock = threading.RLock()
+       # For testing stats? Could include expired_count, etc but not necessary. But for len accurate need purge expired.
+
+Need methods:
+def set(self, key, value, ttl=None):
+  with lock:
+    now = clock()
+    if key in cache: pop? Actually move_to_end if exists then update; if new and len >= maxsize: evict oldest after purge? Need if expired entries. Approach: _purge(now) maybe all expired then if len >= maxsize evict last? But for LRU, if key update, should move to end before eviction? If updating existing, no capacity issue. For new, _evict_capacity(now) which first purges expired, then while len > maxsize: popitem(last=False) (oldest LRU).
+    ttl = self._ttl if ttl is None else float(ttl); if ttl <=

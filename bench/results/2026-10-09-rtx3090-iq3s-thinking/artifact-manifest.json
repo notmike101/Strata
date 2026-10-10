@@ -1,13 +1,13 @@
 {
-  "exported_utc": "2026-10-10T02:22:52.801436+00:00",
+  "exported_utc": "2026-10-10T02:49:14.148597+00:00",
   "files": {
     ".gitattributes": {
       "bytes": 205,
       "sha256": "15b57f1650e1c6330ac02814e730d7470c68f7e1ccee5e2fbeeffa69ad9dcd5a"
     },
     "all-runs.csv": {
-      "bytes": 180780,
-      "sha256": "0a497d84ed91b938eb5d5a6646efd7b3a05add9fda278b88decbd37447a375dc"
+      "bytes": 195226,
+      "sha256": "a518cd3353548e66f23312f9fced9377e0923f5dc65f15fcb7825df43f06d522"
     },
     "B008-pcie.csv": {
       "bytes": 7700,
@@ -1008,6 +1008,58 @@
     "diagnostics/device-plan/P012/run-p012.py": {
       "bytes": 3313,
       "sha256": "c44b3da09b60e1ac5166a7d4bcca72fa514ed7b5c34774e5065021f949f1ba23"
+    },
+    "diagnostics/hyper-connection/abba.json": {
+      "bytes": 23728,
+      "sha256": "36e7d5828041b9b4ba0530907cad1634512c7eb7a91c4aca6141af75718ece57"
+    },
+    "diagnostics/hyper-connection/all-fast020-runs.json": {
+      "bytes": 4219,
+      "sha256": "89c89058382cbd7ae5546354aabc5b88c8ca014448b5fb4a18f8ebda5bcc359a"
+    },
+    "diagnostics/hyper-connection/C034/build-c034-graph.cmd": {
+      "bytes": 596,
+      "sha256": "20431898a366cf39b191b38f356b4e4ffa36285d158e4dcb5cbb9dcca971ec82"
+    },
+    "diagnostics/hyper-connection/C034/C034-graph-build.txt": {
+      "bytes": 313,
+      "sha256": "a624ebea805e9a14a42e7ab078fdba8fae668b1ec487ce4bdd684da391e55fac"
+    },
+    "diagnostics/hyper-connection/C034/C034-graph.txt": {
+      "bytes": 26940,
+      "sha256": "05355e28cddae3428c2c48dc437df4d72d19fa900f683f2b3af1ab7959968c97"
+    },
+    "diagnostics/hyper-connection/C034/c034-hc-graph.cu": {
+      "bytes": 6842,
+      "sha256": "3929e6070f70713eb8bea8c6ac70603dcfe188531357ad555d1b114abfc2dd59"
+    },
+    "diagnostics/hyper-connection/C034/C034-hc-screen.txt": {
+      "bytes": 2618,
+      "sha256": "78fb9899dff3a7ebc4279d19749bd9e626b5376418aecbbdc86aabb730b9a2cb"
+    },
+    "diagnostics/hyper-connection/C034/hc-experiment.md": {
+      "bytes": 1516,
+      "sha256": "c2f3afd1239686da64c4a3ab65c66fe519564e8a104f1826114855ad7948148c"
+    },
+    "diagnostics/hyper-connection/C034/prepare-c034.py": {
+      "bytes": 3795,
+      "sha256": "be9cdb07df1f0a9ed5d7c03454d04d600b9f019e354427acdfeff911411afec4"
+    },
+    "diagnostics/hyper-connection/C034/result.json": {
+      "bytes": 6442,
+      "sha256": "4c4b1acba65811ac001fcd4b0ad8b32e119cecba29238c32c43566056019c258"
+    },
+    "diagnostics/hyper-connection/compare-grfast.py": {
+      "bytes": 2994,
+      "sha256": "ebe379d19c1d993df65d32217efe505a8d2e56410e722b7bc0cd60380deb4766"
+    },
+    "diagnostics/hyper-connection/README.md": {
+      "bytes": 4964,
+      "sha256": "902bb9fb56a101e052e039420a7c0b4b1d7d0f703708d0f1754ab02baabbd2b0"
+    },
+    "diagnostics/hyper-connection/table.md": {
+      "bytes": 372,
+      "sha256": "6ae0710e092466e8df94213df6a6e4310dd43dd0a5aa43081601d0af43ea60c4"
     },
     "diagnostics/memory-regression/R055-retained-memory-control/client-command.json": {
       "bytes": 250,
@@ -3721,6 +3773,342 @@
       "bytes": 7021,
       "sha256": "90f0efa3df29536dac10c5a44ea3a8014b3970ba3bebbaced9520d622697ec59"
     },
+    "diagnostics/served-candidates/R066-grfast-control/config-diff.json": {
+      "bytes": 447,
+      "sha256": "413777f80f6d4b71962a2ac33b3372cbfb1c3fb64c7066d3c6af6d0538e91367"
+    },
+    "diagnostics/served-candidates/R066-grfast-control/effective-sampling-modes.json": {
+      "bytes": 254,
+      "sha256": "26cf4bca672cc8a4844337569cbb0a96eb51167078cd823abe5d45369dbd3b76"
+    },
+    "diagnostics/served-candidates/R066-grfast-control/engine-session.txt": {
+      "bytes": 11477,
+      "sha256": "0b909cffe8f5936507d39389d68dab2a46273b3eada4e07c394a1a5d4dab5552"
+    },
+    "diagnostics/served-candidates/R066-grfast-control/memory-guard.py": {
+      "bytes": 835,
+      "sha256": "0eb2e6466cea2d9487acd287e67f2919558791eb10c2efcceaa5ee372341a9b3"
+    },
+    "diagnostics/served-candidates/R066-grfast-control/memory-summary.json": {
+      "bytes": 342,
+      "sha256": "541726fab365107c2ed9651c42b8df5c8235c87ab9f0fab1ab7d33debab34e16"
+    },
+    "diagnostics/served-candidates/R066-grfast-control/mtp-summary.json": {
+      "bytes": 368,
+      "sha256": "517b6da33bcb8e0ae93d170b9987ecb05c33dbe7d0383253e2b5e4446a0be987"
+    },
+    "diagnostics/served-candidates/R066-grfast-control/observer-audit.json": {
+      "bytes": 277368,
+      "sha256": "9cdeb73b96e6f3d8fa5dce4ddb8061854a6b02c0b7d8ae4e8aa3ac91de513dcb"
+    },
+    "diagnostics/served-candidates/R066-grfast-control/observer.json": {
+      "bytes": 102,
+      "sha256": "fae690257930be882eeec3ce79ec3c911d8f6d6b9da00238be9bd8410776812a"
+    },
+    "diagnostics/served-candidates/R066-grfast-control/prepare.txt": {
+      "bytes": 210,
+      "sha256": "f74c3e293b1d519c8666c53173d5a7e18ee7377e915a556f250278aeec139e3d"
+    },
+    "diagnostics/served-candidates/R066-grfast-control/resident-mode-guard.py": {
+      "bytes": 1268,
+      "sha256": "70e0a993a1aa2cee4f255d3e853ebb26488d87b4c774304520c205aa724c0795"
+    },
+    "diagnostics/served-candidates/R066-grfast-control/safety.csv": {
+      "bytes": 12356,
+      "sha256": "ef6f599b9221d8ea087c054833da1b0ba794ad7d5a5cab45a8f9551d48f1b0e6"
+    },
+    "diagnostics/served-candidates/R066-grfast-control/spec-quality-guard.py": {
+      "bytes": 2282,
+      "sha256": "c5a9ffa351f59b66958d0b0e7fa49cff023eaf4ef287cf08c4bef164f8e6b356"
+    },
+    "diagnostics/served-candidates/R066-grfast-control/supervisor-output.txt": {
+      "bytes": 655,
+      "sha256": "bdea9d8f2daa9c65bad301ec9c403687fbdf59b608804f83d53dcd7f933ad532"
+    },
+    "diagnostics/served-candidates/R066-grfast-control/supervisor.py": {
+      "bytes": 7021,
+      "sha256": "90f0efa3df29536dac10c5a44ea3a8014b3970ba3bebbaced9520d622697ec59"
+    },
+    "diagnostics/served-candidates/R067-grfast-enabled/config-diff.json": {
+      "bytes": 476,
+      "sha256": "02558cefcb47c51832f93b9b4aa6b0205ad85d94b2992181c736d38ea75a03ab"
+    },
+    "diagnostics/served-candidates/R067-grfast-enabled/effective-sampling-modes.json": {
+      "bytes": 254,
+      "sha256": "26cf4bca672cc8a4844337569cbb0a96eb51167078cd823abe5d45369dbd3b76"
+    },
+    "diagnostics/served-candidates/R067-grfast-enabled/engine-session.txt": {
+      "bytes": 11473,
+      "sha256": "a4464708d24c23d8f8db699f6831e15aa047751bbe848cda4dcbc77e868570ab"
+    },
+    "diagnostics/served-candidates/R067-grfast-enabled/memory-guard.py": {
+      "bytes": 835,
+      "sha256": "0eb2e6466cea2d9487acd287e67f2919558791eb10c2efcceaa5ee372341a9b3"
+    },
+    "diagnostics/served-candidates/R067-grfast-enabled/memory-summary.json": {
+      "bytes": 337,
+      "sha256": "06760595652e9d1e979bd662520502addeb4cf1114bbfd0752cc7270612336db"
+    },
+    "diagnostics/served-candidates/R067-grfast-enabled/mtp-summary.json": {
+      "bytes": 367,
+      "sha256": "46f499db00903fb1414fdbe9e3e8884e77a49dc70fb1427cc1f611005e648bff"
+    },
+    "diagnostics/served-candidates/R067-grfast-enabled/observer-audit.json": {
+      "bytes": 278730,
+      "sha256": "f7284b3cc2e35680a4da56957da1f9eadef89a53f862a010877e0abf3c256a49"
+    },
+    "diagnostics/served-candidates/R067-grfast-enabled/observer.json": {
+      "bytes": 102,
+      "sha256": "fae690257930be882eeec3ce79ec3c911d8f6d6b9da00238be9bd8410776812a"
+    },
+    "diagnostics/served-candidates/R067-grfast-enabled/prepare.txt": {
+      "bytes": 210,
+      "sha256": "ce977457ec91784c00d208a4e3d5223852b0cd299c81924e447b835d9eecb9d0"
+    },
+    "diagnostics/served-candidates/R067-grfast-enabled/resident-mode-guard.py": {
+      "bytes": 1268,
+      "sha256": "70e0a993a1aa2cee4f255d3e853ebb26488d87b4c774304520c205aa724c0795"
+    },
+    "diagnostics/served-candidates/R067-grfast-enabled/safety.csv": {
+      "bytes": 12354,
+      "sha256": "17ba02bb7125f6ba24c98e745fe85d2e70a8249aa40a08f558f0378ae10c097e"
+    },
+    "diagnostics/served-candidates/R067-grfast-enabled/spec-quality-guard.py": {
+      "bytes": 2282,
+      "sha256": "c5a9ffa351f59b66958d0b0e7fa49cff023eaf4ef287cf08c4bef164f8e6b356"
+    },
+    "diagnostics/served-candidates/R067-grfast-enabled/supervisor-output.txt": {
+      "bytes": 656,
+      "sha256": "4e784a731ec701e258b273f53abd27ed988add2bcc56d385878754d78052e51b"
+    },
+    "diagnostics/served-candidates/R067-grfast-enabled/supervisor.py": {
+      "bytes": 7021,
+      "sha256": "90f0efa3df29536dac10c5a44ea3a8014b3970ba3bebbaced9520d622697ec59"
+    },
+    "diagnostics/served-candidates/R068-grfast-enabled-reverse/config-diff.json": {
+      "bytes": 476,
+      "sha256": "02558cefcb47c51832f93b9b4aa6b0205ad85d94b2992181c736d38ea75a03ab"
+    },
+    "diagnostics/served-candidates/R068-grfast-enabled-reverse/effective-sampling-modes.json": {
+      "bytes": 254,
+      "sha256": "26cf4bca672cc8a4844337569cbb0a96eb51167078cd823abe5d45369dbd3b76"
+    },
+    "diagnostics/served-candidates/R068-grfast-enabled-reverse/engine-session.txt": {
+      "bytes": 11471,
+      "sha256": "6b6516492e984ddf851306f63df4ae5a48db41a0d4eee5bbc66c4e29149154b1"
+    },
+    "diagnostics/served-candidates/R068-grfast-enabled-reverse/memory-guard.py": {
+      "bytes": 835,
+      "sha256": "0eb2e6466cea2d9487acd287e67f2919558791eb10c2efcceaa5ee372341a9b3"
+    },
+    "diagnostics/served-candidates/R068-grfast-enabled-reverse/memory-summary.json": {
+      "bytes": 338,
+      "sha256": "7df73428444441c3572c2bb4d163ef8df65e7e6904eef69cdcb3599acbabf1fe"
+    },
+    "diagnostics/served-candidates/R068-grfast-enabled-reverse/mtp-summary.json": {
+      "bytes": 368,
+      "sha256": "400c4a560ef7b2b42f065a93415f07cd874131e674af56cf40eeb29dc20e37eb"
+    },
+    "diagnostics/served-candidates/R068-grfast-enabled-reverse/observer-audit.json": {
+      "bytes": 275808,
+      "sha256": "46cb9c09a918dc51b73a01ef7c2956129bae3a0c30bc4b3cef210a4d82424c59"
+    },
+    "diagnostics/served-candidates/R068-grfast-enabled-reverse/observer.json": {
+      "bytes": 102,
+      "sha256": "fae690257930be882eeec3ce79ec3c911d8f6d6b9da00238be9bd8410776812a"
+    },
+    "diagnostics/served-candidates/R068-grfast-enabled-reverse/prepare.txt": {
+      "bytes": 218,
+      "sha256": "6638dbb6471510edac081417210865b990be5d7e97700ed31f26cd57a9654a2e"
+    },
+    "diagnostics/served-candidates/R068-grfast-enabled-reverse/resident-mode-guard.py": {
+      "bytes": 1268,
+      "sha256": "70e0a993a1aa2cee4f255d3e853ebb26488d87b4c774304520c205aa724c0795"
+    },
+    "diagnostics/served-candidates/R068-grfast-enabled-reverse/safety.csv": {
+      "bytes": 12289,
+      "sha256": "11fe5913b92aa91c1d7d8ac3c4ae716fbe782c8ee9b6169806013021dc625f10"
+    },
+    "diagnostics/served-candidates/R068-grfast-enabled-reverse/spec-quality-guard.py": {
+      "bytes": 2282,
+      "sha256": "c5a9ffa351f59b66958d0b0e7fa49cff023eaf4ef287cf08c4bef164f8e6b356"
+    },
+    "diagnostics/served-candidates/R068-grfast-enabled-reverse/supervisor-output.txt": {
+      "bytes": 664,
+      "sha256": "9efe3ed1527ddfb95f63691ed282bf5ed3e405328c07a5c3bd4ecb2a0efee97a"
+    },
+    "diagnostics/served-candidates/R068-grfast-enabled-reverse/supervisor.py": {
+      "bytes": 7021,
+      "sha256": "90f0efa3df29536dac10c5a44ea3a8014b3970ba3bebbaced9520d622697ec59"
+    },
+    "diagnostics/served-candidates/R069-grfast-control-reverse/config-diff.json": {
+      "bytes": 3,
+      "sha256": "ca3d163bab055381827226140568f3bef7eaac187cebd76878e0b63e9e442356"
+    },
+    "diagnostics/served-candidates/R069-grfast-control-reverse/effective-sampling-modes.json": {
+      "bytes": 254,
+      "sha256": "26cf4bca672cc8a4844337569cbb0a96eb51167078cd823abe5d45369dbd3b76"
+    },
+    "diagnostics/served-candidates/R069-grfast-control-reverse/engine-session.txt": {
+      "bytes": 11475,
+      "sha256": "0168e2c1f2f3024ca86f0e7f6f8e7d794de0aa152511e7f1cb55aae8d6b82186"
+    },
+    "diagnostics/served-candidates/R069-grfast-control-reverse/memory-guard.py": {
+      "bytes": 835,
+      "sha256": "0eb2e6466cea2d9487acd287e67f2919558791eb10c2efcceaa5ee372341a9b3"
+    },
+    "diagnostics/served-candidates/R069-grfast-control-reverse/memory-summary.json": {
+      "bytes": 336,
+      "sha256": "04fb742530d8c9fdd38a430ea3820fd8e140fbec9b4423d71fcebab054e44d43"
+    },
+    "diagnostics/served-candidates/R069-grfast-control-reverse/mtp-summary.json": {
+      "bytes": 368,
+      "sha256": "cfe8b851e57ada20bbd57eef8992a2261cd3c1a251a556854de2315ef1dc42d5"
+    },
+    "diagnostics/served-candidates/R069-grfast-control-reverse/observer-audit.json": {
+      "bytes": 277394,
+      "sha256": "121329601ed0eb4209544bdd44f359a9faa06c250263000c83682eabe0ed6bfc"
+    },
+    "diagnostics/served-candidates/R069-grfast-control-reverse/observer.json": {
+      "bytes": 102,
+      "sha256": "fae690257930be882eeec3ce79ec3c911d8f6d6b9da00238be9bd8410776812a"
+    },
+    "diagnostics/served-candidates/R069-grfast-control-reverse/prepare.txt": {
+      "bytes": 217,
+      "sha256": "0264588024a207adcd89a9302f431fd929a426293a0b5e4067ae94d3ceee769a"
+    },
+    "diagnostics/served-candidates/R069-grfast-control-reverse/resident-mode-guard.py": {
+      "bytes": 1268,
+      "sha256": "70e0a993a1aa2cee4f255d3e853ebb26488d87b4c774304520c205aa724c0795"
+    },
+    "diagnostics/served-candidates/R069-grfast-control-reverse/safety.csv": {
+      "bytes": 12356,
+      "sha256": "c032f12337a2935f28e23cb05b1495ae173e7ca7b64d9c2f7acbf69dcbb77e57"
+    },
+    "diagnostics/served-candidates/R069-grfast-control-reverse/spec-quality-guard.py": {
+      "bytes": 2282,
+      "sha256": "c5a9ffa351f59b66958d0b0e7fa49cff023eaf4ef287cf08c4bef164f8e6b356"
+    },
+    "diagnostics/served-candidates/R069-grfast-control-reverse/supervisor-output.txt": {
+      "bytes": 664,
+      "sha256": "937a8e7e6b5792a571ae1d495f2f42deb2effdbc25c44f2dd45f8bd908926bbc"
+    },
+    "diagnostics/served-candidates/R069-grfast-control-reverse/supervisor.py": {
+      "bytes": 7021,
+      "sha256": "90f0efa3df29536dac10c5a44ea3a8014b3970ba3bebbaced9520d622697ec59"
+    },
+    "diagnostics/served-candidates/R070-grfast-pcie020/config-diff.json": {
+      "bytes": 3,
+      "sha256": "ca3d163bab055381827226140568f3bef7eaac187cebd76878e0b63e9e442356"
+    },
+    "diagnostics/served-candidates/R070-grfast-pcie020/effective-sampling-modes.json": {
+      "bytes": 254,
+      "sha256": "26cf4bca672cc8a4844337569cbb0a96eb51167078cd823abe5d45369dbd3b76"
+    },
+    "diagnostics/served-candidates/R070-grfast-pcie020/engine-session.txt": {
+      "bytes": 11480,
+      "sha256": "6dfcadb2a97e5e4c04e0293feaa2c55e2fa643a87cb00e3e7c7695b24bb278df"
+    },
+    "diagnostics/served-candidates/R070-grfast-pcie020/memory-guard.py": {
+      "bytes": 835,
+      "sha256": "0eb2e6466cea2d9487acd287e67f2919558791eb10c2efcceaa5ee372341a9b3"
+    },
+    "diagnostics/served-candidates/R070-grfast-pcie020/memory-summary.json": {
+      "bytes": 338,
+      "sha256": "b0819a9663bd1b5151a098f1e472d13f4c5ec1dcbbd6396449ce3a5edd9c11a2"
+    },
+    "diagnostics/served-candidates/R070-grfast-pcie020/mtp-summary.json": {
+      "bytes": 366,
+      "sha256": "4ee8c78e29e39f3eabe68a105a33af39d5c089db5ddb6ed3ea1e8862b788ab5d"
+    },
+    "diagnostics/served-candidates/R070-grfast-pcie020/observer-audit.json": {
+      "bytes": 277444,
+      "sha256": "b3007a9f2b10f7634e9e481b01352b72169cf5d12147812fe63f22cc65dc7298"
+    },
+    "diagnostics/served-candidates/R070-grfast-pcie020/observer.json": {
+      "bytes": 102,
+      "sha256": "fae690257930be882eeec3ce79ec3c911d8f6d6b9da00238be9bd8410776812a"
+    },
+    "diagnostics/served-candidates/R070-grfast-pcie020/prepare.txt": {
+      "bytes": 210,
+      "sha256": "5c30ad337ea93e59c1376f37dc14a2315ef7114f007485baa53c785462054deb"
+    },
+    "diagnostics/served-candidates/R070-grfast-pcie020/resident-mode-guard.py": {
+      "bytes": 1268,
+      "sha256": "70e0a993a1aa2cee4f255d3e853ebb26488d87b4c774304520c205aa724c0795"
+    },
+    "diagnostics/served-candidates/R070-grfast-pcie020/safety.csv": {
+      "bytes": 12289,
+      "sha256": "ae956b7067837cb7fdfbc0e5e75994ca2b456b88c38fbc06f072115ecef00b49"
+    },
+    "diagnostics/served-candidates/R070-grfast-pcie020/spec-quality-guard.py": {
+      "bytes": 2282,
+      "sha256": "c5a9ffa351f59b66958d0b0e7fa49cff023eaf4ef287cf08c4bef164f8e6b356"
+    },
+    "diagnostics/served-candidates/R070-grfast-pcie020/supervisor-output.txt": {
+      "bytes": 655,
+      "sha256": "430b451558634772de2680d2d08ab37c7fda27f71b0573ca9af0004b6304d58b"
+    },
+    "diagnostics/served-candidates/R070-grfast-pcie020/supervisor.py": {
+      "bytes": 7021,
+      "sha256": "90f0efa3df29536dac10c5a44ea3a8014b3970ba3bebbaced9520d622697ec59"
+    },
+    "diagnostics/served-candidates/R071-grfast-pcie010/config-diff.json": {
+      "bytes": 1657,
+      "sha256": "433784589ff00bb5d79cc9a0df70d3be16ee5a50a8a7217b74a9768fc411ccd4"
+    },
+    "diagnostics/served-candidates/R071-grfast-pcie010/effective-sampling-modes.json": {
+      "bytes": 254,
+      "sha256": "26cf4bca672cc8a4844337569cbb0a96eb51167078cd823abe5d45369dbd3b76"
+    },
+    "diagnostics/served-candidates/R071-grfast-pcie010/engine-session.txt": {
+      "bytes": 11480,
+      "sha256": "e3f0dd88470c79dde30cde84520e44ec4e379d5b8d34c62d7a88d3effc114474"
+    },
+    "diagnostics/served-candidates/R071-grfast-pcie010/memory-guard.py": {
+      "bytes": 835,
+      "sha256": "0eb2e6466cea2d9487acd287e67f2919558791eb10c2efcceaa5ee372341a9b3"
+    },
+    "diagnostics/served-candidates/R071-grfast-pcie010/memory-summary.json": {
+      "bytes": 338,
+      "sha256": "b01fcbc44063e0c0ebb0052684a43454cdc123b05e6222dc92d9353538dd4e36"
+    },
+    "diagnostics/served-candidates/R071-grfast-pcie010/mtp-summary.json": {
+      "bytes": 368,
+      "sha256": "55ee2523b41b678049dce2798441ab8fc02e3a5ead2003a6fa89f622d07889fd"
+    },
+    "diagnostics/served-candidates/R071-grfast-pcie010/observer-audit.json": {
+      "bytes": 278867,
+      "sha256": "e071fd87538f3f0a60c383406cb294cb4ffea7ff7d5b92ca22427f8896287d0e"
+    },
+    "diagnostics/served-candidates/R071-grfast-pcie010/observer.json": {
+      "bytes": 102,
+      "sha256": "fae690257930be882eeec3ce79ec3c911d8f6d6b9da00238be9bd8410776812a"
+    },
+    "diagnostics/served-candidates/R071-grfast-pcie010/prepare.txt": {
+      "bytes": 209,
+      "sha256": "a292755f1da167d72a6a1d53f6e5bac2a586feaeb8aec360fe9ee430fdca118b"
+    },
+    "diagnostics/served-candidates/R071-grfast-pcie010/resident-mode-guard.py": {
+      "bytes": 1268,
+      "sha256": "70e0a993a1aa2cee4f255d3e853ebb26488d87b4c774304520c205aa724c0795"
+    },
+    "diagnostics/served-candidates/R071-grfast-pcie010/safety.csv": {
+      "bytes": 12421,
+      "sha256": "464350a9b0e43bf611d37ae638709e39d0d339db06bff5edc8af8ab5df367736"
+    },
+    "diagnostics/served-candidates/R071-grfast-pcie010/spec-quality-guard.py": {
+      "bytes": 2282,
+      "sha256": "c5a9ffa351f59b66958d0b0e7fa49cff023eaf4ef287cf08c4bef164f8e6b356"
+    },
+    "diagnostics/served-candidates/R071-grfast-pcie010/supervisor-output.txt": {
+      "bytes": 653,
+      "sha256": "a104b2bb24bc4c6f0bc260fd30b8e98af4eaee82b7f3412d05d33e236acc0da0"
+    },
+    "diagnostics/served-candidates/R071-grfast-pcie010/supervisor.py": {
+      "bytes": 7021,
+      "sha256": "90f0efa3df29536dac10c5a44ea3a8014b3970ba3bebbaced9520d622697ec59"
+    },
     "diagnostics/spec-prob-audit/all-run-acceptance-comparison.json": {
       "bytes": 940,
       "sha256": "068ece47c13703618e6272059080e314f18b45b7b3a1a933fa0b9042fec30dab"
@@ -3918,12 +4306,12 @@
       "sha256": "2b50e44df19b0b201212d4218a744111913e55a2f3bb2daec73fdec7ac6a072c"
     },
     "engine-timings.txt": {
-      "bytes": 211437,
-      "sha256": "7da11937e5b6c72c5720371e540cd469c9e397485cd9dc4414e01738f679cae7"
+      "bytes": 223860,
+      "sha256": "ce90d3f430d0a2293dfa15509c41bcb9ae31bcafc708f4aa6a99725fe869dbc2"
     },
     "experiment-index.json": {
-      "bytes": 71103,
-      "sha256": "fb08f455d72ae65be2be025c0e552d67921fb26793c6e90eb024a142b7c95208"
+      "bytes": 75962,
+      "sha256": "7a04b15ea111f452bf505d07913765ab19df3c51ef469b3798866b558e36a37a"
     },
     "F001-pcie.csv": {
       "bytes": 9046,
@@ -3962,8 +4350,8 @@
       "sha256": "2f62bfdf31004200f39c1304db55b529c33f169fec03d3f572c9c4564d092739"
     },
     "goal-90-state.json": {
-      "bytes": 1238,
-      "sha256": "8aab9b4f1b74241cd1a03eba52f07cf5687f2be6dfff4c0a037a0da8902a9123"
+      "bytes": 1254,
+      "sha256": "943de978d77195ef446fd9bfa6025fabc4b653591fdabd229ffe782ccff9c4a6"
     },
     "goal90-benchmark.py": {
       "bytes": 13011,
@@ -3994,16 +4382,16 @@
       "sha256": "f1340e812574b74b1139b75eaa2cad11a2cd0c11f168f6c2f1f0e7a0bb4cbaf6"
     },
     "ledger.md": {
-      "bytes": 190476,
-      "sha256": "f1ed60529d3dd59d4b3b363c7d6e79a2fa04da41ce63568432c18535ecb1734e"
+      "bytes": 204688,
+      "sha256": "14bb407157cc40018719dd774e7547bfde6e983d45da79f77f1b794167bb646b"
     },
     "measure.py": {
       "bytes": 13940,
       "sha256": "a071cf6400f06945e7fd0f41e0adf1cbed86b7d7f11800b560550446f98b57ea"
     },
     "memory-snapshots.json": {
-      "bytes": 38556,
-      "sha256": "3560c1caeb42139b7fbd098c173316fc23dae67e7293564538e72a56d873cf6f"
+      "bytes": 41248,
+      "sha256": "bf96fedc2c49aff057978dc85706c40942ca47e97cea665dc5e93e2cf6d8d565"
     },
     "P001-cuda_api_sum.csv": {
       "bytes": 2053,
@@ -12813,9 +13201,657 @@
       "bytes": 1820,
       "sha256": "2f943744264487e04b1d6f4e280b06245df70103e99501c2e24a03469329b4cb"
     },
+    "raw/target-80/R066-grfast-control/identity.json": {
+      "bytes": 5217,
+      "sha256": "dbda6530452304890466b6b224b03118144bd245988e2d53e30531f0350ee4f9"
+    },
+    "raw/target-80/R066-grfast-control/runs.json": {
+      "bytes": 10334,
+      "sha256": "f06491584d6b621a3e8691aff3954ba71a3974c74c0c62de11e0363d452c1aac"
+    },
+    "raw/target-80/R066-grfast-control/samples/longer-run-1.output.txt": {
+      "bytes": 2407,
+      "sha256": "5811d19756ac04e343bf95e53b28d6026367979597652060ccf1456837d2c24d"
+    },
+    "raw/target-80/R066-grfast-control/samples/longer-run-1.request.json": {
+      "bytes": 11885,
+      "sha256": "b508ef4d08a5c71cb77158f7377b3f2f04f4aaf96f02c11aa8a9f7ae50478d50"
+    },
+    "raw/target-80/R066-grfast-control/samples/longer-run-2.output.txt": {
+      "bytes": 2544,
+      "sha256": "59e7d3b7511c15686c33a46c2fb1cd9efacdbd9822fe62bc729f8be7cc7fa06d"
+    },
+    "raw/target-80/R066-grfast-control/samples/longer-run-2.request.json": {
+      "bytes": 11885,
+      "sha256": "7b454072012314b7a629f420fe7793c0f740ad185f0315c8efe094233ca3b621"
+    },
+    "raw/target-80/R066-grfast-control/samples/longer-run-3.output.txt": {
+      "bytes": 2572,
+      "sha256": "75ba15231bc6c6e422bce408ba88fcac156555b61783aef741522ea8329e9fd8"
+    },
+    "raw/target-80/R066-grfast-control/samples/longer-run-3.request.json": {
+      "bytes": 11885,
+      "sha256": "4f9b1aa1699173866166320568cb5aded9f861ecc2484a1e040d2187e324acdc"
+    },
+    "raw/target-80/R066-grfast-control/samples/longer-run-4.output.txt": {
+      "bytes": 2404,
+      "sha256": "b50489060fdcb39b56a3539333bdc1e06dc74cadfca9fc51651fa37c2aa0cbbf"
+    },
+    "raw/target-80/R066-grfast-control/samples/longer-run-4.request.json": {
+      "bytes": 11885,
+      "sha256": "811b0e42c9f71f6c47790e22723fb3d63f425a79d8b3b64b810ade186fd5e7b7"
+    },
+    "raw/target-80/R066-grfast-control/samples/longer-run-5.output.txt": {
+      "bytes": 2461,
+      "sha256": "a46c2a63a3073234e3a20aed5c11df019b8282cd66f1b4bc593baf25c36e6b0d"
+    },
+    "raw/target-80/R066-grfast-control/samples/longer-run-5.request.json": {
+      "bytes": 11885,
+      "sha256": "7af1600c90072e39fc6a487b2873db81425923a80972cece0273188c9b772c54"
+    },
+    "raw/target-80/R066-grfast-control/samples/longer-warmup.output.txt": {
+      "bytes": 2469,
+      "sha256": "f9e4313e58ade14deb316d0b0d8ff8091332ebba5d7b14c95af9ceded8a15d08"
+    },
+    "raw/target-80/R066-grfast-control/samples/longer-warmup.request.json": {
+      "bytes": 11885,
+      "sha256": "85a5b8c8a7aa54fa07745a1b4d09c1b3c2a56a74389fd87b1686a44f27d1d449"
+    },
+    "raw/target-80/R066-grfast-control/samples/short-run-1.output.txt": {
+      "bytes": 2313,
+      "sha256": "3f68b4770a6489dbe47f7f4c5e5bd3d048e8aaf6e76cb1206fe876c166415bb7"
+    },
+    "raw/target-80/R066-grfast-control/samples/short-run-1.request.json": {
+      "bytes": 955,
+      "sha256": "09c7db64c6dadb98ac526e641f41d469c2ec501ea1c6cab2fbea1d275e255dff"
+    },
+    "raw/target-80/R066-grfast-control/samples/short-run-2.output.txt": {
+      "bytes": 2307,
+      "sha256": "534a1e10a3b6f0abd65717313de57de927aa741dbf8798fd0d774bdc263ef9c0"
+    },
+    "raw/target-80/R066-grfast-control/samples/short-run-2.request.json": {
+      "bytes": 955,
+      "sha256": "2072428311779184a8c38b94198192d84ced11a2515c659a47dd04b24e2217be"
+    },
+    "raw/target-80/R066-grfast-control/samples/short-run-3.output.txt": {
+      "bytes": 2575,
+      "sha256": "0f6da19caefbd85e9e71ff41e6f49f329de0261bef23a9662a6d6295f580b6b9"
+    },
+    "raw/target-80/R066-grfast-control/samples/short-run-3.request.json": {
+      "bytes": 955,
+      "sha256": "07b2670edba3e424359564da9dcbd2a00854f48e0cbba8a12befbfc4efa28d08"
+    },
+    "raw/target-80/R066-grfast-control/samples/short-run-4.output.txt": {
+      "bytes": 2374,
+      "sha256": "55ed36d74cc845f6dbe16e12aa226439b6949bc01ab2a1a14e69177d73f9cf37"
+    },
+    "raw/target-80/R066-grfast-control/samples/short-run-4.request.json": {
+      "bytes": 955,
+      "sha256": "f88ef344c27bd93518a99cd45ac269c4bacf95d5bd8eb79875bf9d3d04b4b4e8"
+    },
+    "raw/target-80/R066-grfast-control/samples/short-run-5.output.txt": {
+      "bytes": 2342,
+      "sha256": "7bbdf9778a4a9103f0088231fe6a3ec4d81883c2bfabd161929ab17a1a69b00e"
+    },
+    "raw/target-80/R066-grfast-control/samples/short-run-5.request.json": {
+      "bytes": 955,
+      "sha256": "5d3f0b19ed2566d3db0aad5d3af96fadcbdb1404a9726646241e53d1027adc57"
+    },
+    "raw/target-80/R066-grfast-control/samples/short-warmup.output.txt": {
+      "bytes": 2223,
+      "sha256": "588e550fbc3cf3cc06dd8d0af90a57eb42abb21c9a72f75042ad783702ea252f"
+    },
+    "raw/target-80/R066-grfast-control/samples/short-warmup.request.json": {
+      "bytes": 955,
+      "sha256": "057285fcb5b01fd8d7e4ed73cb6f46642d5581c976b3103548fa1d79e7de5a0d"
+    },
+    "raw/target-80/R066-grfast-control/summary.json": {
+      "bytes": 1820,
+      "sha256": "46c6d73bf4cf0a2d5b945d7e02e2c27ee47e1e1976f43e5a3364fc5eb61a75f2"
+    },
+    "raw/target-80/R067-grfast-enabled/identity.json": {
+      "bytes": 5217,
+      "sha256": "eb9139c4b2162833d4c02feb61d5571a3ccc8d932abd6b8ea72b81db7178582a"
+    },
+    "raw/target-80/R067-grfast-enabled/runs.json": {
+      "bytes": 10336,
+      "sha256": "cfcd075dc2d760346d2c9755325fb6e934bb303ca5843529d557f9c1b7c7b0e7"
+    },
+    "raw/target-80/R067-grfast-enabled/samples/longer-run-1.output.txt": {
+      "bytes": 2547,
+      "sha256": "35eb23dc346db8c1d74734ccbe598ca63d51dd3529491b0a19ccb849a381a9c9"
+    },
+    "raw/target-80/R067-grfast-enabled/samples/longer-run-1.request.json": {
+      "bytes": 11885,
+      "sha256": "b508ef4d08a5c71cb77158f7377b3f2f04f4aaf96f02c11aa8a9f7ae50478d50"
+    },
+    "raw/target-80/R067-grfast-enabled/samples/longer-run-2.output.txt": {
+      "bytes": 2568,
+      "sha256": "0935fb2aac1205c7a08bcb22c046f6b9b7f41e160f7e9a7ed245c460433f6d3b"
+    },
+    "raw/target-80/R067-grfast-enabled/samples/longer-run-2.request.json": {
+      "bytes": 11885,
+      "sha256": "7b454072012314b7a629f420fe7793c0f740ad185f0315c8efe094233ca3b621"
+    },
+    "raw/target-80/R067-grfast-enabled/samples/longer-run-3.output.txt": {
+      "bytes": 2605,
+      "sha256": "e88040d96e7308980019a26497064d4bf283f198bd16517f15166c92185de44d"
+    },
+    "raw/target-80/R067-grfast-enabled/samples/longer-run-3.request.json": {
+      "bytes": 11885,
+      "sha256": "4f9b1aa1699173866166320568cb5aded9f861ecc2484a1e040d2187e324acdc"
+    },
+    "raw/target-80/R067-grfast-enabled/samples/longer-run-4.output.txt": {
+      "bytes": 2600,
+      "sha256": "7fb292cde88f7a8f1a1b418e19ba460245851454872fb36f4f56392b3205e4ab"
+    },
+    "raw/target-80/R067-grfast-enabled/samples/longer-run-4.request.json": {
+      "bytes": 11885,
+      "sha256": "811b0e42c9f71f6c47790e22723fb3d63f425a79d8b3b64b810ade186fd5e7b7"
+    },
+    "raw/target-80/R067-grfast-enabled/samples/longer-run-5.output.txt": {
+      "bytes": 2509,
+      "sha256": "183b81c9f98969f30a43f55196ea44c902b4122e08e547ff644ca811dd7671a4"
+    },
+    "raw/target-80/R067-grfast-enabled/samples/longer-run-5.request.json": {
+      "bytes": 11885,
+      "sha256": "7af1600c90072e39fc6a487b2873db81425923a80972cece0273188c9b772c54"
+    },
+    "raw/target-80/R067-grfast-enabled/samples/longer-warmup.output.txt": {
+      "bytes": 2391,
+      "sha256": "46ab36575e77d137c1683b27c3f3f545ec76779c7e7f2f8999a1f30a229d7ae3"
+    },
+    "raw/target-80/R067-grfast-enabled/samples/longer-warmup.request.json": {
+      "bytes": 11885,
+      "sha256": "85a5b8c8a7aa54fa07745a1b4d09c1b3c2a56a74389fd87b1686a44f27d1d449"
+    },
+    "raw/target-80/R067-grfast-enabled/samples/short-run-1.output.txt": {
+      "bytes": 2325,
+      "sha256": "60c330d2427c726993dd724c084894114e63be1c6914d376070e648a3c7f616a"
+    },
+    "raw/target-80/R067-grfast-enabled/samples/short-run-1.request.json": {
+      "bytes": 955,
+      "sha256": "09c7db64c6dadb98ac526e641f41d469c2ec501ea1c6cab2fbea1d275e255dff"
+    },
+    "raw/target-80/R067-grfast-enabled/samples/short-run-2.output.txt": {
+      "bytes": 2397,
+      "sha256": "9f43dd4b51208e85ae0655badf5075c0c5bf7e494e420068560ee3102123c33b"
+    },
+    "raw/target-80/R067-grfast-enabled/samples/short-run-2.request.json": {
+      "bytes": 955,
+      "sha256": "2072428311779184a8c38b94198192d84ced11a2515c659a47dd04b24e2217be"
+    },
+    "raw/target-80/R067-grfast-enabled/samples/short-run-3.output.txt": {
+      "bytes": 2488,
+      "sha256": "a6396e2ce740d61e4b18a1ec50d8ddfaa3607cd09076e5210f9567257a26f4af"
+    },
+    "raw/target-80/R067-grfast-enabled/samples/short-run-3.request.json": {
+      "bytes": 955,
+      "sha256": "07b2670edba3e424359564da9dcbd2a00854f48e0cbba8a12befbfc4efa28d08"
+    },
+    "raw/target-80/R067-grfast-enabled/samples/short-run-4.output.txt": {
+      "bytes": 2497,
+      "sha256": "e9a9ed532e38361a7243aae851af70490f215ac1abd55088fa1eda81111b7f97"
+    },
+    "raw/target-80/R067-grfast-enabled/samples/short-run-4.request.json": {
+      "bytes": 955,
+      "sha256": "f88ef344c27bd93518a99cd45ac269c4bacf95d5bd8eb79875bf9d3d04b4b4e8"
+    },
+    "raw/target-80/R067-grfast-enabled/samples/short-run-5.output.txt": {
+      "bytes": 2276,
+      "sha256": "a507b21246cd6a29cb82c1f4aae5b75f41fcc58480c1e6c631cd3c6211dd8a33"
+    },
+    "raw/target-80/R067-grfast-enabled/samples/short-run-5.request.json": {
+      "bytes": 955,
+      "sha256": "5d3f0b19ed2566d3db0aad5d3af96fadcbdb1404a9726646241e53d1027adc57"
+    },
+    "raw/target-80/R067-grfast-enabled/samples/short-warmup.output.txt": {
+      "bytes": 2446,
+      "sha256": "905874e60aa758642313cb1643d074faa0a979a542857ae22d1b42555f2df293"
+    },
+    "raw/target-80/R067-grfast-enabled/samples/short-warmup.request.json": {
+      "bytes": 955,
+      "sha256": "057285fcb5b01fd8d7e4ed73cb6f46642d5581c976b3103548fa1d79e7de5a0d"
+    },
+    "raw/target-80/R067-grfast-enabled/summary.json": {
+      "bytes": 1827,
+      "sha256": "d1739ecd48d7a58ac0eab122bb5a8f517de5459a115230a244ec6214ceb4f960"
+    },
+    "raw/target-80/R068-grfast-enabled-reverse/identity.json": {
+      "bytes": 5217,
+      "sha256": "2ba4286b4aa20ad365b61bab14c21fa7fcd0050b84ee27101dd39e6e70aee695"
+    },
+    "raw/target-80/R068-grfast-enabled-reverse/runs.json": {
+      "bytes": 10329,
+      "sha256": "226e69716e18d877f49f4032f5322696b673335bdc812cd2b13a44a6bc06a454"
+    },
+    "raw/target-80/R068-grfast-enabled-reverse/samples/longer-run-1.output.txt": {
+      "bytes": 2303,
+      "sha256": "cd4af9185a4417d105a5dede9260101f11367bebe9a6f79f94a3be58267f3f22"
+    },
+    "raw/target-80/R068-grfast-enabled-reverse/samples/longer-run-1.request.json": {
+      "bytes": 11885,
+      "sha256": "b508ef4d08a5c71cb77158f7377b3f2f04f4aaf96f02c11aa8a9f7ae50478d50"
+    },
+    "raw/target-80/R068-grfast-enabled-reverse/samples/longer-run-2.output.txt": {
+      "bytes": 2314,
+      "sha256": "6198f147a0e2265aaa401e69486974b8f8e50758d0902a67a51c0534ab09f314"
+    },
+    "raw/target-80/R068-grfast-enabled-reverse/samples/longer-run-2.request.json": {
+      "bytes": 11885,
+      "sha256": "7b454072012314b7a629f420fe7793c0f740ad185f0315c8efe094233ca3b621"
+    },
+    "raw/target-80/R068-grfast-enabled-reverse/samples/longer-run-3.output.txt": {
+      "bytes": 2570,
+      "sha256": "7e9f60dd7517cc4ce8e51eb6268ac0eb468ca383adb3525190b8e185d4dd53b6"
+    },
+    "raw/target-80/R068-grfast-enabled-reverse/samples/longer-run-3.request.json": {
+      "bytes": 11885,
+      "sha256": "4f9b1aa1699173866166320568cb5aded9f861ecc2484a1e040d2187e324acdc"
+    },
+    "raw/target-80/R068-grfast-enabled-reverse/samples/longer-run-4.output.txt": {
+      "bytes": 2414,
+      "sha256": "0e0b6724e5978857dd8deee36d6a2867a229c65b96fb369d0edf8a0718054232"
+    },
+    "raw/target-80/R068-grfast-enabled-reverse/samples/longer-run-4.request.json": {
+      "bytes": 11885,
+      "sha256": "811b0e42c9f71f6c47790e22723fb3d63f425a79d8b3b64b810ade186fd5e7b7"
+    },
+    "raw/target-80/R068-grfast-enabled-reverse/samples/longer-run-5.output.txt": {
+      "bytes": 2485,
+      "sha256": "2e8b5cf37dd0e0afec8e135c1fa3e0bc46585f6ef21dce9ec8538829f8002a9e"
+    },
+    "raw/target-80/R068-grfast-enabled-reverse/samples/longer-run-5.request.json": {
+      "bytes": 11885,
+      "sha256": "7af1600c90072e39fc6a487b2873db81425923a80972cece0273188c9b772c54"
+    },
+    "raw/target-80/R068-grfast-enabled-reverse/samples/longer-warmup.output.txt": {
+      "bytes": 2418,
+      "sha256": "81d193c05727366c5d24a950b98edd02472166935b256d097fe786015faae4b3"
+    },
+    "raw/target-80/R068-grfast-enabled-reverse/samples/longer-warmup.request.json": {
+      "bytes": 11885,
+      "sha256": "85a5b8c8a7aa54fa07745a1b4d09c1b3c2a56a74389fd87b1686a44f27d1d449"
+    },
+    "raw/target-80/R068-grfast-enabled-reverse/samples/short-run-1.output.txt": {
+      "bytes": 2213,
+      "sha256": "0a37a67dea72a0a15703c9be516d22630c794e12fa4d3d7d175b4c4ddd1d365a"
+    },
+    "raw/target-80/R068-grfast-enabled-reverse/samples/short-run-1.request.json": {
+      "bytes": 955,
+      "sha256": "09c7db64c6dadb98ac526e641f41d469c2ec501ea1c6cab2fbea1d275e255dff"
+    },
+    "raw/target-80/R068-grfast-enabled-reverse/samples/short-run-2.output.txt": {
+      "bytes": 2447,
+      "sha256": "c850ca5c37765efca82e22513120b48461b37c62654e8e10a23b5e15d5d69b0c"
+    },
+    "raw/target-80/R068-grfast-enabled-reverse/samples/short-run-2.request.json": {
+      "bytes": 955,
+      "sha256": "2072428311779184a8c38b94198192d84ced11a2515c659a47dd04b24e2217be"
+    },
+    "raw/target-80/R068-grfast-enabled-reverse/samples/short-run-3.output.txt": {
+      "bytes": 2366,
+      "sha256": "9ca8487b5a9aa853b7f1f97ae3cd230f617512bfb46c78d0ee8e727819eb7ecc"
+    },
+    "raw/target-80/R068-grfast-enabled-reverse/samples/short-run-3.request.json": {
+      "bytes": 955,
+      "sha256": "07b2670edba3e424359564da9dcbd2a00854f48e0cbba8a12befbfc4efa28d08"
+    },
+    "raw/target-80/R068-grfast-enabled-reverse/samples/short-run-4.output.txt": {
+      "bytes": 2468,
+      "sha256": "9c498eedc46631410ddbfc8b64e4eb5c54da79e16130a40146ca9087e19967ef"
+    },
+    "raw/target-80/R068-grfast-enabled-reverse/samples/short-run-4.request.json": {
+      "bytes": 955,
+      "sha256": "f88ef344c27bd93518a99cd45ac269c4bacf95d5bd8eb79875bf9d3d04b4b4e8"
+    },
+    "raw/target-80/R068-grfast-enabled-reverse/samples/short-run-5.output.txt": {
+      "bytes": 2440,
+      "sha256": "72fcbae4322e1f15424af4937bed52219c53ab34a0913c22437e1d97db2e743b"
+    },
+    "raw/target-80/R068-grfast-enabled-reverse/samples/short-run-5.request.json": {
+      "bytes": 955,
+      "sha256": "5d3f0b19ed2566d3db0aad5d3af96fadcbdb1404a9726646241e53d1027adc57"
+    },
+    "raw/target-80/R068-grfast-enabled-reverse/samples/short-warmup.output.txt": {
+      "bytes": 2231,
+      "sha256": "37170c392be3fb996eea43bc58041d297d040cc6fe44480204a66666cb00e87b"
+    },
+    "raw/target-80/R068-grfast-enabled-reverse/samples/short-warmup.request.json": {
+      "bytes": 955,
+      "sha256": "057285fcb5b01fd8d7e4ed73cb6f46642d5581c976b3103548fa1d79e7de5a0d"
+    },
+    "raw/target-80/R068-grfast-enabled-reverse/summary.json": {
+      "bytes": 1822,
+      "sha256": "54e7543585fbcf16cdae3ad9c2caddc3d6c46bd5c570a4ad7a4590845ee1c10f"
+    },
+    "raw/target-80/R069-grfast-control-reverse/identity.json": {
+      "bytes": 5217,
+      "sha256": "8917f7a88091a0acac2fb2cf62ca3066c43322e2178b505db4a94d9e49ba40b5"
+    },
+    "raw/target-80/R069-grfast-control-reverse/runs.json": {
+      "bytes": 10333,
+      "sha256": "49d26f33c145a6f41cb7c39bcfb968dbacdca8e3eac99933744fd853a00e84c2"
+    },
+    "raw/target-80/R069-grfast-control-reverse/samples/longer-run-1.output.txt": {
+      "bytes": 2508,
+      "sha256": "b7bc8ca9c617ee9dc320166c9d0a855e02864f5d9c425b488e2aa04188b83089"
+    },
+    "raw/target-80/R069-grfast-control-reverse/samples/longer-run-1.request.json": {
+      "bytes": 11885,
+      "sha256": "b508ef4d08a5c71cb77158f7377b3f2f04f4aaf96f02c11aa8a9f7ae50478d50"
+    },
+    "raw/target-80/R069-grfast-control-reverse/samples/longer-run-2.output.txt": {
+      "bytes": 2441,
+      "sha256": "1d50d39fe6b8e05beda62fef70f09194bbe0108dd0f341e65938fe225c8b02fc"
+    },
+    "raw/target-80/R069-grfast-control-reverse/samples/longer-run-2.request.json": {
+      "bytes": 11885,
+      "sha256": "7b454072012314b7a629f420fe7793c0f740ad185f0315c8efe094233ca3b621"
+    },
+    "raw/target-80/R069-grfast-control-reverse/samples/longer-run-3.output.txt": {
+      "bytes": 2574,
+      "sha256": "611b04d5034e3fb658f1207b6adec45599cdeaed2983d692518a2b167759455c"
+    },
+    "raw/target-80/R069-grfast-control-reverse/samples/longer-run-3.request.json": {
+      "bytes": 11885,
+      "sha256": "4f9b1aa1699173866166320568cb5aded9f861ecc2484a1e040d2187e324acdc"
+    },
+    "raw/target-80/R069-grfast-control-reverse/samples/longer-run-4.output.txt": {
+      "bytes": 2542,
+      "sha256": "f28d104d760b518996909c35e3657245af7a186169ad7af52bce249198101ee6"
+    },
+    "raw/target-80/R069-grfast-control-reverse/samples/longer-run-4.request.json": {
+      "bytes": 11885,
+      "sha256": "811b0e42c9f71f6c47790e22723fb3d63f425a79d8b3b64b810ade186fd5e7b7"
+    },
+    "raw/target-80/R069-grfast-control-reverse/samples/longer-run-5.output.txt": {
+      "bytes": 2497,
+      "sha256": "c4ea8749e99ec9e3a90e2fffdb8febbd16ab72f6cfa7ce1fb5b8bb76f99282e9"
+    },
+    "raw/target-80/R069-grfast-control-reverse/samples/longer-run-5.request.json": {
+      "bytes": 11885,
+      "sha256": "7af1600c90072e39fc6a487b2873db81425923a80972cece0273188c9b772c54"
+    },
+    "raw/target-80/R069-grfast-control-reverse/samples/longer-warmup.output.txt": {
+      "bytes": 2418,
+      "sha256": "81d193c05727366c5d24a950b98edd02472166935b256d097fe786015faae4b3"
+    },
+    "raw/target-80/R069-grfast-control-reverse/samples/longer-warmup.request.json": {
+      "bytes": 11885,
+      "sha256": "85a5b8c8a7aa54fa07745a1b4d09c1b3c2a56a74389fd87b1686a44f27d1d449"
+    },
+    "raw/target-80/R069-grfast-control-reverse/samples/short-run-1.output.txt": {
+      "bytes": 2417,
+      "sha256": "2e7414a1d18c73614bac040282b740bfcc41fc39ba44b5435b1270214a2768f0"
+    },
+    "raw/target-80/R069-grfast-control-reverse/samples/short-run-1.request.json": {
+      "bytes": 955,
+      "sha256": "09c7db64c6dadb98ac526e641f41d469c2ec501ea1c6cab2fbea1d275e255dff"
+    },
+    "raw/target-80/R069-grfast-control-reverse/samples/short-run-2.output.txt": {
+      "bytes": 2203,
+      "sha256": "815d6a878c5f00628d756cbc2a2139b8f55323625c5b8b34a53cccfd908fc619"
+    },
+    "raw/target-80/R069-grfast-control-reverse/samples/short-run-2.request.json": {
+      "bytes": 955,
+      "sha256": "2072428311779184a8c38b94198192d84ced11a2515c659a47dd04b24e2217be"
+    },
+    "raw/target-80/R069-grfast-control-reverse/samples/short-run-3.output.txt": {
+      "bytes": 2298,
+      "sha256": "9a47e09b6966a608af9917fdd41c6f5fd6a49c33d9a55583d2be354d695999a7"
+    },
+    "raw/target-80/R069-grfast-control-reverse/samples/short-run-3.request.json": {
+      "bytes": 955,
+      "sha256": "07b2670edba3e424359564da9dcbd2a00854f48e0cbba8a12befbfc4efa28d08"
+    },
+    "raw/target-80/R069-grfast-control-reverse/samples/short-run-4.output.txt": {
+      "bytes": 2376,
+      "sha256": "9c7fb9ef27f722f373a975c1b32e3e796bc3d8bd6a34055a065f65519b10d865"
+    },
+    "raw/target-80/R069-grfast-control-reverse/samples/short-run-4.request.json": {
+      "bytes": 955,
+      "sha256": "f88ef344c27bd93518a99cd45ac269c4bacf95d5bd8eb79875bf9d3d04b4b4e8"
+    },
+    "raw/target-80/R069-grfast-control-reverse/samples/short-run-5.output.txt": {
+      "bytes": 2417,
+      "sha256": "9b221dabe228973817669237001a4d85729def109f0052ddcaee59e47edb827b"
+    },
+    "raw/target-80/R069-grfast-control-reverse/samples/short-run-5.request.json": {
+      "bytes": 955,
+      "sha256": "5d3f0b19ed2566d3db0aad5d3af96fadcbdb1404a9726646241e53d1027adc57"
+    },
+    "raw/target-80/R069-grfast-control-reverse/samples/short-warmup.output.txt": {
+      "bytes": 2286,
+      "sha256": "87a39710c0834affc0abac009cb3f4fdcfaaf29966e157ce8f7d7e2ae759ed66"
+    },
+    "raw/target-80/R069-grfast-control-reverse/samples/short-warmup.request.json": {
+      "bytes": 955,
+      "sha256": "057285fcb5b01fd8d7e4ed73cb6f46642d5581c976b3103548fa1d79e7de5a0d"
+    },
+    "raw/target-80/R069-grfast-control-reverse/summary.json": {
+      "bytes": 1823,
+      "sha256": "c63eeeb0f3a8c7e18858c34788e65c044016f3a75a9e7bcec0b0edb238be1f1f"
+    },
+    "raw/target-80/R070-grfast-pcie020/identity.json": {
+      "bytes": 5217,
+      "sha256": "102127a345a30551d2178aa51698280042bd8420cd03ad766111648a4eb60f72"
+    },
+    "raw/target-80/R070-grfast-pcie020/runs.json": {
+      "bytes": 10331,
+      "sha256": "a4ce4de58745b470ddcbf95409f621d7c3dcd4a1f0eac6301765c834ab0e188b"
+    },
+    "raw/target-80/R070-grfast-pcie020/samples/longer-run-1.output.txt": {
+      "bytes": 2523,
+      "sha256": "f41bafca48a9276df8abf570960386c092e2cd137d12f301165a76bcda01244f"
+    },
+    "raw/target-80/R070-grfast-pcie020/samples/longer-run-1.request.json": {
+      "bytes": 11885,
+      "sha256": "b508ef4d08a5c71cb77158f7377b3f2f04f4aaf96f02c11aa8a9f7ae50478d50"
+    },
+    "raw/target-80/R070-grfast-pcie020/samples/longer-run-2.output.txt": {
+      "bytes": 2460,
+      "sha256": "727e090e2aebd41d734fceec8557f7a4e333f21cb8e1098a64202570998bbdb7"
+    },
+    "raw/target-80/R070-grfast-pcie020/samples/longer-run-2.request.json": {
+      "bytes": 11885,
+      "sha256": "7b454072012314b7a629f420fe7793c0f740ad185f0315c8efe094233ca3b621"
+    },
+    "raw/target-80/R070-grfast-pcie020/samples/longer-run-3.output.txt": {
+      "bytes": 2502,
+      "sha256": "bfcea53e511afc4c46589d6c065ef278a56757051d25500633ea04e38fddccac"
+    },
+    "raw/target-80/R070-grfast-pcie020/samples/longer-run-3.request.json": {
+      "bytes": 11885,
+      "sha256": "4f9b1aa1699173866166320568cb5aded9f861ecc2484a1e040d2187e324acdc"
+    },
+    "raw/target-80/R070-grfast-pcie020/samples/longer-run-4.output.txt": {
+      "bytes": 2400,
+      "sha256": "b74bbf63e0dce3b74dda6c9e6429244dc19164420a9423c24105d6306df9c276"
+    },
+    "raw/target-80/R070-grfast-pcie020/samples/longer-run-4.request.json": {
+      "bytes": 11885,
+      "sha256": "811b0e42c9f71f6c47790e22723fb3d63f425a79d8b3b64b810ade186fd5e7b7"
+    },
+    "raw/target-80/R070-grfast-pcie020/samples/longer-run-5.output.txt": {
+      "bytes": 2705,
+      "sha256": "4b0279fb3ba8b71d6e9d768fa6f00dd9240f85d1521f81dba88df3a44053e50a"
+    },
+    "raw/target-80/R070-grfast-pcie020/samples/longer-run-5.request.json": {
+      "bytes": 11885,
+      "sha256": "7af1600c90072e39fc6a487b2873db81425923a80972cece0273188c9b772c54"
+    },
+    "raw/target-80/R070-grfast-pcie020/samples/longer-warmup.output.txt": {
+      "bytes": 2456,
+      "sha256": "323a5d150467eba3dbf5f8a564d403aee9f75ff0afbd6697af5f671b8ef23b75"
+    },
+    "raw/target-80/R070-grfast-pcie020/samples/longer-warmup.request.json": {
+      "bytes": 11885,
+      "sha256": "85a5b8c8a7aa54fa07745a1b4d09c1b3c2a56a74389fd87b1686a44f27d1d449"
+    },
+    "raw/target-80/R070-grfast-pcie020/samples/short-run-1.output.txt": {
+      "bytes": 2378,
+      "sha256": "e58bb4ed1ef0911d6f6a0f69dd60b46c06c0d02f2509c81261503ab8a40a55d3"
+    },
+    "raw/target-80/R070-grfast-pcie020/samples/short-run-1.request.json": {
+      "bytes": 955,
+      "sha256": "09c7db64c6dadb98ac526e641f41d469c2ec501ea1c6cab2fbea1d275e255dff"
+    },
+    "raw/target-80/R070-grfast-pcie020/samples/short-run-2.output.txt": {
+      "bytes": 2355,
+      "sha256": "218e56fa91b7dc3877c4c871c603db6fdabec6b821be02f2a51c0e4b7eeb87ad"
+    },
+    "raw/target-80/R070-grfast-pcie020/samples/short-run-2.request.json": {
+      "bytes": 955,
+      "sha256": "2072428311779184a8c38b94198192d84ced11a2515c659a47dd04b24e2217be"
+    },
+    "raw/target-80/R070-grfast-pcie020/samples/short-run-3.output.txt": {
+      "bytes": 2435,
+      "sha256": "e10721747747f5a9cee7dcbda8c87baf4323e8dae49b63a9623b61b4f0c88aa2"
+    },
+    "raw/target-80/R070-grfast-pcie020/samples/short-run-3.request.json": {
+      "bytes": 955,
+      "sha256": "07b2670edba3e424359564da9dcbd2a00854f48e0cbba8a12befbfc4efa28d08"
+    },
+    "raw/target-80/R070-grfast-pcie020/samples/short-run-4.output.txt": {
+      "bytes": 2466,
+      "sha256": "1884a89c10c22fa488401575a9fb4b8baffad3cedb9dc9447c24d8bea00e1615"
+    },
+    "raw/target-80/R070-grfast-pcie020/samples/short-run-4.request.json": {
+      "bytes": 955,
+      "sha256": "f88ef344c27bd93518a99cd45ac269c4bacf95d5bd8eb79875bf9d3d04b4b4e8"
+    },
+    "raw/target-80/R070-grfast-pcie020/samples/short-run-5.output.txt": {
+      "bytes": 2350,
+      "sha256": "b1b2279fbf90e296da0b82b56c80fb4ab5bd501a413f3cfe739215a20618d810"
+    },
+    "raw/target-80/R070-grfast-pcie020/samples/short-run-5.request.json": {
+      "bytes": 955,
+      "sha256": "5d3f0b19ed2566d3db0aad5d3af96fadcbdb1404a9726646241e53d1027adc57"
+    },
+    "raw/target-80/R070-grfast-pcie020/samples/short-warmup.output.txt": {
+      "bytes": 2149,
+      "sha256": "a876030bace9799ab436d6df539eaa6439a2bddcb6ce91a36681d8b4de2fb6e3"
+    },
+    "raw/target-80/R070-grfast-pcie020/samples/short-warmup.request.json": {
+      "bytes": 955,
+      "sha256": "057285fcb5b01fd8d7e4ed73cb6f46642d5581c976b3103548fa1d79e7de5a0d"
+    },
+    "raw/target-80/R070-grfast-pcie020/summary.json": {
+      "bytes": 1822,
+      "sha256": "35043eca1f3acdfe683c2e60a43bc1ed469699c0256fa07cbae8b051cad6af20"
+    },
+    "raw/target-80/R071-grfast-pcie010/identity.json": {
+      "bytes": 5217,
+      "sha256": "ff06c9d0bff8281780b51930c9a026577a9138cedab18f497280bd25d630aafb"
+    },
+    "raw/target-80/R071-grfast-pcie010/runs.json": {
+      "bytes": 10338,
+      "sha256": "257c3814d541448e05ccebb8421073bf6c2977d0d7d44381a59722683e68d3b3"
+    },
+    "raw/target-80/R071-grfast-pcie010/samples/longer-run-1.output.txt": {
+      "bytes": 2306,
+      "sha256": "30e299f55581ab8e35e02cc92b098e19754a30e412ccc6419ab6de15633d38a1"
+    },
+    "raw/target-80/R071-grfast-pcie010/samples/longer-run-1.request.json": {
+      "bytes": 11885,
+      "sha256": "b508ef4d08a5c71cb77158f7377b3f2f04f4aaf96f02c11aa8a9f7ae50478d50"
+    },
+    "raw/target-80/R071-grfast-pcie010/samples/longer-run-2.output.txt": {
+      "bytes": 2500,
+      "sha256": "c39adc9bdd6cea75f5a9dd6e0a1f0dd1a0ddeb4e7902f48f1cdea4aba6b95366"
+    },
+    "raw/target-80/R071-grfast-pcie010/samples/longer-run-2.request.json": {
+      "bytes": 11885,
+      "sha256": "7b454072012314b7a629f420fe7793c0f740ad185f0315c8efe094233ca3b621"
+    },
+    "raw/target-80/R071-grfast-pcie010/samples/longer-run-3.output.txt": {
+      "bytes": 2501,
+      "sha256": "2c63ba532b3339989895a423ed67e33b75d0c317d14beb307b1df7015ce9a91d"
+    },
+    "raw/target-80/R071-grfast-pcie010/samples/longer-run-3.request.json": {
+      "bytes": 11885,
+      "sha256": "4f9b1aa1699173866166320568cb5aded9f861ecc2484a1e040d2187e324acdc"
+    },
+    "raw/target-80/R071-grfast-pcie010/samples/longer-run-4.output.txt": {
+      "bytes": 2621,
+      "sha256": "89002562b607f5510ce41c19529e27db76b73bc0c6e06ca542c3d18125fd0fd1"
+    },
+    "raw/target-80/R071-grfast-pcie010/samples/longer-run-4.request.json": {
+      "bytes": 11885,
+      "sha256": "811b0e42c9f71f6c47790e22723fb3d63f425a79d8b3b64b810ade186fd5e7b7"
+    },
+    "raw/target-80/R071-grfast-pcie010/samples/longer-run-5.output.txt": {
+      "bytes": 2315,
+      "sha256": "1452b963f7a9f8c6b79fa6f1411cb27b7a66e30c3c7c29b7c7b924697c011ee3"
+    },
+    "raw/target-80/R071-grfast-pcie010/samples/longer-run-5.request.json": {
+      "bytes": 11885,
+      "sha256": "7af1600c90072e39fc6a487b2873db81425923a80972cece0273188c9b772c54"
+    },
+    "raw/target-80/R071-grfast-pcie010/samples/longer-warmup.output.txt": {
+      "bytes": 2304,
+      "sha256": "6cb57f7adb6dad4400942ba045947981bb6d0647e09038cb89fa05aa35e362e7"
+    },
+    "raw/target-80/R071-grfast-pcie010/samples/longer-warmup.request.json": {
+      "bytes": 11885,
+      "sha256": "85a5b8c8a7aa54fa07745a1b4d09c1b3c2a56a74389fd87b1686a44f27d1d449"
+    },
+    "raw/target-80/R071-grfast-pcie010/samples/short-run-1.output.txt": {
+      "bytes": 2187,
+      "sha256": "d23ce055f6f893e2ad80ecd7e5b76d37ed4da175023242982b9eec3457651213"
+    },
+    "raw/target-80/R071-grfast-pcie010/samples/short-run-1.request.json": {
+      "bytes": 955,
+      "sha256": "09c7db64c6dadb98ac526e641f41d469c2ec501ea1c6cab2fbea1d275e255dff"
+    },
+    "raw/target-80/R071-grfast-pcie010/samples/short-run-2.output.txt": {
+      "bytes": 2437,
+      "sha256": "3736613f86b023281420fd9716969fa922363f1c5f20d4d4acaafef01c169e76"
+    },
+    "raw/target-80/R071-grfast-pcie010/samples/short-run-2.request.json": {
+      "bytes": 955,
+      "sha256": "2072428311779184a8c38b94198192d84ced11a2515c659a47dd04b24e2217be"
+    },
+    "raw/target-80/R071-grfast-pcie010/samples/short-run-3.output.txt": {
+      "bytes": 2362,
+      "sha256": "58a91752aa176439e40ed64806ad2d32dfa22cc728f7f4e9a26dc53d9651583f"
+    },
+    "raw/target-80/R071-grfast-pcie010/samples/short-run-3.request.json": {
+      "bytes": 955,
+      "sha256": "07b2670edba3e424359564da9dcbd2a00854f48e0cbba8a12befbfc4efa28d08"
+    },
+    "raw/target-80/R071-grfast-pcie010/samples/short-run-4.output.txt": {
+      "bytes": 2338,
+      "sha256": "ec3ac342492bb427903847643d32389840346aab3e030862ad7cf759dcdd6630"
+    },
+    "raw/target-80/R071-grfast-pcie010/samples/short-run-4.request.json": {
+      "bytes": 955,
+      "sha256": "f88ef344c27bd93518a99cd45ac269c4bacf95d5bd8eb79875bf9d3d04b4b4e8"
+    },
+    "raw/target-80/R071-grfast-pcie010/samples/short-run-5.output.txt": {
+      "bytes": 2695,
+      "sha256": "393e62e430661ac2bf41893e3cc450610a15467f7615da7e28e95ceeb6c2242b"
+    },
+    "raw/target-80/R071-grfast-pcie010/samples/short-run-5.request.json": {
+      "bytes": 955,
+      "sha256": "5d3f0b19ed2566d3db0aad5d3af96fadcbdb1404a9726646241e53d1027adc57"
+    },
+    "raw/target-80/R071-grfast-pcie010/samples/short-warmup.output.txt": {
+      "bytes": 2461,
+      "sha256": "3ba4ffefe03be8c37f9c207e7e24a0197ce787cce76bcf6784b3a4c8c4472802"
+    },
+    "raw/target-80/R071-grfast-pcie010/samples/short-warmup.request.json": {
+      "bytes": 955,
+      "sha256": "057285fcb5b01fd8d7e4ed73cb6f46642d5581c976b3103548fa1d79e7de5a0d"
+    },
+    "raw/target-80/R071-grfast-pcie010/summary.json": {
+      "bytes": 1826,
+      "sha256": "827f30cb4bb82a24773c9cacdb0eff6af5da74ffcca7ecb661c301dd6186313b"
+    },
     "README.md": {
-      "bytes": 22966,
-      "sha256": "229017251e77d7ab481ff2e9529c97f60914433d7a3943ddc3361548ab845755"
+      "bytes": 23159,
+      "sha256": "191d4f3e233a065dbc717fbce04e0b268f863f7f2e6f55aaf9581811261baccc"
     },
     "replay.py": {
       "bytes": 1104,
@@ -12834,8 +13870,8 @@
       "sha256": "649d5bb6ff558984406fb099959fc59133d908507bbc4381ed123b4ea6793e66"
     },
     "RESULTS.md": {
-      "bytes": 40649,
-      "sha256": "4a1ac6808a5087d4c8673acfee7d57eb9624ef3a53f495b2f08e0f1c1a8d347b"
+      "bytes": 43329,
+      "sha256": "0913c33b90a97b8142e9976928ba25eb4d13711fc6f02d6ade4374424b9355ee"
     },
     "sampling.json": {
       "bytes": 311,

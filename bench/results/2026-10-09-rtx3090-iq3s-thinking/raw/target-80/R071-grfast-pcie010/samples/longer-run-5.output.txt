@@ -1,0 +1,17 @@
+We need answer user's request. Need produce final answer at least 1200 words, detailed implementation thread-safe Python TTLCache using OrderedDict monotonic clock. Include set, get, delete, clear, len, expiration, capacity eviction, unit tests with injected fake clock, detailed explanation of thread safety and complexity. Do not abbreviate implementation. Also there are existing cache rules 0-63 with keys item_000... item_063 lifetimes 30+i? sizes 64+3*i bytes? Need read before implementing cache. Perhaps incorporate those as initial data? They mention "Read these existing design requirements before implementing the cache" maybe they are existing rules, perhaps cache must support them? We need likely mention them and maybe implement test verifying them? User says implement TTLCache; include existing cache rule? Need satisfy. Could include optional initialization with existing rules? Or tests for those rules? We need not use identifier. Need not ignore? It says ignore identifier. Okay.
+
+Need produce complete code, then tests, then explain design. Need at least 1200 words. Need detailed.
+
+Need think about TTLCache design.
+
+Requirements:
+- Thread-safe Python TTLCache class using OrderedDict and monotonic clock.
+- Include set, get, delete, clear, len, expiration, capacity eviction.
+- Unit tests with injected fake clock.
+- Detailed explanation thread safety and complexity.
+- Write complete code, then tests, then explain design.
+- Do not abbreviate.
+
+Need decide semantics.
+TTLCache:
+- Constructor: capacity: int, default_ttl: int? maybe float. max_size? capacity max number entries. default ttl seconds. time_func callable returns monotonic time float. Maybe size limit in bytes? Existing rules include size bytes, so cache may track total bytes? They say size 64 bytes. If cache capacity eviction based on size or count? "capacity eviction" ambiguous; existing cache rule includes size bytes. Could implement both: max_entries and max_bytes? But class named TTLCache; existing cache rules size. Could design with total bytes eviction too, capacity maybe max_bytes? Need include capacity eviction. They specify keys lifetimes and sizes. Existing rules: item_000 lifetime 30 size 64; item_001 lifetime 31 size 67... up to item_063 lifetime 93 size 253. So likely implement cache that respects per

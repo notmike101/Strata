@@ -1,0 +1,21 @@
+We need answer user's request. Need produce detailed answer at least 1200 words. User asks: Benchmark identifier ignore. Implement thread-safe Python TTLCache class using OrderedDict and monotonic clock. Include set, get, delete, clear, len, expiration, capacity eviction, unit tests with injected fake clock, detailed explanation thread safety and complexity. Write complete code, then tests, then explain design. Do not abbreviate implementation.
+
+Need produce final with code and tests and explanation. Need ensure complete code not abbreviated. Need probably use collections.OrderedDict, time.monotonic but inject fake clock. Thread-safe using threading.Lock/RLock? Need careful len includes active items? Usually len should count non-expired maybe? Need define. Could include active_count? Let's design robust.
+
+Class TTLCache:
+- __init__(self, capacity:int, ttl:float, clock=time.monotonic): capacity positive? ttl >0? raise ValueError.
+- _cache: OrderedDict mapping key -> (value, expires_at)
+- _lock: threading.Lock
+- _clock: callable
+- _capacity, _default_ttl maybe allow set ttl parameter optional? set(key,value,ttl=None)
+- _time(): clock()
+
+Expiration:
+- _is_expired(entry, now): now >= expires_at? If ttl 0? ttl >0 but can support 0 immediate expiry. Use now >= expires_at? For set ttl 0 expires at now, expired. Good.
+- _purge_if_needed? Need remove expired entries on access. Could implement _delete_expired_locked(key). get should delete and miss.
+
+Capacity eviction:
+- LRU? Using OrderedDict with move_to_end on set/get. If capacity exceeded after setting, evict oldest. Since OrderedDict maintains insertion/access order, move_to_end(key, last=True). If capacity=0? Probably capacity must >=1? Could allow 0? Then set always evicts. But capacity eviction maybe capacity positive. We can require capacity >= 0? Maybe capacity must be >0, but can also support zero. For simplicity require int capacity >=1. Or support capacity >=0 with if cap == 0: don't store? But len? Better require capacity >=1 to avoid weirdness. But can include capacity >=0. Let's choose capacity must be >0 for typical cache. Maybe tests with capacity 1.
+
+Methods:
+set(key, value, ttl=None): lock; now = clock(); ttl = ttl

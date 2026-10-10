@@ -1,6 +1,6 @@
 # RTX 3090 / i9-10900KF: IQ3_S thinking-mode optimization ledger
 
-Current goal checkpoint (E092): **90 tok/s is not qualified**. Reject STRATA_VERIFY_DEVICE_PLAN=1: short median 84.3 versus 87.5 control; longer 78.5 versus 84.3. Activation proven in P012 but served throughput regressed. Finite experiment budget closes this hypothesis; no repeat or promotion. Full launcher-tree cleanup is enforced and verified. Process-memory queries stay outside timed generation; GPU telemetry and independent16GiB physical/commit guards remain. The retained production stack is unchanged. Q007 still has two incomplete coding answers out of five; no full quality/matrix qualification is claimed. No benchmark model is resident at this checkpoint.
+Current goal checkpoint (E100): **90 tok/s is not qualified**. Reject combination: short 85.9 versus 86.1 control, longer 82.9 versus 83.1. Longer client rate also slightly lower. A 90.7 short peak does not qualify. Finite budget closes this interaction; no reversed pair, no promotion. Full launcher-tree cleanup is enforced and verified. Process-memory queries stay outside timed generation; GPU telemetry and independent16GiB physical/commit guards remain. The retained production stack is unchanged. Q007 still has two incomplete coding answers out of five; no full quality/matrix qualification is claimed. No benchmark model is resident at this checkpoint.
 
 Active goal: **90 tok/s server_decode_tps** on the fixed short and approximately3K coding matrix; goal created without a token budget at the user's request. See [goal-90-contract.md](goal-90-contract.md). The target remains unproven. Fresh control B010 measured85.9 /84.8 tok/s but included short-run stalls of21.7 and17.5; prompt-read medians77.0 /495.3. No new candidate is promoted. Earlier90/85 follow-up results remain in [follow-up-summary.json](follow-up-summary.json). The B010 stalls remain unexplained; later B011/B012 cells and the Q007 failures are retained without discarding slow or incomplete runs.
 
@@ -155,3 +155,6 @@ The additional restart check in the early hardware campaign was blocked by autom
 - [Strata implementation/details](https://github.com/Niko1221/Strata/blob/fb58e0dbc8399662c0e47c76578c6e878b14f6cf/docs/DETAILS.md): calibration, CPU placement, graph flags, numerical caveats.
 - [NVIDIA Nsight CUDA graph tracing](https://docs.nvidia.com/nsight-systems/UserGuide/index.html#cuda-graph-trace): node-level traces have substantial overhead.
 - [Different-host RTX 3090 report](https://github.com/Niko1221/Strata/issues/165): research lead only; different CPU/PCIe/model, not a matched result.
+
+
+Latest E101: HC fast cumulative15-run medians and rejected PCIe interaction are in [the detailed report](diagnostics/hyper-connection/README.md). No production promotion; goal90 remains unqualified.

@@ -1,0 +1,11 @@
+We need answer user's request. Need produce final answer at least 1200 words. Need implement thread-safe Python TTLCache using OrderedDict monotonic clock, include set, get, delete, clear, len, expiration, capacity eviction, unit tests with injected fake clock, detailed explanation thread safety and complexity. Do not abbreviate implementation. Need benchmark identifier ignore. Need likely provide code, tests, explanation. Need ensure complete code. Could use threading.RLock. OrderedDict move_to_end. Need expiration maybe lazy expiration in get, plus maybe active expiration? len includes non-expired? Need define len maybe count of non-expired entries? But efficient? They ask len. With lazy expiration, len might not remove expired unless get/set. Could provide public len that removes expired? Need thread-safe. Complexity? We can make len O(1) if maintain valid count but expiration makes tricky. Alternative use OrderedDict plus expiration queue? But only OrderedDict and monotonic clock. We can perform cleanup of expired entries in len O(n), but complexity O(n). Could maintain expiry heap? But user specifically using OrderedDict and monotonic clock. Could implement len by purging expired O(n) or O(k). But maybe for complexity say get/set O(1), len O(n) worst-case unless periodic cleanup or use active reaper. Maybe we can implement active expiration in background? But using OrderedDict only. Need complete implementation with thread safety.
+
+Let's design robust TTLCache:
+- from collections import OrderedDict
+- import threading, time, numbers? Maybe types.
+- class TTLCache:
+  __slots__ = ('_maxsize', '_ttl', '_entries', '_lock', '_clock', '_monotonic')? OrderedDict.
+- entries: OrderedDict from key -> (value, expiry_time).
+- maxsize > 0, default_ttl > 0? Allow None? TTL maybe optional. Need capacity eviction. If key exists, update and move end. If maxsize 0? Could support maxsize >= 0; if 0, set does nothing? Usually maxsize positive. We'll validate >0. Maybe allow maxsize=None? No.
+- clock injection: callable returning float seconds since epoch monotonic? Fake clock. Need monotonic clock: time.monotonic by default. Ensure non-negative? Could just call.
+- set(key, value, ttl=None): lock. now = clock(). remove expired maybe purge expired before insertion to maintain capacity. But purge all expired O(n). Could

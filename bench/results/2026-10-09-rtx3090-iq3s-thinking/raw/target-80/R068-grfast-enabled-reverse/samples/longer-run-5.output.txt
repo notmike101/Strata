@@ -1,0 +1,15 @@
+We need answer user's request. Need produce final answer at least 1200 words, detailed implementation thread-safe Python TTLCache using OrderedDict monotonic clock. Include set, get, delete, clear, len, expiration, capacity eviction, unit tests with injected fake clock, detailed explanation of thread safety and complexity. Do not abbreviate implementation. Also there are existing cache rules 0-63 with keys item_000... item_063 lifetimes 30+i? sizes 64+3*i maybe total size? User likely wants cache supports size? Need implement size? The existing cache rules mention size bytes. Need consider capacity eviction based on total byte size maybe. The user asks TTLCache class using OrderedDict and monotonic clock. Include capacity eviction. Existing cache rules include key lifetime and size. So likely implement cache with max_size (number of entries) and max_bytes? Or capacity eviction could mean max entries. But rules include size bytes, so likely need account size per entry, total bytes capacity. Need include tests. Need perhaps initialize with existing rules? "Read these existing design requirements before implementing the cache:" They list rules. So implement cache respecting per-key TTL and size. Need maybe methods set(key, value, ttl, size), get(key), delete, clear, len, expiration, capacity eviction. Need thread-safe. Need fake clock. Need detailed explanation. Need not abbreviate code.
+
+Need decide design. Class TTLCache with OrderedDict from collections. Entry maybe dataclass with value, expires_at, size. max_bytes (total size) and max_entries? They mention capacity eviction but not explicit capacity. Need implement both: capacity (max_entries) and max_bytes. Existing cache rules have sizes; capacity eviction likely evict when total size exceeds capacity. But using OrderedDict capacity often max number. We can support max_size (max entries) and max_bytes. If no byte capacity, use entries.
+
+Requirements:
+- Thread-safe Python TTLCache class using OrderedDict and monotonic clock.
+- set, get, delete, clear, len, expiration, capacity eviction
+- unit tests with injected fake clock
+- detailed explanation thread safety and complexity
+- complete code, tests, explanation design
+- at least 1200 words.
+
+Need maybe include a FakeClock class for tests. Use monotonic clock injected as callable returning float. Thread-safe with threading.RLock or Lock. OrderedDict not thread-safe, guard all operations.
+
+Expiration: Need remove stale entries. Lazy expiration

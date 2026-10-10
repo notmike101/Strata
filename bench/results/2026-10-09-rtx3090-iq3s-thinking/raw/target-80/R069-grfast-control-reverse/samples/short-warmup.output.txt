@@ -1,0 +1,22 @@
+We need answer user's request. Need produce final answer with complete code, tests, detailed explanation at least 1200 words. Need think fully.
+
+Task: Implement thread-safe Python TTLCache class using OrderedDict and monotonic clock. Include set, get, delete, clear, len, expiration, capacity eviction, unit tests with injected fake clock, detailed explanation of thread safety and complexity. Write complete code, then tests, then explain design. Do not abbreviate implementation. At least 1200 words.
+
+Need produce Python code. Need consider thread safety. Use threading.RLock? OrderedDict not thread-safe. Need protect all operations. Use monotonic clock by default, inject clock for tests. TTLCache set(key, value, ttl). get(key, default=None). delete(key), clear(), __len__ maybe. Need expiration: remove expired entries on access and maybe before insert/eviction. Capacity eviction: OrderedDict with move_to_end True for LRU; evict oldest when exceeding capacity. TTL optional per entry store expiry time. If ttl None infinite? Could support default_ttl and ttl None => no expiry? User says TTLCache, probably ttl required? We can support optional ttl=None means no expiration. But maybe use default_ttl. Need complete code. Need unit tests with fake clock. Need not abbreviate implementation. Could implement class:
+
+import threading, time
+from collections import OrderedDict
+from typing import Any, Optional, Callable, Hashable
+
+class TTLCache:
+   def __init__(self, maxsize=..., ttl=None, *, clock=None, default_ttl=None):
+      if maxsize < 0? If 0? capacity. Use maxsize maybe positive integer or None unlimited? For capacity eviction, require maxsize positive? Could allow 0 => no storage. Better validate maxsize positive? But len can be 0. Let's make maxsize non-negative int; if None unlimited. But capacity eviction with maxsize.
+      self._entries = OrderedDict() # key -> (value, expiry, has_expiry) or (value, expiry) expiry None.
+      self._lock = threading.RLock()
+      self._clock = clock or time.monotonic
+      self._default_ttl = default_ttl?
+
+Need handle monotonic clock and fake clock. Use clock callable. Time units seconds.
+
+Methods:
+- _purge_if_expired(key, now): if key in entries and expiry not None and expiry <= now: delete? But if expired we should

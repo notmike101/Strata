@@ -1,0 +1,303 @@
+{
+  "kind": "synthetic kernel diagnostic, not served TPS",
+  "engine_source_commit": "15b252a878bb7070eb92cf719f39b2756e0b3d82",
+  "compiler": "CUDA 13.3.73 sm86",
+  "env": {
+    "STRATA_HC_SPLIT": "2"
+  },
+  "graph_reads": 200,
+  "excluded_warmups_per_variant": 1,
+  "measured_rounds": 7,
+  "round_order": "alternating",
+  "rows": [
+    {
+      "T": "1",
+      "apply": "0",
+      "inject": "0",
+      "old_us": "26.526721",
+      "fast_us": "24.785919",
+      "ratio": "0.934376",
+      "parity": "bitwise_equal"
+    },
+    {
+      "T": "1",
+      "apply": "0",
+      "inject": "1",
+      "old_us": "26.624000",
+      "fast_us": "24.929280",
+      "ratio": "0.936346",
+      "parity": "bitwise_equal"
+    },
+    {
+      "T": "1",
+      "apply": "1",
+      "inject": "0",
+      "old_us": "25.620480",
+      "fast_us": "23.751681",
+      "ratio": "0.927058",
+      "parity": "bitwise_equal"
+    },
+    {
+      "T": "1",
+      "apply": "1",
+      "inject": "1",
+      "old_us": "25.784321",
+      "fast_us": "23.808000",
+      "ratio": "0.923352",
+      "parity": "bitwise_equal"
+    },
+    {
+      "T": "2",
+      "apply": "0",
+      "inject": "0",
+      "old_us": "28.282881",
+      "fast_us": "29.250560",
+      "ratio": "1.034214",
+      "parity": "bitwise_equal"
+    },
+    {
+      "T": "2",
+      "apply": "0",
+      "inject": "1",
+      "old_us": "28.317120",
+      "fast_us": "29.255681",
+      "ratio": "1.033145",
+      "parity": "bitwise_equal"
+    },
+    {
+      "T": "2",
+      "apply": "1",
+      "inject": "0",
+      "old_us": "31.626239",
+      "fast_us": "29.803519",
+      "ratio": "0.942367",
+      "parity": "bitwise_equal"
+    },
+    {
+      "T": "2",
+      "apply": "1",
+      "inject": "1",
+      "old_us": "31.534081",
+      "fast_us": "29.716480",
+      "ratio": "0.942361",
+      "parity": "bitwise_equal"
+    },
+    {
+      "T": "3",
+      "apply": "0",
+      "inject": "0",
+      "old_us": "29.839361",
+      "fast_us": "30.632961",
+      "ratio": "1.026596",
+      "parity": "bitwise_equal"
+    },
+    {
+      "T": "3",
+      "apply": "0",
+      "inject": "1",
+      "old_us": "29.864960",
+      "fast_us": "30.663681",
+      "ratio": "1.026744",
+      "parity": "bitwise_equal"
+    },
+    {
+      "T": "3",
+      "apply": "1",
+      "inject": "0",
+      "old_us": "33.392639",
+      "fast_us": "31.150081",
+      "ratio": "0.932843",
+      "parity": "bitwise_equal"
+    },
+    {
+      "T": "3",
+      "apply": "1",
+      "inject": "1",
+      "old_us": "33.408000",
+      "fast_us": "31.211519",
+      "ratio": "0.934253",
+      "parity": "bitwise_equal"
+    },
+    {
+      "T": "4",
+      "apply": "0",
+      "inject": "0",
+      "old_us": "37.473280",
+      "fast_us": "37.918720",
+      "ratio": "1.011887",
+      "parity": "bitwise_equal"
+    },
+    {
+      "T": "4",
+      "apply": "0",
+      "inject": "1",
+      "old_us": "37.483521",
+      "fast_us": "37.898240",
+      "ratio": "1.011064",
+      "parity": "bitwise_equal"
+    },
+    {
+      "T": "4",
+      "apply": "1",
+      "inject": "0",
+      "old_us": "41.026559",
+      "fast_us": "38.707199",
+      "ratio": "0.943467",
+      "parity": "bitwise_equal"
+    },
+    {
+      "T": "4",
+      "apply": "1",
+      "inject": "1",
+      "old_us": "40.985599",
+      "fast_us": "38.702080",
+      "ratio": "0.944285",
+      "parity": "bitwise_equal"
+    },
+    {
+      "T": "5",
+      "apply": "0",
+      "inject": "0",
+      "old_us": "40.478721",
+      "fast_us": "40.140800",
+      "ratio": "0.991652",
+      "parity": "bitwise_equal"
+    },
+    {
+      "T": "5",
+      "apply": "0",
+      "inject": "1",
+      "old_us": "40.652800",
+      "fast_us": "40.279040",
+      "ratio": "0.990806",
+      "parity": "bitwise_equal"
+    },
+    {
+      "T": "5",
+      "apply": "1",
+      "inject": "0",
+      "old_us": "44.144640",
+      "fast_us": "40.929279",
+      "ratio": "0.927163",
+      "parity": "bitwise_equal"
+    },
+    {
+      "T": "5",
+      "apply": "1",
+      "inject": "1",
+      "old_us": "44.154081",
+      "fast_us": "40.929279",
+      "ratio": "0.926965",
+      "parity": "bitwise_equal"
+    },
+    {
+      "T": "6",
+      "apply": "0",
+      "inject": "0",
+      "old_us": "45.911040",
+      "fast_us": "45.368319",
+      "ratio": "0.988179",
+      "parity": "bitwise_equal"
+    },
+    {
+      "T": "6",
+      "apply": "0",
+      "inject": "1",
+      "old_us": "45.992961",
+      "fast_us": "45.373440",
+      "ratio": "0.986530",
+      "parity": "bitwise_equal"
+    },
+    {
+      "T": "6",
+      "apply": "1",
+      "inject": "0",
+      "old_us": "49.623041",
+      "fast_us": "45.992961",
+      "ratio": "0.926847",
+      "parity": "bitwise_equal"
+    },
+    {
+      "T": "6",
+      "apply": "1",
+      "inject": "1",
+      "old_us": "49.771519",
+      "fast_us": "46.264319",
+      "ratio": "0.929534",
+      "parity": "bitwise_equal"
+    },
+    {
+      "T": "7",
+      "apply": "0",
+      "inject": "0",
+      "old_us": "55.468640",
+      "fast_us": "52.628479",
+      "ratio": "0.948797",
+      "parity": "bitwise_equal"
+    },
+    {
+      "T": "7",
+      "apply": "0",
+      "inject": "1",
+      "old_us": "55.511041",
+      "fast_us": "52.689919",
+      "ratio": "0.949179",
+      "parity": "bitwise_equal"
+    },
+    {
+      "T": "7",
+      "apply": "1",
+      "inject": "0",
+      "old_us": "58.572798",
+      "fast_us": "53.406720",
+      "ratio": "0.911801",
+      "parity": "bitwise_equal"
+    },
+    {
+      "T": "7",
+      "apply": "1",
+      "inject": "1",
+      "old_us": "58.567681",
+      "fast_us": "53.463039",
+      "ratio": "0.912842",
+      "parity": "bitwise_equal"
+    },
+    {
+      "T": "8",
+      "apply": "0",
+      "inject": "0",
+      "old_us": "60.784640",
+      "fast_us": "57.410560",
+      "ratio": "0.944491",
+      "parity": "bitwise_equal"
+    },
+    {
+      "T": "8",
+      "apply": "0",
+      "inject": "1",
+      "old_us": "60.723200",
+      "fast_us": "57.159681",
+      "ratio": "0.941315",
+      "parity": "bitwise_equal"
+    },
+    {
+      "T": "8",
+      "apply": "1",
+      "inject": "0",
+      "old_us": "64.552960",
+      "fast_us": "58.408961",
+      "ratio": "0.904822",
+      "parity": "bitwise_equal"
+    },
+    {
+      "T": "8",
+      "apply": "1",
+      "inject": "1",
+      "old_us": "64.563198",
+      "fast_us": "58.455038",
+      "ratio": "0.905393",
+      "parity": "bitwise_equal"
+    }
+  ],
+  "binary_sha256": "df508c016ed7e4df561eb8fd0f08f1b5ef8741a53377cd56dfb26dcc93d60cd4"
+}

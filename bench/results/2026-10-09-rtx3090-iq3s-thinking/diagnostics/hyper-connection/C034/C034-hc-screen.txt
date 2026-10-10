@@ -1,0 +1,39 @@
+**********************************************************************
+** Visual Studio 2022 Developer Command Prompt v17.14.36
+** Copyright (c) 2025 Microsoft Corporation
+**********************************************************************
+[1/2] Building CXX object CMakeFiles\fused_gr_bench.dir\src\kernels\fused_gr_bench.cpp.obj
+[2/2] Linking CXX executable fused_gr_bench.exe
+T 1 apply 0 inject 0 | old   31.8 us  fast   30.0 us | bitwise equal
+T 1 apply 0 inject 1 | old   31.8 us  fast   30.0 us | bitwise equal
+T 1 apply 1 inject 0 | old   63.1 us  fast   65.6 us | bitwise equal
+T 1 apply 1 inject 1 | old   62.6 us  fast   64.7 us | bitwise equal
+T 2 apply 0 inject 0 | old   61.6 us  fast   60.3 us | bitwise equal
+T 2 apply 0 inject 1 | old   56.8 us  fast   58.8 us | bitwise equal
+T 2 apply 1 inject 0 | old   62.7 us  fast   61.2 us | bitwise equal
+T 2 apply 1 inject 1 | old   62.1 us  fast   61.0 us | bitwise equal
+T 3 apply 0 inject 0 | old   61.8 us  fast   61.2 us | bitwise equal
+T 3 apply 0 inject 1 | old   62.0 us  fast   60.7 us | bitwise equal
+T 3 apply 1 inject 0 | old   65.0 us  fast   61.7 us | bitwise equal
+T 3 apply 1 inject 1 | old   65.2 us  fast   61.1 us | bitwise equal
+T 4 apply 0 inject 0 | old   72.5 us  fast   73.4 us | bitwise equal
+T 4 apply 0 inject 1 | old   71.5 us  fast   73.6 us | bitwise equal
+T 4 apply 1 inject 0 | old   73.8 us  fast   73.9 us | bitwise equal
+T 4 apply 1 inject 1 | old   73.8 us  fast   73.5 us | bitwise equal
+T 5 apply 0 inject 0 | old   74.3 us  fast   73.3 us | bitwise equal
+T 5 apply 0 inject 1 | old   74.1 us  fast   73.8 us | bitwise equal
+T 5 apply 1 inject 0 | old   72.2 us  fast   73.8 us | bitwise equal
+T 5 apply 1 inject 1 | old   72.5 us  fast   73.8 us | bitwise equal
+T 6 apply 0 inject 0 | old   64.6 us  fast   64.3 us | bitwise equal
+T 6 apply 0 inject 1 | old   66.5 us  fast   65.8 us | bitwise equal
+T 6 apply 1 inject 0 | old   79.8 us  fast   68.4 us | bitwise equal
+T 6 apply 1 inject 1 | old   79.7 us  fast   69.7 us | bitwise equal
+T 7 apply 0 inject 0 | old   66.8 us  fast   75.5 us | bitwise equal
+T 7 apply 0 inject 1 | old   66.6 us  fast   81.5 us | bitwise equal
+T 7 apply 1 inject 0 | old   67.6 us  fast   66.4 us | bitwise equal
+T 7 apply 1 inject 1 | old   67.6 us  fast   69.0 us | bitwise equal
+T 8 apply 0 inject 0 | old   66.0 us  fast   63.6 us | bitwise equal
+T 8 apply 0 inject 1 | old   66.2 us  fast   63.9 us | bitwise equal
+T 8 apply 1 inject 0 | old   68.2 us  fast   64.5 us | bitwise equal
+T 8 apply 1 inject 1 | old   68.3 us  fast   64.5 us | bitwise equal
+fused_gr_bench: 0 differing

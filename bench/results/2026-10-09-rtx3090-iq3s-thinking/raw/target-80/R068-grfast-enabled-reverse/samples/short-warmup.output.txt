@@ -1,0 +1,30 @@
+We need answer user's request. Need produce final answer with complete code, tests, detailed explanation at least 1200 words. Need think fully.
+
+Task: Implement thread-safe Python TTLCache class using OrderedDict and monotonic clock. Include set, get, delete, clear, len, expiration, capacity eviction, unit tests with injected fake clock, detailed explanation of thread safety and complexity. Write complete code, then tests, then explain design. Do not abbreviate implementation. Produce detailed answer at least 1200 words.
+
+Need likely include Python code. Need ensure thread-safe. Use threading.RLock? OrderedDict. Monotonic clock injected via clock=time.monotonic. TTLCache methods set, get, delete, clear, len? Python len? Could implement __len__ maybe also len method? They say Include set, get, delete, clear, len, expiration, capacity eviction. Could implement set, get, delete, clear, __len__, _purge_expired, _enforce_capacity maybe len() uses __len__. Also maybe __setitem__, __getitem__, __delitem__. Need not abbreviate.
+
+Need unit tests with injected fake clock. Use unittest. FakeClock class with now. Tests set/get expiration, capacity eviction, thread safety maybe with threads. Could include deterministic fake clock for tests and real default. Need ensure len after get not expired; get updates recency. Need capacity eviction LRU? OrderedDict: move_to_end on get/set. For insertion, if maxsize, evict oldest. If expired items, evict before insertion. For TTL, expiration maybe optional ttl, maxsize optional.
+
+Potential implementation:
+
+import threading, time
+from collections import OrderedDict
+
+class TTLCache:
+    def __init__(self, ttl=None, maxsize=0, clock=time.monotonic):
+        if maxsize < 0: raise ValueError
+        self._clock = clock
+        self._ttl = ttl
+        self._maxsize = maxsize
+        self._cache = OrderedDict() # key -> (value, expires_at or None)
+        self._lock = threading.RLock()
+
+    def set(self, key, value, ttl=None):
+        with self._lock:
+            if ttl is None:
+                ttl = self._ttl
+            now = self._clock()
+            expires_at = now + ttl if ttl is not None else None
+            if key in self._cache:
+                self._cache[key] =

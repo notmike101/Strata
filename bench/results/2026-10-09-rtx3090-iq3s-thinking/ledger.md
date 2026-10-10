@@ -1343,3 +1343,203 @@ Minimum available physical RAM 62,584,963,072 bytes; available commit 40,618,774
 Reject STRATA_VERIFY_DEVICE_PLAN=1: short median 84.3 versus 87.5 control; longer 78.5 versus 84.3. Activation proven in P012 but served throughput regressed. Finite experiment budget closes this hypothesis; no repeat or promotion.
 
 Next: Investigate hyper-connection kernels using existing P009 trace; preserve production configuration and fixed quality gates.
+
+
+## E093 / C034 hyper-connection fast-path screening
+
+Existing P009 shows20,886 gr_up_multi<1,true> calls totaling252.274ms instrumented
+kernel duration, not a critical-path percentage. Existing STRATA_GR_FAST=1 uses
+eight lanes per row and preserves the reduction tree. CUDA defaults off here.
+No shipping source change is needed; staged HC norm/down remain selected.
+
+The upstream eager benchmark passed32/32 bitwise comparisons but reports minima;
+its timings are diagnostic only. A local graph-replay adaptation then passed all
+32 comparisons (T1..8, pending-write on/off, injection on/off). Seven alternating
+timing rounds after one excluded warmup,200 reads per graph, all raw samples saved.
+T1 fast/control median-time ratios were0.934376,0.936346,0.927058,0.923352.
+T2..4 with no pending write lost1.1-3.4%; corresponding pending-write cells won
+5.6-6.7%. T5..8 all improved. These are synthetic kernel timings, not served TPS.
+The mixed multi-token result and dominant T1 improvement justify one off/on pair;
+no promotion and no claim that quality or the90 TPS contract is satisfied.
+
+Budget: R066 fresh retained-binary control and R067 STRATA_GR_FAST=1, otherwise
+identical fixed sampling/context/vision, five seeds per short/~3K cell. Only an
+across-workload served benefit with intact prompt/client rates permits a reversed
+pair. Otherwise close. Numerical screening does not replace full coding quality.
+Evidence: diagnostics/hyper-connection/C034. NVIDIA graph guidance links in plan.
+
+
+## E094 / R066-grfast-control
+
+Same engine and loaded library hashes as R064-deviceplan-control. Config diff is archived. Fixed numeric sampling, high/xhigh reasoning, model/quant, vision, context262144 and INT8KV retained. Original TTLCache streaming cache-miss workloads; one excluded warmup and five measured seeds101-105 per cell,512tokens per measured run. No slow seed excluded.
+
+| Workload | Decode median (range), tok/s | Prompt median, tok/s | E2E median, tok/s | Stream total median, tok/s | TTFT median, s | Draft accepted/offered |
+|---|---:|---:|---:|---:|---:|---:|
+| short | 86.9 (82.6-88.3) | 201.4 | 75.8938 | 75.9039 | 0.8634 | 843/1140 (73.95%) |
+| longer | 82.7 (80.3-85.8) | 495.7 | 41.5126 | 41.5168 | 6.1668 | 862/1180 (73.05%) |
+
+Minimum available physical RAM 62,547,136,512 bytes; available commit 40,615,669,760 bytes. Sampled GPU peak 25,263,800,320 bytes. Both16GiB host floors passed. Per-process peak memory not sampled. Full launcher/server/text/vision cleanup passed and previous config restored.
+
+Fresh control for STRATA_GR_FAST; short 86.9, longer 82.7 server_decode_tps. No production change.
+
+Next: Compare R067 with exactly one environment flag changed.
+
+
+## E095 / R067-grfast-enabled
+
+Same engine and loaded library hashes as R066-grfast-control. Config diff is archived. Fixed numeric sampling, high/xhigh reasoning, model/quant, vision, context262144 and INT8KV retained. Original TTLCache streaming cache-miss workloads; one excluded warmup and five measured seeds101-105 per cell,512tokens per measured run. No slow seed excluded.
+
+| Workload | Decode median (range), tok/s | Prompt median, tok/s | E2E median, tok/s | Stream total median, tok/s | TTFT median, s | Draft accepted/offered |
+|---|---:|---:|---:|---:|---:|---:|
+| short | 88.7 (86.5-89.2) | 204.2 | 77.2461 | 77.2577 | 0.8504 | 886/1157 (76.58%) |
+| longer | 83.1 (80.6-86.1) | 496.1 | 41.6313 | 41.6370 | 6.1699 | 875/1215 (72.02%) |
+
+Minimum available physical RAM 62,655,672,320 bytes; available commit 40,728,608,768 bytes. Sampled GPU peak 25,270,124,544 bytes. Both16GiB host floors passed. Per-process peak memory not sampled. Full launcher/server/text/vision cleanup passed and previous config restored.
+
+Promising first pair: short 88.7 versus 86.9, longer 83.1 versus 82.7; prompt and client median rates also improve. Longer TTFT increases slightly. Below target and not promoted; reverse order confirmation required.
+
+Next: R068 enabled then R069 disabled, both longer-first; full quality gates remain mandatory.
+
+
+## E096 / R068-grfast-enabled-reverse
+
+Same engine and loaded library hashes as R066-grfast-control. Config diff is archived. Fixed numeric sampling, high/xhigh reasoning, model/quant, vision, context262144 and INT8KV retained. Original TTLCache streaming cache-miss workloads; one excluded warmup and five measured seeds101-105 per cell,512tokens per measured run. No slow seed excluded.
+
+| Workload | Decode median (range), tok/s | Prompt median, tok/s | E2E median, tok/s | Stream total median, tok/s | TTFT median, s | Draft accepted/offered |
+|---|---:|---:|---:|---:|---:|---:|
+| short | 86.4 (85.2-88.2) | 191.8 | 75.5408 | 75.5544 | 0.9040 | 797/1040 (76.63%) |
+| longer | 84.3 (82.9-85.0) | 496.2 | 41.9354 | 41.9413 | 6.1635 | 979/1361 (71.93%) |
+
+Minimum available physical RAM 62,614,597,632 bytes; available commit 40,662,786,048 bytes. Sampled GPU peak 25,258,721,280 bytes. Both16GiB host floors passed. Per-process peak memory not sampled. Full launcher/server/text/vision cleanup passed and previous config restored.
+
+Reverse-order fast-path repeat: short 86.4, longer 84.3 server_decode_tps. Short prompt 191.8 tok/s; this run alone does not prove no regression. No promotion.
+
+Next: Pool both enabled processes against both controls without removing slow seeds.
+
+
+## E097 / R069-grfast-control-reverse
+
+Same engine and loaded library hashes as R066-grfast-control. Config diff is archived. Fixed numeric sampling, high/xhigh reasoning, model/quant, vision, context262144 and INT8KV retained. Original TTLCache streaming cache-miss workloads; one excluded warmup and five measured seeds101-105 per cell,512tokens per measured run. No slow seed excluded.
+
+| Workload | Decode median (range), tok/s | Prompt median, tok/s | E2E median, tok/s | Stream total median, tok/s | TTFT median, s | Draft accepted/offered |
+|---|---:|---:|---:|---:|---:|---:|
+| short | 84.5 (83.6-90.5) | 199.3 | 73.9941 | 74.0035 | 0.8777 | 850/1137 (74.76%) |
+| longer | 83.5 (81.5-86.5) | 495.8 | 41.7202 | 41.7235 | 6.1678 | 919/1263 (72.76%) |
+
+Minimum available physical RAM 62,591,614,976 bytes; available commit 40,653,860,864 bytes. Sampled GPU peak 25,257,934,848 bytes. Both16GiB host floors passed. Per-process peak memory not sampled. Full launcher/server/text/vision cleanup passed and previous config restored.
+
+Reverse-order control: short 84.5, longer 83.5 server_decode_tps; full cleanup and safety gates passed. Compare complete ABBA raw rows.
+
+Next: Close bounded fast-path experiment using all-run medians and prompt/client metrics.
+
+
+## E098 / HC fast ABBA and bounded PCIe interaction
+
+Four fresh processes, one excluded warmup and five measured seeds per workload
+per process. The second pair reverses both arm and workload order. Each table
+cell is the ordinary median of all ten measured512-token requests, with zero
+cached prompt tokens. Request JSON, binary, libraries, model shards, projector,
+expert profile and all config except STRATA_GR_FAST match. Cache8409 in all arms.
+The script asserts those properties; abba.json preserves every value and process
+summary. Hardware, runtime and fixed262144-context thinking profile are unchanged.
+
+| Setting | Workload | Decode tok/s | Prompt tok/s | E2E tok/s | Stream tok/s | TTFT s |
+|---|---|---:|---:|---:|---:|---:|
+| off | short | 85.00 | 200.35 | 74.4052 | 74.4213 | 0.8716 |
+| off | longer | 83.10 | 495.75 | 41.6164 | 41.6201 | 6.1673 |
+| on | short | 87.30 | 202.75 | 76.4360 | 76.4482 | 0.8696 |
+| on | longer | 83.15 | 496.15 | 41.6442 | 41.6494 | 6.1664 |
+
+Short decode improved2.71%; the longer result is effectively tied (+0.06%).
+Both individual paired short and longer decode medians increased, but the second
+enabled process had slower short prompt processing. Pooled prompt/client medians
+do not regress. Retain as a combination candidate, not a promoted configuration.
+This does not meet90 TPS or the full quality/stability/workload matrix. Q007's
+two incomplete coding answers remain unresolved. Synthetic bitwise parity is
+necessary evidence for unchanged arithmetic, not a substitute for coding quality.
+All four arms passed both16GiB memory floors and complete process-tree cleanup.
+
+## Next bounded interaction
+
+E073 found PCIe share0.10 improved longer decode82.2 to85.2 but slightly lowered
+short decode87.3 to86.85. Fast HC now improves short and ties longer. Hypothesis:
+their different costs (GPU HC arithmetic vs missed-expert transfer/CPU division)
+may complement each other. They also share GPU scheduling and host waits, so
+additivity is explicitly unproven. No sampler, precision or context change.
+
+Budget: one fresh R070 fast=1/PCIe0.20 control and R071 fast=1/PCIe0.10 candidate,
+same fixed short/~3K requests, warmup+five measured seeds each. Only if both
+decode medians improve and prompt/client rates do not fall, permit one reversed
+pair. Otherwise close this combination. No more repetitions to chase a peak.
+Any retention still requires activation and full fixed quality/matrix checks.
+
+
+## E099 / R070-grfast-pcie020
+
+Same engine and loaded library hashes as R067-grfast-enabled. Config diff is archived. Fixed numeric sampling, high/xhigh reasoning, model/quant, vision, context262144 and INT8KV retained. Original TTLCache streaming cache-miss workloads; one excluded warmup and five measured seeds101-105 per cell,512tokens per measured run. No slow seed excluded.
+
+| Workload | Decode median (range), tok/s | Prompt median, tok/s | E2E median, tok/s | Stream total median, tok/s | TTFT median, s | Draft accepted/offered |
+|---|---:|---:|---:|---:|---:|---:|
+| short | 86.1 (84.8-88.1) | 202.2 | 75.3052 | 75.3182 | 0.8710 | 803/1068 (75.19%) |
+| longer | 83.1 (81.5-88.1) | 496.0 | 41.6311 | 41.6351 | 6.1623 | 987/1299 (75.98%) |
+
+Minimum available physical RAM 62,272,811,008 bytes; available commit 39,816,007,680 bytes. Sampled GPU peak 25,270,976,512 bytes. Both16GiB host floors passed. Per-process peak memory not sampled. Full launcher/server/text/vision cleanup passed and previous config restored.
+
+Fresh fast-kernel PCIe0.20 control: short 86.1, longer 83.1 server_decode_tps. Same retained executable and fixed profile. All rows preserved.
+
+Next: Compare R071 lower PCIe share under the predeclared no-regression rule.
+
+
+## E100 / R071-grfast-pcie010
+
+Same engine and loaded library hashes as R070-grfast-pcie020. Config diff is archived. Fixed numeric sampling, high/xhigh reasoning, model/quant, vision, context262144 and INT8KV retained. Original TTLCache streaming cache-miss workloads; one excluded warmup and five measured seeds101-105 per cell,512tokens per measured run. No slow seed excluded.
+
+| Workload | Decode median (range), tok/s | Prompt median, tok/s | E2E median, tok/s | Stream total median, tok/s | TTFT median, s | Draft accepted/offered |
+|---|---:|---:|---:|---:|---:|---:|
+| short | 85.9 (84.5-90.7) | 205.8 | 75.4163 | 75.4302 | 0.8525 | 928/1210 (76.69%) |
+| longer | 82.9 (81.7-84.4) | 496.1 | 41.6246 | 41.6289 | 6.1594 | 950/1272 (74.69%) |
+
+Minimum available physical RAM 62,643,515,392 bytes; available commit 40,750,952,448 bytes. Sampled GPU peak 25,270,648,832 bytes. Both16GiB host floors passed. Per-process peak memory not sampled. Full launcher/server/text/vision cleanup passed and previous config restored.
+
+Reject combination: short 85.9 versus 86.1 control, longer 82.9 versus 83.1. Longer client rate also slightly lower. A 90.7 short peak does not qualify. Finite budget closes this interaction; no reversed pair, no promotion.
+
+Next: Archive completed comparisons; larger dataflow alternatives need a new explicit theory and finite budget. Fixed contract and production launcher retained.
+
+
+## E101 / HC and PCIe interaction closed; next architecture screen
+
+R070/R071 preserve byte-identical request JSON and exact binary, loaded libraries,
+GGUF, projector and expert-profile identities; configs differ only in PCIe share.
+With HC fast enabled, lowering share0.20 to0.10 changed short decode86.1 to85.9,
+longer83.1 to82.9; longer E2E41.6311 to41.6246. This fails the predeclared rule.
+Close this interaction without another pair. Peak90.7 is not a qualifying result.
+Production launcher and config remain unchanged; full cleanup verified after both
+arms. Production config SHA256 is3457fdfe7d69fbf6651e2031320cdebf88a9d8d269ebbe459db7fdd885e8c9f0.
+Idle GPU after cleanup589MiB. No benchmark model remains resident.
+
+The earlier predeclared four-process HC ABBA comparison remains available in
+diagnostics/hyper-connection/abba.json. Include R070 as well when describing the
+candidate's cumulative results: all-fast020-runs.json contains all15 measured
+rows per workload across R067/R068/R070, not a selected fast subset.
+
+All15 fast/PCIe0.20 short rows: decode median86.50, prompt202.30, E2E75.7012, stream75.7241 tok/s; TTFT0.8710s.
+
+All15 fast/PCIe0.20 longer rows: decode median83.10, prompt496.10, E2E41.6313, stream41.6370 tok/s; TTFT6.1632s.
+
+Remaining architecture hypothesis, not implemented or benchmarked: compress the
+BF16 HC projection storage losslessly relative to current packed weights using
+the source Q8_0 blocks, reconstruct the exact BF16-rounded coefficients on load,
+and preserve the current accumulation tree. P009's HC projection read costs make
+bandwidth reduction a plausible mechanism. The existing STRATA_HC_Q8 is NOT this
+candidate: fused_gr.cu explicitly changes both weights and reduction order, and
+native_dense.cpp adds another allocation without releasing the packed weights.
+Do not enable it as a shortcut or call it quality-neutral. A new candidate needs
+all-actual-tensor reconstruction parity, graph microbenchmark and finite budget
+before any integration or served test. No source or runtime change for this idea.
+
+Q007 still has3/5 compiled/tested answers and2/5 incomplete answers. The full90
+TPS contract is not qualified. Keep the objective unchanged. The goal tool still
+reported a preexisting blocked status at this turn's entry; the user explicitly
+resumed work, but the available update_goal interface cannot set active. No
+completion or threshold change was made. The durable campaign retains active
+optimization intent and this exact resume checkpoint.

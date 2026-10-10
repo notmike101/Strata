@@ -3280,5 +3280,233 @@
       85.9,
       82.5
     ]
+  },
+  {
+    "campaign": "target-80",
+    "arm": "R066-grfast-control",
+    "workload": "longer",
+    "runs": 5,
+    "decode_median": 82.7,
+    "decode_min": 80.3,
+    "decode_max": 85.8,
+    "e2e_median": 41.5126088751323,
+    "stream_total_median": 41.51678088409876,
+    "ttft_median_seconds": 6.166824300016742,
+    "raw_decode": [
+      85.8,
+      81.9,
+      85.3,
+      82.7,
+      80.3
+    ]
+  },
+  {
+    "campaign": "target-80",
+    "arm": "R066-grfast-control",
+    "workload": "short",
+    "runs": 5,
+    "decode_median": 86.9,
+    "decode_min": 82.6,
+    "decode_max": 88.3,
+    "e2e_median": 75.89375644863728,
+    "stream_total_median": 75.90392306741933,
+    "ttft_median_seconds": 0.8634093000437133,
+    "raw_decode": [
+      82.6,
+      88.3,
+      85.3,
+      86.9,
+      86.9
+    ]
+  },
+  {
+    "campaign": "target-80",
+    "arm": "R067-grfast-enabled",
+    "workload": "longer",
+    "runs": 5,
+    "decode_median": 83.1,
+    "decode_min": 80.6,
+    "decode_max": 86.1,
+    "e2e_median": 41.63130343580685,
+    "stream_total_median": 41.637043645058306,
+    "ttft_median_seconds": 6.169948199996725,
+    "raw_decode": [
+      86.1,
+      81.0,
+      83.2,
+      83.1,
+      80.6
+    ]
+  },
+  {
+    "campaign": "target-80",
+    "arm": "R067-grfast-enabled",
+    "workload": "short",
+    "runs": 5,
+    "decode_median": 88.7,
+    "decode_min": 86.5,
+    "decode_max": 89.2,
+    "e2e_median": 77.24607250901343,
+    "stream_total_median": 77.25769233861155,
+    "ttft_median_seconds": 0.8503917999914847,
+    "raw_decode": [
+      86.5,
+      89.2,
+      89.1,
+      88.7,
+      87.7
+    ]
+  },
+  {
+    "campaign": "target-80",
+    "arm": "R068-grfast-enabled-reverse",
+    "workload": "longer",
+    "runs": 5,
+    "decode_median": 84.3,
+    "decode_min": 82.9,
+    "decode_max": 85.0,
+    "e2e_median": 41.935396179685725,
+    "stream_total_median": 41.941285149824054,
+    "ttft_median_seconds": 6.163513100007549,
+    "raw_decode": [
+      82.9,
+      84.3,
+      83.1,
+      84.3,
+      85.0
+    ]
+  },
+  {
+    "campaign": "target-80",
+    "arm": "R068-grfast-enabled-reverse",
+    "workload": "short",
+    "runs": 5,
+    "decode_median": 86.4,
+    "decode_min": 85.2,
+    "decode_max": 88.2,
+    "e2e_median": 75.54083289604921,
+    "stream_total_median": 75.55438249471449,
+    "ttft_median_seconds": 0.9039654999505728,
+    "raw_decode": [
+      86.9,
+      88.2,
+      86.2,
+      85.2,
+      86.4
+    ]
+  },
+  {
+    "campaign": "target-80",
+    "arm": "R069-grfast-control-reverse",
+    "workload": "longer",
+    "runs": 5,
+    "decode_median": 83.5,
+    "decode_min": 81.5,
+    "decode_max": 86.5,
+    "e2e_median": 41.7202375159314,
+    "stream_total_median": 41.723453414214966,
+    "ttft_median_seconds": 6.167844899988268,
+    "raw_decode": [
+      86.5,
+      83.5,
+      82.2,
+      81.5,
+      84.5
+    ]
+  },
+  {
+    "campaign": "target-80",
+    "arm": "R069-grfast-control-reverse",
+    "workload": "short",
+    "runs": 5,
+    "decode_median": 84.5,
+    "decode_min": 83.6,
+    "decode_max": 90.5,
+    "e2e_median": 73.99405301700213,
+    "stream_total_median": 74.0034859684836,
+    "ttft_median_seconds": 0.8776768000097945,
+    "raw_decode": [
+      83.6,
+      90.5,
+      84.3,
+      84.5,
+      84.7
+    ]
+  },
+  {
+    "campaign": "target-80",
+    "arm": "R070-grfast-pcie020",
+    "workload": "longer",
+    "runs": 5,
+    "decode_median": 83.1,
+    "decode_min": 81.5,
+    "decode_max": 88.1,
+    "e2e_median": 41.631061064793194,
+    "stream_total_median": 41.63512893752104,
+    "ttft_median_seconds": 6.162284700025339,
+    "raw_decode": [
+      86.6,
+      83.1,
+      82.9,
+      81.5,
+      88.1
+    ]
+  },
+  {
+    "campaign": "target-80",
+    "arm": "R070-grfast-pcie020",
+    "workload": "short",
+    "runs": 5,
+    "decode_median": 86.1,
+    "decode_min": 84.8,
+    "decode_max": 88.1,
+    "e2e_median": 75.30515649679872,
+    "stream_total_median": 75.31820839736143,
+    "ttft_median_seconds": 0.8710124000208452,
+    "raw_decode": [
+      85.5,
+      86.3,
+      86.1,
+      88.1,
+      84.8
+    ]
+  },
+  {
+    "campaign": "target-80",
+    "arm": "R071-grfast-pcie010",
+    "workload": "longer",
+    "runs": 5,
+    "decode_median": 82.9,
+    "decode_min": 81.7,
+    "decode_max": 84.4,
+    "e2e_median": 41.62459730139811,
+    "stream_total_median": 41.628855821945095,
+    "ttft_median_seconds": 6.1593865000177175,
+    "raw_decode": [
+      81.7,
+      84.4,
+      82.9,
+      84.2,
+      82.4
+    ]
+  },
+  {
+    "campaign": "target-80",
+    "arm": "R071-grfast-pcie010",
+    "workload": "short",
+    "runs": 5,
+    "decode_median": 85.9,
+    "decode_min": 84.5,
+    "decode_max": 90.7,
+    "e2e_median": 75.41632092235285,
+    "stream_total_median": 75.4302214978707,
+    "ttft_median_seconds": 0.8524515000171959,
+    "raw_decode": [
+      89.7,
+      84.5,
+      90.7,
+      84.8,
+      85.9
+    ]
   }
 ]

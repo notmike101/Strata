@@ -1,0 +1,14 @@
+We need answer user's request. Need produce final detailed answer at least 1200 words. Need implement thread-safe Python TTLCache using OrderedDict and monotonic clock. Include set, get, delete, clear, len, expiration, capacity eviction, unit tests with injected fake clock, detailed explanation thread safety complexity. Complete code, then tests, then explain design. Do not abbreviate.
+
+Need ensure code correct. Need think through design.
+
+Requirements: thread-safe TTLCache class using OrderedDict and monotonic clock. likely contextmanager lock? Use threading.RLock? monotonic clock injectable for tests. Need expiration, capacity eviction. Need set, get, delete, clear, len. Also probably __len__, __contains__? "len" method. Need unit tests with fake clock. Need no abbreviation.
+
+Implementation considerations:
+- OrderedDict from collections.
+- lock: RLock to allow recursive? Use Lock maybe. If methods call helper _prune? Avoid reentrant lock by private methods assume lock held, public acquire. Use threading.RLock for simplicity.
+- clock callable returning float. Default time.monotonic.
+- TTL: per-entry expiration, support ttl=0? Usually ttl None or <=0 maybe invalid? Need choose. Could reject ttl <=0 or allow 0 immediate expire? For cache useful positive. But unit tests may set ttl=10.
+- get: acquire lock, check if exists. If expired, delete and return default. If not expired, move_to_end. Return value.
+- set: acquire lock, if ttl <=0? maybe delete? Could allow ttl=0 immediate? Better validate ttl >0 else raise ValueError? But for cache, set ttl positive. Tests may use. For TTL=0, set should not store? Could handle gracefully: if ttl <=0: delete key return. But then capacity? Simpler raise. But unit test for expired uses fake clock advance past ttl. Need no ttl 0. However if ttl=0 maybe immediate expired. Could implement: if ttl <= 0: self._delete(key); return. This avoids exception and is intuitive.
+- set: if key exists, remove? OrderedDict set will update value but preserve order? If key exists, assignment leaves original position. Then move_to_end to make most recently used? Need choose eviction: OrderedDict can be LRU by moving accessed/updated to end. Evict first item if capacity exceeded. Need also expire expired entries before/after capacity. If expired

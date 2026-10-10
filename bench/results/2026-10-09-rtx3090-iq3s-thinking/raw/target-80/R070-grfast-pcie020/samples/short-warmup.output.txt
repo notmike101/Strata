@@ -1,0 +1,18 @@
+We need answer user's request. Need produce final answer with complete code, tests, detailed explanation at least 1200 words. Need think fully.
+
+Task: Implement thread-safe Python TTLCache class using OrderedDict and monotonic clock. Include set, get, delete, clear, len, expiration, capacity eviction, unit tests with injected fake clock, detailed explanation of thread safety and complexity. Write complete code, then tests, then explain design. Do not abbreviate implementation. Detailed answer >=1200 words.
+
+Need produce Python code. Need consider thread safety: use RLock? OrderedDict operations not thread-safe. Need protect with threading.Lock or RLock. TTLCache with maxsize, default ttl. Use time.monotonic by default but inject clock callable. OrderedDict for LRU: move_to_end on access. Insertions at end. Evict oldest when exceeding maxsize. Expiration: lazy expiration on get and len? User wants expiration. Need define TTLCache:
+
+class TTLCache:
+  def __init__(self, maxsize=128, default_ttl=None, clock=None):
+    if maxsize <=0 raise ValueError? Could allow maxsize=0? Maybe maxsize positive integer. maxsize=None unlimited? Could support.
+    if default_ttl not None and <=0 raise.
+    if clock is None: clock = time.monotonic
+    self._entries = OrderedDict() # key -> (value, expires_at)
+    self._lock = RLock()
+    self._maxsize = maxsize
+    self._default_ttl = default_ttl
+    self._clock = clock
+
+ set(key, value, ttl=None): ttl override default. If ttl is None use default_ttl; if ttl <=0 maybe delete if key exists? Need design: If ttl <= 0, store expired? Better validate ttl >0? But expiration. Could allow ttl=0 to immediately expire. For simplicity: ttl None => default; if ttl is not None and ttl <0 raise; ttl==0 means expires_at = now (expired). Use _now = self._clock(); expires_at = now + ttl if ttl is not None else None? Could support indefinite TTL None? default_ttl can be None meaning never expires. If default_ttl is None and ttl None => no expiry (None). If ttl provided must >=0. If expires_at == now, expired. In set, with lock: if key in entries delete? Actually need preserve LRU? Setting updates value

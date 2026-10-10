@@ -3,14 +3,16 @@
   "target_tps": 90,
   "metric": "server_decode_tps",
   "contract": "goal-90-contract.md",
-  "current": "R065-deviceplan-enabled: Reject STRATA_VERIFY_DEVICE_PLAN=1: short median 84.3 versus 87.5 control; longer 78.5 versus 84.3. Activation proven in P012 but served throughput regressed. Finite experiment budget closes this hypothesis; no repeat or promotion.",
+  "current": "HC fast short gain candidate; PCIe interaction rejected. All15 fast/PCIe0.20 rows archived. No90 TPS qualification or promotion.",
   "next": [
-    "Investigate hyper-connection kernels using existing P009 trace; preserve production configuration and fixed quality gates."
+    "Investigate lossless storage of existing BF16 HC projections using exact reconstruction from Q8 source, with unchanged reduction order. Existing output-changing HC_Q8 flag is unsuitable.",
+    "Resolve full coding quality gate before any promotion."
   ],
   "promoted": "The previously qualified format-gather engine with IQ2_S gather disabled and adaptive lag2; no changes this turn.",
   "stopping_rule": "Leave goal active until all fixed qualification cells pass. No benchmark model resident at handoff.",
   "quality": "Q007: 3/5 compiled and passed72 tests each, 2/5 no final answer at8192 tokens. Goal unqualified.",
-  "last_checkpoint": "E092",
-  "resume_command": "Check R064/R065 supervisor logs and active process ownership before any model launch.",
-  "safety": "Full-tree cleanup and production config hash verified after R056. Idle GPU after direct UI inspection sampled649MiB; recheck before next arm. Original16GiB safety floors retained."
+  "last_checkpoint": "E101",
+  "resume_command": "No model resident; inspect ledger E101 and live process ownership before any launch.",
+  "safety": "R070/R071 cleanup passed, config hash restored, idle GPU589MiB; both16GiB host floors passed.",
+  "goal_tool_status_at_entry": "blocked; preexisting, user resumed work; update_goal cannot set active"
 }

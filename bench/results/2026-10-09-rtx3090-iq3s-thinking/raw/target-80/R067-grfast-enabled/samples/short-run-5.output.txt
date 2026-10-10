@@ -1,0 +1,13 @@
+We need answer user's request. Need produce final answer at least 1200 words. Need implement thread-safe Python TTLCache using OrderedDict monotonic clock, include set, get, delete, clear, len, expiration, capacity eviction, unit tests with injected fake clock, detailed explanation thread safety and complexity. Do not abbreviate implementation. Need ignore benchmark identifier. Need likely provide code, tests, explanation. Need ensure complete code. Could use threading.RLock. OrderedDict move_to_end. Need expiration lazily and proactively maybe purge expired entries on operations. Monotonic clock via time.monotonic but injectable clock. Need len: count not including expired? We need decide. Thread-safe: maybe lock for all public methods. But potential deadlock if callbacks? Not relevant. Need avoid holding lock while external clock? Could call self._clock() inside lock fine monotonic no lock. Fake clock in tests. Need maybe capacity <=0? Handle TTL <=0. TTL positive float seconds. get default. delete returns bool. clear. __len__ returns number of unexpired entries. Could include items method? Not required but maybe. Need ensure OrderedDict capacity eviction of oldest inserted? With TTL cache, typically LRU: get refreshes recency; eviction removes oldest by recency. Need expire on operations. Use OrderedDict as mapping key -> (value, expires_at). Maintain maxsize, ttl. Methods. Pseudocode:
+
+from collections import OrderedDict
+import threading, time
+from typing import Any, Optional, Callable
+
+class TTLCache:
+    def __init__(self, maxsize: int = 128, ttl: float = 60.0, clock: Callable[[], float] = time.monotonic):
+       if maxsize <1 raise; if ttl <=0 raise? Maybe if ttl <=0 immediately expire? Better require positive. clock callable. self._entries = OrderedDict(); self._lock=threading.RLock(); self._maxsize=maxsize; self._default_ttl=ttl; self._clock=clock.
+
+    def _monotonic(self): return float(self._clock())
+
+    def _purge_expired_locked(self): now = self._clock(); # iterate? To avoid O(n) every time? Could while oldest expires_at <= now pop? But OrderedDict order by recency, not expiration. Since entries added/refreshed at now, expiration = now + ttl; If TTL fixed and refresh moves to end, then order by insertion/recency also order

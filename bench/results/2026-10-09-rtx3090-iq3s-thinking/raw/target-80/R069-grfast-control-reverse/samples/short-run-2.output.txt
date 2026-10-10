@@ -1,0 +1,25 @@
+We need answer user's request. Need produce final detailed answer at least 1200 words, complete code, tests, explanation design. Need implement thread-safe Python TTLCache class using OrderedDict and monotonic clock. Include set, get, delete, clear, len, expiration, capacity eviction, unit tests with injected fake clock, detailed explanation thread safety and complexity. Do not abbreviate implementation. Benchmark identifier ignore. Need likely provide full code, tests, explanation. Need ensure correctness.
+
+Let's design.
+
+Need thread-safe TTLCache. Use collections.OrderedDict for LRU. Monotonic clock default time.monotonic, injected clock. TTL per item? class TTLCache(maxsize=128, ttl=... maybe default TTL, clock=time.monotonic, maxsize=0 means unbounded?). Include set, get, delete, clear, len, expiration, capacity eviction. Need thread safety: lock RLock? For internal consistency. Operations should be atomic. If using OrderedDict, move_to_end for LRU on access. Need expiration: lazy expiration on get/set, maybe purge_expired before operations, and capacity eviction. Need avoid recursive lock issues? Use threading.RLock. However for thread safety, public methods lock. For __len__, lock. Expiration method maybe internal assumes lock.
+
+Need consider clock injection: fake clock in tests. Need deterministic.
+
+Implement:
+from collections import OrderedDict
+import threading
+import time
+from typing import Optional, Any, Hashable, Callable, TypeVar, Generic? Maybe simple.
+
+class TTLCache:
+    def __init__(self, ttl=..., maxsize=... , clock=time.monotonic): if maxsize <=0 unbounded? if ttl is None means no TTL? Could support.
+       if ttl is not None and ttl <0 raise.
+       self._ttl = ttl
+       self._maxsize = maxsize
+       self._clock = clock
+       self._entries = OrderedDict() # key -> (value, expires_at)
+       self._lock = threading.RLock()
+
+    def set(self, key, value, ttl=None): lock: self._purge_expired(now); if key in: move_to_end; else if maxsize and len >= maxsize: self._evict(); expires_at = None if ttl is None else now+ttl; entries[key]=(value,expires_at)
+       But if key already present and ttl changed, update. Need not evict if replacing existing. Use
