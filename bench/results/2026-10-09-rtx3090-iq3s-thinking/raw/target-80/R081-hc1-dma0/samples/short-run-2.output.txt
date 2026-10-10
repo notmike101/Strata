@@ -1,0 +1,16 @@
+We need answer user's request. Need produce final detailed answer at least 1200 words, complete code, tests, explanation design. Need implement thread-safe Python TTLCache class using OrderedDict and monotonic clock. Include set, get, delete, clear, len, expiration, capacity eviction, unit tests with injected fake clock, detailed explanation thread safety and complexity. Do not abbreviate implementation. Benchmark identifier ignore.
+
+Need think about design. Use OrderedDict from collections. Thread safety: use threading.RLock or Lock. Monotonic clock injected default time.monotonic. TTLCache methods: __init__(capacity: int, ttl: float | None, clock: Callable[[], float] = time.monotonic). Maybe ttl global default, but set can have ttl override. Use OrderedDict mapping key -> (value, expires_at). Need expiration. LRU? TTLCache with capacity eviction. OrderedDict move_to_end on get to make LRU, or insertion order for TTL? Need capacity eviction: when len > capacity remove least recently used. TTLCache typical: on get, if expired delete, else move to end. set: if key exists update, delete old, insert new at end, if expired maybe not store? Need len? len may be tricky: include expired not removed? Could implement __len__ triggers expiration? If using OrderedDict, len should reflect active entries maybe remove expired while iterating. But removing expired in len can be O(n). Could lazy expire in operations and __len__ may be O(n). We can implement purge_expired() internal. For detailed. Also maybe include __contains__, keys, values, items? Not required but useful. Need unit tests with injected fake clock: class FakeClock. Need use unittest. Ensure thread-safe tests? maybe simple concurrency test with many threads set/get? Could include deterministic fake clock. But fake clock not thread-safe maybe in tests okay. Need code complete. Could include typing. Need avoid abbreviations. At least 1200 words. We'll provide code block, tests code block, explanation. Need ensure implementation no bugs.
+
+Let's design robust TTLCache:
+
+from __future__ import annotations
+from collections import OrderedDict
+from threading import RLock
+from time import monotonic
+from typing import Any, Callable, Generic, Iterable, Iterator, Mapping? Maybe TypeVar.
+
+class TTLCache:
+    MISSING sentinel maybe use __missing__.
+
+__init__(self, capacity: int = 128, ttl: float | None = 

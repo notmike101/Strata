@@ -1,0 +1,11 @@
+We need answer user's request. Need produce final detailed answer >=1200 words, complete code, tests, explanation. User provided benchmark identifier ignore. Need implement thread-safe Python TTLCache using OrderedDict and monotonic clock. Include set, get, delete, clear, len, expiration, capacity eviction, unit tests with injected fake clock, detailed explanation of thread safety and complexity. Complete code no abbreviations. Need likely use threading.Lock, OrderedDict. Need discuss monotonic clock, fake clock injection. Need maybe include tests using unittest. Need ensure thread safety: lock around public methods, possibly internal helper without lock called when holding lock. Need capacity eviction LRU? OrderedDict move_to_end. TTL expiration maybe lazy expiration on get and len. Need len method thread-safe but length may be O(n) if purging expired. Need discuss complexity: get amortized O(1) maybe with lazy purge O(k) where k expired visited; set O(1) plus evict O(1). delete O(1). clear O(n) if OrderedDict.clear? Actually O(n) to clear entries, but maybe create new OrderedDict under lock O(1)? If replace with new OrderedDict, old may be GC; clear O(1) but leaves old objects to GC. We can choose self._entries.clear() O(n) but okay. Could implement clear by replacing OrderedDict to O(1) (assuming old discarded). But if references? We don't expose. Could use clear to avoid GC cost? Need detailed. Could do `self._entries = OrderedDict()` under lock? That may be okay but old dict may still be garbage. If tests expect after clear no entries. Could implement. But len maybe after purge? Need capacity. Need fake clock injection. Use callable now: `def __init__(self, capacity, ttl, clock=time.monotonic)`. Store clock. In set compute expiry = now + ttl if ttl is not None? TTL maybe positive? Need validate. Need thread-safe. Need unit tests with fake clock. Need complete code, tests, explanation. Need >=1200 words. Need ensure no abbreviation. Could include imports. Could include class definition. Need maybe define exceptions? Not necessary. Need maybe include sentinel? Let's design robust.
+
+Class:
+from threading import Lock
+from time import monotonic
+from collections import OrderedDict
+from typing import Callable, Hashable, Any
+
+class TTLCache:
+    """Thread-safe cache with per-entry TTL and LRU capacity eviction."""
+   

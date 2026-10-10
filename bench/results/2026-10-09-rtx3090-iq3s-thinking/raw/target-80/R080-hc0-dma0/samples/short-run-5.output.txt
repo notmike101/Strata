@@ -1,0 +1,19 @@
+We need answer user's request. Need produce final answer at least 1200 words. Need implement thread-safe Python TTLCache using OrderedDict monotonic clock, include set, get, delete, clear, len, expiration, capacity eviction, unit tests with injected fake clock, detailed explanation thread safety and complexity. Write complete code, then tests, then explain design. Do not abbreviate implementation. Need likely provide code blocks. Need ensure correctness.
+
+Need think design. TTLCache thread-safe. Use collections.OrderedDict. Need monotonic clock injected for tests. Python 3.8? Could use time.monotonic. Need maybe support TTL expiration: entries have expiration time. OrderedDict for LRU: on get move_to_end. set if key exists update expiration and move_to_end. If new insert then if over capacity pop first item. Expiration lazy? Include expiration maybe method expire(), maybe purge expired entries on operations. Use internal _data key -> (value, expiry). OrderedDict order: oldest first. For expired entries, remove on get/set/len? Need len returns number of live entries after purging expired. Need thread safety: lock around operations; no nested lock issues. Could use threading.RLock to allow calling internal methods with lock. But keep simple: all public methods acquire _lock, call private without lock. Need fake clock test. Need maybe include tests using unittest and fake clock that returns controlled times. Need demonstrate expiration and capacity eviction and thread safety maybe test concurrent updates? Could include simple concurrent test using threads. But requirement unit tests with injected fake clock; not necessarily concurrency test but could include. Need complete code not abbreviated.
+
+Potential issues: OrderedDict move_to_end for existing key when updating. If capacity <=0? Should handle. Need ttl default? None? Let's design API:
+
+class TTLCache:
+    def __init__(self, capacity: int, default_ttl: Optional[float] = None, clock: Callable[[], float] = time.monotonic):
+       if capacity <=0 raise ValueError
+       if default_ttl is not None and default_ttl <0 raise ValueError
+       self.capacity = capacity
+       self.default_ttl = default_ttl
+       self.clock = clock
+       self._cache = OrderedDict() # key -> (value, expires_at)
+       self._lock = threading.RLock()
+
+    def set(self, key, value, ttl=None):
+        if ttl is None: ttl=self.default_ttl
+        if ttl is None: ttl=float('inf')

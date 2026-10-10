@@ -1,0 +1,21 @@
+We need answer user's request. Need implement function topological_order(nodes, edges) in Python. Return only complete function in Python code block. Need think details.
+
+Requirements:
+- nodes list unique strings; edges list of (before, after) pairs.
+- Return lexicographically smallest topological ordering.
+- include isolated nodes.
+- ignore duplicate edges.
+- Raise ValueError for edge endpoint absent from nodes or a cycle.
+- Do not mutate either input.
+- Use no imports.
+- Return only complete function in Python code block.
+
+Need produce only code block. Need ensure no imports. Lexicographically smallest topological ordering: for strings, standard Kahn with min-heap priority. But no imports, so implement heap manually? Could use sorted lists each step? For lexicographically smallest among all topo order, greedy pick smallest available node (no incoming edges) works. Need efficient? nodes unknown. Could maintain indegrees, adjacency sets. Duplicate edges ignored: use sets for adjacency to avoid duplicate indegree increments. But must not mutate inputs. We can create new structures.
+
+Validate nodes? Unique strings assumed. If duplicate? Could ignore? Not specified. Edge endpoint absent raise. Edges may not be tuple? pair iterable. Could unpack.
+
+Cycle detection: Kahn if output length != len(nodes) raise.
+
+Do not mutate either input: not modify nodes/edges. But we iterate, create sets. Need if nodes is generator? Spec list. If not list, iterating consumes? But inputs assumed list. Could do nodes_list = list(nodes) maybe safe? Do not mutate, but copy. Then nodes_set = set(nodes_list). Need validate nodes unique? Could not. If nodes has duplicates? Return? Unique assumed. If copy list preserves order? Lexicographic ordering independent. Need include isolated nodes.
+
+Potential issue with lex smallest: nodes are strings. Need sort initial available list. Greedy with sorted available and each step choose min. If using list and pop(0) each time O(n^2), okay? We can implement heap without imports. Could implement min heap functions nested to avoid import. Or use `available = sorted(...)` and `available.pop(0)`? For lexicographically smallest, always min. Popping first is O(n). Could be okay but maybe expected robust. We can implement custom heap for O(log n). But simpler. Need only function. No imports. Could use list as heap with helper functions. Need not use `

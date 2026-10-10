@@ -1,0 +1,16 @@
+We need answer user's request. Need produce final answer with complete code, tests, detailed explanation at least 1200 words. Need think fully.
+
+Task: Implement thread-safe Python TTLCache class using OrderedDict and monotonic clock. Include set, get, delete, clear, len, expiration, capacity eviction, unit tests with injected fake clock, detailed explanation of thread safety and complexity. Write complete code, then tests, then explain design. Do not abbreviate implementation. At least 1200 words.
+
+Need produce robust code. Let's design.
+
+TTLCache:
+- OrderedDict for LRU? The user says capacity eviction, likely LRU eviction using OrderedDict move_to_end. Need thread safe with RLock. Monotonic clock injected. TTL per cache maybe optional per key? Include expiration. Maybe store expiry timestamps.
+- Methods: __init__(maxsize, ttl, clock=None). Use monotonic if None. set(key, value, ttl=None), get(key, default=None), delete(key), clear(), __len__, __contains__, maybe purge_expired(). Need capacity eviction. Expiration: on get, if expired delete return default. Also maybe lazy expiration. len should count non-expired entries? If __len__ called, maybe purge expired to be accurate. Could also expose expired count? Need simple.
+- Thread safety: lock protects operations. Clock injection: fake clock increments. Unit tests with unittest. Need not use threading? Could test concurrency using threads? Since unit tests with fake clock. But thread safety explanation can include concurrency tests. We can include a concurrent test using many threads with real clock or fake? Fake clock with lock? If fake clock is not thread-safe, tests may be flaky. Could implement FakeClock with Lock too, or avoid concurrent with fake clock. Use unittest.
+
+Need ensure complete, no abbreviations. Could use typing.
+
+Potential pitfalls:
+- OrderedDict in Python 3.7 is LRU via move_to_end. Need store expiry in separate dict or in values? Could use OrderedDict key -> (value, expires_at). This makes move_to_end on get. For capacity eviction, popitem(last=False).
+- If updating existing key, update expiry and move_to_end, ensure capacity? Since existing no eviction. If new and maxsize >0 and len >= maxsize after maybe purge expired? Eviction policy: before insert, purge expired; if still full, evict least recently used. For maxsize <=0, maybe

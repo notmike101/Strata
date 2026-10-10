@@ -1,0 +1,22 @@
+We need answer user's request. Need produce detailed answer at least 1200 words. User: "Benchmark identifier ... Ignore. Implement a thread-safe Python TTLCache class using an OrderedDict and a monotonic clock. Include set, get, delete, clear, len, expiration, capacity eviction, unit tests with an injected fake clock, and a detailed explanation of thread safety and complexity. Write complete code, then tests, then explain the design. Do not abbreviate the implementation. Produce a detailed answer of at least 1200 words."
+
+We need output complete code, tests, explanation. Need likely mention ignore identifier. Need satisfy: thread-safe TTLCache using OrderedDict and monotonic clock. Include set, get, delete, clear, len, expiration, capacity eviction, unit tests with injected fake clock. Detailed explanation thread safety and complexity. At least 1200 words. Need code not abbreviated. Use Python. Need maybe use threading.RLock, collections.OrderedDict, time.monotonic. Injected fake clock for tests: default time.monotonic but can pass clock. Implement maybe context manager? Need ensure thread safety. Use OrderedDict as LRU? TTLCache maybe order used for expiration? They say using OrderedDict and monotonic clock, capacity eviction. Could implement LRU eviction with OrderedDict.move_to_end. Need store values and expires_at. Could use OrderedDict key -> Entry(value, expires_at). Expiration: lazy on get and len? Need clear expired entries. For len: should reflect non-expired? We can purge expired during len. Need careful: if len purges, may affect capacity? OK.
+
+Need unit tests with fake clock: define FakeClock. Use unittest? Provide complete tests. Could use assertEqual. Need code in answer.
+
+Need ensure no abbreviation: complete implementation. Maybe include __contains__, items? Not necessary but can include. Need at least 1200 words. We can have code long enough, explanation long.
+
+Potential implementation:
+
+from collections import OrderedDict
+import threading
+import time
+from typing import Any, Optional, Callable
+
+class _CacheEntry:
+    __slots__ = ('value','expires_at')
+    def __init__(...): ...
+
+class TTLCache:
+    def __init__(self, ttl: float = 300.0, capacity: int = 128, clock: Optional[Callable[[], float]] = None) -> None:
+         if capacity <=0 raise ValueError

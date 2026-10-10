@@ -1,0 +1,13 @@
+We need answer user's request. Need produce final detailed answer at least 1200 words. User asks: Benchmark identifier ignore. Read existing design requirements before implementing cache: many existing cache rules 0-63 keys item_x with lifetime increasing 30+idx, size increasing 64+3*idx, expiration must remove stale entries, access must update LRU. Implement thread-safe Python TTLCache class using OrderedDict and monotonic clock. Include set, get, delete, clear, len, expiration, capacity eviction, unit tests with injected fake clock, detailed explanation thread safety and complexity. Write complete code, then tests, then explain design. Do not abbreviate implementation. Produce detailed answer >=1200 words.
+
+Need likely mention existing rules? Maybe incorporate default rules? The rules specify key item_000 lifetime 30 size 64 etc. Could implement TTLCache with capacity and per-key lifetime and size? They mention existing cache rules; likely need support existing rules perhaps initialize with those or set them. Need implement set, get, delete, clear, len, expiration, capacity eviction. Use OrderedDict, monotonic clock. Thread-safe. Fake clock for unit tests. Include maybe preloading existing rules. Need ensure thread safety: lock (RLock), atomic operations. LRU order update on get/set. TTL expiration: lazy on access and proactive purge? Include method expire or purge_expired. Capacity eviction based on total size or entries? Existing rules have sizes. TTLCache capacity? Could support capacity in bytes and entry capacity? They ask capacity eviction. Existing sizes matter. Need probably capacity as max total bytes; each entry size. If size > capacity reject? Or evict LRU until enough space. Also per-key lifetime. Could support default lifetime. Need thread-safe and monotonic clock. Fake clock: object with time(). Use time.monotonic in tests as fake.
+
+Need write complete code, then tests, then explanation. At least 1200 words. We can write code long. Need no abbreviations. Tests with unittest and FakeMonotonicClock. Could use from __future__? We need ensure code works. Let's design:
+
+class FakeClock:
+    def __init__(self, now=0.0): self._now=float(now)
+    def time(self): return self._now
+    def advance(self, delta): self._now += float(delta)
+
+class TTLCache:
+    def __init__(self, capacity

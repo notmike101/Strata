@@ -3,14 +3,14 @@
   "target_tps": 90,
   "metric": "server_decode_tps",
   "contract": "goal-90-contract.md",
-  "current": "C044 PR1166 rejected and reverted:86.3/83.4 vs87.4/84.2. C042 compiler also rejected. P014 finite upstream review published.",
+  "current": "Combined stack rejected; no confirmation trigger; no production change; HC-fast retained as unpromoted component.",
   "next": [
-    "Use P014 finite review to select exact prompt-only PR1368 or1525 with independent parity and same-day served checks; no unsupported decode promise. C043 batched-transfer runtime remains unmeasured, held for upstream priority."
+    "C046 accepted-row adaptive usage plus HC-fast; correctness and bounded plan before served tests."
   ],
   "promoted": "The previously qualified format-gather engine with IQ2_S gather disabled and adaptive lag2; no changes this turn.",
   "stopping_rule": "Leave goal active until all fixed qualification cells pass. No benchmark model resident at handoff.",
   "quality": "Q007: 3/5 compiled and passed72 tests each, 2/5 no final answer at8192 tokens. Goal unqualified.",
-  "last_checkpoint": "E120",
+  "last_checkpoint": "E127",
   "resume_command": "Read E117-E120 P014/C044. No model resident. Source restored; rebuild build-cuda86-main before any new current-source baseline. PR1368/1525 are deferred prompt-only leads; C043 R077 held.",
   "safety": "All R074/R075/R076/R078/R079 passed16GiB floors and exact cleanup. GPU457MiB after final cleanup. Production hashes unchanged.",
   "goal_tool_status_at_entry": "active, verified get_goal"

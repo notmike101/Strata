@@ -1,0 +1,11 @@
+We need answer user's request. Need produce complete code, tests, explanation >=1200 words. Need think thoroughly.
+
+User: Implement thread-safe Python TTLCache class using OrderedDict and monotonic clock. Include set, get, delete, clear, len, expiration, capacity eviction, unit tests with injected fake clock, detailed explanation of thread safety and complexity. Write complete code, then tests, then explain design. Do not abbreviate implementation. Detailed answer at least 1200 words.
+
+Need craft final with code blocks. Need no abbreviations? Means not shortened, full. We can include imports. Need TTLCache class. Need OrderedDict, monotonic clock injectable. Thread-safe. Methods set, get, delete, clear, len, expiration, capacity eviction. Maybe implement __len__, maybe __getitem__/__setitem__/__delitem__? Need unit tests. Fake clock.
+
+Need consider thread safety with reentrant lock. OrderedDict from collections. Monotonic clock: time.monotonic by default. Fake clock in tests. TTLCache stores values with expiry timestamps. Eviction: capacity maxsize LRU? TTLCache capacity eviction typically least recently used? Using OrderedDict move_to_end on get/set for LRU. Also remove expired entries before len/get? Need define expiration: lazy expiration maybe purge expired entries. Capacity eviction: when exceed maxsize, popitem(last=False). Need handle maxsize <=0. ttl per item maybe default ttl or None. Expiration: item expires when monotonic time >= expiry? Use expires <= now expired. Could include has_key, keys? Maybe not required but include helpful methods. Thread safety with RLock so operations nested. Fake clock needs monotonic() method.
+
+Need detailed explanation >=1200 words. Code length maybe 200 words, tests 300, explanation 800+ enough. Need produce at least 1200 words total? Likely yes. Need ensure enough. Could be 1500-2000 words.
+
+Need design. Potential issues with len counting expired entries. If __len__ only counts live items, we need purge expired inside lock. But if purge many expired entries, O(n). Complexity: get O(1) with one expired cleanup maybe O(n) worst-case if many expired? Could also use heapq for expiration O(log n) but user requires OrderedDict. Maybe acceptable. For len, purge_expired O(n). To avoid expensive len, can maintain count of

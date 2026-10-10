@@ -49,8 +49,8 @@ Prompt medians201.2/496.1 vs205.5/497.1; request-E2E76.4100/41.1743 vs
 recorded in E107/E108. Both decode medians fell, so reject without another pair
 or stacking it with GR_FAST. There is no qualifying90 TPS result.
 
-All12 output-text pairs differ, and the request's cache-miss nonce also differs;
-these served files are not an exact-input bitwise comparison. The512-token
+Correction E121: all12 request payloads are byte-identical while all12 output texts differ.
+The earlier nonce explanation was wrong; the cause remains unresolved. The512-token
 speed runs are capped thinking continuations, not completed-answer quality
 qualification. Full coding/workload qualification remains unresolved as before.
 

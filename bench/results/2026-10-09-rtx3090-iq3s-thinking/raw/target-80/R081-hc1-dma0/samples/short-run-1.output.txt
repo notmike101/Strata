@@ -1,0 +1,15 @@
+We need answer user's request. Need produce detailed answer at least 1200 words. User asks: Benchmark identifier ignore. Implement thread-safe Python TTLCache class using OrderedDict and monotonic clock. Include set, get, delete, clear, len, expiration, capacity eviction, unit tests with injected fake clock, detailed explanation thread safety and complexity. Write complete code, then tests, then explain design. Do not abbreviate implementation.
+
+Need produce final with code complete, tests, explanation. Need ensure at least 1200 words. Probably can include lots explanation.
+
+Need think carefully. Implement TTLCache: thread-safe with OrderedDict and monotonic clock. Use RLock? OrderedDict not thread-safe. Need lock all public methods. Monotonic clock injected: time.monotonic maybe. Default clock returns time.monotonic(). TTL default per set and global? We can design class with default_ttl optional. set(key,value, ttl=None). Store tuple (value, expires_at). OrderedDict for LRU? The prompt says capacity eviction, using OrderedDict. Could use move_to_end on get for LRU eviction. Expiration on set/get and maybe purge expired keys. Need len? If len should count live entries only? Should probably exclude expired entries, but if only remove expired during operations. Could implement _purge_expired and _purge_expired_if_due. For thread safety and deterministic tests, injected fake clock.
+
+Need complete code not abbreviate. Could include full class:
+
+import threading
+import time
+from collections import OrderedDict
+from typing import Any, Optional, Callable, Dict? 
+
+class TTLCache:
+    __slots__ maybe. Need handle capacity nonnegative. If maxsize = 0? If 0, clear on set? Let's design: maxsize integer >=0. If maxsize == 0, no entries stored. default_ttl positive? maybe default_ttl=None infinite. set(key, value, ttl=None): with lock: if maxsize==0 return; now = clock(); ttl = self._resolve_ttl(ttl); expires_at = now + ttl if ttl is not None else math.inf; Need import math.inf? yes. But if use float inf. If ttl == 0? Should entry expire immediately? Could store expires_at = now and not visible on get if expires_at <= now. set with ttl negative? Should be invalid? Maybe raise ValueError for ttl <=0? Could support ttl 0 as immediate expired? Better validate ttl > 0 or None. But maybe

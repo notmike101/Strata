@@ -1,0 +1,409 @@
+{
+  "arms": {
+    "R080-hc0-dma0": {
+      "longer": {
+        "runs": 5,
+        "prompt_tokens": [
+          3034,
+          3035,
+          3034,
+          3034,
+          3033
+        ],
+        "completion_tokens": [
+          512,
+          512,
+          512,
+          512,
+          512
+        ],
+        "server_decode_tps": {
+          "median": 85.1,
+          "min": 83.3,
+          "max": 87.8
+        },
+        "prompt_tps": {
+          "median": 495.8,
+          "min": 495.5,
+          "max": 496.1
+        },
+        "ttft_seconds": {
+          "median": 6.166188100003637,
+          "min": 6.162456899997778,
+          "max": 6.168136499996763
+        },
+        "request_seconds": {
+          "median": 12.154762300022412,
+          "min": 11.967178799968679,
+          "max": 12.287815100047737
+        },
+        "request_e2e_tps": {
+          "median": 42.1234070533042,
+          "min": 41.66729364262739,
+          "max": 42.7836843217668
+        },
+        "stream_total_tps": {
+          "median": 42.12801401759994,
+          "min": 41.671464243015805,
+          "max": 42.786923236566864
+        }
+      },
+      "short": {
+        "runs": 5,
+        "prompt_tokens": [
+          165,
+          168,
+          168,
+          165,
+          167
+        ],
+        "completion_tokens": [
+          512,
+          512,
+          512,
+          512,
+          512
+        ],
+        "server_decode_tps": {
+          "median": 88.2,
+          "min": 83.3,
+          "max": 93.7
+        },
+        "prompt_tps": {
+          "median": 204.4,
+          "min": 196.6,
+          "max": 214.2
+        },
+        "ttft_seconds": {
+          "median": 0.8457562999683432,
+          "min": 0.8041432999889366,
+          "max": 0.8866745000123046
+        },
+        "request_seconds": {
+          "median": 6.645588000013959,
+          "min": 6.295245699991938,
+          "max": 6.95888529997319
+        },
+        "request_e2e_tps": {
+          "median": 77.04359644307239,
+          "min": 73.57500201964423,
+          "max": 81.33121793811094
+        },
+        "stream_total_tps": {
+          "median": 77.05773693937988,
+          "min": 73.59006607747773,
+          "max": 81.35480021748306
+        }
+      }
+    },
+    "R081-hc1-dma0": {
+      "longer": {
+        "runs": 5,
+        "prompt_tokens": [
+          3034,
+          3035,
+          3034,
+          3034,
+          3033
+        ],
+        "completion_tokens": [
+          512,
+          512,
+          512,
+          512,
+          512
+        ],
+        "server_decode_tps": {
+          "median": 85.7,
+          "min": 81.6,
+          "max": 88.2
+        },
+        "prompt_tps": {
+          "median": 496.0,
+          "min": 495.6,
+          "max": 496.4
+        },
+        "ttft_seconds": {
+          "median": 6.158744199958164,
+          "min": 6.157240399974398,
+          "max": 6.173870500002522
+        },
+        "request_seconds": {
+          "median": 12.116489699983504,
+          "min": 11.934359099948779,
+          "max": 12.423295499989763
+        },
+        "request_e2e_tps": {
+          "median": 42.256463107520084,
+          "min": 41.212897173734774,
+          "max": 42.9013402154287
+        },
+        "stream_total_tps": {
+          "median": 42.259733256385715,
+          "min": 41.21592882621837,
+          "max": 42.90469656009705
+        }
+      },
+      "short": {
+        "runs": 5,
+        "prompt_tokens": [
+          165,
+          168,
+          168,
+          165,
+          167
+        ],
+        "completion_tokens": [
+          512,
+          512,
+          512,
+          512,
+          512
+        ],
+        "server_decode_tps": {
+          "median": 86.5,
+          "min": 84.9,
+          "max": 87.9
+        },
+        "prompt_tps": {
+          "median": 211.2,
+          "min": 197.9,
+          "max": 213.1
+        },
+        "ttft_seconds": {
+          "median": 0.8331576000200585,
+          "min": 0.8077815999859013,
+          "max": 0.8644488000427373
+        },
+        "request_seconds": {
+          "median": 6.728712500014808,
+          "min": 6.609461999963969,
+          "max": 6.868076900020242
+        },
+        "request_e2e_tps": {
+          "median": 76.09182291543489,
+          "min": 74.54779663263395,
+          "max": 77.46470136340766
+        },
+        "stream_total_tps": {
+          "median": 76.10695673312284,
+          "min": 74.55769159128265,
+          "max": 77.4845476970963
+        }
+      }
+    },
+    "R082-hc1-dma1": {
+      "longer": {
+        "runs": 5,
+        "prompt_tokens": [
+          3034,
+          3035,
+          3034,
+          3034,
+          3033
+        ],
+        "completion_tokens": [
+          512,
+          512,
+          512,
+          512,
+          512
+        ],
+        "server_decode_tps": {
+          "median": 82.5,
+          "min": 80.3,
+          "max": 86.4
+        },
+        "prompt_tps": {
+          "median": 496.8,
+          "min": 496.4,
+          "max": 497.7
+        },
+        "ttft_seconds": {
+          "median": 6.14445090002846,
+          "min": 6.142599300015718,
+          "max": 6.158532899979036
+        },
+        "request_seconds": {
+          "median": 12.328848899982404,
+          "min": 12.058267000014894,
+          "max": 12.500206299999263
+        },
+        "request_e2e_tps": {
+          "median": 41.52861342965528,
+          "min": 40.959324007319,
+          "max": 42.46049618899362
+        },
+        "stream_total_tps": {
+          "median": 41.53169406870297,
+          "min": 40.964897763082035,
+          "max": 42.46651736984565
+        }
+      },
+      "short": {
+        "runs": 5,
+        "prompt_tokens": [
+          165,
+          168,
+          168,
+          165,
+          167
+        ],
+        "completion_tokens": [
+          512,
+          512,
+          512,
+          512,
+          512
+        ],
+        "server_decode_tps": {
+          "median": 88.9,
+          "min": 85.8,
+          "max": 90.4
+        },
+        "prompt_tps": {
+          "median": 208.5,
+          "min": 193.6,
+          "max": 218.0
+        },
+        "ttft_seconds": {
+          "median": 0.83481639996171,
+          "min": 0.8053285999922082,
+          "max": 0.9122388999676332
+        },
+        "request_seconds": {
+          "median": 6.625035199976992,
+          "min": 6.474148100009188,
+          "max": 6.797175799962133
+        },
+        "request_e2e_tps": {
+          "median": 77.28260824965551,
+          "min": 75.32540205931592,
+          "max": 79.08376393170144
+        },
+        "stream_total_tps": {
+          "median": 77.29677477713304,
+          "min": 75.33870929939835,
+          "max": 79.09897614698014
+        }
+      }
+    },
+    "R083-hc0-dma1": {
+      "longer": {
+        "runs": 5,
+        "prompt_tokens": [
+          3034,
+          3035,
+          3034,
+          3034,
+          3033
+        ],
+        "completion_tokens": [
+          512,
+          512,
+          512,
+          512,
+          512
+        ],
+        "server_decode_tps": {
+          "median": 82.7,
+          "min": 82.2,
+          "max": 86.7
+        },
+        "prompt_tps": {
+          "median": 495.5,
+          "min": 495.3,
+          "max": 496.5
+        },
+        "ttft_seconds": {
+          "median": 6.167990000045393,
+          "min": 6.151033999980427,
+          "max": 6.177111600001808
+        },
+        "request_seconds": {
+          "median": 12.315659400017466,
+          "min": 12.03905720001785,
+          "max": 12.379416700045113
+        },
+        "request_e2e_tps": {
+          "median": 41.573088648365335,
+          "min": 41.35897614611633,
+          "max": 42.52824714540279
+        },
+        "stream_total_tps": {
+          "median": 41.57643956707833,
+          "min": 41.364412581492076,
+          "max": 42.5326996502917
+        }
+      },
+      "short": {
+        "runs": 5,
+        "prompt_tokens": [
+          165,
+          168,
+          168,
+          165,
+          167
+        ],
+        "completion_tokens": [
+          512,
+          512,
+          512,
+          512,
+          512
+        ],
+        "server_decode_tps": {
+          "median": 85.2,
+          "min": 84.8,
+          "max": 87.1
+        },
+        "prompt_tps": {
+          "median": 206.6,
+          "min": 202.0,
+          "max": 220.0
+        },
+        "ttft_seconds": {
+          "median": 0.8511004000320099,
+          "min": 0.789867699961178,
+          "max": 0.8691124999895692
+        },
+        "request_seconds": {
+          "median": 6.787749300012365,
+          "min": 6.683739500003867,
+          "max": 6.875894600001629
+        },
+        "request_e2e_tps": {
+          "median": 75.43001035690392,
+          "min": 74.46303787144711,
+          "max": 76.60382335363366
+        },
+        "stream_total_tps": {
+          "median": 75.4450410134625,
+          "min": 74.4747800683507,
+          "max": 76.62271037237441
+        }
+      }
+    }
+  },
+  "request_sha256": {
+    "longer-run-1.request.json": "e74d51510a2559aac8e7b4908e02b8bdbbb457493a5d756c177010e2771d9ead",
+    "longer-run-2.request.json": "8b1521282150938fc1e368bc68bd9790136cb14fd9e4b8a321bf59912c1d6f57",
+    "longer-run-3.request.json": "8d07997570ba2dea7ca0f7f89c0a50c4339733105d52460b4b6465ac75a453d2",
+    "longer-run-4.request.json": "4255c2a647069ac5be00162c5dbe7d020a33c8ec908cbc291e0b02438d0036cf",
+    "longer-run-5.request.json": "230b85561aa46fb752c1d6305c8611f55495d0dc2dd8cc4d906c44aad5c1b180",
+    "longer-warmup.request.json": "4aa983160eca44d90bc8b7c2deef13029b5238db7a64e1ffa57061f9a28edd9c",
+    "short-run-1.request.json": "6b19e29c82e0f4f8f23136499f1966231729666b437ed602bee2f73b09da5b35",
+    "short-run-2.request.json": "c0eeacd07de57552eda6809437f5f911d07e757fb45ccfd32631193e7590f62c",
+    "short-run-3.request.json": "cbcb72220ad10864057863a4a678ce5efe0b6c8edba44b2e335297cdfa67d175",
+    "short-run-4.request.json": "501d910c47652489d9b03d2cabf90aaeb3c7342db1e1874d9262f86325817235",
+    "short-run-5.request.json": "470959a0cd2fddb2e1e36088aec9b1109a47e34250cead3263e6e6e3aff65bd6",
+    "short-warmup.request.json": "fe3f7fe3e7dc95b0cb32a81d2d32da3ccc8fad31da4577acbaeef7ade64a8621"
+  },
+  "identical_request_comparisons": 36,
+  "engine_sha256": "6048736d7674d8f3c66ce50060f11ca6623df33d3e885030941a6ef9e62f427c",
+  "only_factors": [
+    "STRATA_GR_FAST",
+    "STRATA_DMA_BATCH"
+  ],
+  "decision": "Combined stack rejected; no confirmation trigger; no production change; HC-fast retained as unpromoted component."
+}

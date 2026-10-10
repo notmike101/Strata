@@ -1,0 +1,14 @@
+We need answer user's request. Need produce final answer at least 1200 words, detailed implementation thread-safe Python TTLCache using OrderedDict monotonic clock. Include set, get, delete, clear, len, expiration, capacity eviction, unit tests with injected fake clock, detailed explanation of thread safety and complexity. Do not abbreviate implementation. Also mention ignore benchmark identifier? They said ignore. Need likely not mention existing rules? Could maybe incorporate? The existing rules are filler. Need satisfy: key item_000... irrelevant maybe don't need mention. Need code complete. Need produce detailed answer.
+
+Need ensure code correct. Thread-safe TTLCache. Use threading.RLock, OrderedDict. Clock injectable returns float monotonic seconds. Entry value plus expires_at and size? Existing rules include size bytes, but task says TTLCache using OrderedDict. Should include size? User says read existing design requirements before implementing cache: rules include key lifetime and size. It may expect cache supports size? The explicit requirements: Implement a thread-safe Python TTLCache class using an OrderedDict and a monotonic clock. Include set, get, delete, clear, len, expiration, capacity eviction. Existing rules mention size 64 etc. Maybe need account for size? TTLCache capacity eviction could be max entries or max bytes? It says size 64 bytes. Could implement capacity in bytes? But typical TTLCache capacity max entries. Existing rules sizes imply bytes. To be safe include optional max_bytes and max_size? But using OrderedDict simple. Need capacity eviction. If we implement max_bytes as optional and max_entries as optional. However OrderedDict capacity eviction with bytes more complex but can maintain total_size and evict LRU until within capacity. Need handle set with item size. Existing rules sizes increasing, maybe test can insert items with those sizes and verify eviction by size? Could include max_bytes. Need thread-safe.
+
+Need monotonic clock injectable. Use fake clock tests with unittest. Need detailed explanation at least 1200 words. Need code complete no abbreviation. Could include import threading, time, OrderedDict, Optional.
+
+Potential design:
+
+class _CacheEntry:
+    __slots__ = ('value','expires_at','size')
+...
+
+class TTLCache:
+    def __init__(self, max_entries=128, max_bytes=None, clock=time.monotonic, default_ttl=... maybe default_ttl None? Could require ttl per set. If lifetime from rules, set(key,value,ttl). Need default ttl?

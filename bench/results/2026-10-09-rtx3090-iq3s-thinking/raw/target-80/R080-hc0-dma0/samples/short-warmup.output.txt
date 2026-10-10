@@ -1,0 +1,25 @@
+We need answer user's request. Need produce final answer with complete code, tests, detailed explanation at least 1200 words. Need think fully.
+
+Task: Implement thread-safe Python TTLCache class using OrderedDict and monotonic clock. Include set, get, delete, clear, len, expiration, capacity eviction, unit tests with injected fake clock, detailed explanation of thread safety and complexity. Write complete code, then tests, then explain design. Do not abbreviate implementation. Produce detailed answer at least 1200 words.
+
+Need likely include imports threading, time, OrderedDict, maybe typing. Need thread-safe. Use monotonic clock by default but inject fake clock for tests. Need TTL expiration lazy? Could do lazy expiration on get/capacity/len? Need len maybe remove expired? Thread-safe. Could implement public set, get, delete, clear, len (or __len__), maybe __contains__? User asks include len. Also expiration and capacity eviction. Use OrderedDict for LRU? Not required but common; OrderedDict can be used to maintain insertion order and move_to_end. TTLCache perhaps expiration + capacity eviction. Need thread-safe using RLock. Fake clock: callable returning float seconds. Need monotonic clock by default. Tests with unittest, fake clock.
+
+Need complete code no abbreviation. Need tests complete. Need explanations. Need at least 1200 words. Need maybe mention benchmark identifier ignored. Could mention ignored? User says ignore identifier. We can just start with code. Need ensure code is valid. Need maybe Python 3.8+ OrderedDict.move_to_end available. Need handle None sentinel? Use object() for missing.
+
+Potential design:
+
+class TTLCache:
+    def __init__(self, maxsize=128, ttl=300, clock=time.monotonic):
+       if maxsize <=0 raise ValueError; ttl >=0? TTL can 0? If ttl <0 raise.
+       self._clock = clock
+       self._maxsize = maxsize
+       self._default_ttl = ttl
+       self._cache = OrderedDict() # key -> (value, expires_at)
+       self._lock = threading.RLock()
+
+    def set(self, key, value, ttl=None):
+       with lock:
+          now = self._clock()
+          if ttl is None: ttl = self._default_ttl
+          if ttl <0: raise ValueError
+          if ttl == 0? entry expires immediately. If ttl

@@ -1,6 +1,6 @@
 # All completed workload cells
 
-Ordinary medians and full ranges, excluding only explicitly labeled warmups. Historical campaigns have different contracts and are not pooled. P002 and P009 have one measured run per cell and are diagnostic only. Units: tokens, tok/s, and seconds. These are short and approximately 3K prompts, not the index's usual 4K/32K/128K sweep.
+Ordinary medians and full ranges, excluding only explicitly labeled warmups. Historical campaigns have different contracts and are not pooled. P-prefixed profiler arms are diagnostic only and never qualifying speed evidence. Units: tokens, tok/s, and seconds. These are short and approximately 3K prompts, not the index's usual 4K/32K/128K sweep.
 
 | Configuration / workload | Actual prompt tokens | Fresh tokens | Reused tokens | Generated tokens | Runs | Prompt tok/s median (range) | Decode tok/s median (range) | TTFT seconds median (range) | Client total seconds median (range) |
 | --- | ---: | ---: | ---: | ---: | ---: | --- | --- | --- | --- |
@@ -77,6 +77,7 @@ Ordinary medians and full ranges, excluding only explicitly labeled warmups. His
 | [target-80/P008-short-profile](raw/target-80/P008-short-profile/runs.json) / short | 167 | 167 | 0 | 512 | 1 | 181.70 (181.70-181.70) | 56.10 (56.10-56.10) | 0.988 (0.988-0.988) | 10.058 (10.058-10.058) |
 | [target-80/P009-short-profile](raw/target-80/P009-short-profile/runs.json) / short | 167 | 167 | 0 | 512 | 1 | 178.10 (178.10-178.10) | 69.80 (69.80-69.80) | 1.026 (1.026-1.026) | 8.323 (8.323-8.323) |
 | [target-80/P012-short-profile](raw/target-80/P012-short-profile/runs.json) / short | 167 | 167 | 0 | 512 | 1 | 196.20 (196.20-196.20) | 68.40 (68.40-68.40) | 0.941 (0.941-0.941) | 8.391 (8.391-8.391) |
+| [target-80/P015-short-profile](raw/target-80/P015-short-profile/runs.json) / short | 167 | 167 | 0 | 512 | 1 | 196.60 (196.60-196.60) | 87.10 (87.10-87.10) | 0.910 (0.910-0.910) | 6.784 (6.784-6.784) |
 | [target-80/Q007-goal-coding](raw/target-80/Q007-goal-coding/runs.json) / quality/coding | 148 | 148 | 0 | 4121-8192 | 5 | 163.00 (139.20-182.10) | 79.20 (77.70-79.40) | 0.943 (0.852-1.092) | 102.957 (52.755-105.372) |
 | [target-80/R001-host-last](raw/target-80/R001-host-last/runs.json) / longer | 3034-3035 | 3034-3035 | 0 | 512 | 3 | 427.10 (426.90-427.30) | 59.50 (56.80-60.90) | 7.141 (7.140-7.154) | 15.729 (15.516-16.126) |
 | [target-80/R001-host-last](raw/target-80/R001-host-last/runs.json) / short | 165-168 | 165-168 | 0 | 512 | 3 | 179.00 (170.50-182.00) | 61.10 (60.70-63.70) | 0.970 (0.934-1.018) | 9.373 (8.945-9.378) |
@@ -210,3 +211,11 @@ Ordinary medians and full ranges, excluding only explicitly labeled warmups. His
 | [target-80/R078-host-first](raw/target-80/R078-host-first/runs.json) / short | 165-168 | 165-168 | 0 | 512 | 5 | 207.50 (197.00-215.90) | 87.40 (85.80-88.80) | 0.836 (0.813-0.898) | 6.732 (6.611-6.778) |
 | [target-80/R079-host-sibling](raw/target-80/R079-host-sibling/runs.json) / longer | 3033-3035 | 3033-3035 | 0 | 512 | 5 | 497.00 (495.70-497.90) | 83.40 (80.20-85.20) | 6.149 (6.135-6.168) | 12.281 (12.131-12.496) |
 | [target-80/R079-host-sibling](raw/target-80/R079-host-sibling/runs.json) / short | 165-168 | 165-168 | 0 | 512 | 5 | 205.30 (199.90-213.40) | 86.30 (85.40-90.10) | 0.853 (0.826-0.861) | 6.733 (6.505-6.832) |
+| [target-80/R080-hc0-dma0](raw/target-80/R080-hc0-dma0/runs.json) / longer | 3033-3035 | 3033-3035 | 0 | 512 | 5 | 495.80 (495.50-496.10) | 85.10 (83.30-87.80) | 6.166 (6.162-6.168) | 12.155 (11.967-12.288) |
+| [target-80/R080-hc0-dma0](raw/target-80/R080-hc0-dma0/runs.json) / short | 165-168 | 165-168 | 0 | 512 | 5 | 204.40 (196.60-214.20) | 88.20 (83.30-93.70) | 0.846 (0.804-0.887) | 6.646 (6.295-6.959) |
+| [target-80/R081-hc1-dma0](raw/target-80/R081-hc1-dma0/runs.json) / longer | 3033-3035 | 3033-3035 | 0 | 512 | 5 | 496.00 (495.60-496.40) | 85.70 (81.60-88.20) | 6.159 (6.157-6.174) | 12.116 (11.934-12.423) |
+| [target-80/R081-hc1-dma0](raw/target-80/R081-hc1-dma0/runs.json) / short | 165-168 | 165-168 | 0 | 512 | 5 | 211.20 (197.90-213.10) | 86.50 (84.90-87.90) | 0.833 (0.808-0.864) | 6.729 (6.609-6.868) |
+| [target-80/R082-hc1-dma1](raw/target-80/R082-hc1-dma1/runs.json) / longer | 3033-3035 | 3033-3035 | 0 | 512 | 5 | 496.80 (496.40-497.70) | 82.50 (80.30-86.40) | 6.144 (6.143-6.159) | 12.329 (12.058-12.500) |
+| [target-80/R082-hc1-dma1](raw/target-80/R082-hc1-dma1/runs.json) / short | 165-168 | 165-168 | 0 | 512 | 5 | 208.50 (193.60-218.00) | 88.90 (85.80-90.40) | 0.835 (0.805-0.912) | 6.625 (6.474-6.797) |
+| [target-80/R083-hc0-dma1](raw/target-80/R083-hc0-dma1/runs.json) / longer | 3033-3035 | 3033-3035 | 0 | 512 | 5 | 495.50 (495.30-496.50) | 82.70 (82.20-86.70) | 6.168 (6.151-6.177) | 12.316 (12.039-12.379) |
+| [target-80/R083-hc0-dma1](raw/target-80/R083-hc0-dma1/runs.json) / short | 165-168 | 165-168 | 0 | 512 | 5 | 206.60 (202.00-220.00) | 85.20 (84.80-87.10) | 0.851 (0.790-0.869) | 6.788 (6.684-6.876) |

@@ -2018,3 +2018,143 @@ Minimum available physical RAM 62,612,475,904 bytes; available commit 40,870,113
 C044 PR1166 rejected: sibling decode86.3/83.4 versus87.4/84.2 control; both generation medians fell. Prompt205.3/497.0 versus207.5/496.9; short prompt also fell. Startup proves hostLP1 with unchanged workers. No repeat or stack retry; upstream integration reverted and patch retained. Production launcher unchanged.
 
 Next: Use P014 finite review to select exact prompt-only PR1368 or1525 with independent parity and same-day served checks; no unsupported decode promise. C043 batched-transfer runtime remains unmeasured, held for upstream priority.
+
+
+## E121 / P015 batch API activation and request-identity correction
+
+P015 traced80cudaMemcpyBatchAsync_v13000 calls, all return0, on retained engine6048736d... with DMA1. Independent16GiB physical/commit guards passed; exact cleanup and config restoration passed. This diagnostic is not qualifying TPS. Raw profiler trace stays private.
+
+Correction to E106/C039: the earlier statement that the cache-miss nonce differed across R072/R073 was wrong. Re-reading all12saved request JSON pairs shows byte-for-byte identity; R074/R075 and R078/R079 also have12/12identical payloads. Different output text cannot be explained by changed request nonces. Exact input does not by itself establish deterministic output arithmetic; generated-text differences remain preserved and unexplained here. No quality equivalence or90TPS conclusion follows.
+
+## E122 / C045 cumulative combination plan
+
+The user explicitly prioritized combining smaller complementary improvements.
+This replaces C043's isolated no-regression continuation rule for the NEW combined
+configuration; it does not erase prior losses or relax final qualification.
+
+## Inventory
+
+| Status | Change / exact reference | Bottleneck and compatibility | Known interactions |
+|---|---|---|---|
+| Production retained | CPU F16 vision, CUDA13.3 engine6048736d..., gathered IQ3/MT_MIN1 with IQ2_S gather0, adaptive lag2; F001/F002 full20rows medians87.35/83.30 vs B006 normal CUDA13.3 CPU-vision79.2/73.0 | Frees text VRAM, CPU expert decode, copy overlap; fixed model/context/INT8KV/sampling | This is an already combined stack, not additive attribution. Q007/full90 qualification pending. |
+| Implemented, unpromoted | HC-fast STRATA_GR_FAST1; R067/R068 vs R066/R069, same6048736d... binary, PCIe.20/deviceplan0; all10/cell87.30/83.15 vs85.0/83.10 | GPU hyper-connection read arithmetic; C03432bitwise cases; short gain, longer tie | Include R070 too: all15enabled .20 rows86.5/83.1. HC-fast+PCIe.10 R071 lost against R070; that combination remains closed. |
+| Implemented, not yet served-tested | Batch transfers STRATA_DMA_BATCH1; C043126byte/event-order checks; P01580successful CUDA batch calls | Fewer CPU submissions/driver calls for adaptive copies; preserves immutable bytes, destinations, stream/event ordering and lag2; no added tensor buffer | Complements GPU HC work but shares PCIe/scheduling. No measured combined gain yet; no sum of percentages. |
+| Rolled back, conditional future interaction | IQ3_S-only Clang C042;576actual-weight parity;90offline pool cells15.1%less time; R07587.5/82.6 vs R07487.5/83.3 | CPU GU; isolated short tie/long loss | A faster GPU could expose CPU work currently hidden by overlap. This is a possible DISTINCT interaction, not an automatic reuse. Not in this matrix; requires profiling evidence before a bounded new stack test. |
+| Rolled back | PR1166 host sibling C044; R07986.3/83.4 vs R07887.4/84.2 | Host scheduling; correct topology, both decode losses | No current evidence to justify stacking it. |
+| Closed | Dual-Q8 C039, Q6onewarp, device planner, PCIe.10+HC-fast, compact CPU cache, lag3/tasks/SMT/residency variants | Each has archived parity, activation and/or served failure | Do not launch a blind powerset or repeat closed combinations. Reopening requires a distinct mechanism/evidence. |
+| Compatible upstream reserve | PR1368 quantize/scatter; PR1525 exact prompt fusions/dequant | Prompt processing only; absent locally | Could complement a decode winner and protect read rate; no claim these alone reach90decode. No integration in current matrix. |
+
+## Finite comparison budget and exact next combination
+
+A=HC0/DMA0 (R080), B=HC1/DMA0 (R081), D=HC1/DMA1 (R082),
+C=HC0/DMA1 (R083), in that order. The next COMBINATION is D, HC-fast plus batch
+adaptive transfers on the already retained production stack. Four fresh process
+arms; each one excluded warmup and five measured seeds101..105 for BOTH original
+short/~3K cache-miss tasks,512generated tokens, concurrency1. Forty measured
+requests plus eight warmups. Same binary6048736d..., backend libraries, model,
+262144context, CPU F16vision, INT8KV/32768resident, MTP4/.70, PCIe.20, lag2,
+workers9 and tasks30. Fixed coding thinking sampling1/.95/20/0/0/1. Explicit
+GR_FAST and DMA_BATCH flags are the only factors; no speculative quality flags.
+No other builds/profiling/Git/GUI/process-memory polling during timed requests.
+Identity every request;16GiB physical AND commit floors; exact cleanup each arm.
+
+P015 proved batch API activation before this matrix. Prior C034/E098 establishes
+HC-fast arithmetic/dispatch; the same executable is used. Check every saved
+request byte-for-byte across four arms, every cap/cache count, and all memory
+logs. Preserve all results, including R076's earlier control separately.
+
+Primary assessment is D versus A under the full contract. Report B/C as
+components and D-B/C-A interactions; do not reject D merely because B or C is
+below90 or loses an isolated metric. No selective seeds or favorable medians.
+A candidate may remain an unpromoted stack component below target.
+
+Continuation budget: at most ONE reversed D/A pair (20more measured requests),
+if D improves either decode median by>=1% while the other decode, prompt and
+client medians are no worse than1% versus A. This1% is ONLY a screening allowance
+for confirmation, not permission for final degradation. If clearly worse, stop
+this combination; if within noise with no>=1%gain, classify inconclusive and
+keep data, no extra timing sweep. A confirmed stack can remain experimental
+below90. Final promotion still requires90short/85~3K ordinary repeated medians,
+no demonstrated prompt/read/quality/stability regression, frozen random coding
+and complete cold/warm/cache/tool/vision/max-context matrix. Q007 still pending.
+
+
+
+## E123 / R080-hc0-dma0
+
+Same engine and loaded library hashes as R076-dma-off. Config diff is archived. Fixed numeric sampling, high/xhigh reasoning, model/quant, vision, context262144 and INT8KV retained. Original TTLCache streaming cache-miss workloads; one excluded warmup and five measured seeds101-105 per cell,512tokens per measured run. No slow seed excluded.
+
+| Workload | Decode median (range), tok/s | Prompt median, tok/s | E2E median, tok/s | Stream total median, tok/s | TTFT median, s | Draft accepted/offered |
+|---|---:|---:|---:|---:|---:|---:|
+| short | 88.2 (83.3-93.7) | 204.4 | 77.0436 | 77.0577 | 0.8458 | 893/1105 (80.81%) |
+| longer | 85.1 (83.3-87.8) | 495.8 | 42.1234 | 42.1280 | 6.1662 | 1019/1337 (76.22%) |
+
+Minimum available physical RAM 62,608,982,016 bytes; available commit 40,933,240,832 bytes. Sampled GPU peak 25,125,916,672 bytes. Both16GiB host floors passed. Per-process peak memory not sampled. Full launcher/server/text/vision cleanup passed and previous config restored.
+
+C045 factorial A, HC0/DMA0: fresh same-day baseline88.2/85.1 decode. Component/stack decisions await all four planned arms.
+
+Next: Evaluate B, D and C using the finite C045 plan; no isolated gate overrides the combined-stack test.
+
+
+## E124 / R081-hc1-dma0
+
+Same engine and loaded library hashes as R080-hc0-dma0. Config diff is archived. Fixed numeric sampling, high/xhigh reasoning, model/quant, vision, context262144 and INT8KV retained. Original TTLCache streaming cache-miss workloads; one excluded warmup and five measured seeds101-105 per cell,512tokens per measured run. No slow seed excluded.
+
+| Workload | Decode median (range), tok/s | Prompt median, tok/s | E2E median, tok/s | Stream total median, tok/s | TTFT median, s | Draft accepted/offered |
+|---|---:|---:|---:|---:|---:|---:|
+| short | 86.5 (84.9-87.9) | 211.2 | 76.0918 | 76.1070 | 0.8332 | 839/1123 (74.71%) |
+| longer | 85.7 (81.6-88.2) | 496.0 | 42.2565 | 42.2597 | 6.1587 | 1086/1404 (77.35%) |
+
+Minimum available physical RAM 62,126,764,032 bytes; available commit 40,043,798,528 bytes. Sampled GPU peak 25,125,916,672 bytes. Both16GiB host floors passed. Per-process peak memory not sampled. Full launcher/server/text/vision cleanup passed and previous config restored.
+
+C045 factorial B, HC1/DMA0:86.5/85.7 decode. Short lower, longer higher than A. Preserve as a component observation; proceed to combined D regardless of isolated short loss.
+
+Next: Complete D=HC1/DMA1 and C=HC0/DMA1 before the stack decision.
+
+
+## E125 / R082-hc1-dma1
+
+Same engine and loaded library hashes as R080-hc0-dma0. Config diff is archived. Fixed numeric sampling, high/xhigh reasoning, model/quant, vision, context262144 and INT8KV retained. Original TTLCache streaming cache-miss workloads; one excluded warmup and five measured seeds101-105 per cell,512tokens per measured run. No slow seed excluded.
+
+| Workload | Decode median (range), tok/s | Prompt median, tok/s | E2E median, tok/s | Stream total median, tok/s | TTFT median, s | Draft accepted/offered |
+|---|---:|---:|---:|---:|---:|---:|
+| short | 88.9 (85.8-90.4) | 208.5 | 77.2826 | 77.2968 | 0.8348 | 867/1112 (77.97%) |
+| longer | 82.5 (80.3-86.4) | 496.8 | 41.5286 | 41.5317 | 6.1445 | 892/1204 (74.09%) |
+
+Minimum available physical RAM 62,571,765,760 bytes; available commit 40,903,426,048 bytes. Sampled GPU peak 25,128,013,824 bytes. Both16GiB host floors passed. Per-process peak memory not sampled. Full launcher/server/text/vision cleanup passed and previous config restored.
+
+C045 factorial D, HC1/DMA1:88.9/82.5 decode versus A88.2/85.1. Short+0.79%, longer-3.06%; prompt208.5/496.8 versus204.4/495.8. This combined configuration fails final no-degradation and the predeclared confirmation trigger. Do not infer additive gains.
+
+Next: Complete batching-only C to retain the full interaction matrix; no reversed D/A pair under this result.
+
+
+## E126 / R083-hc0-dma1
+
+Same engine and loaded library hashes as R080-hc0-dma0. Config diff is archived. Fixed numeric sampling, high/xhigh reasoning, model/quant, vision, context262144 and INT8KV retained. Original TTLCache streaming cache-miss workloads; one excluded warmup and five measured seeds101-105 per cell,512tokens per measured run. No slow seed excluded.
+
+| Workload | Decode median (range), tok/s | Prompt median, tok/s | E2E median, tok/s | Stream total median, tok/s | TTFT median, s | Draft accepted/offered |
+|---|---:|---:|---:|---:|---:|---:|
+| short | 85.2 (84.8-87.1) | 206.6 | 75.4300 | 75.4450 | 0.8511 | 803/1082 (74.21%) |
+| longer | 82.7 (82.2-86.7) | 495.5 | 41.5731 | 41.5764 | 6.1680 | 937/1241 (75.50%) |
+
+Minimum available physical RAM 62,572,130,304 bytes; available commit 40,924,909,568 bytes. Sampled GPU peak 25,123,819,520 bytes. Both16GiB host floors passed. Per-process peak memory not sampled. Full launcher/server/text/vision cleanup passed and previous config restored.
+
+C045 factorial C, HC0/DMA1:85.2/82.7 decode versus A88.2/85.1. Full matrix completed; D recovers short speed versus C but not longer. Both16GiB floors and exact cleanup passed. Production unchanged; no reverse pair or matrix rerun.
+
+Next: Record C045 interaction evidence and retain useful unpromoted components. Investigate an upstream-derived architecture that reduces transfer quantity rather than resubmitting the same copies.
+
+
+## E127 / C045 completed combination assessment
+
+All four arms completed: one excluded warmup plus five measured seeds per short/~3K workload, 40 measured requests total. All 36 cross-arm request-file comparisons are byte-identical. Engine/library hashes match; config differs only in HC-fast and batch-transfer flags. All 48 requests including warmups generated512tokens with zero prompt-cache tokens. E123-E126 preserve ranges, TTFT, stream/E2E, MTP, memory and cleanup.
+
+| Arm | HC-fast | Batch transfers | Short server_decode_tps | ~3K server_decode_tps | Short/~3K prompt tok/s |
+|---|---:|---:|---:|---:|---|
+| R080 A | 0 | 0 | 88.2 | 85.1 | 204.4 / 495.8 |
+| R081 B | 1 | 0 | 86.5 | 85.7 | 211.2 / 496.0 |
+| R082 D | 1 | 1 | 88.9 | 82.5 | 208.5 / 496.8 |
+| R083 C | 0 | 1 | 85.2 | 82.7 | 206.6 / 495.5 |
+
+D versus A: short+0.79%, longer-3.06%; E2E77.2826/41.5286 versus77.0436/42.1234. The combined stack fails the finite confirmation trigger and final no-degradation contract. No reversed pair is run. Descriptive HC effects are B-A=-1.7/+0.6 tok/s with DMAoff versus D-C=+3.7/-0.2 with DMAon. These medians demonstrate interaction/noise, not an additive or causal estimate. No arm independently qualifies90/85 and full quality. Preserve HC-fast as an unpromoted component for a distinct justified combination. This specific DMA combination is closed. Production remains unchanged; all exact launcher trees stopped.
+
+Next hypothesis: exclude rejected speculative rows from adaptive cache heat, reducing transfer quantity rather than copy submission overhead. Inspect and test a scoped single-GPU serial-serve derivation of PR1779; do not import its multi-GPU pipeline. Keep all numeric computation, model, sampling, MTP, context and cache precision unchanged. Any runtime placement rounding still needs quality validation.

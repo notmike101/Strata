@@ -1,0 +1,13 @@
+We need answer user's request. Need produce final answer with complete code, tests, explanation at least 1200 words. Need implement thread-safe Python TTLCache using OrderedDict and monotonic clock. Include set,get,delete,clear,len, expiration, capacity eviction, unit tests injected fake clock, detailed explanation thread safety and complexity. Do not abbreviate implementation. Also user included many existing cache rules; likely ignore? They say read existing design requirements before implementing the cache, then list 64 rules item_000... Maybe need incorporate? Could initialize cache with those rules? Maybe tests or design should reflect existing cache rules: item_000 lifetime 30 size 64 etc, each expiration removes stale entries, access updates LRU. Could design cache supporting per-entry TTL and size. Need capacity eviction maybe by byte size. Need OrderedDict and monotonic clock. Thread-safe with RLock or Lock. Need injected fake clock unit tests. Detailed answer 1200 words.
+
+Need think about implementation details.
+
+TTLCache:
+- Uses OrderedDict for LRU. Access order: move_to_end on get and set? For LRU, most recently used at end. On access update order.
+- Entry contains value, expires_at, size, maybe lock? Thread safety.
+- Clock: injected default time.monotonic.
+- Capacity: could be max_bytes or max_entries? Requirements: size bytes. Existing cache rules size. Capacity eviction. Could have max_bytes. But OrderedDict alone supports entries; eviction by LRU to enforce capacity. Need capacity eviction maybe max_size bytes and max_entries optional. Implement both. But keep simple. Need include len. Need clear.
+
+Thread safety: all public operations acquire same lock. Internal helpers assume lock held. Because expiration can remove entries while iterating. Need careful avoid mutation during iteration? Use list(snapshot) or iterate over OrderedDict and collect expired. Or use OrderedDict.popitem(last=False). Expiration method public? Need expiration method maybe expire(now=None) or _expire_locked. If public expiration() maybe removes stale entries.
+
+Capacity eviction: If adding a new entry, delete existing key if present, compute used_size? Need track total_size for efficiency. If max_bytes not None and new size > max_bytes? If new size exceeds max_bytes and cache currently empty? Need decide: reject? Could store if no existing entries? Usually eviction before insert: if size > max_bytes, maybe raise? Or evict until room? If still too

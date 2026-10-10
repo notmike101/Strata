@@ -1,0 +1,16 @@
+{
+  "batch_runtime_calls": [
+    {
+      "api": "cudaMemcpyBatchAsync_v13000",
+      "return_value": 0,
+      "calls": 80,
+      "summed_api_ms": 27.624988
+    }
+  ],
+  "engine_sha256": "6048736d7674d8f3c66ce50060f11ca6623df33d3e885030941a6ef9e62f427c",
+  "trace_sha256": "9086fcb91841df30fae2430145f09dedc69cb588a010db5f3a1d61ab8f83e6d2",
+  "minimum_physical_available": 60358557696,
+  "minimum_commit_available": 36906991616,
+  "diagnostic_only": true,
+  "limitation": "API trace proves calls/return status, not served speed or full correctness; interval tracing may perturb timing."
+}

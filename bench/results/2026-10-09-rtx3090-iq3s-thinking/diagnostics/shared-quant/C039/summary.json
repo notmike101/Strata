@@ -197,6 +197,6 @@
   "engine_sha256": "ca6551bc7fcd095032c082408378adf91c476a48d48e7e223988c0d4c06beefc",
   "upstream_main": "fb58e0dbc8399662c0e47c76578c6e878b14f6cf",
   "backend_validation": "CUDA13.3.73/sm86 only. HIP excluded by preprocessor; HIP/SYCL not built. No review or merge requested. Experimental production edits removed.",
-  "served_output_comparison": "all12 output texts differ; request cache-miss nonce also differs, so this is not an exact-input arithmetic parity test",
+  "served_output_comparison": "CORRECTED E121: all12 request payloads are byte-identical but output texts differ; nonce differences do not explain this; cause unresolved",
   "production_changes_retained": false
 }

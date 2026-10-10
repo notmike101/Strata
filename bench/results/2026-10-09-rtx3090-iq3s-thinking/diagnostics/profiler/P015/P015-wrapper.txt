@@ -1,0 +1,38 @@
+Cleanup verified: no live Strata launcher, server, engine or vision process.
+memory.used [MiB], memory.free [MiB]
+457 MiB, 23866 MiB
+START short-warmup
+{"label": "short-warmup", "workload": "short", "warmup": true, "seed": 100, "request_started_utc": "2026-10-10T04:32:58.779516+00:00", "prompt_tokens": 166, "fresh_prompt_tokens": 166, "cached_tokens": 0, "completion_tokens": 512, "server_decode_tps": 77.9, "prompt_tps": 122.8, "request_seconds": 7.9907814000034705, "request_e2e_tps": 64.07383388059867, "stream_total_tps": 64.07957160929189, "ttft_seconds": 1.4275432999711484, "finish_reason": "length", "cache_expected": "miss", "cache_valid": true, "output_512": true}
+WARNING: CPU context switches trace requires administrative privileges, disabling.
+WARNING: CPU sampling requires administrative privileges, disabling.
+START short-run-1
+{"label": "short-run-1", "workload": "short", "warmup": false, "seed": 101, "request_started_utc": "2026-10-10T04:33:08.391325+00:00", "prompt_tokens": 167, "fresh_prompt_tokens": 167, "cached_tokens": 0, "completion_tokens": 512, "server_decode_tps": 87.1, "prompt_tps": 196.6, "request_seconds": 6.784291000047233, "request_e2e_tps": 75.46846088949242, "stream_total_tps": 75.47448167972516, "ttft_seconds": 0.910064100055024, "finish_reason": "length", "cache_expected": "miss", "cache_valid": true, "output_512": true}
+Generating '<USER_HOME>\AppData\Local\Temp\nsys-me\nsys-report-28ba.qdstrm'
+
+[1/1] [0%                          ] P015-decode.nsys-rep
+[1/1] [0%                          ] P015-decode.nsys-rep
+[1/1] [1%                          ] P015-decode.nsys-rep
+[1/1] [2%                          ] P015-decode.nsys-rep
+[1/1] [5%                          ] P015-decode.nsys-rep
+[1/1] [7%                          ] P015-decode.nsys-rep
+[1/1] [9%                          ] P015-decode.nsys-rep
+[1/1] [11%                         ] P015-decode.nsys-rep
+[1/1] [13%                         ] P015-decode.nsys-rep
+[1/1] [=15%                        ] P015-decode.nsys-rep
+[1/1] [==18%                       ] P015-decode.nsys-rep
+[1/1] [==19%                       ] P015-decode.nsys-rep
+[1/1] [==20%                       ] P015-decode.nsys-rep
+[1/1] [=================72%        ] P015-decode.nsys-rep
+[1/1] [=======================96%  ] P015-decode.nsys-rep
+[1/1] [========================98% ] P015-decode.nsys-rep
+[1/1] [========================100%] P015-decode.nsys-rep
+[1/1] [========================100%] P015-decode.nsys-rep
+Generated:
+	C:\Strata\local-setup\target-80\P015-decode.nsys-rep
+SUCCESS: The process with PID 521960 (child process of PID 318616) has been terminated.
+SUCCESS: The process with PID 137468 (child process of PID 318616) has been terminated.
+SUCCESS: The process with PID 318616 (child process of PID 390400) has been terminated.
+SUCCESS: The process with PID 291968 (child process of PID 372604) has been terminated.
+SUCCESS: The process with PID 390400 (child process of PID 372604) has been terminated.
+SUCCESS: The process with PID 372604 (child process of PID 281784) has been terminated.
+Cleanup verified: no live Strata launcher, server, engine or vision process.
