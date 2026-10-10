@@ -1,0 +1,20 @@
+We need answer user wants implement topological_order in Python. Need produce final only complete function in Python code block. Need think carefully. Requirements:
+- Implement topological_order(nodes, edges)
+- nodes list unique strings; edges list of (before, after) pairs.
+- Return lexicographically smallest topological ordering.
+- include isolated nodes.
+- ignore duplicate edges.
+- Raise ValueError for edge endpoint absent from nodes or a cycle.
+- Do not mutate either input.
+- Use no imports.
+- Return only complete function in Python code block.
+
+Need ensure lexicographically smallest topological ordering. For unique strings. Need no imports. Need avoid hidden state, deterministic, don't mutate input. Need handle duplicate edges. Need cycle detection. Need edge endpoint absent ValueError.
+
+Algorithm: Validate node membership. Could create set nodes_set = set(nodes). Need ensure nodes unique? Says nodes unique, but can still handle. Need avoid mutating inputs: use new lists, sets. Duplicate edges ignore: use set of edge tuples. Need consider self-loop cycle: raise ValueError.
+
+For lexicographically smallest topological order among all: use Kahn's algorithm with min-heap / sorted available nodes. But no imports, cannot use heapq? Could use list and min/pop each step O(n^2). Since no imports, simple. Need deterministic and lexicographically smallest. Standard: indegree counts, adjacency list (unique edges). Available nodes indegree 0 sorted ascending. At each step pick smallest available. Need update neighbors. To ensure lexicographically smallest among all topo sorts, picking smallest currently available greedily works for strings lex order. Yes.
+
+Need adjacency representation. Could adjacency = {node: set()} from nodes. indegree = {node:0}. For edge in edges: if before not in nodes_set or after not in nodes_set: raise ValueError. Ignore duplicates: if edge already seen continue. Add before -> after. Increment indegree after. If self-loop? duplicate ignore? Self loop is cycle. If (a,a) duplicate seen once, add adjacency a->a indegree++. Later cycle detection via len(order)<n raise. Or raise immediately if before == after? Either okay but cycle. Need careful if edges contains duplicate of same edge: ignore duplicate, not increment multiple.
+
+No mutation: Do not mutate edges/nodes. We iterate. We create adjacency sets. Could use dict list and avoid set for each? Need duplicate edge set globally. Use edge_seen

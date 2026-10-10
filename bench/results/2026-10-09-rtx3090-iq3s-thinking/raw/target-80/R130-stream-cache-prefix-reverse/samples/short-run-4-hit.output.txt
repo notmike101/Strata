@@ -1,0 +1,12 @@
+We need answer user's request: "Implement topological_order(nodes, edges) in Python. nodes is a list of unique strings; edges is a list of (before, after) pairs. Return the lexicographically smallest topological ordering, include isolated nodes, and ignore duplicate edges. Raise ValueError for an edge endpoint absent from nodes or a cycle. Do not mutate either input. Use no imports. Return only the complete function in a Python code block."
+
+Need provide final code block only. Need think through implementation. Need no imports. Lexicographically smallest topological order for nodes strings. Kahn's algorithm with min-heap normally, but no imports. Need no imports means no heapq. Can implement using sorted list? Nodes strings unique. Need lexicographically smallest topological ordering. We can repeatedly select smallest available node among those indegree zero. To avoid imports, can maintain list/set of ready and sort each step or use min. Complexity okay unspecified. Need ignore duplicate edges. Need not mutate inputs. Need validate edge endpoints absent raise ValueError. Need cycle raise ValueError.
+
+Potential approach:
+
+def topological_order(nodes, edges):
+    # nodes list unique strings, but we can treat as given order? Need include isolated nodes. Lexicographically smallest overall based on strings, not input order. Need all nodes.
+    # Validate nodes? not needed. But if duplicate nodes? input says unique. If edges contain tuple length? Could unpack. If duplicate edges ignore.
+    node_set = set(nodes) maybe okay no import. But nodes may be list. Does set mutate? no.
+    adjacency = {node: set() for node in nodes} maybe sets. indegree = {node:0 for node in nodes}. For each edge: try b,a=edge except ValueError? Could raise? not required but maybe unpack fails. We can if len(edge)!=2? But edges list of pairs. We can just before, after = edge. If endpoint absent raise ValueError. Ignore duplicates: if after not in adjacency[before]: add; indegree[after]+=1.
+    # Need lexicographically smallest: use ready = [n for n in nodes if indegree[n]==0]? But then need sort? At each step choose min(ready). If using list remove min. min O(n) each, remove O(n), total O(n^2) fine. But to be lexicographically smallest among all topological orders? Greedy choosing smallest available is correct for lexicographically smallest top

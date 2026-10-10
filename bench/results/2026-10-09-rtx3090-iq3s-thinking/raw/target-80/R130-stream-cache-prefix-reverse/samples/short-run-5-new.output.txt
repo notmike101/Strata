@@ -1,0 +1,16 @@
+We need answer user's request. Need produce final with only complete function in Python code block. Need implement topological_order(nodes, edges). Requirements:
+- nodes list unique strings
+- edges list of (before, after) pairs
+- return lexicographically smallest topological ordering
+- include isolated nodes
+- ignore duplicate edges
+- Raise ValueError for edge endpoint absent from nodes or a cycle
+- Do not mutate either input
+- Use no imports
+- Return only complete function in Python code block.
+
+Need think carefully about lexicographically smallest topological order. Given directed graph edges before -> after. We want lexicographically smallest sequence among all topological orders. Standard algorithm: Kahn with min-heap selecting available nodes with indegree zero yields lexicographically smallest topological order if comparing list lexicographically by node strings. But nodes are strings, need sort. No imports, can use heapq? heapq import prohibited. Could implement simple selection min from available list O(n^2) acceptable? Need no imports. Need avoid mutating inputs. Use sets/dicts.
+
+Potential lexicographically smallest with Kahn: initialize indegree counts (only unique edges). available = sorted nodes with indegree 0. Repeatedly choose lexicographically smallest available (e.g. min) append, decrement indegree neighbors, add new zero nodes. If result length < len(nodes) cycle -> ValueError. But need verify min-heap greedy is lexicographically smallest topological order. For lexicographically smallest sequence of labels, yes at each position pick smallest possible label among nodes that can appear next in some completion. Is indegree-zero available set exactly nodes that can appear next? If no cycle, any topological order can choose any available node first? Yes if node has indegree 0, it can be placed next; remaining graph acyclic. Picking smallest available greedily yields lexicographically smallest. Need prove not tricky: Suppose pick available 'a', but choosing 'a' first makes later sequence larger than choosing 'b' first? Lexicographic compares first element: any order with 'b' first larger than one with 'a' first, so choose smallest available. After fixing first, recursively choose smallest available among remaining. So okay.
+
+Duplicate edges ignore. Edge endpoint absent raise ValueError. Need handle edges possibly not tuple length 2? Probably assume. Could validate unpack? Could raise ValueError? Not specified; maybe let exception? Better robust? But no imports. Could check len(edge)!=2 raise ValueError?

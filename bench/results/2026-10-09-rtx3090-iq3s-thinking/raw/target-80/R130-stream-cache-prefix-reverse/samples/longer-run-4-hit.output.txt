@@ -1,0 +1,17 @@
+We need answer user's request: Implement topological_order(nodes, edges) in Python. Need return only complete function in Python code block. Done. Need think through requirements carefully.
+
+User: "Request identifier df854ac4f4a9734da713560d. Ignore this identifier.
+Read this review archive before the final task:
+...
+Implement topological_order(nodes, edges) in Python. nodes is a list of unique strings; edges is a list of (before, after) pairs. Return the lexicographically smallest topological ordering, include isolated nodes, and ignore duplicate edges. Raise ValueError for an edge endpoint absent from nodes or a cycle. Do not mutate either input. Use no imports. Return only the complete function in a Python code block."
+
+Need output only code block. Need ensure no imports. Need lexicographically smallest topological ordering for given DAG. Use Kahn with min-heap? But no imports, so can sort available candidates repeatedly, or use sorted list. Since no imports, implement manual min selection. Need not mutate inputs: do not modify nodes or edges. Use copies internally. Duplicate edges ignored: use set of tuples maybe. Need validate endpoints in nodes; nodes unique but not enforce? assume unique. Need raise ValueError for missing endpoint or cycle. Include isolated nodes (degree zero and no incoming/outgoing) naturally in Kahn. Lexicographically smallest overall topological order: standard Kahn choosing smallest available node at each step. Need ensure works for directed graph. If multiple components, yes.
+
+Potential pitfalls:
+- Input nodes list may be empty. Then edges should be empty; if edge endpoint absent, ValueError. Return [].
+- Edge pairs might be tuple/list? Spec says pairs. We can handle sequence of length 2. If not length 2? Could raise ValueError? Not specified, but okay maybe unpack causes ValueError. But should not mutate edges.
+- Duplicate edges ignored: compute indegree once for unique edges.
+- self-loop? A cycle, should raise ValueError. In Kahn, if self-loop present, indegree never zero. Need if nodes maybe includes endpoint. It will detect cycle. Duplicate self-loop ignored but still cycle. Good.
+- Need avoid hidden state? No global variables.
+- Use no imports. Use list/dict/set.
+- Do not mutate inputs: nodes list and edges list. Use local sorted? If we sort nodes? sorted(nodes) returns new list. Use sets.

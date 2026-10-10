@@ -1,0 +1,25 @@
+We need answer user: "Request identifier ... Ignore this identifier. Implement topological_order(nodes, edges) in Python. nodes is a list of unique strings; edges is a list of (before, after) pairs. Return the lexicographically smallest topological ordering, include isolated nodes, and ignore duplicate edges. Raise ValueError for an edge endpoint absent from nodes or a cycle. Do not mutate either input. Use no imports. Return only the complete function in a Python code block."
+
+Need provide final only code block with complete function. Need think requirements. Implement Kahn's algorithm lexicographically smallest: initialize indegree for all nodes. Need ignore duplicate edges: set of directed edges or adjacency set. But must not mutate inputs: nodes list, edges list. We can build sets. Raise ValueError if endpoint absent from nodes. Edge endpoint absent. Since nodes unique strings but not guaranteed? Can validate. Use no imports. Need lexicographically smallest topological ordering: use heap if heap module? No imports. Can implement min-selection with list? Need not import heapq. Since no imports. Could maintain list and sort initial, then pop min by list.pop(index) and update, use bisect? No imports. Simpler: use min on list of available. Complexity okay likely. Or implement manual binary search insertion to maintain sorted list without imports. Need robust. Could do:
+
+def topological_order(nodes, edges):
+    node_set = set(nodes)
+    # ensure unique? nodes unique strings per spec. maybe not check.
+    adj = {node: set() for node in nodes}
+    indeg = {node: 0 for node in nodes}
+    seen_edges = set()
+    for before, after in edges:
+        if before not in node_set or after not in node_set:
+            raise ValueError(...)
+        if before == after: cycle self-loop? raise.
+        if before not in adj[before]? adj exists.
+        if (before, after) in seen_edges: continue
+        seen_edges.add((before, after))
+        adj[before].add(after)
+        indeg[after] += 1
+    available = sorted(nodes)
+    order = []
+    # remove nodes with indeg==0
+    available = [node for node in available if indeg[node] == 0]
+    while available:
+        node = available.pop(0) # O(n^2). Could be ok. But lexicographically

@@ -1,0 +1,22 @@
+We need respond to user: "Implement topological_order(nodes, edges) in Python... Return only the complete function in a Python code block." Need produce final only code block. Need ensure no imports. Need handle nodes list unique strings, edges list of (before, after). Return lexicographically smallest topological ordering. Include isolated nodes. Ignore duplicate edges. Raise ValueError for edge endpoint absent from nodes or cycle. Do not mutate inputs.
+
+Need craft robust deterministic Kahn with min-heap? Without imports can't use heapq? Could implement min selection manually or sort candidates each step. Since no imports. Need not mutate input. Need probably validate edges endpoints. Duplicate edges: ignore duplicate pairs. Cycle detection. Lexicographically smallest among nodes strings. Kahn: compute indegree only for unique edges. Repeated edges count once. Need not mutate nodes or edges. We can build sets/ dict.
+
+Potential pitfalls: self-loop cycle: edge (a,a) endpoint present, duplicate ignored, but creates self-loop => cycle raise. Need detect. Kahn with indegree. If cycle raise.
+
+Implement:
+
+def topological_order(nodes, edges):
+    # maybe check nodes iterable? not required.
+    node_set = set(nodes)
+    if len(node_set) != len(nodes)? Problem says unique strings, but can trust? Could validate? If duplicates in nodes? Since unique, no matter. But if duplicates, set len differs. Could either still use set. Lexicographic ordering over unique nodes. But mutating no. Use node_set = {n for n in nodes}. But to output all nodes. If duplicates, maybe include once? Spec unique, so ok.
+    # build normalized unique edges.
+    unique_edges = set()
+    for edge in edges:
+       if not isinstance(edge, tuple)? Problem says pairs. Could unpack try. Need robust? If invalid length? Could raise ValueError maybe.
+       try: before, after = edge
+       except (TypeError, ValueError): raise ValueError("...")
+       if before not in node_set or after not in node_set: raise ValueError
+       unique_edges.add((before, after))
+    # build adjacency and indegree
+    adj = {n: [] for n in nodes}? But if nodes list has duplicates? Need deterministic. Use list(node_set) maybe order not important. Need include isolated. To avoid mutation of nodes, iterate nodes maybe use for n in nodes: adj[n]. But duplicates cause multiple keys. Since unique

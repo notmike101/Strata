@@ -1,0 +1,17 @@
+We need respond to user: "Implement topological_order(nodes, edges) in Python... Return only the complete function in a Python code block." Need produce final only code block. Need ensure no imports. Need handle nodes list unique strings, edges list of (before, after). Return lexicographically smallest topological ordering. Include isolated nodes. Ignore duplicate edges. Raise ValueError for edge endpoint absent from nodes or cycle. Do not mutate inputs.
+
+Need design robust. Lexicographically smallest topological order: For DAG, choose smallest available node at each step (Kahn with heap). Since Python heapq import not allowed. Could implement min selection without heap: repeatedly scan nodes with indegree 0 and pick min. Complexity O(V^2 + E) acceptable likely. Need not mutate inputs. Need ignore duplicate edges. Validate endpoints before from nodes. Use set of nodes. Validate all edge tuples? If malformed? Not required. Could handle missing? If edge endpoint absent raise ValueError. Need avoid duplicates so indegree counted once. Could store adjacency as set/dict. Need ignore duplicate edges.
+
+Cycle detection: if result length != len(nodes), raise ValueError. Need if nodes empty return []? Yes.
+
+Do not mutate inputs: use local copies/structures. If input nodes list unique but maybe empty. Use list(nodes). Need preserve no mutation. If nodes are not comparable? strings, lexicographic. Use min. Need deterministic.
+
+Potential pitfalls: If nodes includes None? Strings, no. Use set of nodes for O(1). Need handle duplicate edges; adjacency sets. For each edge in edges: if not valid tuple? Could unpack; if not, unpack error. Maybe robust: if len(edge)!=2 raise ValueError? But spec edges pairs. Could raise ValueError if endpoint absent. If edge not length 2, ValueError? Could do try: before, after = edge except Exception: raise ValueError("invalid edge")? Might be okay. But "Return only complete function". Avoid overengineering? We can include robust validation.
+
+Lexicographically smallest topological ordering with isolated nodes included. Kahn min available. Need ensure duplicate edges ignored; if edges have self-loop, cycle -> raise ValueError. Duplicate self-loop ignored once? If self-loop edge before==after, adjacency includes self? indegree increases; when remove node, self adjacency indegree decreases, not available -> cycle. Good.
+
+Implementation options:
+
+def topological_order(nodes, edges):
+    node_set = set(nodes)
+    adj = {

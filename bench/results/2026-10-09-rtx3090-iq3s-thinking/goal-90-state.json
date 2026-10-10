@@ -3,17 +3,18 @@
   "target_tps": 90,
   "metric": "server_decode_tps",
   "contract": "goal-90-contract.md",
-  "current": "C056 selected-coding streaming-miss comparison closed:92.3/90.5 decode with prompt/E2E non-degradation over all15runs/cell. Original TTL and Q015 proofs retained; full goal remains unqualified.",
+  "current": "C056 cache matrix closed: target medians pass but non-degradation screen fails. Do not promote or repeat this comparison until favorable.",
   "next": [
-    "C056 stream exact-repeat cache-hit matrix, with opposite-order fresh confirmations and matched controls.",
-    "C056 nonstream miss/hit matrix, then remaining tools/vision/reasoning/cancellation/mixed-history/near-limit checks."
+    "Inspect per-request outputs, MTP counts and routing/cache history; separate observed acceptance changes from causal claims.",
+    "Run a bounded stage/refill/decode diagnostic if existing evidence cannot explain the mixed regressions; retain all data and fixed sampler.",
+    "After a revised candidate passes this screen, finish nonstream and real-use/near-limit gates."
   ],
   "promoted": "The previously qualified format-gather engine with IQ2_S gather disabled and adaptive lag2; no changes this turn.",
   "stopping_rule": "Leave goal active until all fixed qualification cells pass. No benchmark model resident at handoff.",
   "quality": "C056 Q015:5/5 natural-stop answers,72tests each, unchanged corrected-v2 checker and approved32768cap. Full real-use matrix remains pending.",
-  "last_checkpoint": "E224",
-  "resume_command": "No model resident. Stay on perf/rtx3090-thinking-80. Reuse cc85c6c7 engine and R119 config. Next use run-c020-arm.py --goal-coding --cache-hits; do not pool hit-interleaved misses into the closed pure-miss matrix.",
-  "safety": "R122-R127 complete with exact cleanup and production3457fdfe restored;16GiB floors pass. No engine/launcher change.",
+  "last_checkpoint": "E231",
+  "resume_command": "No model resident. Stay on perf/rtx3090-thinking-80. Read C056/stream-cache/decision.md. C056 cc85c6c7 is experimental and failed cache-matrix promotion; do not alter production launcher.",
+  "safety": "R128-R131 exact cleanup and production3457fdfe restoration verified; 16GiB physical/commit floors pass.",
   "goal_tool_status_at_entry": "active, verified get_goal",
   "target_short_tps": 90,
   "target_longer_tps": 85,
@@ -39,7 +40,7 @@
   },
   "quality_checker_revision": "v2: standard TypeError restored, objective cases unchanged",
   "c056": {
-    "status": "experimental; full qualification pending",
+    "status": "experimental; failed streaming cache non-degradation screen; not promoted",
     "engine_sha256": "cc85c6c787beed24c113a3a5c7fe7bb376bd07f04bc48f3e58264dec701b3c91",
     "original_ttl_decode_tps": [
       90.05,
@@ -52,6 +53,26 @@
     ],
     "selected_repetitions_per_cell": 15,
     "quality": "Q0155/5,72cases per answer, natural stops under approved32768cap",
-    "next_missing": "stream/nonstream cache-hit and nonstream-miss, real-use and near-limit gates"
+    "next_missing": "stream/nonstream cache-hit and nonstream-miss, real-use and near-limit gates",
+    "stream_cache": {
+      "arms": [
+        "R128-stream-cache-control",
+        "R129-stream-cache-prefix",
+        "R130-stream-cache-prefix-reverse",
+        "R131-stream-cache-control-reverse"
+      ],
+      "repetitions_per_cell": 10,
+      "failed_gates": [
+        "longer/stream/hit: decode_no_degradation",
+        "longer/stream/hit: e2e_no_degradation",
+        "longer/stream/hit: latency_no_degradation",
+        "short/stream/hit: prompt_no_degradation",
+        "short/stream/hit: ttft_no_degradation",
+        "short/stream/new: decode_no_degradation",
+        "short/stream/new: e2e_no_degradation",
+        "short/stream/new: latency_no_degradation"
+      ],
+      "full_goal_pass": false
+    }
   }
 }

@@ -1,0 +1,13 @@
+We need respond to user: "Implement topological_order(nodes, edges) in Python... Return only the complete function in a Python code block." Need produce final only code block. Need ensure no imports. Need handle nodes list unique strings, edges list of (before, after). Return lexicographically smallest topological ordering. Include isolated nodes. Ignore duplicate edges. Raise ValueError for edge endpoint absent from nodes or cycle. Do not mutate inputs.
+
+Need craft robust deterministic Kahn with min-heap? Without imports can't use heapq. Could implement min selection by scanning available nodes each step O(n^2) fine. Or implement simple min-heap manually? No imports. We can build sorted nodes initial zero indegree and repeatedly pop smallest. Since unique strings. Need no mutation: don't modify nodes/edges lists. Could copy? Not necessary if only iterate. Need duplicate edges ignore: need avoid double counting indegree and adjacency. If duplicate edges, ignoring duplicate means set of edges? But edges might contain duplicates. Since no imports, can use set. Nodes strings. Edges endpoints maybe non-string? Assume. Need validate endpoint absent. Need cycle raise ValueError. Need lex smallest among topological order: Kahn choosing smallest available at each step yields lexicographically smallest topological order for total ordering if tie choices? Yes, standard. Need consider edges list can include tuples not length 2? Could validate? Maybe if invalid raise ValueError? The spec only endpoints absent. Could defensively handle malformed. But no overcomplicate.
+
+Need no mutation of inputs: If we use set(nodes) no mutation. But set requires hash. Good. For edges, to ignore duplicates: adjacency dict and indegree dict. But to validate edges endpoints absent before building? If invalid endpoint absent raise. Need if duplicate edge ignore. Could build set of edge pairs to avoid duplicate count. However if edges contains duplicate tuple, set fine. If edge contains list? (before, after) pairs; likely tuples. Could convert to tuple? If edge is list [a,b], set edge = tuple(edge)? But if edge not iterable? Could raise ValueError? Maybe. But avoid mutating input by not modifying. Could do:
+
+edge_set = set()
+adj = {node: [] for node in nodes}
+indeg = {node:0 for node in nodes}
+node_set = set(nodes)
+for edge in edges:
+    try: before, after = edge
+    except (TypeError, ValueError): raise ValueError("edge must be a pair

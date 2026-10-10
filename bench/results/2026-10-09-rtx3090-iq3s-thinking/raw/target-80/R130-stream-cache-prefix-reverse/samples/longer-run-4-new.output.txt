@@ -1,0 +1,21 @@
+We need answer user's request: Implement topological_order(nodes, edges) in Python. Need return only complete function in Python code block. Done. Need think through requirements carefully.
+
+User: "Request identifier df854ac4f4a9734da713560d. Ignore this identifier.
+Read this review archive before the final task:
+...
+Implement topological_order(nodes, edges) in Python. nodes is a list of unique strings; edges is a list of (before, after) pairs. Return the lexicographically smallest topological ordering, include isolated nodes, and ignore duplicate edges. Raise ValueError for an edge endpoint absent from nodes or a cycle. Do not mutate either input. Use no imports. Return only the complete function in a Python code block."
+
+Need output only code block. Need ensure no imports. Need lexicographically smallest topological ordering. For DAG with unique strings. Lexicographically smallest topological ordering likely among sequences of node names sorted lexicographically? Usually Kahn's algorithm with min-heap yields lexicographically smallest topological order by node names. No imports => can't use heapq? Could implement manually with list sort and selection each step; nodes likely reasonable. Need ignore duplicate edges. Do not mutate inputs. Validate edges endpoints absent -> ValueError. Cycle -> ValueError. Input nodes list unique strings, but maybe we can rely? Could handle? Need not mutate. Edges list of pairs. Need deterministic. Need isolated nodes included.
+
+Need code only. Could:
+
+def topological_order(nodes, edges):
+    node_set = set(nodes)
+    indegree = {node:0 for node in nodes}
+    adj = {node:set() for node in nodes} maybe sets not mutate input. For edge in edges:
+       try: before, after = edge? if not pair? Might raise? Requirement only edge endpoint absent or cycle. But could robust.
+       if before not in node_set or after not in node_set: raise ValueError(...)
+       if after in adj[before]: continue
+       adj[before].add(after)
+       indegree[after] += 1
+    # Kahn: available nodes indegree 0. To get lexicographically smallest, each iteration choose min available (sorted). Need efficient. Could maintain sorted list and remove selected. Or use heap no imports? Could implement min-heap manually? Simpler: avail = sorted([n for n in nodes if indegree[n

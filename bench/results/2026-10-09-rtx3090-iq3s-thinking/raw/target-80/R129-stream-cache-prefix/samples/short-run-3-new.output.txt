@@ -1,0 +1,17 @@
+We need answer user wants implement function in Python code block only? Need produce final with complete function in Python code block. Need think through requirements.
+
+Task: Implement topological_order(nodes, edges) in Python. nodes list of unique strings; edges list of (before, after) pairs. Return lexicographically smallest topological ordering, include isolated nodes, ignore duplicate edges. Raise ValueError for edge endpoint absent from nodes or a cycle. Do not mutate either input. Use no imports. Return only complete function in Python code block.
+
+Need design. Inputs: nodes list, edges list of tuples. Need not mutate either input. No imports.
+
+Need lexicographically smallest topological ordering among valid orders. Standard Kahn with min-heap yields lexicographically smallest when choose smallest available node. No heapq import allowed. Could use list and min available each step, O(V^2) okay? Or implement heap? Simpler: set/list. Use nodes list copied. Need duplicate edges ignore. Need validate endpoints: raise ValueError if edge endpoints absent. Could first convert nodes to set (doesn't mutate) but set uses no imports. Then for each edge, check before, after in node_set. But if edge is not iterable? Could assume pairs. Need maybe handle duplicates ignoring.
+
+Cycle detection: if len(order) != len(nodes), raise ValueError.
+
+Need lexicographically smallest topological ordering with string nodes. Use Kahn: indegree dict. adjacency dict mapping node to set of successors to ignore duplicates. For duplicate edges, set avoids multiple indegree increments. Need initialize adjacency {node: set() for node in nodes}; indegree {node:0}. For edge (u,v): if u not node_set or v not node_set raise ValueError. If v not in adjacency[u]: add v, indegree[v]+=1. This mutates new dicts only.
+
+Available nodes: nodes with indegree 0. To pick lexicographically smallest, could maintain list avail and pop min via min and remove: avail.remove(min(avail)). That mutates avail not input. Need ensure if nodes duplicate? unique given. But input not mutated. If avail is list(nodes?) we must not mutate input: avail = [node for node in nodes if indegree[node]==0].
+
+Potential issue: If nodes list not sorted? Lexicographically smallest overall order should consider all nodes. If using nodes order for avail initialization not matter; we always choose min among available.
+
+Need if cycle raise ValueError. If empty nodes and

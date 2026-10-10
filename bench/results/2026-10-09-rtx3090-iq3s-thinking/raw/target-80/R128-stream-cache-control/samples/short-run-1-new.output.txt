@@ -1,0 +1,12 @@
+We need answer user's request: Implement topological_order(nodes, edges) in Python. Need return only complete function in Python code block. Need ensure lexicographically smallest topological ordering, include isolated nodes, ignore duplicate edges. Raise ValueError for edge endpoint absent from nodes or cycle. Do not mutate either input. Use no imports. Need no identifier mention. Need likely pure Python.
+
+We need craft final code only in Python block. Need consider requirements deeply.
+
+Function topological_order(nodes, edges):
+- nodes list unique strings. Need not mutate either input. Could iterate, make internal structures.
+- edges list of pairs (before, after). Duplicate edges ignore.
+- Edge endpoint absent from nodes -> ValueError.
+- cycle -> ValueError.
+- Return lexicographically smallest topological ordering: likely Kahn's algorithm choosing smallest available node by lex order. Because strings; min available via heap? No imports (heapq not allowed? heapq is import; can't use imports. Could sort available each iteration; O(n^2 log n) but fine. Or maintain min list and use min; no imports. But for lexicographically smallest topological order with Kahn: repeatedly select lexicographically smallest node among zero indegree. Need update indegrees and available. Need ignore duplicate edges. Need detect edges missing endpoints. Need ensure no mutation of input: if we store adjacency sets and indegree dicts, no mutate lists. But edges elements maybe tuples; we don't mutate. Need handle if edges is list. If edge is not length 2? Not specified; could raise ValueError? Maybe not. But robust.
+
+Need ensure isolated nodes included. If nodes empty? Return []. Duplicate edges: indegree count should ignore duplicates. We can build adjacency set per node? Need no imports. Use dict with keys node strings to set of out-neighbors. indegrees dict. First validate all nodes? nodes unique. But need handle duplicate nodes? It says unique. Could ignore. If duplicates? Could produce weird but not required. Could make set for membership: node_set = set(nodes); no mutation. Then for edge in edges: before, after = edge? If unpack fails maybe ValueError. if before not in node_set or after not in node_set: raise ValueError. if before == after: cycle self-loop -> raise. We can also build and later detect. Duplicate edges: if after not in adj[before], add and indeg[after]++. Need initialize adj for all nodes = set(). inde

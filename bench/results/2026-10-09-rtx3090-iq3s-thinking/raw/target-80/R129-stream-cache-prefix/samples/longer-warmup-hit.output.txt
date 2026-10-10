@@ -1,0 +1,16 @@
+We need answer user wants code only in Python code block. Need analyze. Need produce final only code block. Need ensure function correct.
+
+Problem: topological_order(nodes, edges): nodes list unique strings; edges list pairs before, after. Return lexicographically smallest topological ordering, include isolated nodes, ignore duplicate edges. Raise ValueError for edge endpoint absent from nodes or a cycle. Do not mutate either input. No imports. Complete function only.
+
+Need design deterministic lexicographically smallest topological order. Given directed acyclic graph nodes strings. Need Kahn's algorithm with min-heap? No imports. Could use sorted list or simple min selection each step O(n^2) okay? Need no imports, so no heapq. We can implement manually or sort candidates each iteration. Need ignore duplicate edges. Do not mutate input lists? Input list itself won't mutate if we don't modify. But edges tuple? Need avoid mutating. We can copy adjacency sets. Unique nodes, but maybe validate duplicates? It says unique. We can still handle duplicates maybe.
+
+Need endpoint absent check: for each edge, if before not in node_set or after not in node_set raise ValueError. Also cycle.
+
+Lexicographically smallest topological ordering: Among nodes with indegree zero at each step, choose lexicographically smallest string. Is that always globally lexicographically smallest topological order? Yes for standard topological order with string node labels, Kahn with min available yields lexicographically smallest sequence (for total order labels), because at first position choose smallest possible among valid topological orders; choosing smallest zero indegree node is valid and doesn't prevent lexicographically minimal continuation? Need proof but okay. However careful: For lexicographically smallest sequence of node names, at each position choosing smallest currently available zero indegree is correct by exchange argument, yes.
+
+Implementation without imports:
+- nodes_set = set(nodes)
+- adjacency = {node: set() for node in nodes}
+- indegree = {node:0 for node in nodes}
+- iterate edges: for edge in edges: maybe unpack; if edge not length 2? Maybe raise ValueError? Spec only endpoints absent/cycle. Could robust. If before in node_set and after in node_set. If edge already ignored duplicate: use seen_edges set of (before, after). If not seen: add, adjacency[before].add(after), indegree[after]+=1.
+- available: list of nodes with indegree 0. Need lexic

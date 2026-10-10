@@ -1,0 +1,18 @@
+We need answer user wants code only in Python code block. Need implement topological_order. Need think thoroughly. We need produce final only complete function code block, no imports.
+
+Requirements:
+- topological_order(nodes, edges)
+- nodes list unique strings; edges list of (before, after) pairs.
+- Return lexicographically smallest topological ordering, include isolated nodes, ignore duplicate edges.
+- Raise ValueError for edge endpoint absent from nodes or a cycle.
+- Do not mutate either input.
+- Use no imports.
+- Return only complete function in Python code block.
+
+Need ensure lexicographically smallest topological ordering. Usual Kahn's algorithm selecting smallest available node at each step yields lexicographically smallest topological order for DAG when all edges from before to after. Need confirm. Yes: among all valid topological sorts, greedily choosing smallest available node yields lexicographically smallest sequence. Need include isolated nodes: nodes with no incoming/outgoing have indegree 0 initially and will be considered.
+
+Need not mutate inputs. Can use sets from nodes. Need ignore duplicate edges: duplicates shouldn't affect indegree. We can track adjacency set or seen edges. Use no imports so set literal? Use built-ins. Need no collections. Could implement using dict of sets or lists with seen set.
+
+Edge validation: If endpoint absent from nodes, raise ValueError. Edge tuple? Should handle maybe list pairs. Could attempt unpack. But if invalid edge length? not specified; could let unpack error? We can guard: if not (isinstance? no imports? no need). Maybe use try except unpack? Need no imports. Could do for before, after in edges. If pair missing unpack ValueError/TypeError. Fine. But edge endpoints absent from nodes: check before in node_set and after in node_set else ValueError. Duplicate edges ignore: Need if duplicate edge before->after, don't increment indegree again or adjacency duplicate. Need if same pair appears twice but maybe also reversed cycle? Duplicate same ignored.
+
+Potential issue lexicographic sorting strings: Python string ordering. Need available list. We can maintain set of indegree zero. To pick lexicographically smallest each time without heap? Can sort available each iteration or select min(available). available is list/set. If use set, min() built-in. Complexity O(V^2 log? But fine). Could avoid imports: available = set(), while available: node = min(available); remove; result append; for nxt in adj[node

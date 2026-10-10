@@ -1,0 +1,26 @@
+We need answer user's request: "Implement topological_order(nodes, edges) in Python. nodes is a list of unique strings; edges is a list of (before, after) pairs. Return the lexicographically smallest topological ordering, include isolated nodes, and ignore duplicate edges. Raise ValueError for an edge endpoint absent from nodes or a cycle. Do not mutate either input. Use no imports. Return only the complete function in a Python code block."
+
+Need provide final code block only. Need think through implementation. Need no imports. Lexicographically smallest topological order for nodes strings. Kahn's algorithm with min-heap normally, but no imports. Need no imports means no heapq. Can implement using sorted list? Nodes strings unique. Need lexicographically smallest topological ordering. We can repeatedly select smallest available node among those indegree zero. To avoid imports, can maintain list/set of ready and sort each step or use min. Complexity okay unspecified. Need ignore duplicate edges. Need not mutate inputs. Need validate edge endpoints absent raise ValueError. Need cycle raise ValueError.
+
+Potential approach:
+
+def topological_order(nodes, edges):
+    # no mutation. Need nodes list unique strings; but can assume. Need maybe make local sets/lists. 
+    node_set = set(nodes)
+    if not all(isinstance(n, str)? Not specified. Could not necessary.
+    # adjacency sets to ignore duplicates. Need ensure not mutate edges or nodes. Use new dict.
+    adj = {node: set() for node in nodes}
+    indeg = {node: 0 for node in nodes}
+    for before, after in edges:
+        if before not in node_set or after not in node_set: raise ValueError
+        if after not in adj[before]:
+            adj[before].add(after)
+            indeg[after] += 1
+    ready = [node for node in nodes if indeg[node] == 0]
+    order = []
+    while ready:
+        # choose lexicographically smallest ready. Use min(ready). But need remove efficiently.
+        current = min(ready)
+        ready.remove(current)
+        order.append(current)
+        for neighbor in sorted(adj[current])? Not needed, just update; if new ready append. But to maintain lexicographically smallest, need ready includes all current indegree zero, choose min. We can append neighbors as they become zero; order among ready handled by min next iteration. But

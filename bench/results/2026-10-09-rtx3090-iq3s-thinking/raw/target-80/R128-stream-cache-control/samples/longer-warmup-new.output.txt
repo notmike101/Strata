@@ -1,0 +1,19 @@
+We need answer user wants code only in Python code block. Need analyze. Need produce final only code block. Need ensure function correct.
+
+Problem: topological_order(nodes, edges): nodes list unique strings; edges list pairs before, after. Return lexicographically smallest topological ordering, include isolated nodes, ignore duplicate edges. Raise ValueError for edge endpoint absent from nodes or a cycle. Do not mutate either input. No imports. Complete function only.
+
+Need design deterministic lexicographically smallest topological order. Usually Kahn with min-heap of zero indegree nodes to get lexicographically smallest among valid topological orders. But no imports (heapq unavailable). Need implement own min selection or sort each iteration. n maybe unspecified. We can use built-in sorted. Need not mutate inputs. Use copies.
+
+Need consider duplicate edges ignore. Need validate endpoints present. Could do first pass: create set nodes? Need preserve original nodes? nodes unique but unsorted. Need not mutate. If invalid endpoint absent raise ValueError. Cycle detection: Kahn; if processed count != len(nodes) raise ValueError.
+
+Lexicographically smallest: Given set of available nodes sorted lexicographically. Pick smallest each time. That yields lexicographically smallest topological ordering among all topological orders? Yes if ordering compared lexicographically by sequence of strings; picking smallest available at each step gives lexicographically smallest topological sort (assuming total order on node labels). Because any valid order's first element must be in available, so choose smallest possible; induction.
+
+Need implement with no imports. Could use set for seen nodes. Need handle edges duplicates. Need avoid mutating input lists: edges iteration only. Could build indegree dict and adjacency dict. Need ensure isolated nodes included. For duplicate edges, need avoid incrementing indegree multiple times. Could build adjacency as dict of set? But sets are okay no imports. However need deterministic? sets no issue if we iterate sorted. But duplicate ignored. Need endpoints absent: first validate all nodes? Since nodes list unique but not necessarily need check duplicates? Spec unique strings; can rely? Might still handle.
+
+Potential issue: If nodes contains non-string? Spec strings. No need.
+
+Function:
+def topological_order(nodes, edges):
+    node_set = set(nodes)
+    # If duplicate nodes? Spec unique. Could if len(node_set)!=len(nodes): maybe? Raising not specified. Avoid hidden? Not needed.
+    # Build adjacency dict only for known nodes maybe lazily.

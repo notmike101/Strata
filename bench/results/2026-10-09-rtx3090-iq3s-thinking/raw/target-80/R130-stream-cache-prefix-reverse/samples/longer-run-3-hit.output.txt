@@ -1,0 +1,13 @@
+We need answer user's request. Need produce final only complete function in Python code block. Need ensure no imports. Implement topological_order(nodes, edges). Nodes list unique strings; edges list pairs before, after. Return lexicographically smallest topological ordering, include isolated nodes, ignore duplicate edges. Raise ValueError for edge endpoint absent from nodes or a cycle. Do not mutate either input. Use no imports.
+
+Need think carefully about lexicographically smallest topological ordering. For DAG with partial order constraints before->after. To get lexicographically smallest ordering among all topological sorts, standard Kahn with min-heap of available nodes (smallest label) yields lexicographically smallest sequence if comparing sequences lexicographically by node labels? Usually yes, choosing smallest available at each step yields lexicographically smallest topological order. Need not use heapq due no imports. Can maintain sorted list or min each iteration. Since no imports, can use min(available) and remove. Complexity O(V^2) okay? Need robust. Could sort nodes initially? Need ignore duplicate edges. Need not mutate input: don't sort nodes in place, don't modify nodes or edges. Could build set of nodes. Validate endpoints: for each edge if before not in nodes or after not in nodes raise ValueError. Duplicate edges ignored: when building graph indegree count unique edges. Need avoid duplicate counting. Could use set of edges? Edges are pairs (before, after). But edge elements strings; pair hashable. But if edges contains unhashable? edges list of pairs, likely tuple. Could use set of normalized (before, after) but if self loops? Edge (a,a): endpoint present, cycle? Self-loop cycle. Need detect. Duplicate self loops ignored but cycle still detected if present. For duplicate edges, only count once.
+
+Implementation:
+
+def topological_order(nodes, edges):
+    # nodes list unique strings. Could make node_set = set(nodes).
+    # We must not mutate inputs. We can iterate.
+    # If duplicate edge: if pair already in seen continue. But self-loop should be counted? If count unique and Kahn will detect remaining nodes if self-loop indegree remains. But if self-loop ignored? No, only duplicate edges ignored; self-loop remains. Need handle.
+    # We need graph adjacency unique. Use set for outgoing per node to ignore duplicates naturally. But if using dict values sets, no mutation inputs.
+    node_set = set(nodes)
+    graph = {

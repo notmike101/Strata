@@ -1,0 +1,13 @@
+We need answer to user: implement topological_order in Python, only complete function in code block, no imports. Need analyze requirements.
+
+Function topological_order(nodes, edges). nodes list unique strings; edges list of (before, after) pairs. Return lexicographically smallest topological ordering, include isolated nodes, ignore duplicate edges. Raise ValueError for edge endpoint absent from nodes or a cycle. Do not mutate either input. Use no imports. Return only complete function in Python code block.
+
+Need produce final code block only likely.
+
+Algorithm: Kahn's algorithm with sorted availability? Lexicographically smallest topological order: At each step choose smallest available node among nodes with indegree 0. Need ensure do not mutate inputs. Could make copies of sets/dicts. Need validate edges: before/after must be in nodes set. Duplicate edges ignored: build adjacency dict and indegree only unique directed edges. Since nodes unique strings but may not have set? Use set(nodes). Do not mutate nodes/edges. Could iterate edges.
+
+Need raise ValueError if cycle or bad endpoint.
+
+Lexicographic smallest: use list sorted of available with bisect to avoid imports? Can use list.insert or min(available) O(n^2), okay unspecified constraints. But maybe implement efficient heap? Without imports no heapq. Could implement min each step. Need lexicographic string order. Nodes can be strings, unique. Use sorted nodes set to initialize available? Actually Kahn: indegree dict, adjacency set/list. If we ignore duplicates. For all nodes indegree 0. Could maintain a sorted list of zero indegree nodes. But when adding new zero indegree, need insert lexicographically; use min on available simpler. Complexity O(n*(n+m)) maybe okay? But if want more efficient without imports, implement heap? Can implement min-heap manually. But simplest: available list initially sorted; repeatedly idx = min(range(len(available)), key=available.__getitem__) but strings compare. Then pop. Since need lexicographically smallest topological order, choosing smallest current available yields lexicographically smallest among all topological sorts. Need prove? Standard with priority queue.
+
+Edge endpoints: if pair isn't 2? User says edges is list of pairs. Could unpack with except? Not required. But robust: for before, after in edges. If not iterable maybe TypeError not ValueError. We can do if not isinstance(edge, tuple) or len(edge)!=2? Maybe not needed. But ensure edge endpoints absent from nodes

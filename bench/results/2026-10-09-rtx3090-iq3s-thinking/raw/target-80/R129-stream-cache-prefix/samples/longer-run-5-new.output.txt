@@ -1,0 +1,38 @@
+We need respond to user: "Implement topological_order(nodes, edges) in Python... Return only the complete function in a Python code block." Need produce final only code block. Need ensure no imports. Need handle nodes list unique strings, edges list of (before, after). Return lexicographically smallest topological ordering. Include isolated nodes. Ignore duplicate edges. Raise ValueError for edge endpoint absent from nodes or cycle. Do not mutate inputs.
+
+Need craft robust deterministic Kahn with min-heap? Without imports can't use heapq? Could implement min selection manually or sort candidates each step. Since no imports. Need not mutate input. Need probably validate edges endpoints. Duplicate edges: ignore duplicate pairs. Cycle detection. Lexicographically smallest among nodes strings. Kahn: compute indegree only for unique edges. Repeated edges count once. Need not mutate nodes or edges. We can build sets/ dict.
+
+Potential pitfalls: self-loop cycle: edge (a,a) endpoint present, duplicate ignored, but creates self-loop => cycle raise. Need detect. Kahn with indegree. If cycle raise.
+
+Implement:
+
+def topological_order(nodes, edges):
+    node_set = set(nodes)  # copies
+    indegree = {node: 0 for node in nodes}
+    adj = {node: [] for node in nodes}
+    seen_edges = set()
+    for before, after in edges:
+        if before not in node_set or after not in node_set:
+            raise ValueError(...)
+        pair = (before, after)
+        if pair in seen_edges:
+            continue
+        seen_edges.add(pair)
+        adj[before].append(after)
+        indegree[after] += 1
+    result = []
+    available = [node for node, deg in indegree.items() if deg == 0]
+    # Need lexicographically smallest: repeatedly pick min available. Could sort each iteration: available.sort() then pop(0). But if we add new nodes, sort. Or maintain min.
+    while available:
+        available.sort()
+        current = available.pop(0)
+        result.append(current)
+        for neighbor in adj[current]:
+            indegree[neighbor] -= 1
+            if indegree[neighbor] == 0:
+                available.append(neighbor)
+    if len(result) != len(nodes):
+        raise ValueError("cycle")
+    return result
+
+Do we need worry nodes empty? available empty

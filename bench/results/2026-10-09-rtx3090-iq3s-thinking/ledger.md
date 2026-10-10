@@ -4275,3 +4275,133 @@ This closes only the selected-coding streaming cache-miss requirement. Original 
 Each of the six arms passed the independent16GiB physical/commit floors, full launcher/server/text/vision cleanup and production configuration restoration. No new engine or launcher edit in this turn. The existing candidate is engine/strata-cuda133-prefix-preserve.exe SHA256cc85c6c787beed24c113a3a5c7fe7bb376bd07f04bc48f3e58264dec701b3c91. No promotion and no benchmark model retained at this checkpoint.
 
 Next required work: selected-coding stream exact-repeat cache-hit and nonstream miss/hit cells, each with fresh-process confirmations in opposite workload order and matched controls. Keep misses from hit-interleaved arms separate from this closed pure-miss comparison because the expert-cache history differs. Record actual positive prompt reuse for hits. Then complete tools, vision, remote reasoning levels, natural-stop/exact-output, cancellation, mixed history, idle/cleanup and near-limit recall/memory gates on this exact candidate. Preserve the earlier258901input2.6decode observation; do not imply90tok/s at full occupied context. Full goal remains active and unqualified.
+
+
+## E225 / C056 streaming exact-repeat cache matrix declaration
+
+Previous turn was progress: the selected-coding pure streaming-miss comparison closed at15measured runs per configuration/cell, with92.3/90.5candidate decode and improved paired prompt/E2E medians; report pushed at a443246d. Entry checks confirm that commit, clean tracked checkout, candidate enginecc85c6c7, production configuration3457fdfe, no resident inference/profiler process and idleGPU457MiB/0percent. Upstream main remainsfb58e0; no new source update to apply. Goal remains active.
+
+Next bounded matrix: R128control/R129candidate short-first, then R130candidate/R131control longer-first. Configurations copied exactly from R118/R119 and the same cc85c6c7 binary/libraries; only prefix staging0/1 differs. Use existing --goal-coding --cache-hits in stream mode. For each frozen coding workload, run one excluded new/hit warmup pair and five measured new/hit pairs with seeds101-105. The hit repeats its immediately preceding payload byte-for-byte. Require every new request to have cache_n0, every hit to have positive actual cache_n, and every response512completion tokens. Record actual fresh/reused token counts, decode, prompt processing, stream-total, E2E, TTFT, latency, acceptance and memory separately.
+
+The new requests in this interleaved sequence have different expert-cache history from the closed pure-miss matrix. Keep them as their own cells and never add them to R122-R127 medians. The exact-repeat hit cells are the missing qualification. Compare all ten measured runs per cell/configuration across the opposite-order confirmations using ordinary medians; no discarded slow seeds. Preserve sampler,262144 context, quant/KV, MTP, compatible CPUF16 vision, single concurrency and16GiB physical/commit floors. Each arm must clean up its full process tree and restore production before the next starts.
+
+No engine or launcher change. Q015 completed-answer5/5 remains separate from these capped speed responses. Nonstream and real-use/near-limit requirements remain pending; no full goal completion or promotion from this matrix alone.
+
+
+## E226 / R128-stream-cache-control exact-repeat matrix arm
+
+longer/stream/hit: raw decode[89.5, 92.6, 95.9, 88.9, 89.4], ordinary median89.5; prompt80.0, E2E88.409575, stream={'median': 88.42931742744867, 'min': 87.87655705378653, 'max': 94.73467454320857}, TTFT={'median': 0.08671489998232573, 'min': 0.0822442999924533, 'max': 0.10468260000925511}. Fresh/cached counts[(5, 3133), (5, 3129), (5, 3130), (5, 3130), (5, 3129)].
+
+longer/stream/new: raw decode[87.5, 88.7, 90.5, 88.7, 86.4], ordinary median88.7; prompt508.6, E2E42.824077, stream={'median': 42.8275884752707, 'min': 42.32493514044524, 'max': 43.295183934157464}, TTFT={'median': 6.189837299985811, 'min': 6.185852900031023, 'max': 6.204204500012565}. Fresh/cached counts[(3138, 0), (3134, 0), (3135, 0), (3135, 0), (3134, 0)].
+
+short/stream/hit: raw decode[93.3, 95.2, 92.3, 96.3, 89.6], ordinary median93.3; prompt75.0, E2E92.049187, stream={'median': 92.06364453230265, 'min': 88.35794660141389, 'max': 94.51951135587635}, TTFT={'median': 0.09867969999322668, 'min': 0.088171900017187, 'max': 0.12278969999169931}. Fresh/cached counts[(5, 162), (5, 161), (5, 160), (5, 160), (5, 163)].
+
+short/stream/new: raw decode[95.5, 94.1, 91.6, 96.0, 94.0], ordinary median94.1; prompt209.6, E2E81.770777, stream={'median': 81.78676869958795, 'min': 70.45518895870039, 'max': 83.57159398902456}, TTFT={'median': 0.8145867999992333, 'min': 0.8077404000214301, 'max': 1.9273226000368595}. Fresh/cached counts[(167, 0), (166, 0), (165, 0), (165, 0), (168, 0)].
+
+All24request payloads retain fixed profile/512cap, and each new/hit pair is byte-identical. One excluded warmup and five measured runs per cell. Cache/length gate=True; failures, if any, are retained. Interleaved misses stay separate from the closed pure-miss comparison. Candidate/control config, binary and loaded-library identity checks passed. No completed-answer quality or full goal claim from capped responses.
+
+Minimum physical62481850368 and commit41687445504bytes;16GiB floors pass. Exact cleanup and production3457fdfe restoration verified.
+
+Next: Run R129 candidate with the identical new/repeat sequence, then reverse-order R130/R131.
+
+
+## E227 / R129-stream-cache-prefix exact-repeat matrix arm
+
+longer/stream/hit: raw decode[87.2, 89.5, 94.6, 89.6, 88.2], ordinary median89.5; prompt81.0, E2E88.433721, stream={'median': 88.45266674925388, 'min': 86.11791490281269, 'max': 93.35629727998435}, TTFT={'median': 0.08535430004121736, 'min': 0.08170679997419938, 'max': 0.09349840000504628}. Fresh/cached counts[(5, 3133), (5, 3129), (5, 3130), (5, 3130), (5, 3129)].
+
+longer/stream/new: raw decode[89.4, 87.5, 89.2, 87.4, 90.9], ordinary median89.2; prompt513.3, E2E43.175595, stream={'median': 43.178962750522906, 'min': 42.76866672913166, 'max': 43.554514557248986}, TTFT={'median': 6.138781199988443, 'min': 6.133494400011841, 'max': 6.146514499967452}. Fresh/cached counts[(3138, 0), (3134, 0), (3135, 0), (3135, 0), (3134, 0)].
+
+short/stream/hit: raw decode[95.2, 93.7, 91.4, 96.7, 93.8], ordinary median93.8; prompt74.1, E2E92.180675, stream={'median': 92.19589149212929, 'min': 90.07214444461314, 'max': 95.4289584800809}, TTFT={'median': 0.10935410001548007, 'min': 0.09227119997376576, 'max': 0.11791570001514629}. Fresh/cached counts[(5, 162), (5, 161), (5, 160), (5, 160), (5, 163)].
+
+short/stream/new: raw decode[89.6, 92.6, 90.3, 91.0, 88.8], ordinary median90.3; prompt218.9, E2E79.613420, stream={'median': 79.62499365068565, 'min': 78.26309969141472, 'max': 81.55194108434496}, TTFT={'median': 0.7926385999890044, 'min': 0.7743619999964722, 'max': 0.8114922000095248}. Fresh/cached counts[(167, 0), (166, 0), (165, 0), (165, 0), (168, 0)].
+
+All24request payloads retain fixed profile/512cap, and each new/hit pair is byte-identical. One excluded warmup and five measured runs per cell. Cache/length gate=True; failures, if any, are retained. Interleaved misses stay separate from the closed pure-miss comparison. Candidate/control config, binary and loaded-library identity checks passed. No completed-answer quality or full goal claim from capped responses.
+
+Minimum physical62458945536 and commit41695301632bytes;16GiB floors pass. Exact cleanup and production3457fdfe restoration verified.
+
+Next: Run the reverse-order candidate R130 and control R131, then pool all four streaming cache arms.
+
+
+## E228 / R130-stream-cache-prefix-reverse exact-repeat matrix arm
+
+longer/stream/hit: raw decode[88.7, 91.5, 94.5, 92.9, 94.3], ordinary median92.9; prompt83.3, E2E91.766349, stream={'median': 91.7810417686884, 'min': 87.54088539776805, 'max': 93.20812254152963}, TTFT={'median': 0.08404970000265166, 'min': 0.07522339996648952, 'max': 0.09279779996722937}. Fresh/cached counts[(5, 3133), (5, 3129), (5, 3130), (5, 3130), (5, 3129)].
+
+longer/stream/new: raw decode[88.4, 86.3, 91.7, 90.6, 90.0], ordinary median90.0; prompt513.1, E2E43.348303, stream={'median': 43.351469968393516, 'min': 42.50613445717879, 'max': 43.66641506160547}, TTFT={'median': 6.15007820003666, 'min': 6.134955899964552, 'max': 6.163187700032722}. Fresh/cached counts[(3138, 0), (3134, 0), (3135, 0), (3135, 0), (3134, 0)].
+
+short/stream/hit: raw decode[92.1, 89.4, 95.9, 94.6, 91.6], ordinary median92.1; prompt74.7, E2E90.961567, stream={'median': 90.98805277076427, 'min': 88.17507491776358, 'max': 94.58452951020729}, TTFT={'median': 0.10271309997187927, 'min': 0.09139200003119186, 'max': 0.10436890000710264}. Fresh/cached counts[(5, 162), (5, 161), (5, 160), (5, 160), (5, 163)].
+
+short/stream/new: raw decode[93.6, 91.6, 88.9, 92.8, 91.3], ordinary median91.6; prompt221.0, E2E80.698661, stream={'median': 80.72420331527456, 'min': 78.56264003369631, 'max': 82.176665996409}, TTFT={'median': 0.7828591000288725, 'min': 0.7785131999989972, 'max': 0.7955770999542437}. Fresh/cached counts[(167, 0), (166, 0), (165, 0), (165, 0), (168, 0)].
+
+All24request payloads retain fixed profile/512cap, and each new/hit pair is byte-identical. One excluded warmup and five measured runs per cell. Cache/length gate=True; failures, if any, are retained. Interleaved misses stay separate from the closed pure-miss comparison. Candidate/control config, binary and loaded-library identity checks passed. No completed-answer quality or full goal claim from capped responses.
+
+Minimum physical62464278528 and commit41733947392bytes;16GiB floors pass. Exact cleanup and production3457fdfe restoration verified.
+
+Next: Run the final opposite-order control R131, then pool all four arms without omitting any run.
+
+
+## E229 / R131-stream-cache-control-reverse exact-repeat matrix arm
+
+longer/stream/hit: raw decode[88.5, 92.1, 93.8, 93.2, 90.8], ordinary median92.1; prompt82.1, E2E90.969741, stream={'median': 90.99852216300609, 'min': 87.13704103719526, 'max': 92.47960878823783}, TTFT={'median': 0.0912234999705106, 'min': 0.08401539997430518, 'max': 0.11118389997864142}. Fresh/cached counts[(5, 3133), (5, 3129), (5, 3130), (5, 3130), (5, 3129)].
+
+longer/stream/new: raw decode[88.5, 88.4, 85.9, 84.5, 87.2], ordinary median87.2; prompt509.6, E2E42.419538, stream={'median': 42.42291625603938, 'min': 41.9209090653885, 'max': 42.84573506058342}, TTFT={'median': 6.177239799988456, 'min': 6.1744049999979325, 'max': 6.217188599985093}. Fresh/cached counts[(3138, 0), (3134, 0), (3135, 0), (3135, 0), (3134, 0)].
+
+short/stream/hit: raw decode[91.6, 97.9, 92.9, 89.3, 93.3], ordinary median92.9; prompt77.0, E2E91.494459, stream={'median': 91.50847139677565, 'min': 87.83128282999446, 'max': 96.52527122128036}, TTFT={'median': 0.09809610003139824, 'min': 0.09029540000483394, 'max': 0.11830010003177449}. Fresh/cached counts[(5, 162), (5, 161), (5, 160), (5, 160), (5, 163)].
+
+short/stream/new: raw decode[94.8, 90.6, 88.2, 93.9, 89.4], ordinary median90.6; prompt202.3, E2E79.434069, stream={'median': 79.458719752056, 'min': 77.16507801513428, 'max': 82.18650651282947}, TTFT={'median': 0.841768599988427, 'min': 0.8095237999805249, 'max': 0.8523502000025474}. Fresh/cached counts[(167, 0), (166, 0), (165, 0), (165, 0), (168, 0)].
+
+All24request payloads retain fixed profile/512cap, and each new/hit pair is byte-identical. One excluded warmup and five measured runs per cell. Cache/length gate=True; failures, if any, are retained. Interleaved misses stay separate from the closed pure-miss comparison. Candidate/control config, binary and loaded-library identity checks passed. No completed-answer quality or full goal claim from capped responses.
+
+Minimum physical62460960768 and commit41674158080bytes;16GiB floors pass. Exact cleanup and production3457fdfe restoration verified.
+
+Next: Pool all four streaming cache arms, retain every run, and inspect each target/non-degradation gate before choosing the next experiment.
+
+
+## E230 / C056 four-arm streaming cache comparison
+
+R128 control and R129 candidate ran short-first; R130 candidate and R131 control ran longer-first. Each fresh process ran one excluded new/repeat warmup pair and five measured new/repeat pairs for each prompt length. All 96 requests are retained: 80 measured and 16 warmups. Each repeat request is byte-identical to its preceding new request. All new requests have zero reused tokens, all repeats have positive reuse, and all responses contain 512 completion tokens. Exact model, context, thinking sampler, prompt fixture, seeds, executable and loaded libraries remain fixed; candidate/control differ only in STRATA_PREFILL_STAGE_PREFIX. Ten measured values per configuration/cell are pooled using ordinary medians. First requests are separately retained in the JSON.
+
+The misses in this interleaved matrix are separate from the closed pure-miss R122-R127 comparison because the expert-cache history differs. Hit prompt throughput represents only five fresh tokens, not rereading the entire cached prompt. Server decode, prompt throughput, client end-to-end, stream-total, TTFT and total latency remain separate. The benchmark client runs on this PC through its LAN IP; a separate LAN device was not measured. Model loading and pre-request identity checks are outside request timing.
+
+| Cell | Metric | Control | Candidate | Change |
+|---|---|---:|---:|---:|
+| longer/stream/hit | server_decode_tps | 91.450000 | 90.550000 | -0.984% |
+| longer/stream/hit | prompt_tps | 80.300000 | 82.350000 | +2.553% |
+| longer/stream/hit | request_e2e_tps | 90.282037 | 89.448428 | -0.923% |
+| longer/stream/hit | stream_total_tps | 90.303821 | 89.460911 | -0.933% |
+| longer/stream/hit | ttft_seconds | 0.090624 | 0.084702 | -6.535% |
+| longer/stream/hit | request_seconds | 5.671446 | 5.724557 | +0.936% |
+| longer/stream/new | server_decode_tps | 87.950000 | 89.300000 | +1.535% |
+| longer/stream/new | prompt_tps | 508.750000 | 513.150000 | +0.865% |
+| longer/stream/new | request_e2e_tps | 42.664828 | 43.193964 | +1.240% |
+| longer/stream/new | stream_total_tps | 42.668136 | 43.197958 | +1.242% |
+| longer/stream/new | ttft_seconds | 6.189421 | 6.140647 | -0.788% |
+| longer/stream/new | request_seconds | 12.000598 | 11.853510 | -1.226% |
+| short/stream/hit | server_decode_tps | 93.100000 | 93.750000 | +0.698% |
+| short/stream/hit | prompt_tps | 76.950000 | 74.500000 | -3.184% |
+| short/stream/hit | request_e2e_tps | 91.771823 | 92.133731 | +0.394% |
+| short/stream/hit | stream_total_tps | 91.786058 | 92.155838 | +0.403% |
+| short/stream/hit | ttft_seconds | 0.098388 | 0.102914 | +4.601% |
+| short/stream/hit | request_seconds | 5.579105 | 5.557141 | -0.394% |
+| short/stream/new | server_decode_tps | 93.950000 | 91.150000 | -2.980% |
+| short/stream/new | prompt_tps | 208.400000 | 219.850000 | +5.494% |
+| short/stream/new | request_e2e_tps | 80.922679 | 80.163395 | -0.938% |
+| short/stream/new | stream_total_tps | 80.942396 | 80.179753 | -0.942% |
+| short/stream/new | ttft_seconds | 0.824272 | 0.785508 | -4.703% |
+| short/stream/new | request_seconds | 6.327504 | 6.386978 | +0.940% |
+
+Gate failures: longer/stream/hit: decode_no_degradation; longer/stream/hit: e2e_no_degradation; longer/stream/hit: latency_no_degradation; short/stream/hit: prompt_no_degradation; short/stream/hit: ttft_no_degradation; short/stream/new: decode_no_degradation; short/stream/new: e2e_no_degradation; short/stream/new: latency_no_degradation.
+
+Raw per-run values, ranges, actual fresh/reused counts and MTP acceptance are retained in c056-stream-cache-pooled.json and each arm's raw export. No failed value is dropped and these medians do not establish statistical certainty. Each arm passed its independent 16 GiB physical/commit headroom floors and exact process cleanup; production configuration was restored. The engine and production launcher were not changed during this comparison. Q015 remains separate completed-answer quality evidence; capped responses are not substitutes for that check.
+
+Full qualification remains pending. No promotion or goal-completion claim. Continue from the recorded gate outcomes; any repeat must be bounded and declared before its result, not repeated until favorable. Nonstream miss/hit and real-use/near-limit checks still remain. The user-facing timing explanation is preserved in metrics-explained.md at the report root, with a raw R129 example and the client timer boundaries; no timing implementation was changed.
+
+
+## E231 / C056 cache matrix retained as a failed promotion screen
+
+Close the four-arm R128-R131 comparison without an additional repeat pair. Every candidate cell exceeds its 90-short/85-longer decode threshold, but that is insufficient under the no-degradation contract. Short interleaved misses: control93.95 versus candidate91.15 server-decode tok/s (-2.980%); client E2E80.922679 versus80.163395 (-0.938%). Longer repeat hits: control91.45 versus candidate90.55 decode (-0.984%); E2E90.282037 versus89.448428 (-0.923%). Short repeat hits improve decode93.10 to93.75, but fresh-prompt rate76.95 to74.50 (-3.184%) and TTFT98.388 to102.914ms fail their gates. The five freshly processed tokens make that prompt rate sensitive to small durations; this is an explanation of scale, not permission to erase or waive the failure. Longer interleaved misses improve every reported median. All sixteen warmups and eighty measured requests remain in the public record.
+
+The short-miss aggregate MTP acceptance ratio changed from2025/2577 (78.580%) to1896/2506 (75.658%). This is a plausible contributor, not a causal finding. Longer-hit acceptance improved from1998/2607 (76.640%) to1939/2491 (77.840%) while decode slowed, so acceptance ratio alone cannot explain all results. Equal request bytes and seeds do not prove equal generated sequences or identical CPU/GPU routing; cached history and adaptive execution must be investigated. Engine logs preserve real served draft/suffix and accepted-usage counts. Do not label these served values raw-target kernel throughput.
+
+No candidate promotion and no production-launcher edit. Prior pure-miss and Q015 quality successes remain valid within their own workloads; they do not override this failed workload screen. The cache matrix is closed rather than rerun until favorable. Next, inspect the existing per-request output/draft/routing evidence and obtain a bounded diagnostic of short new/repeat prefill/refill and subsequent decode work before proposing a code change. Keep diagnostic instrumentation separate from qualifying rates. The goal remains active; nonstream and real-use/near-limit gates remain outstanding after a candidate passes this screen. Exact process cleanup,16GiB memory floors and restored production configuration were verified for every arm.
+
+The user's timing question is documented in metrics-explained.md: request timing excludes model load and preflight, includes prompt and served generation, and uses this PC's LAN address. The illustrative measured R129 seed103 longer miss has512completion tokens,5743.0ms server decode (89.2tok/s),11858.5512ms complete client request (43.175595tok/s), and6137.5134ms TTFT. This individual example is not used as a qualification statistic.

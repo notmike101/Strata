@@ -1,0 +1,16 @@
+We need answer user: "Request identifier ... Ignore this identifier. Implement topological_order(nodes, edges) in Python. nodes is a list of unique strings; edges is a list of (before, after) pairs. Return the lexicographically smallest topological ordering, include isolated nodes, and ignore duplicate edges. Raise ValueError for an edge endpoint absent from nodes or a cycle. Do not mutate either input. Use no imports. Return only the complete function in a Python code block."
+
+Need provide final only code block with complete function. Need think requirements. Implement Kahn's algorithm lexicographically smallest: need choose smallest available node at each step. But "lexicographically smallest topological ordering" among all valid topological orders: using min-heap. But no imports allowed, so cannot use heapq. Can implement manually or sort available list. Since no imports, implement own min-heap functions or use list sort each time. Nodes strings; number unspecified. Could use heap without import by manual implementation, or simply maintain sorted list? Lexicographically smallest: repeatedly select smallest node with indegree zero. With small data, sorted list okay. But efficient? Use no imports, manual heap possible. Need ensure not mutate inputs. edges may be list of tuples. Duplicate edges ignored. Need validate endpoints present. If edge endpoint absent raise ValueError. Cycle raise ValueError. Duplicate edges ignore (no double indegree). Isolated nodes included. Need no mutation of input lists. We can create new structures. nodes list unique strings. We can copy nodes? If we use nodes as initial list but not modify, okay. Use node_set = set(nodes) for validation. edges may be list; iterating okay. Need ignore duplicate edges: use set of edge pairs seen. But need edges are pairs maybe tuples? Could convert to tuple? If edge not length 2? Spec says pairs. We could assume. But robust: try unpack. If edge is tuple. Need not mutate.
+
+Algorithm:
+def topological_order(nodes, edges):
+    node_set = set(nodes)
+    # copy nodes to avoid mutation? We can not mutate input by using list(nodes) for remaining? If we use for node in nodes okay. Need output list.
+    successors = {node: set() for node in nodes}
+    indegree = {node: 0 for node in nodes}
+    seen_edges = set()
+    for edge in edges:
+        # unpack
+        try:
+           before, after = edge
+       

@@ -1,0 +1,14 @@
+We need answer user's request: Implement topological_order(nodes, edges) in Python. Need return only complete function in Python code block. Need ensure lexicographically smallest topological ordering, include isolated nodes, ignore duplicate edges. Raise ValueError for edge endpoint absent from nodes or cycle. Do not mutate either input. Use no imports. Need no identifier mention. Need likely pure Python.
+
+We need craft final code only in Python block. Need consider requirements deeply.
+
+Function topological_order(nodes, edges):
+- nodes list unique strings. Need not mutate either input. Could iterate, make internal structures. Don't sort original.
+- edges list of pairs (before, after). Ignore duplicate edges.
+- Raise ValueError if any endpoint absent from nodes. Need detect before building? Check all edges endpoints in node_set.
+- Need lexicographically smallest topological ordering. Given nodes strings unique. We can implement Kahn's algorithm selecting smallest available node. For lexicographically smallest overall topological order? For total order with strings, choosing smallest available at each step yields lexicographically smallest sequence among topological sorts? Typically yes for Kahn with min-heap. Need prove? Given prefix fixed, choose smallest possible next node to minimize lex order. If a node is available, choosing smaller first can't violate constraints later. Yes.
+
+Need no imports: so no heapq. Need maintain available nodes sorted. Options:
+- For each step, select min among indegree zero set using min() over set/list. Complexity O(n^2) acceptable likely. But need no imports, simple.
+- Need include isolated nodes (indegree zero initially).
+- Duplicate edges: if use set of edges to count indegree once. Could ignore duplicates by building adjacency dict of set per node? Need not mutate inputs. Build adjacency = {node: set() for node in nodes}; indegree = {node:0 ...}; For each edge: validate endpoints. If b not in node_set or a not in node_set: raise ValueError. If b not in adj[a]? add and indegree[b]++. This ignores duplicate edges and self-loop? Self-loop: edge (x,x) is cycle? Yes, will add indegree and adjacency? If b not in adj[a] then add, indegree. Then algorithm cycle detect. Could validate self-loop? not necessary; Kahn detects cycle if indegree remains. But if duplicate self loops ignored one. If edge (x,x) then after processing other nodes, x never available ->

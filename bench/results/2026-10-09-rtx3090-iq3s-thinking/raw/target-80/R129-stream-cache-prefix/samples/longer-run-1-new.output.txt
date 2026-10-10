@@ -1,0 +1,23 @@
+We need answer user's request. Need implement topological_order in Python. Need return only complete function in Python code block. Need satisfy constraints: no imports, no mutate input, lexicographically smallest topological ordering include isolated nodes, ignore duplicate edges, raise ValueError for edge endpoint absent from nodes or cycle. Need likely Kahn algorithm with min-heap. But no imports => can implement heap manually or use sorted lists. Need ensure lexicographically smallest: repeatedly choose smallest available node among indegree 0. Since nodes unique strings but maybe not sorted? Input nodes list unique strings but could not mutate. We can sort a copy. Need track adjacency. Ignore duplicate edges: for duplicate (a,b), only count indegree once and adjacency once. Need detect missing endpoints. Need avoid hidden state deterministic.
+
+Potential approach:
+def topological_order(nodes, edges):
+    # validate nodes? list of unique strings. Could maybe assume but we can robustly check? User asks nodes list unique strings; no need but perhaps validate duplicates? Not asked. If nodes not unique? Could ValueError? But don't need.
+    node_set = set(nodes)
+    indegree = {node:0 for node in nodes}
+    adj = {node: set() for node in nodes}
+    for edge in edges:
+       if not isinstance? Not necessary. Edge should pair length 2.
+       before, after = edge
+       if before not in node_set or after not in node_set: raise ValueError
+       if after not in adj[before]: # duplicate ignored
+          adj[before].add(after)
+          indegree[after]+=1
+    available = [n for n in nodes if indegree[n]==0] maybe sorted
+    # sort available lexically. Since strings compare. Need min heap manual:
+    heap = available sorted; we can implement helper pop_min, push? But since only need extract min from available set. Could use available list and choose min via min(). Number nodes likely reasonable. But to be safe O(n^2). Could manually heapify and heappop using list operations. Without imports.
+
+Implement manual heap:
+def _heapify(heap):
+    for i in range(len(heap)//2 -1, -1,-1): _sift_down(...)
+But inside topological_order can define nested helpers. Need not imports. Or use `available.sort()` and pop min then add newly zero nodes and sort? If we append new nodes then

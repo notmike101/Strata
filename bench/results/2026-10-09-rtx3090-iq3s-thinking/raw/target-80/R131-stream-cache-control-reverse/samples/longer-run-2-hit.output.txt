@@ -1,0 +1,26 @@
+We need answer user wants implement topological_order in Python. Need produce final only complete function in Python code block. Need think carefully. Requirements:
+- Implement topological_order(nodes, edges)
+- nodes list unique strings; edges list (before, after) pairs.
+- Return lexicographically smallest topological ordering, include isolated nodes, ignore duplicate edges.
+- Raise ValueError for edge endpoint absent from nodes or cycle.
+- Do not mutate either input.
+- Use no imports.
+- Return only complete function in code block.
+
+Need design deterministic. Lexicographically smallest topological ordering of graph with node strings. Need handle duplicates. Not mutate inputs. No imports, so can't use heapq? Could implement with min selection manually. Need ensure lexicographically smallest topological order. Standard Kahn: available nodes indegree 0, always choose smallest string among available. Need efficiently find min. Can use list and min. No imports. Need avoid mutating inputs: use new structures. Validate endpoints absent: raise ValueError. Need cycle detection: if output length != number of nodes raise ValueError.
+
+Potential pitfalls: nodes list may be empty? Unique strings. Return [] for empty if edges empty; edges with endpoints absent raise ValueError. Duplicates ignore. Edges may self-loop? endpoint exists but cycle; self-loop indegree positive, no topological order -> raise ValueError. If duplicate edges, indegree should count once. Need ignore duplicates, so use set of normalized edges? If duplicate (a,b) ignore duplicate. But if edges contain both (a,b) and (b,a), both distinct, cycle. Need not mutate input. Use local sets.
+
+Lexicographically smallest topological ordering. Need compare strings default Python. Are nodes unique strings. If nodes maybe not comparable? strings yes.
+
+Implementation options:
+def topological_order(nodes, edges):
+    node_set = set(nodes) # does not mutate.
+    # If nodes maybe unhashable? strings.
+    indegree = {node: 0 for node in nodes}
+    adjacency = {node: set() for node in nodes}
+    seen_edges = set()
+    for before, after in edges:
+        if before not in node_set or after not in node_set:
+             raise ValueError...
+        if before == after: maybe self-loop. Could add? It creates cycle. But if we add indegree for same and adjacency self, cycle. Need avoid duplicate self loop? It's okay

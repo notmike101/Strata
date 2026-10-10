@@ -1,0 +1,21 @@
+We need answer user's request: "Implement topological_order(nodes, edges) in Python. nodes is a list of unique strings; edges is a list of (before, after) pairs. Return the lexicographically smallest topological ordering, include isolated nodes, and ignore duplicate edges. Raise ValueError for an edge endpoint absent from nodes or a cycle. Do not mutate either input. Use no imports. Return only the complete function in a Python code block."
+
+Need provide final code block only. Need think through implementation. Need no imports. Lexicographically smallest topological order for nodes strings. Kahn's algorithm with min-heap normally, but no imports. Need no imports means no heapq. Can implement using sorted list? Nodes strings unique. Need lexicographically smallest topological ordering. We can repeatedly select smallest available node among those indegree zero. To avoid imports, can maintain list/set of ready and sort each step or use min. Complexity okay unspecified. Need ignore duplicate edges. Need not mutate inputs. Edge endpoint absent raises ValueError. Cycle raises ValueError.
+
+Details: edges list of (before, after) pairs. Could be tuples/lists? Unpack. Validate endpoints in nodes set. Duplicate edges: need count indegree only once per pair, adjacency set. Input nodes list unique but not necessarily sorted. Include isolated nodes. Return list.
+
+Potential issues with lexicographically smallest: For DAG, Kahn selecting smallest zero-indegree at each step yields lexicographically smallest topological order if node labels comparable strings. Yes. Need ensure no mutation: create nodes_set = set(nodes). Need preserve original order? No, output order determined. For nodes_set iteration? Use ready = sorted(nodes_set) initially (indegree zero). But if nodes list includes nodes and edges, indegree computed. Need ensure we don't mutate edges or nodes. We'll not modify.
+
+Implementation idea:
+
+def topological_order(nodes, edges):
+    node_set = set(nodes)
+    indegree = {node: 0 for node in node_set}
+    adjacency = {node: set() for node in node_set}
+    seen_edges = set()
+    for edge in edges:
+        try:
+            before, after = edge
+        except (TypeError, ValueError):
+            raise ValueError("edge must be a pair")? User didn't specify malformed edges. Should we raise ValueError? Could be okay. But if unpack fails maybe TypeError. But tests likely normal pairs. Could avoid try.
+        if before

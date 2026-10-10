@@ -1,0 +1,19 @@
+We need respond to user: "Implement topological_order(nodes, edges) in Python... Return only the complete function in a Python code block." Need produce final only code block. Need ensure no imports. Need handle nodes list unique strings, edges list of (before, after). Return lexicographically smallest topological ordering. Include isolated nodes. Ignore duplicate edges. Raise ValueError for edge endpoint absent from nodes or cycle. Do not mutate inputs.
+
+Need design robust. Lexicographically smallest topological order: For DAG, choose smallest available node at each step (Kahn with heap). Since Python heapq import not allowed. Could implement min selection without heap: repeatedly scan nodes with indegree 0 and pick min. Complexity O(V^2 + E) acceptable likely. Need not mutate inputs. Need ignore duplicate edges. Validate endpoints before from nodes. Edges list may contain tuples length 2. If invalid? Not specified. Could handle by raising ValueError maybe. But no hidden state. Duplicate edges: use set of normalized edges. But if nodes strings unique, we can check endpoints membership.
+
+Cycle: if len(result) != len(nodes), raise ValueError. Need if nodes empty return []? Yes.
+
+Do not mutate inputs: use local copies/structures. If input nodes list, can sort for stable? Need ensure no mutation. For scanning min available, sort candidates maybe. Since nodes strings.
+
+Potential approach:
+- Convert nodes to set nodes_set = set(nodes). But if nodes has duplicates? Says unique. Could still handle duplicates by nodes = list(nodes)? If duplicates in nodes? Input list of unique. Don't mutate.
+- Validate each edge: if isinstance edge sequence? If len != 2? Could raise ValueError. If before/after not in nodes_set: raise ValueError.
+- If before == after? This creates self-loop cycle. Should be detected. But ignore duplicate edges? A self-loop is an edge endpoint present. Topological order impossible. Our cycle detection will catch: indegree increments, not processed. Good.
+- Duplicate edges: maintain set seen_edges. For each (u,v) if u,v not seen: add to adjacency, indeg[v] += 1. Need adjacency maybe list or dict. Since nodes are strings, use dict mapping to list. Avoid mutating input edges? Not mutating.
+
+- Kahn:
+result=[]
+indegree = {node:0 for node in nodes}
+adj = {node: [] for node in nodes}
+seen = set

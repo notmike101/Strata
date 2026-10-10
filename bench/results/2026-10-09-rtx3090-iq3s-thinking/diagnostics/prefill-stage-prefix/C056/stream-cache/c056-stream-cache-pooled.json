@@ -1,0 +1,1053 @@
+{
+  "arms": [
+    "R128-stream-cache-control",
+    "R129-stream-cache-prefix",
+    "R130-stream-cache-prefix-reverse",
+    "R131-stream-cache-control-reverse"
+  ],
+  "engine_sha256": "cc85c6c787beed24c113a3a5c7fe7bb376bd07f04bc48f3e58264dec701b3c91",
+  "fixture_sha256": "16fafa0ea4cd5f5a7e535c7df090c9344d11e0909a35bfde0b476ecdc4b743e5",
+  "request_bytes_identical": true,
+  "full_goal_pass": false,
+  "promoted": false,
+  "first_requests": {
+    "R128-stream-cache-control": {
+      "label": "short-warmup-new",
+      "workload": "short/stream/new",
+      "warmup": true,
+      "seed": 100,
+      "request_started_utc": "2026-10-10T11:15:57.440252+00:00",
+      "prompt_tokens": 166,
+      "fresh_prompt_tokens": 166,
+      "cached_tokens": 0,
+      "completion_tokens": 512,
+      "server_decode_tps": 82.4,
+      "prompt_tps": 65.9,
+      "request_seconds": 8.75029729999369,
+      "request_e2e_tps": 58.512297633632315,
+      "stream_total_tps": 58.52167482835891,
+      "ttft_seconds": 2.5660863000084646,
+      "finish_reason": "length",
+      "timings": {
+        "cache_n": 0,
+        "prompt_n": 166,
+        "prompt_ms": 2518.1,
+        "prompt_per_token_ms": 15.169,
+        "prompt_per_second": 65.9,
+        "predicted_n": 512,
+        "predicted_ms": 6210.6,
+        "predicted_per_token_ms": 12.13,
+        "predicted_per_second": 82.4,
+        "draft_n": 254,
+        "draft_n_accepted": 190
+      },
+      "cache_expected": "miss",
+      "cache_valid": true,
+      "output_512": true
+    },
+    "R129-stream-cache-prefix": {
+      "label": "short-warmup-new",
+      "workload": "short/stream/new",
+      "warmup": true,
+      "seed": 100,
+      "request_started_utc": "2026-10-10T11:21:19.514232+00:00",
+      "prompt_tokens": 166,
+      "fresh_prompt_tokens": 166,
+      "cached_tokens": 0,
+      "completion_tokens": 512,
+      "server_decode_tps": 79.4,
+      "prompt_tps": 128.2,
+      "request_seconds": 7.748079099983443,
+      "request_e2e_tps": 66.080894811863,
+      "stream_total_tps": 66.09170156468471,
+      "ttft_seconds": 1.327264399966225,
+      "finish_reason": "length",
+      "timings": {
+        "cache_n": 0,
+        "prompt_n": 166,
+        "prompt_ms": 1294.7,
+        "prompt_per_token_ms": 7.799,
+        "prompt_per_second": 128.2,
+        "predicted_n": 512,
+        "predicted_ms": 6447.3,
+        "predicted_per_token_ms": 12.592,
+        "predicted_per_second": 79.4,
+        "draft_n": 247,
+        "draft_n_accepted": 180
+      },
+      "cache_expected": "miss",
+      "cache_valid": true,
+      "output_512": true
+    },
+    "R130-stream-cache-prefix-reverse": {
+      "label": "longer-warmup-new",
+      "workload": "longer/stream/new",
+      "warmup": true,
+      "seed": 100,
+      "request_started_utc": "2026-10-10T11:26:04.294974+00:00",
+      "prompt_tokens": 3136,
+      "fresh_prompt_tokens": 3136,
+      "cached_tokens": 0,
+      "completion_tokens": 512,
+      "server_decode_tps": 66.8,
+      "prompt_tps": 484.9,
+      "request_seconds": 14.147907600039616,
+      "request_e2e_tps": 36.18909696572844,
+      "stream_total_tps": 36.191515377059886,
+      "ttft_seconds": 6.50772540003527,
+      "finish_reason": "length",
+      "timings": {
+        "cache_n": 0,
+        "prompt_n": 3136,
+        "prompt_ms": 6467.5,
+        "prompt_per_token_ms": 2.062,
+        "prompt_per_second": 484.9,
+        "predicted_n": 512,
+        "predicted_ms": 7667.6,
+        "predicted_per_token_ms": 14.976,
+        "predicted_per_second": 66.8,
+        "draft_n": 230,
+        "draft_n_accepted": 164
+      },
+      "cache_expected": "miss",
+      "cache_valid": true,
+      "output_512": true
+    },
+    "R131-stream-cache-control-reverse": {
+      "label": "longer-warmup-new",
+      "workload": "longer/stream/new",
+      "warmup": true,
+      "seed": 100,
+      "request_started_utc": "2026-10-10T11:30:51.287629+00:00",
+      "prompt_tokens": 3136,
+      "fresh_prompt_tokens": 3136,
+      "cached_tokens": 0,
+      "completion_tokens": 512,
+      "server_decode_tps": 66.7,
+      "prompt_tps": 486.6,
+      "request_seconds": 14.144646500004455,
+      "request_e2e_tps": 36.19744049452482,
+      "stream_total_tps": 36.20006810409187,
+      "ttft_seconds": 6.491133100003935,
+      "finish_reason": "length",
+      "timings": {
+        "cache_n": 0,
+        "prompt_n": 3136,
+        "prompt_ms": 6444.2,
+        "prompt_per_token_ms": 2.055,
+        "prompt_per_second": 486.6,
+        "predicted_n": 512,
+        "predicted_ms": 7680.8,
+        "predicted_per_token_ms": 15.002,
+        "predicted_per_second": 66.7,
+        "draft_n": 230,
+        "draft_n_accepted": 164
+      },
+      "cache_expected": "miss",
+      "cache_valid": true,
+      "output_512": true
+    }
+  },
+  "cells": {
+    "longer/stream/hit": {
+      "exact_repeat_hit": true,
+      "raw_decode": [
+        [
+          89.5,
+          92.6,
+          95.9,
+          88.9,
+          89.4,
+          88.5,
+          92.1,
+          93.8,
+          93.2,
+          90.8
+        ],
+        [
+          87.2,
+          89.5,
+          94.6,
+          89.6,
+          88.2,
+          88.7,
+          91.5,
+          94.5,
+          92.9,
+          94.3
+        ]
+      ],
+      "fresh_cached_counts": [
+        [
+          [
+            5,
+            3133
+          ],
+          [
+            5,
+            3129
+          ],
+          [
+            5,
+            3130
+          ],
+          [
+            5,
+            3130
+          ],
+          [
+            5,
+            3129
+          ],
+          [
+            5,
+            3133
+          ],
+          [
+            5,
+            3129
+          ],
+          [
+            5,
+            3130
+          ],
+          [
+            5,
+            3130
+          ],
+          [
+            5,
+            3129
+          ]
+        ],
+        [
+          [
+            5,
+            3133
+          ],
+          [
+            5,
+            3129
+          ],
+          [
+            5,
+            3130
+          ],
+          [
+            5,
+            3130
+          ],
+          [
+            5,
+            3129
+          ],
+          [
+            5,
+            3133
+          ],
+          [
+            5,
+            3129
+          ],
+          [
+            5,
+            3130
+          ],
+          [
+            5,
+            3130
+          ],
+          [
+            5,
+            3129
+          ]
+        ]
+      ],
+      "metrics": {
+        "server_decode_tps": {
+          "control": 91.44999999999999,
+          "candidate": 90.55,
+          "percent_change": -0.9841443411700346,
+          "ranges": [
+            [
+              88.5,
+              95.9
+            ],
+            [
+              87.2,
+              94.6
+            ]
+          ]
+        },
+        "prompt_tps": {
+          "control": 80.3,
+          "candidate": 82.35,
+          "percent_change": 2.5529265255292533,
+          "ranges": [
+            [
+              78.0,
+              83.9
+            ],
+            [
+              76.2,
+              90.7
+            ]
+          ]
+        },
+        "request_e2e_tps": {
+          "control": 90.28203671739254,
+          "candidate": 89.44842847833883,
+          "percent_change": -0.9233378746905552,
+          "ranges": [
+            [
+              87.1175353033465,
+              94.71785004732547
+            ],
+            [
+              86.10061031250842,
+              93.33523868418412
+            ]
+          ]
+        },
+        "stream_total_tps": {
+          "control": 90.30382140170238,
+          "candidate": 89.46091141939831,
+          "percent_change": -0.9334156287301609,
+          "ranges": [
+            [
+              87.13704103719526,
+              94.73467454320857
+            ],
+            [
+              86.11791490281269,
+              93.35629727998435
+            ]
+          ]
+        },
+        "ttft_seconds": {
+          "control": 0.09062440000707284,
+          "candidate": 0.08470200002193451,
+          "percent_change": -6.535105318960577,
+          "ranges": [
+            [
+              0.0822442999924533,
+              0.11118389997864142
+            ],
+            [
+              0.07522339996648952,
+              0.09349840000504628
+            ]
+          ]
+        },
+        "request_seconds": {
+          "control": 5.6714461499941535,
+          "candidate": 5.724556800007122,
+          "percent_change": 0.9364569213625051,
+          "ranges": [
+            [
+              5.405528099974617,
+              5.877117600000929
+            ],
+            [
+              5.485602300032042,
+              5.946531599969603
+            ]
+          ]
+        }
+      },
+      "mtp": [
+        {
+          "accepted": 1998,
+          "offered": 2607,
+          "ratio": 0.766398158803222
+        },
+        {
+          "accepted": 1939,
+          "offered": 2491,
+          "ratio": 0.7784022480931353
+        }
+      ],
+      "decode_target_pass": true,
+      "decode_no_degradation": false,
+      "prompt_no_degradation": true,
+      "e2e_no_degradation": false,
+      "latency_no_degradation": false,
+      "ttft_no_degradation": true
+    },
+    "longer/stream/new": {
+      "exact_repeat_hit": false,
+      "raw_decode": [
+        [
+          87.5,
+          88.7,
+          90.5,
+          88.7,
+          86.4,
+          88.5,
+          88.4,
+          85.9,
+          84.5,
+          87.2
+        ],
+        [
+          89.4,
+          87.5,
+          89.2,
+          87.4,
+          90.9,
+          88.4,
+          86.3,
+          91.7,
+          90.6,
+          90.0
+        ]
+      ],
+      "fresh_cached_counts": [
+        [
+          [
+            3138,
+            0
+          ],
+          [
+            3134,
+            0
+          ],
+          [
+            3135,
+            0
+          ],
+          [
+            3135,
+            0
+          ],
+          [
+            3134,
+            0
+          ],
+          [
+            3138,
+            0
+          ],
+          [
+            3134,
+            0
+          ],
+          [
+            3135,
+            0
+          ],
+          [
+            3135,
+            0
+          ],
+          [
+            3134,
+            0
+          ]
+        ],
+        [
+          [
+            3138,
+            0
+          ],
+          [
+            3134,
+            0
+          ],
+          [
+            3135,
+            0
+          ],
+          [
+            3135,
+            0
+          ],
+          [
+            3134,
+            0
+          ],
+          [
+            3138,
+            0
+          ],
+          [
+            3134,
+            0
+          ],
+          [
+            3135,
+            0
+          ],
+          [
+            3135,
+            0
+          ],
+          [
+            3134,
+            0
+          ]
+        ]
+      ],
+      "metrics": {
+        "server_decode_tps": {
+          "control": 87.95,
+          "candidate": 89.30000000000001,
+          "percent_change": 1.5349630471859,
+          "ranges": [
+            [
+              84.5,
+              90.5
+            ],
+            [
+              86.3,
+              91.7
+            ]
+          ]
+        },
+        "prompt_tps": {
+          "control": 508.75,
+          "candidate": 513.1500000000001,
+          "percent_change": 0.8648648648648782,
+          "ranges": [
+            [
+              507.6,
+              510.1
+            ],
+            [
+              512.3,
+              514.0
+            ]
+          ]
+        },
+        "request_e2e_tps": {
+          "control": 42.664828190004,
+          "candidate": 43.19396416107686,
+          "percent_change": 1.2402158722318202,
+          "ranges": [
+            [
+              41.917822924379614,
+              43.291778299423626
+            ],
+            [
+              42.50285287963017,
+              43.66308594105467
+            ]
+          ]
+        },
+        "stream_total_tps": {
+          "control": 42.668135679478354,
+          "candidate": 43.197957779604316,
+          "percent_change": 1.2417277944974492,
+          "ranges": [
+            [
+              41.9209090653885,
+              43.295183934157464
+            ],
+            [
+              42.50613445717879,
+              43.66641506160547
+            ]
+          ]
+        },
+        "ttft_seconds": {
+          "control": 6.189420550013892,
+          "candidate": 6.140647049993277,
+          "percent_change": -0.7880139930143581,
+          "ranges": [
+            [
+              6.1744049999979325,
+              6.217188599985093
+            ],
+            [
+              6.133494400011841,
+              6.163187700032722
+            ]
+          ]
+        },
+        "request_seconds": {
+          "control": 12.000597500038566,
+          "candidate": 11.853510149987414,
+          "percent_change": -1.2256668890918032,
+          "ranges": [
+            [
+              11.826725999999326,
+              12.214374800038058
+            ],
+            [
+              11.72615240002051,
+              12.046250199957285
+            ]
+          ]
+        }
+      },
+      "mtp": [
+        {
+          "accepted": 1849,
+          "offered": 2416,
+          "ratio": 0.7653145695364238
+        },
+        {
+          "accepted": 2061,
+          "offered": 2613,
+          "ratio": 0.7887485648679678
+        }
+      ],
+      "decode_target_pass": true,
+      "decode_no_degradation": true,
+      "prompt_no_degradation": true,
+      "e2e_no_degradation": true,
+      "latency_no_degradation": true,
+      "ttft_no_degradation": true
+    },
+    "short/stream/hit": {
+      "exact_repeat_hit": true,
+      "raw_decode": [
+        [
+          93.3,
+          95.2,
+          92.3,
+          96.3,
+          89.6,
+          91.6,
+          97.9,
+          92.9,
+          89.3,
+          93.3
+        ],
+        [
+          95.2,
+          93.7,
+          91.4,
+          96.7,
+          93.8,
+          92.1,
+          89.4,
+          95.9,
+          94.6,
+          91.6
+        ]
+      ],
+      "fresh_cached_counts": [
+        [
+          [
+            5,
+            162
+          ],
+          [
+            5,
+            161
+          ],
+          [
+            5,
+            160
+          ],
+          [
+            5,
+            160
+          ],
+          [
+            5,
+            163
+          ],
+          [
+            5,
+            162
+          ],
+          [
+            5,
+            161
+          ],
+          [
+            5,
+            160
+          ],
+          [
+            5,
+            160
+          ],
+          [
+            5,
+            163
+          ]
+        ],
+        [
+          [
+            5,
+            162
+          ],
+          [
+            5,
+            161
+          ],
+          [
+            5,
+            160
+          ],
+          [
+            5,
+            160
+          ],
+          [
+            5,
+            163
+          ],
+          [
+            5,
+            162
+          ],
+          [
+            5,
+            161
+          ],
+          [
+            5,
+            160
+          ],
+          [
+            5,
+            160
+          ],
+          [
+            5,
+            163
+          ]
+        ]
+      ],
+      "metrics": {
+        "server_decode_tps": {
+          "control": 93.1,
+          "candidate": 93.75,
+          "percent_change": 0.6981740064446962,
+          "ranges": [
+            [
+              89.3,
+              97.9
+            ],
+            [
+              89.4,
+              96.7
+            ]
+          ]
+        },
+        "prompt_tps": {
+          "control": 76.95,
+          "candidate": 74.5,
+          "percent_change": -3.1838856400259963,
+          "ranges": [
+            [
+              71.7,
+              83.6
+            ],
+            [
+              72.3,
+              77.9
+            ]
+          ]
+        },
+        "request_e2e_tps": {
+          "control": 91.77182282293825,
+          "candidate": 92.13373080258074,
+          "percent_change": 0.39435631603477184,
+          "ranges": [
+            [
+              87.81129791059705,
+              96.50178030644973
+            ],
+            [
+              88.15609441538932,
+              95.40594652642012
+            ]
+          ]
+        },
+        "stream_total_tps": {
+          "control": 91.78605796453914,
+          "candidate": 92.15583814223785,
+          "percent_change": 0.4028718368551898,
+          "ranges": [
+            [
+              87.83128282999446,
+              96.52527122128036
+            ],
+            [
+              88.17507491776358,
+              95.4289584800809
+            ]
+          ]
+        },
+        "ttft_seconds": {
+          "control": 0.09838790001231246,
+          "candidate": 0.10291449996293522,
+          "percent_change": 4.60076894623862,
+          "ranges": [
+            [
+              0.088171900017187,
+              0.12278969999169931
+            ],
+            [
+              0.09139200003119186,
+              0.11791570001514629
+            ]
+          ]
+        },
+        "request_seconds": {
+          "control": 5.579105450015049,
+          "candidate": 5.5571409999683965,
+          "percent_change": -0.39369125110538805,
+          "ranges": [
+            [
+              5.305601600033697,
+              5.830684800050221
+            ],
+            [
+              5.366541799972765,
+              5.807879799976945
+            ]
+          ]
+        }
+      },
+      "mtp": [
+        {
+          "accepted": 2088,
+          "offered": 2661,
+          "ratio": 0.7846674182638106
+        },
+        {
+          "accepted": 2007,
+          "offered": 2583,
+          "ratio": 0.7770034843205574
+        }
+      ],
+      "decode_target_pass": true,
+      "decode_no_degradation": true,
+      "prompt_no_degradation": false,
+      "e2e_no_degradation": true,
+      "latency_no_degradation": true,
+      "ttft_no_degradation": false
+    },
+    "short/stream/new": {
+      "exact_repeat_hit": false,
+      "raw_decode": [
+        [
+          95.5,
+          94.1,
+          91.6,
+          96.0,
+          94.0,
+          94.8,
+          90.6,
+          88.2,
+          93.9,
+          89.4
+        ],
+        [
+          89.6,
+          92.6,
+          90.3,
+          91.0,
+          88.8,
+          93.6,
+          91.6,
+          88.9,
+          92.8,
+          91.3
+        ]
+      ],
+      "fresh_cached_counts": [
+        [
+          [
+            167,
+            0
+          ],
+          [
+            166,
+            0
+          ],
+          [
+            165,
+            0
+          ],
+          [
+            165,
+            0
+          ],
+          [
+            168,
+            0
+          ],
+          [
+            167,
+            0
+          ],
+          [
+            166,
+            0
+          ],
+          [
+            165,
+            0
+          ],
+          [
+            165,
+            0
+          ],
+          [
+            168,
+            0
+          ]
+        ],
+        [
+          [
+            167,
+            0
+          ],
+          [
+            166,
+            0
+          ],
+          [
+            165,
+            0
+          ],
+          [
+            165,
+            0
+          ],
+          [
+            168,
+            0
+          ],
+          [
+            167,
+            0
+          ],
+          [
+            166,
+            0
+          ],
+          [
+            165,
+            0
+          ],
+          [
+            165,
+            0
+          ],
+          [
+            168,
+            0
+          ]
+        ]
+      ],
+      "metrics": {
+        "server_decode_tps": {
+          "control": 93.95,
+          "candidate": 91.15,
+          "percent_change": -2.980308674827037,
+          "ranges": [
+            [
+              88.2,
+              96.0
+            ],
+            [
+              88.8,
+              93.6
+            ]
+          ]
+        },
+        "prompt_tps": {
+          "control": 208.39999999999998,
+          "candidate": 219.85000000000002,
+          "percent_change": 5.494241842610381,
+          "ranges": [
+            [
+              88.5,
+              213.1
+            ],
+            [
+              215.9,
+              226.2
+            ]
+          ]
+        },
+        "request_e2e_tps": {
+          "control": 80.9226793181337,
+          "candidate": 80.16339473401771,
+          "percent_change": -0.9382840391764513,
+          "ranges": [
+            [
+              70.44551061742246,
+              83.55276268864786
+            ],
+            [
+              78.25224467357755,
+              82.16002031112687
+            ]
+          ]
+        },
+        "stream_total_tps": {
+          "control": 80.94239616691593,
+          "candidate": 80.17975301085991,
+          "percent_change": -0.9422048174646647,
+          "ranges": [
+            [
+              70.45518895870039,
+              83.57159398902456
+            ],
+            [
+              78.26309969141472,
+              82.176665996409
+            ]
+          ]
+        },
+        "ttft_seconds": {
+          "control": 0.8242722499999218,
+          "candidate": 0.7855079500004649,
+          "percent_change": -4.702851515316753,
+          "ranges": [
+            [
+              0.8077404000214301,
+              1.9273226000368595
+            ],
+            [
+              0.7743619999964722,
+              0.8114922000095248
+            ]
+          ]
+        },
+        "request_seconds": {
+          "control": 6.327503799984697,
+          "candidate": 6.3869784499984235,
+          "percent_change": 0.9399385902205237,
+          "ranges": [
+            [
+              6.127864399983082,
+              7.268028800026514
+            ],
+            [
+              6.231741400028113,
+              6.542943300039042
+            ]
+          ]
+        }
+      },
+      "mtp": [
+        {
+          "accepted": 2025,
+          "offered": 2577,
+          "ratio": 0.7857974388824214
+        },
+        {
+          "accepted": 1896,
+          "offered": 2506,
+          "ratio": 0.75658419792498
+        }
+      ],
+      "decode_target_pass": true,
+      "decode_no_degradation": false,
+      "prompt_no_degradation": true,
+      "e2e_no_degradation": false,
+      "latency_no_degradation": false,
+      "ttft_no_degradation": true
+    }
+  }
+}

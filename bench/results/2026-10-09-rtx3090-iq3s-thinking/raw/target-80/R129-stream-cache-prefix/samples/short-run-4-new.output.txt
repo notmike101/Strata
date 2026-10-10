@@ -1,0 +1,20 @@
+We need answer user's request: "Implement topological_order(nodes, edges) in Python. nodes is a list of unique strings; edges is a list of (before, after) pairs. Return the lexicographically smallest topological ordering, include isolated nodes, and ignore duplicate edges. Raise ValueError for an edge endpoint absent from nodes or a cycle. Do not mutate either input. Use no imports. Return only the complete function in a Python code block."
+
+Need provide final code block only. Need think through implementation. Need no imports. Lexicographically smallest topological order for nodes strings. Kahn's algorithm with min-heap normally, but no imports. Need no imports means no heapq. Can implement using sorted list? Nodes strings unique. Need lexicographically smallest topological ordering. We can repeatedly select smallest available node among those indegree zero. To avoid imports, can maintain list/set of ready and sort each step or use min. Complexity okay unspecified. Need ignore duplicate edges. Need not mutate inputs. Need validate edge endpoints absent raise ValueError. Cycle raise ValueError. Need include isolated nodes.
+
+Potential implementation:
+def topological_order(nodes, edges):
+    # don't mutate inputs; but can iterate. Need nodes unique strings but not validate? okay.
+    node_set = set(nodes)
+    # But if nodes contains duplicates? says unique. But set for lookup. Does not mutate input.
+    indegree = {node: 0 for node in nodes}
+    adjacency = {node: set() for node in nodes}
+    seen_edges = set()
+    for edge in edges:
+       # ensure edge is pair? Could unpack. If invalid tuple maybe ValueError? not specified. We can assume.
+       before, after = edge
+       if before not in node_set or after not in node_set: raise ValueError
+       if before == after? Self-loop is cycle? Edge (a,a). Duplicate ignored. Need cycle. If self-loop, indegree not? Should raise cycle. Could treat as edge; indegree self? Kahn will cycle. But duplicate edges ignored. Self-loop causes indegree[a]+=1 and adjacency[a] contains a; cycle. If before==after, maybe should raise ValueError cycle? If add self, Kahn detects. But if duplicate self ignored? If multiple self edges, indegree increments for each unique. Good.
+       edge_key = (before, after)
+       if edge_key not in seen_edges:
+           seen_edges.add(edge_key

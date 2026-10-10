@@ -1,0 +1,20 @@
+We need respond to user: "Implement topological_order(nodes, edges) in Python... Return only the complete function in a Python code block." Need produce final only code block. Need ensure no imports. Need handle nodes list unique strings, edges list of (before, after). Return lexicographically smallest topological ordering. Include isolated nodes. Ignore duplicate edges. Raise ValueError for edge endpoint absent from nodes or cycle. Do not mutate inputs.
+
+Need craft robust deterministic Kahn with min-heap? Without imports can't use heapq? Could implement min selection by scanning available nodes each step O(n^2) fine. Or implement heap manually? Simpler scanning.
+
+Need no mutation: avoid modifying nodes or edges. Build sets/dicts. Duplicate edges ignored. Need careful if duplicate self-loop? edge endpoints present, duplicate ignored. Self-loop causes cycle. Duplicate edges count once. Need detect cycles.
+
+Lexicographically smallest: repeatedly choose smallest node among zero indegree. Nodes strings lex compare. Since nodes unique strings.
+
+Input validation: nodes list unique? assumed. But maybe if non-string? Not required. Need endpoints absent raise ValueError. Edge might not be tuple length? Could validate? Probably okay but robust. "edges is list of (before, after) pairs". Could handle if not pair? But no imports. Maybe try unpack, but if invalid TypeError not ValueError. Better if not tuple/list or len !=2 raise ValueError? Not requested but edge endpoint absent only. Could avoid overengineering.
+
+Need ignore duplicate edges: when building adjacency and indegree, if edge already added, skip increment. Use set of seen_edges maybe with pairs as tuple. But if duplicates and also invalid endpoint? Need check invalid first. Build node_set = set(nodes). For edge in edges: validate len? If before or after not in node_set raise. If (before,after) in seen skip. Else add.
+
+Cycle detection: after topological sort if len(result) != len(nodes) raise ValueError. But if duplicate self-loop, indegree incremented once, result length missing -> cycle. Good.
+
+Could precompute indegree. For each unique edge before->after: adjacency[before].add(after) maybe set to avoid duplicate? Already seen; adjacency list okay. But if use set adjacency, output deterministic because choose by sorting zero list. Could maintain adjacency as set. Not mutation inputs. Need avoid mutating adjacency? fine.
+
+Implementation:
+
+def topological_order(nodes, edges):
+    node_set = set(nodes)

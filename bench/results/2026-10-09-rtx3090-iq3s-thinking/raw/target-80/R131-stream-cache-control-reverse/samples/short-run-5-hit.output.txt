@@ -1,0 +1,33 @@
+We need answer user's request. Need produce final with only complete function in Python code block. Need implement topological_order(nodes, edges). Requirements:
+- nodes list unique strings
+- edges list of (before, after) pairs
+- return lexicographically smallest topological ordering
+- include isolated nodes
+- ignore duplicate edges
+- Raise ValueError for edge endpoint absent from nodes or a cycle
+- Do not mutate either input
+- Use no imports
+- Return only complete function in Python code block.
+
+Need think carefully. Need no imports. Need lexicographically smallest topological ordering among all topological orders. Strings unique. Need ignore duplicate edges. Edges can be duplicate, self-loop? Edge endpoint absent? Cycle includes self-loop. Must not mutate inputs. Could use built-in sorted only. Need no imports (no heapq). Could implement Kahn algorithm selecting smallest available node repeatedly using sorting or min scan. Need ensure not mutate inputs: copy nodes? Input list not mutate. We can create set/list copies. Edges iteration okay. Need not use imports.
+
+Potential issues lexicographically smallest with Kahn: at each step choose smallest node among zero indegree yields lexicographically smallest topological order if lexicographic on full sequence with strings. Yes standard. Need handle duplicate edges: if duplicate edges increment indegree multiple times or ignore duplicate. Use set of edges (or per adjacency set). Need avoid mutating input. Also validate endpoints. If edge endpoint absent raise ValueError. If duplicate edge, only count once and adjacency once.
+
+Need maybe edges can be tuple/list of length? assume pair. Need not mutate edges. Could use `for before, after in edges:` okay. But if invalid pair unpack error? Not requested. Need possibly edges contains non-tuples? Not needed.
+
+Implement:
+
+def topological_order(nodes, edges):
+    node_set = set(nodes)
+    # if nodes unique by spec, but maybe we should not mutate. set(nodes) fine.
+    # adjacency: dict of set, indegree int. Use all nodes.
+    indegree = {node: 0 for node in nodes}
+    adj = {node: set() for node in nodes}
+    seen_edges = set()
+    for before, after in edges:
+        if before not in node_set or after not in node_set:
+            raise ValueError(...)
+        edge = (before, after)
+        if edge in seen_edges:
+            continue
+        seen_edges.add

@@ -1,0 +1,16 @@
+We need answer user's request: "Implement topological_order(nodes, edges) in Python. nodes is a list of unique strings; edges is a list of (before, after) pairs. Return the lexicographically smallest topological ordering, include isolated nodes, and ignore duplicate edges. Raise ValueError for an edge endpoint absent from nodes or a cycle. Do not mutate either input. Use no imports. Return only the complete function in a Python code block."
+
+Need provide final code block only. Need think through implementation. Need no imports. Lexicographically smallest topological order for nodes strings. Kahn's algorithm with min-heap normally, but no imports. Need no imports means no heapq. Can implement using sorted list? Nodes strings unique. Need lexicographically smallest among valid topological orderings: at each step choose smallest available node (indegree 0). We can avoid heapq by maintaining sorted list of available nodes; each step select first (min) and remove. Need performance not specified. Could use simple list and min, or sort initially and each iteration find min among available. For small fine. Need ignore duplicate edges: ensure only one edge per (u,v). Also edges list may have duplicate pairs. Need not mutate inputs: don't modify nodes/edges. Build own sets/lists. Edge endpoints absent => ValueError. Cycle detection: if produced order length < number of nodes => ValueError. Isolated nodes included naturally indegree 0. Lexicographically smallest: if we choose min available each step. Need consider duplicate edges: ignore duplicates, but duplicate edges would affect indegree if not deduped. So store set of pairs. Also if self-loop? Edge (n,n) invalid cycle. Need detect cycle. If self-loop, indegree > 0 and won't include all -> ValueError. Good.
+
+Potential implementation:
+
+def topological_order(nodes, edges):
+    node_set = set(nodes)
+    # validate nodes? list unique given. But maybe duplicates in input? not specified. If duplicate nodes? Could ignore? But unique.
+    # Validate edges endpoints
+    seen_edges = set()
+    indegree = {n:0 for n in nodes}
+    successors = {n: [] for n in nodes}
+    for edge in edges:
+       if not isinstance(edge, tuple?) Could be list? pairs. Could use try unpack. If len !=2? ValueError? The spec says pairs. If invalid pair maybe raise ValueError? Could handle.
+       before,

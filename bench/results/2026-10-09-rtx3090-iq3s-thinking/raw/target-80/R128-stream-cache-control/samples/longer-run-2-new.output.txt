@@ -1,0 +1,19 @@
+We need answer user wants implement topological_order in Python. Need produce final only complete function in Python code block. Need think carefully. Requirements:
+- Implement topological_order(nodes, edges)
+- nodes list unique strings; edges list of (before, after) pairs.
+- Return lexicographically smallest topological ordering.
+- include isolated nodes.
+- ignore duplicate edges.
+- Raise ValueError for edge endpoint absent from nodes or a cycle.
+- Do not mutate either input.
+- Use no imports.
+- Return only complete function in Python code block.
+
+Need ensure lexicographically smallest topological ordering. For unique strings. Lexicographically smallest topological order usually Kahn's algorithm selecting smallest available node at each step yields lexicographically smallest topological order? Need verify. Given set of available nodes (in-degree zero), choosing minimum at each step yields lexicographically smallest topological sequence. Yes for total order lexicographic. Since all nodes must included. Need handle duplicates. Need validate endpoints. Avoid mutating input. Need not imports. Could use min on list each iteration. O(V+E)*V maybe okay. But can implement without heap because no imports? heapq is import not allowed. Could use sorted lists and pointer but duplicates? Since no imports, we can use list sort each iteration. Need not mutate inputs: don't sort input; make copies/structures.
+
+Need consider edges list may contain tuple/list of length 2. Edges duplicate ignored. Need cycle detection. If processed count != len(nodes) raise. Validate nodes? nodes unique? Input guaranteed unique? But maybe could handle. It says nodes is list of unique strings. But should perhaps not mutate. Could convert to set. But if duplicates, maybe ValueError? Not required. Could validate edges endpoints absent. If endpoints not strings? Not specified. We can use str? Lexicographic order of strings. If nodes non-strings, min works comparable. But unique strings.
+
+Potential issue with isolated nodes and duplicate edges: Need indegree counts unique edges. Use adjacency dict: {node: []} for each node. Need avoid duplicate edge: use set of edge pairs. But if edges list of arbitrary pairs, convert to tuple? Since endpoint could be unhashable? Strings. Use edge = (before, after). Need if edge not length 2? Not specified. Could let unpack raise? Better maybe treat invalid as endpoint absent? Maybe not.
+
+Need no imports. Implementation:
+def topological_order(nodes

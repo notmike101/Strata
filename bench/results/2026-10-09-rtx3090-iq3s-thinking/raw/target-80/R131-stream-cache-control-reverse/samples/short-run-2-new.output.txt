@@ -1,0 +1,11 @@
+We need answer user: "Request identifier ... Ignore this identifier. Implement topological_order(nodes, edges) in Python. nodes is a list of unique strings; edges is a list of (before, after) pairs. Return the lexicographically smallest topological ordering, include isolated nodes, and ignore duplicate edges. Raise ValueError for an edge endpoint absent from nodes or a cycle. Do not mutate either input. Use no imports. Return only the complete function in a Python code block."
+
+Need provide final only code block with complete function. Need think requirements. Implement Kahn's algorithm lexicographically smallest: need choose smallest available node at each step. But "lexicographically smallest topological ordering" among all valid topological orders: using min-heap. But no imports allowed, so cannot use heapq. Can implement manually or sort available list. Since no imports, implement own min-heap functions or use list sort each time. Nodes strings; number unknown. Could use heap without import by manual implementation. Simpler: maintain sorted list? O(n^2 log n) maybe okay. But implement min-heap manual for efficiency. Or repeatedly compute min from set/list? Could use min(). If using set available and min(available) each iteration, does not mutate input, no imports. Complexity O(n*(m+n)?) min over up to n each step O(n^2) but okay maybe? Need robust.
+
+Need ignore duplicate edges: build adjacency set and indegree counts only unique edges. Edges list can be list of tuples. Need validate endpoints in nodes. Could create node_set = set(nodes). If any not in node_set raise ValueError. Need not mutate inputs. Using set(nodes) creates new. Need duplicate edge handling: adjacency = {node: set() for node in nodes}. For each edge (a,b): if a not in node_set or b not in node_set: raise ValueError. If b not in adjacency[a]: add; indegree[b] += 1. But note: if duplicate self-edge? Edge endpoint absent? self edge a->a should cycle if present. Duplicate self edge: first adds indegree a, adjacency[a]. Later duplicate ignored; cycle detected. Good. If edge (a,b) with a,b present.
+
+Need cycle detection: Kahn. available nodes indegree 0. Use min extraction.
+
+Manual min heap:
+def _heappush(heap, item): heap.append(item); _siftup...
+def _heappop(heap): root=

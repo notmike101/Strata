@@ -1,0 +1,14 @@
+We need answer user wants code only in Python code block. Need analyze. Need produce final only code block. Need ensure function correct.
+
+Problem: topological_order(nodes, edges): nodes list unique strings; edges list pairs before, after. Return lexicographically smallest topological ordering, include isolated nodes, ignore duplicate edges. Raise ValueError for edge endpoint absent from nodes or a cycle. Do not mutate either input. No imports. Complete function only.
+
+Need design deterministic lexicographically smallest topological order. Given directed acyclic graph nodes strings. Need Kahn's algorithm with min-heap? No imports. Could use sorted list or simple min selection each step. Need no mutate input. Could validate edges endpoints, duplicates. Need no hidden state deterministic.
+
+Approach:
+- if nodes isn't list? Not specified but robust? Input list of unique strings. Could handle any iterable? Need no mutation. Use tuple(nodes)? But no imports. We can convert to list, set. Validate duplicates? It says unique. We can maybe raise ValueError if not? Not required but edge absent. Keep input intact.
+- Create set of nodes: node_set = set(nodes). This iterates but not mutate.
+- Need adjacency and indegree. Use dicts mapping node-> set/list neighbors and indegree int. Could use dict of sets to dedupe. But if nodes order? Need lexicographic. Isolated nodes included; if using adjacency dict for every node: indegree = {node:0}; outgoing = {node: []? set?}. To dedupe edges, using sets avoids duplicate indegree. But iterating sets non-deterministic, but selection by min among candidates uses sorted or comparisons so deterministic. Could avoid sets? Use adjacency dict of list plus set of seen edges. seen_edges = set(). For each edge:
+  - validate tuple? if not tuple length 2? Could raise ValueError? Maybe assume. But edge endpoint absent -> ValueError. If endpoints not in node_set: raise ValueError.
+  - if (u,v) not in seen_edges: add; outgoing[u].append(v); indegree[v]+=1.
+- Then candidates = [node for node in nodes if indegree[node]==0]? But nodes may be unsorted. Need lexicographically smallest at each step. Could sort candidates. Then loop: pop min. We can sort candidates each iteration or maintain sorted list.
+   - candidates = sorted([n for n in nodes if indegree[n]==0]) maybe

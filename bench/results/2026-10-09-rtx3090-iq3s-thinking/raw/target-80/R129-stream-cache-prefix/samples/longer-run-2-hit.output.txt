@@ -1,0 +1,18 @@
+We need answer user wants implement topological_order in Python. Need produce final only complete function in Python code block. Need think carefully. Requirements:
+- Implement topological_order(nodes, edges)
+- nodes list unique strings; edges list of (before, after) pairs.
+- Return lexicographically smallest topological ordering.
+- include isolated nodes.
+- ignore duplicate edges.
+- Raise ValueError for edge endpoint absent from nodes or a cycle.
+- Do not mutate either input.
+- Use no imports.
+- Return only complete function in Python code block.
+
+Need ensure lexicographically smallest topological ordering. For unique string nodes, typical Kahn with min-heap. But no imports -> can't use heapq. Could implement simple selection: maintain in-degree dict, adjacency set/dict. Duplicate edges ignored. Do not mutate input: need avoid mutating lists/tuples; can read only. We can make copies structures. To ignore duplicate edges, use set of tuples or set per node. Need validate endpoints: for each edge, if before not in nodes_set or after not in nodes_set -> ValueError. Duplicate edges ignored. Also if self-loop? self-loop is cycle if node endpoint absent? If before==after present, duplicate maybe but self-loop creates cycle. In-degree counts: with duplicate ignored, self-loop increments indegree and adjacency to itself -> no zero indegree? It might be zero if no other? self indegree 1, cannot process. If there are zero nodes? nodes empty, edges empty -> return []. If edges nonempty endpoints absent -> error.
+
+Lexicographically smallest: at each step select smallest among available zero indegree nodes by string. Since nodes unique strings. Need efficient enough but no heapq. Could just repeatedly scan remaining nodes to choose min. O(n^2 + E) maybe okay unless large. But we can implement min selection using list of available strings and min() each iteration. Need avoid mutating original inputs. Using available list mutable copy. If using min(available) O(n) then pop by index maybe O(n). Or sort initial available and maintain? Need handle dynamic additions. Could use simple list and min. Or implement our own heap with array. But no imports; can implement heapq functions manually. But simple min is acceptable? The problem likely expects efficient? Could implement custom min-heap to be robust. Need ensure deterministic and lex smallest.
+
+Need decide. Python code block only. Need function.
+
+Potential pitfalls: Lexicographically smallest topological order

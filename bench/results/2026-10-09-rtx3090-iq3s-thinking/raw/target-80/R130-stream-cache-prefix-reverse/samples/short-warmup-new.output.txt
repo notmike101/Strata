@@ -1,0 +1,17 @@
+We need answer to user: implement topological_order in Python, only complete function in code block, no imports. Need analyze requirements.
+
+Function topological_order(nodes, edges). nodes list unique strings; edges list of (before, after) pairs. Return lexicographically smallest topological ordering, include isolated nodes, ignore duplicate edges. Raise ValueError for edge endpoint absent from nodes or a cycle. Do not mutate either input. Use no imports. Return only complete function in Python code block.
+
+Need produce final code block only likely.
+
+Algorithm: Kahn's algorithm with sorted available nodes. Need lexicographically smallest topological ordering for DAG with string nodes. Need not mutate inputs. We can create set of nodes, indegree dict, adjacency sets ignoring duplicates. Need validate edges endpoints in nodes before? If an edge endpoint absent raise ValueError. Also cycle if len(order) != len(nodes). Need handle duplicate edges ignored so indegree not incremented multiple times.
+
+Lexicographically smallest topological order among all valid orders. For a set of currently available nodes (indegree 0), choose smallest string each step. This yields lexicographically smallest sequence? Yes if comparing as list of strings lexicographic, greedily pick min available works for topological sorting if all nodes equal priority.
+
+Need no imports. Can't use heapq? heapq import disallowed. We can maintain sorted list of zero indegree nodes. Since no imports, use list and sort each iteration or find min. Nodes count unknown; simple fine. But ensure no mutating input: do not mutate nodes list; edges not. Use copies.
+
+Potential pitfalls: nodes could include duplicates? says unique strings; but robust maybe set? If duplicates in nodes? We can use nodes_set = set(nodes). If duplicates, len mismatch? But spec unique. Do not mutate.
+
+Need ignore duplicate edges. Could build adj as dict of set or dict of dict to track unique edges. Since no imports, defaultdict not allowed. Use dict comprehension: adj = {node: set() for node in nodes_set}. indegree = {node:0 for node in nodes_set}. For each before, after in edges: if before not in nodes_set or after not in nodes_set: raise ValueError. if after in adj[before]: continue. add; indegree[after] += 1.
+
+Then available = [n for n in nodes_set if indegree[n]==0]. sort. Then while available: choose first (min sorted). Pop(0). But if we

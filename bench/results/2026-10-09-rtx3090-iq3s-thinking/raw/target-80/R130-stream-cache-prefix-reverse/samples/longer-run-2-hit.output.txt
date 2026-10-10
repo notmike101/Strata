@@ -1,0 +1,20 @@
+We need answer user wants implement topological_order in Python. Need produce final only complete function in Python code block. Need think carefully. Requirements:
+- Implement topological_order(nodes, edges)
+- nodes list unique strings; edges list (before, after) pairs.
+- Return lexicographically smallest topological ordering, include isolated nodes, ignore duplicate edges.
+- Raise ValueError for edge endpoint absent from nodes or cycle.
+- Do not mutate either input.
+- Use no imports.
+- Return only complete function in code block.
+
+Need design deterministic. Lexicographically smallest topological ordering of graph with node strings. Need handle duplicates. Not mutate inputs. No imports, so can't use heapq? Could implement min selection manually. Since no imports, use list and min? O(n^2) okay likely. Could implement Kahn with adjacency sets and indegree dict. Need ensure inputs not mutated: edges list not mutated. nodes can be copied. Sets created. Duplicate edges ignored. Edge endpoints absent: raise ValueError. Need cycle detection.
+
+Lexicographically smallest topological ordering: Kahn's algorithm choosing smallest available node each step. For strings lexicographic default. Need if duplicate edges ignored: if edge repeated, should not increment indegree twice or add adjacency multiple. Use adjacency dict sets; indegree dict.
+
+Cycle detection: If len(result)<len(nodes) raise ValueError. Or detect cycle explicitly. Need isolated nodes included. All nodes unique. If nodes empty? Then should return [] unless invalid edge absent. Edge with endpoint absent if nodes empty raises. If nodes None? Not specified; maybe if not iterable? Could assume. Do not use exceptions? If nodes None maybe TypeError. Could robustly handle? But no imports. Could validate types? Not necessary maybe.
+
+Need avoid hidden state. Deterministic. Need no mutation of inputs: we don't mutate nodes or edges. But if nodes is list, we can copy. If edges is tuple of tuple? fine. If nodes contains duplicates? It says unique; but maybe ignore. Need not mutate nodes. Using set(nodes) okay.
+
+Potential issue: lexicographically smallest topological ordering with strings: If available nodes are arbitrary, choose min using min(candidates) each iteration. That yields lexicographically smallest among all topological sorts? Kahn with smallest available at each step yields lexicographically smallest topological order (for total order on labels) because greedy earliest possible minimum. Yes.
+
+Could implement more efficient with heap but no imports.

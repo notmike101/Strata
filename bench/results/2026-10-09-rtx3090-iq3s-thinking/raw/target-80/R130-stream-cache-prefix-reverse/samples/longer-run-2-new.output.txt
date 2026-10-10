@@ -1,0 +1,26 @@
+We need answer user wants implement topological_order in Python. Need produce final only complete function in Python code block. Need think carefully. Requirements:
+- Implement topological_order(nodes, edges)
+- nodes list unique strings; edges list of (before, after) pairs.
+- Return lexicographically smallest topological ordering.
+- include isolated nodes.
+- ignore duplicate edges.
+- Raise ValueError for edge endpoint absent from nodes or a cycle.
+- Do not mutate either input.
+- Use no imports.
+- Return only complete function in Python code block.
+
+Need ensure lexicographically smallest topological ordering. For unique strings. Need no imports. Need avoid hidden state, deterministic, don't mutate input. Need handle duplicate edges. Need cycle detection. Need edge endpoint absent ValueError.
+
+Algorithm: Kahn's algorithm with min selection. But lex smallest topological order given arbitrary graph? Yes selecting smallest available node at each step yields lexicographically smallest topological order if nodes comparable strings. Need be careful: lexicographically smallest sequence among topological orders can be obtained by greedy choosing smallest zero indegree at each position. Correct for topological sort.
+
+Need not mutate input: copy structures. nodes list maybe contains unique strings; but should validate? Could maybe if duplicates? Spec unique; no need. Need maybe ensure nodes is list? Not necessary but can iterate.
+
+Need ignore duplicate edges. We can maintain adjacency sets/dicts and indegrees. But sets may introduce non-deterministic iteration? If we use sets to deduplicate and iterate sorted or min-heap? No imports (heapq not allowed). Can use simple list and sorted? Sorting available builtin. Need deterministic. Could use dict adjacency mapping from before to list of after unique. Since no imports. To ignore duplicate edges, use set for processed? Need avoid mutation of input, but can use set of edges seen. Since no imports, set builtin ok. Need avoid hidden state? Local.
+
+Potential concern: using set for nodes may not preserve but we only need membership and sorted nodes. Use nodes_set = set(nodes). This uses no import. But if nodes contains non-hashable? spec strings.
+
+Implementation options:
+def topological_order(nodes, edges):
+    node_set = set(nodes)
+    # Validate endpoints absent from nodes; maybe also edge pairs not length2? Could raise ValueError? Spec only endpoints. Could handle malformed tuple? If pair unpack error? Maybe not.
+    adjacency = {node:

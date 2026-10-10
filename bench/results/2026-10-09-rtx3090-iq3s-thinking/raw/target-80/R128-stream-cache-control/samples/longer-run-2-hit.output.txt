@@ -1,0 +1,25 @@
+We need answer user wants implement topological_order in Python. Need produce final only complete function in Python code block. Need think carefully. Requirements:
+- Implement topological_order(nodes, edges)
+- nodes list unique strings; edges list of (before, after) pairs.
+- Return lexicographically smallest topological ordering.
+- include isolated nodes.
+- ignore duplicate edges.
+- Raise ValueError for edge endpoint absent from nodes or a cycle.
+- Do not mutate either input.
+- Use no imports.
+- Return only complete function in Python code block.
+
+Need ensure lexicographically smallest topological ordering. For unique strings. Lexicographically smallest topological order usually Kahn with min-heap. But no imports. Need implement min-heap without heapq? Could use sorting available. Need avoid imports. Could implement simple min selection from available nodes each step: sort candidates or find min. Since no imports, built-in min. For efficiency maybe maintain set/list of ready nodes. Need not use heapq. Need deterministic. Could do:
+
+def topological_order(nodes, edges):
+    if not all(isinstance?) not specified. Maybe assume. Need don't mutate inputs. Need validate endpoints present. Duplicate edges ignored: use set of edge pairs? Since strings. Need also if self-loop edge (a,a): endpoint present but cycle -> ValueError. Kahn will detect cycle due indegree >0 and node never ready. But if self-loop, indegree self. If isolated otherwise? cycle detected. Good.
+
+Need do not mutate input. Can't iterate nodes then mutate. We'll make node_set = set(nodes). Need maybe validate no duplicates? nodes unique by spec. Could optionally not check. Need handle invalid edge endpoints. Edge might not be tuple/list? Could unpack try. If edge endpoints missing raise ValueError. Need ignore duplicate edges: use seen = set(); adjacency set/dict. If duplicate, do not increase indegree. Need avoid hidden state? irrelevant.
+
+Potential lexicographically smallest with Kahn using sorted list. Need maintain indegree dict for nodes. adjacency: for each node list? To ignore duplicates and maybe avoid duplicate indegree. Could use sets for adjacency. No imports. But sets okay. Need ensure order deterministic. Approach:
+
+    node_set = set(nodes)
+    adj = {node: set() for node in nodes}
+    indeg = {node: 0 for node in nodes}
+    seen_edges = set()
+    for before, after in edges

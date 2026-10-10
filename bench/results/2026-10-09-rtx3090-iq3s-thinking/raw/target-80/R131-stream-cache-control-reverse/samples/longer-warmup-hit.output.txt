@@ -1,0 +1,13 @@
+We need answer user wants code only in Python code block. Need analyze. Need produce final only code block. Need ensure function correct.
+
+Problem: topological_order(nodes, edges): nodes list unique strings; edges list pairs before, after. Return lexicographically smallest topological ordering, include isolated nodes, ignore duplicate edges. Raise ValueError for edge endpoint absent from nodes or cycle. Do not mutate either input. No imports.
+
+Need lexicographically smallest topological ordering among all valid orderings. Standard Kahn with min-heap; no imports so implement min manually or sort candidates. Need no hidden state. Keep inputs intact: don't modify nodes/edges. Need handle duplicate edges ignore. Cycle detection. Edge endpoints absent -> ValueError.
+
+Potential approach:
+- Validate nodes? list unique strings but assume? Could robustly handle? We can build set of nodes from list. If duplicate? unique. Could ignore or maybe not.
+- Edges: list of tuples; if malformed? Not specified. Could validate length 2 maybe? But raising ValueError okay? Could unpack try except. But if non-tuple? maybe TypeError? To be safe, if not sequence? Hmm not needed but can handle.
+- Need avoid mutating input: use copies. Since no imports.
+- Duplicate edges ignored: set of edges. For each (u,v), check u in node_set, v in node_set. Also self-loop? endpoint present; self-loop is cycle -> raise ValueError. Duplicate edge ignored.
+- indegree dict: initialize for all nodes to 0. adjacency sets maybe to avoid duplicate. We can build adj = {node: [] or set?}. Since no imports. Need deterministic sorting: use sorted of available nodes each iteration. Candidate list; choose min using min(candidate_list) O(n^2) but fine. Or maintain sorted list? Simplicity: available = [n for n in nodes if indeg==0]; result=[]; while available: choose min via available.sort? If sort each loop and pop(0), but sort list mutates local copy. available is local; input not. But sorting each iteration O(n^2 log). Could choose min and remove. Since strings. For lex smallest: At each step choose smallest zero indegree node. Kahn with priority queue yields lex smallest topological order for unique strings. Proof standard.
+- When remove u, iterate over neighbors in sorted? Adj sets local. For each v, decrement indeg; if zero append v to available.

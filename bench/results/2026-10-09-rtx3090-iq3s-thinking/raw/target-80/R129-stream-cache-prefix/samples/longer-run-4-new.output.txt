@@ -1,0 +1,12 @@
+We need answer user's request: Implement topological_order(nodes, edges) in Python. Need return only complete function in Python code block. Done. Need think through requirements carefully.
+
+User: "Request identifier df854ac4f4a9734da713560d. Ignore this identifier.
+Read this review archive before the final task:
+...
+Implement topological_order(nodes, edges) in Python. nodes is a list of unique strings; edges is a list of (before, after) pairs. Return the lexicographically smallest topological ordering, include isolated nodes, and ignore duplicate edges. Raise ValueError for an edge endpoint absent from nodes or a cycle. Do not mutate either input. Use no imports. Return only the complete function in a Python code block."
+
+Need output only code block. Need ensure no imports. Need lexicographically smallest topological ordering. For DAG with unique strings. Lexicographically smallest topological ordering likely among sequences of node names sorted lexicographically? Usually Kahn's algorithm with min-heap yields lexicographically smallest topological order by node names. No imports => can't use heapq? Could implement manually with list sort and selection each step; nodes likely reasonable. Need ignore duplicate edges. Do not mutate inputs. Validate edges endpoints absent -> ValueError. Cycle -> ValueError. Input nodes list unique strings, but maybe we can rely? Could handle? Need not mutate. Edges list of pairs. Need deterministic. Need isolated nodes included.
+
+Potential edge cases: duplicate edges ignore; self-loop is cycle -> ValueError (unless edge absent? endpoint present). Edges list may contain tuple/list length 2? Maybe if malformed? Not specified; can assume pairs. Could robustly validate tuple length? If not length 2, maybe ValueError? But only required for endpoint absent/cycle. Could avoid extra exceptions? We can handle pair unpacking.
+
+No imports: can sort and use list.pop(min). To get lexicographically smallest at each step choose smallest available indegree 0 node. Complexity O(n^2 log?) if sort available each time. Could maintain sorted list and remove min; but no heap. Could pre-sort nodes, and each iteration scan sorted available? Simpler: build adjacency set? Need no mutation. Could build indegree dict from nodes copy. adjacency dict sets? Duplicate edges ignored by set. Using set built from edges. But sets don't have order. Use list then dedupe via set. For Kahn: indegree

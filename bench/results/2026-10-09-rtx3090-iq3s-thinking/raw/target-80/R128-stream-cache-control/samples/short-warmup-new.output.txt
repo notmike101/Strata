@@ -1,0 +1,15 @@
+We need answer to user: implement topological_order in Python, only complete function in code block, no imports. Need analyze requirements.
+
+Function topological_order(nodes, edges). nodes list unique strings; edges list of (before, after) pairs. Return lexicographically smallest topological ordering, include isolated nodes, ignore duplicate edges. Raise ValueError for edge endpoint absent from nodes or a cycle. Do not mutate either input. Use no imports. Return only complete function in Python code block.
+
+Need produce final code block only likely.
+
+Algorithm: Kahn's algorithm with sorted availability? Lexicographically smallest topological order: nodes are strings, lexicographic comparison. We can repeatedly pick smallest available node with indegree zero among not processed. Need handle duplicates in edges: ignore duplicate edges to avoid indegree overcount. Do not mutate inputs.
+
+Need no imports. Since nodes list, unique strings but maybe need validate? Could make copy of nodes set. Use built-in sorted. Need be careful edges may contain non-tuple? Not specified. Could just unpack. For endpoint absent: if before not in node_set or after not in node_set raise ValueError. If self-loop? Cycle: edge (a,a) self-loop should raise ValueError because cycle? Usually cycle. We can detect via Kahn's if not all nodes processed. But duplicate self-loop? indegree remains positive, no processed => cycle. If duplicate edge ignore. We need avoid mutating edges/nodes. We can create copies? Do not mutate either input. If we iterate only, no mutate. But to ignore duplicates, use set. But edges may have duplicate pairs, use seen_edges set. But if edge endpoints not hashable? Nodes strings, pairs of strings. ok.
+
+But need lexicographically smallest ordering among all topological sorts. Kahn with min-heap gives lexicographically smallest if comparing strings. No imports means cannot heapq. Could use list sorted each iteration or maintain available sorted list. Need efficient? Could use available = sorted(zero indegree nodes), pick available.pop(0), then when adding new nodes, insert in sorted order maybe. Simpler: each iteration find min of available list with min(available, key=str?) Since strings default order. available.pop(index). Or sort available each loop. For n moderate? no constraints. Could use sorted list and bisect? bisect is import? Could implement manual insert. But no imports, can use built-in sort.
+
+Implementation option:
+
+def topological_order(nodes, edges):

@@ -1,0 +1,12 @@
+We need answer user's request: Implement topological_order(nodes, edges) in Python. Need return only complete function in Python code block. Done. Need think through requirements carefully.
+
+User: "Request identifier df854ac4f4a9734da713560d. Ignore this identifier.
+Read this review archive before the final task:
+...
+Implement topological_order(nodes, edges) in Python. nodes is a list of unique strings; edges is a list of (before, after) pairs. Return the lexicographically smallest topological ordering, include isolated nodes, and ignore duplicate edges. Raise ValueError for an edge endpoint absent from nodes or a cycle. Do not mutate either input. Use no imports. Return only the complete function in a Python code block."
+
+Need output only code block. Need ensure no imports. Need lexicographically smallest topological ordering. For DAG with unique strings. Lexicographically smallest topological ordering likely compare sequences lexicographically by elements (strings). Standard algorithm: Kahn with min-heap yields lexicographically smallest topological order? Yes, for topological sort where all nodes available choose smallest lexicographic label at each step yields lexicographically smallest sequence. Need implement min-heap without imports? Can use built-in sorted and pop? But no imports, can manually manage min? Could use heap? Need import heapq? Not allowed. Could implement simple list and pop min each iteration: O(V*(E+V)) acceptable maybe? Need no imports. Use sorted on candidates. Kahn: indegree dict, adjacency sets to ignore duplicate edges. Need not mutate inputs. If nodes list unique strings but could not be sorted? We can build sorted nodes? For lexicographically smallest initial candidates can sort available. Could use available sorted list and pop(0) for min? Need efficient enough? Use list sorted each iteration or insert maintain? Simpler: candidates = sorted(...); while candidates: node = candidates.pop(0); for neighbors: indegree-- if 0 insert into candidates maintaining sorted via bisect? No imports. Could just candidates.append then candidates.sort() each loop; O(n^2 log n) but okay unless huge. Better implement insertion manually? Could use list insertion by bisect_left? bisect is import. Could implement manual binary search or linear. Need no imports. Could implement custom push sorted:
+
+def insert_sorted(lst, val):
+    lo, hi=0,len(lst)
+    while lo<

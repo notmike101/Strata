@@ -1,0 +1,28 @@
+We need answer user wants code only in Python code block. Need implement topological_order. Need think thoroughly. We need produce final only complete function code block, no imports. Need not mutate inputs. Lexicographically smallest topological ordering among unique strings. Edges list of (before, after). Ignore duplicate edges. Raise ValueError for edge endpoint absent from nodes or cycle. Include isolated nodes.
+
+Need consider lexicographically smallest topological ordering. Standard Kahn with min-heap would need heap import? Use no imports. Can use min over available nodes each step O(n^2) fine. Need no imports. Could also sort nodes and use available list min.
+
+Need ignore duplicate edges. But duplicate edge handling: if same edge multiple times, decrement indegree once, adjacency not duplicate. Need also possibly self-loop? If (a,a) with a in nodes, cycle. Should raise. For duplicate self-loop also duplicate ignore, still cycle.
+
+Potential subtlety: lexicographically smallest topological ordering for strings. Need compare strings by default. If nodes are unique strings. Isolated nodes included. If there are disconnected components, pick smallest available among all with indegree zero each step. This yields lexicographically smallest sequence. Proof: greedy choose smallest possible next.
+
+Need avoid mutating input: nodes list not mutated. We can copy set. Edges not mutated (iterating okay). But need avoid modifying any tuples. Use new structures.
+
+Need ensure if edge endpoints not in nodes, raise ValueError. Could check all edges first before processing to avoid partial? Not required but can. If duplicate edges, if endpoint missing, raise regardless duplicates. Need use no imports.
+
+Implementation options:
+
+def topological_order(nodes, edges):
+    if any(not isinstance? Not needed.
+    node_set = set(nodes)
+    # nodes unique per spec. But if duplicate? unique. Could if len(node_set) != len(nodes) maybe ignore? Not specified. Could raise? Don't mutate input.
+    adj = {node: set() for node in nodes}
+    indegree = {node: 0 for node in nodes}
+    edge_seen = set()
+    for before, after in edges:
+         if before not in node_set or after not in node_set: raise ValueError(...)
+         edge = (before, after)
+         if edge in edge_seen: continue
+         edge_seen.add(edge)
+         adj[before].add(after)
+         indegree[

@@ -1,0 +1,14 @@
+We need answer user's request: Implement topological_order(nodes, edges) in Python. Need return only complete function in Python code block. Done. Need think through requirements carefully.
+
+User: "Request identifier df854ac4f4a9734da713560d. Ignore this identifier.
+Read this review archive before the final task:
+...
+Implement topological_order(nodes, edges) in Python. nodes is a list of unique strings; edges is a list of (before, after) pairs. Return the lexicographically smallest topological ordering, include isolated nodes, and ignore duplicate edges. Raise ValueError for an edge endpoint absent from nodes or a cycle. Do not mutate either input. Use no imports. Return only the complete function in a Python code block."
+
+Need output only code block. Need ensure no imports. Need lexicographically smallest topological ordering. For DAG with unique strings. Lexicographically smallest topological ordering likely among sequences of node names sorted lexicographically? Usually Kahn's algorithm with min-heap yields lexicographically smallest topological order by node names. No imports => can't use heapq? Could implement manually with list sort and selection each step O(n^2) okay unless large. Need ignore duplicate edges. Do not mutate inputs. Need validate edge endpoints absent -> ValueError. Cycle -> ValueError. Isolated nodes included. Edge list may have tuples length? Not specified. Could assume. But robust maybe if not sequence? Need not overcomplicate. Need no hidden state deterministic. Keep input data intact.
+
+Implementation possibilities:
+def topological_order(nodes, edges):
+    # Make copies? Need not mutate. We can use node set from nodes, but nodes list unique strings. But if nodes contains non-string? assume strings. Need duplicate nodes? says unique, but we can validate? If duplicate, set removes; but to maintain? It says unique, no need. But to not mutate inputs, don't modify nodes/edges. If we create indegree dict by copying keys. adjacency sets/dicts.
+    node_set = set(nodes)
+    # validate unique? Not needed but if duplicate? Could raise? Spec says unique. If duplicate input, preserving? We can handle by sorted(nodes) maybe duplicates? But topological ordering of unique nodes. If duplicates in nodes invalid but not asked. Could not raise unless required? Better perhaps if len(node_set) != len(nodes): raise ValueError? But spec says nodes unique. If
