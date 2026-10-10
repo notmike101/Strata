@@ -1,0 +1,7 @@
+## E188 / reproduce completion failure before component ablation
+
+Refined the next step after review: a single Q010/Q011 pair cannot identify which component caused the seed103 difference. Before the broad ablation proposed inE187, do one bounded fresh-process matched replay of seeds101,102,103 in that order on candidate and production. Preserve the preceding requests rather than extracting seed103 in isolation: adaptive cache/tuner history matters. Same32768 allowance, request bytes, numeric profile, reasoning, model/context/vision and72-test checker. Label replay as a three-request diagnosis, not a replacement for the five-answer quality gate. At most one candidate/control pair; retain a non-reproduction and do not keep repeating until a desired outcome. Only follow with a one-component ablation if evidence supports it; respected accepted-usage/barrier dependency remains mandatory.
+
+No replay started. Both model trees remain cleaned up. C054 speed candidate still queued. The expanded allowance is approved and already applied; no user decision remains pending. Next authoritatively inspect process state, then prepare distinct Q012/Q013 diagnostic paths after confirming they are unused.
+
+Publication check: an atomic replacement of an existing P018 identity export returned transient Windows AccessDenied once; both files had ordinary Archive attributes. Re-running the unchanged exporter succeeded. No experiment was rerun and no measurement was discarded. Final inventory/hash validation is required before push.

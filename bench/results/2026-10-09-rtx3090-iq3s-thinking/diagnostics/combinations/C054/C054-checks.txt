@@ -1,0 +1,24 @@
+**********************************************************************
+** Visual Studio 2022 Developer Command Prompt v17.14.36
+** Copyright (c) 2025 Microsoft Corporation
+**********************************************************************
+[1/3] Linking CXX executable sampler_parity.exe
+[2/3] Building CXX object CMakeFiles\accepted_usage_test.dir\tests\core\accepted_usage.cpp.obj
+[3/3] Linking CXX executable accepted_usage_test.exe
+Test project C:/strata/local-setup/target-80/build-cuda86-main
+    Start  34: sampler_parity
+1/6 Test  #34: sampler_parity ...................   Passed    1.02 sec
+    Start  36: sampler_parity_one_block
+2/6 Test  #36: sampler_parity_one_block .........   Passed    1.30 sec
+    Start  37: sampler_parity_old
+3/6 Test  #37: sampler_parity_old ...............   Passed    3.80 sec
+    Start  70: coupled_draft_test
+4/6 Test  #70: coupled_draft_test ...............   Passed    0.10 sec
+    Start 107: accepted_usage_test
+5/6 Test #107: accepted_usage_test ..............   Passed    0.15 sec
+    Start 108: token_barrier_test
+6/6 Test #108: token_barrier_test ...............   Passed    0.03 sec
+
+100% tests passed out of 6
+
+Total Test time (real) =   6.61 sec

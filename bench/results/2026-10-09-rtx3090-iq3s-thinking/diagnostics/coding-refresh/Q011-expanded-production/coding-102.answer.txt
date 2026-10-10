@@ -1,0 +1,78 @@
+```python
+def topological_order(nodes, edges):
+    node_set = set(nodes)
+    adjacency = {node: set() for node in node_set}
+    indegree = {node: 0 for node in node_set}
+
+    for before, after in edges:
+        if before not in node_set or after not in node_set:
+            raise ValueError("Edge endpoint absent from nodes")
+
+        if after in adjacency[before]:
+            continue
+
+        adjacency[before].add(after)
+        indegree[after] += 1
+
+    heap = []
+
+    def push(value):
+        heap.append(value)
+        i = len(heap) - 1
+        while i:
+            parent = (i - 1) // 2
+            if heap[parent] <= heap[i]:
+                break
+            heap[parent], heap[i] = heap[i], heap[parent]
+            i = parent
+
+    def pop():
+        if not heap:
+            return None
+
+        smallest = heap[0]
+        last = heap.pop()
+
+        if heap:
+            heap[0] = last
+            i = 0
+            n = len(heap)
+
+            while True:
+                left = 2 * i + 1
+                right = left + 1
+                smallest_index = i
+
+                if left < n and heap[left] < heap[smallest_index]:
+                    smallest_index = left
+                if right < n and heap[right] < heap[smallest_index]:
+                    smallest_index = right
+
+                if smallest_index == i:
+                    break
+
+                heap[i], heap[smallest_index] = heap[smallest_index], heap[i]
+                i = smallest_index
+
+        return smallest
+
+    for node in node_set:
+        if indegree[node] == 0:
+            push(node)
+
+    result = []
+
+    while heap:
+        current = pop()
+        result.append(current)
+
+        for neighbor in adjacency[current]:
+            indegree[neighbor] -= 1
+            if indegree[neighbor] == 0:
+                push(neighbor)
+
+    if len(result) != len(node_set):
+        raise ValueError("Cycle detected")
+
+    return result
+```

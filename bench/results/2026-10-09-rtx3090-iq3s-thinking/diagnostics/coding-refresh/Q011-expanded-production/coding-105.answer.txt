@@ -1,0 +1,87 @@
+```python
+def topological_order(nodes, edges):
+    unique_nodes = set(nodes)
+    graph = {node: set() for node in unique_nodes}
+    indegree = {node: 0 for node in unique_nodes}
+
+    for edge in edges:
+        before, after = edge
+
+        if before not in unique_nodes or after not in unique_nodes:
+            raise ValueError("edge endpoint absent from nodes")
+
+        if after not in graph[before]:
+            graph[before].add(after)
+            indegree[after] += 1
+
+    def _sift_down(heap, index):
+        n = len(heap)
+        item = heap[index]
+
+        while True:
+            left = index * 2 + 1
+            if left >= n:
+                break
+
+            right = left + 1
+            child = left
+
+            if right < n and heap[right] < heap[left]:
+                child = right
+
+            if heap[child] >= item:
+                break
+
+            heap[index] = heap[child]
+            index = child
+
+        heap[index] = item
+
+    def _heappush(heap, item):
+        heap.append(item)
+        index = len(heap) - 1
+
+        while index:
+            parent = (index - 1) // 2
+
+            if heap[parent] <= item:
+                break
+
+            heap[index] = heap[parent]
+            index = parent
+
+        heap[index] = item
+
+    def _heappop(heap):
+        top = heap[0]
+        item = heap.pop()
+
+        if heap:
+            heap[0] = item
+            _sift_down(heap, 0)
+
+        return top
+
+    heap = [node for node in unique_nodes if indegree[node] == 0]
+
+    for i in range(len(heap) // 2 - 1, -1, -1):
+        _sift_down(heap, i)
+
+    result = []
+    processed = 0
+
+    while heap:
+        node = _heappop(heap)
+        result.append(node)
+        processed += 1
+
+        for nxt in graph[node]:
+            indegree[nxt] -= 1
+            if indegree[nxt] == 0:
+                _heappush(heap, nxt)
+
+    if processed != len(unique_nodes):
+        raise ValueError("cycle detected")
+
+    return result
+```

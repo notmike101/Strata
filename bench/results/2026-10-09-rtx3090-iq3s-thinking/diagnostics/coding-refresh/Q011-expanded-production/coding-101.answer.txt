@@ -1,0 +1,76 @@
+```python
+def topological_order(nodes, edges):
+    node_set = set(nodes)
+
+    adjacency = {node: set() for node in node_set}
+    indegree = {node: 0 for node in node_set}
+
+    for edge in edges:
+        try:
+            before, after = edge
+        except (TypeError, ValueError):
+            raise ValueError("each edge must be a (before, after) pair") from None
+
+        if before not in node_set or after not in node_set:
+            raise ValueError("edge endpoint absent from nodes")
+
+        if after in adjacency[before]:
+            continue
+
+        adjacency[before].add(after)
+        indegree[after] += 1
+
+    def _heappush(heap, item):
+        heap.append(item)
+        i = len(heap) - 1
+        while i > 0:
+            parent = (i - 1) // 2
+            if heap[parent] <= heap[i]:
+                break
+            heap[parent], heap[i] = heap[i], heap[parent]
+            i = parent
+
+    def _heappop(heap):
+        smallest = heap[0]
+        last = heap.pop()
+
+        if heap:
+            heap[0] = last
+            i = 0
+            size = len(heap)
+
+            while True:
+                left = 2 * i + 1
+                right = left + 1
+                candidate = i
+
+                if left < size and heap[left] < heap[candidate]:
+                    candidate = left
+                if right < size and heap[right] < heap[candidate]:
+                    candidate = right
+
+                if candidate == i:
+                    break
+
+                heap[i], heap[candidate] = heap[candidate], heap[i]
+                i = candidate
+
+        return smallest
+
+    available = sorted(node for node in node_set if indegree[node] == 0)
+    order = []
+
+    while available:
+        node = _heappop(available)
+        order.append(node)
+
+        for successor in adjacency[node]:
+            indegree[successor] -= 1
+            if indegree[successor] == 0:
+                _heappush(available, successor)
+
+    if len(order) != len(node_set):
+        raise ValueError("cycle detected")
+
+    return order
+```

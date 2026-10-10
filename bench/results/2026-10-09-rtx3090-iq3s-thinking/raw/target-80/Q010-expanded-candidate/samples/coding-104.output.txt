@@ -1,0 +1,157 @@
+We need answer user's request. Need implement function only complete function in Python code block. Need think. Requirements: topological_order(nodes, edges). nodes list of unique strings. edges list pairs (before, after). Return lexicographically smallest topological ordering. Include isolated nodes. Ignore duplicate edges. Raise ValueError for edge endpoint absent from nodes or a cycle. Do not mutate inputs. No imports. Return only complete function in Python code block.
+
+Need produce final with code block only? "Return only the complete function in a Python code block." So final should be ```python
+def topological_order...```
+No explanations.
+
+Need decide algorithm: lexicographically smallest topological order. Usually Kahn with min-heap by string. But no imports. Could use sorted list and pop min each step, O(n^2) acceptable? Need robust.
+
+Need handle duplicate edges. Need avoid mutating inputs. Need validate endpoints. Cycle detection if len(result) != len(nodes). Need duplicate edges ignored; ensure indegree counts unique edges. Could build adjacency dict and indegree dict. Since nodes unique strings but not necessarily sorted. Isolated nodes included. Lexicographically smallest among all topological orderings: use min available node at each step. Without heapq, can maintain available sorted list using nodes sorted and update? Simpler: each iteration scan candidate nodes with indegree 0 not used, choose min lexicographically. That's O(n^2) and no imports. It doesn't mutate nodes. Build set nodes_set. For edges, if before or after not in nodes_set raise ValueError. Ignore duplicate edges: track seen_edges set; if pair not in seen, add adjacency and indegree. But careful: If duplicate edge, don't increment indegree twice. If multiple edges same, okay.
+
+Cycle: after process, if len(order)!=len(nodes_set) raise ValueError. Also if self-loop edge (a,a) then indegree includes self, cycle, raise. If edge endpoint absent: Need raise ValueError. Does missing endpoint before adding all? yes. Could validate first or during building. But if missing endpoint in edges, raise. Duplicate edges with missing endpoint? raise. Do not mutate edges/nodes. Using for e in edges no mutation. Building dict copies.
+
+Potential issue lexicographic: strings unique. Python string comparison. Candidate scanning sorted? We can sort all nodes once to ensure choose min. But if we remove nodes? Let's think. Approach:
+node_set = set(nodes) maybe assumes unique but set. order = []
+adj = {node: [] for node in node_set}
+indeg = {node: 0 for node in node_set}
+seen = set()
+for before, after in edges: if before not in node_set or after not in node_set: raise ValueError; if (before, after) in seen: continue; seen.add(...); adj[before].append(after); indeg[after]+=1
+Then Kahn: available = [node for node in node_set if indeg[node] == 0]; available.sort() (list of strings). order = []
+While available:
+   # get lexicographically smallest: available[0]
+   node = available.pop(0) (mutates local)
+   order.append(node)
+   for nb in adj[node]:
+      indeg[nb]-=1
+      if indeg[nb]==0:
+         # insert into available maintaining sorted order: available.append(nb); available.sort() perhaps O(n log n) or bisect but no import. sort okay.
+if len(order) != len(node_set): raise ValueError
+return order
+
+Does choosing min available using sorted list yield lexicographically smallest topological ordering? Yes: for topological order with total order on labels, greedy selecting smallest available yields lexicographically smallest. Need ensure if multiple choices? yes.
+
+But using available.pop(0) and available.sort() every insertion okay. Could also choose min scanning but fine.
+
+Need be careful if edges list contains tuples not pairs? assume. Could use tuple pair as key. If edges are list of lists? (before, after) pairs. If before/after unhashable? nodes strings so endpoints strings; edge pair may be tuple. We can do before, after = edge; key = (before, after). If edge is list [before, after], key works. If invalid length maybe error not specified; okay.
+
+Potential issue duplicate edges not just exact pair? Ignore duplicate edges exact (before, after). okay.
+
+Could optimize no mutation of inputs: node_set = set(nodes) reads. Adj lists are new. indeg new. edges iterated. no mutation.
+
+Need only function. Might need type hints? Could include. No imports. Use complete function.
+
+Let's consider lexicographically smallest topological ordering with available sorting. Example nodes ['b','a'], edge ('b','a'). available ['b']; order b then a. If isolated 'c' and constraints? Suppose nodes a,b,c edges b->a. initial available b,c sorted b,c; pick b (smallest) then a? after b indeg a 0 insert a: available [a,c]? sorted [a,c]. pick a then c. order b,a,c. Is lexicographically smallest? topological possibilities: b,a,c; b,c,a? c can be before b. Compare b,a,c vs b,c,a: b equal, a<c so b,a,c smaller. Good. Suppose available initially c,b (edge b->a). sorted b,c pick b. Is that always? If c isolated, could order c before b but c > b so b first lex smaller. yes.
+
+Need consider cycle detection with self-loop and duplicate self-loop? seen ignore duplicate. indeg self positive. available none if only self? len order < nodes raise.
+
+Potential issue if nodes list unique but contains empty? strings can be empty; sorting okay.
+
+Potential issue if node_set used and nodes list empty: returns [] no raise unless edge endpoints absent? If edges empty. okay. If edges endpoint absent and nodes empty, before not in set raise.
+
+Need no imports. Maybe implement helper? Only function. Code block. Ensure no mutation: using set(nodes) if nodes is iterator? nodes is list. But if nodes could be generator? They say list. Could use node_set = set(nodes); if need length. okay.
+
+Potential edge duplicates: Use seen_edges set. Could if edge has unhashable elements? before/after strings hashable. Edge itself can be tuple/list. key tuple okay. If edge not length 2 will unpack error; okay.
+
+Potential memory: fine.
+
+Could there be lexicographically smallest requiring tie-breaking beyond labels? labels unique. Greedy okay.
+
+Need final only code. But maybe include function with docstring? okay. But "Return only complete function in a Python code block." So code only.
+
+Let's verify:
+def topological_order(nodes, edges):
+    nodes_set = set(nodes)
+    adjacency = {node: [] for node in nodes_set}
+    indegree = {node: 0 for node in nodes_set}
+
+    seen_edges = set()
+    for edge in edges:
+        before, after = edge
+        if before not in nodes_set or after not in nodes_set:
+            raise ValueError("Edge endpoint not found in nodes.")
+        pair = (before, after)
+        if pair in seen_edges:
+            continue
+        seen_edges.add(pair)
+        adjacency[before].append(after)
+        indegree[after] += 1
+
+    available = sorted(node for node in nodes_set if indegree[node] == 0)
+    order = []
+
+    while available:
+        node = available.pop(0)
+        order.append(node)
+        for neighbor in adjacency[node]:
+            indegree[neighbor] -= 1
+            if indegree[neighbor] == 0:
+                available.append(neighbor)
+                available.sort()
+
+    if len(order) != len(nodes_set):
+        raise ValueError("Cycle detected.")
+    return order
+
+This mutates adjacency lists by appending, not input. okay.
+
+One subtlety: available.pop(0) O(n); no imports. Could use index. okay.
+
+Could there be duplicate edges and indegree if duplicate after validation? yes.
+
+Alternative to avoid repeated sort: use min each iteration. But current okay. However available.sort() each new node; available always sorted after pop(0) remains sorted, appending and sort re-sorts. If many insertions maybe O(n^2 log n) but fine.
+
+Do we need include isolated nodes if no indegree. yes.
+
+Cycle detection: If cycle but also some processed nodes, len mismatch. Good. But what if nodes_set empty and len order 0. ok.
+
+Potential problem with duplicate edges: if edge appears after a cycle? no.
+
+Potential issue with `nodes` is list of unique strings but we don't validate duplicates? Not required; using set collapses. If duplicates, topological length mismatch? We compare len(order) to len(nodes_set), so if nodes duplicate, len mismatch? Suppose nodes ['a','a']; nodes_set len 1, order len 1 returns. Not specified unique; fine. If duplicate nodes should maybe not mutate. no issue.
+
+Potential problem if nodes contains unhashable? strings. ok.
+
+Need final. Ensure no text outside code block. final:
+```python
+def ...
+```
+
+Need maybe no imports. Good.
+```python
+def topological_order(nodes, edges):
+    nodes_set = set(nodes)
+    adjacency = {node: [] for node in nodes_set}
+    indegree = {node: 0 for node in nodes_set}
+    seen_edges = set()
+
+    for edge in edges:
+        before, after = edge
+
+        if before not in nodes_set or after not in nodes_set:
+            raise ValueError("Edge endpoint not found in nodes.")
+
+        pair = (before, after)
+        if pair in seen_edges:
+            continue
+
+        seen_edges.add(pair)
+        adjacency[before].append(after)
+        indegree[after] += 1
+
+    available = sorted(node for node in nodes_set if indegree[node] == 0)
+    order = []
+
+    while available:
+        node = available.pop(0)
+        order.append(node)
+
+        for neighbor in adjacency[node]:
+            indegree[neighbor] -= 1
+            if indegree[neighbor] == 0:
+                available.append(neighbor)
+                available.sort()
+
+    if len(order) != len(nodes_set):
+        raise ValueError("Cycle detected.")
+
+    return order
+```

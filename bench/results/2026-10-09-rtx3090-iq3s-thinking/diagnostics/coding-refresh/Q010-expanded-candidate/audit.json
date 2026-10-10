@@ -1,0 +1,85 @@
+{
+  "arm": "Q010-expanded-candidate",
+  "source_configuration": "Q008-goal-coding",
+  "quality_passed": false,
+  "passed_count": 4,
+  "checks": [
+    {
+      "seed": 101,
+      "finish_reason": "stop",
+      "completion_tokens": 15491,
+      "returncode": 0,
+      "stdout": "{\"passed\": true, \"compiled\": true, \"cases\": 72, \"test_seed\": 904001}\n",
+      "stderr": "",
+      "passed": true
+    },
+    {
+      "seed": 102,
+      "finish_reason": "stop",
+      "completion_tokens": 6210,
+      "returncode": 0,
+      "stdout": "{\"passed\": true, \"compiled\": true, \"cases\": 72, \"test_seed\": 904001}\n",
+      "stderr": "",
+      "passed": true
+    },
+    {
+      "seed": 103,
+      "finish_reason": "length",
+      "completion_tokens": 32768,
+      "passed": false,
+      "error": "Did not stop naturally"
+    },
+    {
+      "seed": 104,
+      "finish_reason": "stop",
+      "completion_tokens": 2254,
+      "returncode": 0,
+      "stdout": "{\"passed\": true, \"compiled\": true, \"cases\": 72, \"test_seed\": 904001}\n",
+      "stderr": "",
+      "passed": true
+    },
+    {
+      "seed": 105,
+      "finish_reason": "stop",
+      "completion_tokens": 7939,
+      "returncode": 0,
+      "stdout": "{\"passed\": true, \"compiled\": true, \"cases\": 72, \"test_seed\": 904001}\n",
+      "stderr": "",
+      "passed": true
+    }
+  ],
+  "request_identity": [
+    {
+      "seed": 101,
+      "matches_original_except_approved_cap": true,
+      "request_sha256": "14dfc02ba3f168b22821eb3dc135635ba875cca3bee3f22106c06ba8d30a00e2"
+    },
+    {
+      "seed": 102,
+      "matches_original_except_approved_cap": true,
+      "request_sha256": "2e24de623705215ed78d36f8f5d842e6f2faae7c655e7bf21163fd00ee843df6"
+    },
+    {
+      "seed": 103,
+      "matches_original_except_approved_cap": true,
+      "request_sha256": "8064840fa77d2df782948a3fb2ededb0bb0f7fb0be21e0abac8ea17b6d3cfc9d"
+    },
+    {
+      "seed": 104,
+      "matches_original_except_approved_cap": true,
+      "request_sha256": "d6a5d34956e2f219dd045ea604af4cd9aee32f30cf8318179aa6b58cbf620937"
+    },
+    {
+      "seed": 105,
+      "matches_original_except_approved_cap": true,
+      "request_sha256": "4e90e60da792a26a39786afc7469771e3c1252f84243f81ca74fc2280553277f"
+    }
+  ],
+  "minimum_memory_bytes": {
+    "physical_available": 62516215808,
+    "commit_available": 41714528256
+  },
+  "speed_qualification": false,
+  "quality_cap": 32768,
+  "legacy_failures_preserved": true
+}

@@ -3602,3 +3602,109 @@ Both configurations fail the existing completed-answer gate. The current data do
 Rechecked the user-specified model card on2026-10-10: https://huggingface.co/unsloth/Qwen3.8-Flash-Next-GGUF#best-practices . It keeps the prescribed thinking sampler and advises ample generation length for reasoning. Our8192 completion-quality cap is a frozen test limit, not that model-card recommendation. Asked the user whether to raise only this separate quality allowance to32768;512-token speed requests, prompts, seeds, sampler, context and objective tests would stay fixed. No answer yet and no cap change applied. This approval is required by the user's fixed-contract instruction, not an inferred skill restriction. All failures remain historical evidence whatever the decision.
 
 Next independent optimization work: audit the existing distribution-preserving coupled-Gumbel path with the retained HC/accepted-cache stack, then a bounded same-binary control/candidate comparison if integration is sound. Earlier R040 coupling alone86.9/85.1 versus R03787.5/83.9 was mixed, not a winner; the new hypothesis is a measured interaction with GPU/cache improvements, not assumed additive gains. Preserve every numeric sampling parameter and exact-match target verification; biased probability/suffix paths stay excluded. A new random stream requires its own fixed-arm reproducibility and completed-answer checks before promotion. No new inference run has started.
+
+
+## E182 / C054 coupled drafting plus HC/cache combination
+
+Previous turn made progress: complete Q008/Q009 quality evidence changed interpretation and was pushedf523264f. Goal remains active with corrected90short/85long thresholds. Quality cap8192 unchanged; user choice about32768 remains pending. Current authoritative cleanup logs and idleGPU457MiB verified before tests. No production source or configuration edit.
+
+Hypothesis: R040 coupling's longer-context gain may combine with HC latency hiding and accepted-row cache accounting. Coupling changes draft/target agreement, HC changes GPU execution, accepted usage changes expert placement; interactions can help or hurt, so no addition of isolated speedups is assumed. Existing R040 mixed result stays closed as a stand-alone configuration. This is a distinct combined stack compared on one C0510dea69dc executable.
+
+Integration audit: generate.cpp clips the verify window at token barriers before AcceptedUsage.begin(T), captures rows only around ver.run, clears the pointer before MTP draft execution, and commits exactly the a+1 target-verified input prefix. Target verification uses exact equality; STRATA_SPEC_PROB is explicitly0, so known biased probability/suffix composition is excluded. Coupled counters use absolute sequence positions and copy the unchanged per-request sampler. HC selection does not alter this acceptance logic. Gumbel draws preserve the intended categorical distribution subject to finite implementation checks; they change the seeded text stream and are not claimed byte-identical to inverse-CDF sampling.
+
+Ran fresh build/checks for sampler_parity, sampler_parity_one_block, sampler_parity_old, coupled_draft_test, accepted_usage_test and token_barrier_test:6/6 pass. Sampler tests include the fixed numeric chain, GPU/host Gumbel checks and empirical distribution checks; host tests cover counters/history/prefixes/boundaries. These do not establish complete model quality. Buildtree strata.exe remains archived C053 and is NOT used; served engine is explicit C051 file0dea69dc. Private supervisor now verifies requested coupled-startup marker before timed requests.
+
+Pre-registered comparison: R112 A0/0, R113 B1/1 for STRATA_SPEC_COUPLED/STRATA_SPEC_GUMBEL. HC1, accepted1, conditional64/minfresh1025, lag2, PCIe.20, MTP4/.70, modelIQ3_S,262144context,INT8KV and CPUF16vision fixed. Both arms explicitly set probability/old/one-block sampler flags0. Original TTLCache short/~3K streaming cache misses, same requests/seeds101-105,512tokens,1warmup+5measured each. No other model/profiler/build runs during inference;16GiB global floors and exact tree cleanup.
+
+Finite screen: if candidate loses more than3percent in either server-decode or E2E median, or either prompt-rate median, stop after the first pair. Otherwise complete R114 B then R115 A with reverse workload order and pool all ten rows per cell. This3percent is only a screening stop, never a promotion regression allowance. Full target/no-degradation and all quality/matrix gates remain required. At most four arms; no repeated search for a favorable median. Archive every warmup, slow seed, output, MTP acceptance and resource record.
+
+
+## E183 / R112-coupled-stack-control
+
+Explicitly verified candidate engine SHA256 0dea69dcbf10b0f925549552ec58c76d64c2acf51276187b60adb1a62b90b4dd; loaded library hashes match R099-conditional64. This is a new-binary control comparison, not a same-binary claim. Config diff is archived. Fixed numeric sampling, high/xhigh reasoning, model/quant, vision, context262144 and INT8KV retained. Original TTLCache streaming cache-miss workloads; one excluded warmup and five measured seeds101-105 per cell,512tokens per measured run. No slow seed excluded.
+
+| Workload | Decode median (range), tok/s | Prompt median, tok/s | E2E median, tok/s | Stream total median, tok/s | TTFT median, s | Draft accepted/offered |
+|---|---:|---:|---:|---:|---:|---:|
+| short | 88.7 (87.4-91.2) | 210.0 | 77.9408 | 77.9522 | 0.8345 | 805/1088 (73.99%) |
+| longer | 86.7 (82.2-88.1) | 496.5 | 42.5708 | 42.5741 | 6.1520 | 978/1290 (75.81%) |
+
+Minimum available physical RAM 62,292,963,328 bytes; available commit 41,396,244,480 bytes. Sampled GPU peak 25,130,110,976 bytes. Both16GiB host floors passed. Per-process peak memory not sampled. Full launcher/server/text/vision cleanup passed and previous config restored.
+
+C054 feature-off control88.7 short/86.7 longer; no coupled candidate measured yet. Quality evaluation takes priority after user approval of a separate32768-token allowance.
+
+Next: Q010 candidate and Q011 production complete-answer suites at32768;512-token speed protocol unchanged. R113 remains queued, not run.
+
+
+## E184 / approved expanded quality allowance, Q010 and Q011
+
+Direct user answer in this thread approves raising only the separate completed-answer quality allowance to32768. The oversight relay conveys the same approval. Updated goal-90-contract.md from8192 to32768 with historical-preservation clause; added goal90-quality-expanded.py instead of altering the original8192 client. Every payload must equal its originalQ007 payload after changing only max_tokens. Existing checker check-topological.py and its72cases are unchanged. Five seeds101-105, original task, numeric sampler, reasoning settings, model, context, vision and memory floors remain fixed.512-token speed requests unchanged.
+
+Private supervisor adds --goal-quality-expanded selecting the new client and a7200s whole-suite safety timeout, allowing five longer answers while preserving1s16GiB physical/commit checks and exact final cleanup. Legacy client/timeout remains available unchanged. Q010-expanded-candidate uses exactQ008 config; Q011-expanded-production uses exactQ009 config. Both have distinct output paths, no quality warmup, and no speed-target claim from variable-length answers. New manifest explicitly corrects quality warmup wording.
+
+R112 completed before this change and exact cleanup passed. C054 candidateR113/R114/R115 not started; bounded combination remains queued while matched completed-answer quality takes priority. R112 control88.7/86.7 is retained, not a combined optimization result. No model resident at the preparation checkpoint. Next: runQ010, audit natural completion and tests, cleanup; then matchedQ011. Record any cap failures and never relabel Q007/Q008/Q009.
+
+
+## E185 / Q010-expanded-candidate approved expanded quality
+
+Seed101: 15491tokens, finishstop, passed=True; {"passed": true, "compiled": true, "cases": 72, "test_seed": 904001}
+
+Seed102: 6210tokens, finishstop, passed=True; {"passed": true, "compiled": true, "cases": 72, "test_seed": 904001}
+
+Seed103: 32768tokens, finishlength, passed=False; Did not stop naturally
+
+Seed104: 2254tokens, finishstop, passed=True; {"passed": true, "compiled": true, "cases": 72, "test_seed": 904001}
+
+Seed105: 7939tokens, finishstop, passed=True; {"passed": true, "compiled": true, "cases": 72, "test_seed": 904001}
+
+Pass count4/5 with user-approved32768 cap. All five requests equal the originalQ007 requests except max_tokens. Configuration, executable, libraries, expert profile, fixture and vision hashes matchQ008-goal-coding. Natural-stop passing answers compile and pass72tests each. Zero prompt reuse. Legacy8192 failures remain unchanged. Variable-length quality answers do not satisfy the512-token speed target.
+
+Minimum physical62516215808 and commit41714528256bytes;16GiB floors pass. Exact cleanup verified and production3457fdfe restored. No promotion; other workload, stability and real-use requirements remain.
+
+
+## E186 / Q011-expanded-production approved expanded quality
+
+Seed101: 9087tokens, finishstop, passed=True; {"passed": true, "compiled": true, "cases": 72, "test_seed": 904001}
+
+Seed102: 3740tokens, finishstop, passed=True; {"passed": true, "compiled": true, "cases": 72, "test_seed": 904001}
+
+Seed103: 3417tokens, finishstop, passed=True; {"passed": true, "compiled": true, "cases": 72, "test_seed": 904001}
+
+Seed104: 5742tokens, finishstop, passed=True; {"passed": true, "compiled": true, "cases": 72, "test_seed": 904001}
+
+Seed105: 7482tokens, finishstop, passed=True; {"passed": true, "compiled": true, "cases": 72, "test_seed": 904001}
+
+Pass count5/5 with user-approved32768 cap. All five requests equal the originalQ007 requests except max_tokens. Configuration, executable, libraries, expert profile, fixture and vision hashes matchQ009-production-quality. Natural-stop passing answers compile and pass72tests each. Zero prompt reuse. Legacy8192 failures remain unchanged. Variable-length quality answers do not satisfy the512-token speed target.
+
+Minimum physical62270132224 and commit41084174336bytes;16GiB floors pass. Exact cleanup verified and production3457fdfe restored. No promotion; other workload, stability and real-use requirements remain.
+
+
+## E187 / approved expanded quality comparison closes
+
+Q010 candidate4/5 versus matched Q011 production5/5 at the user-approved32768 completed-answer allowance. All five request files are byte-identical between arms, and equalQ007 after changing only max_tokens. Profile, seeds, task, checker and72 test cases remain unchanged. Production's successful answers were reviewed as coherent implementations; finite test coverage is not a claim of universal model quality.
+
+| Seed | Candidate tokens | Candidate outcome | Production tokens | Production outcome |
+|---|---:|---|---:|---|
+|101|15491|natural stop;72tests pass|9087|natural stop;72tests pass|
+|102|6210|natural stop;72tests pass|3740|natural stop;72tests pass|
+|103|32768|cap reached; no final answer|3417|natural stop;72tests pass|
+|104|2254|natural stop;72tests pass|5742|natural stop;72tests pass|
+|105|7939|natural stop;72tests pass|7482|natural stop;72tests pass|
+
+Candidate seed103 exhausted32768 while production seed103 finished3417 and passed. Candidate is ineligible for promotion under the fixed all-five condition. This one pair does not identify a causal component or prove a general distributional quality regression. Do not rerun the unchanged candidate until a favorable pass count appears. Preserve all Q007/Q008/Q0098192 failures and Q01032768 failure. No source/runtime/launcher change was promoted. Both exact trees stopped, production config3457fdfe restored, idleGPU457MiB/0percent. Both host16GiB floors passed.
+
+Long-answer throughput is diagnostic only, not the512-token target. Q010 selected coding speed medians from earlier R110/R11193.6/89.35 remain separate. Original-workload R112 control88.7/86.7 is below the short90 target, so full performance qualification also remains incomplete. Q011's5/5 quality applies to production6048736d configuration only; it cannot be transferred to C051 HC/accepted1 stack.
+
+C054 state: integration6/6 checks pass, R112 control completed, R113/R114/R115 were never started after quality took priority. Keep that proposed combination queued; no combined winner exists. Next controlled diagnosis: same C051 executable and HC1, disable accepted-row accounting and its dependent barriers for a complete five-seed32768 quality suite. All quality inputs are148 fresh tokens, below the1025 barrier threshold, so barriers were inactive in Q010; the changed active mechanism is accepted-row accounting. This is a component-isolation test, not a new sampling profile or a retry of the same configuration. Inspect dependency guards before preparing it. After quality is resolved, prioritize the outstanding unchanged nonstream/cache-hit, mixed-history and real-use matrix before additional speed searches.
+
+Changes implementing approval: goal-90-contract.md quality allowance; new goal90-quality-expanded.py (legacy client preserved); private supervisor expanded-client selector and7200s whole-suite timeout with original per-second memory guards; record-expanded-quality.py validates exact request equivalence except approved cap and preserves natural-stop/72-test scoring. Checker check-topological.py unchanged.512-token benchmark client unchanged. The generated final functions are published separately from their reasoning for inspection.
+
+
+## E188 / reproduce completion failure before component ablation
+
+Refined the next step after review: a single Q010/Q011 pair cannot identify which component caused the seed103 difference. Before the broad ablation proposed inE187, do one bounded fresh-process matched replay of seeds101,102,103 in that order on candidate and production. Preserve the preceding requests rather than extracting seed103 in isolation: adaptive cache/tuner history matters. Same32768 allowance, request bytes, numeric profile, reasoning, model/context/vision and72-test checker. Label replay as a three-request diagnosis, not a replacement for the five-answer quality gate. At most one candidate/control pair; retain a non-reproduction and do not keep repeating until a desired outcome. Only follow with a one-component ablation if evidence supports it; respected accepted-usage/barrier dependency remains mandatory.
+
+No replay started. Both model trees remain cleaned up. C054 speed candidate still queued. The expanded allowance is approved and already applied; no user decision remains pending. Next authoritatively inspect process state, then prepare distinct Q012/Q013 diagnostic paths after confirming they are unused.
+
+Publication check: an atomic replacement of an existing P018 identity export returned transient Windows AccessDenied once; both files had ordinary Archive attributes. Re-running the unchanged exporter succeeded. No experiment was rerun and no measurement was discarded. Final inventory/hash validation is required before push.
+
+Publication validation also caught the private LAN literal in the newly copied audit-helper source before any push. Sanitized that public copy; executable private helper and all measurements unchanged.

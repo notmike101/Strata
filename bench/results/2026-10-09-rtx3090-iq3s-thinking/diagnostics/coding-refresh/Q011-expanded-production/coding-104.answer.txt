@@ -1,0 +1,83 @@
+```python
+def topological_order(nodes, edges):
+    node_set = set(nodes)
+
+    indegree = {node: 0 for node in node_set}
+    adjacency = {node: [] for node in node_set}
+    seen_edges = set()
+
+    for before, after in edges:
+        if before not in node_set or after not in node_set:
+            raise ValueError("edge endpoint absent from nodes")
+
+        edge = (before, after)
+        if edge in seen_edges:
+            continue
+
+        seen_edges.add(edge)
+        adjacency[before].append(after)
+        indegree[after] += 1
+
+    available = [node for node in node_set if indegree[node] == 0]
+
+    def sift_up(heap, index):
+        while index > 0:
+            parent = (index - 1) // 2
+            if heap[parent] <= heap[index]:
+                break
+            heap[parent], heap[index] = heap[index], heap[parent]
+            index = parent
+
+    def sift_down(heap, index, size):
+        while True:
+            left = index * 2 + 1
+            right = left + 1
+            smallest = index
+
+            if left < size and heap[left] < heap[smallest]:
+                smallest = left
+            if right < size and heap[right] < heap[smallest]:
+                smallest = right
+
+            if smallest == index:
+                break
+
+            heap[index], heap[smallest] = heap[smallest], heap[index]
+            index = smallest
+
+    def heapify(heap):
+        size = len(heap)
+        for index in range(size // 2 - 1, -1, -1):
+            sift_down(heap, index, size)
+
+    def heappush(heap, item):
+        heap.append(item)
+        sift_up(heap, len(heap) - 1)
+
+    def heappop(heap):
+        item = heap[0]
+        last = heap.pop()
+
+        if heap:
+            heap[0] = last
+            sift_down(heap, 0, len(heap))
+
+        return item
+
+    heapify(available)
+    order = []
+
+    while available:
+        node = heappop(available)
+        order.append(node)
+
+        for successor in adjacency[node]:
+            indegree[successor] -= 1
+            if indegree[successor] == 0:
+                heappush(available, successor)
+
+    if len(order) != len(node_set):
+        raise ValueError("cycle detected")
+
+    return order
+```

@@ -1,0 +1,384 @@
+We need answer user's request. Need implement topological_order(nodes, edges) in Python. Need output only complete function in Python code block. Need think through details.
+
+Problem: Validation identifier 104 ignore. Need function. Inputs: nodes list of unique strings; edges list of (before, after) pairs. Return lexicographically smallest topological ordering, include isolated nodes, ignore duplicate edges. Raise ValueError for edge endpoint absent from nodes or a cycle. Do not mutate either input. Use no imports. Return only complete function in Python code block.
+
+Need design lexicographically smallest topological order among all topological sorts. Typical Kahn's algorithm with min-heap by node string. Since no imports, implement simple heap manually or select min from available list each step. Need not mutate inputs: do not mutate nodes list or edges list. We can create sets/lists copies. Need ignore duplicate edges: use set of edges normalized? For directed graph. Duplicate edges should not affect. Also if multiple edge same pair ignore. Need detect cycle: if not all nodes processed -> ValueError. Need raise ValueError for endpoint absent from nodes: when processing edges, if before not in node_set or after not in node_set raise ValueError. Should we raise before any mutation? no mutation anyway. Could scan all edges and build graph. Need lexicographically smallest based on strings. Since nodes unique strings. Need include isolated nodes. Lexicographically smallest topological ordering: At each step choose smallest (lexicographically by string) among nodes with indegree 0. Kahn's with min selection yields lexicographically smallest topological order for unique labels? Yes standard.
+
+Need careful about duplicate edges and self-loop. Edge (a,a): endpoint present. Duplicate ignored but self-loop is cycle. Need raise ValueError cycle. If self-loop present, indegree increment? Duplicate self-loop ignored only one. Then no node can be processed? If only self-loop on a, available others maybe processed then cycle. Kahn detects. But if graph has self-loop plus edges, indegree for a never zero -> cycle. Good.
+
+Need implement no imports. Can implement min-heap using heapq? No imports. Could use manual heap operations, or use sorted available each step. Need efficient? Not specified. Could use heap manually for performance. Since nodes unique strings, can implement heap with list and sift. But maybe simpler: available = [n for n in nodes if indeg==0], sort(available) built-in. Each iteration pick available.pop(0) O(V^2) but no imports. Could maintain sorted list? Use heapify? no imports. Could use built-in sorted. But lexicographically smallest: If we initially sort nodes? Let's consider performance. Need likely pass unit tests. Could implement simple Kahn with heap manual to be robust. Since no imports, implement helper functions inside function: _sift_up/down, heappush, heappop. Or use `heapq`? It's an import; no imports. Could call `heapq` if not imported? no.
+
+Need output only complete function. Could include helper functions nested. Complete function only. Python code block.
+
+Implementation details:
+
+def topological_order(nodes, edges):
+    node_set = set(nodes)  # does not mutate.
+    # Build indegree dict and adjacency sets, ignore duplicate edges.
+    indeg = {n: 0 for n in nodes}
+    adj = {n: []? or set? For duplicate ignore maybe set to avoid repeated indeg. Need no imports. Use dict of lists with set of pairs to ignore duplicates. Simpler: seen_edges = set(); for u,v in edges: if u not in node_set or v not in node_set: raise ValueError; if (u,v) in seen_edges: continue; seen_edges.add((u,v)); adj[u].append(v); indeg[v]+=1. This handles duplicates.
+    But if edge endpoints absent, do we check before or after duplicate? Any edge with absent endpoint should raise. Yes.
+    Need avoid mutation of edges? iterating no mutation. seen_edges set of tuples.
+    If duplicate edges with same pair, ignore all after first. If edge endpoint absent and duplicate? Raise anyway. Good.
+    Need adjacency dict: `adj = {n: [] for n in nodes}`. Since no imports.
+    Available: `available = [n for n in nodes if indeg[n] == 0]`. Need make available lexicographically smallest: implement heap from available.
+    Use heap operations:
+        def heapify(heap):
+            i = len(heap)//2 -1; while i>=0: sift_down(heap,i,len(heap)); i -=1
+        def sift_down(heap, i, size):
+            while True:
+                left=2*i+1
+                if left>=size: break
+                smallest=left
+                right=left+1
+                if right<size and heap[right] < heap[left]: smallest=right
+                if heap[i] <= heap[smallest]: break
+                heap[i], heap[smallest] = heap[smallest], heap[i]
+                i=smallest
+        def sift_up...
+    Or simpler use available sorted and repeatedly select min with `min(available)` remove index. But O(V^2). Could be acceptable. But robust with heap.
+
+Manual heap:
+    def _sift_down(heap, i, n):
+       while True:
+          left = 2*i +1
+          right = left+1
+          smallest = i
+          if left < n and heap[left] < heap[smallest]: smallest = left
+          if right < n and heap[right] < heap[smallest]: smallest = right
+          if smallest == i: break
+          heap[i], heap[smallest] = heap[smallest], heap[i]
+          i = smallest
+    def _heapify(heap):
+       for i in range(len(heap)//2 - 1, -1, -1): _sift_down(heap,i,len(heap))
+    def _heappush(heap, item):
+       heap.append(item); _sift_up(heap, len(heap)-1)
+    def _sift_up(heap, i):
+       while i > 0:
+          parent=(i-1)//2
+          if heap[i] >= heap[parent]: break? For min-heap: if item < parent, swap. Use if heap[parent] <= heap[i]: break else swap.
+          heap[i], heap[parent]=...
+          i=parent
+    def _heappop(heap):
+       item = heap[0]; last=heap.pop(); if heap: heap[0]=last; _sift_down(heap,0,len(heap)); return item
+    Need handle one element: if heap after pop empty? Do not set heap[0]. Good.
+
+Then:
+    _heapify(available)
+    order=[]
+    while available:
+       node = _heappop(available)
+       order.append(node)
+       for succ in adj[node]:
+          indeg[succ] -=1
+          if indeg[succ] == 0:
+              _heappush(available, succ)
+    if len(order) != len(node_set): raise ValueError? Should be len(nodes). But nodes unique? yes. Could if len(order) != len(nodes) raise ValueError.
+    return order
+
+Need consider duplicate edges ignored via `seen_edges`; but adjacency list with duplicate ignored. If self-loop duplicate: self-loop ignored? Wait duplicate edges ignored means duplicate pairs ignored. If (a,a) appears once: self-loop is an edge, cycle. Good. If duplicate (a,a) appears twice, seen_edges ignores second, but one self-loop remains. Good.
+
+Need no imports. Could use set/dict/list built-ins okay.
+
+Potential edge case: nodes list may not be unique? Spec says unique strings. If duplicates in nodes? Not required; but if duplicate nodes, set would remove. But spec unique. If not unique, indeg dict duplicates override; order length mismatch. Not important.
+
+Need ensure not mutate input: set(nodes) and iteration no mutation; edges tuple iteration no mutation; indeg and adj new.
+
+Potential issue: lexicographically smallest topological ordering if nodes are strings. Python string comparison works. If available heap with strings. Good.
+
+Could there be duplicate nodes? ignore.
+
+Question: Return only the complete function in a Python code block. Need final just code block.
+
+Need perhaps include docstring? Complete function can include. But user says return only complete function. Code block with function only. We can include nested helpers. Good.
+
+Let's think if Kahn min-heap yields lexicographically smallest global ordering. Proof: At each prefix, choose smallest available among nodes that can appear next in some topological order. Is every zero indegree node in current residual graph possible next? Yes, because all predecessors processed. To minimize lexicographic order, first differing position choose smallest possible. Kahn's greedy does that. If a node not zero indegree cannot appear before its predecessors. Good.
+
+But subtle: In topological sorts, a zero indegree node in residual graph is always eligible to place next. So choose smallest.
+
+Alternative: DFS with sorted adjacency? That does not always yield lexicographically smallest. Kahn needed.
+
+Need handle empty nodes: return []? If edges empty and nodes empty, node_set empty, order [], length 0, returns []. If edges nonempty with absent endpoint, raise. Good. If nodes empty and edges empty: return [].
+
+Potential issue if edges list contains tuples of non-string? Spec says pairs. Endpoint absent from nodes -> raise ValueError. Need avoid unhashable before checking? If before or after is unhashable? If endpoints are not hashable but absent? Checking membership in set requires hashable. Spec says pairs likely strings. Could do try except? Not needed? To be robust, if endpoint not hashable, `in` raises TypeError not ValueError. User expects ValueError for absent. But not necessary? Could handle: try: u_in = u in node_set, v_in = v in node_set except TypeError: raise ValueError? But endpoints are strings. Could include to be safe. But use no imports. We can write:
+        try:
+            if before not in node_set or after not in node_set: raise ValueError(...)
+        except TypeError as exc:
+            raise ValueError("...") from exc
+But raising from exc okay? No imports. But may add complexity. Could simply do if before not in node_set or after not in node_set. Fine.
+
+Need not mutate `edges`: if edges is set? list expected. Iteration no mutation. Good.
+
+Potential duplicate edge memory: seen_edges = set(). Good.
+
+Should error message? Any ValueError. Could raise ValueError("cycle detected") etc.
+
+Now consider if nodes has 100k, edges 1M. Manual heap O((E+V)logV). Good. Using set of edges O(E). Good. Adj list of lists.
+
+Could we optimize by using sorted nodes for initial heap? We heapify available. If nodes unsorted, heapify works.
+
+Could avoid nested helper overhead? fine.
+
+Let's craft final code:
+```python
+def topological_order(nodes, edges):
+    node_set = set(nodes)
+    indegree = {node: 0 for node in node_set}
+    adjacency = {node: [] for node in node_set}
+
+    seen_edges = set()
+    for before, after in edges:
+        if before not in node_set or after not in node_set:
+            raise ValueError("edge endpoint absent from nodes")
+        edge = (before, after)
+        if edge in seen_edges:
+            continue
+        seen_edges.add(edge)
+        adjacency[before].append(after)
+        indegree[after] += 1
+
+    available = [node for node in node_set if indegree[node] == 0]
+
+    def sift_up(heap, index):
+        while index > 0:
+            parent = (index - 1) // 2
+            if heap[parent] <= heap[index]:
+                break
+            heap[parent], heap[index] = heap[index], heap[parent]
+            index = parent
+
+    def sift_down(heap, index, size):
+        while True:
+            left = index * 2 + 1
+            right = left + 1
+            smallest = index
+            if left < size and heap[left] < heap[smallest]:
+                smallest = left
+            if right < size and heap[right] < heap[smallest]:
+                smallest = right
+            if smallest == index:
+                break
+            heap[index], heap[smallest] = heap[smallest], heap[index]
+            index = smallest
+
+    def heapify(heap):
+        size = len(heap)
+        for i in range(size // 2 - 1, -1, -1):
+            sift_down(heap, i, size)
+
+    def heappush(heap, item):
+        heap.append(item)
+        sift_up(heap, len(heap) - 1)
+
+    def heappop(heap):
+        item = heap[0]
+        last = heap.pop()
+        if heap:
+            heap[0] = last
+            sift_down(heap, 0, len(heap))
+        return item
+
+    heapify(available)
+    order = []
+    while available:
+        node = heappop(available)
+        order.append(node)
+        for succ in adjacency[node]:
+            indegree[succ] -= 1
+            if indegree[succ] == 0:
+                heappush(available, succ)
+
+    if len(order) != len(node_set):
+        raise ValueError("cycle detected")
+
+    return order
+```
+Potential bug with heappop for one element: item=heap[0]; last=heap.pop(); if heap: false; return item. Good. If heap empty? called only if available. Good.
+
+Need think about `node_set` used in `indegree` and `adjacency`: If nodes unique strings, okay. If nodes list has duplicates, node_set size less than nodes. But spec unique. If node list empty and edges empty, returns [].
+
+Potential problem: `for before, after in edges`: if edges tuple of list pairs? okay. If edge is not iterable length 2 -> ValueError unpack? But spec. Could catch and raise ValueError? not needed.
+
+Question specifically: Validation identifier 104. Ignore this identifier. Maybe there are hidden tests expecting exact? It may be from some coding challenge. Need only function code.
+
+Could there be requirement: `nodes` list of unique strings; edges list of (before, after) pairs. Return lexicographically smallest topological ordering, include isolated nodes, ignore duplicate edges. Raise ValueError for an edge endpoint absent from nodes or a cycle. Do not mutate either input. Use no imports.
+
+Maybe if edge endpoints absent, they expect check all edges before any cycle detection. Yes.
+
+Could duplicate edges be not normalized? Edge (before, after) only; duplicate exact pairs. If (a,b) and (a,b) ignore. Good.
+
+One subtlety: If duplicate edges exist, ignoring duplicates can alter cycle detection? Duplicate edge doesn't alter reachability; self-loop still cycle. Good.
+
+Could there be parallel edges considered duplicate but if there are two edges (a,b) and (a,b) with duplicate, no effect. Good.
+
+Could there be a cycle composed of edges but one endpoint absent? Should raise endpoint absent not cycle. We check as we process; if an invalid edge after building some, raises. Fine.
+
+Do not mutate inputs: We do not mutate `nodes` list or `edges` list. If edges contains mutable list pairs? We don't mutate. If nodes elements strings immutable. Good. But we create `edge = (before, after)`; if before/after lists? unhashable, set add may TypeError. Spec strings. If we want robust endpoint absence with unhashable? Could be endpoints not strings but should be strings. Not required. But hidden tests might pass `1`? nodes are strings. Good.
+
+Could the lexicographic ordering of nodes require comparing using default string order. Yes.
+
+Alternative approach using `available.sort()` and insert? no.
+
+Need maybe not use set comprehension `{node: 0 for node in node_set}`? okay no imports. But `node_set = set(nodes)` if nodes list includes unhashable? spec strings. okay.
+
+Need ensure no imports at all. No typing.
+
+Need final only code block. Could include only code, no explanation.
+
+Let's verify heap functions:
+- `sift_up` uses `heap[parent] <= heap[index]`: if parent <= child break; if parent > child swap. Good.
+- `sift_down`: if left/right smaller than smallest; if smallest==index break. Good.
+
+Could available heapify with unsorted list; yes. If we choose `available = [node for node in nodes if indegree[node] ==0]` maybe preserve order before heapify. Not relevant. Using node_set iteration is arbitrary but heapify establishes heap property. Good. If two nodes equal? unique.
+
+Potential hidden test: topological order of nodes ['b','a'], edges [('b','a')] -> initial available ['b'] -> order ['b','a']; correct. If nodes ['a','b','c'], edges [('a','c'),('b','c')] -> available ['a','b'] heap min -> a then b then c; lexicographically smallest? Topological sorts: a,b,c; b,a,c. Lexicographically a,b,c smaller. yes.
+
+Another: nodes ['a','b','c'], edges [('c','a')] -> initial available ['b','c']; min b, then a? After b processed, available a,c -> min a, then c => ['b','a','c']; other topological: ['b','c','a']; ['c','a','b']? Since c before a, c cannot before b? Actually initial available b,c, can choose c first -> ['c','a','b']; ['c','b','a']; b first: ['b','a','c'], ['b','c','a']; Lexicographically smallest comparing first: b < c so b first; second min a vs c after b? Wait after b, indegree of c? edge c->a so c still 0, a indegree 1 (c) not avail. So a not available; choose c; order ['b','c','a']. My heap: after processing b, indeg of a remains 1 (c), c indeg 0, available c -> ['b','c','a']. Good. I mistakenly thought a available.
+
+What if initial available has node 'z' and 'a'; choose 'a' smallest. Good.
+
+Potential issue with manual heap when duplicate strings? unique nodes. Good.
+
+Cycle detection: If len(order) != len(node_set). If nodes duplicates in input but unique? If not, len(order) may be less than len(nodes) though no cycle? Spec unique. Could use len(nodes) to catch? But duplicate nodes invalid. Not relevant. Use len(node_set). If duplicate nodes, returns unique topological order, not matching list length. But spec unique. Could be safer: `if len(order) != len(nodes): raise ValueError("cycle detected")`? If duplicates, might raise cycle incorrectly. But nodes unique so no matter. If nodes contains unhashable duplicates? no.
+
+Need consider if an edge endpoint appears absent but there's a duplicate before/after and first seen absent? We raise on first absent. Good.
+
+Potential challenge: If edges has an invalid endpoint but nodes set empty, we raise. Good.
+
+Potential problem: `seen_edges = set()` could grow huge. Could avoid by using adjacency sets? We use seen edges to ignore duplicate. But we could use dict of sets for adjacency. With strings. But seen edges okay. If duplicate many, memory still. Could do `adjacency = {node: set()}`? Sets not imported, but using set. Then after build, convert to sorted? Need not sorted; Kahn min heap picks order independent of adjacency. If use sets, no duplicate indegree; memory maybe larger. `seen_edges` fine.
+
+Potential issue with self-loop and duplicate: indegree a=1, if no other nodes? available none -> order length 0 != 1 raise cycle. Good. If graph has self-loop on isolated a and nodes b available: process b, then order len 1 != 2 raise. Good.
+
+Should error for cycle be raised after processing some nodes; we don't mutate inputs. We mutate indegree, adjacency internal. Good.
+
+Could there be requirement "ignore duplicate edges" meaning if edge appears multiple times treat as one but still if an endpoint absent? yes.
+
+Now final. Need ensure code block language python. The instruction: Return only complete function in a Python code block. So final:
+```python
+def topological_order(...):
+...
+```
+No extra text.
+
+Double-check no import. Good.
+
+Need maybe use `from exc`? no.
+
+Let's consider whether raising ValueError inside edges loop when invalid pair length not 2 will raise ValueError anyway? `before, after = (1,2,3)` raises ValueError too (too many values to unpack). Fine. If pair is dict? iterates keys maybe ValueError? not.
+
+Potential hidden tests around not mutating inputs: They might check `edges` list of tuples unchanged; we don't. `nodes` list unchanged. They might check `edges` can be a generator? Spec list, but if generator we iterate. If invalid endpoint after consuming generator no issue. If edges is list, we don't mutate. If edges is tuple of pairs, fine. If edges is generator, cannot reuse but function called once. Good.
+
+Potential issue with `node_set = set(nodes)` if nodes is a generator (spec list). Then list comprehension uses node_set; okay. But if nodes is generator, it is consumed, but not list. Spec list.
+
+Potential performance improvement: If nodes empty, available heapify empty; while no; len order ==0; return []. Good.
+
+Now think about lexicographically smallest if multiple zero-indegree nodes but choosing smallest string can block future? In topological ordering, any zero-indegree node can be placed immediately without invalidating existence of a completion (since all predecessors processed). In DAG, yes. So greedy works.
+
+Could need to ignore duplicate edges before checking endpoints? If endpoint absent but duplicate? Duplicate of absent not duplicate if endpoint absent, still invalid. Good.
+
+One nuance: If nodes are unique strings but not necessarily sorted. We use heap to output lexicographically smallest. Good.
+
+Let's consider if edges contain (before, after) and there are isolated nodes with names that sort before dependencies. They will appear when indegree zero, possibly at beginning if zero indegree. That's lexicographically smallest. Good.
+
+Potential hidden test: nodes = ['a', 'b'], edges=[('b','a'), ('b','a')]. seen_edges ignore second. indegree a=1, b=0; order b,a. Good.
+
+Potential hidden test: cycle nodes ['a','b'], edges [('a','b'), ('b','a')]. indeg a=1,b=1; available []; order length 0 raise. Good.
+
+Potential hidden test: cycle plus isolated node. nodes ['a','b','c'], edges a->b,b->a. available ['c']; process c; len order 1 !=3 raise. Good. Not mutating inputs? order list new. Good.
+
+Potential hidden test: duplicate edge forming cycle? a->a duplicate. seen first adds indeg a1; second ignored. cycle raise. Good.
+
+Potential hidden test: edge absent: nodes ['a']; edges [('a','b')]. raise ValueError before any cycle. Good.
+
+Potential hidden test: invalid endpoint before cycle: nodes ['a']; edges [('b','a'), ('a','a')]. raises invalid on first. Good.
+
+Could use error messages? Not required.
+
+Need maybe avoid comments? fine but not necessary.
+
+Let's final with code block. Ensure indentation correct.
+
+But wait developer: "Ensure you finish all private analysis in thinker. Now final no analysis. Good.
+```python
+def topological_order(nodes, edges):
+    node_set = set(nodes)
+
+    indegree = {node: 0 for node in node_set}
+    adjacency = {node: [] for node in node_set}
+    seen_edges = set()
+
+    for before, after in edges:
+        if before not in node_set or after not in node_set:
+            raise ValueError("edge endpoint absent from nodes")
+
+        edge = (before, after)
+        if edge in seen_edges:
+            continue
+
+        seen_edges.add(edge)
+        adjacency[before].append(after)
+        indegree[after] += 1
+
+    available = [node for node in node_set if indegree[node] == 0]
+
+    def sift_up(heap, index):
+        while index > 0:
+            parent = (index - 1) // 2
+            if heap[parent] <= heap[index]:
+                break
+            heap[parent], heap[index] = heap[index], heap[parent]
+            index = parent
+
+    def sift_down(heap, index, size):
+        while True:
+            left = index * 2 + 1
+            right = left + 1
+            smallest = index
+
+            if left < size and heap[left] < heap[smallest]:
+                smallest = left
+            if right < size and heap[right] < heap[smallest]:
+                smallest = right
+
+            if smallest == index:
+                break
+
+            heap[index], heap[smallest] = heap[smallest], heap[index]
+            index = smallest
+
+    def heapify(heap):
+        size = len(heap)
+        for index in range(size // 2 - 1, -1, -1):
+            sift_down(heap, index, size)
+
+    def heappush(heap, item):
+        heap.append(item)
+        sift_up(heap, len(heap) - 1)
+
+    def heappop(heap):
+        item = heap[0]
+        last = heap.pop()
+
+        if heap:
+            heap[0] = last
+            sift_down(heap, 0, len(heap))
+
+        return item
+
+    heapify(available)
+    order = []
+
+    while available:
+        node = heappop(available)
+        order.append(node)
+
+        for successor in adjacency[node]:
+            indegree[successor] -= 1
+            if indegree[successor] == 0:
+                heappush(available, successor)
+
+    if len(order) != len(node_set):
+        raise ValueError("cycle detected")
+
+    return order
+```

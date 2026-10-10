@@ -1,0 +1,15 @@
+We need answer user's request. Need produce final answer with complete code, tests, explanation at least 1200 words. Need implement thread-safe Python TTLCache using OrderedDict and monotonic clock. Include set,get,delete,clear,len, expiration, capacity eviction, unit tests injected fake clock, detailed explanation thread safety and complexity. Existing requirements mention keys item_000... item_063 lifetimes sizes 30..93 bytes step 1 lifetime, sizes step 3 bytes. Need maybe incorporate? It says read these existing design requirements before implementing cache. They are specific rules. Could implement tests that populate all existing rules? Need likely satisfy: expiration must remove stale entries, access update LRU order. Key item_000 has lifetime 30 and size 64 etc. Need maybe include preloaded fixture? Need implement cache that handles max size capacity by bytes? Requirement includes size bytes and capacity eviction. TTLCache could have capacity in bytes? Existing rules specify sizes, so likely capacity eviction by total bytes. Need design: key -> value, size, expiry. LRU order OrderedDict: move_to_end on access. Expiration remove stale entries. Need thread-safe: Lock/RLock. Monotonic clock injection. Need complete code, tests, explanation. Could write code with TTLCache:
+
+import threading, time
+from collections import OrderedDict
+
+class TTLCache:
+    def __init__(self, max_size_bytes=None, clock=None, default_lifetime=None? Maybe each set can include lifetime and size. Since existing cache rules include lifetime and size per key. Could set(key, value, lifetime, size)
+       max_capacity bytes optional. If None maybe unlimited except eviction? But requirement capacity eviction. Maybe max_size_bytes. Also max_count? Maybe size in bytes. Use size_bytes. On set: with self._lock:
+          now = self._clock()
+          self._evict_expired(now) # lazy? Maybe prune expired.
+          if key in self._cache: remove existing size, move? If update lifetime.
+          while max_size_bytes and self._total_size + size > max_size_bytes:
+             if no entries break? If single entry larger than capacity maybe reject? Could evict until fits, if size > capacity return False? Or allow and evict others? Need robust.
+             key_evict, entry = self._cache.popitem(last=False) # LRU
+          insert key at end: Entry(value, size

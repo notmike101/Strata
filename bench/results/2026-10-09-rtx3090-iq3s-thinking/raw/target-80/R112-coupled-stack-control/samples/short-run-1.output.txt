@@ -1,0 +1,15 @@
+We need answer user's request. Need produce detailed answer at least 1200 words. User asks: Benchmark identifier ignore. Implement thread-safe Python TTLCache class using OrderedDict and monotonic clock. Include set, get, delete, clear, len, expiration, capacity eviction, unit tests with injected fake clock, detailed explanation thread safety and complexity. Write complete code, then tests, then explain design. Do not abbreviate implementation.
+
+Need produce final with code complete, tests, explanation. Need ensure at least 1200 words. Should include Python implementation using threading, collections.OrderedDict, time.monotonic by default but injectable clock. Methods: set(key, value, ttl=None?), get(key, default=None), delete(key), clear(), __len__, maybe __contains__, expiration handling on access. Need capacity eviction: if full evict oldest by LRU? Since OrderedDict and TTL, maybe capacity eviction: maintain ordered by insertion/last access? We can implement LRU: on get move_to_end, on set move_to_end. Expiration: store expires_at. On get check expiry. On len and contains maybe count non-expired; need prune expired. Need thread-safe: all public methods acquire reentrant lock? If nested calls? If _get_entry uses lock? Simpler: use threading.RLock, each public method acquires. Avoid calling external callbacks while holding lock. Fake clock injection: constructor takes clock: Callable[[], float]=time.monotonic. TTL default? maxsize. capacity eviction when len>maxsize: popitem(last=False). Need handle ttl=0 immediate expired. Could normalize ttl=None means infinite? TTL cache with TTL maybe require ttl default. We can include default_ttl.
+
+Need tests: with unittest, FakeClock class set time, advance. Tests for set/get, expiration, delete, clear, len counts unexpired, capacity eviction LRU, thread safety? Maybe simple concurrent test. But user wants unit tests with injected fake clock. Could include concurrency test using real threads and barrier? But fake clock not deterministic under concurrency, but fine. Could test thread-safety by increments.
+
+Need code no abbreviations.
+
+Need consider OrderedDict thread-safe? No, need lock. Need monotonic clock: default time.monotonic. Clock injectable returns float seconds.
+
+Potential implementation:
+
+class TTLCache:
+    __slots__ = ('_lock','_clock','_maxsize','_default_ttl','_data')
+    def __init__(
