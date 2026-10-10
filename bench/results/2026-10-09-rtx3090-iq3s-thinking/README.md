@@ -160,3 +160,5 @@ The additional restart check in the early hardware campaign was blocked by autom
 Latest E101: HC fast cumulative15-run medians and rejected PCIe interaction are in [the detailed report](diagnostics/hyper-connection/README.md). No production promotion; goal90 remains unqualified.
 
 Latest E102: [C035 exact HC source screen](diagnostics/hyper-connection/C035/README.md) rejected source-Q8 reconstruction because no such blocks exist in the selected model. No production changes.
+
+Latest E103: [C036 exact BF16 storage screen](diagnostics/hyper-connection/C036/README.md) saved18.54% storage but failed GPU timing; rejected without production changes.

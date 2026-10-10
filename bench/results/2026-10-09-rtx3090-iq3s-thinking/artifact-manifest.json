@@ -1,5 +1,5 @@
 {
-  "exported_utc": "2026-10-10T02:58:16.452730+00:00",
+  "exported_utc": "2026-10-10T03:03:47.061967+00:00",
   "files": {
     ".gitattributes": {
       "bytes": 205,
@@ -1080,6 +1080,58 @@
     "diagnostics/hyper-connection/C035/README.md": {
       "bytes": 2133,
       "sha256": "cb6a2f61a3453e6131154b2e82c8882c9fb5802966908dd47975677aebb44ddb"
+    },
+    "diagnostics/hyper-connection/C036/build-c036.cmd": {
+      "bytes": 592,
+      "sha256": "748eacf1de4ae6ee43a2df23d5092143559d5e3dd3786527713b2db4a9de79a8"
+    },
+    "diagnostics/hyper-connection/C036/C036-build.txt": {
+      "bytes": 309,
+      "sha256": "c72071eed7c11e673ff9e59c1842b6659867e948b5bf3163e9db6a4be5a70e10"
+    },
+    "diagnostics/hyper-connection/C036/c036-dot.inl": {
+      "bytes": 1221,
+      "sha256": "27bbce2043c80e3ec090d3373233249a5739a3e496bf7aeac80e023cf07c436b"
+    },
+    "diagnostics/hyper-connection/C036/c036-kernel.cu": {
+      "bytes": 5706,
+      "sha256": "40ae40fb385da59116c1a384ea4e29d32c098a41d9898a0d22bd5caea9da11c5"
+    },
+    "diagnostics/hyper-connection/C036/c036-plan.md": {
+      "bytes": 1978,
+      "sha256": "4c8d5fb84b8517ae717011f62bad5c69d52207d0312e38996bbe2e505969af57"
+    },
+    "diagnostics/hyper-connection/C036/c036-prepare.py": {
+      "bytes": 1974,
+      "sha256": "1fb55179d4c894dae1dc9a15ace8ed9ebfb6e907c04382955f174364c58855a4"
+    },
+    "diagnostics/hyper-connection/C036/C036-result.json": {
+      "bytes": 160751,
+      "sha256": "16fa4f71dca772ade63a319e4f54517cd43db906d054fed94cf5bac4c3f6a66d"
+    },
+    "diagnostics/hyper-connection/C036/c036-screen.py": {
+      "bytes": 3956,
+      "sha256": "13b52887a7acab23a857ff083dda803860518e2b9c2c8f7387e35a970df5b264"
+    },
+    "diagnostics/hyper-connection/C036/C036-screen.txt": {
+      "bytes": 499,
+      "sha256": "758e001971ae39146a69366a8a6531b5cd878bde511accead24d65c7440819bb"
+    },
+    "diagnostics/hyper-connection/C036/C036-timing-manifest.json": {
+      "bytes": 435,
+      "sha256": "668e1576f794e4074e4de9c0cce28089f07d3398ea4ec83f3b3acd45ba4cb0c2"
+    },
+    "diagnostics/hyper-connection/C036/C036-timing.txt": {
+      "bytes": 12730,
+      "sha256": "ce93dbd57eb7d8d81dac9b9ced5446db0e26d84465a27e950e1a69d242683def"
+    },
+    "diagnostics/hyper-connection/C036/README.md": {
+      "bytes": 3571,
+      "sha256": "f94b00742757ffdd5d741938d90895e158858d2478d437f2dc448db6e53a1d1e"
+    },
+    "diagnostics/hyper-connection/C036/summary.json": {
+      "bytes": 3313,
+      "sha256": "3f63a66e287ce9222a108d106bd67e832b08ffb923c10c894456a9d4c3187028"
     },
     "diagnostics/hyper-connection/compare-grfast.py": {
       "bytes": 2994,
@@ -4382,8 +4434,8 @@
       "sha256": "2f62bfdf31004200f39c1304db55b529c33f169fec03d3f572c9c4564d092739"
     },
     "goal-90-state.json": {
-      "bytes": 1252,
-      "sha256": "106a5a83f96384f7257994bcad32a56eadaf2c746064aed333e26ec63cbdb601"
+      "bytes": 1231,
+      "sha256": "87953b31114e3060f057aa1d3f01100378bf6d3789be96849ec7c24473273e16"
     },
     "goal90-benchmark.py": {
       "bytes": 13011,
@@ -4414,8 +4466,8 @@
       "sha256": "f1340e812574b74b1139b75eaa2cad11a2cd0c11f168f6c2f1f0e7a0bb4cbaf6"
     },
     "ledger.md": {
-      "bytes": 206808,
-      "sha256": "806dbdf698347299658ce0a747ffd6dc016c8fa183c9a35c223561fa57238c47"
+      "bytes": 210365,
+      "sha256": "9e0c7d87163de2d8190270ad9b9c73b894153133ff1f5949ac11f436e0fd856d"
     },
     "measure.py": {
       "bytes": 13940,
@@ -13882,8 +13934,8 @@
       "sha256": "827f30cb4bb82a24773c9cacdb0eff6af5da74ffcca7ecb661c301dd6186313b"
     },
     "README.md": {
-      "bytes": 23357,
-      "sha256": "a14ddada1370da33c6084f77bb513235acc3c4bf599d5d8035f2974132e856a7"
+      "bytes": 23529,
+      "sha256": "4d5aba288a4f716779b461dfe5f9043ff9ad856472834ca88c569a8e867de509"
     },
     "replay.py": {
       "bytes": 1104,

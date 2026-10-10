@@ -3,16 +3,16 @@
   "target_tps": 90,
   "metric": "server_decode_tps",
   "contract": "goal-90-contract.md",
-  "current": "C035 rejected: all398 target+draft HC tensors checked; no Q8 source blocks. No runtime changes or server launch.",
+  "current": "C036 rejected: exact reconstruction saved18.54% bytes but14/15 GPU projection cells slowed20-56%. No integration or server launch.",
   "next": [
-    "Choose a new measured architecture hypothesis from actual BF16 storage or host/device scheduling; source-Q8 reconstruction is inapplicable.",
-    "Full quality matrix remains mandatory; goal90 unqualified."
+    "Reassess existing host/device scheduling traces for removable work; do not retune the failed BF16 decoder without new evidence.",
+    "Full quality gate remains unresolved; goal90 not qualified."
   ],
   "promoted": "The previously qualified format-gather engine with IQ2_S gather disabled and adaptive lag2; no changes this turn.",
   "stopping_rule": "Leave goal active until all fixed qualification cells pass. No benchmark model resident at handoff.",
   "quality": "Q007: 3/5 compiled and passed72 tests each, 2/5 no final answer at8192 tokens. Goal unqualified.",
-  "last_checkpoint": "E102",
-  "resume_command": "Read E102 and C035 evidence; do not repeat source-Q8 reconstruction. Confirm live ownership before next experiment.",
+  "last_checkpoint": "E103",
+  "resume_command": "Read E103/C036; no model resident. Confirm process ownership before any new experiment.",
   "safety": "R070/R071 cleanup passed, config hash restored, idle GPU589MiB; both16GiB host floors passed.",
   "goal_tool_status_at_entry": "blocked; reconfirmed by get_goal, no active/resume transition exists in exposed update_goal enum"
 }

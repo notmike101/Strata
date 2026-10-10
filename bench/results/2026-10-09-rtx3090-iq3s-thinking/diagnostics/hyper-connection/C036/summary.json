@@ -1,0 +1,136 @@
+{
+  "decision": "rejected by predeclared timing gate",
+  "storage": {
+    "experiment": "C036",
+    "format": "52 bytes per32 BF16 values plus64 bytes per fallback block",
+    "tensor_count": 298,
+    "coefficients": 659374080,
+    "original_bytes": 1318748160,
+    "encoded_bytes": 1074217408,
+    "reduction_fraction": 0.1854264213722202,
+    "eligible_fraction": 0.9979264213722202,
+    "mismatching_coefficients": 0,
+    "eligibility_pass": true,
+    "minimum_physical_available_bytes": 121236983808,
+    "minimum_commit_available_bytes": 124016676864,
+    "seconds": 27.201215700013563
+  },
+  "timing_cells": [
+    {
+      "id": "0",
+      "T": "1",
+      "original_us": "7.607680",
+      "packed_us": "11.873280",
+      "ratio": "1.560697"
+    },
+    {
+      "id": "0",
+      "T": "2",
+      "original_us": "10.071041",
+      "packed_us": "14.612480",
+      "ratio": "1.450940"
+    },
+    {
+      "id": "0",
+      "T": "3",
+      "original_us": "12.071680",
+      "packed_us": "16.788481",
+      "ratio": "1.390733"
+    },
+    {
+      "id": "0",
+      "T": "4",
+      "original_us": "14.175839",
+      "packed_us": "18.739199",
+      "ratio": "1.321911"
+    },
+    {
+      "id": "0",
+      "T": "5",
+      "original_us": "14.945281",
+      "packed_us": "18.938721",
+      "ratio": "1.267204"
+    },
+    {
+      "id": "1",
+      "T": "1",
+      "original_us": "7.055360",
+      "packed_us": "10.337280",
+      "ratio": "1.465167"
+    },
+    {
+      "id": "1",
+      "T": "2",
+      "original_us": "8.908800",
+      "packed_us": "12.472320",
+      "ratio": "1.400000"
+    },
+    {
+      "id": "1",
+      "T": "3",
+      "original_us": "10.525921",
+      "packed_us": "14.136321",
+      "ratio": "1.343001"
+    },
+    {
+      "id": "1",
+      "T": "4",
+      "original_us": "12.260799",
+      "packed_us": "16.091681",
+      "ratio": "1.312450"
+    },
+    {
+      "id": "1",
+      "T": "5",
+      "original_us": "14.658560",
+      "packed_us": "18.691999",
+      "ratio": "1.275159"
+    },
+    {
+      "id": "2",
+      "T": "1",
+      "original_us": "51.164162",
+      "packed_us": "44.917759",
+      "ratio": "0.877914"
+    },
+    {
+      "id": "2",
+      "T": "2",
+      "original_us": "10.525121",
+      "packed_us": "15.143359",
+      "ratio": "1.438782"
+    },
+    {
+      "id": "2",
+      "T": "3",
+      "original_us": "12.180480",
+      "packed_us": "16.885759",
+      "ratio": "1.386297"
+    },
+    {
+      "id": "2",
+      "T": "4",
+      "original_us": "14.295040",
+      "packed_us": "18.953119",
+      "ratio": "1.325853"
+    },
+    {
+      "id": "2",
+      "T": "5",
+      "original_us": "17.638399",
+      "packed_us": "21.253120",
+      "ratio": "1.204935"
+    }
+  ],
+  "parity_cases": 45,
+  "finite_bitwise_output_floats": 1382400,
+  "prototype_sha256": "489415e235b91763be5de0906a04a1d72d1058ace33523d67aec102f92998976",
+  "limitations": [
+    "isolated up-projection dot kernel, not full HC read or served TPS",
+    "three actual tensors, T1..5, three input sets each; all tensor coefficients separately reconstructed on CPU",
+    "one id2/T1 cell has elevated timings; all raw rounds retained; no causal attribution or discarded rows",
+    "one GPU microbenchmark process; no confidence interval or full model quality claim"
+  ],
+  "production_changes": false,
+  "server_launched": false
+}
