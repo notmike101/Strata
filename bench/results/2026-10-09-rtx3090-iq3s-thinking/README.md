@@ -1,6 +1,6 @@
 # RTX 3090 / i9-10900KF: IQ3_S thinking-mode optimization ledger
 
-Current goal checkpoint (E100): **90 tok/s is not qualified**. Reject combination: short 85.9 versus 86.1 control, longer 82.9 versus 83.1. Longer client rate also slightly lower. A 90.7 short peak does not qualify. Finite budget closes this interaction; no reversed pair, no promotion. Full launcher-tree cleanup is enforced and verified. Process-memory queries stay outside timed generation; GPU telemetry and independent16GiB physical/commit guards remain. The retained production stack is unchanged. Q007 still has two incomplete coding answers out of five; no full quality/matrix qualification is claimed. No benchmark model is resident at this checkpoint.
+Current goal checkpoint (E108): **90 tok/s is not qualified**. C039 dual-output quantization passed exact offline tests but lost served generation:85.7/80.8 versus87.4/81.2 tok/s. Experimental source edits were removed; production launcher unchanged. Both16GiB floors and process cleanup passed. Q007 full coding qualification remains incomplete. No benchmark model is resident.
 
 Active goal: **90 tok/s server_decode_tps** on the fixed short and approximately3K coding matrix; goal created without a token budget at the user's request. See [goal-90-contract.md](goal-90-contract.md). The target remains unproven. Fresh control B010 measured85.9 /84.8 tok/s but included short-run stalls of21.7 and17.5; prompt-read medians77.0 /495.3. No new candidate is promoted. Earlier90/85 follow-up results remain in [follow-up-summary.json](follow-up-summary.json). The B010 stalls remain unexplained; later B011/B012 cells and the Q007 failures are retained without discarding slow or incomplete runs.
 
@@ -166,3 +166,5 @@ Latest E103: [C036 exact BF16 storage screen](diagnostics/hyper-connection/C036/
 Latest E104: [C037 expert-fetch screen](diagnostics/expert-fetch/C037/README.md) passed byte parity but produced no useful timing gain; rejected. Goal API is active.
 
 Latest E105: [C038 shared quantization](diagnostics/shared-quant/C038/README.md) rejected on three reproducible byte mismatches. No engine or launcher change. Goal remains active.
+
+E106-E108: [C039 dual-output quantization](diagnostics/shared-quant/C039/README.md) passed exact offline parity but lost the served comparison. Production edits removed; no launcher promotion.

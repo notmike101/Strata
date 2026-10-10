@@ -1,0 +1,22 @@
+We need answer user's request. Need produce complete code, tests, explanation >=1200 words. Need think thoroughly.
+
+User: Implement thread-safe Python TTLCache class using OrderedDict and monotonic clock. Include set, get, delete, clear, len, expiration, capacity eviction, unit tests with injected fake clock, detailed explanation of thread safety and complexity. Write complete code, then tests, then explain design. Do not abbreviate implementation. Detailed answer at least 1200 words.
+
+Need craft final with code blocks. Need no abbreviations? Means don't ellipsize code. Need complete code. Include thread-safe TTLCache using OrderedDict, monotonic clock injected. Methods set, get, delete, clear, len, expiration? Maybe method expiration or expiry? Need maybe __len__, expire? They mention len and expiration, likely methods for length and expire/cleanup? Let's design.
+
+Requirements: thread-safe: use threading.Lock or RLock. OrderedDict for LRU? TTL cache with expiration and capacity eviction. Need use monotonic clock injected for tests. Could implement class:
+
+import threading
+from collections import OrderedDict
+from typing import Optional, Any, Callable, Hashable
+
+DEFAULT_TTL = None
+
+class TTLCache:
+    def __init__(self, maxsize: int = 128, ttl: Optional[float] = None, clock: Callable[[], float] = time.monotonic, max_size? capacity?). Need OrderedDict mapping key -> (value, expires_at). Move to end on set and get (LRU). Eviction capacity: if len > max_size evict least recently used (popleft). Also need purge expired keys? Since len should not count expired? Need thread-safe. For performance, lazy expiration on access: get returns None if expired. But len should reflect non-expired? If len returns number entries without purge, maybe includes expired. Better __len__ calls _purge_expired under lock. Also expiration method maybe expire() or cleanup? They asked include expiration, capacity eviction. Could implement methods:
+    def __len__(self): returns number of active entries, evict expired.
+    def expire(self): remove expired, return count removed.
+    def __contains__(self): check after expiry.
+    def __getitem__/__setitem__/__delitem__ optional.
+    def set(key, value, ttl=None) store with ttl.
+    def get(key, default=None) returns value if not expired,

@@ -1,0 +1,12 @@
+We need answer user's request. Need produce final detailed answer at least 1200 words, complete code, tests, explanation design. Need ignore benchmark identifier. Need implement thread-safe Python TTLCache class using OrderedDict and monotonic clock. Include set, get, delete, clear, len, expiration, capacity eviction, unit tests with injected fake clock, detailed explanation thread safety and complexity. Do not abbreviate implementation. Need likely no external libs? Use collections.OrderedDict, threading.RLock, time.monotonic maybe default. Could include typing. Need ensure thread safety. Need complete code then tests then design explanation. Need at least 1200 words. Let's plan.
+
+Code: TTLCache class.
+Parameters: maxsize, ttl default None? maybe global ttl. Use OrderedDict mapping key -> value and expiry? Could store tuples (value, expires_at). OrderedDict maintains LRU order: most recently used at end. Methods:
+__init__(self, maxsize, ttl=None, clock=None). If maxsize < 0? If ttl negative? Raise ValueError. clock default time.monotonic. _lock = threading.RLock(). _data = OrderedDict(). _maxsize, _ttl, _clock.
+Public:
+set(key, value, ttl=None): with lock: ttl resolve; expires = clock()+ttl if ttl is not None else None (None never expires). If key exists: remove then append to end? To refresh expiry and LRU. If new and maxsize full: evict oldest? Since OrderedDict order is LRU, oldest at first. But expired entries also could be first? We should evict expired first maybe while len>=maxsize before inserting: prune_expired? But careful with monotonic and ttl None. We can _delete_expired_locked. Then if key in data: remove. If len(data) >= maxsize: if maxsize == 0: maybe just return? If maxsize zero, no entries stored. If maxsize positive and len >= maxsize: popitem(last=False) (oldest least recently used). Then insert key -> (value, expires), move_to_end(key).
+Return maybe None.
+
+get(key, default=None): with lock: entry = data.get(key); if entry None? Need differentiate stored None values. Store entries as tuple; if key not in data return default. Else value, expiry. If expired: del data[key]; return default. Else move_to_end(key); return value.
+
+delete(key): with

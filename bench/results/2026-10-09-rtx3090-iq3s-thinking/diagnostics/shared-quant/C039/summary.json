@@ -1,0 +1,202 @@
+{
+  "offline_decision": "pass byte/output parity and timing gate",
+  "final_decision": "reject after R072/R073 served comparison; source restored",
+  "geomean_time_ratio": 0.9341930514588555,
+  "min_ratio": 0.868036,
+  "max_ratio": 0.96743,
+  "timing_cells": [
+    {
+      "layer": "0",
+      "T": "1",
+      "original_us": "6.370240",
+      "candidate_us": "5.529600",
+      "ratio": "0.868036"
+    },
+    {
+      "layer": "0",
+      "T": "2",
+      "original_us": "7.597120",
+      "candidate_us": "7.229440",
+      "ratio": "0.951603"
+    },
+    {
+      "layer": "0",
+      "T": "3",
+      "original_us": "8.971520",
+      "candidate_us": "8.499200",
+      "ratio": "0.947353"
+    },
+    {
+      "layer": "0",
+      "T": "4",
+      "original_us": "9.451520",
+      "candidate_us": "9.143680",
+      "ratio": "0.967430"
+    },
+    {
+      "layer": "0",
+      "T": "5",
+      "original_us": "11.466240",
+      "candidate_us": "11.008000",
+      "ratio": "0.960036"
+    },
+    {
+      "layer": "0",
+      "T": "6",
+      "original_us": "12.554240",
+      "candidate_us": "12.001280",
+      "ratio": "0.955954"
+    },
+    {
+      "layer": "0",
+      "T": "7",
+      "original_us": "12.881920",
+      "candidate_us": "12.308480",
+      "ratio": "0.955485"
+    },
+    {
+      "layer": "0",
+      "T": "8",
+      "original_us": "13.772800",
+      "candidate_us": "13.238080",
+      "ratio": "0.961176"
+    },
+    {
+      "layer": "1",
+      "T": "1",
+      "original_us": "6.377600",
+      "candidate_us": "5.795840",
+      "ratio": "0.908781"
+    },
+    {
+      "layer": "1",
+      "T": "2",
+      "original_us": "8.243200",
+      "candidate_us": "7.383040",
+      "ratio": "0.895652"
+    },
+    {
+      "layer": "1",
+      "T": "3",
+      "original_us": "8.939520",
+      "candidate_us": "8.386560",
+      "ratio": "0.938144"
+    },
+    {
+      "layer": "1",
+      "T": "4",
+      "original_us": "8.345280",
+      "candidate_us": "7.758720",
+      "ratio": "0.929714"
+    },
+    {
+      "layer": "1",
+      "T": "5",
+      "original_us": "9.615040",
+      "candidate_us": "8.939520",
+      "ratio": "0.929743"
+    },
+    {
+      "layer": "1",
+      "T": "6",
+      "original_us": "10.258240",
+      "candidate_us": "9.632000",
+      "ratio": "0.938953"
+    },
+    {
+      "layer": "1",
+      "T": "7",
+      "original_us": "11.028481",
+      "candidate_us": "10.485760",
+      "ratio": "0.950789"
+    },
+    {
+      "layer": "1",
+      "T": "8",
+      "original_us": "11.870720",
+      "candidate_us": "11.221761",
+      "ratio": "0.945331"
+    },
+    {
+      "layer": "2",
+      "T": "1",
+      "original_us": "5.384320",
+      "candidate_us": "4.864000",
+      "ratio": "0.903364"
+    },
+    {
+      "layer": "2",
+      "T": "2",
+      "original_us": "7.004480",
+      "candidate_us": "6.285440",
+      "ratio": "0.897346"
+    },
+    {
+      "layer": "2",
+      "T": "3",
+      "original_us": "7.647360",
+      "candidate_us": "6.991040",
+      "ratio": "0.914177"
+    },
+    {
+      "layer": "2",
+      "T": "4",
+      "original_us": "8.377600",
+      "candidate_us": "7.892480",
+      "ratio": "0.942093"
+    },
+    {
+      "layer": "2",
+      "T": "5",
+      "original_us": "9.526400",
+      "candidate_us": "8.835840",
+      "ratio": "0.927511"
+    },
+    {
+      "layer": "2",
+      "T": "6",
+      "original_us": "10.792320",
+      "candidate_us": "10.082560",
+      "ratio": "0.934235"
+    },
+    {
+      "layer": "2",
+      "T": "7",
+      "original_us": "10.988480",
+      "candidate_us": "10.444800",
+      "ratio": "0.950523"
+    },
+    {
+      "layer": "2",
+      "T": "8",
+      "original_us": "11.888640",
+      "candidate_us": "11.354240",
+      "ratio": "0.955050"
+    }
+  ],
+  "corpus": {
+    "cases": 4096,
+    "input_values": 47185920,
+    "output_bytes_compared": 106168320,
+    "guards": "pass",
+    "runs": "prototype and integrated API separately passed"
+  },
+  "actual_weight_output_cases_per_pass": 96,
+  "memory_snapshot": {
+    "physical_available": 121327857664,
+    "commit_available": 124817063936
+  },
+  "prototype_hashes": {
+    "c039-red.exe": "2b8b277bc873e884605db70dc139edb20a0504336aaa4e85389a795c4033f5e0",
+    "c039-parity.exe": "5ee3de695dc66b9ce7e3350fa7bdb5e748f588cb8c72ad45ea1b23ecac619de5",
+    "c039-corpus.exe": "da9bb6d5ceefd973a1f5a5de99392c813772eb034df65c6fdf308425806f4b17",
+    "c039-timing.exe": "15a90c175a56279a4087ef8ec6a5b930e5d545543e7c1037de7d725d51fb1852",
+    "c039-integrated-corpus.exe": "40036d455fd407ece74bf8795d9992ab21974eb9a12671f16706fb22b9fcd28e",
+    "c039-integrated-parity.exe": "86eabd7128601ff5d1a6ad738338571f5c1a89f0f9550c089d2a59e60a4954b2"
+  },
+  "engine_sha256": "ca6551bc7fcd095032c082408378adf91c476a48d48e7e223988c0d4c06beefc",
+  "upstream_main": "fb58e0dbc8399662c0e47c76578c6e878b14f6cf",
+  "backend_validation": "CUDA13.3.73/sm86 only. HIP excluded by preprocessor; HIP/SYCL not built. No review or merge requested. Experimental production edits removed.",
+  "served_output_comparison": "all12 output texts differ; request cache-miss nonce also differs, so this is not an exact-input arithmetic parity test",
+  "production_changes_retained": false
+}

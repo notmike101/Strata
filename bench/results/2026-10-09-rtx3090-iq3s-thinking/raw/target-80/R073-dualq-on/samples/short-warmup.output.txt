@@ -1,0 +1,11 @@
+We need answer user's request. Need produce final answer with complete code, tests, detailed explanation at least 1200 words. Need think fully.
+
+Task: Implement thread-safe Python TTLCache class using OrderedDict and monotonic clock. Include set, get, delete, clear, len, expiration, capacity eviction, unit tests with injected fake clock, detailed explanation of thread safety and complexity. Write complete code, then tests, then explain design. Do not abbreviate implementation. Produce detailed answer at least 1200 words.
+
+Need likely include Python code. Need ensure thread-safe. Use OrderedDict, threading.RLock, time.monotonic injected clock. Methods: set(key, value, ttl maybe default), get(key, default=None), delete(key), clear(), __len__, expiration (maybe keys(), items? maybe expiring method?). Capacity eviction: LRU eviction when exceed maxsize. TTL expiration: remove expired on access; perhaps background lazy expiration. Could have maxsize=None? Use OrderedDict for LRU. On set: if existing update move_to_end. If new insert at end. Evict oldest if len > maxsize. On get: if expired delete return default; else move_to_end return value. On delete: remove if exists. Clear: clear. Expiration: method maybe remove_expired() to clean expired entries (maybe returns count), or check if expired internal. Could include items/keys that filter expired? Need include expiration. Could implement `expire()` or `sweep_expired`. Unit tests with fake clock.
+
+Need be careful: monotonic clock injection: constructor accepts `clock=time.monotonic`. For tests FakeClock increments. Need avoid time.sleep.
+
+Potential thread safety: Use `threading.RLock` because methods may call other methods while holding lock? E.g., `__setitem__` calls `__getitem__`? We'll implement all with lock. Need avoid public methods calling private while lock? Use RLock if internal calls, but could use non-reentrant and avoid nested. RLock easier.
+
+TTL semantics: default_ttl seconds. If ttl <= 0? Should delete immediately? Could treat ttl <=0 invalid? For immediate expiration? Need unit tests. Could require ttl >= 0. For set with ttl None uses default. If ttl == 0 entry immediately expires, maybe set then get returns default. But len might be 1 until sweep? If set ttl=0, we can still insert with expires_at == now; get returns expired.

@@ -1,0 +1,24 @@
+{
+  "exe": {
+    "control": "C:\\strata\\engine\\strata-cuda133-format-gather.exe",
+    "candidate": "C:\\strata\\engine\\strata-cuda133-dual-q8.exe"
+  },
+  "env": {
+    "control": {
+      "STRATA_IQ256_GATHER": "1",
+      "STRATA_IQ_MT_MIN": "1",
+      "STRATA_IQ256_GATHER_IQ2_S": "0",
+      "STRATA_ADAPT_LAG": "2",
+      "STRATA_VERIFY_DEVICE_PLAN": "0",
+      "STRATA_GR_FAST": "1"
+    },
+    "candidate": {
+      "STRATA_IQ256_GATHER": "1",
+      "STRATA_IQ_MT_MIN": "1",
+      "STRATA_IQ256_GATHER_IQ2_S": "0",
+      "STRATA_ADAPT_LAG": "2",
+      "STRATA_DUAL_Q8": "0",
+      "STRATA_GR_FAST": "0"
+    }
+  }
+}

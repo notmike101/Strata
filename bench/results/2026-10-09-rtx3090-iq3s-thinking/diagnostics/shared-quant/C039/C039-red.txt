@@ -1,0 +1,22 @@
+PARITY layer=0 T=1 pattern=0 qbytes=2880 floats=1280 exact=pass
+PARITY layer=0 T=1 pattern=1 qbytes=2880 floats=1280 exact=pass
+PARITY layer=0 T=1 pattern=2 qbytes=2880 floats=1280 exact=pass
+PARITY layer=0 T=1 pattern=3 qbytes=2880 floats=1280 exact=pass
+PARITY layer=0 T=2 pattern=0 qbytes=5760 floats=2560 exact=pass
+PARITY layer=0 T=2 pattern=1 qbytes=5760 floats=2560 exact=pass
+PARITY layer=0 T=2 pattern=2 qbytes=5760 floats=2560 exact=pass
+PARITY layer=0 T=2 pattern=3 qbytes=5760 floats=2560 exact=pass
+PARITY layer=0 T=3 pattern=0 qbytes=8640 floats=3840 exact=pass
+PARITY layer=0 T=3 pattern=1 qbytes=8640 floats=3840 exact=pass
+PARITY layer=0 T=3 pattern=2 qbytes=8640 floats=3840 exact=pass
+PARITY layer=0 T=3 pattern=3 qbytes=8640 floats=3840 exact=pass
+PARITY layer=0 T=4 pattern=0 qbytes=11520 floats=5120 exact=pass
+PARITY layer=0 T=4 pattern=1 qbytes=11520 floats=5120 exact=pass
+PARITY layer=0 T=4 pattern=2 qbytes=11520 floats=5120 exact=pass
+PARITY layer=0 T=4 pattern=3 qbytes=11520 floats=5120 exact=pass
+PARITY layer=0 T=5 pattern=0 qbytes=14400 floats=6400 exact=pass
+PARITY layer=0 T=5 pattern=1 qbytes=14400 floats=6400 exact=pass
+PARITY layer=0 T=5 pattern=2 qbytes=14400 floats=6400 exact=pass
+PARITY layer=0 T=5 pattern=3 qbytes=14400 floats=6400 exact=pass
+PARITY layer=0 T=6 pattern=0 qbytes=17280 floats=7680 exact=pass
+FAIL dual quant layer=0 T=6 pattern=1 routed_equal=1 shared_equal=0

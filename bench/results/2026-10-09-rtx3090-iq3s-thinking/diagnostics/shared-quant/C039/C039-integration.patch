@@ -1,0 +1,133 @@
+diff --git a/include/strata/kernels/iq_kernels.hpp b/include/strata/kernels/iq_kernels.hpp
+index 2c38f6f9..302831c0 100644
+--- a/include/strata/kernels/iq_kernels.hpp
++++ b/include/strata/kernels/iq_kernels.hpp
+@@ -22,6 +22,13 @@ size_t iq_row_bytes(int ggml_type, int64_t n) noexcept;
+ /// q8_1 blocks for `n_rows` rows of `n_cols` floats (n_cols a multiple of 32): y is n_rows * n_cols/32 blocks.
+ void quantize_q8_1_rows(const float* x, int64_t n_rows, int64_t n_cols, void* y, void* stream);
+ 
++#if !defined(STRATA_USE_HIP)
++/// CUDA opt-in producer for concurrent expert branches: routed matches quantize_q8_1_rows,
++/// shared matches native_quantize_q8_1 (including approximate division/FTZ). Distinct,
++/// non-overlapping output buffers, each n_rows*n_cols/32*36 bytes. Same shape contract.
++void quantize_q8_1_rows_dual(const float* x, int n_rows, int n_cols, void* routed, void* shared, void* stream);
++#endif
++
+ /// y[c][r] = W[r] . x[c] for `ncols` columns of q8_1 activations (x stride n_in/32 blocks per column).
+ void iq_mmvq(int ggml_type, const void* w, const void* x_q8_1, float* y, int n_in, int n_out, int ncols, void* stream);
+ 
+diff --git a/src/core/verify.cpp b/src/core/verify.cpp
+index 71c0c7d0..84bad0a2 100644
+--- a/src/core/verify.cpp
++++ b/src/core/verify.cpp
+@@ -1280,6 +1280,7 @@ bool Verifier::record_window(int T, cudaStream_t cs, std::string& err) {
+         const bool sh_fork = sh_stream_on() && !prof_on_ && sh_cs_ != nullptr && ev_fork_ != nullptr && ev_join_ != nullptr;
+         const bool sh_fork_late = sh_fork && sh_fork_late_env && !ar_on();
+         cudaStream_t sh_stream = sh_fork ? sh_cs_ : cs;
++        bool dual_q8_ready = false;   // separate precise routed / fast shared images, never interchangeable
+         if (sh_fork && !sh_fork_late) {
+             cudaEventRecord(ev_fork_, cs);
+             cudaStreamWaitEvent(sh_cs_, ev_fork_, 0);
+@@ -1352,6 +1353,25 @@ bool Verifier::record_window(int T, cudaStream_t cs, std::string& err) {
+                                      m_x_ + tb * N, m_ids_ + tb * K, m_seq_, cs);
+             }
+             if (sh_fork_late) {
++#if !defined(STRATA_USE_HIP)
++                static const bool dual_q8_env = [] {
++                    const char* e = std::getenv("STRATA_DUAL_Q8");
++                    return e != nullptr && e[0] == '1';
++                }();
++                if (dual_q8_env && G == 1 && !q8_ffn && strata::kernels::cpu::expert_layout().native) {
++                    // G==1 avoids reusing shared scratch while another group is still running.
++                    // After the CPU doorbell, before the fork: both readers see their own exact
++                    // quantizer's bytes. The shared expert still owns sh_xq_ for its hidden state.
++                    quantize_q8_1_rows_dual(xm, n, (int) N,
++                                            nat_xq_ + (size_t) tb * (N / 32) * 36, sh_xq_, cs);
++                    dual_q8_ready = true;
++                    static bool dual_q8_announced = false;
++                    if (!dual_q8_announced) {
++                        std::fprintf(stderr, "strata dual q8: recording precise+fast images, single group T=%d\n", n);
++                        dual_q8_announced = true;
++                    }
++                }
++#endif
+                 cudaEventRecord(ev_fork_, cs);
+                 cudaStreamWaitEvent(sh_cs_, ev_fork_, 0);
+             }
+@@ -1370,9 +1390,10 @@ bool Verifier::record_window(int T, cudaStream_t cs, std::string& err) {
+             nsw.up_type = wsu->native_type; nsw.up_data = wsu->native_data;
+             nsw.down_type = wsd->native_type; nsw.down_data = wsd->native_data;
+             nsw.q8_1 = sh_fork ? sh_xq_ : xq_;
++            nsw.x_q8_1 = dual_q8_ready ? sh_xq_ : nullptr;
+             // STRATA_VERIFY_QDEDUP=1 (not with the forked shared-expert stream, which quantizes into its own buffer): the
+-            // experts' q8_1 image of xm is made first and the shared expert's gate/up read it (quantize_q8_1_rows and
+-            // native_quantize_q8_1 write the same bytes)
++            // experts' q8_1 image of xm is made first and the shared expert's gate/up read it.
++            // CUDA quantizers can differ at rounding boundaries; STRATA_DUAL_Q8 preserves both images.
+             qdedup = g_qdedup() && !sh_fork && strata::kernels::cpu::expert_layout().native;
+             if (qdedup && !q8_ffn) quantize_q8_1_rows(xm, n, N, nat_xq_ + (size_t) tb * (N / 32) * 36, cs);
+             if (!shared_expert_native_bf16_enabled()) {
+@@ -1392,7 +1413,7 @@ bool Verifier::record_window(int T, cudaStream_t cs, std::string& err) {
+             if (sh_fork) cudaEventRecord(ev_join_, sh_cs_);
+         }
+         if (strata::kernels::cpu::expert_layout().native) {
+-            if (!qdedup)
++            if (!qdedup && !dual_q8_ready)
+                 if (!q8_ffn) quantize_q8_1_rows(xm, n, N, nat_xq_ + (size_t) tb * (N / 32) * 36, cs);
+         } else
+             quantize_q8_0_scaled(xm, hit_xq_ + (size_t) tb * (N / 32) * 34, hit_xs_ + (size_t) tb * (N / 32), (int64_t) n * N, cs);
+diff --git a/src/kernels/cuda/iq_kernels.cu b/src/kernels/cuda/iq_kernels.cu
+index a81c0d83..b207fe69 100644
+--- a/src/kernels/cuda/iq_kernels.cu
++++ b/src/kernels/cuda/iq_kernels.cu
+@@ -1536,6 +1536,33 @@ __global__ void quantize_q8_1_kernel(const float* __restrict__ x, block_q8_1* __
+     q8_1_store(x[i], y, i);
+ }
+ 
++// STRATA_DUAL_Q8=1: retain the routed precise and shared fast-math byte images.
++// CUDA only: explicit FTZ operations match native_mmvq.cu; this TU stays precise.
++#if !defined(STRATA_USE_HIP)
++__device__ __forceinline__ float dual_fast_abs(float x){float y;asm("abs.ftz.f32 %0, %1;":"=f"(y):"f"(x));return y;}
++__device__ __forceinline__ float dual_fast_max(float a,float b){float y;asm("max.ftz.f32 %0, %1, %2;":"=f"(y):"f"(a),"f"(b));return y;}
++__device__ __forceinline__ float dual_fast_add(float a,float b){float y;asm("add.rn.ftz.f32 %0, %1, %2;":"=f"(y):"f"(a),"f"(b));return y;}
++__device__ __forceinline__ float dual_fast_div(float a,float b){float y;asm("div.approx.ftz.f32 %0, %1, %2;":"=f"(y):"f"(a),"f"(b));return y;}
++__device__ __forceinline__ float dual_fast_round(float a){float h=copysignf(.5f,a),y,z;asm("add.rz.ftz.f32 %0, %1, %2;":"=f"(y):"f"(a),"f"(h));asm("cvt.rzi.f32.f32 %0, %1;":"=f"(z):"f"(y));return z;}
++__global__ __launch_bounds__(256,1) void dual_q8_1_kernel(const float*x,block_q8_1*routed,block_q8_1*shared,int n){
++ int i=blockIdx.x*256+threadIdx.x;if(i>=n)return;
++ float xi=x[i],am=fabsf(xi),af=dual_fast_abs(xi),sum=xi,sf=xi;
++ #pragma unroll
++ for(int o=16;o;o>>=1){
++  am=fmaxf(am,__shfl_xor_sync(0xffffffffu,am,o));
++  af=dual_fast_max(af,__shfl_xor_sync(0xffffffffu,af,o));
++  sum=__fadd_rn(sum,__shfl_xor_sync(0xffffffffu,sum,o));
++  sf=dual_fast_add(sf,__shfl_xor_sync(0xffffffffu,sf,o));
++ }
++ float d=q8_1_finite(__fdiv_rn(am,127.f));
++ float df=q8_1_finite(dual_fast_div(af,127.f));
++ signed char qr=q8_1_quant(xi,d,am),qf=0;
++ if(af!=0.f){float q=dual_fast_round(dual_fast_div(xi,df));qf=(signed char)(q>127.f?127.f:q< -127.f?-127.f:q);}
++ routed[i/32].qs[i%32]=qr;shared[i/32].qs[i%32]=qf;
++ if(i%32==0){routed[i/32].ds=q8_1_ds(d,sum);shared[i/32].ds=q8_1_ds(df,sf);}
++}
++#endif
++
+ // swiglu_entries_kernel and quantize_q8_1_kernel in one pass, over the call's own entries only:
+ // [grp_start[0], grp_start[*n_groups]) (a call's entries are contiguous; the verify window's PCIe call starts after
+ // its VRAM call) instead of all cap_entries twice - nothing reads the others: the down kernel reads its groups'.
+@@ -2732,6 +2759,16 @@ void quantize_q8_1_rows(const float* x, int64_t n_rows, int64_t n_cols, void* y,
+     check("quantize_q8_1_rows");
+ }
+ 
++#if !defined(STRATA_USE_HIP)
++void quantize_q8_1_rows_dual(const float* x, int n_rows, int n_cols, void* routed, void* shared, void* stream) {
++    const int n = n_rows * n_cols;
++    if (n <= 0) return;
++    dual_q8_1_kernel<<<(unsigned) ((n + 255) / 256), 256, 0, (cudaStream_t) stream>>>(
++        x, (block_q8_1*) routed, (block_q8_1*) shared, n);
++    check("quantize_q8_1_rows_dual");
++}
++#endif
++
+ void iq_mmvq(int t, const void* w, const void* x_q8_1, float* y, int n_in, int n_out, int ncols, void* stream) {
+     const size_t rb = iq_row_bytes(t, n_in);
+     cudaStream_t s = (cudaStream_t) stream;

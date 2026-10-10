@@ -3,16 +3,16 @@
   "target_tps": 90,
   "metric": "server_decode_tps",
   "contract": "goal-90-contract.md",
-  "current": "C038 shared quant buffer rejected: three sequentially reproduced int8 rounding mismatches. No production changes.",
+  "current": "R072/R073: dual-output Q8 rejected. Decode87.4/81.2 control versus85.7/80.8 candidate; source restored.",
   "next": [
-    "Evaluate a dual-output quantizer preserving both baseline arithmetic paths; use C038 counterexamples first. Do not exchange their output buffers.",
-    "All fixed quality and workload conditions remain required; no qualifying90 TPS result."
+    "Reassess CPU expert code generation against prior host traces and actual mixed-format inventory. Avoid repeating closed GPU scheduling paths.",
+    "Rebuild build-cuda86-main before treating its library/engine as a new source baseline; it currently retains C039 objects."
   ],
   "promoted": "The previously qualified format-gather engine with IQ2_S gather disabled and adaptive lag2; no changes this turn.",
   "stopping_rule": "Leave goal active until all fixed qualification cells pass. No benchmark model resident at handoff.",
   "quality": "Q007: 3/5 compiled and passed72 tests each, 2/5 no final answer at8192 tokens. Goal unqualified.",
-  "last_checkpoint": "E105",
-  "resume_command": "Read E105/C038; no benchmark model resident.",
-  "safety": "C038 prototypes exited; cleanup found no live Strata; GPU457MiB idle, config and executable hashes unchanged.",
+  "last_checkpoint": "E108",
+  "resume_command": "Read E106-E108/C039 and verify live ownership; no model resident.",
+  "safety": "R072/R073 both16GiB floors passed, minimum physical62.7GB and commit40.9GB decimal; clean shutdown and457MiB idle GPU; config/exe hashes unchanged.",
   "goal_tool_status_at_entry": "active, verified get_goal"
 }

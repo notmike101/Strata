@@ -3508,5 +3508,81 @@
       84.8,
       85.9
     ]
+  },
+  {
+    "campaign": "target-80",
+    "arm": "R072-dualq-off",
+    "workload": "longer",
+    "runs": 5,
+    "decode_median": 81.2,
+    "decode_min": 79.3,
+    "decode_max": 85.8,
+    "e2e_median": 41.17431328890119,
+    "stream_total_median": 41.17744192924237,
+    "ttft_median_seconds": 6.160558900039177,
+    "raw_decode": [
+      83.5,
+      81.2,
+      79.3,
+      79.5,
+      85.8
+    ]
+  },
+  {
+    "campaign": "target-80",
+    "arm": "R072-dualq-off",
+    "workload": "short",
+    "runs": 5,
+    "decode_median": 87.4,
+    "decode_min": 85.0,
+    "decode_max": 90.1,
+    "e2e_median": 76.41003451226939,
+    "stream_total_median": 76.42350077041621,
+    "ttft_median_seconds": 0.850938799965661,
+    "raw_decode": [
+      89.2,
+      90.1,
+      85.0,
+      87.4,
+      86.9
+    ]
+  },
+  {
+    "campaign": "target-80",
+    "arm": "R073-dualq-on",
+    "workload": "longer",
+    "runs": 5,
+    "decode_median": 80.8,
+    "decode_min": 79.9,
+    "decode_max": 83.6,
+    "e2e_median": 41.109761215712304,
+    "stream_total_median": 41.11285463350827,
+    "ttft_median_seconds": 6.1435593999922276,
+    "raw_decode": [
+      79.9,
+      80.8,
+      80.0,
+      83.6,
+      82.3
+    ]
+  },
+  {
+    "campaign": "target-80",
+    "arm": "R073-dualq-on",
+    "workload": "short",
+    "runs": 5,
+    "decode_median": 85.7,
+    "decode_min": 83.7,
+    "decode_max": 88.5,
+    "e2e_median": 75.30683121233578,
+    "stream_total_median": 75.32533889224277,
+    "ttft_median_seconds": 0.8486796999932267,
+    "raw_decode": [
+      87.6,
+      85.7,
+      85.5,
+      83.7,
+      88.5
+    ]
   }
 ]

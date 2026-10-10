@@ -1,0 +1,12 @@
+**********************************************************************
+** Visual Studio 2022 Developer Command Prompt v17.14.36
+** Copyright (c) 2025 Microsoft Corporation
+**********************************************************************
+C:\Strata\local-setup\target-80\c039-red.cu(23): warning #177-D: variable "ITERS" was declared but never referenced
+   constexpr int N=2560,M=640,MAXT=8,ITERS=100;size_t qb=K::native_q8_1_bytes(N,MAXT);
+                                     ^
+
+Remark: The warnings can be suppressed with "-diag-suppress <warning-number>"
+
+c039-red.cu
+tmpxft_00099a2c_00000000-7_c039-red.cudafe1.cpp
