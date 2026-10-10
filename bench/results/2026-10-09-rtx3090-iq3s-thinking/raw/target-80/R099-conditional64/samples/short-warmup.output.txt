@@ -1,0 +1,16 @@
+We need answer user's request. Need produce final answer with complete code, tests, detailed explanation at least 1200 words. Need think fully.
+
+Task: Implement thread-safe Python TTLCache class using OrderedDict and monotonic clock. Include set, get, delete, clear, len, expiration, capacity eviction, unit tests with injected fake clock, detailed explanation of thread safety and complexity. Write complete code, then tests, then explain design. Do not abbreviate implementation. Produce detailed answer at least 1200 words.
+
+Need likely include Python code. Need ensure thread-safe. Use OrderedDict, threading.RLock, time.monotonic injected. TTLCache class. Methods: set(key,value,ttl=None?) get(key, default=None) delete(key) clear() __len__? maybe keys? expiration maybe purge method. capacity eviction. Need handle TTL <=0? Store expiration absolute monotonic time. If ttl is None no expiry? Requirement TTLCache probably default ttl? Need design: TTLCache(maxsize, ttl=..., clock=time.monotonic, default_ttl=None?) Use OrderedDict for LRU? Need OrderedDict and monotonic clock. Include expiration, capacity eviction. Thread-safe. Unit tests with fake clock.
+
+Implementation details:
+- class TTLCache:
+    def __init__(self, maxsize, ttl=None, clock=time.monotonic) maybe ttl float seconds. If maxsize <=0 raise ValueError. If ttl is not None and ttl <0 raise ValueError? Maybe allow zero expire immediately.
+    self._maxsize = int(maxsize)
+    self._default_ttl = ttl
+    self._clock = clock
+    self._data = OrderedDict() mapping key -> (value, expires_at) where expires_at None for no expiration. If ttl is None? For a TTLCache, require default ttl? But include set(..., ttl=None). Could set use default_ttl. If set ttl None and default_ttl None => no expiration? Need maybe allow None no expiry. But class TTLCache maybe should default TTL if provided. I'll support optional TTL per key and default TTL; if neither, item never expires. But name TTLCache. Better: require maxsize, default ttl can be None. If ttl=None no expiry; else expires. Tests with fake clock.
+    Need ensure if updating key moves to end. If item expired, treat as miss.
+    _now = self._clock()
+    _is_expired(item, now): expires_at is not None and expires

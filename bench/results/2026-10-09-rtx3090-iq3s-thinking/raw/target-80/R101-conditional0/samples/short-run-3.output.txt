@@ -1,0 +1,14 @@
+We need answer user's request. Need produce final detailed answer at least 1200 words. Need implement thread-safe Python TTLCache using OrderedDict and monotonic clock. Include set, get, delete, clear, len, expiration, capacity eviction, unit tests with injected fake clock, detailed explanation thread safety complexity. Complete code, tests, explanation. Do not abbreviate implementation. Also Benchmark identifier irrelevant ignore. Need likely include code blocks. Need ensure thread safety with lock. Need use OrderedDict for LRU? TTL cache can maintain expiration times and capacity eviction. Need discuss expiration: lazy and active? Methods get should check expiration and remove if expired. Maybe also purge expired periodically? Include _purge maybe. Use monotonic clock injected via factory. Need tests with fake clock. Need detailed explanation of thread safety and complexity.
+
+Let's design robust TTLCache.
+
+Class TTLCache:
+__init__(maxsize, ttl, clock=time.monotonic). Use collections.OrderedDict. Store (value, expires_at). For capacity eviction: when adding, if maxsize <=0 maybe raise. Need ensure capacity eviction even if len after expiring. Use lock.
+
+Methods:
+- get(key, default=None): acquire lock; node = cache.get(key); if missing return default; expires_at = node[1]; now = clock(); if now >= expires_at: del cache[key]; return default; move_to_end(key); return node[0]. Need if value is None? Use tuple.
+- set(key, value, ttl=None): if ttl is None use default ttl; if ttl <0? Raise ValueError? Could allow ttl<=0 immediate expiration? Better ValueError for negative; ttl=0 expires immediately. With lock: now = clock(); if now >= expires_at maybe not store? But if set and immediate expiration maybe store then not? For TTL=0, set should not store or delete existing. Use expires_at = now+ttl. If ttl <=0: if ttl == 0 delete existing? But set maybe should not store. Need decide. For TTL 0, item expires immediately; to keep len 0, don't insert, and remove existing. If ttl <0 raise ValueError.
+If key exists: update value and expiration, move_to_end. If len >= maxsize after insertion? Use OrderedDict LRU. Need handle new key and capacity. Pseudocode:
+with lock:
+ now = clock(); expires_at = now+ttl;
+ if ttl <= 0: self

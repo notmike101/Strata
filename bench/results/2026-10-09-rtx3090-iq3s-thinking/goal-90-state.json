@@ -3,15 +3,15 @@
   "target_tps": 90,
   "metric": "server_decode_tps",
   "contract": "goal-90-contract.md",
-  "current": "C048 rejected: short85.2 vs88.7, longer89.6 vs84.4. No confirmation pair or production change. Source restored; candidate archived.",
+  "current": "Retained as an opt-in experimental component only; not promoted. Short pooled decode/E2E slightly lower; 90 short target and full quality unqualified. Finite comparison closed.",
   "next": [
-    "Plan C049 long-path-only token barriers using existing1024-token prompt-path boundary; test interactions with prior short requests."
+    "Refresh short-decode profile on cumulative stack using existing guarded Nsight workflow; select a complementary change from current evidence."
   ],
   "promoted": "The previously qualified format-gather engine with IQ2_S gather disabled and adaptive lag2; no changes this turn.",
   "stopping_rule": "Leave goal active until all fixed qualification cells pass. No benchmark model resident at handoff.",
   "quality": "Q007: 3/5 compiled and passed72 tests each, 2/5 no final answer at8192 tokens. Goal unqualified.",
-  "last_checkpoint": "E150",
-  "resume_command": "Read E147-E150 and C048. Rejected source restored to dd0555b5. Build tree contains rejected C048; saved candidate hashc9508334. No inference resident. Remain on current branch.",
-  "safety": "24 C048 requests passed16GiB physical/commit floors and exact cleanup; idleGPU457MiB; production hashunchanged.",
+  "last_checkpoint": "E156",
+  "resume_command": "Read E151-E156/C049. Source retains default-off conditional barrier candidate; engineac43e898. Production unchanged. C049 comparison budget closed; no extra repeats. No model resident. Current source build tree matches C049.",
+  "safety": "All48requests passed16GiB physical/commit guards and exact cleanup; GPU457MiB. High performance power scheme already active.",
   "goal_tool_status_at_entry": "active, verified get_goal"
 }

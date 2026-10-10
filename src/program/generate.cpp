@@ -20,6 +20,7 @@
 #include "strata/core/device.hpp"
 #include "strata/core/remote_expert_opt.hpp"
 #include "strata/core/accepted_usage.hpp"
+#include "strata/core/token_barrier.hpp"
 #include "strata/core/expert_cache.hpp"
 #include "strata/core/conversation_snapshot.hpp"
 #include "strata/core/conversation_file.hpp"
@@ -2336,6 +2337,25 @@ int main(int argc, char** argv) {
     }
     const char* accepted_usage_env = std::getenv("STRATA_ACCEPTED_USAGE");
     const bool accepted_usage_on = accepted_usage_env && std::string(accepted_usage_env) == "1";
+    int64_t adapt_barrier_tokens = 0;
+    if (const char* env = std::getenv("STRATA_SERIAL_ADAPT_TOKENS")) {
+        char* end = nullptr;
+        adapt_barrier_tokens = std::strtoll(env, &end, 10);
+        if (end == env || *end || adapt_barrier_tokens < 0 || adapt_barrier_tokens > o.max_context ||
+            (adapt_barrier_tokens > 0 && !accepted_usage_on)) {
+            std::fprintf(stderr, "strata: STRATA_SERIAL_ADAPT_TOKENS needs 0..max-context and STRATA_ACCEPTED_USAGE=1 when enabled\n");
+            return 2;
+        }
+    }
+    int64_t adapt_min_prompt = 0;
+    if (const char* env = std::getenv("STRATA_SERIAL_ADAPT_MIN_PROMPT")) {
+        char* end = nullptr;
+        adapt_min_prompt = std::strtoll(env, &end, 10);
+        if (end == env || *end || adapt_min_prompt < 0 || adapt_min_prompt > o.max_context) {
+            std::fprintf(stderr, "strata: STRATA_SERIAL_ADAPT_MIN_PROMPT needs 0..max-context fresh tokens\n");
+            return 2;
+        }
+    }
     if (accepted_usage_on && (!o.serve || !o.layer_split.empty() || o.peer_device >= 1 ||
         o.expert_cache_remote[0] > 0 || o.expert_cache_remote[1] > 0 || o.expert_cache_remote[2] > 0 ||
         o.batch > 0 || o.pipeline_windows > 0 || o.adapt_async || o.no_pool ||
@@ -7403,6 +7423,9 @@ int main(int argc, char** argv) {
                 return 2;
             }
             std::fprintf(stderr, "strata serve: accepted-row adaptive usage enabled (serial, committed inputs only)\n");
+            if (adapt_barrier_tokens > 0)
+                std::fprintf(stderr, "strata serve: serial cache barrier every %lld accepted input tokens\n",
+                             (long long) adapt_barrier_tokens);
         }
         // #477 --expert-profile-save: what the adaptive tier learned, kept across restarts (opt-in; off: `heat` stays
         // empty and nothing below runs).  It needs the adaptive tier's counts and the residency table.
@@ -9992,6 +10015,37 @@ int main(int argc, char** argv) {
             for (int64_t i = 0; i < n - 1; ++i) consumed.push_back((int32_t) ids[(size_t) i]);
             const char* finish = "length";
             const uint64_t usage_examined0 = accepted_usage.examined, usage_retained0 = accepted_usage.retained;
+            const int64_t request_barrier_tokens = strata::core::TokenBarrier::interval_for_prompt(
+                adapt_barrier_tokens, adapt_min_prompt, n - resume);
+            strata::core::TokenBarrier token_barrier(p, request_barrier_tokens);
+            if (adapt_barrier_tokens > 0)
+                std::fprintf(stderr, "strata serial cache policy: %lld fresh prompt tokens, interval %lld\n",
+                             (long long) (n - resume), (long long) request_barrier_tokens);
+            int64_t barrier_count = 0;
+            double barrier_ms = 0.0;
+            auto publish_token_barrier = [&](int64_t position) -> bool {
+                const auto start = Clock::now();
+                // ver.run has served every host callback. No next window is launched:
+                // these streams now contain only device commits and drafter work.
+                if (!ver.wait_commit(err)) return false;
+                if (cudaStreamSynchronize(ver.stream()) != cudaSuccess ||
+                    (use_mtp && cudaStreamSynchronize(mtp.stream()) != cudaSuccess)) {
+                    err = "serial cache barrier: waiting for verifier/drafter failed";
+                    return false;
+                }
+                apply_pending(true);
+                if (!adapt()) { err = "serial cache barrier: refill failed"; return false; }
+                // Check the refill explicitly: apply_pending's legacy wait ignores errors.
+                if (cudaStreamSynchronize(adapt_stream) != cudaSuccess) {
+                    err = "serial cache barrier: waiting for refill failed";
+                    return false;
+                }
+                apply_pending(true);
+                token_barrier.advance(position);
+                ++barrier_count;
+                barrier_ms += std::chrono::duration<double, std::milli>(Clock::now() - start).count();
+                return true;
+            };
             const Clock::time_point d0 = Clock::now();
             // STRATA_DECODE_TIMING=1: where a request's decode time goes (one line per request)
             static const bool dec_timing = std::getenv("STRATA_DECODE_TIMING") != nullptr;
@@ -10665,6 +10719,7 @@ int main(int argc, char** argv) {
                         chain_n = policy.chain(T, p_mtp, chain_n, cm);
                     }
                 }
+                token_barrier.clip(p, T, chain_n);
                 const int T_mtp = T;
                 T += chain_n;
                 const bool timed_round = !first_window;
@@ -10749,7 +10804,7 @@ int main(int argc, char** argv) {
                 std::thread adapt_thr;   // the adaptive tier beside the commit and the draft (as in generate)
                 bool adapt_ok = true;
                 // (--adapt-async 1: the asynchronous tier above instead, ticked before the window)
-                if (!drive.d.usage.empty() && !ajob && ((rounds + 1) % o.adapt_every) == 0)
+                if (!drive.d.usage.empty() && !ajob && request_barrier_tokens == 0 && ((rounds + 1) % o.adapt_every) == 0)
                     adapt_thr = std::thread([&] { adapt_ok = adapt(); });
                 if (!ver.commit(a + 1, err)) {
                     if (adapt_thr.joinable()) adapt_thr.join();
@@ -10795,6 +10850,11 @@ int main(int argc, char** argv) {
                     std::printf("ERR %s\n", err.c_str());
                     return 1;
                 }
+                if (token_barrier.due(p + a + 1) && !eos && produced_n < max_new &&
+                    !publish_token_barrier(p + a + 1)) {
+                    std::printf("ERR %s\n", err.c_str());
+                    return 1;
+                }
                 if (timed_round && !eos && chain_n == 0)
                     policy.observe(from_sfx, T, a, sfx_match,
                                    std::chrono::duration<double, std::milli>(Clock::now() - round0).count());
@@ -10807,6 +10867,9 @@ int main(int argc, char** argv) {
                 p += a + 1;
             }
             const double decode_ms = std::chrono::duration<double, std::milli>(Clock::now() - d0).count();
+            if (request_barrier_tokens > 0)
+                std::fprintf(stderr, "strata serial cache barriers: %lld updates, %.3f ms total\n",
+                             (long long) barrier_count, barrier_ms);
             if (accepted_usage_on)
                 std::fprintf(stderr, "strata accepted usage: %llu retained of %llu routed entries\n",
                              (unsigned long long)(accepted_usage.retained - usage_retained0),

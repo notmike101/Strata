@@ -2806,3 +2806,191 @@ potential mechanism, not permission to bypass C048's stop or cherry-pick rows.
 
 Goal90/85 and full quality/cold-warm/workload qualification remain active and
 unmet. Q007's two incomplete natural-stop coding answers remain unresolved.
+
+
+## E151 / C049 longer-prefill-only cache barriers
+
+Previous goal turn was progress: C048 global barriers rejected for short decode
+-3.95%, while ~3K decode improved6.16%. Candidate source was archived and restored.
+C049 is a distinct policy-composition experiment, not a rerun of that failed arm.
+Reuse its tested64-token boundary mechanism only after a request freshly reads
+at least1025 prompt tokens. Prefill consumes all but the final prompt token, and
+the existing CPU-sharing limit is chunks below1024. Thus this threshold follows
+the existing prompt-path boundary, not the specific3034-token fixture. Cached
+long contexts with short fresh suffixes retain window-based adaptation. Rejected
+draft rows still do not count; synchronization and64-token interval stay fixed.
+
+Default off. Gate tests cover fresh1/1024/1025/262144, configured interval0,
+minimum0 and cached-suffix semantics. Preserve CUDA/math/model/quant/sampling,
+262144context,INT8KV/32768resident,CPU F16vision,MTP4/.70,PCIe.20,lag2,HC1 and
+acceptedusage1,DMA0/deviceplan0,9workers30tasks. Both arms use auto prompt share
+with explicitMAX1024: fixed80 was not a promoted performance win. This differs
+from C048 in both arms; only the barrier option differs within this new pair.
+
+Bounded comparison A R098 control0, B R099 conditional64; each fresh process,
+one warmup+five measured seeds101..105 per original short/~3K cell,512tokens,
+streaming/cachemiss/concurrency1. Byte-identical payloads; no arithmetic or
+sampling change. If any decode/E2E median loses>3% or prompt median loses>2%,
+close without confirmation. Otherwise one reverse B R100/A R101 pair maximum;
+pool all10rows/cell ordinary medians. No threshold or interval sweep. Since short
+requests run before long ones, repeated short results also test the new binary's
+inactive branch; mixed history in the reverse workload order remains a later
+gate, not an implied guarantee. R096/97 remain unused closed-C048 reservations.
+
+16GiB physical/commit floors, no per-process polling during requests, no builds/
+Git/GUI/profiler concurrently. Exact process-tree cleanup/config restore eacharm.
+Require runtime log proof short interval0 and long interval64, seven updates per
+512-token longer request. If retained, test boundary-neighbor workloads, cache
+hits, fresh cold and random coding before promotion. Full quality/workload gates
+unchanged;512-token throughput screens do not prove compilable answer quality.
+
+
+## E152 / R098-conditional0
+
+Explicitly verified candidate engine SHA256 ac43e89822e4febce9a2e3ae93a786eaa705bdc61f04ba28302ee50c64bb87c3; loaded library hashes match R090-stack-auto. This is a new-binary control comparison, not a same-binary claim. Config diff is archived. Fixed numeric sampling, high/xhigh reasoning, model/quant, vision, context262144 and INT8KV retained. Original TTLCache streaming cache-miss workloads; one excluded warmup and five measured seeds101-105 per cell,512tokens per measured run. No slow seed excluded.
+
+| Workload | Decode median (range), tok/s | Prompt median, tok/s | E2E median, tok/s | Stream total median, tok/s | TTFT median, s | Draft accepted/offered |
+|---|---:|---:|---:|---:|---:|---:|
+| short | 90.0 (86.3-91.8) | 206.8 | 78.4740 | 78.4961 | 0.8248 | 824/1102 (74.77%) |
+| longer | 83.8 (82.1-87.8) | 497.3 | 41.9150 | 41.9207 | 6.1381 | 955/1313 (72.73%) |
+
+Minimum available physical RAM 62,593,171,456 bytes; available commit 40,871,514,112 bytes. Sampled GPU peak 25,130,110,976 bytes. Both16GiB host floors passed. Per-process peak memory not sampled. Full launcher/server/text/vision cleanup passed and previous config restored.
+
+C049 same-day automatic-share control: short90.0 and longer83.8 server decode; E2E78.4740/41.9150. New conditional-policy binary with feature0. Not full goal or quality qualification.
+
+Next: Compare R099 and apply written confirmation rule.
+
+
+## E153 / R099-conditional64
+
+Same engine and loaded library hashes as R098-conditional0. Config diff is archived. Fixed numeric sampling, high/xhigh reasoning, model/quant, vision, context262144 and INT8KV retained. Original TTLCache streaming cache-miss workloads; one excluded warmup and five measured seeds101-105 per cell,512tokens per measured run. No slow seed excluded.
+
+| Workload | Decode median (range), tok/s | Prompt median, tok/s | E2E median, tok/s | Stream total median, tok/s | TTFT median, s | Draft accepted/offered |
+|---|---:|---:|---:|---:|---:|---:|
+| short | 88.5 (88.0-90.0) | 210.3 | 77.4039 | 77.4145 | 0.8336 | 849/1156 (73.44%) |
+| longer | 87.8 (81.0-93.6) | 497.1 | 42.8233 | 42.8265 | 6.1423 | 1113/1391 (80.01%) |
+
+Minimum available physical RAM 62,521,552,896 bytes; available commit 40,808,697,856 bytes. Sampled GPU peak 25,125,916,672 bytes. Both16GiB host floors passed. Per-process peak memory not sampled. Full launcher/server/text/vision cleanup passed and previous config restored.
+
+C049 first candidate pass: short88.5 (-1.67%) and longer87.8 (+4.77%) decode; E2E77.4039 (-1.36%) /42.8233 (+2.17%). Gate proven inactive on all6 short requests and active with7 updates on all6 longer requests. First longer measured request includes a five-token graph capture; retained without exclusion. Screening permits the one reversed pair; no confirmed win or promotion.
+
+Next: R100 candidate then R101 control, same request order; pool all10 seeds per cell afterward.
+
+
+## E154 / R100-conditional64
+
+Same engine and loaded library hashes as R098-conditional0. Config diff is archived. Fixed numeric sampling, high/xhigh reasoning, model/quant, vision, context262144 and INT8KV retained. Original TTLCache streaming cache-miss workloads; one excluded warmup and five measured seeds101-105 per cell,512tokens per measured run. No slow seed excluded.
+
+| Workload | Decode median (range), tok/s | Prompt median, tok/s | E2E median, tok/s | Stream total median, tok/s | TTFT median, s | Draft accepted/offered |
+|---|---:|---:|---:|---:|---:|---:|
+| short | 90.1 (85.7-92.1) | 211.7 | 78.6941 | 78.7053 | 0.8330 | 890/1150 (77.39%) |
+| longer | 84.2 (82.8-86.4) | 497.6 | 41.9768 | 41.9800 | 6.1387 | 871/1212 (71.86%) |
+
+Minimum available physical RAM 62,548,140,032 bytes; available commit 40,841,080,832 bytes. Sampled GPU peak 25,125,916,672 bytes. Both16GiB host floors passed. Per-process peak memory not sampled. Full launcher/server/text/vision cleanup passed and previous config restored.
+
+C049 confirmation candidate90.1/84.2 decode, E2E78.6941/41.9768. The larger first-pass longer gain did not repeat; every seed remains included. Gate and cleanup passed; no promotion.
+
+Next: Pool with final R101 control and R098/R099; no extra confirmation pair.
+
+
+## E155 / R101-conditional0
+
+Same engine and loaded library hashes as R098-conditional0. Config diff is archived. Fixed numeric sampling, high/xhigh reasoning, model/quant, vision, context262144 and INT8KV retained. Original TTLCache streaming cache-miss workloads; one excluded warmup and five measured seeds101-105 per cell,512tokens per measured run. No slow seed excluded.
+
+| Workload | Decode median (range), tok/s | Prompt median, tok/s | E2E median, tok/s | Stream total median, tok/s | TTFT median, s | Draft accepted/offered |
+|---|---:|---:|---:|---:|---:|---:|
+| short | 88.8 (87.6-91.7) | 199.4 | 78.0203 | 78.0359 | 0.8650 | 928/1229 (75.51%) |
+| longer | 82.7 (79.0-84.2) | 496.7 | 41.5619 | 41.5650 | 6.1480 | 915/1245 (73.49%) |
+
+Minimum available physical RAM 62,592,548,864 bytes; available commit 40,893,767,680 bytes. Sampled GPU peak 25,125,916,672 bytes. Both16GiB host floors passed. Per-process peak memory not sampled. Full launcher/server/text/vision cleanup passed and previous config restored.
+
+C049 final same-binary control completed. Complete10-row pooled medians: control89.4/82.9 versus conditional89.1/85.0 server decode; E2E78.2471/41.6374 versus78.0490/42.1705. Longer gain2.53%, short loss0.34%; no no-degradation or goal qualification. Finite four-arm comparison closed.
+
+Next: Record full comparison and retain default-off experimental component; profile remaining short-input cost before selecting another change.
+
+
+## E156 / C049 complete four-arm comparison; experimental component only
+
+Same-binary ABBA R098/R099/R100/R101 completed,10 measured rows per workload/cell
+(40 measured+8 warmups total). All512tokens, cachemiss, exact payload equality,
+fixed thinking coding sampling1/.95/20/0/0/1,frequency0. Context262144, INT8KV with
+32768 resident, CPU F16vision, MTP4/.70,PCIe.20,9workers30tasks,HC1/acceptedusage1,
+auto prompt sharing/MAX1024,DMA0/deviceplan0. No slow seed or graph capture removed.
+
+| All-run ordinary median | Control | Conditional64 | Change |
+|---|---:|---:|---:|
+| Short server_decode_tps |89.4|89.1|-0.336%|
+| ~3K server_decode_tps |82.9|85.0|+2.533%|
+| Short prompt_tps |206.35|211.00|+2.253%|
+| ~3K prompt_tps |497.05|497.25|+0.040%|
+| Short request_e2e_tps |78.24714|78.04901|-0.253%|
+| ~3K request_e2e_tps |41.63743|42.17055|+1.280%|
+| Short stream_total_tps |78.26603|78.05986|-0.263%|
+| ~3K stream_total_tps |41.64120|42.17379|+1.279%|
+| Short TTFT seconds |.852411|.833291|-2.243%|
+| ~3K TTFT seconds |6.140930|6.141785|+0.014%|
+
+Individual pass decode short/~3K: A90.0/83.8, B88.5/87.8, B90.1/84.2,
+A88.8/82.7. Every individual result and raw seed order is retained in E152-E155
+and summary.json. The larger first-pass longer gain did not repeat at the same
+size. R099 longer run1 includes a captured5-token graph; retained. Its longer
+draft acceptance80.01% versus R09872.73% also shows that output/draft behavior
+contributes to served speed. No isolated kernel-speed claim follows.
+
+The candidate's longer median reaches85.0 in this screen, but short89.1 misses90,
+and short decode/E2E point estimates are below control. Therefore no no-degradation
+qualification, no production promotion, no target completion. The complete finite
+comparison is closed; no extra repeats to seek a favorable median. Retain the
+default-off code as an experimental component for future justified combinations.
+It is not a verified overall winner. Same-day control is essential: earlier
+same-stack historical controls were sometimes faster; do not pool different
+binary histories or present the2.533% as a universal gain.
+
+Runtime proof: all12 enabled-arm short requests logged interval0; all12 longer
+requests logged interval64 and seven completed barriers each. Policy uses fresh
+prompt tokens n-resume, so long cached conversations with short suffixes retain
+ordinary window adaptation. Threshold1025 is anchored to1024 prefill tokens plus
+the last prompt token consumed in decode. This request-level rule is a proxy:
+checkpoint splits can still make smaller prefill chunks. Boundary-neighbor,
+cache-hit and reversed workload-history validation remain required.
+
+Barrier time median214.684ms across12 longer requests,
+range210.816..216.275; includes selection/copies/fences/publication,
+not removable latency. Full-output byte matches across passes: control
+0/12, conditional0/12.
+No determinism or answer-quality claim follows from the scheduling policy.
+
+Implementation/build: SHA256ac43e89822e4febce9a2e3ae93a786eaa705bdc61f04ba28302ee50c64bb87c3,
+source cacdcd35 plus C049-integration.patch/new header+test. CUDA13.3 sm86 passed;
+the registered boundary test,1.2M accepted-prefix oracle steps, accepted-usage
+oracle, Windows affinity and IQ AVX2 parity passed. New fresh-count boundary tests
+failed before implementation, then passed. Five malformed minimum settings were
+rejected before load. Prior C048 routing/config restrictions remain. HIP/SYCL not
+built; no upstream review requested. Default-off helper leaves base/tail windows
+unchanged in tests; actual default-output byte equivalence is not established
+under the preexisting automatic-placement nondeterminism. Full quality is pending.
+
+Use only for further controlled experiments: STRATA_ACCEPTED_USAGE=1,
+STRATA_SERIAL_ADAPT_TOKENS=64, STRATA_SERIAL_ADAPT_MIN_PROMPT=1025. Unset/0 token
+interval keeps ordinary window-based adaptation. A minimum0 enables the rejected
+global policy from C048; it is not recommended. Requires one-GPU serial serving
+and active synchronous cache; unsupported helper/peer/batch/pipeline routes fail.
+Production config and launcher keep these experimental options off.
+
+All four supervisors passed16GiB physical/commit floors and exact launcher/server/
+engine/vision cleanup. Minimum available physical/commit62521552896/40808697856
+bytes; maximum sampled GPU25130110976bytes. No process-memory polling during
+requests. Production config restored3457fdfe7d69fbf6651e2031320cdebf88a9d8d269ebbe459db7fdd885e8c9f0;
+idleGPU457MiB. No benchmark model resident. Windows powercfg read-only check shows
+High performance scheme8c5e7fda-e8bf-4a96-9a85-a6e23a8c635c already active; no
+power-setting mutation or prospective gain claimed.
+
+Next: refresh short-decode profiling on the cumulative native stack before
+selecting another kernel/configuration change. Prior P009/P013 traces predate HC1,
+accepted usage and this experiment. Reuse profile-goal90-new.ps1 / profile-one-
+request-new.py only after inspecting their identity/config/cleanup guards; trace
+one warmup plus one measured diagnostic request, never count it as qualifying TPS.
+Use dependency/overlap evidence, not summed overlapping durations as saved time.
+Full frozen random-coding, cold/warm/cache-hit/vision/tools/reasoning/cancel/max-
+context matrix remains required. Q007 two incomplete coding answers unresolved.
+Goal remains active and unqualified; no safe experiment is currently blocked.

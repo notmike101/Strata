@@ -1,0 +1,26 @@
+We need answer user's request. Need produce complete code, tests, explanation >=1200 words. Need think thoroughly.
+
+User: Implement thread-safe Python TTLCache class using OrderedDict and monotonic clock. Include set, get, delete, clear, len, expiration, capacity eviction, unit tests with injected fake clock, detailed explanation of thread safety and complexity. Write complete code, then tests, then explain design. Do not abbreviate implementation. Detailed answer at least 1200 words.
+
+Need craft final with code. Must be detailed. Need include fake clock inject. Thread safety with RLock? Need monotonic clock. Use time.monotonic. Need expiration and capacity eviction. OrderedDict. Need len likely active entries count. Need consider thread-safe: get should update LRU? Usually TTL cache with LRU? Capacity eviction uses OrderedDict. For TTL cache maybe insertion order for expiry? Could combine LRU and expiration: capacity eviction removes oldest by OrderedDict (if move_to_end on get). Expiration lazy and maybe purge. Need set/get/delete/clear/len/expiration/capacity eviction.
+
+Need complete implementation:
+class FakeClock: def __init__(self): self._now = 0.0; def monotonic(self): return self._now; def advance(self, delta): self._now += delta
+
+TTLCache:
+from collections import OrderedDict
+import threading, time
+from typing import Any, Hashable, Optional, Tuple, Callable, Iterable
+
+_SENTINEL? Need get can distinguish missing vs value. Could get(key, default=None) return default. If stored value could None default None ambiguous; but TTL cache can support get with default; expiration: if expired delete and return default. Use _missing = object() maybe.
+
+Fields:
+- _lock = threading.RLock()
+- _clock = clock or time.monotonic
+- _maxsize: int >=0
+- _default_ttl: float >=0? If None no expiration? TTL cache usually ttl in seconds. Use default_ttl float or None (None no ttl). Per-set ttl optional. Could ttl <=? If ttl <0 maybe ValueError. If 0 means expires immediately? Usually ttl >0. Need handle.
+- _entries: OrderedDict[Any, Tuple[float, Any]] where expiration time or None.
+- maxsize? capacity eviction.
+
+Methods:
+__init__(self, maxsize, default_ttl=None, clock=None): if maxsize <0 raise; if default

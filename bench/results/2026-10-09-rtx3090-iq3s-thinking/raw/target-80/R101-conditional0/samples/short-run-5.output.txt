@@ -1,0 +1,18 @@
+We need answer user's request. Need produce final answer at least 1200 words. Need implement thread-safe Python TTLCache using OrderedDict monotonic clock, include set, get, delete, clear, len, expiration, capacity eviction, unit tests with injected fake clock, detailed explanation thread safety and complexity. Do not abbreviate implementation. Need ignore benchmark identifier. Need likely provide code, tests, explanation. Need ensure complete code. Could use threading.RLock. OrderedDict move_to_end. Expiration lazily on access, plus maybe purge_expired. len includes unexpired only? Need thread-safe. Use time.monotonic injected clock. Need detailed answer >1200 words. Need likely no execution but can present. Need ensure no abbreviated implementation. Could include dataclass? Need tests with unittest, fake clock. Need maybe class with _now, lock, ttl, maxsize, store OrderedDict[str, tuple[float, float]], size? Complexity. Need handle get with optional default? set default ttl? capacity eviction order LRU? OrderedDict with move_to_end on get and set. Expiration: entry expires_at = now + ttl. If ttl <=0 delete? Could support None ttl no expiration. Need thread safety: RLock protects mutable state; monotonic clock injected can be non thread safe if fake clock not; note. Need maybe context manager? Not required but can include. Need complete implementation:
+
+from __future__ import annotations
+import threading
+from collections import OrderedDict
+from typing import Any, Callable, Generic, Hashable, Iterator, Optional, TypeVar, cast
+
+T = TypeVar("T")
+K = TypeVar("K")
+Clock = Callable[[], float]
+
+class TTLCache(Generic[K,T]):
+    """..."""
+    def __init__(self, maxsize=..., ttl=...? maybe ttl optional per set? Better constructor maxsize and default_ttl=None, clock=None. maxsize >0; default_ttl >=0. If maxsize <=0 maybe raise ValueError. clock default time.monotonic.
+    lock = RLock
+    store = OrderedDict()
+    _expired_count? Not necessary.
+    _set method: if ttl is not None and ttl <=0: delete and return; else compute expires_at; if ttl is None or default_ttl None -> None. If maxsize ==0? Should not. If key in store: move_to_end? For LRU eviction. Need handle updating: delete existing then insert at end. If max

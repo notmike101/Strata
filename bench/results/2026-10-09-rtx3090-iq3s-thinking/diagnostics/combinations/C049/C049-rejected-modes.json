@@ -1,0 +1,27 @@
+[
+  {
+    "minimum": "-1",
+    "exit": 2,
+    "stderr": "strata: STRATA_SERIAL_ADAPT_MIN_PROMPT needs 0..max-context fresh tokens\n"
+  },
+  {
+    "minimum": "1025x",
+    "exit": 2,
+    "stderr": "strata: STRATA_SERIAL_ADAPT_MIN_PROMPT needs 0..max-context fresh tokens\n"
+  },
+  {
+    "minimum": "262145",
+    "exit": 2,
+    "stderr": "strata: STRATA_SERIAL_ADAPT_MIN_PROMPT needs 0..max-context fresh tokens\n"
+  },
+  {
+    "minimum": "99999999999999999999999999",
+    "exit": 2,
+    "stderr": "strata: STRATA_SERIAL_ADAPT_MIN_PROMPT needs 0..max-context fresh tokens\n"
+  },
+  {
+    "minimum": "",
+    "exit": 2,
+    "stderr": "strata: STRATA_SERIAL_ADAPT_MIN_PROMPT needs 0..max-context fresh tokens\n"
+  }
+]

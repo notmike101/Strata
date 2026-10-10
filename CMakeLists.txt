@@ -1471,6 +1471,10 @@ if(STRATA_BUILD_TESTS)
   target_include_directories(accepted_usage_test PRIVATE ${CMAKE_CURRENT_SOURCE_DIR}/include)
   target_compile_features(accepted_usage_test PRIVATE cxx_std_17)
   add_test(NAME accepted_usage_test COMMAND accepted_usage_test)
+  add_executable(token_barrier_test tests/core/token_barrier.cpp)
+  target_include_directories(token_barrier_test PRIVATE ${CMAKE_CURRENT_SOURCE_DIR}/include)
+  target_compile_features(token_barrier_test PRIVATE cxx_std_17)
+  add_test(NAME token_barrier_test COMMAND token_barrier_test)
   # Plan v0.3 P6: one expert applied to several tokens, bitwise vs the single-token kernel (synthetic, CPU only).
   # plan v0.3 P5: the device dequantizers vs the artifact's CPU dequantizers on the real shards (not a ctest: needs
   # the 38 GB model; run it by hand or from tools/gpu_session.py)

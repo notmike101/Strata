@@ -1,0 +1,554 @@
+{
+  "arms": [
+    "R098-conditional0",
+    "R099-conditional64",
+    "R100-conditional64",
+    "R101-conditional0"
+  ],
+  "results": {
+    "conditional0": {
+      "policy_activation": [],
+      "barrier_costs": [],
+      "workloads": {
+        "short": {
+          "runs": 10,
+          "metrics": {
+            "server_decode_tps": {
+              "median": 89.4,
+              "raw": [
+                90.7,
+                88.4,
+                90.0,
+                91.8,
+                86.3,
+                88.8,
+                91.5,
+                87.8,
+                91.7,
+                87.6
+              ]
+            },
+            "prompt_tps": {
+              "median": 206.35000000000002,
+              "raw": [
+                206.8,
+                215.1,
+                205.9,
+                203.4,
+                217.4,
+                210.8,
+                210.1,
+                195.4,
+                193.8,
+                199.4
+              ]
+            },
+            "request_e2e_tps": {
+              "median": 78.24713997852257,
+              "raw": [
+                79.45024403598804,
+                77.65047969061553,
+                78.47399590183923,
+                79.95925076677746,
+                76.20671774708691,
+                78.02028405520589,
+                79.6504886773946,
+                76.28041784088762,
+                79.23567902196059,
+                76.60513568603977
+              ]
+            },
+            "stream_total_tps": {
+              "median": 78.2660252696466,
+              "raw": [
+                79.4710937940661,
+                77.66191052126919,
+                78.49611862027204,
+                79.97507401848105,
+                76.22055495341947,
+                78.03593191902117,
+                79.66787582920765,
+                76.29362812756455,
+                79.25201207998074,
+                76.615887043138
+              ]
+            },
+            "ttft_seconds": {
+              "median": 0.8524110500293318,
+              "raw": [
+                0.8247830999898724,
+                0.8216693000285886,
+                0.8565780999488197,
+                0.8497854000306688,
+                0.8074076999910176,
+                0.8154023999813944,
+                0.8550367000279948,
+                0.8996426000376232,
+                0.8975140000111423,
+                0.8649805000168271
+              ]
+            }
+          }
+        },
+        "longer": {
+          "runs": 10,
+          "metrics": {
+            "server_decode_tps": {
+              "median": 82.9,
+              "raw": [
+                84.9,
+                82.1,
+                82.4,
+                83.8,
+                87.8,
+                79.0,
+                83.1,
+                82.7,
+                84.2,
+                80.3
+              ]
+            },
+            "prompt_tps": {
+              "median": 497.05,
+              "raw": [
+                497.6,
+                497.2,
+                497.0,
+                497.3,
+                497.3,
+                496.7,
+                496.9,
+                496.7,
+                497.1,
+                496.0
+              ]
+            },
+            "request_e2e_tps": {
+              "median": 41.63742657293302,
+              "raw": [
+                42.13341909228594,
+                41.4747245575563,
+                41.48893983852766,
+                41.91495238398384,
+                42.830577860565654,
+                40.63295219422867,
+                41.71293482506303,
+                41.56191832080302,
+                41.93887721559118,
+                40.92464339993561
+              ]
+            },
+            "stream_total_tps": {
+              "median": 41.64120110239507,
+              "raw": [
+                42.13660780418902,
+                41.477888939410526,
+                41.49484700049227,
+                41.92065678914253,
+                42.83533006488117,
+                40.63808524532004,
+                41.71743238201183,
+                41.56496982277831,
+                41.945138969634186,
+                40.93176886786547
+              ]
+            },
+            "ttft_seconds": {
+              "median": 6.140929599991068,
+              "raw": [
+                6.13814180000918,
+                6.136263100022916,
+                6.1544715000200085,
+                6.13079830002971,
+                6.141000400006305,
+                6.140858799975831,
+                6.140612699964549,
+                6.154534700035583,
+                6.148041799955536,
+                6.163275500002783
+              ]
+            }
+          }
+        }
+      }
+    },
+    "conditional64": {
+      "policy_activation": [
+        {
+          "arm": "R099-conditional64",
+          "fresh_tokens": 165,
+          "interval": 0
+        },
+        {
+          "arm": "R099-conditional64",
+          "fresh_tokens": 165,
+          "interval": 0
+        },
+        {
+          "arm": "R099-conditional64",
+          "fresh_tokens": 168,
+          "interval": 0
+        },
+        {
+          "arm": "R099-conditional64",
+          "fresh_tokens": 168,
+          "interval": 0
+        },
+        {
+          "arm": "R099-conditional64",
+          "fresh_tokens": 165,
+          "interval": 0
+        },
+        {
+          "arm": "R099-conditional64",
+          "fresh_tokens": 167,
+          "interval": 0
+        },
+        {
+          "arm": "R099-conditional64",
+          "fresh_tokens": 3033,
+          "interval": 64
+        },
+        {
+          "arm": "R099-conditional64",
+          "fresh_tokens": 3034,
+          "interval": 64
+        },
+        {
+          "arm": "R099-conditional64",
+          "fresh_tokens": 3035,
+          "interval": 64
+        },
+        {
+          "arm": "R099-conditional64",
+          "fresh_tokens": 3034,
+          "interval": 64
+        },
+        {
+          "arm": "R099-conditional64",
+          "fresh_tokens": 3034,
+          "interval": 64
+        },
+        {
+          "arm": "R099-conditional64",
+          "fresh_tokens": 3033,
+          "interval": 64
+        },
+        {
+          "arm": "R100-conditional64",
+          "fresh_tokens": 165,
+          "interval": 0
+        },
+        {
+          "arm": "R100-conditional64",
+          "fresh_tokens": 165,
+          "interval": 0
+        },
+        {
+          "arm": "R100-conditional64",
+          "fresh_tokens": 168,
+          "interval": 0
+        },
+        {
+          "arm": "R100-conditional64",
+          "fresh_tokens": 168,
+          "interval": 0
+        },
+        {
+          "arm": "R100-conditional64",
+          "fresh_tokens": 165,
+          "interval": 0
+        },
+        {
+          "arm": "R100-conditional64",
+          "fresh_tokens": 167,
+          "interval": 0
+        },
+        {
+          "arm": "R100-conditional64",
+          "fresh_tokens": 3033,
+          "interval": 64
+        },
+        {
+          "arm": "R100-conditional64",
+          "fresh_tokens": 3034,
+          "interval": 64
+        },
+        {
+          "arm": "R100-conditional64",
+          "fresh_tokens": 3035,
+          "interval": 64
+        },
+        {
+          "arm": "R100-conditional64",
+          "fresh_tokens": 3034,
+          "interval": 64
+        },
+        {
+          "arm": "R100-conditional64",
+          "fresh_tokens": 3034,
+          "interval": 64
+        },
+        {
+          "arm": "R100-conditional64",
+          "fresh_tokens": 3033,
+          "interval": 64
+        }
+      ],
+      "barrier_costs": [
+        {
+          "arm": "R099-conditional64",
+          "updates": 7,
+          "milliseconds": 214.487
+        },
+        {
+          "arm": "R099-conditional64",
+          "updates": 7,
+          "milliseconds": 215.488
+        },
+        {
+          "arm": "R099-conditional64",
+          "updates": 7,
+          "milliseconds": 214.881
+        },
+        {
+          "arm": "R099-conditional64",
+          "updates": 7,
+          "milliseconds": 215.218
+        },
+        {
+          "arm": "R099-conditional64",
+          "updates": 7,
+          "milliseconds": 215.576
+        },
+        {
+          "arm": "R099-conditional64",
+          "updates": 7,
+          "milliseconds": 216.275
+        },
+        {
+          "arm": "R100-conditional64",
+          "updates": 7,
+          "milliseconds": 212.34
+        },
+        {
+          "arm": "R100-conditional64",
+          "updates": 7,
+          "milliseconds": 215.756
+        },
+        {
+          "arm": "R100-conditional64",
+          "updates": 7,
+          "milliseconds": 213.699
+        },
+        {
+          "arm": "R100-conditional64",
+          "updates": 7,
+          "milliseconds": 213.715
+        },
+        {
+          "arm": "R100-conditional64",
+          "updates": 7,
+          "milliseconds": 210.816
+        },
+        {
+          "arm": "R100-conditional64",
+          "updates": 7,
+          "milliseconds": 211.008
+        }
+      ],
+      "workloads": {
+        "short": {
+          "runs": 10,
+          "metrics": {
+            "server_decode_tps": {
+              "median": 89.1,
+              "raw": [
+                88.0,
+                90.0,
+                89.7,
+                88.5,
+                88.2,
+                92.1,
+                85.7,
+                88.3,
+                90.1,
+                91.8
+              ]
+            },
+            "prompt_tps": {
+              "median": 211.0,
+              "raw": [
+                204.0,
+                218.5,
+                213.9,
+                203.9,
+                210.3,
+                213.6,
+                211.7,
+                203.3,
+                205.1,
+                214.7
+              ]
+            },
+            "request_e2e_tps": {
+              "median": 78.04901157693187,
+              "raw": [
+                77.20162912347581,
+                79.2175362127132,
+                78.78378637684685,
+                77.40387991498858,
+                77.37185460370131,
+                80.81322474373063,
+                75.40213119966585,
+                77.23086093361077,
+                78.69414323887517,
+                80.35507148328777
+              ]
+            },
+            "stream_total_tps": {
+              "median": 78.05985760198024,
+              "raw": [
+                77.2126207707176,
+                79.23863311757076,
+                78.80256061578116,
+                77.41446453857473,
+                77.38256847611194,
+                80.8295396729909,
+                75.41634758329089,
+                77.24512386749826,
+                78.70525066538576,
+                80.38469098697448
+              ]
+            },
+            "ttft_seconds": {
+              "median": 0.83329115001834,
+              "raw": [
+                0.833592500013765,
+                0.7977085000020452,
+                0.8091157999588177,
+                0.8500295000267215,
+                0.834191300033126,
+                0.7989393000025302,
+                0.832989800022915,
+                0.8578771000029519,
+                0.8464711999986321,
+                0.8198895999812521
+              ]
+            }
+          }
+        },
+        "longer": {
+          "runs": 10,
+          "metrics": {
+            "server_decode_tps": {
+              "median": 85.0,
+              "raw": [
+                81.0,
+                91.2,
+                82.9,
+                87.8,
+                93.6,
+                84.1,
+                82.8,
+                86.4,
+                84.2,
+                85.8
+              ]
+            },
+            "prompt_tps": {
+              "median": 497.25,
+              "raw": [
+                496.3,
+                496.0,
+                497.6,
+                497.2,
+                497.1,
+                497.2,
+                497.6,
+                497.6,
+                497.6,
+                497.3
+              ]
+            },
+            "request_e2e_tps": {
+              "median": 42.1705495516091,
+              "raw": [
+                41.11783888365818,
+                43.55499436906119,
+                41.644631071564305,
+                42.823329751896864,
+                44.1615029979743,
+                41.919396140681116,
+                41.641919072007006,
+                42.51917014560987,
+                41.976826496226494,
+                42.3642726069917
+              ]
+            },
+            "stream_total_tps": {
+              "median": 42.17378854219536,
+              "raw": [
+                41.12167364311023,
+                43.558531593838815,
+                41.647781458292386,
+                42.826532760109764,
+                44.16505104078032,
+                41.923468037766455,
+                41.64607307669614,
+                42.5222568302104,
+                41.97998466491024,
+                42.36759241948048
+              ]
+            },
+            "ttft_seconds": {
+              "median": 6.141785299987532,
+              "raw": [
+                6.155344300030265,
+                6.159823400026653,
+                6.137705200002529,
+                6.142009200004395,
+                6.142256100021768,
+                6.146767999976873,
+                6.132147199998144,
+                6.1372869000188075,
+                6.138714300002903,
+                6.141561399970669
+              ]
+            }
+          }
+        }
+      }
+    }
+  },
+  "percent_change_on_vs_off": {
+    "short": {
+      "server_decode_tps": -0.3355704697986739,
+      "prompt_tps": 2.253452871335093,
+      "request_e2e_tps": -0.2532084899781295,
+      "stream_total_tps": -0.26341911059883927,
+      "ttft_seconds": -2.2430375592073726
+    },
+    "longer": {
+      "server_decode_tps": 2.533172496984304,
+      "prompt_tps": 0.040237400663922784,
+      "request_e2e_tps": 1.2803936807723737,
+      "stream_total_tps": 1.2789915413118358,
+      "ttft_seconds": 0.01393437235406303
+    }
+  },
+  "screening_stop": false,
+  "goal_qualified": false,
+  "quality_qualified": false,
+  "output_reproducibility": {
+    "control": {
+      "matched": 0,
+      "total": 12
+    },
+    "conditional": {
+      "matched": 0,
+      "total": 12
+    }
+  },
+  "decision": "Retained as an opt-in experimental component only; not promoted. Short pooled decode/E2E slightly lower; 90 short target and full quality unqualified. Finite comparison closed."
+}
