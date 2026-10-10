@@ -1,0 +1,30 @@
+We need answer user's request. Need produce final detailed answer at least 1200 words, complete code, tests, explanation thread safety complexity. User says benchmark identifier ignore. Implement thread-safe Python TTLCache class using OrderedDict and monotonic clock. Include set, get, delete, clear, len, expiration, capacity eviction, unit tests with injected fake clock, detailed explanation. Do not abbreviate implementation. Need likely provide code fully. Need think about design.
+
+Need satisfy: thread-safe Python TTLCache class using OrderedDict and monotonic clock. Need injected fake clock. Methods: set, get, delete, clear, len, expiration, capacity eviction. Maybe include __contains__, maybe keys? Include unit tests with fake clock. Complexity O(1) average for operations, lazy expiration. Thread safety: use RLock, copy? Need careful about iterating for expiration to avoid deadlock. OrderedDict move_to_end for LRU. Monotonic clock. Need complete code not abbreviated.
+
+Potential class:
+
+import threading, time
+from collections import OrderedDict
+from typing import Any, Optional, Callable
+
+class TTLCache:
+    def __init__(self, capacity=128, ttl=300.0, clock=None, lock=None):
+       if capacity <1 raise ValueError
+       if ttl <=0? TTL maybe non-negative? If ttl=0 expire immediately? allow >0.
+       self._capacity = int(capacity)
+       self._ttl = float(ttl)
+       self._clock = clock or time.monotonic
+       self._store = OrderedDict() # key -> value? Need store expiration timestamp and value. Could store (value, expires_at) tuple. Or dataclass.
+       self._lock = threading.RLock()
+
+    def set(self, key, value, ttl=None):
+       with self._lock:
+          now = self._clock()
+          expires_at = now + (ttl if ttl is not None else self._ttl)
+          if key in self._store:
+             self._store[key] = (value, expires_at)
+             self._store.move_to_end(key, last=True)
+          else:
+             self._store[key] = (value, expires_at)
+             # Need evict if over capacity after insertion. But if expired entries exist, maybe purge before/after insertion to prefer capacity evict oldest? For TTL, maybe purge expired entries before insert to free space. Then if over capacity, ev

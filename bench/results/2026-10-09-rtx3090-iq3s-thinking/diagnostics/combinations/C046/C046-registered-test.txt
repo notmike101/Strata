@@ -1,0 +1,22 @@
+**********************************************************************
+** Visual Studio 2022 Developer Command Prompt v17.14.36
+** Copyright (c) 2025 Microsoft Corporation
+**********************************************************************
+[0/1] Re-running CMake...
+-- Strata: CUDA enabled, arch 86
+-- strata: pack/full/experts.bin absent - the expert arena load test is NOT registered
+-- Warning: ccache not found - consider installing it for faster compilation or disable this warning with GGML_CCACHE=OFF
+-- CMAKE_SYSTEM_PROCESSOR: AMD64
+-- CMAKE_GENERATOR_PLATFORM: 
+-- GGML_SYSTEM_ARCH: x86
+-- Including CPU backend
+-- x86 detected
+-- Adding CPU backend variant ggml-cpu: /arch:AVX2 GGML_AVX2;GGML_FMA;GGML_F16C;__BMI2__;GGML_BMI2
+-- ggml version: 0.24.0
+-- ggml commit:  2b207d48
+-- Configuring done (4.0s)
+-- Generating done (0.3s)
+-- Build files have been written to: C:/strata/local-setup/target-80/build-cuda86-main
+[1/3] Building CXX object CMakeFiles\accepted_usage_test.dir\tests\core\accepted_usage.cpp.obj
+[2/3] Linking CXX executable accepted_usage_test.exe
+accepted usage: all prefix, invalid ID, duplicate, reset, and exception restoration checks passed

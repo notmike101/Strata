@@ -1,0 +1,15 @@
+{
+  "engine_sha256": "8057ab78c4129fc250ed668f5acd738a6b9cd2381b2d089467bd24f72f770ab2",
+  "source_sha256": {
+    "src/program/generate.cpp": "5e6a7e6bad0da6bcbd6abf2d32adee24a25b32641554f63a240a15333a66cc6e",
+    "include/strata/core/accepted_usage.hpp": "b02122d7a0c061d0eeccfac23acf91db7b76e3c2ccae45792bef1406e747062c",
+    "tests/core/accepted_usage.cpp": "5891c19272db2351d203d6bb0624c002fcb9e33a1d3eda4b9d0cba5b2e1ae09e"
+  },
+  "tests": [
+    "4096 independent scalar-oracle windows plus prefix/ID/reset/exception cases passed",
+    "iq_avx2_parity 0 failures",
+    "Windows pool affinity passed"
+  ],
+  "build": "CUDA13.3.73 sm86 MSVC Release; HIP/SYCL unavailable, not built",
+  "production_promoted": false
+}

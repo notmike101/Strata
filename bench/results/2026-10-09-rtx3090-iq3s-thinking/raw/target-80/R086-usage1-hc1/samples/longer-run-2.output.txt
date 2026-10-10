@@ -1,0 +1,15 @@
+We need answer user's request. Need produce final detailed answer at least 1200 words. Need implement thread-safe Python TTLCache using OrderedDict monotonic clock. Include set, get, delete, clear, len, expiration, capacity eviction, unit tests with injected fake clock, detailed explanation thread safety complexity. Also existing cache rules maybe need incorporate? They list 64 rules items item_000 to item_063 lifetimes 30+rule and sizes 64+3*rule? Need likely implement cache respecting existing rules? Benchmark identifier ignore. "Read these existing design requirements before implementing the cache" maybe need consider existing rules? They don't ask specifically to use them? Could include tests with those items? We need complete code, tests, explanation. Need be careful: TTLCache with capacity eviction, size bytes, expiration. Use OrderedDict, threading.Lock/RLock, monotonic clock injected fake clock. Include expiration method maybe public. set should maybe update size? Need capacity eviction by size? Existing rules include size. "size 64 bytes". Implement capacity limit total bytes maybe. Could default max_size bytes. Or capacity count? User says capacity eviction. Could implement max_items or max_bytes. Existing cache rules have size bytes, so likely cache has byte capacity. Need include set(key, value, lifetime, size). Existing rules maybe loaded. We can make TTLCache support per-entry lifetime and size. Thread-safe: use RLock to allow public methods call expiration. Monotonic clock: time.monotonic, inject clock callable. OrderedDict move_to_end for LRU. Expiration removes stale entries. Need tests with fake clock. Need maybe use unittest. Need no abbreviation. Need detailed answer >1200 words.
+
+Potential design:
+class Entry: __slots__ = ('value','size','expires_at')
+class TTLCache:
+    def __init__(self, max_bytes: int, clock=time.monotonic, max_items=None?)
+        self._max_bytes = max_bytes
+        self._clock = clock
+        self._data = OrderedDict()
+        self._total_size = 0
+        self._lock = threading.RLock()
+
+Methods:
+    _is_expired(expiry, now): expiry is not None and expiry <= now.
+    def _purge_expired(self): iterate? O(n). Could remove all expired. For efficiency, since insertion order not sorted by expiration, must scan. But for LRU OrderedDict order irrelevant

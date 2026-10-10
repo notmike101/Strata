@@ -1,0 +1,16 @@
+We need answer user's request. Need produce final answer with complete code, tests, detailed explanation at least 1200 words. Need satisfy Benchmark identifier ignored? It says Benchmark identifier ... Ignore this identifier. We should ignore. Need implement thread-safe Python TTLCache using OrderedDict and monotonic clock. Include set, get, delete, clear, len, expiration, capacity eviction, unit tests with injected fake clock, detailed explanation of thread safety and complexity. Do not abbreviate implementation. Detailed answer >=1200 words.
+
+Need think carefully. Python TTLCache class. Thread-safe. Use OrderedDict. Monotonic clock. Could inject clock callable. Methods: __init__(maxsize, ttl=None, clock=time.monotonic). set/get/delete/clear/__len__/__contains__/keys? Maybe expiration. Use RLock to allow reentrant? Need thread safety. OrderedDict is not thread-safe, so protect all operations with lock. Expiration lazy on get/set; also maybe _purge_expired. Capacity eviction: OrderedDict order: insertion/update order? For LRU? TTLCache capacity eviction likely least-recently-used? User says capacity eviction; with OrderedDict can use move_to_end on get and set. TTL expiry independent. Need maybe set stores value and expires_at. Or store (value, expires_at). get checks expired, remove if expired. If ttl not provided, infinite? Use None ttl => no expiration. clock injected fake clock. Unit tests with fake clock. Need include unit tests. Can write unittest. Need no abbreviate. Maybe include `set` alias `__setitem__`? They requested set, get, delete, clear, len, expiration, capacity eviction. Use methods set/get/delete/clear/__len__. Could also include `expires_at`, `remaining_ttl`.
+
+Potential implementation:
+
+class TTLCache:
+    def __init__(self, maxsize, ttl=None, clock=None):
+        if maxsize <=0: raise ValueError
+        self._maxsize = int(maxsize)
+        if ttl is not None and ttl < 0: raise ValueError
+        self._ttl = ttl
+        self._clock = clock if clock is not None else time.monotonic
+        self._cache = OrderedDict()  # key -> (value, expires_at)
+        self._lock = threading.RLock()
+        self._size = 0? Could use len(self._cache) under lock. But len called under lock? For thread-safe len use with lock

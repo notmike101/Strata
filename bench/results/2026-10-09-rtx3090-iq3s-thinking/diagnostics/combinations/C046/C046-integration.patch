@@ -1,0 +1,128 @@
+diff --git a/CMakeLists.txt b/CMakeLists.txt
+index 98409b83..4209b7d5 100644
+--- a/CMakeLists.txt
++++ b/CMakeLists.txt
+@@ -1467,6 +1467,10 @@ if(STRATA_BUILD_TESTS)
+     target_link_libraries(pool_affinity_test PRIVATE strata_kernels_cpu)
+     add_test(NAME pool_affinity_test COMMAND pool_affinity_test)
+   endif()
++  add_executable(accepted_usage_test tests/core/accepted_usage.cpp)
++  target_include_directories(accepted_usage_test PRIVATE ${CMAKE_CURRENT_SOURCE_DIR}/include)
++  target_compile_features(accepted_usage_test PRIVATE cxx_std_17)
++  add_test(NAME accepted_usage_test COMMAND accepted_usage_test)
+   # Plan v0.3 P6: one expert applied to several tokens, bitwise vs the single-token kernel (synthetic, CPU only).
+   # plan v0.3 P5: the device dequantizers vs the artifact's CPU dequantizers on the real shards (not a ctest: needs
+   # the 38 GB model; run it by hand or from tools/gpu_session.py)
+diff --git a/src/program/generate.cpp b/src/program/generate.cpp
+index 433d3957..cc9240a2 100644
+--- a/src/program/generate.cpp
++++ b/src/program/generate.cpp
+@@ -19,6 +19,7 @@
+ #include "strata/core/dma_batch.hpp"
+ #include "strata/core/device.hpp"
+ #include "strata/core/remote_expert_opt.hpp"
++#include "strata/core/accepted_usage.hpp"
+ #include "strata/core/expert_cache.hpp"
+ #include "strata/core/conversation_snapshot.hpp"
+ #include "strata/core/conversation_file.hpp"
+@@ -913,6 +914,7 @@ bool parse_i64_list(const char* s, std::vector<int64_t>& out, std::string& err)
+ /// The pool's adapter plus the wall-clock it spent, so the report can say how much of the token was the CPU.
+ struct Drive {
+     strata::core::ExpertDispatch d;
++    strata::core::AcceptedUsage* accepted_usage = nullptr;
+     double cpu_ms = 0;
+     int64_t calls = 0;
+     /// THE ROUTING TRACE, which is P0.S8 and a stated prerequisite of Phase 3.  `drive_pool` is called once
+@@ -957,7 +959,13 @@ void drive_pool_multi(void* user, const float* x_f, const int32_t* ids, int64_t
+     Drive* t = (Drive*) user;
+     t->d.layers = layer;
+     const Clock::time_point a = Clock::now();
+-    strata::core::expert_pool_dispatch_multi(t->d, x_f, ids, n_tok, k, out);
++    if (t->accepted_usage != nullptr) {
++        t->accepted_usage->record(layer, t->d.n_expert, ids, n_tok, k);
++        const strata::core::PauseUsage paused(t->d.usage);
++        strata::core::expert_pool_dispatch_multi(t->d, x_f, ids, n_tok, k, out);
++    } else {
++        strata::core::expert_pool_dispatch_multi(t->d, x_f, ids, n_tok, k, out);
++    }
+     t->cpu_ms += std::chrono::duration<double, std::milli>(Clock::now() - a).count();
+     ++t->calls;
+     // the routing trace for the serve path: the same record format drive_pool writes (layer, k, ids, weights),
+@@ -2326,6 +2334,15 @@ int main(int argc, char** argv) {
+         std::fprintf(stderr, "strata generate: --remote-expert-opt requires --serve\n");
+         return 2;
+     }
++    const char* accepted_usage_env = std::getenv("STRATA_ACCEPTED_USAGE");
++    const bool accepted_usage_on = accepted_usage_env && std::string(accepted_usage_env) == "1";
++    if (accepted_usage_on && (!o.serve || !o.layer_split.empty() || o.peer_device >= 1 ||
++        o.expert_cache_remote[0] > 0 || o.expert_cache_remote[1] > 0 || o.expert_cache_remote[2] > 0 ||
++        o.batch > 0 || o.pipeline_windows > 0 || o.adapt_async || o.no_pool ||
++        o.adapt_every <= 0 || o.adapt_swaps <= 0)) {
++        std::fprintf(stderr, "strata: STRATA_ACCEPTED_USAGE requires single-GPU serial serve with synchronous adaptive cache\n");
++        return 2;
++    }
+     // the peer tier is the second card's only user: a layer split or a remote expert cache would put a second engine
+     // part (and a second copy of the same experts) on it
+     if (o.peer_device >= 1 && (!o.layer_split.empty() || o.expert_cache_remote[0] > 0)) {
+@@ -7379,6 +7396,14 @@ int main(int argc, char** argv) {
+             std::all_of(host_res.begin(), host_res.end(), [](int32_t r) { return r >= 0; });
+         if (o.adapt_every > 0 && o.adapt_swaps > 0 && !all_experts_resident)
+             drive.d.usage.assign((size_t) (g.n_layers * g.n_expert), 0.0f);
++        strata::core::AcceptedUsage accepted_usage;
++        if (accepted_usage_on) {
++            if (drive.d.usage.empty()) {
++                std::fprintf(stderr, "strata: STRATA_ACCEPTED_USAGE needs an active adaptive cache\n");
++                return 2;
++            }
++            std::fprintf(stderr, "strata serve: accepted-row adaptive usage enabled (serial, committed inputs only)\n");
++        }
+         // #477 --expert-profile-save: what the adaptive tier learned, kept across restarts (opt-in; off: `heat` stays
+         // empty and nothing below runs).  It needs the adaptive tier's counts and the residency table.
+         std::vector<double> heat;
+@@ -9966,6 +9991,7 @@ int main(int argc, char** argv) {
+             consumed.reserve((size_t) (n + max_new + S));
+             for (int64_t i = 0; i < n - 1; ++i) consumed.push_back((int32_t) ids[(size_t) i]);
+             const char* finish = "length";
++            const uint64_t usage_examined0 = accepted_usage.examined, usage_retained0 = accepted_usage.retained;
+             const Clock::time_point d0 = Clock::now();
+             // STRATA_DECODE_TIMING=1: where a request's decode time goes (one line per request)
+             static const bool dec_timing = std::getenv("STRATA_DECODE_TIMING") != nullptr;
+@@ -10681,10 +10707,19 @@ int main(int argc, char** argv) {
+                 // STRATA_SPEC_PROB: the MTP drafts' distributions q, judged by rejection sampling (core/spec_prob.hpp);
+                 // a suffix window and the lookup chain's tail are point masses and keep the exact-match rule
+                 if (use_mtp && mtp.prob() && !from_sfx && T_mtp > 1) ver.set_spec_q(mtp.spec_q(), T_mtp - 1);
++                if (accepted_usage_on) {
++                    accepted_usage.begin(T);
++                    drive.accepted_usage = &accepted_usage;
++                }
++                struct ResetAcceptedUsage {
++                    Drive& drive;
++                    ~ResetAcceptedUsage() { drive.accepted_usage = nullptr; }
++                } reset_accepted_usage{drive};
+                 if (!ver.run(T, window.data(), p, win_pool_fn, win_pool_user, outv.data(), err) || drive.d.failed) {
+                     std::printf("ERR %s\n", drive.d.failed && drive.d.fail ? drive.d.fail : err.c_str());
+                     return 1;
+                 }
++                drive.accepted_usage = nullptr;
+                 // Diagnostics (as in generate): STRATA_DUMP_FIRST_LOGITS=<path> writes the logits of each request's first
+                 // window to <path>.<n>, so the prompt paths (a peer card's share, a split) can be compared by KL
+                 if (first_window) {
+@@ -10701,6 +10736,7 @@ int main(int argc, char** argv) {
+                 }
+                 int a = 0;
+                 while (a < T - 1 && window[(size_t) a + 1] == outv[(size_t) a]) ++a;
++                if (accepted_usage_on) accepted_usage.commit(drive.d.usage, a + 1);
+                 if (from_sfx) { ++sfx_windows; sfx_drafts += T - 1; sfx_ok += a; }
+                 if (chain_n > 0) { ++chain_windows; chain_drafts += chain_n; chain_ok += std::max(0, a - (T_mtp - 1)); }
+                 if (!from_sfx && !first_window)
+@@ -10771,6 +10807,10 @@ int main(int argc, char** argv) {
+                 p += a + 1;
+             }
+             const double decode_ms = std::chrono::duration<double, std::milli>(Clock::now() - d0).count();
++            if (accepted_usage_on)
++                std::fprintf(stderr, "strata accepted usage: %llu retained of %llu routed entries\n",
++                             (unsigned long long)(accepted_usage.retained - usage_retained0),
++                             (unsigned long long)(accepted_usage.examined - usage_examined0));
+             // the last commit (set_commit_async): the session is complete before anything reads or copies it
+             if (!ver.wait_commit(err)) {
+                 std::printf("ERR %s\n", err.c_str());

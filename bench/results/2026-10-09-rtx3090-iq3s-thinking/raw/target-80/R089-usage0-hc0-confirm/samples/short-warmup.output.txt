@@ -1,0 +1,18 @@
+We need answer user's request. Need produce final answer with complete code, tests, detailed explanation at least 1200 words. Need think fully.
+
+Task: Implement thread-safe Python TTLCache class using OrderedDict and monotonic clock. Include set, get, delete, clear, len, expiration, capacity eviction, unit tests with injected fake clock, detailed explanation of thread safety and complexity. Write complete code, then tests, then explain design. Do not abbreviate implementation. At least 1200 words.
+
+Need produce robust code. Let's design.
+
+TTLCache: thread-safe. Use OrderedDict. Need monotonic clock injected. Default time.monotonic. Methods: set, get, delete, clear, len, __len__, maybe __contains__, pop, setdefault? Requirement includes set, get, delete, clear, len, expiration, capacity eviction. Unit tests with fake clock. Detailed explanation.
+
+Implementation considerations:
+- OrderedDict maps key -> (value, expires_at)
+- default_ttl
+- maxsize
+- clock
+- lock = threading.RLock() or threading.Lock. RLock if methods call each other under lock. We'll use RLock.
+- _now returns clock().
+- _purge_expired? On get: if expired remove and miss. On set: before insert can purge expired? To enforce TTL capacity? Typically TTLCache evicts expired on access and before insert. Need capacity eviction: if maxsize and len > maxsize after inserting, popitem(last=False) FIFO? OrderedDict insertion order; LRU? Using OrderedDict can do move_to_end for LRU. But user just says capacity eviction, not LRU. OrderedDict maybe LRU. We can implement LRU eviction: on get hit move_to_end, on set update move_to_end, evict last=False (least recently used? If move_to_end on access then first is LRU, popitem(last=False)). But if using insertion order FIFO, get not move. TTLCache in cachetools uses OrderedDict for LRU? We can mention LRU. Thread-safe.
+
+Need handle expiration: store expiry absolute monotonic time. TTL can be None = never expire. set TTL optional; if ttl is None and default_ttl is None no expiry. If ttl is negative? Could treat as immediately expire; if ttl == 0 immediately expire? For get if now >= expires_at expired. For set if ttl is not None and ttl <= 0, should not store? TTL of 

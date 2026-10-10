@@ -1,0 +1,15 @@
+We need answer user's request. Need produce final detailed answer at least 1200 words. User asks: Benchmark identifier ignore. Read existing design requirements before implementing cache: many existing cache rules with lifetimes increasing 30 sec for item_000 size 64 etc. Need implement thread-safe Python TTLCache class using OrderedDict and monotonic clock. Include set, get, delete, clear, len, expiration, capacity eviction, unit tests with injected fake clock, detailed explanation of thread safety and complexity. Complete code, tests, explain design. Do not abbreviate implementation. At least 1200 words.
+
+Need likely incorporate existing design requirements? They list many rules: key item_000 lifetime 30 size64 ... item_063 lifetime 93 size253. These are probably irrelevant but maybe should be considered as existing cache rules. Need maybe implement cache that can accommodate existing rules? Need perhaps not hardcode them, but mention TTLCache can store entries with varying TTL and size. Could include tests that load these existing rules? But requirements ask implement TTLCache class. Could design size capacity in bytes? Existing rules include size bytes; capacity eviction perhaps bytes? They mention size in rules. TTLCache usually capacity in entries or bytes? They ask size 64 bytes etc, expiration and capacity eviction. Could implement capacity in bytes? Need include size per entry. Use OrderedDict maps key to (value, expiry_time, size). Maintain total_bytes. Capacity parameter max_bytes or max_size? Could use max_size in bytes. Or max_size number of entries. Existing rules sizes suggest capacity maybe bytes. But "size 64 bytes" likely item sizes. Need capacity eviction based on total size. Could support both max_size (entries) and max_bytes? Simpler: capacity as max bytes. Need unit tests with fake clock. Use collections OrderedDict, threading.RLock, time.monotonic default. TTLCache set(key, value, ttl, size, max_size? Maybe cache capacity fixed at init). Existing design rules: each rule says access must update LRU order; expiration remove stale entries.
+
+Need produce complete code no abbreviation. Could implement class:
+
+from collections import OrderedDict
+import threading, time
+
+class _Entry:
+    __slots__ = ('value','expires_at','size')
+    def __init__(...)
+
+class TTLCache:
+    def __init__(self, max_bytes=1024, clock=time.monotonic

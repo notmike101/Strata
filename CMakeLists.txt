@@ -1467,6 +1467,10 @@ if(STRATA_BUILD_TESTS)
     target_link_libraries(pool_affinity_test PRIVATE strata_kernels_cpu)
     add_test(NAME pool_affinity_test COMMAND pool_affinity_test)
   endif()
+  add_executable(accepted_usage_test tests/core/accepted_usage.cpp)
+  target_include_directories(accepted_usage_test PRIVATE ${CMAKE_CURRENT_SOURCE_DIR}/include)
+  target_compile_features(accepted_usage_test PRIVATE cxx_std_17)
+  add_test(NAME accepted_usage_test COMMAND accepted_usage_test)
   # Plan v0.3 P6: one expert applied to several tokens, bitwise vs the single-token kernel (synthetic, CPU only).
   # plan v0.3 P5: the device dequantizers vs the artifact's CPU dequantizers on the real shards (not a ctest: needs
   # the 38 GB model; run it by hand or from tools/gpu_session.py)

@@ -1,0 +1,11 @@
+We need answer user's request. Need produce final detailed answer at least 1200 words. Need implement thread-safe Python TTLCache using OrderedDict monotonic clock. Include set, get, delete, clear, len, expiration, capacity eviction, unit tests with injected fake clock, detailed explanation thread safety complexity. Also existing cache rules maybe need incorporate? They list 64 rules items item_000 to item_063 lifetimes 30+rule and sizes 64+3*rule? Need maybe implement with size? They mention cache rule size. They ask implement TTLCache class using OrderedDict. Need include capacity eviction. Existing cache rules: maybe need set all those rules? The prompt: "Read these existing design requirements before implementing the cache:" then lists rules. They likely expect implementation respects per-key lifetime and size? They mention size but not necessarily weighted cache? It says existing cache rule has lifetime and size. Maybe should include size support? TTLCache typical capacity number of entries, not byte size. But rules include size; perhaps capacity eviction could be based on max_size total bytes? User says capacity eviction but not explicit byte vs count. Need maybe support both entry capacity and byte capacity. The requirements: existing cache rule 0: key item_000 has lifetime 30 seconds and size 64 bytes; expiration must remove stale entries, access must update LRU. ... up to 63. Could include a test verifying all 64 rules with fake clock. Need not use benchmark identifier. Need produce complete code, tests, explanation. At least 1200 words.
+
+Need think through implementation details.
+
+Thread-safe TTLCache:
+- from threading import RLock
+- OrderedDict from collections
+- use injected clock: default time.monotonic.
+- Entry dataclass or tuple: value, expires_at, size.
+- _entries OrderedDict: LRU order. Maybe move_to_end on get and set.
+- capacity: max_entries (int) and max_bytes (int or None). Existing sizes require byte capacity? Maybe if capacity max_entries=64 and max_bytes enough. Need ensure if inserting larger than max_bytes cannot insert? For size 64, total sizes if all 64 entries = arithmetic: 64,67,... 253. Count 64. Sum = 64*64 + 3*(0+...+63)? wait size =64 + 3*r

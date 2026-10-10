@@ -2158,3 +2158,174 @@ All four arms completed: one excluded warmup plus five measured seeds per short/
 D versus A: short+0.79%, longer-3.06%; E2E77.2826/41.5286 versus77.0436/42.1234. The combined stack fails the finite confirmation trigger and final no-degradation contract. No reversed pair is run. Descriptive HC effects are B-A=-1.7/+0.6 tok/s with DMAoff versus D-C=+3.7/-0.2 with DMAon. These medians demonstrate interaction/noise, not an additive or causal estimate. No arm independently qualifies90/85 and full quality. Preserve HC-fast as an unpromoted component for a distinct justified combination. This specific DMA combination is closed. Production remains unchanged; all exact launcher trees stopped.
 
 Next hypothesis: exclude rejected speculative rows from adaptive cache heat, reducing transfer quantity rather than copy submission overhead. Inspect and test a scoped single-GPU serial-serve derivation of PR1779; do not import its multi-GPU pipeline. Keep all numeric computation, model, sampling, MTP, context and cache precision unchanged. Any runtime placement rounding still needs quality validation.
+
+
+## E128 / C046 prelaunch plan
+
+# C046: committed-row cache heat and HC-fast
+
+Hypothesis: current serial verify dispatch counts rejected draft rows in adaptive
+expert heat. Keeping only committed input rows may improve cache placement and
+reduce misses/transfers; HC-fast addresses independent GPU arithmetic. P013 proves
+transfers occur, not that their whole interval is removable. Inspired by the
+accepted-usage portion of upstreamPR1779 headf3727b2464321a35c4638491d75bcda1d4ecbb9c;
+no multi-GPU pipeline code is imported. This is a new cache policy, not a repeat
+of C045 copy-submission batching or prior adapt-every/lag sweeps.
+
+Implementation: opt-in STRATA_ACCEPTED_USAGE=1 for single-GPU serial serve with
+synchronous adaptive cache. Record routed expert indices per verify input row;
+temporarily suppress eager usage accounting with RAII restoration; count rows
+0..a before the existing adaptation point, matching ver.commit(a+1). Preserve
+duplicate ID counts and invalid ID handling. Discard rejected rows. Final-window
+counts follow committed input rows even if output cap/EOS prevents emitting all
+outputs; no change to the existing commit/emission policy. Empty/default flag
+keeps the original accounting. Unsupported batch/pipeline/async/peer/helper/
+all-resident modes reject opt-in. Prompt path, model bytes, expert routing,
+computation, KV, sampling, MTP depth/threshold, PCIe fraction and adapt schedule
+remain unchanged. Placement may change CPU/GPU rounding; this is NOT an assertion
+of identical generated text or automatic quality parity.
+
+Correctness gate: first reproduce missing-helper test failure, then pass scalar
+oracle checks over all accepted prefixes, invalid IDs, duplicate IDs, repeated
+windows, exception restoration, and4096 random48-layer512-expert windows. Build
+CUDA13.3/sm86 engine and run existing IQ AVX2 parity and topology tests. HIP/SYCL
+toolchains unavailable; not built, no upstream review/merge request. Verify
+active startup message and actual retained/routed counters in each enabled arm.
+
+Finite served budget: four fresh arms A=usage0/HC0 R084, B=usage1/HC0 R085,
+D=usage1/HC1 R086, C=usage0/HC1 R087, in A/B/D/C order. SAME newly built engine
+for every arm; DMA0/deviceplan0. One excluded warmup plus five seeds101..105 per
+short and ~3K cell,512tokens,cachemiss,concurrency1. Forty measured requests.
+Fixed262144context,INT8KV/32768resident,CPU F16vision,thinking high->xhigh unlimited,
+temperature1/top_p.95/top_k20/min_p0/presence0/repetition1, MTP4/.70, PCIe.20,
+lag2,9workers30tasks. Identity per request; independent16GiB physical AND commit
+floors; audit-no-process; no competing builds/profilers/GUI/Git during timings.
+Exact cleanup and config restore after each arm. Assert byte-identical payloads.
+
+Assess D against A, B/C retained as component/interactions. Maximum ONE reversed
+D/A pair (20more measured requests) if either decode median improves>=1% and
+neither other decode/prompt/E2E median falls>1%. This is a continuation screen,
+not final permission for degradation. Otherwise stop this combination. No
+component must individually reach90 or win every isolated metric. Retain useful
+unpromoted components with evidence. Full promotion requires90/85 repeated
+ordinary medians, fixed random coding with completed tested answer, and all
+cold/warm/cache/tool/vision/maxcontext/quality/stability checks; Q007 is unresolved.
+No peak/microbenchmark/short-only success qualifies. Retained production stays
+unchanged until all requirements pass. No model resident at handoff.
+
+
+
+## E129 / R084-usage0-hc0
+
+Explicitly verified candidate engine SHA256 8057ab78c4129fc250ed668f5acd738a6b9cd2381b2d089467bd24f72f770ab2; loaded library hashes match R080-hc0-dma0. This is a new-binary control comparison, not a same-binary claim. Config diff is archived. Fixed numeric sampling, high/xhigh reasoning, model/quant, vision, context262144 and INT8KV retained. Original TTLCache streaming cache-miss workloads; one excluded warmup and five measured seeds101-105 per cell,512tokens per measured run. No slow seed excluded.
+
+| Workload | Decode median (range), tok/s | Prompt median, tok/s | E2E median, tok/s | Stream total median, tok/s | TTFT median, s | Draft accepted/offered |
+|---|---:|---:|---:|---:|---:|---:|
+| short | 87.9 (82.2-88.9) | 203.5 | 76.6375 | 76.6595 | 0.8410 | 816/1097 (74.38%) |
+| longer | 81.7 (79.9-82.8) | 496.6 | 41.3400 | 41.3444 | 6.1522 | 955/1328 (71.91%) |
+
+Minimum available physical RAM 62,468,005,888 bytes; available commit 40,772,149,248 bytes. Sampled GPU peak 25,123,819,520 bytes. Both16GiB host floors passed. Per-process peak memory not sampled. Full launcher/server/text/vision cleanup passed and previous config restored.
+
+C046 A new-binary control:87.9/81.7 decode; production unchanged. Full matrix pending.
+
+Next: Run B usage-only, then D combined and C HC-only per finite C046 plan.
+
+
+## E130 / R085-usage1-hc0
+
+Same engine and loaded library hashes as R084-usage0-hc0. Config diff is archived. Fixed numeric sampling, high/xhigh reasoning, model/quant, vision, context262144 and INT8KV retained. Original TTLCache streaming cache-miss workloads; one excluded warmup and five measured seeds101-105 per cell,512tokens per measured run. No slow seed excluded.
+
+| Workload | Decode median (range), tok/s | Prompt median, tok/s | E2E median, tok/s | Stream total median, tok/s | TTFT median, s | Draft accepted/offered |
+|---|---:|---:|---:|---:|---:|---:|
+| short | 87.5 (85.8-89.3) | 206.0 | 77.1226 | 77.1385 | 0.8402 | 904/1214 (74.46%) |
+| longer | 82.8 (80.8-86.3) | 496.0 | 41.5491 | 41.5523 | 6.1624 | 990/1278 (77.46%) |
+
+Minimum available physical RAM 62,477,889,536 bytes; available commit 40,765,911,040 bytes. Sampled GPU peak 25,125,916,672 bytes. Both16GiB host floors passed. Per-process peak memory not sampled. Full launcher/server/text/vision cleanup passed and previous config restored.
+
+C046 B usage-only:87.5/82.8 decode versus87.9/81.7 control. Activation proved12requests:2950080 retained of3310560 routed entries. Short slightly lower, longer higher; component evidence only.
+
+Next: Run D usage1/HC1 then C usage0/HC1; judge combined stack against A.
+
+
+## E131 / R086-usage1-hc1
+
+Same engine and loaded library hashes as R084-usage0-hc0. Config diff is archived. Fixed numeric sampling, high/xhigh reasoning, model/quant, vision, context262144 and INT8KV retained. Original TTLCache streaming cache-miss workloads; one excluded warmup and five measured seeds101-105 per cell,512tokens per measured run. No slow seed excluded.
+
+| Workload | Decode median (range), tok/s | Prompt median, tok/s | E2E median, tok/s | Stream total median, tok/s | TTFT median, s | Draft accepted/offered |
+|---|---:|---:|---:|---:|---:|---:|
+| short | 87.6 (84.6-90.8) | 203.6 | 76.8049 | 76.8157 | 0.8630 | 899/1197 (75.10%) |
+| longer | 82.7 (80.2-85.6) | 497.1 | 41.6162 | 41.6217 | 6.1357 | 928/1289 (71.99%) |
+
+Minimum available physical RAM 62,532,505,600 bytes; available commit 40,852,852,736 bytes. Sampled GPU peak 25,123,819,520 bytes. Both16GiB host floors passed. Per-process peak memory not sampled. Full launcher/server/text/vision cleanup passed and previous config restored.
+
+C046 D combined:87.6/82.7 decode versus87.9/81.7. Long+1.22%, short-0.34%, prompt203.6/497.1 and E2E76.8049/41.6162 do not regress. Finite reverse confirmation trigger passes; no promotion.
+
+Next: Complete C HC-only, then the single permitted reversed D/A pair; pool all measured rows.
+
+
+## E132 / R087-usage0-hc1
+
+Same engine and loaded library hashes as R084-usage0-hc0. Config diff is archived. Fixed numeric sampling, high/xhigh reasoning, model/quant, vision, context262144 and INT8KV retained. Original TTLCache streaming cache-miss workloads; one excluded warmup and five measured seeds101-105 per cell,512tokens per measured run. No slow seed excluded.
+
+| Workload | Decode median (range), tok/s | Prompt median, tok/s | E2E median, tok/s | Stream total median, tok/s | TTFT median, s | Draft accepted/offered |
+|---|---:|---:|---:|---:|---:|---:|
+| short | 88.4 (85.1-91.1) | 201.8 | 77.3560 | 77.3665 | 0.8457 | 919/1217 (75.51%) |
+| longer | 84.2 (78.8-86.3) | 496.5 | 41.8582 | 41.8640 | 6.1560 | 942/1267 (74.35%) |
+
+Minimum available physical RAM 62,578,327,552 bytes; available commit 40,881,319,936 bytes. Sampled GPU peak 25,128,013,824 bytes. Both16GiB host floors passed. Per-process peak memory not sampled. Full launcher/server/text/vision cleanup passed and previous config restored.
+
+C046 C HC-only:88.4/84.2 decode; full initial factorial complete. D87.6/82.7 is slower than C but passes the predeclared D-versus-A confirmation screen. No additive gain or promotion claimed.
+
+Next: Execute exactly one reversed D/A pair, R088/R089, then assess all10rows per cell; no additional sweep.
+
+
+## E133 / R088-usage1-hc1-confirm
+
+Same engine and loaded library hashes as R084-usage0-hc0. Config diff is archived. Fixed numeric sampling, high/xhigh reasoning, model/quant, vision, context262144 and INT8KV retained. Original TTLCache streaming cache-miss workloads; one excluded warmup and five measured seeds101-105 per cell,512tokens per measured run. No slow seed excluded.
+
+| Workload | Decode median (range), tok/s | Prompt median, tok/s | E2E median, tok/s | Stream total median, tok/s | TTFT median, s | Draft accepted/offered |
+|---|---:|---:|---:|---:|---:|---:|
+| short | 87.3 (83.9-93.9) | 203.8 | 76.4968 | 76.5116 | 0.8541 | 965/1262 (76.47%) |
+| longer | 84.1 (81.3-86.2) | 495.4 | 41.8563 | 41.8594 | 6.1681 | 981/1305 (75.17%) |
+
+Minimum available physical RAM 62,522,593,280 bytes; available commit 40,876,900,352 bytes. Sampled GPU peak 25,125,916,672 bytes. Both16GiB host floors passed. Per-process peak memory not sampled. Full launcher/server/text/vision cleanup passed and previous config restored.
+
+C046 D confirmation:87.3/84.1 decode. Full10short D runs median87.45 remains below90. Long confirmation stronger than initial82.7; final A repeat required for pooled assessment.
+
+Next: Finish R089 A control; pool both five-run passes and close finite C046 matrix.
+
+
+## E134 / R089-usage0-hc0-confirm
+
+Same engine and loaded library hashes as R084-usage0-hc0. Config diff is archived. Fixed numeric sampling, high/xhigh reasoning, model/quant, vision, context262144 and INT8KV retained. Original TTLCache streaming cache-miss workloads; one excluded warmup and five measured seeds101-105 per cell,512tokens per measured run. No slow seed excluded.
+
+| Workload | Decode median (range), tok/s | Prompt median, tok/s | E2E median, tok/s | Stream total median, tok/s | TTFT median, s | Draft accepted/offered |
+|---|---:|---:|---:|---:|---:|---:|
+| short | 87.4 (83.0-88.1) | 201.0 | 76.6129 | 76.6271 | 0.8495 | 891/1159 (76.88%) |
+| longer | 81.0 (80.0-84.8) | 496.8 | 41.1770 | 41.1806 | 6.1374 | 917/1253 (73.18%) |
+
+Minimum available physical RAM 62,528,049,152 bytes; available commit 40,896,790,528 bytes. Sampled GPU peak 25,125,916,672 bytes. Both16GiB host floors passed. Per-process peak memory not sampled. Full launcher/server/text/vision cleanup passed and previous config restored.
+
+C046 A confirmation:87.4/81.0 decode. Finite six-arm matrix complete, all guards and exact cleanup passed. Assess pooled A/D ordinary medians and keep unpromoted component evidence.
+
+Next: Publish C046 full matrix, activation, tests and code; inspect output-path variability before further controlled combinations.
+
+
+## E135 / C046 full confirmation and retained experimental component
+
+Sixty measured512-token requests across six fresh-process arms, plus twelve excluded warmups. Fixed numeric sampling and262144context. All60 cross-arm request-file comparisons are byte-identical; same engine8057ab78... and backend libraries, only accepted-usage and HC flags differ. All measured/warmup responses have512tokens and zero cache reuse. Each arm passed independent16GiB physical/commit guards and exact cleanup.
+
+| Group | Measured runs per workload | Short / ~3K server_decode_tps | Short / ~3K prompt tok/s | Short / ~3K request_e2e_tps |
+|---|---:|---|---|---|
+| A control R084+R089 | 10 | 87.40 / 81.50 | 202.25 / 496.80 | 76.6252 / 41.2801 |
+| D combined R086+R088 | 10 | 87.45 / 83.30 | 203.70 / 496.40 | 76.6509 / 41.7356 |
+| B accepted-usage only R085 | 5 | 87.50 / 82.80 | 206.00 / 496.00 | 77.1226 / 41.5491 |
+| C HC only R087 | 5 | 88.40 / 84.20 | 201.80 / 496.50 | 77.3560 / 41.8582 |
+
+D versus A: short+0.057%, longer+2.209%; prompt+0.717%/-0.081%; request E2E+0.033%/+1.103%. Short TTFT0.85642s versus0.84527s; longer6.16156s versus6.14619s. This is a longer-input signal with unchanged short decode, small prompt/TTFT differences and incomplete quality; not a verified no-degradation winner. The HC-only five-run arm was faster than D, so additive/causal benefit is not established. No extra repetition is authorized by the exhausted finite plan. Both targets remain unmet.
+
+Keep accepted-row accounting disabled by default as an experimental component with tests and reproducible source; production launcher/executable/config remain unchanged. Same model bytes, routing, computation, sampling and precision; cache placement can alter CPU/GPU rounding, so full quality remains required. The meaningful longer-input result is preserved for justified future combinations, not discarded solely for missing90. Do not blindly repeat this matrix.
+
+Runtime activation: all12requests in each of R085/R086/R088 logged positive retained/routed counts with rejected rows excluded; full counts in summary.json. This proves accounting activation, not fewer copied bytes. Tests cover all prefix lengths, invalid/duplicate IDs, reset, exception restoration and4096 random48-layer512-expert windows. Post-matrix test strengthening explicitly covers T1..8 and is registered in CMake with assertions enabled in Release. Existing IQ AVX2 parity reports0failures; Windows affinity test passes. CUDA13.3sm86 built; HIP/SYCL not built and no upstream review/merge requested.
+
+Follow-up P016 read-only reproducibility audit: R084/R089 have identical payloads/config/binary but all12output texts differ; common prefixes range57..506characters (warmup included), not a tokenizer-level divergence measurement. Positive seeds are forwarded in serve/server.py:959-961, parsed in generate.cpp, and Verifier::run draws Philox(seed,position). Source also feeds measured round times into DraftPolicy::observe, while CPU/GPU expert arithmetic can round differently (documented at the adaptation barrier). Those are plausible contributors, NOT proof of root cause. Do not change the sampling contract or blame a different nonce. Next bounded diagnostic should isolate the first differing routing/window/logit state using identical fresh-process requests, preserving production and all safety guards.

@@ -1,0 +1,13 @@
+We need answer user's request. Need produce complete code, tests, explanation >=1200 words. Need think in English because user English. Need final answer detailed. Need implement thread-safe Python TTLCache class using OrderedDict and monotonic clock. Include set, get, delete, clear, len, expiration, capacity eviction, unit tests with injected fake clock, detailed explanation thread safety and complexity. Do not abbreviate. At least 1200 words.
+
+Need design carefully.
+
+Class TTLCache:
+- __init__(self, ttl: float=60, capacity: Optional[int]=None, clock: Callable[[], float]=time.monotonic, lock_factory? maybe threading.RLock)
+Thread safety: use threading.RLock or Lock. Use OrderedDict. Store items: OrderedDict[key -> (value, expires_at)] perhaps use monotonic clock. TTL default. Methods set(key, value, ttl=None, skip_existing? maybe upsert) -> None. get(key, default=None, update=True?) maybe refresh? TTL cache typical get returns value if not expired, deletes expired; maybe no refresh. Need ensure atomic operations under lock. Expiration: purge expired items before operations. But capacity eviction: if exceeding capacity after set, pop oldest (LRU?) using OrderedDict. Need define semantics: move_to_end on get? If using OrderedDict as LRU, yes. TTL cache capacity eviction maybe least recently used. User asks expiration, capacity eviction. Should implement LRU with OrderedDict: get updates order, set inserts/updates and move to end. Evict oldest when capacity exceeded.
+
+Thread safety details: single internal RLock to protect dictionary, clock access, etc. Public methods use with self._lock. Avoid nested deadlock? RLock OK. Could use Lock but need internal helpers called within lock, not reentrant. We can design private helpers assume lock held and no external calls that call public methods. RLock safer.
+
+Clock injection: constructor accepts clock: Callable[[], float] = time.monotonic. For unit tests fake clock: class FakeClock: self.now, set/advance. Since monotonic may be time.time? time.monotonic fine. TTL float seconds. Validate ttl >=0, capacity positive or None. If ttl=0 expired immediately? Maybe allowed. Use <= expiration? If now >= expires_at => expired.
+
+Need include expiration method: maybe expire_all(), __contains__? Methods: set, get, delete, clear, __len__, __contains__, items

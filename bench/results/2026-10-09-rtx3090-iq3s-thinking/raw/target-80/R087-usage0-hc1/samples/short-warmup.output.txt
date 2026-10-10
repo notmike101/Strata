@@ -1,0 +1,11 @@
+We need answer user's request. Need produce final answer with complete code, tests, detailed explanation at least 1200 words. Need satisfy Benchmark identifier ignored? It says Benchmark identifier ... Ignore this identifier. We should ignore. Need implement thread-safe Python TTLCache using OrderedDict and monotonic clock. Include set, get, delete, clear, len, expiration, capacity eviction, unit tests with injected fake clock, detailed explanation of thread safety and complexity. Do not abbreviate implementation. Detailed answer >=1200 words.
+
+Need think carefully. Python TTLCache class. Thread-safe. Use OrderedDict. Monotonic clock. Could inject clock callable. Methods: __init__(maxsize, ttl=None, clock=time.monotonic). set (maybe __setitem__), get, delete, clear, len, expiration maybe get_ttl, has? Expiration: lazy expiration on get and set? Also maybe purge expired? Need capacity eviction: if maxsize exceeded, pop last item. Use OrderedDict move_to_end on access for LRU? TTLCache usually OrderedDict with maxsize and ttl. Need ensure thread-safe via RLock? Operations need atomic. Use self._lock = threading.RLock(). Clock injected fake clock. Need no abbreviate.
+
+Potential implementation:
+from collections import OrderedDict
+import threading, time
+
+class TTLCache:
+  def __init__(self, maxsize: int, ttl: float | None = None, clock: Callable[[], float] = time.monotonic):
+      if maxsize <= 0 raise ValueError? maybe if maxsize is None unlimited? But capacity eviction requires maxsize. Could support maxsize >0. ttl default None means no expiration unless passed per set. Need maybe ttl can be per item. set(key, value, ttl=None). Expiration computed: if ttl or self.ttl: expires_at=clock()+ttl else None. Need store tuple(value, expires_at). OrderedDict stores insertion order; move_to_end(key) for recency. For capacity eviction: if len(self._store) >= maxsize and key not in store before insertion? Need delete oldest first. If maxsize 0? maybe no cache, but we can disallow. Evict oldest expired? Need maybe on set, call self._purge_expired()? If purge all expired O(n). Alternatively check expiration for key and evict capacity. For correctness with TTL, get returns None if expired and deletes. len should maybe count live items? But O(n) if purge all expired.

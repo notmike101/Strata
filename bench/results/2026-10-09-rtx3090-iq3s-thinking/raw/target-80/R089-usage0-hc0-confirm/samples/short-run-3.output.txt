@@ -1,0 +1,16 @@
+We need answer user's request. Need produce final detailed answer at least 1200 words. Need implement thread-safe Python TTLCache using OrderedDict and monotonic clock. Include set, get, delete, clear, len, expiration, capacity eviction, unit tests with injected fake clock, detailed explanation thread safety complexity. Complete code, tests, explanation. Do not abbreviate implementation. Also Benchmark identifier ignored. Need likely provide Python code. Need ensure thread-safe. Could use threading.Lock. OrderedDict for LRU? TTL cache likely store value and expires_at. Use OrderedDict mapping keys to (value, expires_at). Use monotonic clock injected for tests. Methods: __init__(maxsize, ttl=None, clock=time.monotonic). set(key, value, ttl=None), get(key, default=None), delete(key), clear(), __len__, maybe __contains__, __iter__? Need expire? Could have lazy expiration on get and set, and maybe _prune on set? Capacity eviction evicts oldest inserted? With OrderedDict LRU? If using OrderedDict, move_to_end on get. TTL cache can use OrderedDict for insertion order for eviction oldest. Need thread safety: all public ops hold lock, clock call maybe outside? Could call inside to keep consistent? Fake clock injected may not be thread-safe? Tests single-thread. Need maybe context manager? Need ensure if ttl <=0 maybe delete/no cache. Could implement expiration: on get, if expired, delete and return default. On set, if key exists update and move_to_end, if expired previous remove then add. If maxsize reached, evict oldest item (next(iter(od))). But if oldest expired, remove expired first then maybe capacity. Need avoid recursive lock. Use non-reentrant lock? Public methods lock then call private _get/_set without lock. _cleanup? Could define _is_expired. Use lock for all operations. If clock raises? ignore.
+
+Potential design:
+from __future__ import annotations
+import threading, time
+from collections import OrderedDict
+from typing import Any, Optional, Callable, Hashable
+
+class TTLCache:
+    def __init__(self, maxsize: int = 128, ttl: Optional[float]=None, clock: Callable[[], float]=time.monotonic):
+       if maxsize <= 0: raise ValueError
+       self._lock=threading.Lock()
+       self._cache=OrderedDict()
+       self._maxsize=maxsize
+       self._default_ttl=ttl
+       self

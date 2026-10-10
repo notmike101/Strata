@@ -1,0 +1,29 @@
+We need answer user's request. Need produce complete code, tests, explanation >=1200 words. Need think thoroughly.
+
+User: Implement thread-safe Python TTLCache class using OrderedDict and monotonic clock. Include set, get, delete, clear, len, expiration, capacity eviction, unit tests with injected fake clock, detailed explanation of thread safety and complexity. Write complete code, then tests, then explain design. Do not abbreviate implementation. Detailed answer at least 1200 words.
+
+Need craft final with code blocks. Need no abbreviations? Means not leave implementation incomplete? "Do not abbreviate the implementation." So provide full class and tests.
+
+Need design: TTLCache with OrderedDict, monotonic clock. Thread-safe: lock. OrderedDict for LRU? TTL eviction: remove expired items. set(key, value, ttl maybe per-call or default ttl). get: return value or default? If expired, remove, return default. delete. clear. len: maybe number of non-expired? Need decide. If len triggers cleanup? Could return count of active entries after purging expired. Need capacity eviction. Expiration. Unit tests with injected fake clock.
+
+Potential implementation:
+
+import threading
+from collections import OrderedDict
+import time
+
+class _Sentinel? Maybe NOT_FOUND.
+
+class TTLCache:
+    def __init__(self, capacity=128, default_ttl=300.0, clock=time.monotonic, lock=None):
+       if capacity <1 raise ValueError? If default_ttl negative raise.
+       self._capacity=capacity
+       self._default_ttl=float(default_ttl) if not None? Could ttl=None for no expiry? Include expiration. Could support ttl=None means never expires. default_ttl maybe None.
+       self._clock=clock
+       self._lock=lock or threading.RLock()
+       self._data=OrderedDict()
+       self._not_found=object()
+
+Need ensure thread safety. Use RLock? If methods call internal with lock? Avoid reentrancy issues. RLock allows calling public inside public. But simpler lock = threading.Lock and public acquire. Helper methods assume lock held. No nested public calls except maybe len calls _purge. Could use Lock.
+
+Need atomic get with eviction. set: with lock: now = clock(); _delete_expired? If capacity full evict. But if setting existing key update: move to end. Need insert. If capacity is 0? maybe disallow. For

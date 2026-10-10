@@ -1,0 +1,24 @@
+We need answer user's request. Need produce final detailed answer at least 1200 words, complete code, tests, explanation thread safety complexity. User says benchmark identifier ignore. Implement thread-safe Python TTLCache using OrderedDict and monotonic clock. Include set, get, delete, clear, len, expiration, capacity eviction, unit tests with injected fake clock, detailed explanation. Do not abbreviate implementation. Need likely provide code blocks. Need ensure complete. Let's design robust class.
+
+Need think through implementation details:
+- Thread-safe: use threading.RLock or Lock. Need monotonic clock injection: parameter now=None default time.monotonic.
+- OrderedDict for LRU eviction. TTL expiry: store value and expires_at timestamp. On set: if existing, remove/update move to end. If new, insert, then if len > capacity: popitem(last=False) evict oldest. Then purge expired? Need ensure get returns None? Could use sentinel. len should maybe include not-yet-expired entries. So purge expired entries first. Need expiration method maybe purge_expired. Capacity eviction. Need __len__, get, set, delete, clear, maybe __contains__, keys? User requested set, get, delete, clear, len, expiration, capacity eviction. Use class methods.
+- Thread safety: critical sections: _purge_expired, _evict_capacity, get. Avoid recursive lock? Use RLock to allow public methods call private methods with same lock. But careful not to call user code with lock held? Could copy? get returns value only. Use sentinel to distinguish stored None. If value may be None, get returns sentinel? Public get(key, default=None) if key not found return default; if stored None return None. Use missing sentinel. Need avoid storing None confusion.
+
+Potential code:
+import threading, time
+from collections import OrderedDict
+
+_MISSING = object()
+
+class TTLCache:
+    def __init__(self, capacity=128, ttl=300.0, clock=None):
+        if capacity <=0 raise ValueError
+        if ttl <0? TTL can be 0? maybe allow >=0, negative invalid. if ttl <0 raise ValueError.
+        self._capacity = int(capacity)
+        self._ttl = float(ttl)
+        self._clock = clock or time.monotonic
+        self._cache = OrderedDict() # key -> (expires_at, value)
+        self._lock = threading.RLock()
+
+   

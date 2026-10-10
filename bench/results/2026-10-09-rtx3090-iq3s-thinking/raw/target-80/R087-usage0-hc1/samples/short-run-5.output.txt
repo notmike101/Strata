@@ -1,0 +1,20 @@
+We need answer user's request. Need produce final answer at least 1200 words. Need implement thread-safe Python TTLCache using OrderedDict monotonic clock, include set, get, delete, clear, len, expiration, capacity eviction, unit tests with injected fake clock, detailed explanation thread safety and complexity. Do not abbreviate implementation. Need ignore benchmark identifier. Need likely provide code, tests, explanation. Need ensure complete code. Could use threading.RLock. OrderedDict move_to_end. Need expiration lazily and active purge maybe. Need thread-safe len: since expiration may change visible count, len must account for expired entries. Need decide semantics: get deletes expired; set removes expired before capacity? Could call _purge_expired. Need len triggers purge? If len is called under lock, can purge expired, so count is live count. Need ensure capacity eviction when over capacity after set. TTLCache with maxsize and ttl. fake clock injected via callable returning float monotonic-ish. Need tests with unittest. Need detailed answer >1200 words. Need maybe include imports. Need code no abbreviations. Need maybe type hints. Need consider monotonic clock requirement: default time.monotonic. The fake clock in tests not monotonic maybe can increment. Good.
+
+Potential implementation:
+import threading
+from collections import OrderedDict
+from typing import Optional, Callable, Tuple, Any
+from time import monotonic
+
+class TTLCache:
+    def __init__(self, maxsize, ttl, clock=monotonic):
+        if maxsize <=0: raise ValueError...
+        if ttl <=0: raise ValueError...
+        self._clock=clock
+        self._maxsize=maxsize
+        self._ttl=ttl
+        self._cache=OrderedDict()
+        self._lock=threading.Lock() # reentrancy? Use RLock if methods call private without lock? We'll use _with_lock and private methods assume called with lock.
+    def set(self,key,value): with lock: self._purge_expired(); if key in: move; else if len==maxsize: pop oldest; insert; expire_at=clock()+ttl; if expire_at<=now? Maybe if ttl zero not allowed.
+    def get(self,key,default=None): with lock: entry = cache.get(key); if None return default; now=clock(); if entry.expire_at <= now: del; maybe next oldest? no. return value
+    delete, clear, len, maybe __contains

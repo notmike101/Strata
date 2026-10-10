@@ -1,0 +1,16 @@
+We need answer user's request. Need produce final answer detailed >=1200 words. User asks: Benchmark identifier... ignore. Read existing design requirements before implementing cache: long list rules 0-63 each key item_x lifetime 30+ x seconds and size 64 + 3x bytes; expiration must remove stale entries, access update LRU order. Implement thread-safe Python TTLCache class using OrderedDict and monotonic clock. Include set, get, delete, clear, len, expiration, capacity eviction, unit tests with injected fake clock, detailed explanation thread safety and complexity. Complete code, tests, explain design. No abbreviate. At least 1200 words.
+
+Need craft answer. Should include code likely comprehensive. Consider existing rules? They describe cache rules with keys lifetimes sizes. Need incorporate? Could pre-seed? The existing cache rule each item has lifetime and size, expiration remove stale, access update LRU. Need implement cache that supports per-entry TTL and maybe max size? Use OrderedDict. Thread-safe with RLock or Lock? Need monotonic clock. Capacity eviction: maxsize bytes? Since rules have sizes. Implement capacity bytes eviction by size. TTL per entry. Access updates LRU: get and set move_to_end. Expiration: get checks expiration and deletes; maybe also lazy expiration on set to remove expired entries? Capacity eviction can evict expired first. Need unit tests with fake clock. Also maybe thread tests? Need detailed explanation. Need not use benchmark identifier. Need ensure complete code. Could implement class:
+
+from collections import OrderedDict
+import threading, time
+
+class Clock: def __init__(...); def monotonic(self) ...
+
+TTLCache:
+ def __init__(self, maxsize=None, default_ttl=300, clock=None, lock_factory=threading.RLock): self._data=OrderedDict(); self._lock=lock_factory(); ... max_size? Since sizes per rule, set(key,value,lifetime=None,size=None). Store Node namedtuple (value, expires_at, size). current_size.
+
+Methods:
+ _now = self._clock.monotonic
+ _entry_expired(entry, now): entry.expires_at <= now (maybe <=? Use < or <=; define strict? If now >= expires_at stale.)
+ _purge_expired(): iterate keys? But iterating while deleting can be O(n). Could just for k in list(self._data): if expired delete. Called on set? Could be expensive but okay. Or

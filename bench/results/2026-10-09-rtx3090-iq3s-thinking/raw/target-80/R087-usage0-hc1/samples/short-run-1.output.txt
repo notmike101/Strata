@@ -1,0 +1,11 @@
+We need answer user's request. Need produce complete code, tests, explanation >=1200 words. Need think thoroughly.
+
+User: Implement thread-safe Python TTLCache class using OrderedDict and monotonic clock. Include set, get, delete, clear, len, expiration, capacity eviction, unit tests with injected fake clock, detailed explanation of thread safety and complexity. Write complete code, then tests, then explain design. Do not abbreviate implementation. Detailed answer at least 1200 words.
+
+Need craft final with code blocks. Need no abbreviations? Means don't ellipsize code. Need complete code. Include import threading, OrderedDict, time maybe monotonic default. Class TTLCache. Need thread-safe using RLock? OrderedDict not thread-safe. Use Lock. Methods: __init__(max_size, ttl, clock=None). store key->value and expire_at. OrderedDict maybe stores tuple(value, expires_at). maxsize can be None? Could enforce positive? Use collections.OrderedDict. Clock callable returning float. Use time.monotonic default. Need get: acquire lock, check expiry, if expired delete and maybe get default. Need set: with lock, if key exists update value/expire and move_to_end; if new add and if len>max_size evict oldest (FIFO/LRU? OrderedDict move_to_end on get/set for LRU). Expiration: need delete expired entries. Could have _prune(max_items?) Need len accurate? If len includes expired, not ideal. Could implement _evict_expired at public methods to remove expired. But _prune O(number expired). len() returns live count, so prunes expired entries O(n) potentially. Accept. Could optimize by keeping heap? But requirement OrderedDict. Fine.
+
+Need capacity eviction. If max_size is 0? Maybe raise ValueError if max_size <=0? Or allow None? Better require int >0? TTL can be None for no TTL? Requirement TTLCache. Use ttl float >0. Could allow ttl=None infinite? But include expiration. Let's implement positive ttl. For maxsize positive. If maxsize None maybe infinite? Not needed. We'll enforce maxsize > 0, ttl > 0.
+
+Need unit tests with fake clock. Use unittest? Include class FakeClock. Need test set/get, expiration, delete, clear, len, capacity eviction, thread safety maybe concurrency tests? Include injected fake clock in tests. Need no abbreviate. We can provide complete tests.
+
+Need thread

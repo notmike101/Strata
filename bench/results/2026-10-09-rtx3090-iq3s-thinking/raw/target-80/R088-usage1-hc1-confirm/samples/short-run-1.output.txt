@@ -1,0 +1,12 @@
+We need answer user's request. Need produce detailed answer at least 1200 words. User asks: Benchmark identifier ignore. Implement thread-safe Python TTLCache class using OrderedDict and monotonic clock. Include set, get, delete, clear, len, expiration, capacity eviction, unit tests with injected fake clock, detailed explanation thread safety and complexity. Write complete code, then tests, then explain design. Do not abbreviate implementation.
+
+Need produce final with code complete, tests, explanation. Need ensure at least 1200 words. Should include imports collections OrderedDict, maybe typing, contextlib? Thread-safe using threading.RLock. Monotonic clock injectable. TTLCache with maxsize, ttl, clock parameter default time.monotonic. OrderedDict for LRU? TTLCache: on set, validate maxsize >0 ttl >=0, get check expiration and maybe move_to_end. delete pop. clear. len count maybe __len__ and __iter__? Expiration: purge expired entries maybe on set/get/len? Need ensure len accurate? If len returns live entries, need prune expired. But pruning on every call can cost O(n). Better maybe maintain count? With OrderedDict and TTL, to have O(1) len and avoid O(n), we can prune lazily but len could be inaccurate if expired entries remain. User asks include expiration, len. We can implement __len__ to count non-expired maybe O(n), but complexity? Better maintain active_count and heap of expirations? But asks using OrderedDict and monotonic clock. Could maintain OrderedDict only. Could implement __len__ by calling purge if expensive? Let's analyze.
+
+Requirement: thread-safe Python TTLCache class using OrderedDict and monotonic clock. Include set, get, delete, clear, len, expiration, capacity eviction. Unit tests with injected fake clock. Detailed explanation thread safety and complexity. Complete code, tests, explain design. Do not abbreviate.
+
+Could implement TTLCache as:
+class TTLCache:
+    def __init__(maxsize, ttl, clock=None): self._entries OrderedDict key->(value, expires_at)
+        self._maxsize maxsize>0, self._ttl >=0, self._clock = clock or time.monotonic
+        self._lock = threading.RLock()
+    def set(key, value, ttl=None): with lock: if ttl is None ttl=self._ttl; now=clock(); expired? if key exists remove; if len(self._entries)>=

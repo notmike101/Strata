@@ -1,0 +1,14 @@
+We need answer user's request. Need produce final answer with complete code, tests, detailed explanation at least 1200 words. Need satisfy Benchmark identifier ignored? It says Benchmark identifier ... Ignore this identifier. We should ignore. Need implement thread-safe Python TTLCache using OrderedDict and monotonic clock. Include set, get, delete, clear, len, expiration, capacity eviction, unit tests with injected fake clock, detailed explanation of thread safety and complexity. Do not abbreviate implementation. Detailed answer >=1200 words.
+
+Need think carefully. Python TTLCache class. Thread-safe. Use OrderedDict. Monotonic clock. Methods: set, get, delete, clear, __len__, maybe purge? Expiration, capacity eviction. Unit tests with fake clock. Need complete code, tests, explanation.
+
+Need design: import time, threading, collections.OrderedDict, typing maybe. Clock injection: clock=time.monotonic. Default? For unit tests fake clock with now attribute or callable. Thread-safe: one RLock protects all operations. Use OrderedDict for LRU? TTL cache often order by insertion; get updates order for LRU? Need choose. The prompt says OrderedDict and monotonic clock. Could implement LRU with capacity eviction: when set new entry and at capacity, evict least recently used? OrderedDict can move_to_end. TTL expiration: each entry store (value, expires_at). On get check expiry. Also maybe purge expired entries on operations. len should return number of currently valid entries after purge? Could implement len purging expired. Need complexity: set/get/delete/clear O(1) amortized, len O(n) if purge all expired, but can be O(n). Need maybe lazy expiration only on access; capacity eviction O(1). Thread safe with lock. Use reentrant? Since methods might call internal purge that calls len? Could use RLock to be safe. But avoid nested if using private methods no lock. Use threading.Lock for speed. Ensure not deadlock. Could use private _purge_locked no public call.
+
+Implement:
+
+class TTLCache:
+    def __init__(self, maxsize=128, ttl=None, clock=None):
+       self._maxsize = maxsize; self._default_ttl = ttl; self._clock = clock or time.monotonic
+       self._data = OrderedDict()
+       self._lock = threading.Lock()
+       if maxsize < 0? Could set 0 means unbounded? Usually maxsize=
