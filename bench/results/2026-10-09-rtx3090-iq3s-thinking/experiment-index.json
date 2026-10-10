@@ -1311,6 +1311,21 @@
   },
   {
     "campaign": "target-80",
+    "arm": "P012-short-profile",
+    "workload": "short",
+    "runs": 1,
+    "decode_median": 68.4,
+    "decode_min": 68.4,
+    "decode_max": 68.4,
+    "e2e_median": 61.014548239855195,
+    "stream_total_median": 61.01850612651839,
+    "ttft_median_seconds": 0.9406468999804929,
+    "raw_decode": [
+      68.4
+    ]
+  },
+  {
+    "campaign": "target-80",
     "arm": "Q007-goal-coding",
     "workload": "quality/coding",
     "runs": 5,
@@ -2850,6 +2865,44 @@
   },
   {
     "campaign": "target-80",
+    "arm": "R054-q6-enabled",
+    "workload": "longer",
+    "runs": 5,
+    "decode_median": 81.5,
+    "decode_min": 75.8,
+    "decode_max": 84.2,
+    "e2e_median": 40.75322238796993,
+    "stream_total_median": 40.757363193817135,
+    "ttft_median_seconds": 6.153865700005554,
+    "raw_decode": [
+      81.5,
+      81.6,
+      84.2,
+      76.6,
+      75.8
+    ]
+  },
+  {
+    "campaign": "target-80",
+    "arm": "R054-q6-enabled",
+    "workload": "short",
+    "runs": 5,
+    "decode_median": 84.5,
+    "decode_min": 83.6,
+    "decode_max": 86.2,
+    "e2e_median": 73.91777092666365,
+    "stream_total_median": 73.93515364303342,
+    "ttft_median_seconds": 0.910668500000611,
+    "raw_decode": [
+      84.4,
+      84.5,
+      86.2,
+      83.6,
+      85.6
+    ]
+  },
+  {
+    "campaign": "target-80",
     "arm": "R056-memory-attribution",
     "workload": "longer",
     "runs": 5,
@@ -2884,6 +2937,348 @@
       86.8,
       87.4,
       86.1
+    ]
+  },
+  {
+    "campaign": "target-80",
+    "arm": "R057-q6-disabled-retry",
+    "workload": "longer",
+    "runs": 5,
+    "decode_median": 82.6,
+    "decode_min": 79.6,
+    "decode_max": 84.4,
+    "e2e_median": 41.53928291288726,
+    "stream_total_median": 41.54229536305493,
+    "ttft_median_seconds": 6.146547799988184,
+    "raw_decode": [
+      82.6,
+      84.4,
+      79.6,
+      82.8,
+      81.6
+    ]
+  },
+  {
+    "campaign": "target-80",
+    "arm": "R057-q6-disabled-retry",
+    "workload": "short",
+    "runs": 5,
+    "decode_median": 83.5,
+    "decode_min": 80.2,
+    "decode_max": 93.4,
+    "e2e_median": 72.66063446200623,
+    "stream_total_median": 72.6703060201495,
+    "ttft_median_seconds": 0.926840700005414,
+    "raw_decode": [
+      81.4,
+      83.5,
+      88.2,
+      93.4,
+      80.2
+    ]
+  },
+  {
+    "campaign": "target-80",
+    "arm": "R058-q6-enabled-reverse",
+    "workload": "longer",
+    "runs": 5,
+    "decode_median": 80.9,
+    "decode_min": 76.6,
+    "decode_max": 85.2,
+    "e2e_median": 41.098943032335484,
+    "stream_total_median": 41.16253548104013,
+    "ttft_median_seconds": 6.145781700004591,
+    "raw_decode": [
+      79.8,
+      82.4,
+      85.2,
+      80.9,
+      76.6
+    ]
+  },
+  {
+    "campaign": "target-80",
+    "arm": "R058-q6-enabled-reverse",
+    "workload": "short",
+    "runs": 5,
+    "decode_median": 84.7,
+    "decode_min": 83.3,
+    "decode_max": 89.7,
+    "e2e_median": 73.8539386905187,
+    "stream_total_median": 73.87115816778767,
+    "ttft_median_seconds": 0.923905100004049,
+    "raw_decode": [
+      89.7,
+      83.3,
+      84.7,
+      85.8,
+      83.5
+    ]
+  },
+  {
+    "campaign": "target-80",
+    "arm": "R059-q6-disabled-reverse",
+    "workload": "longer",
+    "runs": 5,
+    "decode_median": 83.7,
+    "decode_min": 80.7,
+    "decode_max": 84.7,
+    "e2e_median": 41.73599535840904,
+    "stream_total_median": 41.74037368542959,
+    "ttft_median_seconds": 6.161027499998454,
+    "raw_decode": [
+      83.7,
+      80.7,
+      84.7,
+      84.6,
+      81.9
+    ]
+  },
+  {
+    "campaign": "target-80",
+    "arm": "R059-q6-disabled-reverse",
+    "workload": "short",
+    "runs": 5,
+    "decode_median": 85.0,
+    "decode_min": 83.7,
+    "decode_max": 88.3,
+    "e2e_median": 74.33065031621311,
+    "stream_total_median": 74.34453134748867,
+    "ttft_median_seconds": 0.8919889999961015,
+    "raw_decode": [
+      85.0,
+      88.3,
+      83.7,
+      84.5,
+      86.5
+    ]
+  },
+  {
+    "campaign": "target-80",
+    "arm": "R060-q6off-pcie010",
+    "workload": "longer",
+    "runs": 5,
+    "decode_median": 81.8,
+    "decode_min": 73.4,
+    "decode_max": 86.0,
+    "e2e_median": 41.33120580954084,
+    "stream_total_median": 41.33417146965736,
+    "ttft_median_seconds": 6.17382720002206,
+    "raw_decode": [
+      86.0,
+      82.4,
+      73.4,
+      81.8,
+      77.6
+    ]
+  },
+  {
+    "campaign": "target-80",
+    "arm": "R060-q6off-pcie010",
+    "workload": "short",
+    "runs": 5,
+    "decode_median": 87.0,
+    "decode_min": 84.9,
+    "decode_max": 90.2,
+    "e2e_median": 76.3432922860821,
+    "stream_total_median": 76.35785214782415,
+    "ttft_median_seconds": 0.8492740000074264,
+    "raw_decode": [
+      90.2,
+      84.9,
+      87.8,
+      86.2,
+      87.0
+    ]
+  },
+  {
+    "campaign": "target-80",
+    "arm": "R061-q6on-pcie010",
+    "workload": "longer",
+    "runs": 5,
+    "decode_median": 81.0,
+    "decode_min": 79.6,
+    "decode_max": 83.8,
+    "e2e_median": 41.11197386473057,
+    "stream_total_median": 41.11515709057505,
+    "ttft_median_seconds": 6.165764599980321,
+    "raw_decode": [
+      80.9,
+      83.4,
+      83.8,
+      79.6,
+      81.0
+    ]
+  },
+  {
+    "campaign": "target-80",
+    "arm": "R061-q6on-pcie010",
+    "workload": "short",
+    "runs": 5,
+    "decode_median": 87.1,
+    "decode_min": 86.2,
+    "decode_max": 88.1,
+    "e2e_median": 76.15712571617915,
+    "stream_total_median": 76.17092565345168,
+    "ttft_median_seconds": 0.8682585999486037,
+    "raw_decode": [
+      88.1,
+      86.2,
+      88.0,
+      87.1,
+      87.0
+    ]
+  },
+  {
+    "campaign": "target-80",
+    "arm": "R062-q6on-pcie010-reverse",
+    "workload": "longer",
+    "runs": 5,
+    "decode_median": 84.0,
+    "decode_min": 82.1,
+    "decode_max": 85.3,
+    "e2e_median": 41.80853225739686,
+    "stream_total_median": 41.81283327977655,
+    "ttft_median_seconds": 6.164759300008882,
+    "raw_decode": [
+      85.3,
+      84.0,
+      82.1,
+      82.3,
+      84.0
+    ]
+  },
+  {
+    "campaign": "target-80",
+    "arm": "R062-q6on-pcie010-reverse",
+    "workload": "short",
+    "runs": 5,
+    "decode_median": 87.9,
+    "decode_min": 85.3,
+    "decode_max": 89.4,
+    "e2e_median": 76.65463368542875,
+    "stream_total_median": 76.66954332151043,
+    "ttft_median_seconds": 0.8724381999927573,
+    "raw_decode": [
+      86.4,
+      88.1,
+      87.9,
+      89.4,
+      85.3
+    ]
+  },
+  {
+    "campaign": "target-80",
+    "arm": "R063-q6off-pcie010-reverse",
+    "workload": "longer",
+    "runs": 5,
+    "decode_median": 84.4,
+    "decode_min": 80.8,
+    "decode_max": 86.6,
+    "e2e_median": 41.95375902567024,
+    "stream_total_median": 41.958354743060625,
+    "ttft_median_seconds": 6.171690799994394,
+    "raw_decode": [
+      86.6,
+      80.8,
+      84.8,
+      84.4,
+      84.0
+    ]
+  },
+  {
+    "campaign": "target-80",
+    "arm": "R063-q6off-pcie010-reverse",
+    "workload": "short",
+    "runs": 5,
+    "decode_median": 85.9,
+    "decode_min": 84.9,
+    "decode_max": 91.8,
+    "e2e_median": 75.48710487068051,
+    "stream_total_median": 75.50182650233414,
+    "ttft_median_seconds": 0.8508471000241116,
+    "raw_decode": [
+      85.9,
+      91.8,
+      84.9,
+      88.8,
+      85.5
+    ]
+  },
+  {
+    "campaign": "target-80",
+    "arm": "R064-deviceplan-control",
+    "workload": "longer",
+    "runs": 5,
+    "decode_median": 84.3,
+    "decode_min": 82.9,
+    "decode_max": 84.5,
+    "e2e_median": 41.974812276001835,
+    "stream_total_median": 41.979493148914194,
+    "ttft_median_seconds": 6.1479057999677025,
+    "raw_decode": [
+      84.3,
+      84.3,
+      84.5,
+      82.9,
+      84.3
+    ]
+  },
+  {
+    "campaign": "target-80",
+    "arm": "R064-deviceplan-control",
+    "workload": "short",
+    "runs": 5,
+    "decode_median": 87.5,
+    "decode_min": 86.9,
+    "decode_max": 88.9,
+    "e2e_median": 76.8104877035959,
+    "stream_total_median": 76.82448280980832,
+    "ttft_median_seconds": 0.8485504999989644,
+    "raw_decode": [
+      88.9,
+      87.5,
+      87.8,
+      86.9,
+      87.5
+    ]
+  },
+  {
+    "campaign": "target-80",
+    "arm": "R065-deviceplan-enabled",
+    "workload": "longer",
+    "runs": 5,
+    "decode_median": 78.5,
+    "decode_min": 78.1,
+    "decode_max": 81.7,
+    "e2e_median": 40.45693388622944,
+    "stream_total_median": 40.46228636336236,
+    "ttft_median_seconds": 6.16584710002644,
+    "raw_decode": [
+      78.1,
+      78.1,
+      79.4,
+      78.5,
+      81.7
+    ]
+  },
+  {
+    "campaign": "target-80",
+    "arm": "R065-deviceplan-enabled",
+    "workload": "short",
+    "runs": 5,
+    "decode_median": 84.3,
+    "decode_min": 81.1,
+    "decode_max": 86.4,
+    "e2e_median": 73.68508780878712,
+    "stream_total_median": 73.69510297769904,
+    "ttft_median_seconds": 0.8374267999897711,
+    "raw_decode": [
+      86.4,
+      81.1,
+      84.3,
+      85.9,
+      82.5
     ]
   }
 ]

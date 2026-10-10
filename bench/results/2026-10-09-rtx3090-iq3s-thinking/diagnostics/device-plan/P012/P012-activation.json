@@ -1,0 +1,24 @@
+{
+  "kernel_rows": [
+    {
+      "kernel": "strata::kernels::<unnamed>::resident_plan_kernel(const int *, int, int, const int *, int, const unsigned char *, const unsigned long long *, long long, int *, long long, unsigned int *, unsigned int, volatile unsigned int *)",
+      "calls": 16032,
+      "summed_ms": 33.591836
+    },
+    {
+      "kernel": "strata::kernels::<unnamed>::wait_flag_ge_or_kernel(const volatile unsigned int *, unsigned int, const volatile unsigned int *)",
+      "calls": 48096,
+      "summed_ms": 726.911499
+    },
+    {
+      "kernel": "strata::kernels::copy_i32_from_mapped_kernel(int *, const volatile int *, int)",
+      "calls": 1148,
+      "summed_ms": 2.869823
+    }
+  ],
+  "instrumented_only": true,
+  "minimum_memory": {
+    "physical_available": 59917492224,
+    "commit_available": 36158709760
+  }
+}

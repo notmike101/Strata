@@ -1,0 +1,13 @@
+We need answer user's request. Need produce final detailed answer at least 1200 words, complete code, tests, explanation design. Need implement thread-safe Python TTLCache class using OrderedDict and monotonic clock. Include set, get, delete, clear, len, expiration, capacity eviction, unit tests with injected fake clock, detailed explanation thread safety and complexity. Do not abbreviate implementation. Benchmark identifier ignore.
+
+Need think about design. Need ensure code complete. Use threading.RLock? OrderedDict is not thread-safe for read/write, so protect with lock. Use monotonic clock: time.monotonic as default but inject clock. Need handle capacity eviction. TTLCache likely maxsize and ttl seconds. OrderedDict for LRU? If using OrderedDict for expiration and capacity. Need move to end on get/set. Need purge expired items. Could store expires_at. Methods set(key, value, ttl=None?), get(key, default=None), delete(key), clear(), __len__ maybe returns count? Need len method? Could __len__. Expiration maybe purge() or expire(). Need capacity eviction. Maybe if maxsize > 0 and len > maxsize evict oldest. But if expired items not purged before len? Need define. len could purge first? But that may change. Could have __len__ purge expired to return active count. But thread safety: lock. Complexity: get amortized O(1), set O(1) average, delete O(1), clear O(n), purge O(n) for all expired. If purge on operations may be O(n). Could mention. Need ensure not using time? injected fake clock. Could import time, threading, collections.
+
+Implementation choices:
+
+class TTLCache:
+    def __init__(self, maxsize=128, ttl=300.0, *, clock=time.monotonic, **kwargs): maybe maxsize None? OrderedDict. Need thread-safe. Use self._lock = threading.RLock(). _data = OrderedDict. _maxsize = maxsize. _ttl = ttl. _clock = clock.
+
+Potential issue: OrderedDict move_to_end(key, last=True) is not documented thread-safe but okay under lock. Need check if key exists before move.
+
+Methods:
+    def __init__ self._validate: maxsize if not None and maxsize <=0? Could allow maxsize=None means no cap. Need ttl float >=0? if None? maybe infinite? Use None for infinite? Simpler require positive. Could

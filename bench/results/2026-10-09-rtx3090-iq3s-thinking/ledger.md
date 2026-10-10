@@ -1080,3 +1080,266 @@ payloads. Do not infer a code regression from R053 alone, and do not silently
 exclude R055 or its slow rows. Enable the exact Q6 component only after a stable
 control; evaluate combinations as measured interactions, not summed percentages.
 Goal90 remains active, fixed thinking sampling and all quality gates unchanged.
+
+
+## E080 / R057-q6-disabled-retry
+
+Explicitly verified candidate engine SHA256 1dfeecd9869c266e82961426026e14c82ff822e0e004898959a900925ea57cf4; loaded library hashes match R056-memory-attribution. This is a new-binary control comparison, not a same-binary claim. Config diff is archived. Fixed numeric sampling, high/xhigh reasoning, model/quant, vision, context262144 and INT8KV retained. Original TTLCache streaming cache-miss workloads; one excluded warmup and five measured seeds101-105 per cell,512tokens per measured run. No slow seed excluded.
+
+| Workload | Decode median (range), tok/s | Prompt median, tok/s | E2E median, tok/s | Stream total median, tok/s | TTFT median, s | Draft accepted/offered |
+|---|---:|---:|---:|---:|---:|---:|
+| short | 83.5 (80.2-93.4) | 189.9 | 72.6606 | 72.6703 | 0.9268 | 887/1179 (75.23%) |
+| longer | 82.6 (79.6-84.4) | 497.7 | 41.5393 | 41.5423 | 6.1465 | 988/1303 (75.83%) |
+
+Minimum available physical RAM 62,133,624,832 bytes; available commit 39,957,852,160 bytes. Sampled GPU peak 25,380,110,336 bytes. Both16GiB host floors passed. Per-process peak memory not sampled. Full launcher/server/text/vision cleanup passed and previous config restored.
+
+Rebuilt disabled control completed at83.5/82.6 short/longer server decode tok/s. The intermittent memory stop did not reproduce; this does not erase R053 or R055. All8409 cache slots retained. No promotion.
+
+Next: Complete same-binary enabled comparison and reverse-order confirmation before judging the small component.
+
+
+## E081 / R054-q6-enabled
+
+Same engine and loaded library hashes as R057-q6-disabled-retry. Config diff is archived. Fixed numeric sampling, high/xhigh reasoning, model/quant, vision, context262144 and INT8KV retained. Original TTLCache streaming cache-miss workloads; one excluded warmup and five measured seeds101-105 per cell,512tokens per measured run. No slow seed excluded.
+
+| Workload | Decode median (range), tok/s | Prompt median, tok/s | E2E median, tok/s | Stream total median, tok/s | TTFT median, s | Draft accepted/offered |
+|---|---:|---:|---:|---:|---:|---:|
+| short | 84.5 (83.6-86.2) | 193.9 | 73.9178 | 73.9352 | 0.9107 | 877/1171 (74.89%) |
+| longer | 81.5 (75.8-84.2) | 496.8 | 40.7532 | 40.7574 | 6.1539 | 986/1336 (73.80%) |
+
+Minimum available physical RAM 61,753,532,416 bytes; available commit 39,369,736,192 bytes. Sampled GPU peak 25,408,487,424 bytes. Both16GiB host floors passed. Per-process peak memory not sampled. Full launcher/server/text/vision cleanup passed and previous config restored.
+
+Same-binary Q6 opt-in changed short decode83.5 to84.5 and longer82.6 to81.5 tok/s. Requests were byte-identical, only STRATA_Q6_ONEWARP changed,8409 cache slots retained. Mixed first pair, not a verified served gain; retain for reverse-order confirmation rather than adding isolated percentages.
+
+Next: Run enabled then disabled in fresh processes with longer-first workload order, preserving all runs and fixed sampling.
+
+
+## E082 / R058-q6-enabled-reverse
+
+Same engine and loaded library hashes as R057-q6-disabled-retry. Config diff is archived. Fixed numeric sampling, high/xhigh reasoning, model/quant, vision, context262144 and INT8KV retained. Original TTLCache streaming cache-miss workloads; one excluded warmup and five measured seeds101-105 per cell,512tokens per measured run. No slow seed excluded.
+
+| Workload | Decode median (range), tok/s | Prompt median, tok/s | E2E median, tok/s | Stream total median, tok/s | TTFT median, s | Draft accepted/offered |
+|---|---:|---:|---:|---:|---:|---:|
+| short | 84.7 (83.3-89.7) | 188.4 | 73.8539 | 73.8712 | 0.9239 | 938/1238 (75.77%) |
+| longer | 80.9 (76.6-85.2) | 497.9 | 41.0989 | 41.1625 | 6.1458 | 960/1330 (72.18%) |
+
+Minimum available physical RAM 62,375,604,224 bytes; available commit 40,273,682,432 bytes. Sampled GPU peak 25,371,656,192 bytes. Both16GiB host floors passed. Per-process peak memory not sampled. Full launcher/server/text/vision cleanup passed and previous config restored.
+
+Enabled reverse-order repeat completed84.7/80.9 short/longer server decode tok/s. All8409 cache slots retained; no memory stop. Q6 remains unpromoted.
+
+Next: Complete the paired disabled reverse-order comparison, then evaluate the predeclared PCIe0.10 interaction.
+
+
+## E083 / R059-q6-disabled-reverse
+
+Same engine and loaded library hashes as R057-q6-disabled-retry. Config diff is archived. Fixed numeric sampling, high/xhigh reasoning, model/quant, vision, context262144 and INT8KV retained. Original TTLCache streaming cache-miss workloads; one excluded warmup and five measured seeds101-105 per cell,512tokens per measured run. No slow seed excluded.
+
+| Workload | Decode median (range), tok/s | Prompt median, tok/s | E2E median, tok/s | Stream total median, tok/s | TTFT median, s | Draft accepted/offered |
+|---|---:|---:|---:|---:|---:|---:|
+| short | 85.0 (83.7-88.3) | 197.0 | 74.3307 | 74.3445 | 0.8920 | 859/1141 (75.28%) |
+| longer | 83.7 (80.7-84.7) | 496.1 | 41.7360 | 41.7404 | 6.1610 | 924/1241 (74.46%) |
+
+Minimum available physical RAM 62,262,190,080 bytes; available commit 40,038,105,088 bytes. Sampled GPU peak 25,345,077,248 bytes. Both16GiB host floors passed. Per-process peak memory not sampled. Full launcher/server/text/vision cleanup passed and previous config restored.
+
+Disabled reverse-order repeat completed85.0/83.7 short/longer server decode tok/s. Across AB/BA, ordinary ten-run medians off84.75/82.70 versus on84.60/81.20 show no verified served gain. Keep Q6 disabled in production. The standalone kernel gain is not a served-speed claim.
+
+Next: Measure the same binary at PCIe0.10 with Q6 disabled and enabled; accept only a combination that removes regressions across all metrics.
+
+
+## E084 / Q6 AB/BA result and conditional interaction test
+
+Ten measured rows per workload/flag, all retained: off84.75/82.70 versus
+on84.60/81.20 short/longer ordinary median server_decode_tps. Short prompt
+195.80 versus193.35, longer496.25 versus497.15. Client E2E73.9670/41.5853
+versus73.8859/40.9434. The small kernel win did not establish a served gain at
+PCIe0.20; the production switch remains off. No peak or selected seed is promoted.
+
+Test the predeclared interaction with PCIe0.10 because its previous longer gain
+came with a slight short regression. Both components are conditional candidates,
+not independent production winners. The new plan fixes A/B/C/D configurations,
+all-run medians, request equality and fresh-process opposite-order checks. A
+combination must remove regressions, not merely beat one losing component.
+
+Repository hygiene:18,451 local generated build/download/diagnostic files were
+still visible to Git as untracked scratch. Added only /local-setup/ and /.tools/
+to the local .git/info/exclude; git check-ignore verified both. No files were
+deleted. Scrubbed public bench/results evidence remains tracked and published.
+This reduces irrelevant workspace scanning; it is not proof of the cause of
+R053/R055 memory growth and is not reported as a model throughput improvement.
+The four completed Q6 served arms had no memory stop. Goal90 remains active.
+
+
+## E085 / R060-q6off-pcie010
+
+Same engine and loaded library hashes as R057-q6-disabled-retry. Config diff is archived. Fixed numeric sampling, high/xhigh reasoning, model/quant, vision, context262144 and INT8KV retained. Original TTLCache streaming cache-miss workloads; one excluded warmup and five measured seeds101-105 per cell,512tokens per measured run. No slow seed excluded.
+
+| Workload | Decode median (range), tok/s | Prompt median, tok/s | E2E median, tok/s | Stream total median, tok/s | TTFT median, s | Draft accepted/offered |
+|---|---:|---:|---:|---:|---:|---:|
+| short | 87.0 (84.9-90.2) | 207.8 | 76.3433 | 76.3579 | 0.8493 | 792/1075 (73.67%) |
+| longer | 81.8 (73.4-86.0) | 495.3 | 41.3312 | 41.3342 | 6.1738 | 916/1283 (71.40%) |
+
+Minimum available physical RAM 61,906,137,088 bytes; available commit 39,734,501,376 bytes. Sampled GPU peak 25,291,358,208 bytes. Both16GiB host floors passed. Per-process peak memory not sampled. Full launcher/server/text/vision cleanup passed and previous config restored.
+
+Factorial C: Q6 off and PCIe0.10 completed87.0/81.8 short/longer server decode tok/s; all8409 cache slots retained. Conditional candidate only, not promoted.
+
+Next: Complete D and the predeclared D/C reverse-order pair before computing interaction.
+
+
+## E086 / R061-q6on-pcie010
+
+Same engine and loaded library hashes as R060-q6off-pcie010. Config diff is archived. Fixed numeric sampling, high/xhigh reasoning, model/quant, vision, context262144 and INT8KV retained. Original TTLCache streaming cache-miss workloads; one excluded warmup and five measured seeds101-105 per cell,512tokens per measured run. No slow seed excluded.
+
+| Workload | Decode median (range), tok/s | Prompt median, tok/s | E2E median, tok/s | Stream total median, tok/s | TTFT median, s | Draft accepted/offered |
+|---|---:|---:|---:|---:|---:|---:|
+| short | 87.1 (86.2-88.1) | 203.5 | 76.1571 | 76.1709 | 0.8683 | 864/1122 (77.01%) |
+| longer | 81.0 (79.6-83.8) | 495.8 | 41.1120 | 41.1152 | 6.1658 | 929/1291 (71.96%) |
+
+Minimum available physical RAM 62,423,752,704 bytes; available commit 40,322,920,448 bytes. Sampled GPU peak 25,279,496,192 bytes. Both16GiB host floors passed. Per-process peak memory not sampled. Full launcher/server/text/vision cleanup passed and previous config restored.
+
+Factorial D: adding Q6 toPCIe0.10 changed short87.0 to87.1 and longer81.8 to81.0 tok/s. Short prompt and client throughput also fell. No useful first-pair synergy; no promotion.
+
+Next: Finish R062/R063 opposite-order confirmation, retain all rows, then close or retain this combination based on the complete matrix.
+
+
+## E087 / R062-q6on-pcie010-reverse
+
+Same engine and loaded library hashes as R061-q6on-pcie010. Config diff is archived. Fixed numeric sampling, high/xhigh reasoning, model/quant, vision, context262144 and INT8KV retained. Original TTLCache streaming cache-miss workloads; one excluded warmup and five measured seeds101-105 per cell,512tokens per measured run. No slow seed excluded.
+
+| Workload | Decode median (range), tok/s | Prompt median, tok/s | E2E median, tok/s | Stream total median, tok/s | TTFT median, s | Draft accepted/offered |
+|---|---:|---:|---:|---:|---:|---:|
+| short | 87.9 (85.3-89.4) | 203.3 | 76.6546 | 76.6695 | 0.8724 | 833/1057 (78.81%) |
+| longer | 84.0 (82.1-85.3) | 495.8 | 41.8085 | 41.8128 | 6.1648 | 1041/1379 (75.49%) |
+
+Minimum available physical RAM 62,351,650,816 bytes; available commit 40,301,572,096 bytes. Sampled GPU peak 25,261,015,040 bytes. Both16GiB host floors passed. Per-process peak memory not sampled. Full launcher/server/text/vision cleanup passed and previous config restored.
+
+Combined reverse-order repeat completed87.9/84.0 short/longer server decode tok/s with safe memory and full cleanup. This process median alone does not qualify or prove an interaction.
+
+Next: Record the final C control and calculate the entire fixed factorial matrix.
+
+
+## E088 / R063-q6off-pcie010-reverse
+
+Same engine and loaded library hashes as R060-q6off-pcie010. Config diff is archived. Fixed numeric sampling, high/xhigh reasoning, model/quant, vision, context262144 and INT8KV retained. Original TTLCache streaming cache-miss workloads; one excluded warmup and five measured seeds101-105 per cell,512tokens per measured run. No slow seed excluded.
+
+| Workload | Decode median (range), tok/s | Prompt median, tok/s | E2E median, tok/s | Stream total median, tok/s | TTFT median, s | Draft accepted/offered |
+|---|---:|---:|---:|---:|---:|---:|
+| short | 85.9 (84.9-91.8) | 201.1 | 75.4871 | 75.5018 | 0.8508 | 841/1088 (77.30%) |
+| longer | 84.4 (80.8-86.6) | 495.4 | 41.9538 | 41.9584 | 6.1717 | 1037/1347 (76.99%) |
+
+Minimum available physical RAM 62,783,791,104 bytes; available commit 40,855,494,656 bytes. Sampled GPU peak 25,253,347,328 bytes. Both16GiB host floors passed. Per-process peak memory not sampled. Full launcher/server/text/vision cleanup passed and previous config restored.
+
+Final PCIe0.10 Q6-disabled reverse-order control completed; retain all five seeds per workload and compare against every matching enabled row. No candidate is promoted by this record.
+
+Next: Calculate the four-configuration interaction with all ten measured rows per workload/configuration; refresh upstream and move to the next scheduling theory if the stack does not pass.
+
+
+## E089 / complete Q6 and PCIe interaction matrix
+
+Every cell below contains ten measured runs from two fresh processes, each with
+one excluded warmup and five measured seeds. All measured requests generated 512
+tokens with zero reused prompt tokens. Input JSON is byte-identical by label.
+The binary, loaded CUDA libraries, GGUF shards, projector, expert profile,
+262,144 context, INT8 KV, vision and thinking sampling match. Every arm retained
+8,409 GPU cache slots. Only the named Q6 flag and PCIe share differ.
+
+These are ordinary medians of every measured row, not averages of process medians.
+Per-process summaries, ranges and every raw value are in factorial.json. A/B and
+C/D are separate AB/BA blocks; temporal drift is a limitation of this matrix.
+The earlier memory failures remain in the ledger and are not hidden by this table.
+
+| Setting | Q6 | PCIe share | Workload | Decode tok/s | Prompt tok/s | E2E tok/s | Stream tok/s | TTFT s |
+|---|---:|---:|---|---:|---:|---:|---:|---:|
+| A | 0 | 0.20 | short | 84.75 | 195.80 | 73.9670 | 73.9834 | 0.8942 |
+| A | 0 | 0.20 | longer | 82.70 | 496.25 | 41.5853 | 41.5884 | 6.1490 |
+| B | 1 | 0.20 | short | 84.60 | 193.35 | 73.8859 | 73.9032 | 0.9127 |
+| B | 1 | 0.20 | longer | 81.20 | 497.15 | 40.9434 | 40.9772 | 6.1479 |
+| C | 0 | 0.10 | short | 86.60 | 204.80 | 75.9383 | 75.9526 | 0.8501 |
+| C | 0 | 0.10 | longer | 83.20 | 495.35 | 41.6315 | 41.6363 | 6.1728 |
+| D | 1 | 0.10 | short | 87.50 | 203.40 | 76.4059 | 76.4202 | 0.8699 |
+| D | 1 | 0.10 | longer | 82.85 | 495.80 | 41.5816 | 41.5852 | 6.1653 |
+
+The combination does not reach the target. Compared with PCIe 0.10 alone,
+Q6 improves the pooled short decode median but lowers the longer decode median.
+It is therefore not a verified improvement across both workloads. Its exact
+kernel speedup is real within C030's microbenchmark, but cannot be promoted as a
+served-speed win. Production retains its previous engine and settings. All eight
+arms completed full-tree cleanup and passed the original host-memory floors.
+Full coding, cold/warm, tools, vision and maximum-context qualification is not
+claimed. Q007's incomplete coding answers remain an unresolved quality gate.
+
+The arithmetic interaction is retained in factorial.json as (D-C)-(B-A), in each
+metric's own units. A positive interaction does not imply that D beats C, reaches
+90 tok/s, or meets the prompt/client no-regression requirement.
+
+Next: close this Q6/PCIe combination as unpromoted; refresh upstream and test the existing device-side resident-group planning path only after its parity and activation checks. Fixed thinking sampling and goal90 remain unchanged.
+
+
+## E090 / retire Q6 shipping code; resident-planner activation proven
+
+The completed interaction matrix did not establish an across-workload Q6 benefit.
+Removed only the new Q6 kernel/dispatch and its shipping test; git diff against
+745b5e38 confirms native_mmvq.cu returned to the prior source. The archived source,
+all tests and prototype commit e564208a remain available for reproduction. The
+retained production executable was never overwritten or promoted to this candidate.
+
+Refreshed upstream through the required GitHub App helper: main remains
+fb58e0dbc8399662c0e47c76578c6e878b14f6cf and latest release remains v0.1.41,
+published2026-10-08T12:14:59Z. No update was available to apply.
+
+New hypothesis and finite budget are in diagnostics/device-plan/P012/device-plan-experiment.md.
+Existing P009 trace supplied the wait/copy evidence; no new baseline trace was
+collected. The existing CUDA resident_plan parity suite passed641 cases with zero
+failures. Source inspection confirmed partial-cache, single-stage eligibility,
+foresight disabled, and lag2 event completion before residency publication.
+
+P012 then captured one excluded warmup and one complete512-token frozen random
+coding request with STRATA_VERIFY_DEVICE_PLAN=1 on the retained6048736d engine.
+Nsight recorded16,032 resident_plan kernels (none in P009), proving execution.
+Their summed instrumented duration was33.592ms;48,096 wait_flag_ge_or calls summed
+726.911ms. These are overlapping instrumented sums, not critical-path percentages
+or served improvements. The profiled request reported68.4 server decode tok/s;
+it is explicitly nonqualifying. Profiling reduced cache capacity to8,394 slots
+versus8,409 in ordinary runs, another reason not to compare profiled TPS directly.
+
+Independent physical/commit headroom stayed above59,917,492,224/36,158,709,760 bytes.
+The wrapper and outer supervisor cleaned the whole model tree and restored the
+production config. The redundant outer Nsight shutdown reported a closed connection
+after the inner shutdown had already completed; the nested finally still executed
+and verified model cleanup. Idle GPU returned to581MiB. No benchmark model remains.
+
+Next is one unprofiled off/on pair, five measured seeds after one warmup per short
+and ~3K workload. Another reversed pair is conditional on promising served decode,
+prompt rate and client latency. No endless repeats of this hypothesis. The fixed
+model, quant,262144 context, vision, thinking profile and every quality gate remain.
+
+
+## E091 / R064-deviceplan-control
+
+Same engine and loaded library hashes as R056-memory-attribution. Config diff is archived. Fixed numeric sampling, high/xhigh reasoning, model/quant, vision, context262144 and INT8KV retained. Original TTLCache streaming cache-miss workloads; one excluded warmup and five measured seeds101-105 per cell,512tokens per measured run. No slow seed excluded.
+
+| Workload | Decode median (range), tok/s | Prompt median, tok/s | E2E median, tok/s | Stream total median, tok/s | TTFT median, s | Draft accepted/offered |
+|---|---:|---:|---:|---:|---:|---:|
+| short | 87.5 (86.9-88.9) | 206.0 | 76.8105 | 76.8245 | 0.8486 | 812/1079 (75.25%) |
+| longer | 84.3 (82.9-84.5) | 497.0 | 41.9748 | 41.9795 | 6.1479 | 915/1228 (74.51%) |
+
+Minimum available physical RAM 62,691,651,584 bytes; available commit 40,731,168,768 bytes. Sampled GPU peak 25,264,357,376 bytes. Both16GiB host floors passed. Per-process peak memory not sampled. Full launcher/server/text/vision cleanup passed and previous config restored.
+
+Fresh retained-binary device-plan control; short 87.5 and longer 84.3 server_decode_tps. Fixed sampling and context, five measured seeds per workload. Full quality matrix remains incomplete.
+
+Next: Compare predeclared R065 device-plan enabled arm.
+
+
+## E092 / R065-deviceplan-enabled
+
+Same engine and loaded library hashes as R064-deviceplan-control. Config diff is archived. Fixed numeric sampling, high/xhigh reasoning, model/quant, vision, context262144 and INT8KV retained. Original TTLCache streaming cache-miss workloads; one excluded warmup and five measured seeds101-105 per cell,512tokens per measured run. No slow seed excluded.
+
+| Workload | Decode median (range), tok/s | Prompt median, tok/s | E2E median, tok/s | Stream total median, tok/s | TTFT median, s | Draft accepted/offered |
+|---|---:|---:|---:|---:|---:|---:|
+| short | 84.3 (81.1-86.4) | 206.1 | 73.6851 | 73.6951 | 0.8374 | 851/1135 (74.98%) |
+| longer | 78.5 (78.1-81.7) | 496.1 | 40.4569 | 40.4623 | 6.1658 | 911/1276 (71.39%) |
+
+Minimum available physical RAM 62,584,963,072 bytes; available commit 40,618,774,528 bytes. Sampled GPU peak 25,273,040,896 bytes. Both16GiB host floors passed. Per-process peak memory not sampled. Full launcher/server/text/vision cleanup passed and previous config restored.
+
+Reject STRATA_VERIFY_DEVICE_PLAN=1: short median 84.3 versus 87.5 control; longer 78.5 versus 84.3. Activation proven in P012 but served throughput regressed. Finite experiment budget closes this hypothesis; no repeat or promotion.
+
+Next: Investigate hyper-connection kernels using existing P009 trace; preserve production configuration and fixed quality gates.

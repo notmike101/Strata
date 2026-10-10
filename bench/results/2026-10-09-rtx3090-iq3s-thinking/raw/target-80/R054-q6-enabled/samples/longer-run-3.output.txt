@@ -1,0 +1,25 @@
+We need answer user's request. Need produce final answer with complete code, tests, explanation at least 1200 words. Need implement thread-safe Python TTLCache using OrderedDict and monotonic clock. Include set,get,delete,clear,len, expiration, capacity eviction, unit tests injected fake clock, detailed explanation thread safety and complexity. Do not abbreviate implementation. Also user included many existing cache rule lines likely irrelevant? Benchmark identifier ignore. Need maybe note rules ignored? No, just answer. Need ensure detailed answer >=1200 words. Need complete code not abbreviated. Need think carefully.
+
+Need design: TTLCache class with thread-safe. Use OrderedDict. Monotonic clock injectable. Need len property? "len" perhaps __len__ and maybe public method len()? Include expiration. Need capacity eviction. Need unit tests with injected fake clock. Could use unittest. Use collections.OrderedDict, threading.Lock/RLock. Clock callable.
+
+Need discuss existing design requirements? They list rules: keys item_000 etc lifetime and size. Could maybe seed cache with these rules? But request says implement cache class; existing rules before implementing. Could include them? They likely expect ignore? Benchmark identifier. Existing cache rules maybe just fluff to read. Could mention the cache can support arbitrary per-item lifetimes and sizes. Since set requires size? Existing rules include size bytes; cache capacity likely byte capacity? Need include capacity eviction. Need set(key,value,lifetime=..., size=...) perhaps. If size included, capacity bytes. Need track total bytes. LRU access updates order. Expiration removes stale entries. Thread-safe.
+
+Need decide class interface.
+
+Could implement:
+
+class TTLCache:
+    def __init__(self, max_size=128, clock=time.monotonic, default_lifetime=60, default_size=0):
+         self._lock = threading.RLock()
+         self._clock = clock
+         self._max_size = max_size
+         self._default_lifetime = default_lifetime
+         self._default_size = default_size
+         self._data = OrderedDict() # key -> (value, expires_at, size)
+         self._total_size = 0
+
+    def set(self, key, value, lifetime=None, size=None):
+       now = self._clock()
+       if lifetime is None: lifetime = default
+       if size is None: size = default
+       if lifetime < 0? maybe allow immediate expire or raise ValueError.

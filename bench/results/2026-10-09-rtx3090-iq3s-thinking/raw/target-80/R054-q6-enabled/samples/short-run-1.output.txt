@@ -1,0 +1,12 @@
+We need answer user's request. Need produce complete code, tests, explanation >=1200 words. Need think thoroughly.
+
+User: Implement thread-safe Python TTLCache class using OrderedDict and monotonic clock. Include set, get, delete, clear, len, expiration, capacity eviction, unit tests with injected fake clock, detailed explanation of thread safety and complexity. Write complete code, then tests, then explain design. Do not abbreviate implementation. Detailed answer at least 1200 words.
+
+Need craft final with code. Must be detailed. Need include TTLCache. Need thread safety: use threading.RLock or Lock? OrderedDict not thread-safe. Need operations atomic. Need expiration: lazy and maybe active? Since no background thread. Need monotonic clock injected? They want monotonic clock. Could class accept time_func defaults time.monotonic. But tests inject fake clock. For fake clock need set time? Could inject now as callable. If fake_clock has advance. Use monotonic semantics: no wall jumps. Could include clock validation? Not necessary.
+
+Need include capacity eviction: OrderedDict with move_to_end on get (LRU) and set. maxsize. If maxsize <=0? maybe raise ValueError. Or support no limit if None? User includes capacity eviction; implement maxsize int positive. Maybe allow None? Could simpler: maxsize required positive. But TTLCache maybe from cachetools has maxsize. Include. Expiration: each entry store expires_at = now + ttl. TTL default? Could cache-level default_ttl, allow set ttl override. If ttl is None? maybe never expires? They likely expect expiration. But TTL means ttl required. Could support ttl <=0 => immediately expired? If ttl None means no expiration? Hmm user says TTLCache, expiration. Could default_ttl=None meaning infinite? But then not TTL? Let's design robust: maxsize, default_ttl, time_func. If default_ttl is None, no expiration unless set ttl. If ttl is None, no expiration. If ttl <0 raise? Could allow ttl=0 delete. But if ttl<=0 immediate expiration. Could implement:
+
+class TTLCache:
+    def __init__(self, maxsize=128, default_ttl=60.0, time_func=None): validate maxsize>0; default_ttl >=0 or None? time_func = time_func or time.monotonic; self._lock=threading.RLock(); self._data=OrderedDict()
+
+Need len: returns count

@@ -1,0 +1,12 @@
+We need answer user's request. Need produce final answer at least 1200 words, detailed implementation thread-safe Python TTLCache using OrderedDict monotonic clock. Include set, get, delete, clear, len, expiration, capacity eviction, unit tests with injected fake clock, detailed explanation of thread safety and complexity. Do not abbreviate implementation. Need probably mention ignore benchmark identifier? The user says Benchmark identifier ... Ignore. We can just not mention. Need ensure answer includes complete code then tests then explanation. Need think through design. Need produce long enough. Let's design class TTLCache. Use OrderedDict from collections. Use time.monotonic as default clock but inject fake_clock. Thread safety: RLock. OrderedDict is not thread-safe. Need lock all public operations. But maybe operations need atomic set with eviction/expiration. Use internal helper _purge_expired under lock. Since fake clock may not be monotonic? Use monotonic semantics. Need size? The existing cache rules mention size bytes but implementation? We can implement maxsize and max_bytes? Requirements say include set, get, delete, clear, len, expiration, capacity eviction. Existing rules have size bytes, so maybe implement size-aware cache? It says key item_... has lifetime and size; expiration remove stale, access update LRU. Could incorporate size as per-entry size and max_bytes? But main requirement: TTLCache using OrderedDict and monotonic clock. Include set/get/delete/clear/len, expiration, capacity eviction. The existing rules have size field, so we should support item_size maybe and total bytes capacity. But "capacity eviction" may mean max entries, not bytes. But with sizes, perhaps we can support both maxsize and max_bytes. We need not overcomplicate but can include both, default maxsize None? But user likely expects standard TTLCache maxsize and ttl. However existing cache rules specify size bytes; if we ignore maybe okay? But better implement capacity and byte size eviction. Need tests with injected fake clock. Need unit tests. Need thread safety detailed. Need complexity O(1) amortized for get/set/delete with lazy purge. But purge can evict many expired in one call O(k). Could mention.
+
+Need design details. Need ensure tests pass.
+
+Implementation:
+
+from collections import OrderedDict
+import threading, time
+
+class TTLCache:
+    def __init__(self, maxsize=None, ttl=None, max_bytes=None, clock=time.monotonic):
+        if maxsize is not None and maxsize <=

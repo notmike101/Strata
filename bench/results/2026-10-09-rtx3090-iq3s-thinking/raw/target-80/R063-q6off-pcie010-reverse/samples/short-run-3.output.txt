@@ -1,0 +1,16 @@
+We need answer user's request. Need produce final detailed answer >=1200 words. Implement thread-safe Python TTLCache using OrderedDict monotonic clock. Include set,get,delete,clear,len, expiration, capacity eviction, unit tests with injected fake clock, detailed explanation of thread safety and complexity. Complete code then tests then explain design. Do not abbreviate. Need likely include code in code blocks. Need ensure at least 1200 words. Need careful. Let's plan.
+
+We need implement TTLCache:
+
+from collections import OrderedDict
+import threading, time
+
+class TTLCache:
+    def __init__(self, capacity, ttl, clock=time.monotonic): validate capacity >=0, ttl>=0? maybe >0.
+        self._capacity = capacity
+        self._ttl = ttl
+        self._clock = clock
+        self._cache = OrderedDict()
+        self._lock = threading.RLock() maybe. Store tuple value, expires_at. Or expiration per item. Need capacity eviction: if capacity 0 maybe set does nothing? get returns None. Could also raise? Usually capacity int > 0. But robust: if capacity ==0, delete all and set no-op? Need decide. Thread-safe: methods lock. Expire entries on get/set? Also len? Need len include non-expired? If len called, maybe purge expired and return len. Could have __len__. Need clear deletes.
+
+Potential issue: OrderedDict for LRU eviction. On get, move_to_end to mark recent. On set, if key exists update value and expires, move_to_end. If new and capacity > 0: if len exceeds capacity popitem(last=False) (oldest) evict. But if there are expired entries, capacity count? Need ensure capacity eviction: We can purge expired before eviction? If capacity >0 and after set len > capacity: maybe pop oldest regardless, but if oldest expired, also okay. But if expired entries exist, maybe they occupy capacity. Could purge all expired before set to maintain capacity. But purging all expired on every set O(n) if not careful. Alternative maintain insertion/last access order and expiration; capacity eviction only among live entries? If expired entries remain, len includes expired? If we want len exclude expired, need lazy expiration. OrderedDict length counts expired unless purge. Simpler: before capacity check, call _purge_expired_locked? That can be O(n) each set if many expired, but maybe okay for simple. But

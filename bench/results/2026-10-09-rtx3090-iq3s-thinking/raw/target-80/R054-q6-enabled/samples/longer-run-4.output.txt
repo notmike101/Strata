@@ -1,0 +1,12 @@
+We need answer user's request. Need produce final detailed answer at least 1200 words. Need implement thread-safe Python TTLCache using OrderedDict and monotonic clock, include set, get, delete, clear, len, expiration, capacity eviction, unit tests with injected fake clock, detailed explanation thread safety and complexity. They gave existing cache rules 0-63 with item_XXX lifetime and size. Need probably incorporate? "Read these existing design requirements before implementing the cache" Could mean need satisfy rules? Existing rules specify key lifetime and size. Need maybe include initial data or per-key lifetimes/sizes? Implement TTLCache generic with maxsize and default ttl? Existing rules might require per-entry ttl and size. Need capacity eviction and access update LRU. Could include tests that instantiate cache and set item_000...? But request: Implement class. Existing cache rule: expiration must remove stale entries, and access must update LRU order. Could use those to demonstrate tests? Need maybe mention these 64 rules can be loaded as seed entries? Since they are design requirements, likely implement cache with per-key lifetime and size, capacity eviction by total size or count? Existing rules include size in bytes. Capacity eviction may require byte-size capacity. TTLCache with OrderedDict and monotonic clock. Need thread-safe. Need unit tests with fake clock. Need detailed explanation.
+
+Need ensure code not abbreviated. Need at least 1200 words. We can include full code and tests. Need possibly benchmark identifier ignored. We shouldn't mention identifier maybe. Need not use web. Need final only.
+
+Let's design robust TTLCache.
+
+Options:
+- class TTLCache:
+  - __init__(max_size: int = 1024, ttl: float = 300.0, clock: callable = time.monotonic)
+  - OrderedDict _data maps key to CacheEntry(value, size, expires_at)
+  - Lock = threading.RLock or Lock? Since no reentrant needed, use RLock for safety. Need thread-safe operations. Use private methods under lock. Public methods acquire lock.
+  - set(key, value, ttl=None, size=1): validate nonnegative; compute expire_at = clock() + ttl; if key exists remove old size, move to end; else _size += size; if size > max_size? If item size > max_size? Need capacity eviction: remove LRU until total_size <= max_size. But if item

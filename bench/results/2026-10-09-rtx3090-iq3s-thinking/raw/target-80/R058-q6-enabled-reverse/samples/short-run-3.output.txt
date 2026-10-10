@@ -1,0 +1,22 @@
+We need answer user's request. Need produce final detailed answer at least 1200 words. Need implement thread-safe Python TTLCache using OrderedDict and monotonic clock. Include set, get, delete, clear, len, expiration, capacity eviction, unit tests with injected fake clock, detailed explanation thread safety complexity. Complete code, then tests, then explain design. Do not abbreviate.
+
+Need ensure code correct. Need think through design.
+
+Requirements: thread-safe Python TTLCache class using OrderedDict and monotonic clock. Probably default clock time.monotonic, allow injection. Methods: set, get, delete, clear, len. expiration, capacity eviction. Unit tests with fake clock.
+
+Potential implementation:
+
+from collections import OrderedDict, namedtuple
+import threading, time
+
+class TTLCache:
+    def __init__(self, maxsize=128, ttl=None, *, timer=time.monotonic, enable_timer=True? maybe no background). Since only methods.
+        if maxsize <=0 raise ValueError; if ttl is not None and ttl <0 raise ValueError
+        self._lock = threading.RLock? Use threading.Lock sufficient if no reentrant calls? Public methods all acquire lock, no nested method calls that need reentrant except len maybe? To be safe RLock.
+        self._cache = OrderedDict()
+        self._maxsize = maxsize
+        self._ttl = ttl
+        self._timer = timer
+        self._default_ttl = ttl
+
+Need expiration: store (value, expires_at) or just expiry. For get, if expired delete and return default. If not expired, move_to_end (LRU). set stores expires_at = timer() + ttl if ttl is not None else None. Eviction if len > maxsize: popitem(last=False). Maybe if maxsize=0? Could raise; or allow 0 and clear? Typically cache maxsize nonnegative. If maxsize=0, set immediately evicts. Could support 0. But OrderedDict popitem only if len > maxsize. If maxsize=0, set then pop. Good. But maybe __len__ counts entries before expiry? Requirement len maybe active entries? Need consider. They ask len, expiration. Could implement __len__ that counts non-expired entries? But OrderedDict doesn't track lazy deletion. We can in len purge expired? But expensive O(n). Maybe provide __len__ returns total entries stored (including expired not purged), but also provide maybe actual active? They

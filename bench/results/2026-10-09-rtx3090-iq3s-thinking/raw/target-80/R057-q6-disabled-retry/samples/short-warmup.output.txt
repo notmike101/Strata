@@ -1,0 +1,23 @@
+We need answer user's request. Need produce final answer with complete code, tests, detailed explanation at least 1200 words. Need think fully.
+
+Task: Implement thread-safe Python TTLCache class using OrderedDict and monotonic clock. Include set, get, delete, clear, len, expiration, capacity eviction, unit tests with injected fake clock, detailed explanation of thread safety and complexity. Write complete code, then tests, then explain design. Do not abbreviate implementation. Produce detailed answer at least 1200 words.
+
+Need likely include imports threading, time, collections.OrderedDict, typing maybe. TTLCache class: thread-safe with RLock. Use OrderedDict storing key -> (value, expires_at) or maybe store expiry first. Need monotonic clock injectable. Default monotonic from time.monotonic. Support maxsize and ttl. set(key, value, ttl=None), get(key, default=None), delete(key) maybe __delitem__? clear(), len() __len__. Expiration: purge expired entries. On get: if key missing return default; if expired delete and maybe return default. On set: if key exists update; if maxsize exceeded evict oldest? Need capacity eviction: OrderedDict ordered by insertion/usage? We can maintain LRU by move_to_end on get and set. If max_size reached, popitem(last=False) evicts least recently used (oldest). But with TTL, maybe also purge expired before capacity. Need thread safety.
+
+Need use fake clock for tests: class FakeClock with now. Tests: expiration, set/get, delete, clear, len, capacity eviction, TTL, injected clock, maybe thread safety? Could include concurrent test? User says unit tests with injected fake clock. Could include threading test not necessary but can add.
+
+Need detailed explanation >=1200 words. Let's craft answer. Need maybe use Python 3. Code complete.
+
+Potential implementation:
+
+from __future__ import annotations
+import threading
+import time
+from collections import OrderedDict
+from typing import Any, Callable, Hashable, Optional, Tuple
+
+class TTLCache:
+    def __init__(self, ttl: float | None = None, max_size: int | None = None, *, monotonic: Callable[[], float] | None = None) -> None:
+        if ttl is not None and ttl < 0: raise ValueError
+        if max_size is not None and max_size <=0: raise ValueError
+        self.ttl

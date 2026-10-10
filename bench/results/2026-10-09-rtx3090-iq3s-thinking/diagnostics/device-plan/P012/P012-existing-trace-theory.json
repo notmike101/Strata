@@ -1,0 +1,16 @@
+{
+  "trace": "P009-decode.sqlite",
+  "scope": "Instrumented summed kernel durations are not critical-path shares.",
+  "rows": [
+    {
+      "kernel": "strata::kernels::<unnamed>::wait_flag_ge_kernel(const volatile unsigned int *, unsigned int)",
+      "calls": 47808,
+      "summed_ms": 795.644513
+    },
+    {
+      "kernel": "strata::kernels::copy_i32_from_mapped_kernel(int *, const volatile int *, int)",
+      "calls": 17064,
+      "summed_ms": 72.941927
+    }
+  ]
+}

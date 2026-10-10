@@ -1,0 +1,25 @@
+We need answer user's request. Need produce detailed answer at least 1200 words. User asks: Benchmark identifier ignore. Implement thread-safe Python TTLCache class using OrderedDict and monotonic clock. Include set, get, delete, clear, len, expiration, capacity eviction, unit tests with injected fake clock, detailed explanation thread safety and complexity. Write complete code, then tests, then explain design. Do not abbreviate implementation.
+
+Need produce final with code complete, tests complete, explanation. Need ensure code works. Need decide API.
+
+Implementation: class TTLCache using threading.Lock, collections.OrderedDict. Store values as entries maybe tuple (value, expires_at). Need support default ttl? set(key, value, ttl=None). get(key, default=None). delete(key). clear. __len__ perhaps returns len after purging expired. len maybe length method. Need expiration: get and len and maybe keys? Need capacity eviction when set exceeds capacity: LRU eviction? OrderedDict and monotonic clock. Need use OrderedDict move_to_end on get/set. Evict oldest (first) when capacity exceeded. Could also purge expired during operations.
+
+Thread safety: one lock protects all operations. Need avoid deadlocks. Maybe use with self._lock. Use time.monotonic injected as clock function. Constructor capacity, ttl, clock=time.monotonic. Validate capacity positive, ttl positive? If ttl is None no expiration? User says TTLCache class maybe ttl required? Better support optional default ttl and per-key ttl; if ttl=None never expires? TTL suggests expiration. Could require ttl > 0 but also support None? Unit tests need injected fake clock. FakeClock increments time. Need test capacity eviction and expiration.
+
+Need detailed explanation at least 1200 words. Code complete, tests. Could include imports: threading, time, collections.OrderedDict, unittest.
+
+Need decide class methods.
+
+Potential code:
+
+import threading
+import time
+from collections import OrderedDict
+
+class TTLCache:
+    def __init__(self, capacity, ttl=None, clock=None):
+         if not isinstance(capacity, int) or capacity <= 0: raise ValueError
+         self._capacity = capacity
+         self._default_ttl = ttl
+         self._clock = clock if clock is not None else time.monotonic
+         self._lock = threading.RLock()? Use RLock maybe safe if reentrant? Since operations don't call each other, Lock enough. RLock helpful. Use threading.Lock.

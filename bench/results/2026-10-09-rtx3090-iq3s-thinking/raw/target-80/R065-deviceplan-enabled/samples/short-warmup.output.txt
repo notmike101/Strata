@@ -1,0 +1,11 @@
+We need answer user's request. Need produce final answer with complete code, tests, detailed explanation at least 1200 words. Need think fully.
+
+Task: Implement thread-safe Python TTLCache class using OrderedDict and monotonic clock. Include set, get, delete, clear, len, expiration, capacity eviction, unit tests with injected fake clock, detailed explanation of thread safety and complexity. Write complete code, then tests, then explain design. Do not abbreviate implementation. Detailed answer >=1200 words.
+
+Need produce Python code. Need consider thread safety: use RLock? OrderedDict operations not thread-safe. Need protect all public methods. Monotonic clock injected? Default time.monotonic. Fake clock for tests. TTL: expiry = now + ttl. On get: check if expired, delete. On len: need account for expired entries? Could prune expired. Since OrderedDict insertion order not expiry order. Capacity eviction: least recently used? OrderedDict can be LRU. Need move_to_end on access? User said using OrderedDict and monotonic clock; capacity eviction. We can implement LRU by move_to_end on get/set. Expiration: store expiry timestamps. On set: if key exists update ttl. If over capacity, evict oldest? But with LRU, evict least recently used. But OrderedDict after move_to_end maintains recency. Also can prune expired before eviction. Need thread-safe.
+
+Need unit tests with injected fake clock. Could use unittest. FakeClock class with set, advance. TTLCache(clock=time.monotonic, ttl=None?). Methods: set(key, value, ttl=None), get(key, default=None), delete(key), clear(), __len__(), maybe __contains__, maybe items? Need len includes expired? Should not count expired. Could call _prune_expired inside len? If many expired, O(n) for len. But acceptable. For thread safety, _lock = threading.RLock(). Use _clock. For internal methods not assume lock? Could use private methods without lock, call inside public with lock; or public methods lock and helper assumes lock. Use RLock to allow reentrant? Not necessary but okay. But if helpers not public. Need not call public from public to avoid lock issues. RLock safe.
+
+Need avoid memory leak: expired entries remain until access, set, len, maybe cleanup. Could implement cleanup: prune expired on operations. But if no operations, len may be O(n). Could optional background thread? Not required.
+
+Need

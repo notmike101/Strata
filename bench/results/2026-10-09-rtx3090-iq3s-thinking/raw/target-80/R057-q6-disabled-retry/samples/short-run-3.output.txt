@@ -1,0 +1,16 @@
+We need answer user's request. Need produce final detailed answer at least 1200 words. Need implement thread-safe Python TTLCache using OrderedDict and monotonic clock. Include set, get, delete, clear, len, expiration, capacity eviction, unit tests with injected fake clock, detailed explanation thread safety complexity. Complete code, tests, explanation. Do not abbreviate implementation. Also Benchmark identifier ignored. Need likely no mention identifier. Need ensure code complete. We can provide single file maybe with class and tests. Need discuss design. Need be careful: thread-safe TTL cache with OrderedDict and monotonic clock. Methods: set, get, delete, clear, len, maybe __len__, maybe get method returns sentinel? Need expiration: lazy cleanup on get/set maybe purge expired. Capacity eviction: if maxsize, evict least-recently-used? TTLCache usually OrderedDict LRU? But maybe capacity eviction least recently used. Need thread safety: use threading.Lock. Injected fake clock: callable returns float. Use time.monotonic by default. Need maybe support ttl optional. Need set(key,value,ttl=None). If ttl not provided? Could have default_ttl. Need expiration cleanup on set: remove expired before insert, or after. OrderedDict: move_to_end for LRU. For get: check expiration, if expired delete and return sentinel/default. Need handle maxsize <=0? maybe infinite? But capacity eviction. Could implement maxsize int optional; if None unlimited. If maxsize <=0 maybe no caching? Better validate non-negative. But typical: if maxsize is None unlimited, if maxsize <=0 raises ValueError? Could allow 0 cache stores nothing. Need maybe use _sentinel object. Need unit tests: use unittest with FakeClock class returning float, set, get, expiration, capacity eviction, LRU, delete, clear, len, concurrency maybe? They ask unit tests with injected fake clock. We can include concurrency test to demonstrate thread safety? Maybe optional. Need at least 1200 words. Include code blocks. Need ensure no abbreviations. Complete code. Maybe include imports.
+
+Potential implementation details:
+
+from __future__ import annotations
+import threading
+import time
+from collections import OrderedDict
+from typing import Any, Callable, Optional
+
+_UNSET = object()
+
+class TTLCache:
+    __slots__ = ... but OrderedDict? okay.
+    def __init__(self, maxsize=None, default_ttl=None, clock=None):
+        if maxsize is not None and

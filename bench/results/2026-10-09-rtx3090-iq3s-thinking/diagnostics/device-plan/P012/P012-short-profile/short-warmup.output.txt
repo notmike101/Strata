@@ -1,0 +1,20 @@
+We need answer user wants code only? "Return only the complete function in a Python code block." Need implement topological_order(nodes, edges) with requirements:
+- nodes list unique strings.
+- edges list of (before, after) pairs.
+- Return lexicographically smallest topological ordering.
+- include isolated nodes.
+- ignore duplicate edges.
+- Raise ValueError for edge endpoint absent from nodes or cycle.
+- Do not mutate either input.
+- Use no imports.
+- Return only complete function in Python code block.
+
+Need think about implementation. Need lexicographically smallest topological ordering. Usually Kahn's algorithm with min-heap gives lexicographically smallest if using nodes strings and always pick smallest available. Can't import heapq. Need implement min selection without imports. Since nodes unique strings, maybe can sort candidates each iteration or maintain sorted list. Simpler: copy nodes, build indegree and adjacency. Remove duplicates from edges. Need check endpoints. Then Kahn: while candidates: select min from candidate list. Since no imports, candidate list can be maintained sorted, or simply choose min each time. Complexity O(n^2) but okay. But ensure lexicographically smallest topological order for strings? Yes choose smallest among currently available nodes each step yields lexicographically smallest sequence under standard definitions if comparison is total order. Need isolated nodes with indegree zero initially.
+
+Need not mutate inputs. Use local copies. nodes list maybe not sorted. Need include isolated nodes. Need duplicates ignored. Need cycle raise ValueError.
+
+Potential issue duplicate edges: If edge duplicate, indegree counted once. Use set of edges? Could ignore duplicates by using adjacency sets and indegree increment only if not seen. Need no imports. Sets okay built-in. Edge endpoints: strings. Could edge pair length not 2? Problem says pairs; but robust if tuple length? We can raise ValueError if not iterable length? Not necessary but could. Need not mutate input; edges iteration doesn't mutate. nodes maybe convert to set.
+
+Cycle: If processed count < len(nodes) raise ValueError.
+
+Need lexicographically smallest: if we maintain candidates sorted and remove selected, but when decrement indegree of neighbors append to candidates and insert sorted? Simpler: maintain set/list of ready nodes, and each iteration pick min(ready) (or min of list). ready as set? If we pop min from set? Need remove. Use ready list and remove selected? For each step, candidate = min(ready_nodes); then

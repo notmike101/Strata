@@ -1,0 +1,17 @@
+We need answer user's request. Need produce final detailed answer >=1200 words. Need implement thread-safe Python TTLCache class using OrderedDict and monotonic clock. Include set, get, delete, clear, len, expiration, capacity eviction, unit tests with injected fake clock, detailed explanation thread safety and complexity. Complete code, then tests, then explanation. Do not abbreviate implementation. We need likely provide code with class, tests. Need think through design.
+
+Need ensure Python code correct. Thread-safe using lock. OrderedDict and monotonic clock (time.monotonic default? allow injected clock for tests). TTLCache: maxsize, ttl default maybe. Store entries as value, expires_at. OrderedDict maintains LRU recency: move_to_end on get/set. Need expiration: lazy removal on get, set, len? len includes expired? We can do purge_expired under lock. Also periodic? No. Capacity eviction: evict LRU when > maxsize. Also maybe if ttl <=0? Should handle negative ttl? Could store immediately expired. maxsize non-negative? Need robust.
+
+Implementation:
+from collections import OrderedDict, namedtuple
+import threading, time
+
+class TTLCache:
+    def __init__(self, maxsize=128, ttl=300, clock=time.monotonic):
+        if maxsize <0 raise ValueError? maxsize int. if ttl <0? Could allow 0, but negative maybe ValueError. If maxsize==0: no entries? Could set no entries? We'll support zero: set returns without storing? Maybe store then evict? Simpler validate >=0. But if zero, set immediately returns after evict? If maxsize=0, set should not store.
+        self._maxsize = int(maxsize)
+        self._ttl = float(ttl)
+        self._clock = clock
+        self._data = OrderedDict() # key -> (value, expires_at)
+        self._lock = threading.RLock() maybe to allow nested. Use RLock for simplicity; thread-safe but not lock-free.
+    set(key, value, ttl=None): ttl = self._ttl if ttl is None else ttl. if ttl <0 raise? Could allow immediate expiry. If negative raise ValueError maybe. if self._maxsize ==0: return. expiration = now + ttl. under lock: if key exists, update expires, move end. else: _data[key]=(value,expiration); _evict_locked()

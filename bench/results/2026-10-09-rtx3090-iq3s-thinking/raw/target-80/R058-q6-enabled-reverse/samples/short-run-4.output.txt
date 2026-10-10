@@ -1,0 +1,12 @@
+We need answer user's request. Need produce complete code, tests, explanation design, at least 1200 words. Need implement thread-safe Python TTLCache using OrderedDict and monotonic clock. Include set, get, delete, clear, len, expiration, capacity eviction, unit tests with injected fake clock. Detailed explanation thread safety and complexity. No abbreviation. Need likely use threading.RLock? OrderedDict thread-safety? Need ensure monotonic clock injectable. Need perhaps handle default ttl, capacity. Need expiration: remove expired on get, set; maybe len purges? In thread-safe cache, operations under lock. Fake clock injection for tests: maybe use unittest, unittest.mock? Could implement with clock parameter default time.monotonic.
+
+Need consider OrderedDict move_to_end for LRU. TTLCache capacity eviction: when set new key and exceeds capacity, pop oldest (FIFO/LRU). TTL: key expiration time absolute based on clock. get returns default if missing/expired. delete removes if exists (maybe no expiry). clear empties. len maybe return count of unexpired? Need thread-safe. len can purge expired and return len. Could include purge method. Need avoid deadlocks: single RLock; no nested locks. OrderedDict not thread-safe but protected by lock. Monotonic clock: injected callable returning float seconds. Could define default_clock = time.monotonic.
+
+Need complete implementation. Maybe include dataclass Entry? Use tuple (value, expires_at). But OrderedDict values can be tuple. Need if value None? sentinel default. Need TTL seconds. Need if ttl is None? maybe never expires? TTLCache with ttl. Could support per-key ttl. Need handle negative ttl? Raise ValueError. ttl can be None for no expiry? But TTLCache perhaps always ttl. Include default_ttl, capacity, clock. If capacity <=0 raise ValueError. If ttl not None and ttl <0 raise ValueError. set(key, value, ttl=None) per-key ttl? Yes.
+
+Need unit tests with fake clock. Use unittest.TestCase. FakeClock increments. Tests:
+- set/get hit
+- expiration using fake clock: get after ttl expired returns None and purges
+- get before expiry returns value
+- capacity eviction oldest when exceed maxsize
+- LRU behavior? get refreshes order so set evicts least recently used? Need decide. OrderedDict plus move_to_end. TTLCache capacity eviction could evict least-recently used if get moves_to_end, or insertion order if no move. User says OrderedDict

@@ -1,0 +1,14 @@
+We need answer user's request. Need produce complete code, tests, explanation design, at least 1200 words, detailed. User says Benchmark identifier ignore. Need implement thread-safe Python TTLCache using OrderedDict and monotonic clock. Include set, get, delete, clear, len, expiration, capacity eviction, unit tests with injected fake clock, and detailed explanation of thread safety and complexity. Complete code not abbreviated. Need likely provide Python code for class and tests. Need ensure thread safety. Let's design.
+
+Requirements: TTLCache: cache with TTL default? Probably supports default_ttl maybe set with ttl override. Monotonic clock injected fake clock. OrderedDict and threading.Lock. Need expiration and capacity eviction. Methods: set, get, delete, clear, len (maybe __len__, __contains__, __iter__? Include len). Could include pop? Unit tests with fake clock. Need complete code not abbreviated. Maybe also include context manager? Not necessary. Need detailed answer at least 1200 words.
+
+Implementation details:
+from __future__ import annotations
+import threading, time
+from collections import OrderedDict
+from typing import Any, Hashable, Optional, Tuple, TypeVar? Sentinel maybe.
+
+class TTLCache:
+    _MISS = object()
+    def __init__(self, capacity:int=128, default_ttl:float|None=60, clock:Callable[[float]] = time.monotonic, max_ttl: Optional[float]=None?)
+But user only asks monotonic clock; injected fake clock. Could allow clock returning current time. default_ttl None means never expire? Or if None no TTL? Need expiration. If ttl None? Use default_ttl? Could set ttl=None for never. Need handle capacity eviction LRU. Use OrderedDict move_to_end. For expiration: store expiry absolute. On get, if now >= expiry delete return default. On set, prune expired before insertion? Need avoid O(n) scans maybe maintain min-heap? But requirement using OrderedDict and monotonic clock. Capacity eviction. Expiration: lazy expiration on get, plus maybe expire on set to prevent expired entries occupying capacity? Could scan OrderedDict from oldest by expiry? OrderedDict ordered by insertion/LRU not expiry. Need efficient expiration? Could implement internal min-heap for expirations? But requirement says using OrderedDict and monotonic clock, not exclusively? "using an OrderedDict and a monotonic clock". Could do lazy expiration only. Need expiration of entries: entries removed when accessed; if capacity full

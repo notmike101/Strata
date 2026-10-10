@@ -704,36 +704,6 @@ __global__ void native_q6_k_mmvq_kernel(const Q6KBlock* __restrict__ w,
     }
 }
 
-#if !defined(__HIPCC__)
-// Opt-in for the measured 2560x10240 single-column Q6_K projection. Keep the
-// original four warp accumulators as per-lane scalars, with the same block and
-// addition order, so a physical warp can own a row without shared-memory waits.
-__launch_bounds__(4 * WARP, 1)
-__global__ void native_q6_k_onewarp_kernel(const Q6KBlock* __restrict__ weights,
-                                          const Q81Block* __restrict__ activation,
-                                          float* __restrict__ output, int n_in, int n_out) {
-    const int row = 4 * int(blockIdx.x) + int(threadIdx.y);
-    if (row >= n_out) return;  // a whole warp; all participating XOR lanes remain active
-    const int lane = int(threadIdx.x), blocks = n_in / 256;
-    float partial[4] = {};
-    for (int base = 0; base < blocks; base += 4) {
-#pragma unroll
-        for (int virtual_warp = 0; virtual_warp < 4; ++virtual_warp) {
-            const int kbx = base + virtual_warp;
-            if (kbx < blocks) {
-                partial[virtual_warp] += q6_q8_dot(weights + std::size_t(row) * blocks + kbx,
-                                                  activation + kbx * 8, lane);
-            }
-        }
-    }
-    float sum = partial[0];
-#pragma unroll
-    for (int virtual_warp = 1; virtual_warp < 4; ++virtual_warp) sum += partial[virtual_warp];
-    sum = warp_sum(sum);
-    if (lane == 0) output[row] = sum;
-}
-#endif
-
 // The four 32-element formats use native two-byte loads and VDR=2. The affine
 // Q4_0/Q5_0 correction consumes the original-input sum stored in Q8_1, exactly
 // as the pinned CUDA dot does; a signed-integer code substitution would differ.
@@ -2347,17 +2317,6 @@ void native_q6_k_mmvq(const void* weights, const void* x_q8_1, float* y,
     const auto* x = static_cast<const Q81Block*>(x_q8_1);
     const auto s = static_cast<cudaStream_t>(stream);
     const dim3 threads(WARP, WARPS);
-#if !defined(__HIPCC__)
-    static const bool one_warp = [] {
-        const char* value = std::getenv("STRATA_Q6_ONEWARP");
-        return value != nullptr && std::strcmp(value, "1") == 0;
-    }();
-    if (one_warp && n_in == 2560 && n_out == 10240) {
-        native_q6_k_onewarp_kernel<<<unsigned(n_out / 4), threads, 0, s>>>(w, x, y, n_in, n_out);
-        launch_check();
-        return;
-    }
-#endif
     if (n_in / 256 < WARPS * WARP / 32) {
         const unsigned blocks = unsigned((std::size_t(n_out) + WARPS - 1) / WARPS);
         native_q6_k_mmvq_kernel<true><<<blocks, threads, 0, s>>>(w, x, y, n_in, n_out);

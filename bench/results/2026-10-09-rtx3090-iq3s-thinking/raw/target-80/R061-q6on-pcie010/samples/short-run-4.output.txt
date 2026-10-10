@@ -1,0 +1,15 @@
+We need answer user's request. Need produce complete code, tests, explanation design, at least 1200 words. Need likely in final. Need ensure thread-safe Python TTLCache using OrderedDict and monotonic clock. Include set, get, delete, clear, len, expiration, capacity eviction, unit tests with injected fake clock, detailed explanation of thread safety and complexity. Do not abbreviate implementation. We need write complete code. Need maybe Python code with threading.RLock, OrderedDict, maybe fake clock. Need decide implementation details.
+
+User's benchmark identifier to ignore. No issue.
+
+Need at least 1200 words. Final answer with code then tests then explanation. Need not abbreviate implementation. Need ensure complete.
+
+Let's design robust TTLCache.
+
+Class TTLCache:
+- __init__(self, maxsize=128, ttl=300.0, clock=time.monotonic): validate maxsize non-negative int? If maxsize ==0 maybe no entries? capacity eviction. Use OrderedDict. Internal lock threading.RLock. maybe default ttl. Store values dict key -> (value, expires_at). OrderedDict stores keys maybe for LRU? Need OrderedDict. OrderedDict stores key->value? But need expiration time. Could use OrderedDict key -> (value, expires_at). But capacity eviction needs oldest insertion/least recently used. If get refreshes LRU (move_to_end), then capacity eviction evicts least recently used. If get shouldn't refresh? TTLCache capacity eviction likely LRU. Need specify. Use move_to_end on get (unless expired). For set, move_to_end. Expiration: lazy on get, plus purge on operations? Need expiration method maybe len counts non-expired. User requests len, expiration, capacity eviction. Need include expiration. Could define public methods:
+- set(key, value, ttl=None)
+- get(key, default=None)
+- delete(key)
+- clear()
+- __len__ returns number of non-expired entries (after purging? careful: len should not mutate? Could purge expired under lock). Since thread-safe and expiration. Could implement __len__ to purge expired and return len. But calling len can evict; fine. But if len called often O(n). Could maintain size and expired counts? Simpler O(n) purge. Complexity O(n) worst case, amortized? Could be. But we need detailed explanation complexity. Could optimize? We need OrderedDict and monotonic. Maybe implement _purge

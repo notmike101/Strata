@@ -1,0 +1,18 @@
+We need answer user's request. Need produce final answer at least 1200 words. Need implement thread-safe Python TTLCache using OrderedDict monotonic clock, include set, get, delete, clear, len, expiration, capacity eviction, unit tests with injected fake clock, detailed explanation thread safety and complexity. Do not abbreviate implementation. Need ignore benchmark identifier. Need likely provide code, tests, explanation. Need ensure complete code. Could use threading.RLock. OrderedDict for LRU? TTLCache probably capacity eviction (LRU). Need include expiration on access maybe cleanup expired entries lazily. Thread safety: lock protects OrderedDict and clock? monotonic clock? Use time.monotonic by default but injected clock. Need fake clock unit tests. Use unittest. Need no abbreviations. Need detailed answer.
+
+Let's design:
+
+import threading
+from collections import OrderedDict
+from typing import Any, Optional, Callable, Iterator, Tuple? maybe.
+
+class TTLCache:
+    def __init__(self, capacity: int, ttl: float, clock: Callable[[], float] = time.monotonic):
+        if capacity <=0 raise ValueError; ttl >? maybe allow ttl <=0? expiration immediate.
+        self._capacity=capacity; self._ttl=ttl; self._clock=clock; self._store=OrderedDict(); self._lock=RLock()
+
+Need maybe set default? Could set(key,value,ttl=None). get(key, default=None). delete. clear. __len__. Maybe also __contains__? But request says len. Include capacity eviction.
+
+Expiration: on get, if expired delete and return default. Maybe cleanup_expired method. set: if key exists remove then insert with expiry = now+ttl. If key doesn't exist: evict if len >= capacity. Need order for LRU. Need move_to_end on get. On set existing key update value and expiry and move end. Need if capacity 1. Need ensure not call clock while holding lock? okay. Need avoid recursion? Use private methods with lock? For clarity, acquire lock in public methods. Helper _get_with_expiry? But thread safety easier: public method with with self._lock. Helper functions called under lock without acquiring.
+
+Need monotonic clock: time.monotonic. Fake clock test. Need unit tests: set/get, expiration, len, eviction, delete, clear, thread safety? Could include multi-threading test. Fake clock test uses fake. Need maybe test that capacity eviction evicts

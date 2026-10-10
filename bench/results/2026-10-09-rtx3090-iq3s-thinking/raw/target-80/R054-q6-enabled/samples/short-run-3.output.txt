@@ -1,0 +1,24 @@
+We need answer user's request. Need produce final detailed answer >=1200 words. Implement thread-safe Python TTLCache using OrderedDict monotonic clock. Include set,get,delete,clear,len, expiration, capacity eviction, unit tests with injected fake clock, detailed explanation of thread safety and complexity. Complete code then tests then explain design. Do not abbreviate. Need likely include code only sections. Ensure thread-safe. Need consider OrderedDict move_to_end for LRU eviction. TTLCache with maxsize, ttl. Use monotonic time default but allow clock injection. Thread-safe using RLock. Expiration: get removes expired entries; maybe internal cleanup? len should maybe count expired? Typically len includes live items? We can define len returns number of non-expired items? But if len called, can purge expired. Need capacity eviction when set exceeds maxsize: popitem(last=False). Use OrderedDict move_to_end when get/set to maintain LRU. Need delete/clear return bool. Need unit tests fake clock. Need ensure no abbreviated implementation. Could include full code with imports. Need maybe discuss monotonic clock and fake clock protocol. Provide tests in unittest or pytest? Unit tests with fake clock. Let's design robust.
+
+TTLCache class:
+```
+from collections import OrderedDict
+import threading
+import time
+from typing import Optional, Any, Callable
+
+class TTLCache:
+    _sentinel = object()
+    def __init__(self, maxsize=128, ttl=300.0, clock=None):
+        if maxsize <=0: raise ValueError
+        if ttl <=0: raise ValueError
+        self._maxsize = maxsize
+        self._ttl = ttl
+        self._clock = clock if callable else time.monotonic
+        self._lock = threading.RLock()
+        self._cache = OrderedDict()
+    def _now(self): return self._clock()
+    def _expire_if_needed(self, key, value, ttl, now): ...
+```
+Store tuple (value, expires_at). Need if ttl None? Could support per-entry ttl? Maybe simple global ttl. Include optional per-key ttl? User says TTLCache class with set, get... Could set(key, value, ttl=None). More complete. Default ttl. If per-entry ttl provided use. Expiration.
+Thread safety: RLock for reentrancy? Need if len calls _purge, get calls _purge? If lock held and recursive len? Use R
