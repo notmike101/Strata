@@ -23,6 +23,7 @@
 #include "strata/core/token_barrier.hpp"
 #include "strata/core/expert_cache.hpp"
 #include "strata/core/conversation_snapshot.hpp"
+#include "strata/core/checkpoint_storage_reuse.hpp"
 #include "strata/core/conversation_file.hpp"
 #include "strata/core/conversation_memory.hpp"
 #include "strata/core/coupled_draft.hpp"
@@ -7015,6 +7016,15 @@ int main(int argc, char** argv) {
         std::vector<ImgKey> live_imgs, req_imgs;
         bool live_ok = false;
         std::vector<ConvCheckpoint> checks;
+        // Retain only storage from an invalid active checkpoint. This never keeps
+        // its state valid or changes which token prefixes may be restored.
+        const bool checkpoint_reuse = [&] {
+            const char* v = std::getenv("STRATA_CHECKPOINT_REUSE");
+            return v && v[0] == '1' && stages.empty() && o.batch == 0 &&
+                   o.conversation_cache_mib == 0 && o.prompt_cache > 0;
+        }();
+        ConvCheckpoint checkpoint_spare;
+        bool checkpoint_reuse_announced = false;
         uint64_t check_clock = 0;   // the checkpoints' LRU clock; creation and every use advance it
         int64_t tail_ckpt_len = -1;   // --prompt-cache-tail: the length of the one tail checkpoint alive (-1 = none)
         bool cvec_cached = true;   // the control vector's state the live session and the checkpoints were read with
@@ -7291,6 +7301,11 @@ int main(int argc, char** argv) {
             ConvCheckpoint c;
             c.ids.assign(cur.begin(), cur.begin() + L);
             c.imgs = imgs_below(req_imgs, L);
+            if (checkpoint_reuse && parts == nullptr &&
+                strata::core::recycle_checkpoint_storage(c, checkpoint_spare) && !checkpoint_reuse_announced) {
+                std::fprintf(stderr, "strata serve: discarded checkpoint storage reuse active\n");
+                checkpoint_reuse_announced = true;
+            }
             if (parts != nullptr) {
                 if (parts->size() != stages.size() + 1) return false;
                 c.gdn = std::move((*parts)[0].gdn);
@@ -9371,6 +9386,17 @@ int main(int argc, char** argv) {
             if (strata::kernels::cvec().loaded()) strata::kernels::cvec_set_enabled(want_cvec);
             // this request rewrites every cell from `resume` on, so a checkpoint past it (or not on this prompt's
             // path) no longer has its cells; the ones kept are prefixes of both the old tokens and the new
+            if (checkpoint_reuse) {
+                const uint64_t floor = (uint64_t) o.conversation_cache_min_free_mib * 1024 * 1024;
+                if (!strata::core::conversation_memory_admit(strata::core::conversation_available_memory(), 0, floor)) {
+                    checkpoint_spare = ConvCheckpoint{};
+                } else {
+                    for (ConvCheckpoint& discarded : checks) {
+                        if (((int64_t) discarded.ids.size() > resume || !starts_with(discarded.ids, discarded.imgs)) &&
+                            strata::core::recycle_checkpoint_storage(checkpoint_spare, discarded)) break;
+                    }
+                }
+            }
             checks.erase(std::remove_if(checks.begin(), checks.end(), [&](const ConvCheckpoint& c) {
                              return (int64_t) c.ids.size() > resume || !starts_with(c.ids, c.imgs);
                          }), checks.end());

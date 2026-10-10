@@ -1,0 +1,138 @@
+Start testing: Oct 10 08:19 Central Daylight Time
+----------------------------------------------------------
+1/121 Testing: conversation_cache_test
+1/121 Test: conversation_cache_test
+Command: "C:/strata/local-setup/target-80/build-cuda86-main/conversation_cache_test.exe"
+Directory: C:/strata/local-setup/target-80/build-cuda86-main
+"conversation_cache_test" start time: Oct 10 08:19 Central Daylight Time
+Output:
+----------------------------------------------------------
+conversation_cache_test: 4208 checks passed
+<end of output>
+Test time =   0.18 sec
+----------------------------------------------------------
+Test Passed.
+"conversation_cache_test" end time: Oct 10 08:19 Central Daylight Time
+"conversation_cache_test" time elapsed: 00:00:00
+----------------------------------------------------------
+
+2/121 Testing: conversation_split_failure_test
+2/121 Test: conversation_split_failure_test
+Command: "C:/strata/local-setup/target-80/build-cuda86-main/conversation_split_failure_test.exe"
+Directory: C:/strata/local-setup/target-80/build-cuda86-main
+"conversation_split_failure_test" start time: Oct 10 08:19 Central Daylight Time
+Output:
+----------------------------------------------------------
+stages 1: allocation-failure cases preserved: 8
+stages 2: allocation-failure cases preserved: 12
+stages 3: allocation-failure cases preserved: 16
+<end of output>
+Test time =   0.04 sec
+----------------------------------------------------------
+Test Passed.
+"conversation_split_failure_test" end time: Oct 10 08:19 Central Daylight Time
+"conversation_split_failure_test" time elapsed: 00:00:00
+----------------------------------------------------------
+
+3/121 Testing: conversation_memory_test
+3/121 Test: conversation_memory_test
+Command: "C:/strata/local-setup/target-80/build-cuda86-main/conversation_memory_test.exe"
+Directory: C:/strata/local-setup/target-80/build-cuda86-main
+"conversation_memory_test" start time: Oct 10 08:19 Central Daylight Time
+Output:
+----------------------------------------------------------
+conversation_memory_test: 25 checks passed
+<end of output>
+Test time =   0.05 sec
+----------------------------------------------------------
+Test Passed.
+"conversation_memory_test" end time: Oct 10 08:19 Central Daylight Time
+"conversation_memory_test" time elapsed: 00:00:00
+----------------------------------------------------------
+
+4/121 Testing: conversation_file_test
+4/121 Test: conversation_file_test
+Command: "C:/strata/local-setup/target-80/build-cuda86-main/conversation_file_test.exe"
+Directory: C:/strata/local-setup/target-80/build-cuda86-main
+"conversation_file_test" start time: Oct 10 08:19 Central Daylight Time
+Output:
+----------------------------------------------------------
+conversation_file_test: 169 checks passed
+<end of output>
+Test time =   2.03 sec
+----------------------------------------------------------
+Test Passed.
+"conversation_file_test" end time: Oct 10 08:19 Central Daylight Time
+"conversation_file_test" time elapsed: 00:00:02
+----------------------------------------------------------
+
+20/121 Testing: conversation_snapshot_test
+20/121 Test: conversation_snapshot_test
+Command: "C:/strata/local-setup/target-80/build-cuda86-main/conversation_snapshot_test.exe"
+Directory: C:/strata/local-setup/target-80/build-cuda86-main
+"conversation_snapshot_test" start time: Oct 10 08:19 Central Daylight Time
+Output:
+----------------------------------------------------------
+conversation_snapshot_test: 4139 checks passed
+<end of output>
+Test time =   0.86 sec
+----------------------------------------------------------
+Test Passed.
+"conversation_snapshot_test" end time: Oct 10 08:19 Central Daylight Time
+"conversation_snapshot_test" time elapsed: 00:00:00
+----------------------------------------------------------
+
+21/121 Testing: conversation_validation_test
+21/121 Test: conversation_validation_test
+Command: "C:/strata/local-setup/target-80/build-cuda86-main/conversation_validation_test.exe"
+Directory: C:/strata/local-setup/target-80/build-cuda86-main
+"conversation_validation_test" start time: Oct 10 08:19 Central Daylight Time
+Output:
+----------------------------------------------------------
+conversation_validation_test: 972 host-only checks passed
+<end of output>
+Test time =   0.25 sec
+----------------------------------------------------------
+Test Passed.
+"conversation_validation_test" end time: Oct 10 08:19 Central Daylight Time
+"conversation_validation_test" time elapsed: 00:00:00
+----------------------------------------------------------
+
+36/121 Testing: verify_parity
+36/121 Test: verify_parity
+Command: "C:/strata/local-setup/target-80/build-cuda86-main/verify_parity.exe" "--selftest"
+Directory: C:/strata/local-setup/target-80/build-cuda86-main
+"verify_parity" start time: Oct 10 08:19 Central Daylight Time
+Output:
+----------------------------------------------------------
+argmax_rows, row_top_prob_split: bitwise equal to the one-block kernels (ties, NaN, -inf, 1-8 rows on one scratch)
+verify_parity: PASS
+<end of output>
+Test time =   0.29 sec
+----------------------------------------------------------
+Test Passed.
+"verify_parity" end time: Oct 10 08:19 Central Daylight Time
+"verify_parity" time elapsed: 00:00:00
+----------------------------------------------------------
+
+37/121 Testing: qfuse_gdn_test
+37/121 Test: qfuse_gdn_test
+Command: "C:/strata/local-setup/target-80/build-cuda86-main/qfuse_gdn_test.exe"
+Directory: C:/strata/local-setup/target-80/build-cuda86-main
+"qfuse_gdn_test" start time: Oct 10 08:19 Central Daylight Time
+Output:
+----------------------------------------------------------
+QFUSE GDN: 64 cases, 0 failures
+COMMIT full_qfuse=1 enabled=1 fused_output=1 T=1 captured=0 skipped=0 state_bytes_differ=0 output_bytes_differ=0
+COMMIT full_qfuse=0 enabled=1 fused_output=1 T=1 captured=1 skipped=1 state_bytes_differ=0 output_bytes_differ=0
+COMMIT full_qfuse=0 enabled=0 fused_output=1 T=1 captured=0 skipped=0 state_bytes_differ=0 output_bytes_differ=0
+COMMIT full_qfuse=0 enabled=1 fused_output=0 T=1 captured=1 skipped=1 state_bytes_differ=0 output_bytes_differ=0
+<end of output>
+Test time =   0.31 sec
+----------------------------------------------------------
+Test Passed.
+"qfuse_gdn_test" end time: Oct 10 08:19 Central Daylight Time
+"qfuse_gdn_test" time elapsed: 00:00:00
+----------------------------------------------------------
+
+End testing: Oct 10 08:19 Central Daylight Time

@@ -1,0 +1,21 @@
+Test project C:/strata/local-setup/target-80/build-cuda86-main
+    Start  1: conversation_cache_test
+1/8 Test  #1: conversation_cache_test ...........   Passed    0.18 sec
+    Start  2: conversation_split_failure_test
+2/8 Test  #2: conversation_split_failure_test ...   Passed    0.04 sec
+    Start  3: conversation_memory_test
+3/8 Test  #3: conversation_memory_test ..........   Passed    0.05 sec
+    Start  4: conversation_file_test
+4/8 Test  #4: conversation_file_test ............   Passed    2.03 sec
+    Start 20: conversation_snapshot_test
+5/8 Test #20: conversation_snapshot_test ........   Passed    0.86 sec
+    Start 21: conversation_validation_test
+6/8 Test #21: conversation_validation_test ......   Passed    0.25 sec
+    Start 36: verify_parity
+7/8 Test #36: verify_parity .....................   Passed    0.29 sec
+    Start 37: qfuse_gdn_test
+8/8 Test #37: qfuse_gdn_test ....................   Passed    0.31 sec
+
+100% tests passed out of 8
+
+Total Test time (real) =   4.69 sec

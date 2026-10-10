@@ -1,0 +1,12 @@
+{
+  "id": "C063-storage",
+  "bytes": 117669888,
+  "rounds": 7,
+  "warmups": 1,
+  "source_reference": "conversation_checkpoint_save vector.resize then cudaMemcpy, src/core/conversation_state.cpp",
+  "scope": "allocation/copy mechanism, no model or TPS",
+  "executable_sha256": "4d1ed5757a9d396d60270664f0f101958c1376f372ec98cb4a1e162701667428",
+  "harness_sha256": "cdc29d2a6e6dadf449a366fd0316647785b9397bc1d5fa90aa53dc5ffce3f601",
+  "utc": "2026-10-10T13:12:36.350370+00:00",
+  "exit_code": 0
+}

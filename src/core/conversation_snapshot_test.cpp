@@ -1,4 +1,5 @@
 #include "strata/core/conversation_snapshot.hpp"
+#include "strata/core/checkpoint_storage_reuse.hpp"
 #include "strata/core/conversation_file.hpp"
 #include "strata/kernels/kv_q4.hpp"
 #include <cuda_runtime.h>
@@ -151,6 +152,51 @@ void full_session(int fmt, int mode, int experts) {
     check(a.checkpoints[0].used == 17,"upstream checkpoint LRU stamp survives capture");
     fill(177);
     check(conversation_snapshot_save(b,view,ss,g,draft.state,err),"capture complete B");
+    {
+        // Recycle a discarded A allocation, but save fresh B bytes and new metadata.
+        ConversationCheckpoint donor=a.live, reused, reference;
+        const auto* old_gdn=donor.gdn.data();
+        const auto* old_ple=donor.ple.data();
+        const auto* old_tail=donor.tails.data();
+        const auto* old_dead=donor.dead.data();
+        const auto* old_pos=donor.block_pos.data();
+        reused.ids={77,88,99}; reused.imgs={{0,123}}; reused.used=23; reused.pinned=true;
+        reference=reused;
+        check(recycle_checkpoint_storage(reused,donor),"recycle discarded running-state allocation");
+        check(reused.gdn.data()==old_gdn && reused.ple.data()==old_ple && reused.tails.data()==old_tail &&
+              reused.dead.data()==old_dead && reused.block_pos.data()==old_pos,"all five allocations transferred without copying");
+        check(donor.gdn.empty() && donor.ple.empty() && donor.tails.empty() && donor.dead.empty() &&
+              donor.block_pos.empty() && donor.ids==a.live.ids,"donor releases payload but retains metadata");
+        check(reused.ids==reference.ids && reused.imgs==reference.imgs && reused.used==23 && reused.pinned,
+              "recipient token image and retention metadata preserved");
+        check(conversation_checkpoint_save(reused,ss,g,err) && conversation_checkpoint_save(reference,ss,g,err),
+              "save current state into recycled and fresh allocations");
+        auto same=[](const ConversationCheckpoint& x,const ConversationCheckpoint& y) {
+            return x.gdn==y.gdn && x.ple==y.ple && x.tails==y.tails && x.dead==y.dead && x.block_pos==y.block_pos;
+        };
+        check(same(reused,reference) && reused.gdn!=a.live.gdn,"recycled save refreshes every running-state component");
+        check(reused.gdn.data()==old_gdn,"same-sized save retains recycled allocation");
+        check(!recycle_checkpoint_storage(reused,reference) && same(reused,reference),"occupied recipient refused without mutation");
+        ConversationCheckpoint staged=reference, empty;
+        staged.stage_parts.emplace_back();
+        check(!recycle_checkpoint_storage(empty,staged) && same(staged,reference),"layer-split donor refused unchanged");
+        check(!recycle_checkpoint_storage(empty,empty),"self recycling refused");
+        fill(99);
+        check(conversation_checkpoint_restore(reused,ss,g,err),"restore recycled checkpoint after state corruption");
+        ConversationCheckpoint restored_state; restored_state.ids=reused.ids; restored_state.imgs=reused.imgs;
+        check(conversation_checkpoint_save(restored_state,ss,g,err) && same(restored_state,reference),
+              "recycled restore reproduces all fresh captured bytes");
+        check(ss.ple_prev[0]==88 && ss.ple_prev[1]==99,"recycled restore uses new token metadata");
+        std::vector<uint8_t> pooled(sizes.dead);
+        cuda_check(cudaMemcpy(pooled.data(),main.state.idx_pooled,sizes.dead,cudaMemcpyDeviceToHost));
+        check(pooled==reused.dead,"recycled restore reconstructs the partial pooled row");
+        ConversationCheckpoint cancelled=reference, unused;
+        check(recycle_checkpoint_storage(unused,cancelled),"retain discarded storage before an abandoned save");
+        unused=ConversationCheckpoint{};
+        check(unused.bytes()==0,"abandoned or pressure-released spare owns no storage");
+        check(conversation_checkpoint_restore(reference,ss,g,err),"valid checkpoint survives abandoning the spare");
+        fill(177); // Preserve the original B fixture for the remaining snapshot tests.
+    }
     {
         // disk save path: metadata + streamed K/V give the same file as the captured image
         SavedConversation meta;

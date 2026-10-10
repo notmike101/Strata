@@ -1,5 +1,5 @@
 {
-  "exported_utc": "2026-10-10T13:06:02.050250+00:00",
+  "exported_utc": "2026-10-10T18:06:30.582439+00:00",
   "files": {
     ".gitattributes": {
       "bytes": 205,
@@ -496,6 +496,154 @@
     "diagnostics/cache-matrix/R131-stream-cache-control-reverse/wrapper.txt": {
       "bytes": 664,
       "sha256": "f4572d6ce82d8f6d989d4d5821968f7d16b9f16439d104d1a6dcf2fc84a10985"
+    },
+    "diagnostics/checkpoint-reuse/C063/build-c063-engine.cmd": {
+      "bytes": 507,
+      "sha256": "dbcff175f62cbdb562ed8bff1ac090fd1155d0ce267e3b1bf9bee748ef4cef5d"
+    },
+    "diagnostics/checkpoint-reuse/C063/build-c063-red.cmd": {
+      "bytes": 514,
+      "sha256": "226d6e01dc8682862aa0b0d10f4e2667bb5737f6456c8b2d4e2a813c2bb5dffb"
+    },
+    "diagnostics/checkpoint-reuse/C063/build-c063-storage.cmd": {
+      "bytes": 578,
+      "sha256": "cd36922e3c70108b9dbede6257aaae8d4c8d2edb35317b90619e4cd1543c58cf"
+    },
+    "diagnostics/checkpoint-reuse/C063/C063-base-refresh-build.txt": {
+      "bytes": 53863,
+      "sha256": "1394167027dcdb22c78d5f861e1ef2e10592d60e0c3544a6da7020adcb798806"
+    },
+    "diagnostics/checkpoint-reuse/C063/C063-engine-build.txt": {
+      "bytes": 38102,
+      "sha256": "68163155051b8271dee051a40cdcee728ac9e6b6951b9e991c91646805d399b5"
+    },
+    "diagnostics/checkpoint-reuse/C063/C063-final-test-build.txt": {
+      "bytes": 2126,
+      "sha256": "770284f85b6a73e72aef05be53f8a4624dd71153f42576edf0a8e906726e5dc1"
+    },
+    "diagnostics/checkpoint-reuse/C063/C063-red-build.txt": {
+      "bytes": 301,
+      "sha256": "3f8e6c5c16d08d92f406b85d13868648be0ad30a3f27437ec1419c162cde6249"
+    },
+    "diagnostics/checkpoint-reuse/C063/C063-red-enabled-build.txt": {
+      "bytes": 2347,
+      "sha256": "0f99b2f66e2870fc40a2d7082222f631cd3ba0c129802a06484a7b460cf74ebd"
+    },
+    "diagnostics/checkpoint-reuse/C063/C063-red-manifest.json": {
+      "bytes": 373,
+      "sha256": "a3d8249ad3db40293875dc0f554be1477f0a8f1f2952524e4718ccec9e9078d4"
+    },
+    "diagnostics/checkpoint-reuse/C063/C063-red-result.txt": {
+      "bytes": 49,
+      "sha256": "1bbd40fd321e3e32015259df59bed6646f9e92b63e4dd3d9a5a09936694516d1"
+    },
+    "diagnostics/checkpoint-reuse/C063/C063-red-safety.csv": {
+      "bytes": 158,
+      "sha256": "f823152b06c77f9296bb2acb022d304c2f42e1d93c6b1810b3a6a8ea71bfb875"
+    },
+    "diagnostics/checkpoint-reuse/C063/C063-storage-build.txt": {
+      "bytes": 311,
+      "sha256": "84b8a39472932e2b24457a605840cc9cd7a922a57dd536e7461599015e0fae7b"
+    },
+    "diagnostics/checkpoint-reuse/C063/C063-storage-manifest.json": {
+      "bytes": 496,
+      "sha256": "2cf2b0ecb678dd982472d1328b9af0ffecb877ad0006a43f931a3ecb57ddcf1e"
+    },
+    "diagnostics/checkpoint-reuse/C063/C063-storage-result.txt": {
+      "bytes": 1138,
+      "sha256": "578ec2a6b13d4a301b941045adbb363a072ffffc1dc23c952577eccf0dff7189"
+    },
+    "diagnostics/checkpoint-reuse/C063/C063-storage-safety.csv": {
+      "bytes": 217,
+      "sha256": "2db10a15a9a33cfee18317d23f84230edcf181c9a797916a487286aea1060831"
+    },
+    "diagnostics/checkpoint-reuse/C063/c063-storage.cu": {
+      "bytes": 1109,
+      "sha256": "cdc29d2a6e6dadf449a366fd0316647785b9397bc1d5fa90aa53dc5ffce3f601"
+    },
+    "diagnostics/checkpoint-reuse/C063/C063-summary.json": {
+      "bytes": 462,
+      "sha256": "19379dbc99effb84b8f424cf41cd3d39b24f4e7006a2c99b83c06247dc244d15"
+    },
+    "diagnostics/checkpoint-reuse/C063/C063-test-detail.txt": {
+      "bytes": 6407,
+      "sha256": "49cc1cadd6bfca00ac145ec4bfb5a744821a331c0d2538846dd657ab29819d84"
+    },
+    "diagnostics/checkpoint-reuse/C063/C063-tests-manifest.json": {
+      "bytes": 415,
+      "sha256": "77ecc1c8dbd55cae0fdf67566cf9b3beba1567cfcf66ae1d26201ac6696d3c51"
+    },
+    "diagnostics/checkpoint-reuse/C063/C063-tests-result.txt": {
+      "bytes": 997,
+      "sha256": "6f9fcf9fcb3f69aef0746aec26abdb113728165f944c5993aba344c58798f1e9"
+    },
+    "diagnostics/checkpoint-reuse/C063/C063-tests-safety.csv": {
+      "bytes": 453,
+      "sha256": "ca6fda24cc0200608cbe97f7147e87be8298635c0c0cdbdccdc1ee9ba1d35296"
+    },
+    "diagnostics/checkpoint-reuse/C063/checkpoint_storage_reuse.hpp": {
+      "bytes": 922,
+      "sha256": "f03836ef5e45f03fc5cc33782ac514fe631aa0131e3727b54de14e6302b2ebe2"
+    },
+    "diagnostics/checkpoint-reuse/C063/close-c063.py": {
+      "bytes": 11243,
+      "sha256": "0e9a0fb66aede81fbb9997622780571a545eeadafaefa14cb961a58321fd167f"
+    },
+    "diagnostics/checkpoint-reuse/C063/closeout-inventory.json": {
+      "bytes": 1164,
+      "sha256": "fda40aaee37fe4588a14f8d2c3c8dffb062129501a4e518c3b29719e9f2a1897"
+    },
+    "diagnostics/checkpoint-reuse/C063/closure.md": {
+      "bytes": 2254,
+      "sha256": "1b3b8607fd522bb13674e15237ea48bbabd514e538e0bb165f64e0f96777d3c9"
+    },
+    "diagnostics/checkpoint-reuse/C063/integration-and-served-plan.md": {
+      "bytes": 3409,
+      "sha256": "0c98968d3c346a0e59f2ac3547274db85034048454546f55026b543e0d0ea145"
+    },
+    "diagnostics/checkpoint-reuse/C063/plan.md": {
+      "bytes": 3283,
+      "sha256": "a154649a3051058070a847504e84c046e5526581391d4171c1bd892bf5daed3e"
+    },
+    "diagnostics/checkpoint-reuse/C063/R136-checkpoint-control.json": {
+      "bytes": 2361,
+      "sha256": "9c56fcae3147809e40660444c3e3180e8d4e5fcff908663a3cd3a7eade209bfa"
+    },
+    "diagnostics/checkpoint-reuse/C063/R137-checkpoint-candidate.json": {
+      "bytes": 2361,
+      "sha256": "4fd2c6d87f1781af842b24cbd1d29be22e4b93259ed74ccef9e3e04eb9dca432"
+    },
+    "diagnostics/checkpoint-reuse/C063/R138-checkpoint-candidate-reverse.json": {
+      "bytes": 2361,
+      "sha256": "4fd2c6d87f1781af842b24cbd1d29be22e4b93259ed74ccef9e3e04eb9dca432"
+    },
+    "diagnostics/checkpoint-reuse/C063/R139-checkpoint-control-reverse.json": {
+      "bytes": 2361,
+      "sha256": "9c56fcae3147809e40660444c3e3180e8d4e5fcff908663a3cd3a7eade209bfa"
+    },
+    "diagnostics/checkpoint-reuse/C063/run-c063-arm.py": {
+      "bytes": 9624,
+      "sha256": "c4494852349cea574600ebf4479d75b33ef906ba35eb2cc054af2e301a4d8640"
+    },
+    "diagnostics/checkpoint-reuse/C063/run-c063-red.py": {
+      "bytes": 1974,
+      "sha256": "de8b966fa9e9d6d0489037a8ba383539ba825fa93146100eb25666c745b47981"
+    },
+    "diagnostics/checkpoint-reuse/C063/run-c063-storage.py": {
+      "bytes": 1895,
+      "sha256": "2d5d6377d8626897fea31ad64d1f77ceca718927f40822e1fdf95c9c11807666"
+    },
+    "diagnostics/checkpoint-reuse/C063/run-c063-tests.py": {
+      "bytes": 2232,
+      "sha256": "11ad80e855bb619a77ba3e441218a8a1e2ce00bf094853fe1241c4482498f213"
+    },
+    "diagnostics/checkpoint-reuse/C063/source.patch.json": {
+      "bytes": 8228,
+      "sha256": "3a3aeae5a4d09490b77fea3ffbeaaa630bc0430e33fb4017236c15f1cbe10518"
+    },
+    "diagnostics/checkpoint-reuse/C063/start-c063-served.py": {
+      "bytes": 8064,
+      "sha256": "9dd573208f3aa922740a1d665e0468ccddaad1fd6a412019b52f83992b80e360"
     },
     "diagnostics/coding-refresh/checker-v2/check-topological-normal-python-diagnostic.py": {
       "bytes": 2729,
@@ -10790,8 +10938,8 @@
       "sha256": "2f62bfdf31004200f39c1304db55b529c33f169fec03d3f572c9c4564d092739"
     },
     "goal-90-state.json": {
-      "bytes": 11285,
-      "sha256": "e7df55e67d73c3d7eb4b6612bf235788269cd7455ba38cdf73afba355622bb39"
+      "bytes": 11744,
+      "sha256": "3df75d5776aa2efee5b732352eee2792d1b862540c3983cfa74205f113e60c5b"
     },
     "goal90-benchmark.py": {
       "bytes": 13011,
@@ -10804,6 +10952,10 @@
     "goal90-quality.py": {
       "bytes": 1718,
       "sha256": "b946fe8d90ac842633f2938bca30d49562f0e00de75ff83537ec35bd87de5604"
+    },
+    "HANDOFF.md": {
+      "bytes": 5609,
+      "sha256": "a50983aa0f66174bc4314028bf532dbe665fd6828ac8f2bef90918f075ae6757"
     },
     "hardware-supplement.json": {
       "bytes": 798,
@@ -10822,8 +10974,8 @@
       "sha256": "f1340e812574b74b1139b75eaa2cad11a2cd0c11f168f6c2f1f0e7a0bb4cbaf6"
     },
     "ledger.md": {
-      "bytes": 525404,
-      "sha256": "eadbed4d798d6fd0618acad307c35d6dfa354c8999e45a76647436feb35e5822"
+      "bytes": 534356,
+      "sha256": "036fd176100358da7cc7a1a2acb92e83884db227fc77767533dfcb3b48706c90"
     },
     "measure.py": {
       "bytes": 13940,
@@ -28850,8 +29002,8 @@
       "sha256": "195fb14c77a34b2fefedef8efec38d96f4104eed138ab21d18413b28172418e1"
     },
     "README.md": {
-      "bytes": 24021,
-      "sha256": "7f9feced34b424b7426465c50954439aaadbb719bcbab4bb3d24de45879e7197"
+      "bytes": 23843,
+      "sha256": "1cdd153d9b4fc9998dcf39c7ffb3e1dfc6506b92e985006943f0f59c2004e85b"
     },
     "replay.py": {
       "bytes": 1104,

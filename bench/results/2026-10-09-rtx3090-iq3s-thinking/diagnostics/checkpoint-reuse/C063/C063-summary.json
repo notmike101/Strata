@@ -1,0 +1,16 @@
+{
+  "id": "C063",
+  "engine_sha256": "c4a7c1344949e1750dd2eadec2a5f4b79e873578249228c204cbe7dcb43904ca",
+  "micro_bytes": 117669888,
+  "micro_control_median_ms": 31.7219,
+  "micro_reuse_median_ms": 18.2196,
+  "micro_all_bytes_verified": true,
+  "cuda_test_targets": 8,
+  "arms": [
+    "R136-checkpoint-control",
+    "R137-checkpoint-candidate",
+    "R138-checkpoint-candidate-reverse",
+    "R139-checkpoint-control-reverse"
+  ],
+  "full_goal_qualified": false
+}
