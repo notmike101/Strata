@@ -1,0 +1,20 @@
+diff --git a/src/program/generate.cpp b/src/program/generate.cpp
+index 23b6020a..3530e0cf 100644
+--- a/src/program/generate.cpp
++++ b/src/program/generate.cpp
+@@ -2356,11 +2356,13 @@ int main(int argc, char** argv) {
+             return 2;
+         }
+     }
++    // AcceptedUsage::record numbers rows from zero; split-window callbacks carry
++    // group-local rows and would incorrectly count rejected rows as accepted.
+     if (accepted_usage_on && (!o.serve || !o.layer_split.empty() || o.peer_device >= 1 ||
+         o.expert_cache_remote[0] > 0 || o.expert_cache_remote[1] > 0 || o.expert_cache_remote[2] > 0 ||
+-        o.batch > 0 || o.pipeline_windows > 0 || o.adapt_async || o.no_pool ||
++        o.batch > 0 || o.pipeline_windows > 0 || o.spec_split || o.adapt_async || o.no_pool ||
+         o.adapt_every <= 0 || o.adapt_swaps <= 0)) {
+-        std::fprintf(stderr, "strata: STRATA_ACCEPTED_USAGE requires single-GPU serial serve with synchronous adaptive cache\n");
++        std::fprintf(stderr, "strata: STRATA_ACCEPTED_USAGE requires single-GPU serial serve with synchronous adaptive cache and unsplit verify windows (no --spec-split)\n");
+         return 2;
+     }
+     // the peer tier is the second card's only user: a layer split or a remote expert cache would put a second engine

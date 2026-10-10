@@ -3129,3 +3129,85 @@ prototype could remove a measured cost without losing current overlap; abandon
 it if that mechanism is absent. Do not retry the three closed compiler paths.
 Production launcher, context262144, vision and sampling remain unchanged. Goal
 active:90short/85long and complete quality/workload matrix still unqualified.
+
+
+## E161 / C051 split-window compatibility defect found and guarded
+
+Broader scheduling review followed three closed compiler paths. CUDA mapped()
+already uses cudaHostAllocMapped without WriteCombined (verify.cpp:185), unlike
+the uncached SYCL path motivating PR1713. Current CUDA GPU resident/PCIe experts
+already overlap host CPU work after flagA publication and before flag completion.
+A whole-layer drain/CPU-service/relaunch would serialize that work and add host
+launches. No measured transferable cost justifies porting Arc's graph segmentation
+now. Do not equate its647.7ms waitflag-only trace category with removable work.
+
+Existing --spec-split offers a different supported scheduling architecture:
+two token groups interleave pre/post work, allowing CPU experts of one group to
+overlap GPU mixer/router work of the other. It increases weight traffic and kernel
+launches; source documents an earlier~7% regression on another experiment. No
+local campaign comparison found. A bounded same-day screen is more informative
+than implementing ungrounded new graph segmentation.
+
+Interaction found BEFORE combining: Verifier::run passes each group's local rows
+to pool_multi_cb with no global-row offset. AcceptedUsage::record indexes from
+zero on each call. A second group therefore appends routes to first-group rows,
+and commit(keep) can count rejected rows as accepted. C046 guard omitted spec_split.
+All prior C046-C049/P019/P020 arms used unsplit windows, so this finding does not
+invalidate their counters. It does invalidate a prospective combined experiment.
+
+Fix: STRATA_ACCEPTED_USAGE=1 now rejects effective --spec-split at option validation,
+with an explicit diagnostic. Default-off and unsplit accepted-usage paths keep
+their arithmetic and scheduling. No engine kernel, model bytes, context, sampling
+or production launcher change. Full answer-quality equivalence is not claimed.
+
+Regression test tools/test_accepted_usage_modes.py uses absent model paths and
+never loads a model. Initial test attempt lacked --ple-gguf and failed too early;
+retained as a harness mistake. Corrected test reached the downstream CPU feature
+check, proving the missing compatibility guard on the old ac43e898 engine. After
+the fix, the unsafe mode returns2 with the new diagnostic. Three controls reach
+the no-model sentinel: accepted1/--no-spec-split, accepted0/--spec-split, and
+accepted1/--spec-split followed by --no-spec-split (last argument wins).
+
+CUDA13.3 sm86 Release build passed. Token-barrier1.2M oracle steps, accepted-usage
+4096 windows, Windows affinity, and IQ AVX2 parity all passed. Final comment-only
+rebuild and four CLI controls passed. HIP/SYCL were not built; no upstream review.
+Candidate engine SHA256 0dea69dcbf10b0f925549552ec58c76d64c2acf51276187b60adb1a62b90b4dd; kept separately at
+engine/strata-cuda133-usage-guard.exe. Existing production executable unchanged.
+No throughput claim for this configuration guard.
+
+
+## E162 / C052 finite split-window scheduling screen prepared, not run
+
+Hypothesis: interleaving token groups can hide CPU expert work behind GPU mixer/
+router work on this host. Risk: repeated weight reads, smaller batches and more
+kernels can outweigh overlap. This is existing --spec-split, not Arc graph-segment
+porting. Source's older~7% loss is a warning, not a measurement on this stack.
+
+Same current C051 binary for both arms. A R102 unsplit, B R103 split. Both use
+HC-fast1, acceptedusage0, tokenbarrier0 (required by C051), auto prompt share with
+MAX1024, DMA0/deviceplan0; lag2,9workers30tasks,PCIe.20,MTP4/.70. Only --spec-split
+versus --no-spec-split changes within the pair. Do not compare B directly with
+C049 and attribute all differences to scheduling. If promising, correct row-offset
+accounting before any future combination with C046/C049; do not bypass the guard.
+
+Exact IQ3_S,262144context,INT8KV/32768resident,CPU F16vision. Fixed thinking profile
+temperature1,top_p.95,top_k20,min_p0,presence0,repetition1,frequency0. Identical
+original short165/~3K3034 coding payloads,512 generated tokens, concurrency1,
+stream/cachemiss,one warmup plus five measured seeds101..105 per workload. All
+raw runs retained with ordinary medians, decode/prompt/E2E/stream/TTFT separate.
+This is a screen; frozen random coding and full quality matrix remain mandatory.
+
+Finite budget A/B then at most one reversed B/A confirmation if neither decode nor
+E2E median loses>3% and neither prompt median loses>2%. Close immediately on these
+stop conditions, malformed output, incorrect effective parameters, or memory/
+cleanup failure. Pool all10rows/cell if the reverse pair runs; no favorable subset.
+No additional split geometry or spec width sweep. Qualifying>90/85 cannot be
+claimed from this screen alone. Neither candidate is promoted before full gates.
+
+Before launch inventory exact model/profiler/device users and validate binary/
+config identity. Independent16GiB physical/commit floor eachsecond, no per-process
+memory polling, no Git/build/GUI/profiler during measured requests. Current
+run-c020-arm.py supervisor with --observer audit-no-process; exact whole-tree stop
+and production config restore in finally. Runtime proof: exact parsed args plus
+successful captured T>=2 windows and source's split_&&T>=2 group selection; retain
+any capture on a measured request instead of dropping that seed.

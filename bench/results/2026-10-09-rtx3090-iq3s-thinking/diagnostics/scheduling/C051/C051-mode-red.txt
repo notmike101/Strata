@@ -1,0 +1,11 @@
+accepted_usage=1 flags=['--spec-split'] exit=2
+strata generate: --ple-gguf is required; --no-ple explicitly enables a diagnostic ablation
+
+Traceback (most recent call last):
+  File "C:\strata\tools\test_accepted_usage_modes.py", line 44, in <module>
+    main()
+    ~~~~^^
+  File "C:\strata\tools\test_accepted_usage_modes.py", line 37, in main
+    assert result.returncode == 2 and guarded, 'Unsafe combination was not rejected by its configuration guard'
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: Unsafe combination was not rejected by its configuration guard

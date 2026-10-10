@@ -1,0 +1,13 @@
+accepted_usage=1 flags=['--spec-split'] exit=1
+strata: this CPU cannot run the expert kernel: missing AVX512F AVX512BW AVX512VL AVX512-VNNI AVX512-VBMI.
+        The engine needs AVX512-VNNI and AVX512-VBMI (Intel Ice Lake / AMD Zen 4 or newer).
+        The scalar fallback exists for tests only and is far too slow to decode with.
+
+Traceback (most recent call last):
+  File "C:\strata\tools\test_accepted_usage_modes.py", line 45, in <module>
+    main()
+    ~~~~^^
+  File "C:\strata\tools\test_accepted_usage_modes.py", line 38, in main
+    assert result.returncode == 2 and guarded, 'Unsafe combination was not rejected by its configuration guard'
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: Unsafe combination was not rejected by its configuration guard

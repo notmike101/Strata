@@ -1,0 +1,19 @@
+accepted_usage=1 flags=['--spec-split'] exit=2
+strata: STRATA_ACCEPTED_USAGE requires single-GPU serial serve with synchronous adaptive cache and unsplit verify windows (no --spec-split)
+
+accepted_usage=1 flags=['--spec-split', '--no-spec-split'] exit=1
+strata: this CPU cannot run the expert kernel: missing AVX512F AVX512BW AVX512VL AVX512-VNNI AVX512-VBMI.
+        The engine needs AVX512-VNNI and AVX512-VBMI (Intel Ice Lake / AMD Zen 4 or newer).
+        The scalar fallback exists for tests only and is far too slow to decode with.
+
+accepted_usage=0 flags=['--spec-split'] exit=1
+strata: this CPU cannot run the expert kernel: missing AVX512F AVX512BW AVX512VL AVX512-VNNI AVX512-VBMI.
+        The engine needs AVX512-VNNI and AVX512-VBMI (Intel Ice Lake / AMD Zen 4 or newer).
+        The scalar fallback exists for tests only and is far too slow to decode with.
+
+accepted_usage=1 flags=['--no-spec-split'] exit=1
+strata: this CPU cannot run the expert kernel: missing AVX512F AVX512BW AVX512VL AVX512-VNNI AVX512-VBMI.
+        The engine needs AVX512-VNNI and AVX512-VBMI (Intel Ice Lake / AMD Zen 4 or newer).
+        The scalar fallback exists for tests only and is far too slow to decode with.
+
+PASS accepted-usage split-window guard and allowed-mode controls

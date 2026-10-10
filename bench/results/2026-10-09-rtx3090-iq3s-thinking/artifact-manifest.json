@@ -1,5 +1,5 @@
 {
-  "exported_utc": "2026-10-10T07:08:55.569524+00:00",
+  "exported_utc": "2026-10-10T07:15:31.278339+00:00",
   "files": {
     ".gitattributes": {
       "bytes": 205,
@@ -3837,6 +3837,54 @@
       "bytes": 2026,
       "sha256": "d47fa3a9ebe699b3c4ce1d81bc4417f91135fff52430ed826a287e94e36835fc"
     },
+    "diagnostics/scheduling/C051/build-c051-final.cmd": {
+      "bytes": 318,
+      "sha256": "959029a5f39904dddc88fcc13e6b47bb1e0e4cda595474c04337b5acda250236"
+    },
+    "diagnostics/scheduling/C051/C051-engine-build.txt": {
+      "bytes": 37474,
+      "sha256": "c38059e44b9af03c0b23f533ba0447e852c478ef3599dfbecbb75d084cf8b21d"
+    },
+    "diagnostics/scheduling/C051/C051-final-build.txt": {
+      "bytes": 34074,
+      "sha256": "293784c3dae117dd4dc7b3254976776a6f870a725ef1e942ec9ab705b6e66a5a"
+    },
+    "diagnostics/scheduling/C051/C051-guard.patch": {
+      "bytes": 1299,
+      "sha256": "a3c26876987c2590b7f8512c9ff4ae713aace60a7599f84d4a5da48737e79dd7"
+    },
+    "diagnostics/scheduling/C051/C051-mode-green-final.txt": {
+      "bytes": 1271,
+      "sha256": "0520bcb6bd9308509496f18114cce376bf0b9f2fad69da26dcb1baa7b97c4acb"
+    },
+    "diagnostics/scheduling/C051/C051-mode-green.txt": {
+      "bytes": 1271,
+      "sha256": "0520bcb6bd9308509496f18114cce376bf0b9f2fad69da26dcb1baa7b97c4acb"
+    },
+    "diagnostics/scheduling/C051/C051-mode-red-sentinel.txt": {
+      "bytes": 774,
+      "sha256": "306378d4c59ce1d33ea5345361d7ee459cb991a3071a0be7aaa7d836219c7f65"
+    },
+    "diagnostics/scheduling/C051/C051-mode-red.txt": {
+      "bytes": 581,
+      "sha256": "987236efe6b0d7266d7fa8e803dff608d0b46ebd8ea23cd183bdbe4024feafac"
+    },
+    "diagnostics/scheduling/C051/README.md": {
+      "bytes": 2942,
+      "sha256": "b1583589e7ba406a04e4b35dd3b7c3693cb9e32ba7c49f4f24bb1cec06c18943"
+    },
+    "diagnostics/scheduling/C051/record-c051-prepare-c052.py": {
+      "bytes": 8964,
+      "sha256": "fde0db6a078fd60e9d3a33352981fe121fdb17e0f869aaf6377a65a11bdfa478"
+    },
+    "diagnostics/scheduling/C051/test_accepted_usage_modes.py": {
+      "bytes": 2298,
+      "sha256": "8cdca2401051bb0b78b2162fd7a1847492e91d826624890e778fe074debc8716"
+    },
+    "diagnostics/scheduling/C052/plan.md": {
+      "bytes": 2409,
+      "sha256": "404cd3619e637c4c8ca747c86f3039b1f1754147e0cf9f2cc58f0a342248622d"
+    },
     "diagnostics/select-il-table.py": {
       "bytes": 2210,
       "sha256": "e13f32a23648abfc0ef094636e50a302fc90a59c860990848863f70915405f5a"
@@ -7274,8 +7322,8 @@
       "sha256": "2f62bfdf31004200f39c1304db55b529c33f169fec03d3f572c9c4564d092739"
     },
     "goal-90-state.json": {
-      "bytes": 1163,
-      "sha256": "e4abff6c93dae42ff06bc69c4b5c99dbd3279efea9b09b1609731ef9a96d3dd0"
+      "bytes": 1444,
+      "sha256": "d21e8a04b4b81079fc2146df5ca03d76c56f1867ef344d8e40f262b1ce101982"
     },
     "goal90-benchmark.py": {
       "bytes": 13011,
@@ -7306,8 +7354,8 @@
       "sha256": "f1340e812574b74b1139b75eaa2cad11a2cd0c11f168f6c2f1f0e7a0bb4cbaf6"
     },
     "ledger.md": {
-      "bytes": 325242,
-      "sha256": "3de8990f6753f54c48fe2f5a1c581861e3fe544d6915195c4b984958b72763d3"
+      "bytes": 330597,
+      "sha256": "86eb9938adf4cbd8bcca8b0e37181490c2fb54ecd9b2805d46688a4cdb929a5b"
     },
     "measure.py": {
       "bytes": 13940,
@@ -20054,8 +20102,8 @@
       "sha256": "e396f948c0fd6d052e50595108c4b6d7fa55123866f01c9f8d863d89a069c82a"
     },
     "README.md": {
-      "bytes": 23794,
-      "sha256": "ccfa0afc1697f630757b1f8171d57c27bb8ce636a20109227bc1a86eda2341c0"
+      "bytes": 23769,
+      "sha256": "2b113cef0ce010ca12ba40521c7b96ce7881b757197a20a563df13ea5280ed85"
     },
     "replay.py": {
       "bytes": 1104,

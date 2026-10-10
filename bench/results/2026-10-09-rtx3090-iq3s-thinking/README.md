@@ -1,6 +1,6 @@
 # RTX 3090 / i9-10900KF: IQ3_S thinking-mode optimization ledger
 
-Current goal checkpoint (E160): **90/85 tok/s is not fully qualified**. C050 down-kernel compiler probe passed576 bitwise cases but failed its timing gate: only0.78% geometric-mean time reduction, worst cell18.0% slower. Rejected without engine integration. P020 profiler evidence published; next is a scheduling architecture review. Production unchanged, no benchmark model resident.
+Current goal checkpoint (E162): **90/85 tok/s is not fully qualified**. C050 rejected; P020 profiling published. Scheduling review found and fixed an unsupported split-window/accepted-usage combination (C051); CUDA build and regression checks passed. C052 controlled split-window screen prepared but not run. Production unchanged; no benchmark model resident.
 
 Active goal: **90 tok/s server_decode_tps** on the fixed short and approximately3K coding matrix; goal created without a token budget at the user's request. See [goal-90-contract.md](goal-90-contract.md). The target remains unproven. Fresh control B010 measured85.9 /84.8 tok/s but included short-run stalls of21.7 and17.5; prompt-read medians77.0 /495.3. No new candidate is promoted. Earlier90/85 follow-up results remain in [follow-up-summary.json](follow-up-summary.json). The B010 stalls remain unexplained; later B011/B012 cells and the Q007 failures are retained without discarding slow or incomplete runs.
 
