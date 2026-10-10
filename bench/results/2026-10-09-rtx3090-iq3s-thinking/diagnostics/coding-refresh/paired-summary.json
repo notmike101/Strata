@@ -1,0 +1,99 @@
+{
+  "quality_qualified": false,
+  "cells": {
+    "short/stream/new": {
+      "runs": 10,
+      "target_server_decode_tps": 90,
+      "server_decode_values": [
+        92.2,
+        95.0,
+        98.1,
+        90.9,
+        92.7,
+        93.5,
+        93.7,
+        95.2,
+        94.1,
+        91.2
+      ],
+      "server_decode_tps": {
+        "median": 93.6,
+        "min": 90.9,
+        "max": 98.1
+      },
+      "prompt_tps": {
+        "median": 211.45,
+        "min": 204.4,
+        "max": 218.8
+      },
+      "request_e2e_tps": {
+        "median": 81.64137852513474,
+        "min": 79.41660807838488,
+        "max": 84.92115717367777
+      },
+      "stream_total_tps": {
+        "median": 81.66031714692699,
+        "min": 79.43755603765412,
+        "max": 84.93352011204557
+      },
+      "ttft_seconds": {
+        "median": 0.8210878500249237,
+        "min": 0.7946511999471113,
+        "max": 0.8456427999772131
+      },
+      "request_seconds": {
+        "median": 6.271450000000186,
+        "min": 6.029121800034773,
+        "max": 6.447014200035483
+      },
+      "speed_cell_threshold_met": true
+    },
+    "longer/stream/new": {
+      "runs": 10,
+      "target_server_decode_tps": 85,
+      "server_decode_values": [
+        88.2,
+        90.2,
+        88.3,
+        89.0,
+        90.3,
+        78.1,
+        84.2,
+        91.5,
+        90.9,
+        89.7
+      ],
+      "server_decode_tps": {
+        "median": 89.35,
+        "min": 78.1,
+        "max": 91.5
+      },
+      "prompt_tps": {
+        "median": 509.35,
+        "min": 508.0,
+        "max": 510.2
+      },
+      "request_e2e_tps": {
+        "median": 43.05754459581793,
+        "min": 40.170228876778474,
+        "max": 43.527465460934074
+      },
+      "stream_total_tps": {
+        "median": 43.06146523007998,
+        "min": 40.17419499574654,
+        "max": 43.53179173941039
+      },
+      "ttft_seconds": {
+        "median": 6.181492100004107,
+        "min": 6.1656555000226945,
+        "max": 6.209453200048301
+      },
+      "request_seconds": {
+        "median": 11.891123699955642,
+        "min": 11.762688099988736,
+        "max": 12.745757600001525
+      },
+      "speed_cell_threshold_met": true
+    }
+  }
+}

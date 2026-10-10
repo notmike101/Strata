@@ -1,0 +1,25 @@
+We need answer user's request. Need implement topological_order in Python, return only complete function in code block. Need think thoroughly.
+
+We need satisfy: nodes list unique strings; edges list pairs (before, after). Return lexicographically smallest topological ordering, include isolated nodes, ignore duplicate edges. Raise ValueError for edge endpoint absent from nodes or cycle. Do not mutate inputs. Use no imports. Return only function in Python code block.
+
+Need choose algorithm deterministic lexicographically smallest topological order. Given DAG, lexicographically smallest among all topological orderings for strings. Standard Kahn with min-heap. But no imports, can use list sorted and pop first, or implement heap manually? We can sort available nodes each iteration. n unknown; performance maybe okay? Need complete function robust.
+
+Inputs not mutated: avoid modifying lists/sets? Need create copies. Edges could be tuples, lists? We can iterate. Duplicate edges ignored: need unique adjacency? Need indegree count only unique edges. Since duplicate edges ignored means if same (before, after) appears multiple times, count once. Need handle self-loop? Edge (a,a) if nodes? Cycle detection should raise ValueError. If before==after and endpoint present -> cycle (self loop). Kahn will detect. Need maybe validate node unique? Problem says nodes unique; no need enforce? Could avoid hidden state? no imports. Could use dict/set.
+
+Lexicographically smallest topological ordering: with unique strings. If nodes have arbitrary strings, Python string comparison. If nodes not strings? Problem says strings.
+
+Approach:
+def topological_order(nodes, edges):
+    if nodes is None? Could validate? Not needed but edge endpoints absent raise ValueError. Need not use imports.
+
+    # Make set of nodes to check endpoints, without mutating input. node_set = set(nodes)
+    # Maybe ensure no duplicates? If nodes list unique. If duplicate, set collapses; output unique? It says unique. Could leave.
+    # For deterministic if duplicate nodes? Not required. But maybe handle by outputting unique? Hmm.
+
+    # Need adjacency set per node to dedup edges and indegree unique. Using dict with set. No mutation of node_set? fine.
+
+    adj = {node: set() for node in nodes}
+    indegree = {node: 0 for node in nodes}
+    seen_edges = set() # tuple of (before, after)
+
+    for edge in edges:

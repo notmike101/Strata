@@ -1,0 +1,20 @@
+We need answer user wants only complete function in Python code block. Need analyze task. Need produce final only code block.
+
+Implement topological_order(nodes, edges). nodes unique strings, edges list of pairs before after. Return lexicographically smallest topological ordering, include isolated nodes, ignore duplicate edges. Raise ValueError for endpoint absent or cycle. Do not mutate inputs. No imports.
+
+Need decide algorithm: Kahn with min-heap would need heapq import not allowed. Can use sorted list each iteration selecting min indegree 0. n likely small? No imports. Could implement heap manually? Simpler: maintain available list, each iteration choose min using min() and remove; O(n^2) acceptable? Could implement with no imports. Need deterministic lex smallest. Lexicographically smallest topological order: at each step choose smallest available node (Kahn). Need handle duplicates edges: ignore duplicate edges. Do not mutate inputs.
+
+Edge endpoint absent: if before/after not in nodes_set raise ValueError. Duplicate edges should not increment indegree multiple. Use set of normalized pairs.
+
+Cycle detection: after processing count != len(nodes) raise ValueError.
+
+Should not mutate input nodes/edges. Could create nodes_copy? We won't mutate. Use nodes_set = set(nodes), but if nodes is iterable? says list. If nodes list contains duplicates? says unique; but can validate? Could raise? Not required. To be safe if duplicate nodes, could ValueError? But spec unique. Avoid extra. If nodes empty? Return [] if edges empty else endpoint absent? endpoints absent from nodes raise. If edge pair not iterable? ignore.
+
+Lexicographic: strings, natural sort.
+
+Potential issue: If edges has duplicate pairs but maybe order? Ignore duplicates. For edges like ('a','a') self-loop endpoint present, cycle; ignore duplicate? If self-loop, indegree increment once, no source if all? For nodes only a, indegree 1 => cycle raise. Good.
+
+No imports: can use set, list, min. Implementation:
+
+def topological_order(nodes, edges):
+    nodes_list = list(nodes) maybe copy to avoid mutating? But nodes list already not mutated. Need if nodes contains non-string? spec strings. If duplicate? not spec. If nodes not list? list(nodes). But if nodes is generator, then cannot use after? fine. We shouldn't mutate input. list copy doesn't mutate. But if nodes list has duplicates, set size differs. Could raise ValueError? Unique

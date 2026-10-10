@@ -1,0 +1,20 @@
+We need answer user's request: Implement topological_order(nodes, edges) Python. Need return only complete function in Python code block. Need analyze requirements.
+
+We need produce function. Need lexicographically smallest topological ordering. nodes list unique strings, edges list pairs before, after. Include isolated nodes. Ignore duplicate edges. Raise ValueError for edge endpoint absent from nodes or a cycle. Do not mutate either input. No imports.
+
+Need ensure lexicographically smallest topological order. Standard Kahn algorithm with min-heap? But no imports, so implement manually maybe using sorted available list and pop min. Since nodes strings, lexicographic compare works. Need avoid mutation. Input nodes list can be non-empty? unique strings. Edges can be list of tuples? Need handle duplicates. Need raise ValueError for missing endpoint. Need raise ValueError cycle.
+
+Do not mutate either input: avoid modifying nodes, edges. Need not mutate strings etc. But could create copies? If input list mutated? We don't. Need no imports.
+
+Implementation details:
+def topological_order(nodes, edges):
+    # validate nodes? unique strings? Could assume but maybe can robustly check? Requirement says nodes list unique strings; no need. But duplicate edges ignored. Duplicate nodes? if duplicate nodes violates. Maybe don't need, but if duplicate nodes could weird. Could handle with set? But do not mutate input. We can build adjacency from nodes. Need lexicographically smallest topological ordering: choose smallest available node at each step.
+
+Approaches:
+1. Build indegree dict for nodes, adjacency sets for unique edges. For each edge in edges: validate both endpoints in nodes_set. If not in nodes_set raise ValueError. If u==v? A self-loop is a cycle? It should raise ValueError cycle. Edge endpoints absent from nodes; self-loop present but cycle. Kahn will detect no nodes available? If self-loop: indegree of node > 0, adjacency to itself. If no other available maybe cycle detected. If there are other nodes, after processing all acyclic part, remaining node self-loop, cycle detected. Good.
+
+Need ignore duplicate edges: adjacency sets; if edge not already present: add, indegree[v] +=1. Or build set of pairs to skip duplicates. But set of pairs okay. Need no imports.
+
+Then Kahn: compute indegree dict. Available list of nodes with indegree ==0. Sort it. result = []
+while available:
+   # pop smallest:

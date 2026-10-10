@@ -1,0 +1,14 @@
+We need answer user wants implement topological_order in Python, return only complete function in Python code block. Need think through requirements. We must produce final only code block no extra text likely. Need ensure no imports. Function signature topological_order(nodes, edges). Need lexicographically smallest topological ordering, include isolated nodes, ignore duplicate edges. Raise ValueError for edge endpoint absent from nodes or cycle. Do not mutate inputs. No imports.
+
+Need design algorithm. Lexicographically smallest topological order: Kahn's algorithm using min-heap or sorted selection. No imports => can't use heapq. Could use simple list of available nodes sorted and pop(0) or maintain sorted availability. Since no imports, can repeatedly sort available nodes? O(N^2 log N) maybe okay? Need robust. Could implement min-heap manually? Or use sorted list and pop smallest. Need deterministic. Nodes unique strings, but should we validate unique? Maybe not. Input nodes list unique per spec. But do not mutate. If duplicates? Could handle but maybe not needed. Could convert to list? We should not mutate inputs. Use copies of relevant structures. Edges duplicate ignored. Need edge endpoints absent raise ValueError. Need cycle detection: Kahn's processed count != len(nodes) then raise. Need ensure no hidden state.
+
+Potential issues: lexicographically smallest over strings. Python default < works. Need include isolated nodes. Kahn's initialize indegree dict from nodes. adjacency sets to ignore duplicates. Need avoid mutating nodes list and edges list. If nodes contains unhashable? Strings. Edges tuple pairs maybe not tuple? Should unpack? For each edge in edges: before, after = edge maybe if invalid raise? Not specified. Could robustly validate tuple length. But raising ValueError maybe okay. Need not overcomplicate.
+
+Algorithm:
+
+def topological_order(nodes, edges):
+    # copy nodes to preserve? We need output list; do not mutate. Could nodes_copy = list(nodes)
+    # ensure unique? Maybe not, but if duplicates in nodes, unique string spec. If want avoid hidden issues, detect duplicates and raise ValueError? Spec nodes list unique strings. Adding duplicate detection might be acceptable? If tests expect ValueError? They might not test invalid duplicates. If duplicates present and we create set loses duplicates and output length differs, cycle check? But spec says unique.
+    node_list = list(nodes)
+    indegree = {node: 0 for node in node_list}
+    adj = {node:

@@ -1,0 +1,22 @@
+We need answer user's request: Implement topological_order(nodes, edges) Python. Need output only complete function in Python code block. Need satisfy: nodes list unique strings, edges list pairs (before, after). Return lexicographically smallest topological ordering, include isolated nodes, ignore duplicate edges. Raise ValueError for edge endpoint absent from nodes or a cycle. Do not mutate either input. Use no imports.
+
+Need think through implementation. Need lexicographically smallest topological ordering among all valid orders for DAG. Standard Kahn's algorithm selecting smallest available node at each step yields lexicographically smallest topological order (for total lexicographic compare of node labels) if available set sorted. Need no imports, so can use heap? heap is in heapq, import not allowed. Could implement min extraction manually or use sorted list? Need efficient enough? No constraints. Could avoid imports by using list of available nodes and choose min via min each iteration. But need not mutate inputs. Need copy structures. Duplicate edges ignored. Need endpoint validation: for each edge, both before and after in nodes? Raise ValueError if absent. Duplicates ignored. Could use set of nodes. But nodes may be list; set(nodes) creates. Duplicate edges: if same pair appears multiple times, should only count once for indegree. Need also avoid duplicate edge in adjacency maybe set of neighbors per node? Could use dict mapping node to list? Need not import.
+
+Need careful: If edge (u,v) with u==v? That is self-loop cycle. Should raise ValueError cycle. With validation, endpoints present, indegree increment once per unique edge; adjacency unique. Then Kahn. If processed count < len(nodes), cycle. For self-loop: indegree >0 and never zero, processed count <. Good.
+
+Lexicographically smallest topological ordering: Kahn with min available. If nodes are unique strings. Need output list of strings.
+
+Need no imports. Could implement with:
+
+def topological_order(nodes, edges):
+    node_set = set(nodes)
+    for before, after in edges:
+        if before not in node_set or after not in node_set:
+            raise ValueError(...)
+    # Build unique adjacency and indegree using sets to dedupe
+    adj = {node: set() for node in nodes}
+    indegree = {node: 0 for node in nodes}
+    for before, after in edges:
+        if after in adj[before]:
+            continue
+        adj[before

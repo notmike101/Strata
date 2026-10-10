@@ -3474,3 +3474,68 @@ context/vision, independent memory guards and exact cleanup. That is a NEW measu
 baseline on that fixture, not a reuse of a5f34477's90.05result. Preserve Q007's two
 incomplete answers as failures; establish whether they persist on this stack before
 another sampled-drafting combination. Goal remains active; no blocker declared.
+
+
+## E173 / frozen coding baseline and completion-quality refresh
+
+Previous goal turn was progress: six full served arms completed, C052/C053 rejected,
+C053 source restored and ledger pushed7e4f5d7a. The fixed goal is90tok/s in both
+short and~3K cells; no threshold or sampling change in this refresh.
+
+Use existing randomly selected topological_order fixture SHA25616fafa0ea4cd5f5a7e535c7df090c9344d11e0909a35bfde0b476ecdc4b743e5,
+unchanged task/reference, seeds101..105,512output tokens, one warmup per short/
+longer streaming cache-miss cell. Two fresh processes R110 short-first/R111
+longer-first. Native C051 engine0dea69dc, HC1/accepted1/conditional64/minfresh1025,
+IQ3_S262144 INT8KV/32768resident CPUF16vision, MTP4/.70,PCIe.20,lag2,9workers30tasks,
+auto prompt shareMAX1024,DMA0/deviceplan0. Numeric thinking1/.95/20/0/0/1 and
+frequency0, unlimited reasoning unchanged. No coupled/probabilistic sampler flags.
+This is an additional fixed-workload baseline, not an optimization gain against
+historical B011 or proof that every cold/cache-hit/nonstream cell passes.
+
+Then Q008 uses the same original quality payloads from Q007, five seeds101..105,
+separate8192-token natural-stop allowance and72objective tests per final function.
+Do not substitute those throughput values for512-token speed results. Preserve
+incomplete answers as failures, keep the cap and prompt fixed. No new variant or
+parameter sweep during these checks. Q0073/5 remains historical failed evidence.
+
+Preflight no inference/compiler/profiler, GPU457MiB, config3457fdfe restored.
+Independent16GiB physical/commit guard eachsecond, no process-memory polling,
+exact launcher/server/model/vision cleanup and config restoration per process.
+R110 started; its live exec handle was91599. Do not start a second server.
+
+
+## E174 / R110-random-native frozen coding baseline
+
+longer/stream/new: decode[88.2, 90.2, 88.3, 89.0, 90.3] => ordinary median89.0; prompt510.2, E2E42.960721, stream42.965072, TTFT6.180677s.
+
+short/stream/new: decode[92.2, 95.0, 98.1, 90.9, 92.7] => ordinary median92.7; prompt214.0, E2E81.283776, stream81.305735, TTFT0.807274s.
+
+All12requests512tokens/cachemiss, one warmup and5measured per workload; every request matches frozen profile. Exact fixture16fafa0ea4cd5f5a7e535c7df090c9344d11e0909a35bfde0b476ecdc4b743e5, C051 engine0dea69dcbf10b0f925549552ec58c76d64c2acf51276187b60adb1a62b90b4dd. HC1/accepted1/conditional64/minfresh1025, model/context/KV/vision unchanged. No comparison against historical B011 claimed. Partial reasoning is not a completed coding answer. Full matrix and quality remain required.
+
+Minimum physical62218043392 and commit41268506624bytes,16GiB guard passed. Exact cleanup verified, production config restored by supervisor.
+
+Next: Run R111 in reversed workload order, then Q008 complete-answer quality under unchanged profile.
+
+
+## E175 / R111-random-native-reverse frozen coding baseline
+
+longer/stream/new: decode[78.1, 84.2, 91.5, 90.9, 89.7] => ordinary median89.7; prompt509.0, E2E43.154368, stream43.157858, TTFT6.182458s.
+
+short/stream/new: decode[93.5, 93.7, 95.2, 94.1, 91.2] => ordinary median93.7; prompt210.4, E2E81.998981, stream82.014900, TTFT0.824625s.
+
+All12requests512tokens/cachemiss, one warmup and5measured per workload; every request matches frozen profile. Exact fixture16fafa0ea4cd5f5a7e535c7df090c9344d11e0909a35bfde0b476ecdc4b743e5, C051 engine0dea69dcbf10b0f925549552ec58c76d64c2acf51276187b60adb1a62b90b4dd. HC1/accepted1/conditional64/minfresh1025, model/context/KV/vision unchanged. No comparison against historical B011 claimed. Partial reasoning is not a completed coding answer. Full matrix and quality remain required.
+
+Minimum physical62384869376 and commit41575317504bytes,16GiB guard passed. Exact cleanup verified, production config restored by supervisor.
+
+Next: Pool both coding arms and run Q008 complete-answer quality under unchanged profile and corrected 90 short / 85 long thresholds.
+
+
+## E176 / user threshold correction and paired coding baseline
+
+The user correction relayed through oversight at2026-10-10 07:51UTC sets90 server_decode_tps short and85 at approximately3K input. This supersedes E172 and the previous90-both contract interpretation. Updated goal-90-contract.md, goal-90-state.json, README current summary and explicit threshold checks in diagnostics/coding-refresh/paired-summary.json. Goal tool remains active; its90 headline remains the short target and its API cannot edit objective text. Historical logs, failures and recording scripts are preserved, not rewritten or rerun. Sampling, context, quality, memory, workload matrix and promotion requirements are unchanged.
+
+short/stream/new: all10 decode values[92.2, 95.0, 98.1, 90.9, 92.7, 93.5, 93.7, 95.2, 94.1, 91.2]; ordinary median93.6; E2E median81.641379; prompt median211.45. Numeric speed threshold met; not full qualification.
+
+longer/stream/new: all10 decode values[88.2, 90.2, 88.3, 89.0, 90.3, 78.1, 84.2, 91.5, 90.9, 89.7]; ordinary median89.35; E2E median43.057545; prompt median509.35. Numeric speed threshold met; not full qualification.
+
+Both fresh-process confirmations complete; exact server cleanup verified. No benchmark model resident. Next Q008 completed-answer tests without modifying the fixed profile or8192-token quality allowance.

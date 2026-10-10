@@ -3,17 +3,18 @@
   "target_tps": 90,
   "metric": "server_decode_tps",
   "contract": "goal-90-contract.md",
-  "current": "C052 and C053 rejected. Goal contract is90/90; recent90/85 summaries corrected. Source restored toC051 after archiving C053.",
+  "current": "R110/R111 complete. Corrected target90 short /85 longer. Paired coding speed cells pass thresholds; full quality and workload qualification remains outstanding.",
   "next": [
-    "Frozen random-coding baseline and separate completion quality on clean-source C051 HC1/accepted1/conditional64 stack."
+    "Pool both coding arms and run Q008 complete-answer quality under unchanged profile and corrected 90 short / 85 long thresholds."
   ],
   "promoted": "The previously qualified format-gather engine with IQ2_S gather disabled and adaptive lag2; no changes this turn.",
   "stopping_rule": "Leave goal active until all fixed qualification cells pass. No benchmark model resident at handoff.",
   "quality": "Q007: 3/5 compiled and passed72 tests each, 2/5 no final answer at8192 tokens. Goal unqualified.",
-  "last_checkpoint": "E172",
-  "resume_command": "Read E172 and goal-90-contract.md (90 in both short and~3K cells). No model resident. C053 source restored; native C051 engine0dea69dc is clean-source. R110-random-native.json and R111-random-native-reverse.json prepared but unrun, HC1/accepted1/conditional64. Use run-c020-arm.py CONFIG --out ARM --goal-coding --observer audit-no-process, with --reverse-order only for R111. Inspect and reuse goal90-quality.py for separate Q0088192-token five-seed completion checks under guarded supervisor. Preserve previous Q007 failures; do not relabel512token reasoning as coding quality. Build tree still contains rejected C053 objects; do not silently use its strata.exe as C051.",
-  "safety": "C053 all48requests passed16GiB physical/commit floors and exact process cleanup. Config3457fdfe restored; idleGPU457MiB.",
+  "last_checkpoint": "E176",
+  "resume_command": "No benchmark model resident. R110 and R111 have both completed and exact cleanup was verified. Do not rerun them. Prepare Q008 using same C051 config and goal90-quality.py under guarded supervisor; retain Q007 failures.",
+  "safety": "R110/R111 exact cleanup passed and both16GiB global floors passed; production config restored.",
   "goal_tool_status_at_entry": "active, verified get_goal",
   "target_short_tps": 90,
-  "target_longer_tps": 90
+  "target_longer_tps": 85,
+  "target_correction_source": "Direct user correction relayed by oversight thread01a12373-85f9-7790-b482-bc700a87e0d6 on2026-10-10: goal requires90 short and85 long."
 }

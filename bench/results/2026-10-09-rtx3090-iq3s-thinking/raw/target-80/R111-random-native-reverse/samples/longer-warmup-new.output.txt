@@ -1,0 +1,21 @@
+We need answer user's final request. Need produce final only code block complete function. Need ensure implement topological_order(nodes, edges): nodes list unique strings, edges list pairs. Return lexicographically smallest topological ordering. Include isolated nodes, ignore duplicate edges. Raise ValueError for edge endpoint absent from nodes or cycle. Do not mutate inputs. No imports. Return only complete function in Python code block.
+
+Need think about lexicographically smallest topological ordering. Standard Kahn with min-heap, but no imports. Could simulate heap manually? Need no imports. Since no heap, can select minimum candidate each step O(n^2) or implement simple heap functions without imports? Could implement own heap with list. Simpler: maintain in_degree, adjacency sets/lists ignoring duplicates. For each step pick smallest node among indegree zero not used. Need not mutate inputs. Use sets. Since strings unique. Edge endpoints may be not string? spec nodes unique strings, pairs before after. Validate endpoints in nodes_set. If not raise ValueError.
+
+Need duplicate edges ignore. For each edge, if before/after absent raise. Need avoid hidden state deterministic. Use local only. Need maybe validate edge length? Edges is list of (before, after) pairs. Could if len(edge)!=2? Might be robust but not required. Could do:
+try: before, after = edge
+except: raise ValueError...
+But if edge invalid. Not mutating input.
+
+Lexicographically smallest topological ordering for total order among strings: Greedy Kahn selecting smallest available at each step yields lexicographically smallest topological order (for DAG) if comparing sequence lexicographically. Need proof? not in answer.
+
+Implementation options:
+
+def topological_order(nodes, edges):
+    node_set = set(nodes)
+    # ensure nodes unique? input says unique. If duplicates? Could maybe raise? Not necessary. If duplicate nodes, set collapses; output should unique? Better validate? Could if len(node_set) != len(nodes): raise ValueError? Spec says unique. But not mutating. Adding this might be safe? But if user passes duplicates maybe ValueError? Not requested. Could avoid extra. But if duplicates nodes, topological order ambiguous. But we can return unique nodes? Hmm.
+    adj = {node: set() for node in node_set}
+    indeg = {node: 0 for node in node_set}
+    for edge in edges:
+       try: before, after = edge
+       except (TypeError

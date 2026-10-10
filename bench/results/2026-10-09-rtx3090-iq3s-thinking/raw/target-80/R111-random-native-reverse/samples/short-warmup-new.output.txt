@@ -1,0 +1,14 @@
+We need answer user wants code only? "Return only the complete function in a Python code block." Need implement topological_order(nodes, edges) with requirements:
+- nodes list unique strings.
+- edges list of (before, after) pairs.
+- Return lexicographically smallest topological ordering.
+- include isolated nodes.
+- ignore duplicate edges.
+- Raise ValueError for edge endpoint absent from nodes or cycle.
+- Do not mutate either input.
+- Use no imports.
+- Return only complete function in Python code block.
+
+Need think about implementation. Need lexicographically smallest topological ordering. Usually Kahn's algorithm with min-heap gives lexicographically smallest if strings compared. But cannot import heapq. Could manually maintain sorted list? Need no imports. Can sort available each iteration. nodes unique but we should not mutate input. Need ignore duplicate edges: build adjacency set or dict of sets. Also need indegree counts count unique edges. Could build adj dict mapping node -> set of nodes. Need endpoint validation: if before not in nodes_set or after not in nodes_set raise ValueError. Could duplicate edges ignored: use set per node, if after not in adj[before], add and indeg[after] += 1. But need careful if input edges may include duplicates, also self-loop? A self-loop is cycle; indegree increase if not in adj? If before==after, adj[before] add after, indeg[after] +=1 => cycle detected at end. Good.
+Need include isolated nodes: initialize indeg all 0, adj all set().
+Kahn: available = sorted(node for node in nodes if indeg[node] == 0). But sorting each iteration O(V^2 log V). Could pick min by min() and remove? Without heap okay for correctness. Could use list, sort initially, pop(0). But after adding new indegree zero nodes, need insert in sorted position. Since no imports, we can use bisect? bisect is import no. Could manually binary insert or just append and sort each iteration. Need simple robust. Use available = [n for n in nodes_sorted if indeg[n] ==0] sorted. For each step, pop(0). When neighbors decrement to zero, insert into available maintaining sorted. Can insert using manual binary search or list.append then sort? Sorting available each iteration maybe okay. But to be efficient enough? Unknown constraints. Better implement min selection with heap? Can't import but implement

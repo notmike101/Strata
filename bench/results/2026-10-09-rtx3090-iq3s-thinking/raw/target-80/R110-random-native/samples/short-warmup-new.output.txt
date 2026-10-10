@@ -1,0 +1,18 @@
+We need answer user wants code only? "Return only the complete function in a Python code block." Need implement topological_order(nodes, edges) with requirements:
+- nodes list unique strings.
+- edges list of (before, after) pairs.
+- Return lexicographically smallest topological ordering.
+- include isolated nodes.
+- ignore duplicate edges.
+- Raise ValueError for edge endpoint absent from nodes or cycle.
+- Do not mutate either input.
+- Use no imports.
+- Return only complete function in Python code block.
+
+Need think about implementation. Need lexicographically smallest topological ordering. Usually Kahn's algorithm with min-heap gives lexicographically smallest if using standard ordering of labels. But no imports? Cannot use heapq. Could implement simple min selection because no imports. Need efficient? Probably can use sorted lists. Need not mutate inputs. nodes list unique strings. Need validate edge endpoints. Ignore duplicate edges. Also self-loop? An edge (x,x) absent? endpoint present, cycle => ValueError. Need handle duplicate edges, including self-loop duplicates. Cycle detection. Could use indegree dict and adjacency sets. For each edge: validate endpoints in node_set. If duplicate ignore. Use adjacency before -> set(after). indegree dict initial 0 for nodes. If before == after: self-loop cycle: can raise immediately or later? Should raise. But if duplicate self-loop, raise. Could just add self-loop and later cycle detection. But if duplicate normal edges, if not duplicate then indegree++. For self-loop, adding self adjacency increments indegree, Kahn won't include it => cycle. But if self-loop duplicate, need avoid double counting? Could still add self-loop once. We can detect before == after and raise ValueError. But duplicate self-loop should also ValueError; first edge raises fine.
+
+Need ensure not mutate edges or nodes. Reading only. Create node_set = set(nodes). If nodes contains duplicates? Problem says unique strings, but if not maybe? Could still set. But topological ordering nodes maybe unique.
+
+Lexicographically smallest: among all valid topological sorts, choose sequence with smallest string at first position, then etc. Kahn choosing smallest available zero-indegree node at each step yields lexicographically smallest (for DAG with labels sorted) because at each position, the minimal available is necessary for lexicographic min. Need include all isolated nodes.
+
+No imports. Need min selection without heapq. Could maintain a list available, each iteration find min by scanning. That

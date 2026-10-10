@@ -1,0 +1,15 @@
+We need answer user: "Implement topological_order(nodes, edges) in Python. nodes is a list of unique strings; edges is a list of (before, after) pairs. Return the lexicographically smallest topological ordering, include isolated nodes, and ignore duplicate edges. Raise ValueError for an edge endpoint absent from nodes or a cycle. Do not mutate either input. Use no imports. Return only the complete function in a Python code block."
+
+Need produce final only code block with function. Need ensure no imports. Need lexicographically smallest topological ordering. Given nodes list of unique strings, edges list pairs. Include isolated nodes. Ignore duplicate edges. Raise ValueError for edge endpoint absent from nodes or cycle. Do not mutate inputs.
+
+Need think details. Lexicographically smallest topological ordering among all topological orders of DAG with specified set nodes. Standard Kahn with min-heap would lexicographically smallest if nodes compared lexicographically. But no imports, so implement manual selection min each step from ready nodes. Need avoid mutating inputs: don't modify nodes or edges. Can copy? Need handle duplicate edges. Edge endpoints absent raise ValueError before? Also cycle detection. Need ensure if duplicate edge from u to v, indegree counts unique edges. Ignore duplicate edges. So need build graph adjacency set and indegree counts unique.
+
+Potential pitfalls: Input nodes list unique but could be empty? Return [].
+
+If nodes is not list? Not specified. We'll assume. But do not mutate either input. Could iterate.
+
+Algorithm:
+- node_set = set(nodes). Need if nodes list unique. If edge endpoint not in node_set raise ValueError.
+- Build adjacency: dict mapping each node to set of successors? To ignore duplicates and compute indegree. Could create out_adj = {node: set() for node in nodes} but sets maybe okay. indegree = {node:0 for node in nodes}. edges_iter = iter(edges). For each (u,v): if u not in node_set or v not in node_set: raise ValueError. If v not in out_adj[u]: add; indegree[v]+=1. But if out_adj dict created before? Yes.
+- Need not mutate edges. Iterating fine.
+- Kahn: ready = [node for node in nodes if indegree[node]==0]? Need lexicographically smallest overall: At each step choose smallest node among zero indegree. Since all nodes known, we can maintain a list ready and select min each time, remove it, decrease

@@ -1,0 +1,15 @@
+We need answer user wants code only. Need implement function. Need ensure no imports. Complete function only in Python code block. Need think details:
+
+Function topological_order(nodes, edges): nodes unique strings, edges list of (before, after). Return lexicographically smallest topological ordering, include isolated nodes, ignore duplicate edges. Raise ValueError for edge endpoint absent from nodes or a cycle. Do not mutate either input. No imports.
+
+Lexicographically smallest topological ordering: among all valid topological sorts, choose lexicographically smallest sequence. Standard Kahn's algorithm with min-heap gives lexicographically smallest by string, because at each step pick smallest available node. But no imports, cannot use heapq unless implement own min selection. Since node count maybe arbitrary. Could implement with list of indegrees and adjacency sets/dicts, choose min among zero indegree each step using min(). Complexity O(n^2) maybe acceptable? Could implement custom heap for O(log n). No imports. Need complete function.
+
+Need avoid mutation input: nodes is list, edges list. We can iterate. Build dict indegree with 0. adjacency: dict mapping node to list or set. Duplicate edges ignored: use sets or check. Need endpoint absent check: all before, after in nodes set. If edge endpoint absent raise ValueError.
+
+Cycle: if processed count != len(nodes) raise ValueError.
+
+Input not mutated: we create new structures. If edges tuples? okay. Need unique strings. Could not assume nodes sorted.
+
+For lexicographically smallest: Kahn selecting smallest available zero indegree. Using min each step: available list updated. Could use custom binary min-heap to be efficient and no imports. But complete function could just min for simplicity. Need no imports. Since strings comparable. Need maybe node labels not numeric. Lexicographic ordering of sequences: compare first element, if different smaller first. Greedy min available works for topological sorts? Yes, lexicographically smallest topological order can be obtained by at each step choosing smallest node among currently zero indegree. Proof: earliest position should be smallest possible node that can appear first (zero indegree). Recursively. Duplicates ignored. Isolated nodes included zero indegree.
+
+Need consider if nodes empty: return []. If nodes has no zero indegree? cycle or endpoints? If nodes empty and edges empty returns []. If nodes nonempty with self-edge? A->A endpoint present. duplicate ignore? Self-loop creates cycle: indegree of A not zero,

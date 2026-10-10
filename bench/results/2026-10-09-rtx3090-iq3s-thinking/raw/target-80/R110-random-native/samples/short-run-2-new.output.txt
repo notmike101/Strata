@@ -1,0 +1,16 @@
+We need answer user wants code only. Need implement function. Need ensure no imports. Complete function only in Python code block. Need think details:
+
+Request: Implement topological_order(nodes, edges). nodes list unique strings. edges list of (before, after) pairs. Return lexicographically smallest topological ordering, include isolated nodes, ignore duplicate edges. Raise ValueError for edge endpoint absent from nodes or a cycle. Do not mutate either input. Use no imports. Return only complete function in Python code block.
+
+Need produce code. Must not mutate inputs. nodes list unique strings; but maybe ensure not mutate by making local sorted? Need lexicographically smallest topological ordering. Standard Kahn with min-heap to pick smallest available. But no imports, so need implement min-heap manually or simply sort available each iteration? n maybe unknown. Could use list sorted at each step. But to be efficient maybe implement heap operations manually. Since no imports, can write heapq functions? Need not import. Could manually maintain available list and sort. If large, O(n^2 log n) maybe okay? But want robust. Manual min-heap is straightforward.
+
+Need ignore duplicate edges. Need detect invalid endpoints. Need detect cycle. Need not mutate edges. Could validate first: set_nodes = set(nodes). For each edge in edges: check both endpoints in set_nodes else ValueError. Build adjacency dict: for u in nodes: [] maybe. indegree dict counts. Use set of pairs? We can ignore duplicate edges by storing seen set for (u,v). Since edges iterable maybe list, no issue. Could use dict adjacency with set to prevent duplicates and then convert? For lexicographic, need process outgoing. Kahn:
+- node_set = set(nodes)
+- adj = {node: [] for node in nodes}
+- indegree = {node: 0 for node in nodes}
+- seen_edges = set()
+- for before, after in edges: if before not in node_set or after not in node_set: raise ValueError; if (before, after) in seen_edges: continue; seen_edges.add; adj[before].append(after); indegree[after] += 1.
+- available = [node for node, deg in indegree.items() if deg==0]. For lexicographically smallest, if we pop min each time. Could use manual heapify or just available = sorted(available). At each iteration:
+    available.sort()? If use manual heap push/pop.
+
+Implement min

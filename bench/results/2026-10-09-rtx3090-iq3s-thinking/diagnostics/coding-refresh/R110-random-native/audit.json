@@ -1,0 +1,109 @@
+{
+  "summary": {
+    "longer/stream/new": {
+      "runs": 5,
+      "completion_tokens": [
+        512,
+        512,
+        512,
+        512,
+        512
+      ],
+      "prompt_tokens": [
+        3138,
+        3134,
+        3135,
+        3135,
+        3134
+      ],
+      "cache_valid": true,
+      "output_512": true,
+      "server_decode_tps": {
+        "median": 89.0,
+        "min": 88.2,
+        "max": 90.3
+      },
+      "prompt_tps": {
+        "median": 510.2,
+        "min": 509.3,
+        "max": 510.2
+      },
+      "request_e2e_tps": {
+        "median": 42.96072134827153,
+        "min": 42.73081951422577,
+        "max": 43.31854360415323
+      },
+      "stream_total_tps": {
+        "median": 42.965072341788044,
+        "min": 42.73418846510252,
+        "max": 43.323321866360146
+      },
+      "ttft_seconds": {
+        "median": 6.180677099968307,
+        "min": 6.1656555000226945,
+        "max": 6.196729699964635
+      },
+      "request_seconds": {
+        "median": 11.91786319995299,
+        "min": 11.8194186000037,
+        "max": 11.981984100013506
+      }
+    },
+    "short/stream/new": {
+      "runs": 5,
+      "completion_tokens": [
+        512,
+        512,
+        512,
+        512,
+        512
+      ],
+      "prompt_tokens": [
+        167,
+        166,
+        165,
+        165,
+        168
+      ],
+      "cache_valid": true,
+      "output_512": true,
+      "server_decode_tps": {
+        "median": 92.7,
+        "min": 90.9,
+        "max": 98.1
+      },
+      "prompt_tps": {
+        "median": 214.0,
+        "min": 204.4,
+        "max": 218.8
+      },
+      "request_e2e_tps": {
+        "median": 81.28377563173959,
+        "min": 79.41660807838488,
+        "max": 84.92115717367777
+      },
+      "stream_total_tps": {
+        "median": 81.30573452523525,
+        "min": 79.43755603765412,
+        "max": 84.93352011204557
+      },
+      "ttft_seconds": {
+        "median": 0.8072735000168905,
+        "min": 0.7946511999471113,
+        "max": 0.8348993000108749
+      },
+      "request_seconds": {
+        "median": 6.298919999971986,
+        "min": 6.029121800034773,
+        "max": 6.447014200035483
+      }
+    }
+  },
+  "minimum_memory_bytes": {
+    "physical_available": 62218043392,
+    "commit_available": 41268506624
+  },
+  "quality_qualified": false,
+  "fixture_sha256": "16fafa0ea4cd5f5a7e535c7df090c9344d11e0909a35bfde0b476ecdc4b743e5",
+  "engine_sha256": "0dea69dcbf10b0f925549552ec58c76d64c2acf51276187b60adb1a62b90b4dd"
+}

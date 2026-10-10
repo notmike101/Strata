@@ -1,0 +1,19 @@
+We need respond to user with complete function in Python code block only. Need reason. Need ensure satisfies: topological_order(nodes, edges): nodes list unique strings, edges list pairs before after. Return lexicographically smallest topological ordering, include isolated nodes, ignore duplicate edges. Raise ValueError for edge endpoint absent or cycle. Do not mutate either input. No imports. Return only complete function in code block.
+
+Need design. Lexicographically smallest topological order for DAG with arbitrary node strings: standard Kahn using min-heap. But no imports, so implement heap ourselves. Could use sorted list and find min each step O(V^2) simpler and deterministic. Need no imports. Input immutable: don't mutate nodes or edges. Can convert to sets/dicts. Duplicate edges ignored. Need validate edges: each endpoint in nodes. If absent raise ValueError. Cycle: after processing, if len(order)<len(nodes) raise ValueError. Need lexicographically smallest topological ordering among all valid? Kahn with selecting smallest available source yields lexicographically smallest topological order for total order by node string? Yes for lexicographically smallest sequence. Need ensure if nodes unsorted. Use sorted available.
+
+Potential edge cases: empty nodes returns []; self-loop edge (a,a) should raise cycle? Topological invalid. If edge absent? endpoint present. Duplicate edges ignored. Edges could be tuples/lists? It says pairs; can accept sequence of len2. Need avoid hidden state. Deterministic.
+
+Implementation without imports:
+
+def topological_order(nodes, edges):
+    node_set = set(nodes)
+    # validate node unique? prompt says unique. Could not need. If duplicates? Might produce weird. Could raise? It says nodes is unique. But robust. However raising unexpected? Maybe if duplicates, input contract. Could ignore or detect. But don't mutate. Maybe if len(set(nodes)) != len(nodes): raise ValueError? But not specified. Could avoid. But duplicate nodes not allowed; we can assume.
+    indegree = {node:0 for node in nodes}
+    outgoing = {node: set() for node in nodes}
+    seen_edges=set()
+    for edge in edges:
+        if len(edge)!=2: raise ValueError? It says pairs. Could do.
+        before, after = edge
+        if before not in node_set or after not in node_set: raise ValueError
+        if before == after: maybe cycle. Could raise ValueError immediately? Yes self-loop cycle. But
