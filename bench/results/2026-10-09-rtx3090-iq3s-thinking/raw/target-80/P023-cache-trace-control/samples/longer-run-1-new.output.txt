@@ -1,0 +1,31 @@
+We need answer user's request. Need implement topological_order in Python. Need return only complete function in Python code block. Need satisfy constraints: no imports, no mutate input, lexicographically smallest topological ordering include isolated nodes, ignore duplicate edges, raise ValueError for edge endpoint absent from nodes or cycle. Need likely Kahn with min-heap? Can't import heapq. Can implement by selecting min among available manually. Need ensure lexicographically smallest: at each step pick smallest node among nodes with in-degree zero. Need not mutate inputs: copy nodes list, build counts etc. Need ignore duplicate edges: use set of edge pairs. But edges list of tuples maybe could include duplicate; set okay. Edge endpoints absent: raise ValueError. Also cycle after processing all edges. Need be careful if nodes list unique but could be empty. Return []? Yes.
+
+Potential algorithm:
+def topological_order(nodes, edges):
+    # copy nodes for stable? nodes list unique strings. Need maybe ensure no mutation.
+    node_set = set(nodes)  # if nodes is iterable list; unique. If duplicates? spec unique. But copy list preserves? If input mutated no.
+    for before, after in edges:
+        if before not in node_set or after not in node_set:
+            raise ValueError(...)
+    adj = {node: set() for node in nodes}
+    indeg = {node:0 for node in nodes}
+    edge_seen = set()
+    for before, after in edges:
+       if before not in node_set or after not in node_set: raise ValueError
+       if (before, after) not in edge_seen:
+          edge_seen.add(...)
+          # ignore self-loop? A self-loop is a cycle, not duplicate edge. If before==after, then indegree self, adj add self, cycle detected. OK.
+          adj[before].add(after)
+          indeg[after]+=1
+    available = [n for n in nodes if indeg[n]==0]
+    order=[]
+    while available:
+       # find min lex. Since nodes are strings, min available O(n^2) ok. Need deterministic.
+       min_node = min(available)
+       available.remove(min_node)
+       order.append(min_node)
+       for neighbor in adj[min_node]:
+          indeg[neighbor]-=1
+          if indeg[neighbor]==0:
+             available.append(neighbor)
+    if

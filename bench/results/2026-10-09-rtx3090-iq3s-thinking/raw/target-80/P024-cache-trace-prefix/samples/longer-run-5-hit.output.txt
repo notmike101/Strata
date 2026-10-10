@@ -1,0 +1,15 @@
+We need respond to user: "Implement topological_order(nodes, edges) in Python... Return only the complete function in a Python code block." Need produce final only code block. Need ensure no imports. Need handle nodes list unique strings, edges list of (before, after). Return lexicographically smallest topological ordering. Include isolated nodes. Ignore duplicate edges. Raise ValueError for edge endpoint absent from nodes or cycle. Do not mutate inputs.
+
+Need design robust. Lexicographically smallest topological order: For DAG, choose smallest available node at each step (Kahn with heap). Since Python heapq import not allowed. We can sort repeatedly, but okay maybe performance? We can implement min selection without imports. Could use heap via heapq not allowed. Could use min() over available list each iteration. Need ensure no mutation inputs. Need duplicate edges ignore. Need validate endpoints. Need cycle detection. If result length < len(nodes) cycle. But need duplicate edges. Need no hidden state? deterministic.
+
+Consider nodes list unique but maybe order arbitrary. Need include isolated nodes. If nodes empty, edges empty return [].
+
+Edge endpoints absent: for each edge, if not in nodes_set raise ValueError. Edges maybe tuple or iterable? Could use for edge in edges: before, after = edge. But if malformed could raise ValueError? Not specified. We can assume pairs. Should we check length? Could be safe: if not isinstance(edge, (list,tuple)) or len(edge)!=2 raise ValueError? But only specified endpoints absent/cycle. Might not need.
+
+Need do not mutate either input. Avoid set(nodes) does not mutate. But building graph modifies new structures.
+
+Lexicographically smallest topological order: Kahn: compute indegree for unique edges. Need duplicate edges ignored: if before->after duplicate, count indegree once and adjacency unique. Could represent adjacency as set per node to ignore duplicates and validate. But we need do not mutate nodes? sets okay. If edges include self-loop (u,u) cycle, raise ValueError. Kahn detects if result len < len(nodes) but self-loop would prevent. For isolated nodes indegree 0.
+
+Potential issue with lexicographically smallest: If at each step choose smallest among all zero indegree nodes, is that always lexicographically smallest topological sort? Yes for all nodes comparable? Yes greedy min available yields lexicographically smallest topological ordering (with lexicographic on sequence of node labels) because earliest position choose smallest feasible next.
+
+Implementation options without heapq:

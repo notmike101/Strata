@@ -1,0 +1,14 @@
+We need respond to user: "Implement topological_order(nodes, edges) in Python... Return only the complete function in a Python code block." Need produce final only code block. Need ensure no imports. Need handle nodes list unique strings, edges list of (before, after). Return lexicographically smallest topological ordering. Include isolated nodes. Ignore duplicate edges. Raise ValueError for edge endpoint absent from nodes or cycle. Do not mutate inputs.
+
+Need craft robust deterministic Kahn with min-heap? Without imports can't use heapq. Could implement min selection by scanning available nodes each step O(n^2) okay? Or implement simple min-heap ourselves? No imports. We can build sorted nodes initial zero indegree and repeatedly pop smallest. Since unique strings. Need no mutation: don't modify nodes/edges lists. Could copy? Not necessary if only iterate. Need duplicate edges ignore: need avoid double counting indegree and adjacency. If duplicate edges, ignoring duplicate means set of edges? But edges might contain duplicates. Since no imports, can use set. Nodes strings. Edges endpoints maybe non-string? Assume. Need validate endpoint absent. Need cycle raise ValueError.
+
+Lexicographically smallest topological order: Kahn with smallest available node at each step. Need adjacency unique. Build adjacency sets or lists and indegree dict. To avoid duplicate edges, either check set seen_edges = set(); if (u,v) in seen skip. Since edges are tuples (before, after). Need also if self-loop? If u == v and in nodes: duplicate? self-loop creates cycle. If seen? If self-loop edge endpoint present, indegree increment and adjacency add; Kahn will detect cycle because u won't indegree 0. Should raise. Duplicate self-loop ignored as one edge. Fine.
+
+Potential issue with nodes not sorted initial? We can maintain min by scanning. Implementation simple:
+
+def topological_order(nodes, edges):
+    node_set = set(nodes)
+    adj = {node: [] for node in nodes}? Need avoid duplicate adjacency and indegree. Use sets for adj to avoid duplicate. adj = {node: set() for node in nodes}; indegree = {node: 0 for node in nodes}; seen = set()
+    for edge in edges:
+       try: u,v = edge except? maybe TypeError? We can raise ValueError? Not specified; maybe unpack. Could check isinstance(edge, tuple)? Not needed. If endpoint absent: raise ValueError.
+       if u not in node_set

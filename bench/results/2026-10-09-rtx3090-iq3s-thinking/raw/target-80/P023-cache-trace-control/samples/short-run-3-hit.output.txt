@@ -1,0 +1,23 @@
+We need answer user wants code only: complete function in Python code block. Need implement topological_order(nodes, edges). Requirements: nodes list unique strings, edges list of (before, after) pairs. Return lexicographically smallest topological ordering, include isolated nodes, ignore duplicate edges. Raise ValueError for edge endpoint absent from nodes or cycle. Do not mutate inputs. No imports. Return only complete function in Python code block.
+
+Need think carefully. Lexicographically smallest topological ordering. Nodes are strings, ordering lexicographic by string. Need Kahn's algorithm with min-heap? No imports allowed. Could use list and pick min each step. Complexity maybe okay. Need not mutate inputs: avoid modifying nodes, edges, tuples? We create copies structures. Need ignore duplicate edges: use set of edges or adjacency sets. Need raise ValueError for missing endpoint or cycle. Need preserve input? Creating sets/dicts okay.
+
+Implementation options:
+
+def topological_order(nodes, edges):
+    if not isinstance? not required.
+    node_set = set(nodes)
+    # But need maybe check unique? input says unique, no need.
+    indegree = {node:0 for node in nodes}
+    adjacency = {node:set() for node in nodes}
+    edge_seen=set()
+    for edge in edges:
+       # Need edge can be tuple? pairs. If unpack fails? not specified. Could let TypeError. But missing endpoint raise ValueError.
+       try: before, after = edge
+       except TypeError? maybe ValueError? Should we raise ValueError for invalid edge? It says edge endpoint absent; if edge not pair maybe TypeError okay? Could raise ValueError for invalid pair. But not needed.
+       if before not in node_set or after not in node_set: raise ValueError(...)
+       if before == after? self-loop cycle. Should detect cycle. If ignore duplicate edges. If before==after, if not duplicate? A self edge creates cycle. Could add to adjacency; indegree? Kahn won't include, cycle detect. But duplicate edge ignore. If self-loop, edge_seen? If add before==after: if edge in edge_seen ignore; else add edge, adjacency[before].add(after); indegree[after] += 1. If self-loop, indegree >0 and not processed, cycle ValueError. Could explicitly raise.
+       pair=(before, after)
+       if pair in edge_seen: continue
+       edge_seen.add(pair)
+       adjacency[before

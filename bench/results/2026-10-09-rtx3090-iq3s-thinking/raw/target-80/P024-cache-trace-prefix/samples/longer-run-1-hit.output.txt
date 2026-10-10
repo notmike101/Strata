@@ -1,0 +1,24 @@
+We need answer user's request. Need implement topological_order in Python. Need return only complete function in Python code block. Need satisfy constraints.
+
+Problem: nodes list of unique strings; edges list of (before, after). Return lexicographically smallest topological ordering, include isolated nodes, ignore duplicate edges. Raise ValueError for edge endpoint absent from nodes or a cycle. Do not mutate either input. Use no imports.
+
+Need produce code only? User says Return only the complete function in a Python code block. So final should be fenced python block with function only. Need ensure lexicographically smallest among all topological orders. Standard Kahn with min-heap requires heap or sorted each step. No imports. Can implement min selection by scanning available list to pick smallest string, O(n^2) ok. Need not mutate inputs. Need avoid hidden state, deterministic. Need duplicate edges ignored: need count indegrees only once per unique edge. Need validate edge endpoints absent: if before/after not in nodes set raise ValueError. Cycle detection: if processed length != len(nodes) raise ValueError.
+
+Need careful: edges is list of pairs, each pair may be tuple or maybe list? Can unpack. Need not mutate edges. Need nodes list unique. Do we need validate nodes uniqueness? Not required. But if duplicates? Could treat as set but output unique topological order? nodes list unique per spec, ignore. But if duplicates in nodes? Could output duplicates? Better maybe build set and sorted? But output length? If input nodes has duplicates, spec says unique. Could ignore.
+
+Lexicographically smallest topological ordering: Kahn choosing smallest available node at each step yields lexicographically smallest topological order (among topological sorts) when using string lexicographic comparison. Need include isolated nodes: available initially includes indegree 0, all isolated included.
+
+Implementation details:
+
+def topological_order(nodes, edges):
+    # Build set of nodes from nodes; preserve? Need output list of node strings. If nodes unique strings.
+    node_set = set(nodes)
+    # validate edges endpoints absent first? Need all edges.
+    # indegree dict
+    indegree = {node:0 for node in node_set}
+    # adjacency set per node to ignore duplicate edges.
+    adjacency = {node:set() for node in node_set}
+    for before, after in edges:
+        if before not in node_set or after not in node_set:
+            raise ValueError(...)
+       

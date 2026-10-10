@@ -1,0 +1,12 @@
+We need answer user's request. Need produce final with only complete function in Python code block. Need implement topological_order(nodes, edges). Requirements:
+- nodes list unique strings
+- edges list of (before, after) pairs
+- return lexicographically smallest topological ordering
+- include isolated nodes
+- ignore duplicate edges
+- raise ValueError for edge endpoint absent from nodes or a cycle
+- Do not mutate either input
+- Use no imports
+- Return only complete function in Python code block.
+
+Need think carefully about lexicographically smallest topological order. Given directed graph edges before -> after. We want lexicographically smallest sequence among all topological orders. Standard algorithm: Kahn with min-heap selecting available nodes with indegree zero yields lexicographically smallest topological order if comparing list lexicographically by node strings. But nodes are strings, need sort. No imports, can use heapq? imports no. Implement manual min selection: each step select smallest from available list. Complexity O(V^2) maybe fine? Could optimize but no imports. Need ensure duplicate edges ignored for indegree. Must not mutate inputs: copy or use sets/dicts. Raise ValueError for endpoints absent. Need ignore duplicate edges. Need include isolated nodes. If cycle: if processed len < len(nodes), raise ValueError. Need handle empty nodes: return [] likely. Edges may be empty. Duplicate edges: use set of pairs. But edge endpoints might be non-string? nodes are strings but edge endpoints might absent. Endpoint absent: if before not in node_set or after not in node_set raise ValueError. If duplicate with endpoint absent? Need still raise absent if any endpoint absent; duplicate ignored only after checking endpoints? Probably check endpoint first. If duplicate edge repeated, ignore. Could build adjacency set per node to avoid duplicate edges affecting indegree. But don't mutate input; create dict node -> set. Need be careful if nodes unique but not sorted? Lexicographically smallest uses string comparison. If nodes are strings, OK. If same? unique. For available selection: initialize all indegree zero nodes sorted ascending. Then while available: pop smallest, append, for each neighbor (iterate sorted? Not necessary for selection? If update available, need ensure new zero nodes inserted in correct sorted position. Could keep available list sorted and use bisect? No imports. Simpler: use list and linear search min each iteration: available.sort(); pop(0). Sorting each iteration could be O(V^2 log V) but ok. Or use

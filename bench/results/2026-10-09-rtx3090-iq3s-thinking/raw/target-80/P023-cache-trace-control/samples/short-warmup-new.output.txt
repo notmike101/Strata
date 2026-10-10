@@ -1,0 +1,26 @@
+We need answer to user: implement topological_order in Python, only complete function in code block, no imports. Need analyze requirements.
+
+Function topological_order(nodes, edges). nodes list unique strings; edges list of (before, after) pairs. Return lexicographically smallest topological ordering, include isolated nodes, ignore duplicate edges. Raise ValueError for edge endpoint absent from nodes or a cycle. Do not mutate either input. Use no imports. Return only complete function in Python code block.
+
+Need produce final code block only likely.
+
+Algorithm: Kahn's algorithm with sorted availability? Lexicographically smallest topological order: At each step choose smallest available node among nodes with indegree 0. Need ensure do not mutate inputs. Could make copies of sets/dicts. Need validate edges: before/after must be in nodes set. Duplicate edges ignored: use set of directed edges normalized? Edges might be tuples length 2? If edge endpoint absent raise ValueError. If duplicate edge, ignore (no multiple indegree increments). Also self-loop? edge (n,n) endpoint present but creates cycle; Kahn will detect cycle (indegree never zero) if self-loop counted once. Need not mutate nodes/edges. Use no imports.
+
+Need handle lexicographic order: strings compare lexicographically default.
+
+Possible simple:
+
+def topological_order(nodes, edges):
+    if nodes is None? Not specified. nodes unique strings, but maybe empty? Return [] if no nodes? Need validate edges empty? If edge endpoint absent raise ValueError.
+
+    # create set of nodes. But if nodes is list, no mutation. Could do node_set = set(nodes). But nodes may not be set? fine.
+    # Build adjacency dict and indegree dict only for nodes.
+    adjacency = {node: set() for node in nodes}
+    indegree = {node: 0 for node in nodes}
+    seen_edges = set()
+    for edge in edges:
+        try:
+            before, after = edge
+        except (TypeError, ValueError):? Edge expected pairs. If invalid maybe raise ValueError? Requirement edge endpoint absent, maybe invalid edge should raise? Could use if not isinstance(edge,(tuple,list)) or len !=2: raise ValueError("..."). But not specified; robust.
+        if before not in node_set or after not in node_set: raise ValueError(...)
+        if before in adjacency[before] and after in adjacency[before]: continue? Or edge_key=(

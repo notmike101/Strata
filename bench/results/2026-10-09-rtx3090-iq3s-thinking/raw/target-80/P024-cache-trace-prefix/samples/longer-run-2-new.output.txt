@@ -1,0 +1,28 @@
+We need answer user wants implement topological_order in Python. Need produce final only complete function in Python code block. Need think carefully. Requirements:
+- Implement topological_order(nodes, edges)
+- nodes list unique strings; edges list of (before, after) pairs.
+- Return lexicographically smallest topological ordering.
+- include isolated nodes.
+- ignore duplicate edges.
+- Raise ValueError for edge endpoint absent from nodes or a cycle.
+- Do not mutate either input.
+- Use no imports.
+- Return only complete function in Python code block.
+
+Need ensure lexicographically smallest topological ordering. For unique strings. Lexicographically smallest topological order usually Kahn's algorithm selecting smallest available node with indegree 0 at each step. Need ignore duplicate edges. Need not mutate inputs. Need detect cycle. Need edge endpoint absent => ValueError. Duplicate edges: if same (u,v) repeated, should not count indegree twice. Need validate endpoints before perhaps. Need not mutate input; can copy sets/lists. No imports. Can use built-ins.
+
+Potential pitfalls:
+- Lexicographically smallest topological ordering among all valid topological orders. With strings, Kahn with min-heap would be standard. No imports means cannot use heapq? Could implement simple list of available and sort each iteration, but O(V^2 log V?) acceptable? We can implement without imports by using a list ready sorted and pop min, adding new ready and resort, or use min(). Need deterministic.
+- Need handle duplicate edges efficiently. Approach:
+  def topological_order(nodes, edges):
+    if any not string? no requirement maybe not validate types. But edges could not be tuple? Need robust? endpoints absent from nodes -> ValueError. Edge endpoint absent: check both in node_set.
+    if invalid? If edge is not iterable length 2 maybe maybe ValueError? Could try unpack, if fails raise ValueError? Probably good.
+    node_set = set(nodes)
+    indegree = {node: 0 for node in nodes}
+    adjacency = {node: set() for node in nodes}? Sets not imported.
+    seen_edges = set()
+    for edge in edges:
+       try: before, after = edge
+       except (TypeError, ValueError): raise ValueError('...')
+       if before not in node_set or after not in node_set: raise ValueError(...)
+       if before == after? Self-loop. Is that cycle? It makes impossible topological

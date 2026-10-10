@@ -1,0 +1,14 @@
+We need answer user: "Request identifier ... Ignore this identifier. Implement topological_order(nodes, edges) in Python. nodes is a list of unique strings; edges is a list of (before, after) pairs. Return the lexicographically smallest topological ordering, include isolated nodes, and ignore duplicate edges. Raise ValueError for an edge endpoint absent from nodes or a cycle. Do not mutate either input. Use no imports. Return only the complete function in a Python code block."
+
+Need provide final only code block with complete function. Need think requirements. Implement Kahn's algorithm lexicographically smallest: need choose smallest available node at each step. But "lexicographically smallest topological ordering" among all valid topological orders: using min-heap. But no imports allowed, so cannot use heapq. Can implement manually or sort available list. Since no imports, implement own min-heap functions or use list sort each time. Nodes strings; number unspecified. Could use heap without import by manual implementation. Simpler: maintain sorted available list? Need not mutate inputs. nodes unique strings. Edges list pairs. Duplicate edges ignored: need build adjacency set or set of edges. Since no imports, use set. Edge endpoints absent -> ValueError. Cycle -> ValueError. Do not mutate inputs: don't modify nodes/edges. Need perhaps handle nodes not list? But okay.
+
+Potential issue lexicographically smallest: Kahn with min priority queue works if comparing strings lexicographically. Need isolated nodes initially indegree 0. If duplicate edge (a,b) ignore duplicates; self-loop? Edge (x,x): absent? endpoint present; duplicate? self-loop creates cycle, should raise ValueError (cycle). Kahn will detect cycle because indegree not zero. For self-loop indegree includes edge, but if duplicate self-loop ignored one. If self-loop then indegree positive; if no other incoming? It won't be initially zero. If graph has cycle with self-loop, cycle detected.
+
+Need ensure ValueError for edge endpoint absent from nodes. Also maybe if nodes duplicates? nodes unique by spec.
+
+Need complete function. No imports. Can implement with manual min-heap for efficiency. Or sort candidates each time: while available: pick min via min(available) then remove. That's O(V*(V+E)) maybe acceptable? But to be safe implement heap. No imports allowed but builtins ok.
+
+Manual heap:
+
+def _push(heap, item):
+  heap.append(item); i = len(heap)-1; parent=(i

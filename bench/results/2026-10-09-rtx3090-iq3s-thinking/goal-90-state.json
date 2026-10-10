@@ -3,17 +3,17 @@
   "target_tps": 90,
   "metric": "server_decode_tps",
   "contract": "goal-90-contract.md",
-  "current": "C056 cache matrix closed: target medians pass but non-degradation screen fails. Do not promote or repeat this comparison until favorable.",
+  "current": "C056 diagnostic proves ~44ms refill savings; repeat-hit loss occurs in verifier reads, with no staging/refill. Failed promotion screen retained.",
   "next": [
-    "Inspect per-request outputs, MTP counts and routing/cache history; separate observed acceptance changes from causal claims.",
-    "Run a bounded stage/refill/decode diagnostic if existing evidence cannot explain the mixed regressions; retain all data and fixed sampler.",
-    "After a revised candidate passes this screen, finish nonstream and real-use/near-limit gates."
+    "Prepare one bounded current-stack Nsight capture of the fixed short new/repeat history; reuse audited P020 infrastructure and keep all profiling results diagnostic.",
+    "Assess full-prompt checkpoint cost/eviction while retaining normal turn checkpoints; do not implement a fresh-latency regression.",
+    "After a verified candidate passes unchanged cache/nonstream and real-use/near-limit gates, promote and audit full goal."
   ],
   "promoted": "The previously qualified format-gather engine with IQ2_S gather disabled and adaptive lag2; no changes this turn.",
   "stopping_rule": "Leave goal active until all fixed qualification cells pass. No benchmark model resident at handoff.",
   "quality": "C056 Q015:5/5 natural-stop answers,72tests each, unchanged corrected-v2 checker and approved32768cap. Full real-use matrix remains pending.",
-  "last_checkpoint": "E231",
-  "resume_command": "No model resident. Stay on perf/rtx3090-thinking-80. Read C056/stream-cache/decision.md. C056 cc85c6c7 is experimental and failed cache-matrix promotion; do not alter production launcher.",
+  "last_checkpoint": "E235",
+  "resume_command": "No model resident. Stay on perf/rtx3090-thinking-80. Read C056/cache-trace/comparison.md and P020 profiler infrastructure. No MTP threshold, sampler or context changes. C056 cc85c6c7 stays experimental.",
   "safety": "R128-R131 exact cleanup and production3457fdfe restoration verified; 16GiB physical/commit floors pass.",
   "goal_tool_status_at_entry": "active, verified get_goal",
   "target_short_tps": 90,
@@ -73,6 +73,22 @@
         "short/stream/new: latency_no_degradation"
       ],
       "full_goal_pass": false
+    },
+    "trace": {
+      "arms": [
+        "P023-cache-trace-control",
+        "P024-cache-trace-prefix"
+      ],
+      "qualifying_repetitions_added": 0,
+      "refill_savings_ms": [
+        43.8,
+        43.2
+      ],
+      "repeat_has_batched_loan": false,
+      "short_repeat_window_ms": [
+        41.7,
+        48.2
+      ]
     }
   }
 }

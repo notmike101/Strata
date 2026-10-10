@@ -1,0 +1,279 @@
+{
+  "diagnostic_only": true,
+  "qualifying_repetitions_added": 0,
+  "same_requests_binary_libraries": true,
+  "arms": [
+    "P023-cache-trace-control",
+    "P024-cache-trace-prefix"
+  ],
+  "cells": {
+    "longer/stream/hit": {
+      "server_prompt_ms": {
+        "control": 61.4,
+        "candidate": 60.8,
+        "difference": -0.6000000000000014
+      },
+      "server_decode_ms": {
+        "control": 5611.1,
+        "candidate": 5564.5,
+        "difference": -46.600000000000364
+      },
+      "window_count": {
+        "control": 326,
+        "candidate": 306,
+        "difference": -20
+      },
+      "verified_rows": {
+        "control": 573,
+        "candidate": 573,
+        "difference": 0
+      },
+      "mean_ms_per_window": {
+        "control": 17.58960244648318,
+        "candidate": 18.184640522875817,
+        "difference": 0.5950380763926368
+      },
+      "logical_lent_slots": {
+        "control": 0,
+        "candidate": 0,
+        "difference": 0
+      },
+      "physical_refilled_slots": {
+        "control": 0,
+        "candidate": 0,
+        "difference": 0
+      },
+      "loan_ms": {
+        "control": 0,
+        "candidate": 0,
+        "difference": 0
+      },
+      "refill_ms": {
+        "control": 0,
+        "candidate": 0,
+        "difference": 0
+      },
+      "batched_read_ms": {
+        "control": 0,
+        "candidate": 0,
+        "difference": 0
+      },
+      "window_read_ms": {
+        "control": 40.7,
+        "candidate": 40.1,
+        "difference": -0.6000000000000014
+      },
+      "draft_offered": {
+        "control": 258,
+        "candidate": 265,
+        "difference": 7
+      },
+      "draft_accepted": {
+        "control": 187,
+        "candidate": 207,
+        "difference": 20
+      }
+    },
+    "longer/stream/new": {
+      "server_prompt_ms": {
+        "control": 6158.0,
+        "candidate": 6108.0,
+        "difference": -50.0
+      },
+      "server_decode_ms": {
+        "control": 5817.7,
+        "candidate": 5812.4,
+        "difference": -5.300000000000182
+      },
+      "window_count": {
+        "control": 321,
+        "candidate": 329,
+        "difference": 8
+      },
+      "verified_rows": {
+        "control": 581,
+        "candidate": 573,
+        "difference": -8
+      },
+      "mean_ms_per_window": {
+        "control": 18.36475903614458,
+        "candidate": 17.968975903614457,
+        "difference": -0.39578313253012354
+      },
+      "logical_lent_slots": {
+        "control": 1371,
+        "candidate": 1371,
+        "difference": 0
+      },
+      "physical_refilled_slots": {
+        "control": 1371,
+        "candidate": 1232,
+        "difference": -139
+      },
+      "loan_ms": {
+        "control": 0.9,
+        "candidate": 1.7,
+        "difference": 0.7999999999999999
+      },
+      "refill_ms": {
+        "control": 435.1,
+        "candidate": 391.9,
+        "difference": -43.200000000000045
+      },
+      "batched_read_ms": {
+        "control": 5626.0,
+        "candidate": 5625.7,
+        "difference": -0.3000000000001819
+      },
+      "window_read_ms": {
+        "control": 53.8,
+        "candidate": 50.8,
+        "difference": -3.0
+      },
+      "draft_offered": {
+        "control": 268,
+        "candidate": 244,
+        "difference": -24
+      },
+      "draft_accepted": {
+        "control": 191,
+        "candidate": 183,
+        "difference": -8
+      }
+    },
+    "short/stream/hit": {
+      "server_prompt_ms": {
+        "control": 62.1,
+        "candidate": 68.8,
+        "difference": 6.699999999999996
+      },
+      "server_decode_ms": {
+        "control": 5483.6,
+        "candidate": 5461.5,
+        "difference": -22.100000000000364
+      },
+      "window_count": {
+        "control": 317,
+        "candidate": 310,
+        "difference": -7
+      },
+      "verified_rows": {
+        "control": 577,
+        "candidate": 573,
+        "difference": -4
+      },
+      "mean_ms_per_window": {
+        "control": 17.750788643533124,
+        "candidate": 17.61774193548387,
+        "difference": -0.13304670804925323
+      },
+      "logical_lent_slots": {
+        "control": 0,
+        "candidate": 0,
+        "difference": 0
+      },
+      "physical_refilled_slots": {
+        "control": 0,
+        "candidate": 0,
+        "difference": 0
+      },
+      "loan_ms": {
+        "control": 0,
+        "candidate": 0,
+        "difference": 0
+      },
+      "refill_ms": {
+        "control": 0,
+        "candidate": 0,
+        "difference": 0
+      },
+      "batched_read_ms": {
+        "control": 0,
+        "candidate": 0,
+        "difference": 0
+      },
+      "window_read_ms": {
+        "control": 41.7,
+        "candidate": 48.2,
+        "difference": 6.5
+      },
+      "draft_offered": {
+        "control": 261,
+        "candidate": 262,
+        "difference": 1
+      },
+      "draft_accepted": {
+        "control": 195,
+        "candidate": 202,
+        "difference": 7
+      }
+    },
+    "short/stream/new": {
+      "server_prompt_ms": {
+        "control": 788.3,
+        "candidate": 741.8,
+        "difference": -46.5
+      },
+      "server_decode_ms": {
+        "control": 5590.9,
+        "candidate": 5635.3,
+        "difference": 44.400000000000546
+      },
+      "window_count": {
+        "control": 310,
+        "candidate": 329,
+        "difference": 19
+      },
+      "verified_rows": {
+        "control": 570,
+        "candidate": 572,
+        "difference": 2
+      },
+      "mean_ms_per_window": {
+        "control": 18.16516129032258,
+        "candidate": 17.201215805471126,
+        "difference": -0.9639454848514539
+      },
+      "logical_lent_slots": {
+        "control": 311,
+        "candidate": 311,
+        "difference": 0
+      },
+      "physical_refilled_slots": {
+        "control": 311,
+        "candidate": 177,
+        "difference": -134
+      },
+      "loan_ms": {
+        "control": 0.1,
+        "candidate": 0.1,
+        "difference": 0.0
+      },
+      "refill_ms": {
+        "control": 99.5,
+        "candidate": 55.7,
+        "difference": -43.8
+      },
+      "batched_read_ms": {
+        "control": 603.7,
+        "candidate": 603.0,
+        "difference": -0.7000000000000455
+      },
+      "window_read_ms": {
+        "control": 45.9,
+        "candidate": 44.8,
+        "difference": -1.1000000000000014
+      },
+      "draft_offered": {
+        "control": 260,
+        "candidate": 245,
+        "difference": -15
+      },
+      "draft_accepted": {
+        "control": 202,
+        "candidate": 183,
+        "difference": -19
+      }
+    }
+  }
+}

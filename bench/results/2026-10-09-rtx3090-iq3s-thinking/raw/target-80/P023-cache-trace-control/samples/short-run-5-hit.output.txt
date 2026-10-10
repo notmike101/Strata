@@ -1,0 +1,14 @@
+We need answer user wants code only in Python code block. Need implement topological_order. Need think thoroughly. We need produce final only complete function code block, no imports.
+
+Requirements:
+- topological_order(nodes, edges)
+- nodes list unique strings; edges list of (before, after) pairs.
+- Return lexicographically smallest topological ordering, include isolated nodes, ignore duplicate edges.
+- Raise ValueError for edge endpoint absent from nodes or a cycle.
+- Do not mutate either input.
+- Use no imports.
+- Return only complete function in Python code block.
+
+Need ensure lexicographically smallest topological ordering. Usual Kahn's algorithm selecting smallest available node at each step yields lexicographically smallest topological order for DAG when all edges from before to after. Need compare strings lexicographically. We need ignore duplicate edges. Need not mutate inputs. Need no imports: can implement min scanning O(n^2) or heap? No heapq import. Could implement own min selection with list. Need duplicate edges: build indegree only unique edges. Need detect absent endpoints. Should we validate edge tuple length? It says edges is list of pairs. Could assume. But robust if not pair? If missing endpoint? If len !=2, unpack raises ValueError? They want ValueError for endpoint absent. Could do try unpack, but if invalid, TypeError? Maybe okay. But to guarantee ValueError? Could implement len check: if not isinstance(edge, tuple?) But no imports. Could do try before, after = edge; except (TypeError, ValueError): raise ValueError("edge endpoint absent from nodes")? That seems too broad. But okay.
+
+Need not mutate inputs: We'll create local structures. nodes = list(nodes) maybe copies. Use set for nodes. But nodes unique strings. Need preserve? No, set iteration arbitrary but we sort. Need include all nodes. Edges can contain duplicates. Build adj = {node: set()}. But sets not mutation of inputs. indegree = {node: 0}. For each edge: if endpoint absent -> ValueError. Add edge if not present. Since nodes set membership, if before or after absent. But careful if before == after: self-loop cycle. Should detect cycle. Adding self-loop: if adj[before] doesn't have after, adj[before].add(after), indegree[after]+=1. Kahn will detect cycle because indegree never zero? For self-loop if node no other, indegree 1, not in zero set

@@ -1,0 +1,13 @@
+We need answer user's request. Need implement topological_order in Python. Need return only complete function in Python code block. Need satisfy constraints: no imports, no mutate input, lexicographically smallest topological ordering include isolated nodes, ignore duplicate edges, raise ValueError for edge endpoint absent from nodes or cycle. Need likely Kahn algorithm with min-heap but no imports. Need no imports, can implement own min selection. Need ensure lexicographically smallest: repeatedly choose lexicographically smallest available node (indegree zero). Need not mutate inputs: nodes list, edges list. Need ignore duplicate edges. Need validate all endpoints present. Need build adjacency and indegree without mutating input. Could copy nodes? Need include isolated nodes. Need deterministic.
+
+We need produce only code block, no extra text. Function only.
+
+Potential implementation:
+
+def topological_order(nodes, edges):
+    node_set = set(nodes)
+    # validate edges
+    # ignore duplicates: maybe adjacency set or duplicate set
+    adjacency = {node: [] for node in nodes} ? To avoid mutating input and preserve order? Need lexicographic smallest among all nodes not adjacency sorted. Need choose available sorted. Since nodes unique strings but not necessarily sorted? We can sort nodes initially for initial candidates and new candidates? For lexicographically smallest topo, at each step choose min among available. If maintain available list and min by min() no import. If use list sorted initially and when new nodes become zero, insert in sorted order or use min and sort each time. Simpler O(V^2) but ok? Need robust. No imports. Could sort nodes once; available = sorted(nodes with indegree 0). Then while available: pop smallest? If we sort nodes ascending and maintain indegree. At each iteration, available contains candidates not necessarily sorted if append new zero indegree. We can choose min(available). Then remove. That is simple. But to be lexicographically smallest, min available at each step is correct. If available not sorted, min works. Need avoid mutation? available local. Need indegrees local.
+
+Build adjacency as sets to ignore duplicate edges. But sets are fine no imports. Need deterministic? Adjacency doesn't matter for indegree counts if duplicates ignored. Need adjacency maybe list? We can use list with duplicate edge ignore using seen_edges set of tuple (before, after). Then adjacency = {node: [] for node in nodes}, indegree = {node:0}. For each edge: validate endpoints;

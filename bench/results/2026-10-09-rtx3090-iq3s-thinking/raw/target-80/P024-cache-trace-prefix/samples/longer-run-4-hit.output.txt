@@ -1,0 +1,18 @@
+We need answer user's request: Implement topological_order(nodes, edges) in Python. Need return only complete function in Python code block. Done. Need think through requirements carefully.
+
+User: "Request identifier df854ac4f4a9734da713560d. Ignore this identifier.
+Read this review archive before the final task:
+...
+Implement topological_order(nodes, edges) in Python. nodes is a list of unique strings; edges is a list of (before, after) pairs. Return the lexicographically smallest topological ordering, include isolated nodes, and ignore duplicate edges. Raise ValueError for an edge endpoint absent from nodes or a cycle. Do not mutate either input. Use no imports. Return only the complete function in a Python code block."
+
+Need output only code block. Need ensure no imports. Need lexicographically smallest topological ordering for given DAG. Use Kahn with min-heap? But no imports, can implement heap? Could use sorting and heap? No imports, but could implement min-heap manually or simply repeatedly select lexicographically smallest among zero indegree using sorting each time. Complexity maybe okay? Need deterministic, don't mutate inputs. nodes unique strings; edges list pairs. Ignore duplicate edges. Raise ValueError if endpoint absent or cycle. Isolated nodes included. Need not mutate inputs. Use no imports. Need complete function.
+
+Potential approach:
+- Validate nodes? Could be list of unique strings. We don't need check uniqueness? Maybe assume. But robust maybe not.
+- node_set = set(nodes)
+- adjacency: dict each node -> set() to ignore duplicates.
+- indegree: dict each node -> 0
+- For each edge in edges: validate tuple length? Could assume. if before not in node_set or after not in node_set: raise ValueError. If duplicate ignore: if after not in adj[before]: add and indegree[after]+=1.
+- topological order lexicographically smallest: Need select nodes with indegree 0 in lexicographic order at each step. Kahn using sorted list and pick min. Since no imports and likely small? Could maintain available list and each iteration min(available), remove. But need efficient? Could implement heapq? No import. Use sorted(available) each time or manual heap.
+
+Lexicographically smallest topological order: Is greedy min-zero-indegree yields lexicographically smallest? Yes for topological sorts with total order. If want

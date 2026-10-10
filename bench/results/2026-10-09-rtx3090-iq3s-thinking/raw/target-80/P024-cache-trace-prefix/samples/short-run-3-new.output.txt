@@ -1,0 +1,17 @@
+We need answer user wants code only: complete function in Python code block. Need implement topological_order(nodes, edges). Requirements: nodes list unique strings, edges list of (before, after) pairs. Return lexicographically smallest topological ordering, include isolated nodes, ignore duplicate edges. Raise ValueError for edge endpoint absent from nodes or cycle. Do not mutate either input. Use no imports. Return only complete function in Python code block.
+
+Need ensure lexicographically smallest topological ordering. Typically Kahn algorithm with min-heap. But no imports. Could use list sorted selection each step O(n^2) okay? Need not imports. Since nodes strings unique. Edges duplicates ignored.
+
+Do not mutate inputs: nodes, edges lists not modified. But can create local structures.
+
+Potential issue: lexicographically smallest topological order among all valid. Kahn with smallest available node works if lexicographic order based on string ordering. Need ensure initial nodes all included. Duplicates ignore.
+
+Endpoint absent: any edge's before or after not in nodes set raise ValueError. Need maybe edge malformed? Not specified; assume pairs. Could handle not iterable? Maybe not.
+
+Cycle: if processed length < number nodes raise ValueError.
+
+Need ignore duplicate edges. Need indegree counts unique edges. We can use set to track directed edges. For each edge: check endpoints in node_set, else ValueError. If edge not in edge_set and before != after? What about self-loop? It is a cycle. If duplicate self-loop ignored? If edge exists self-loop, endpoint present, edge_set add, indegree after incremented. Then cycle detected if self-loop? If self-loop, indegree >0 and after not available unless removed? In Kahn: if before==after, indeg[after] +=1, adj[before].add(after). Then indegree never 0 for that node unless? It could be in initial available if indeg 0? But indeg >0, so no. If multiple nodes in SCC? Kahn won't process, cycle detected. Good. If duplicate edges ignore: use if edge not in seen add adj/indeg.
+
+Do not mutate input: If nodes/edges are lists, we iterate. We create sets/dicts. No mutation.
+
+No imports: implement min selection without heapq. Could use sorted? sorted built-in allowed no import. For lexicographically smallest, use available list and at each iteration sort? Or maintain sorted and pop index 0? We can use available =

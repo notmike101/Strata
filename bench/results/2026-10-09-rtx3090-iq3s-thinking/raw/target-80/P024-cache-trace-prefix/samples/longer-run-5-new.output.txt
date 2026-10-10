@@ -1,0 +1,18 @@
+We need respond to user: "Implement topological_order(nodes, edges) in Python... Return only the complete function in a Python code block." Need produce final only code block. Need ensure no imports. Need handle nodes list unique strings, edges list of pairs (before, after). Return lexicographically smallest topological ordering, include isolated nodes, ignore duplicate edges. Raise ValueError for edge endpoint absent from nodes or cycle. Do not mutate either input. Use no imports. Need think implementation.
+
+Need lexicographically smallest topological ordering among strings. Standard Kahn with min-heap. No imports, so implement heap manually or sort selection. Since no imports, cannot heapq. Could use sorted available list each time O(V^2 logV) fine, or implement heap. Need deterministic. Input lists not mutated. Avoid hidden state? just pure.
+
+Validate nodes unique? Problem says nodes list of unique strings. But maybe robust: could detect duplicates? "nodes is a list of unique strings" so no need, but could validate and raise ValueError? Not asked. If duplicate nodes? maybe not. Need ignore duplicate edges.
+
+Potential issue: lexicographically smallest topological order: With Kahn using smallest available node at each step yields lexicographically smallest among all topological sorts? Yes if all nodes comparable lexicographically, choosing smallest currently zero indegree greedily yields lexicographically smallest topological order. Need include isolated nodes: initially indegree 0.
+
+Need ignore duplicate edges: If duplicate (a,b), indegree increment multiple times unless handle. Could store adjacency as list? To ignore duplicates, use set of edges and set adjacency? But no imports, sets ok. Need no hidden state. Mutate? not inputs. Use local.
+
+Validation edge endpoints absent: check before/after in nodes_set. Could check all nodes strings? not necessary. If self-edge cycle? A self-edge (a,a) is cycle; edge endpoint absent? If endpoints in nodes. Should raise ValueError. With duplicate self-edge ignored but still cycle. Kahn will detect cycle. Good.
+
+Need consider edges order? For duplicate edges, indegree should count once. Need avoid mutation inputs. Use set() maybe if edges is generator? It says list; can iterate. If edges list contains unhashable? pairs strings. Good.
+
+Implementation:
+def topological_order(nodes, edges):
+    node_set = set(nodes)
+    # If duplicate nodes? set collapses; order? Topological output uses strings. Since unique

@@ -1,0 +1,19 @@
+We need answer user's request. Need produce final with only complete function in Python code block. Need implement topological_order(nodes, edges). Requirements:
+- nodes list unique strings
+- edges list of (before, after) pairs
+- return lexicographically smallest topological ordering
+- include isolated nodes
+- ignore duplicate edges
+- Raise ValueError for edge endpoint absent from nodes or a cycle
+- Do not mutate either input
+- Use no imports
+- Return only complete function in Python code block.
+
+Need think carefully. Need no imports. Need lexicographically smallest topological ordering among all topological orders. Strings unique. Need ignore duplicate edges. Need not mutate inputs: if we convert nodes to set/list, copy. Edges list maybe tuple iteration, don't modify. Duplicate edges ignore: use set adjacency and in-degree. Edge endpoint absent: need check each pair? Edge maybe tuple/list length 2? Problem says list of pairs; probably assume two elements. If endpoint not in nodes raise ValueError. Could also handle non-pair? Not specified. But robust maybe if edge cannot unpack or length not 2 raise ValueError? It says edge endpoint absent, not invalid edge. We can just for before, after in edges; if before not in nodes_set or after not in nodes_set raise ValueError. That assumes length 2. If edge invalid, ValueError anyway (unpack error) but maybe desired? fine.
+
+Lexicographically smallest topological ordering: Given directed graph, Kahn with min-heap. But no imports; can implement min selection manually. Since nodes unique strings, choose smallest available zero in-degree at each step. Need ignore duplicates: use adjacency dict set and indegree dict. To avoid mutating nodes/edges. Need not import heapq; use simple list available and select min each iteration O(V^2+E) acceptable? Could implement without imports. For lexicographically smallest among topological sorts, repeatedly pick smallest string among nodes with indegree zero. Need include isolated nodes: indegree zero from start, yes. Need ensure lexicographic order globally: yes standard greedy with min available gives lexicographically smallest topological order (for strings lex order). But careful if isolated nodes and constraints: choose smallest available.
+
+Implementation:
+def topological_order(nodes, edges):
+    node_set = set(nodes)
+    # validate unique? Problem says unique; not required. But if duplicate nodes, maybe set handles? Return list? It expects unique. Could raise? Not requested. Not mutate inputs

@@ -169,6 +169,14 @@
       "gpu_before": "name, driver_version, memory.used [MiB], memory.total [MiB], utilization.gpu [%], temperature.gpu, power.draw [W]\nNVIDIA GeForce RTX 3090, 610.88, 23554 MiB, 24576 MiB, 0 %, 47, 18.44 W\n",
       "gpu_after": "name, memory.used [MiB], memory.total [MiB], utilization.gpu [%], temperature.gpu, power.draw [W]\nNVIDIA GeForce RTX 3090, 23710 MiB, 24576 MiB, 99 %, 76, 328.57 W\n"
     },
+    "target-80/P023-cache-trace-control": {
+      "gpu_before": "name, driver_version, memory.used [MiB], memory.total [MiB], utilization.gpu [%], temperature.gpu, power.draw [W]\nNVIDIA GeForce RTX 3090, 610.88, 23554 MiB, 24576 MiB, 0 %, 39, 14.45 W\n",
+      "gpu_after": "memory.used [MiB], memory.free [MiB]\n23712 MiB, 611 MiB\n"
+    },
+    "target-80/P024-cache-trace-prefix": {
+      "gpu_before": "name, driver_version, memory.used [MiB], memory.total [MiB], utilization.gpu [%], temperature.gpu, power.draw [W]\nNVIDIA GeForce RTX 3090, 610.88, 23554 MiB, 24576 MiB, 0 %, 48, 18.50 W\n",
+      "gpu_after": "memory.used [MiB], memory.free [MiB]\n23708 MiB, 615 MiB\n"
+    },
     "target-80/Q007-goal-coding": {
       "gpu_before": "name, driver_version, memory.used [MiB], memory.total [MiB], utilization.gpu [%], temperature.gpu, power.draw [W]\nNVIDIA GeForce RTX 3090, 610.88, 23768 MiB, 24576 MiB, 0 %, 50, 21.97 W\n"
     },

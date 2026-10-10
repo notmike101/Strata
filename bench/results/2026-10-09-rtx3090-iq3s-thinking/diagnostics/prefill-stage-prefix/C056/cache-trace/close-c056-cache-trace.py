@@ -1,0 +1,37 @@
+import json,re
+from pathlib import Path
+p=Path(__file__).parent; pub=p.parents[1]/'bench/results/2026-10-09-rtx3090-iq3s-thinking'
+v=json.loads((p/'c056-cache-trace-comparison.json').read_text()); assert v['same_requests_binary_libraries']
+note='''## E235 / C056 trace localizes the cache-screen failure
+
+P023/P024 are the single predeclared diagnostic pair from E232. Every one of48requests completed512tokens with valid new/repeat cache state; identical request bytes, C056 executable and loaded libraries. Neither arm adds qualifying repetitions. Original R128-R131 failures remain closed and unchanged.
+
+| Cell | Metric | Control | Prefix candidate |
+|---|---|---:|---:|
+'''
+for w,c in v['cells'].items():
+    for k in ['logical_lent_slots','physical_refilled_slots','refill_ms','batched_read_ms','window_read_ms','server_prompt_ms','window_count','verified_rows','mean_ms_per_window','server_decode_ms']:
+        s=c[k]; note+=f"| {w} | {k} | {s['control']:.4f} | {s['candidate']:.4f} |\n"
+note+='''
+The intended mechanism is proven on this pair: the logical masks stay311short/1371longer slots while physical refills fall to177/1232. Median refill time drops99.5 to55.7ms short and435.1 to391.9ms longer. Batched-read medians603.7 to603.0ms and5626.0 to5625.7ms are nearly unchanged. The prefix optimization removes approximately44ms of copying/refill work; it is not speeding the batched model arithmetic. Extra relayout cost is0.0ms at displayed short-median precision and0.8ms longer, so relayout synchronization is not the observed large cost here.
+
+Both exact-repeat cells have zero loans, zero refills and zero batched reads. The short-hit prompt interval rises62.1 to68.8ms, localized primarily in the four-token verifier read41.7 to48.2ms. Therefore this repeat-request loss is not directly caused by prefix staging or refill work in that request. The source path at generate.cpp windows_ok/read_windows confirms that short tails bypass lend/read_part. Earlier request state and CPU/GPU execution remain relevant. The prior P016/P017 experiment (E137/E138) had already localized same-seed variation to time-based CPU prompt sharing: disabling it made both first logits and entire outputs identical but reduced prompt throughput to81tok/s, so that path was rejected. Do not repeat it or declare the new pair a proof of the same complete causal chain.
+
+Short-new decode has310 versus329median windows,570 versus572verified rows and5590.9 versus5635.3ms duration. Mean per-window duration medians actually fall18.1652 to17.2012ms. This supports investigating window geometry/fixed per-window costs, not claiming an across-the-board kernel slowdown. Medians of separately varying quantities must not be multiplied as though they describe one request. All raw per-request positions, widths and counts are archived. Across the original cache arms, only1/24and4/24 paired outputs match byte-for-byte; same-configuration opposite-order processes match0/24. Equality is diagnostic, not a quality gate. Existing Q015 completed-answer evidence is neither rerun nor replaced.
+
+Next bounded investigation: use an Nsight capture of the current short new/repeat path (with the exact frozen payload history) to attribute verifier/host/copy costs, building on the existing P020 capture infrastructure. In parallel, inspect a full-prompt checkpoint design: current exact repeats restore before the final four processed prompt tokens and re-read them. An extra checkpoint could avoid that work, but checkpoint_at synchronizes and copies recurrent state, so its fresh-request cost and eviction effect must be measured before implementing or promoting it. Replacing the normal turn checkpoint would lose reuse when assistant/thinking headers change; that alternative is rejected by design. Any retained alternative must preserve the normal checkpoint and all thinking/tool/vision behavior. This is a new cache architecture hypothesis, not permission to select a favorable prompt or reuse old quality proof after behavior changes.
+
+The contract audit also confirms MTP4/minimum draft probability0.70/PCIe0.20 are frozen controls. Earlier T002 and R044 lower-floor trials failed in other sampler configurations. No threshold or target-sampling parameter was changed or proposed as a qualifying shortcut. Q6 one-warp/packed-layout, device planner, fixed80CPUshare and other closed paths are not reopened by this trace.
+
+All48requests retain the exact context262144,IQ3_S,INT8KV,CPUF16vision, unlimited high/xhigh reasoning and1/.95/20/0/0/1 thinking profile. Independent16GiB physical/commit floors, exact model-tree cleanup and production3457fdfe restoration passed for each arm. No engine/source/launcher change in this turn. Goal remains active, candidate experimental and unpromoted. No benchmark model resident at this checkpoint.
+'''
+def put(f,s):
+    f.parent.mkdir(parents=True,exist_ok=True); f.write_text(re.sub(r'C:[/\\]+Users[/\\]+me','<USER_HOME>',s).replace('<LAN_HOST>','<LAN_HOST>'),encoding='utf-8',newline='\n')
+d=pub/'diagnostics/prefill-stage-prefix/C056/cache-trace'; put(d/'comparison.md',note)
+for n in ['c056-cache-trace-comparison.json','compare-c056-cache-trace.py','analyze-c056-cache-trace.py','close-c056-cache-trace.py']:
+    put(d/n,(p/n).read_text())
+for f in [p/'findings.md',pub/'ledger.md']:
+    s=f.read_text(); assert '## E235 /' not in s; put(f,s+'\n\n'+note)
+f=pub/'goal-90-state.json'; s=json.loads(f.read_text()); s.update(last_checkpoint='E235',current='C056 diagnostic proves ~44ms refill savings; repeat-hit loss occurs in verifier reads, with no staging/refill. Failed promotion screen retained.',next=['Prepare one bounded current-stack Nsight capture of the fixed short new/repeat history; reuse audited P020 infrastructure and keep all profiling results diagnostic.','Assess full-prompt checkpoint cost/eviction while retaining normal turn checkpoints; do not implement a fresh-latency regression.','After a verified candidate passes unchanged cache/nonstream and real-use/near-limit gates, promote and audit full goal.'],resume_command='No model resident. Stay on perf/rtx3090-thinking-80. Read C056/cache-trace/comparison.md and P020 profiler infrastructure. No MTP threshold, sampler or context changes. C056 cc85c6c7 stays experimental.'); s['c056']['trace']={'arms':v['arms'],'qualifying_repetitions_added':0,'refill_savings_ms':[43.8,43.2],'repeat_has_batched_loan':False,'short_repeat_window_ms':[41.7,48.2]}; put(f,json.dumps(s,indent=2)+'\n')
+f=pub/'README.md'; s=f.read_text(); start=s.index('Current goal checkpoint'); end=s.index('\n\n',start); s=s[:start]+'''Current goal checkpoint (E235): **full goal remains unqualified**. The bounded C056 cache trace confirms about44ms of saved refill work on fresh prompts; repeat-hit losses occur in verifier reads with no staging/refill. See the [trace decomposition](diagnostics/prefill-stage-prefix/C056/cache-trace/comparison.md). The closed [R128-R131 comparison](diagnostics/prefill-stage-prefix/C056/stream-cache/comparison.md) still fails non-degradation gates despite meeting90short/85longer decode thresholds; diagnostic rates do not replace it. Separate pure-miss and Q015 quality successes remain within their original scope. Fixed sampling,512-token speed cap,262144 context,IQ3_S,INT8KV and vision are unchanged. No launcher promotion and no benchmark model resident at this checkpoint.'''+s[end:]; put(f,s)
+print('E235 recorded; mechanism localized, failed screen retained, profiler/checkpoint investigation next')

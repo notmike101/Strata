@@ -1,0 +1,16 @@
+We need answer user's request: "Implement topological_order(nodes, edges) in Python. nodes is a list of unique strings; edges is a list of (before, after) pairs. Return the lexicographically smallest topological ordering, include isolated nodes, and ignore duplicate edges. Raise ValueError for an edge endpoint absent from nodes or a cycle. Do not mutate either input. Use no imports. Return only the complete function in a Python code block."
+
+Need provide final code block only. Need think through implementation. Need no imports. Lexicographically smallest topological order for nodes strings. Kahn's algorithm with min-heap normally, but no imports. Need no imports means no heapq. Can implement using sorted list? Nodes strings unique. Need lexicographically smallest among valid topological orderings: At each step, among all zero-indegree nodes, choose smallest string. Could use min selection repeatedly O(n^2) okay likely. Need ignore duplicate edges. Need not mutate inputs. Need raise ValueError for invalid endpoint or cycle.
+
+Important: Edges could contain duplicates; duplicates should be ignored for indegree and adjacency. Need avoid duplicates to keep indegree accurate and cycle detection. Could build set of unique edges? Sets okay no imports. But if nodes large, fine. Need ensure not mutating nodes or edges. Use list(nodes) maybe. But don't need mutate. Validate endpoints exist in nodes. nodes unique? Given unique; if duplicate? It says nodes is list unique strings, so no need handle. But maybe robust? Could still use set.
+
+Need lexicographically smallest. With Kahn: indegree dict counts unique incoming edges. adjacency dict lists outgoing neighbors. Need ensure no duplicate edges count multiple. Approach:
+- nodes_list = list(nodes) maybe preserve? But topological ordering lexicographically not based input. Need node_set = set(nodes). If not all strings? Not specified.
+- adjacency = {node: [] for node in nodes_list}
+- indegree = {node:0 for node in nodes_list}
+- seen_edges = set()
+For edge in edges:
+  validate len? Could unpack pair: try except? If invalid tuple length, maybe TypeError or ValueError? Requirement edge endpoint absent from nodes raise ValueError. Not specified malformed. Could robustly handle: if len(edge) !=2 raise ValueError. But edge endpoint absent. Could do:
+    try: before, after = edge
+    except (TypeError, ValueError): raise ValueError(...)
+    if before not in

@@ -1,0 +1,14 @@
+We need answer user wants implement topological_order in Python. Need produce final only complete function in Python code block. Need think carefully. Requirements:
+- Implement topological_order(nodes, edges)
+- nodes list unique strings; edges list of (before, after) pairs.
+- Return lexicographically smallest topological ordering.
+- include isolated nodes.
+- ignore duplicate edges.
+- Raise ValueError for edge endpoint absent from nodes or a cycle.
+- Do not mutate either input.
+- Use no imports.
+- Return only complete function in Python code block.
+
+Need ensure lexicographically smallest topological ordering. For unique strings, lexicographic by default string ordering. Topological order among all nodes. Standard Kahn with min-heap gives lexicographically smallest if using priority queue. But no imports. Could implement simple min selection from available nodes each step; O(n^2) acceptable? Maybe need robust. No imports. Use lists, sets, dict. Avoid mutation. Need validate duplicate edges, endpoints absent. Could copy input? We can iterate without mutating inputs. Create copies? Not necessary but if building new structures no mutate original. Need handle duplicate edges: if duplicate edge (a,b) appears multiple times, indegree should count once. Need avoid double decrement. Use set of edges? Edges may be tuples of strings. Could normalize: seen_edges set. But if edge duplicate, ignore. Need detect endpoint absent: nodes unique. Convert nodes to set? No imports. set is builtin. Need preserve input intact. We can do node_set = set(nodes); if any e not in set: raise. Also validate edges are pairs? Could assume. But maybe robust: for edge in edges: if len(edge) !=2? Could raise? The final task only says edge endpoint absent or cycle. Could ignore invalid shape? Better not raise for unexpected maybe but could fail. If edge is not tuple/list? Could try before, after = edge, if fails raise ValueError? But maybe not needed. Since edges is list of pairs. But safe: try unpack except TypeError: raise ValueError? This may add behavior. Probably fine? But if edge is string length 2? then before, after = edge; but endpoint could be single char. Not needed.
+
+Cycle detection: Kahn returns len(order) < len(nodes) -> cycle. Need also self-loop? self-loop edge (a,a) is endpoint present, duplicate ignored if duplicate. Should raise cycle because indegree[a] 1 and

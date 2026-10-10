@@ -1,0 +1,13 @@
+We need answer user wants code only in Python code block. Need analyze. Need produce final only code block. Need ensure function correct.
+
+Problem: topological_order(nodes, edges): nodes list unique strings; edges list pairs before, after. Return lexicographically smallest topological ordering, include isolated nodes, ignore duplicate edges. Raise ValueError for edge endpoint absent from nodes or a cycle. Do not mutate either input. No imports. Complete function only.
+
+Need design deterministic lexicographically smallest topological order. Usually Kahn with min-heap of zero indegree nodes to get lexicographically smallest among valid topological orders. But no imports (heapq unavailable). Need implement own min selection or sort each iteration. n maybe unspecified. We can use built-in sorted. Need not mutate inputs. Use copies.
+
+Need consider duplicate edges ignore. Need validate endpoints present. Could do first pass: create set nodes? Need preserve original nodes? Input nodes list unique strings. We can validate each edge before/after in node_set. If not raise ValueError. Build adjacency and indegree ignoring duplicate edges. Since need duplicate edges only count once. Could use set for edges pairs? But if nodes not hashable? Strings hashable. Use seen_edges set. For each edge: a,b = edge? Need ensure edge format? Could raise ValueError if not iterable length2? But spec doesn't ask. We can robustly unpack. If endpoint absent raise ValueError. For duplicate edge: if (a,b) in seen_edges: continue; else add, adj[a].add(b)? Need sets? Then indegree increments. For deterministic lexicographically smallest, adjacency sets okay, but selection from candidates sorted. If we use adjacency sets and iterate for decrement no need sorted. Candidate list sorted.
+
+Potential issue with lexicographically smallest topological order: Kahn using sorted candidates works if comparing entire sequence? Yes at each step choose smallest available node among zero indegree. For lexicographically smallest, yes greedy. Need include isolated nodes. Candidate initialized sorted all indegree zero.
+
+Need cycle detection: if result length != len(nodes) raise ValueError. But note isolated nodes always indegree zero. Duplicates ignored. Self-loop? Edge (a,a) if endpoint present, duplicate ignored but self-loop edge creates indegree increment and cycle. It should raise ValueError. Kahn result length less than n. Good.
+
+Need no mutation: If using adjacency dict with set values built from edges only. Don't modify nodes or edges. Could use indeg =

@@ -1,0 +1,29 @@
+We need answer user wants code only in Python code block. Need analyze. Need produce final only code block. Need ensure function correct.
+
+Problem: topological_order(nodes, edges): nodes list unique strings; edges list pairs before, after. Return lexicographically smallest topological ordering, include isolated nodes, ignore duplicate edges. Raise ValueError for edge endpoint absent from nodes or cycle. Do not mutate either input. No imports.
+
+Need lexicographically smallest topological ordering among all valid orderings of nodes strings. Standard Kahn's algorithm with min-heap of available zero indegree gives lexicographically smallest topological order for distinct items (when comparing sequence lexicographically). Need no imports, so cannot use heapq. Need implement no imports, deterministic. We can use min repeatedly or custom heap with lists. O(n^2) maybe acceptable? Unknown constraints. But no imports, simple min. Since nodes strings comparable. Need avoid mutating inputs. Use sets/dicts.
+
+Edges list of tuples. Duplicate edges: ignore. If duplicate edge contributes indegree once and adjacency once.
+
+Validation: edge endpoints absent from nodes. Need not mutate edges; just iterate. Should we validate nodes type? probably not. Unique strings assumption. We can use node_set = set(nodes) maybe assumes hashable. Since strings.
+
+Implementation:
+
+def topological_order(nodes, edges):
+    node_set = set(nodes)
+    # maybe need detect duplicate? nodes unique. If not? Could ignore? Maybe not.
+    # We can create dict adjacency with set to handle duplicates
+    adj = {node: set() for node in nodes}
+    indegree = {node: 0 for node in nodes}
+    for edge in edges:
+       try: before, after = edge
+       except ...? maybe raise ValueError? Problem only endpoints absent or cycle. But tuple unpack errors maybe could be raised? Could guard and raise ValueError? Maybe robust: if not edge or len !=2? But may not be required. Use for before, after in edges. If malformed, raise ValueError? Might be acceptable.
+       if before not in node_set or after not in node_set:
+           raise ValueError(...)
+       if after not in adj[before]: # duplicate edge ignore
+           adj[before].add(after)
+           indegree[after] += 1
+    # Kahn with available = [n for n,v in indegree.items() if v==0]
+    order=[]
+    available =

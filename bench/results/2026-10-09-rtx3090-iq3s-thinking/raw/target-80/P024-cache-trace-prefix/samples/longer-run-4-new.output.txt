@@ -1,0 +1,15 @@
+We need answer user's request: Implement topological_order(nodes, edges) in Python. Need return only complete function in Python code block. Done. Need think through requirements carefully.
+
+User: "Request identifier df854ac4f4a9734da713560d. Ignore this identifier.
+Read this review archive before the final task:
+...
+Implement topological_order(nodes, edges) in Python. nodes is a list of unique strings; edges is a list of (before, after) pairs. Return the lexicographically smallest topological ordering, include isolated nodes, and ignore duplicate edges. Raise ValueError for an edge endpoint absent from nodes or a cycle. Do not mutate either input. Use no imports. Return only the complete function in a Python code block."
+
+Need output only code block. Need ensure no imports. Need lexicographically smallest topological ordering for given nodes list unique strings? Lexicographically smallest topological ordering likely based on string sort order among available nodes. Need use Kahn's algorithm with min-heap but no imports. Could implement manual min selection from available list, sort initially. Need avoid mutating input. Could create copies. Need handle duplicate edges ignore. Edge endpoints absent -> ValueError. Cycle -> ValueError. Need include isolated nodes.
+
+Potential complexities: nodes is a list of unique strings but could maybe have duplicates? Says unique, but robust could handle? If duplicates? Could maybe ValueError? Not specified. Avoid mutating inputs. Edges list of pairs; duplicate edges ignored. If self-loop cycle. If edge endpoints missing raise ValueError. What about duplicate edge same endpoints? Ignore duplicates. What about edge with before or after not string? Probably not required. Need deterministic. Use only built-in.
+
+Algorithm:
+def topological_order(nodes, edges):
+    # make nodes copy? Need maintain? Use set for validation? For output lexicographically smallest, sort nodes. But if nodes list contains unique strings. Could do node_set = set(nodes), but if nodes contains non-hashable? strings hashable.
+    # validate nodes? Maybe check len(node_set) != len(nodes)? Since unique but not required? Could raise ValueError? Spec says unique. If duplicate input, preserving? We need not mutate. If duplicates, including isolated duplicates? Topological order normally unique. But not needed. Could just if duplicates, node_set removes and sorted(set(nodes)); but then ignores duplicate. But if duplicates not unique, maybe invalid? Not asked. Could ignore

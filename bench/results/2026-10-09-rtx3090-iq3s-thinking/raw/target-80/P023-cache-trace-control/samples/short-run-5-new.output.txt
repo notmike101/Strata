@@ -1,0 +1,20 @@
+We need answer user wants code only in Python code block. Need implement topological_order. Need think thoroughly. We need produce final only complete function code block, no imports.
+
+Requirements:
+- topological_order(nodes, edges)
+- nodes list unique strings; edges list of (before, after) pairs.
+- Return lexicographically smallest topological ordering, include isolated nodes, ignore duplicate edges.
+- Raise ValueError for edge endpoint absent from nodes or a cycle.
+- Do not mutate either input.
+- Use no imports.
+- Return only complete function in Python code block.
+
+Need ensure lexicographically smallest topological ordering. Usual Kahn's algorithm selecting smallest available node at each step yields lexicographically smallest topological order for DAG when all edges from before to after. Need confirm. Yes: among all valid topological sorts, greedily choosing smallest available node yields lexicographically smallest sequence. Need include isolated nodes: nodes with no incoming/outgoing have indegree 0 initially; will be considered based on lex order.
+
+Need ignore duplicate edges: if same edge repeated, indegree should count once. Need not mutate input: don't modify nodes or edges. Use internal sets/lists. Need raise ValueError if endpoint absent from nodes. Need cycle detection: if processed len != len(nodes). Need handle nodes list unique, but maybe can trust? Could use set for membership. Do not mutate input: don't sort nodes in place, use sorted. Need be careful about edges iterable? edges list. We can iterate. Need maybe tuples. Duplicate edges ignored. If endpoint absent, raise ValueError immediately. Could build graph with set of neighbors to dedupe and indegree set? Approach:
+- nodeset = set(nodes). But if nodes contains unhashable? strings only.
+- adj = {node: set() for node in nodes}
+- indeg = {node: 0 for node in nodes}
+- seen_edges = set()? If duplicate edge: skip. Could use adjacency set and check before adding. If (u,v) not in adj[u] add, indeg[v]+=1. This dedupes. No need seen_edges. But if u not in nodeset or v not nodeset: raise ValueError. Need maybe edge tuple length? If not pair? User says pairs. Could unpack. If edge is list? Could unpack u, v = edge. If invalid maybe TypeError but not required. Use for edge in edges: u, v = edge.
+
+Potential

@@ -1,0 +1,13 @@
+We need answer user's request. Need produce final only complete function in Python code block. Need ensure no imports. Implement topological_order(nodes, edges). Nodes list unique strings; edges list pairs before, after. Return lexicographically smallest topological ordering, include isolated nodes, ignore duplicate edges. Raise ValueError for edge endpoint absent from nodes or a cycle. Do not mutate either input. Use no imports.
+
+Need think carefully about lexicographically smallest topological ordering. For nodes strings, lexicographic order default string comparison. Need produce smallest sequence in lexicographic order among all valid topological orders. Standard algorithm: use Kahn's with min-heap of zero indegree nodes yields lexicographically smallest topological order if all edges directed and graph DAG? Need prove? Yes, for lexicographically smallest topological order, repeatedly pick smallest available node (zero indegree among remaining) is greedy correct. Need avoid imports -> can't use heapq? It says use no imports, but heapq is import. Implement custom min selection? Node count unknown. Could implement sorted list or manual min. Since nodes unique strings; lexicographic smallest topological order. We can repeatedly pick smallest among current zero indegree candidates. Need no imports, not mutate input. Need ignore duplicate edges. Validate endpoints absent raise ValueError. Cycle raise ValueError. Input data intact. Avoid hidden state. Deterministic.
+
+Potential pitfalls:
+- Duplicate edges: need ignore duplicates for indegree. We can use set of edges but set of tuples requires no import fine. But if endpoints are strings, tuple hash ok. However if duplicate edges, if we just indegree increment per unique edge. Need ensure not mutate input: use local sets/dicts/lists.
+- Self-loop? Endpoint absent? self-loop if before==after in nodes, cycle; raise ValueError. Need detect. In Kahn's, self-loop indegree >0 no start, result length < len nodes -> raise.
+- Edge endpoint absent: need check before, after in node set. But nodes list unique strings; maybe non-string? Spec says strings. Use set(nodes) for membership. Need if nodes contains unhashable? strings ok.
+- Do not mutate input: if nodes list, edges list. We can create local structures.
+- No imports: can use built-ins.
+- Complete function in Python code block only. Need maybe include helper? They asked complete function; can define nested helper? Probably okay.
+
+Need algorithm efficient. If many nodes, selecting min among

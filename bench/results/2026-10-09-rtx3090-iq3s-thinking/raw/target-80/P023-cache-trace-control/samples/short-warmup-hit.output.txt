@@ -1,0 +1,16 @@
+We need answer to user: implement topological_order in Python, only complete function in code block. Need produce final with code only. Need ensure no imports. Function signature topological_order(nodes, edges). nodes list of unique strings. edges list of (before, after) pairs. Return lexicographically smallest topological ordering, include isolated nodes, ignore duplicate edges. Raise ValueError for edge endpoint absent from nodes or cycle. Do not mutate either input. No imports. Complete function in Python code block.
+
+Need think details:
+- Must not mutate inputs. nodes is list, edges list. We can build structures from them. Need handle duplicate edges ignoring duplicates.
+- Lexicographically smallest topological order among all valid orders. For Kahn's algorithm with min-heap gives lexicographically smallest? Need verify. If nodes strings comparable. Use min-heap but no imports. Can implement heap manually using list and heapq? No imports means cannot import heapq. Can use sorted selection O(n^2) simpler. n unknown. We can repeatedly pick smallest available node with indegree 0. That yields lexicographically smallest topological order for DAG? Yes with Kahn choosing smallest current available at each step yields lexicographically smallest sequence because lexicographic order greedy works. Isolated nodes indegree 0 included.
+- Need detect missing endpoint: if before or after not in node set raise ValueError. Duplicate edges: if same directed edge multiple times should count indegree once. But if multiple different edges no issue.
+- Cycle: after processing count < len(nodes) raise ValueError. Need also perhaps self-loop: (a,a) edge -> duplicate? self-loop is edge from a to a, indegree? In set adjacency: add self edge and indegree[a]+=1 if not seen. Then a never indegree 0 => cycle raise. Good.
+
+- Do not mutate inputs: we won't assign to nodes/edges; we can iterate. But if edges list is a generator? Spec list, but not needed. Avoid converting nodes to set? that's new. OK.
+- Need ensure order deterministic. If nodes unique but order not relevant.
+- Implementation:
+def topological_order(nodes, edges):
+    node_set = set(nodes)
+    adj = {node: set() for node in node_set} maybe dict order? For sorting need nodes? Use indegree = {node:0 for node in node_set}
+    seen_edges = set()
+    for edge in edges:

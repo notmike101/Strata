@@ -1,0 +1,22 @@
+We need answer user wants implement function in Python code block only? Need produce final with complete function in Python code block. Need think through requirements.
+
+Task: topological_order(nodes, edges). nodes list of unique strings; edges list of (before, after) pairs. Return lexicographically smallest topological ordering, include isolated nodes, ignore duplicate edges. Raise ValueError for edge endpoint absent from nodes or cycle. Do not mutate inputs. No imports. Return only complete function in Python code block.
+
+Need implement stable lexicographically smallest topo order. For DAG with labels strings, lexicographically smallest sequence means among all valid topological sorts, pick lexicographically by list comparison. Standard algorithm: Kahn's with min-heap of zero indegree nodes yields lexicographically smallest topological order. Without imports (heapq not allowed). Need no imports. Can implement min selection manually using min over available list. Since nodes unique strings. Duplicate edges ignored: use set of edges? Need not mutate inputs, but can create adjacency set. Validate endpoints. Could first convert nodes to list maybe sorted? Input list order irrelevant? Topological lexicographic independent of input order. But duplicate edges ignored; if edge (u,v) duplicate skip. Need ensure no self-loop? Cycle check will catch. But if duplicate edges with cycle? ok.
+
+Need not mutate input: do not sort nodes in place. Can make set of nodes for validation. Need ensure edges iterable of pairs. No type checks needed? Could unpack. If malformed pair may error.
+
+Implementation options:
+
+def topological_order(nodes, edges):
+    node_set = set(nodes)
+    # validate unique? input unique, but if duplicates? Could use node_set, but nodes list maybe duplicates. Requirement unique. We might preserve set. Need if nodes duplicate? Could still set.
+    adj = {node: set() for node in nodes}  # if duplicates keys same? If nodes has duplicates, dict same. But unique.
+    indeg = {node: 0 for node in nodes}
+    seen_edges = set()
+    for before, after in edges:
+        if before not in node_set or after not in node_set:
+            raise ValueError(...)
+        if (before, after) in seen_edges: continue
+        seen_edges.add((before, after))
+        # optional self-loop? if before == after: then cycle. If we add adj before indeg? adjacency add only if after not in adj[
