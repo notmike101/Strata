@@ -1,0 +1,12 @@
+We need answer user's request. Need produce final detailed answer at least 1200 words. Need implement thread-safe Python TTLCache using OrderedDict and monotonic clock, include set, get, delete, clear, len, expiration, capacity eviction, unit tests with injected fake clock, detailed explanation thread safety and complexity. They gave existing cache rules 0-63 with item_XXX lifetime and size. Need perhaps incorporate? The prompt: "Read these existing design requirements before implementing the cache: Existing cache rule ..." Likely need implement a cache that can handle those rules? Maybe mention preloading? Need not abbreviate. Need probably use OrderedDict for LRU and TTL. Need thread safety. Need fake clock injection. Need complete code, tests, explain design. Need at least 1200 words. Need be careful.
+
+We need design TTLCache class. Requirements: OrderedDict and monotonic clock. Methods: set, get, delete, clear, len, expiration, capacity eviction. Thread-safe. Existing cache rules: key item_000 lifetime 30 size 64, incrementing by 3 size, lifetime +1. Could include helper create_existing_cache_rules? Maybe tests using fake clock can simulate entries for these keys. Need not use all? But prompt says read existing design requirements before implementing cache. Could include constants or method to initialize with those rules. Since item count 64, max size capacity maybe at least total bytes? If we want support all rules simultaneously: size bytes sum arithmetic: first 64, diff 3, n=64 sum = 64*(2*64+3*63)/2 = 64*(128+189)/2=64*317/2=32*317=10144 bytes. Lifetime max 93. If capacity bytes? Usually TTLCache capacity in items or bytes? They mention size bytes and capacity eviction. OrderedDict could store bytes sizes. Need capacity maybe max_bytes or max_items? Existing cache rule size 64..253. If capacity eviction: likely max_bytes capacity. We can implement both max_size (bytes) and max_entries. Use max_bytes = total maybe 10144. If capacity in bytes. Could also include max_size_items optional. Need ensure thread-safe.
+
+Implementation details:
+
+from collections import OrderedDict
+import threading
+import time
+from typing import Optional, Any
+
+class _CacheEntry

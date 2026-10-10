@@ -2809,5 +2809,81 @@
       88.4,
       86.9
     ]
+  },
+  {
+    "campaign": "target-80",
+    "arm": "R052-pcie000",
+    "workload": "longer",
+    "runs": 5,
+    "decode_median": 84.0,
+    "decode_min": 80.7,
+    "decode_max": 87.8,
+    "e2e_median": 41.817391341850026,
+    "stream_total_median": 41.821927167816376,
+    "ttft_median_seconds": 6.1676329000038095,
+    "raw_decode": [
+      84.0,
+      85.7,
+      87.8,
+      81.7,
+      80.7
+    ]
+  },
+  {
+    "campaign": "target-80",
+    "arm": "R052-pcie000",
+    "workload": "short",
+    "runs": 5,
+    "decode_median": 85.7,
+    "decode_min": 84.4,
+    "decode_max": 90.1,
+    "e2e_median": 74.78856127069503,
+    "stream_total_median": 74.80236688701946,
+    "ttft_median_seconds": 0.8834422999934759,
+    "raw_decode": [
+      90.1,
+      88.2,
+      85.7,
+      84.4,
+      85.3
+    ]
+  },
+  {
+    "campaign": "target-80",
+    "arm": "R056-memory-attribution",
+    "workload": "longer",
+    "runs": 5,
+    "decode_median": 84.2,
+    "decode_min": 69.5,
+    "decode_max": 86.3,
+    "e2e_median": 41.90183731859131,
+    "stream_total_median": 41.906356840779615,
+    "ttft_median_seconds": 6.156962799985195,
+    "raw_decode": [
+      83.6,
+      86.3,
+      69.5,
+      84.3,
+      84.2
+    ]
+  },
+  {
+    "campaign": "target-80",
+    "arm": "R056-memory-attribution",
+    "workload": "short",
+    "runs": 5,
+    "decode_median": 86.8,
+    "decode_min": 86.1,
+    "decode_max": 88.4,
+    "e2e_median": 75.88165141966856,
+    "stream_total_median": 75.89291947805687,
+    "ttft_median_seconds": 0.8741696999932174,
+    "raw_decode": [
+      86.1,
+      88.4,
+      86.8,
+      87.4,
+      86.1
+    ]
   }
 ]

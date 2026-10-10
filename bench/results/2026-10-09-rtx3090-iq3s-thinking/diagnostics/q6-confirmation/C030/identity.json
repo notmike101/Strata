@@ -1,0 +1,13 @@
+{
+  "model": "ISTA-DASLab/Qwen3.8-Flash-Next-GSQ-RCO-GGUF IQ3_S",
+  "compiler": "CUDA 13.3.73",
+  "reference_library_sha256": "d8fa2323885bf40c1c4a3b064e119c322eba8791a99ff7e1290d89c7b6d4fca5",
+  "reference_library_origin": "Retained CUDA 13.3 build-cuda86 artifact; its CMake source path was the earlier avx2-format-dispatch checkout. No checkout was created or modified for C030.",
+  "candidate_source_sha256": "37e6622be3ae26b7cd8fda41d5bb4715830f1cbdba3f93ccb9682bd0ac5990cf",
+  "original_helpers_sha256": "4696ed40318b4859f2a4a35c0463349981a406ce7377a6194ce70a0ac320d536",
+  "executable_sha256": "088e265c6829ef423acae23a709a8313cf4a86c36241dc0e14f10c7295b4ba60",
+  "driver": "610.88",
+  "gpu": "RTX 3090 sm_86",
+  "sampling": "No sampler in this kernel diagnostic; fixed production thinking profile unchanged.",
+  "cleanup": "66 short-lived processes exited; device reset in main; GPU returned to451MiB."
+}

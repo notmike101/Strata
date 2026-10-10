@@ -1,0 +1,5 @@
+shape=2560/10240 columns=1 kernels=1 onewarp=1 expected=1
+shape=2560/6144 columns=1 kernels=1 onewarp=0 expected=0
+shape=6144/2560 columns=1 kernels=1 onewarp=0 expected=0
+shape=2560/10240 columns=2 kernels=1 onewarp=0 expected=0
+PASS dispatch checks=4

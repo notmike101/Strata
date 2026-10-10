@@ -1,0 +1,21 @@
+We need answer user's request. Need produce final detailed answer at least 1200 words, complete code, tests, explanation thread safety complexity. User says benchmark identifier ignore. Implement thread-safe Python TTLCache class using OrderedDict and monotonic clock. Include set, get, delete, clear, len, expiration, capacity eviction, unit tests with injected fake clock, detailed explanation. Do not abbreviate implementation. Need likely provide code fully. Need think about design.
+
+Need satisfy: thread-safe Python TTLCache class using OrderedDict and monotonic clock. Need injected fake clock. Methods: set, get, delete, clear, len, expiration, capacity eviction. Maybe include __contains__, keys? But requirements. Need unit tests with fake clock. Need explain thread safety and complexity.
+
+Potential implementation:
+
+import threading, time
+from collections import OrderedDict
+
+class TTLCache:
+    def __init__(self, maxsize=128, ttl=60, clock=None):
+        if maxsize <=0: raise ValueError
+        if ttl <=0: raise ValueError
+        self.maxsize = int(maxsize)
+        self.ttl = float(ttl)
+        self._clock = clock or time.monotonic
+        self._lock = threading.RLock()
+        self._cache = OrderedDict() # key -> (value, expires_at)
+        self._timer = threading.Timer? Maybe expiration: could be explicit expiry via lazy deletion plus method evict_expired? They ask expiration. Could provide purge_expired method, and maybe a background timer? "Include set, get, delete, clear, len, expiration, capacity eviction". Could implement expiration as automatic cleanup on get and a purge_expired method; perhaps also optional periodic expiration using threading.Timer. But unit tests with fake clock need deterministic. If background timer uses real clock maybe not. Better include `expire_all`/`purge_expired` and maybe `expire` method. "expiration" maybe method to remove expired entries. Could call internally in get/set/len. Need ensure len excludes expired. Need avoid unbounded expired entries? purge on operations.
+
+Thread safety: use RLock for reentrancy if methods call internal purge. Need snapshot? For len: purge then return len. For get: under lock: remove expired, lookup, if miss return default; if hit, move_to_end for LRU. Maybe refresh expiration? In TTLCache, TTL starts on set, not sliding unless desired. Could optional `refresh=False`? Simpler

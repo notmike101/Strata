@@ -3,14 +3,14 @@
   "target_tps": 90,
   "metric": "server_decode_tps",
   "contract": "goal-90-contract.md",
-  "current": "PCIe AB/BA remains mixed and unpromoted. C028/C029 Q6 dense mappings passed bitwise diagnostics but show no useful general speed gain; production unchanged.",
+  "current": "Retained engine also hit intermittent commit growth in R055; R056 diagnostic completed86.8/84.2 with a69.5 slow row retained. Q6 opt-in correctness passed, not promoted.",
   "next": [
-    "Audit deterministic workload-aware CPU/GPU missed-expert balance using upstream PR 1548 and the retained scheduler; select a falsifiable architecture probe before changing code."
+    "Retry rebuilt disabled control then enabled arm; preserve intermittent memory failures and verify idle GPU state after UI inspection."
   ],
   "promoted": "The previously qualified format-gather engine with IQ2_S gather disabled and adaptive lag2; no changes this turn.",
   "stopping_rule": "Leave goal active until all fixed qualification cells pass. No benchmark model resident at handoff.",
   "quality": "Q007: 3/5 compiled and passed72 tests each, 2/5 no final answer at8192 tokens. Goal unqualified.",
-  "last_checkpoint": "E075",
-  "resume_command": "Read E066 and E073-E075, then inspect upstream PR 1548 through the bot helper and local scheduler dependencies. Do not repeat rejected Q6 mappings.",
-  "safety": "Full-tree cleanup verified; production config restored byte-for-byte; GPU553MiB. Effective sampling inheritance, Windows key spelling, last CLI occurrence and requested resident activation are guarded."
+  "last_checkpoint": "E079",
+  "resume_command": "No benchmark model resident. R053 and R055 stopped safely; R056 completed. After publication, prepare R057 rebuilt disabled control using normal observer, then R054 enabled. Preserve failed-arm evidence.",
+  "safety": "Full-tree cleanup and production config hash verified after R056. Idle GPU after direct UI inspection sampled649MiB; recheck before next arm. Original16GiB safety floors retained."
 }

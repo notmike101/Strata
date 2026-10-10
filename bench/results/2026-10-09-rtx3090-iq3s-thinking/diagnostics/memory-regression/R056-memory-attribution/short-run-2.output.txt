@@ -1,0 +1,12 @@
+We need answer user's request. Need produce final detailed answer >=1200 words, complete code, tests, explanation. User provided benchmark identifier ignore. Need implement thread-safe Python TTLCache using OrderedDict and monotonic clock. Include set, get, delete, clear, len, expiration, capacity eviction, unit tests with injected fake clock, detailed explanation thread safety and complexity. Do not abbreviate implementation. Need likely provide code blocks: implementation, tests, explanation. Need ensure complete code. Need think design.
+
+We need create TTLCache class. Requirements:
+- Thread-safe Python TTLCache class using OrderedDict and monotonic clock.
+- Include set, get, delete, clear, len, expiration, capacity eviction.
+- unit tests with injected fake clock.
+- detailed explanation of thread safety and complexity.
+- Write complete code, then tests, then explain design.
+- Do not abbreviate implementation.
+- >=1200 words.
+
+Need maybe use threading.Lock or RLock. OrderedDict move_to_end for LRU? TTLCache capacity eviction likely LRU on insert when over maxsize. Could also support maxsize and ttl default. Use OrderedDict with values tuple(value, expires_at). Monotonic clock via time.monotonic, injected clock default None. Need thread-safe: use reentrant lock because public methods acquire lock; internal helpers assume lock held. Ensure len is thread-safe? len(cache) should maybe trigger expired cleanup? But calling cleanup while holding lock can be O(n). Thread safety: all operations under lock; no iteration exposing internals without lock; clock monotonic no jumps. However cleanup O(n) could affect complexity. Need complexity average O(1) for set/get/delete with expired cleanup? Expiration of all expired can be O(n) if need len accurate? Need design to make len O(1) maybe store count and maybe lazy expiration? But user asks expiration. Need capacity eviction. Could implement cleanup of expired entries on set/get/delete/clear/len. But len with cleanup O(n) if many expired. Alternative maintain expired entries in OrderedDict and a min-heap for expiration times to clean expired in O(k log k) or O(log n). But requirement specifically using OrderedDict and monotonic clock. Could use OrderedDict only, capacity eviction O(1). For expiration, to make len O(1) without cleanup? Could not delete expired in len unless cleanup needed. Could implement lazy expiration in get: expired return None. For len returns total entries including expired unless call _

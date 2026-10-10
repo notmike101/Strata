@@ -1,0 +1,14 @@
+We need answer user's request. Need produce detailed answer at least 1200 words. User asks: Benchmark identifier ignore. Implement thread-safe Python TTLCache class using OrderedDict and monotonic clock. Include set, get, delete, clear, len, expiration, capacity eviction, unit tests with injected fake clock, detailed explanation thread safety and complexity. Write complete code, then tests, then explain design. Do not abbreviate implementation.
+
+Need produce final with code and tests and explanation. Need ensure complete code not abbreviated. Need probably use Python 3.12? But simple. Need maybe import threading, time, collections.ordereddict, numbers? Need design.
+
+Need think about implementation details. Thread-safe TTL cache: OrderedDict for LRU maybe? User says capacity eviction; likely evict oldest inserted/accessed. Need TTL. Use OrderedDict as cache and maybe _expiry dict? Better use OrderedDict with key -> (value, expiry_monotonic). For thread safety, use RLock? Need operations: set, get, delete, clear, len, expiration, capacity eviction. Need injected fake clock for tests. Use time_func argument default time.monotonic. Maybe maxsize, ttl. Need expiration maybe method to purge expired items, maybe set can purge expired when accessing. len should include expired? Need decide. Usually len should return count of non-expired entries, maybe trigger cleanup. Need maybe public method expire()/purge. Also `expiration`? User includes expiration maybe get_expiration or method. We can implement methods: set(key,value,ttl=None), get(key,default=None), delete(key), clear(), len, expired cleanup, set_ttl. Use OrderedDict for cache: key->value. Need expiry: maybe store expiry in parallel dict for performance but OrderedDict only? User says using an OrderedDict and monotonic clock. Could store tuple (value, expires_at) in OrderedDict, still using OrderedDict. For LRU: get move_to_end. Set: if existing update move_to_end. If new and maxsize reached, need evict capacity. But expired entries can make len > actual? Let's design robust.
+
+Potential approach:
+- Cache entry in OrderedDict: key: (value, expires_at or None)
+- `maxsize`: int >0 or None unbounded. `ttl`: float >0 or None default.
+- time_func callable returns monotonic float.
+- lock: threading.RLock because internal calls may need nested lock? Use with self._lock.
+
+Methods:
+`

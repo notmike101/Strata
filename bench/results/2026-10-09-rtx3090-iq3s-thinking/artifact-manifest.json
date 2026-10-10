@@ -1,13 +1,13 @@
 {
-  "exported_utc": "2026-10-10T00:30:18.962910+00:00",
+  "exported_utc": "2026-10-10T01:34:52.196545+00:00",
   "files": {
     ".gitattributes": {
       "bytes": 205,
       "sha256": "15b57f1650e1c6330ac02814e730d7470c68f7e1ccee5e2fbeeffa69ad9dcd5a"
     },
     "all-runs.csv": {
-      "bytes": 151577,
-      "sha256": "3ba83a96c7309201be1051f35ec68ec35f2b5b147fc07873c59381204fd7efaf"
+      "bytes": 156297,
+      "sha256": "2015931ab8dd84213a89ff2324accc0875dbee54efc6afe4e34abcbf1ee434e9"
     },
     "B008-pcie.csv": {
       "bytes": 7700,
@@ -889,6 +889,434 @@
       "bytes": 49070,
       "sha256": "cf17639f00d60c49ea494d447a796647706cab9981e3e6f02b7a39ead3c82b7c"
     },
+    "diagnostics/memory-regression/R055-retained-memory-control/client-command.json": {
+      "bytes": 250,
+      "sha256": "6deb19c73b293423331e35db41b4865957df78ad33b260267f04116ade6eea03"
+    },
+    "diagnostics/memory-regression/R055-retained-memory-control/client-log.txt": {
+      "bytes": 4658,
+      "sha256": "e1b08def60aab19f9deb6ef63cbdfacea7ddc1d980d7270effcbe47ce4658439"
+    },
+    "diagnostics/memory-regression/R055-retained-memory-control/configuration.json": {
+      "bytes": 1864,
+      "sha256": "7006a2d6ae0db581b6cdd67e8fa60efe0f82b961a2e90e03a745332d27699ed5"
+    },
+    "diagnostics/memory-regression/R055-retained-memory-control/effective-sampling-modes.json": {
+      "bytes": 254,
+      "sha256": "26cf4bca672cc8a4844337569cbb0a96eb51167078cd823abe5d45369dbd3b76"
+    },
+    "diagnostics/memory-regression/R055-retained-memory-control/engine-session.txt": {
+      "bytes": 10526,
+      "sha256": "139a48735b6fd5f8bf1c515c5bb3a4fbbf5e7913476580b4e904da757d5f0e4a"
+    },
+    "diagnostics/memory-regression/R055-retained-memory-control/failure.json": {
+      "bytes": 176,
+      "sha256": "d8f9306e3172213912db4e3b0ca5934a4548c716599d52471814a5f095ef40a3"
+    },
+    "diagnostics/memory-regression/R055-retained-memory-control/identity.json": {
+      "bytes": 8109,
+      "sha256": "0774ae41ca07ba3a42cf6b6dd761750673db9daaa884b2f88d7b66771b3baeea"
+    },
+    "diagnostics/memory-regression/R055-retained-memory-control/longer-run-1.output.txt": {
+      "bytes": 2443,
+      "sha256": "7f9d0f608a4963318c4dd44ca9e934a320ae159f59362585f6ddb6197187d74a"
+    },
+    "diagnostics/memory-regression/R055-retained-memory-control/longer-run-1.request.json": {
+      "bytes": 11885,
+      "sha256": "b508ef4d08a5c71cb77158f7377b3f2f04f4aaf96f02c11aa8a9f7ae50478d50"
+    },
+    "diagnostics/memory-regression/R055-retained-memory-control/longer-run-1.sse": {
+      "bytes": 122130,
+      "sha256": "4a39459ba32a8e00ecdb3e2d84e903feb50b4615b44642bcd8d3c207763ec7c2"
+    },
+    "diagnostics/memory-regression/R055-retained-memory-control/longer-run-2.output.txt": {
+      "bytes": 2371,
+      "sha256": "5abdeb843222d1f8da6d263463be12ea0c3e72fc41ef793ebee14b183e1227b9"
+    },
+    "diagnostics/memory-regression/R055-retained-memory-control/longer-run-2.request.json": {
+      "bytes": 11885,
+      "sha256": "7b454072012314b7a629f420fe7793c0f740ad185f0315c8efe094233ca3b621"
+    },
+    "diagnostics/memory-regression/R055-retained-memory-control/longer-run-2.sse": {
+      "bytes": 122064,
+      "sha256": "d3fd770b5c643f1b1e51e9a967d54094e5755fc59004f7c42a0399cda95b6ebd"
+    },
+    "diagnostics/memory-regression/R055-retained-memory-control/longer-run-3.output.txt": {
+      "bytes": 2443,
+      "sha256": "060486928eeaab8b77aba43d19f618bc30bd98097afd17707cfa60b877b75616"
+    },
+    "diagnostics/memory-regression/R055-retained-memory-control/longer-run-3.request.json": {
+      "bytes": 11885,
+      "sha256": "4f9b1aa1699173866166320568cb5aded9f861ecc2484a1e040d2187e324acdc"
+    },
+    "diagnostics/memory-regression/R055-retained-memory-control/longer-run-3.sse": {
+      "bytes": 122127,
+      "sha256": "0a4598c9e2e2802cc82fa88828d1c57fe7d49c60f4bc3af563bd3721c65f795c"
+    },
+    "diagnostics/memory-regression/R055-retained-memory-control/longer-run-4.request.json": {
+      "bytes": 11885,
+      "sha256": "811b0e42c9f71f6c47790e22723fb3d63f425a79d8b3b64b810ade186fd5e7b7"
+    },
+    "diagnostics/memory-regression/R055-retained-memory-control/longer-run-4.sse": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "diagnostics/memory-regression/R055-retained-memory-control/longer-warmup.output.txt": {
+      "bytes": 2246,
+      "sha256": "502bc6fd953c9a30577c2e3b09c1ea046b0666bd4f67cbcdaa46cd7e00f0b7e0"
+    },
+    "diagnostics/memory-regression/R055-retained-memory-control/longer-warmup.request.json": {
+      "bytes": 11885,
+      "sha256": "85a5b8c8a7aa54fa07745a1b4d09c1b3c2a56a74389fd87b1686a44f27d1d449"
+    },
+    "diagnostics/memory-regression/R055-retained-memory-control/longer-warmup.sse": {
+      "bytes": 121933,
+      "sha256": "d42dc4f93b6aae7e08b58d10809629102115cb8e0f346b18d8edafa9dafcb5e8"
+    },
+    "diagnostics/memory-regression/R055-retained-memory-control/memory-guard.py": {
+      "bytes": 835,
+      "sha256": "0eb2e6466cea2d9487acd287e67f2919558791eb10c2efcceaa5ee372341a9b3"
+    },
+    "diagnostics/memory-regression/R055-retained-memory-control/monitor-log.txt": {
+      "bytes": 1258,
+      "sha256": "1804e8a0a493586665141e179c8418da086fdddc8613ae80e9f652d71e74966a"
+    },
+    "diagnostics/memory-regression/R055-retained-memory-control/observer-audit.json": {
+      "bytes": 419939,
+      "sha256": "754aa020f2873ee5658c2c564a1bd381a7df548d476d7895be7f469c9eb17cee"
+    },
+    "diagnostics/memory-regression/R055-retained-memory-control/observer.json": {
+      "bytes": 102,
+      "sha256": "fae690257930be882eeec3ce79ec3c911d8f6d6b9da00238be9bd8410776812a"
+    },
+    "diagnostics/memory-regression/R055-retained-memory-control/prepare.txt": {
+      "bytes": 219,
+      "sha256": "24931bb70b78a44e14fdd6a28a5107c2d4438989446ff1a3d94ce72d9b3a5d43"
+    },
+    "diagnostics/memory-regression/R055-retained-memory-control/resident-mode-guard.py": {
+      "bytes": 1268,
+      "sha256": "70e0a993a1aa2cee4f255d3e853ebb26488d87b4c774304520c205aa724c0795"
+    },
+    "diagnostics/memory-regression/R055-retained-memory-control/runs.json": {
+      "bytes": 8608,
+      "sha256": "32e50569990f4ee52b61167fbe72620b7ff3ac8403921353492f716b61344b7a"
+    },
+    "diagnostics/memory-regression/R055-retained-memory-control/safety.csv": {
+      "bytes": 17317,
+      "sha256": "c0cb3b13588feada5b81e5dcbbeec785a7b3d97fd48af94416e7b07e58d22bb3"
+    },
+    "diagnostics/memory-regression/R055-retained-memory-control/short-run-1.output.txt": {
+      "bytes": 2282,
+      "sha256": "b892ff053b2dc3fe8e4470f6df6f8e4540e27ae6e3e29318ea1dfcbbe0d9c685"
+    },
+    "diagnostics/memory-regression/R055-retained-memory-control/short-run-1.request.json": {
+      "bytes": 955,
+      "sha256": "09c7db64c6dadb98ac526e641f41d469c2ec501ea1c6cab2fbea1d275e255dff"
+    },
+    "diagnostics/memory-regression/R055-retained-memory-control/short-run-1.sse": {
+      "bytes": 121974,
+      "sha256": "679e96119df218305d3acf2b597a858b09f738fa6359591ce04741fe823b11e0"
+    },
+    "diagnostics/memory-regression/R055-retained-memory-control/short-run-2.output.txt": {
+      "bytes": 2391,
+      "sha256": "e0aa3d13c86626a3bfeb79e0064c3c726c71609721ec56b5555326135e5269e4"
+    },
+    "diagnostics/memory-regression/R055-retained-memory-control/short-run-2.request.json": {
+      "bytes": 955,
+      "sha256": "2072428311779184a8c38b94198192d84ced11a2515c659a47dd04b24e2217be"
+    },
+    "diagnostics/memory-regression/R055-retained-memory-control/short-run-2.sse": {
+      "bytes": 122071,
+      "sha256": "942e2c31c149e8cba9d8703b7ab6fdb689d6b106b38cd46600b1e2d92bf4426a"
+    },
+    "diagnostics/memory-regression/R055-retained-memory-control/short-run-3.output.txt": {
+      "bytes": 2350,
+      "sha256": "fa6996f892ad324e52560820f7043c7c2d565dcef5cdbf79b46dec300f342765"
+    },
+    "diagnostics/memory-regression/R055-retained-memory-control/short-run-3.request.json": {
+      "bytes": 955,
+      "sha256": "07b2670edba3e424359564da9dcbd2a00854f48e0cbba8a12befbfc4efa28d08"
+    },
+    "diagnostics/memory-regression/R055-retained-memory-control/short-run-3.sse": {
+      "bytes": 122038,
+      "sha256": "f4d847c710597a1e35c2c46b0ac8b226e37b943856ed820612ae1851f357676b"
+    },
+    "diagnostics/memory-regression/R055-retained-memory-control/short-run-4.output.txt": {
+      "bytes": 2354,
+      "sha256": "4433d06dfb68ebf9a60ec8a5824a66865df21d43614237e15885ca894537cf32"
+    },
+    "diagnostics/memory-regression/R055-retained-memory-control/short-run-4.request.json": {
+      "bytes": 955,
+      "sha256": "f88ef344c27bd93518a99cd45ac269c4bacf95d5bd8eb79875bf9d3d04b4b4e8"
+    },
+    "diagnostics/memory-regression/R055-retained-memory-control/short-run-4.sse": {
+      "bytes": 122035,
+      "sha256": "2cad9b1155a3d27ba028b9ad90a6a1063d80d5e8bd5970dd59c2b408656919c8"
+    },
+    "diagnostics/memory-regression/R055-retained-memory-control/short-run-5.output.txt": {
+      "bytes": 2437,
+      "sha256": "268f571e2f1781df49885cbefc3d944ec3c7f2118ccb6637a17bead7ff8dd423"
+    },
+    "diagnostics/memory-regression/R055-retained-memory-control/short-run-5.request.json": {
+      "bytes": 955,
+      "sha256": "5d3f0b19ed2566d3db0aad5d3af96fadcbdb1404a9726646241e53d1027adc57"
+    },
+    "diagnostics/memory-regression/R055-retained-memory-control/short-run-5.sse": {
+      "bytes": 122118,
+      "sha256": "ef14acc167125b578b1a0661bf69cbbfaba02c1dba45862c1e832f6b1221bb54"
+    },
+    "diagnostics/memory-regression/R055-retained-memory-control/short-warmup.output.txt": {
+      "bytes": 2154,
+      "sha256": "b95b58aad570d6c34988bd12a40059c00c6fe3620f0a313bf06b04b30d60f7d9"
+    },
+    "diagnostics/memory-regression/R055-retained-memory-control/short-warmup.request.json": {
+      "bytes": 955,
+      "sha256": "057285fcb5b01fd8d7e4ed73cb6f46642d5581c976b3103548fa1d79e7de5a0d"
+    },
+    "diagnostics/memory-regression/R055-retained-memory-control/short-warmup.sse": {
+      "bytes": 121840,
+      "sha256": "fa07e6cccc73e0b169b12efb893e4c302a8cc35f935757688495c358e781ffdb"
+    },
+    "diagnostics/memory-regression/R055-retained-memory-control/spec-quality-guard.py": {
+      "bytes": 2282,
+      "sha256": "c5a9ffa351f59b66958d0b0e7fa49cff023eaf4ef287cf08c4bef164f8e6b356"
+    },
+    "diagnostics/memory-regression/R055-retained-memory-control/startup.txt": {
+      "bytes": 4836,
+      "sha256": "59367200f80c48dbf777ff4afdf0b539ea0e1f1877117442a6fbc28186e1f584"
+    },
+    "diagnostics/memory-regression/R055-retained-memory-control/supervisor-output.txt": {
+      "bytes": 1410,
+      "sha256": "fea3f5d301236882dd5f1313389758fc0137b7efd092c358cc2eab9293513ec0"
+    },
+    "diagnostics/memory-regression/R055-retained-memory-control/supervisor.py": {
+      "bytes": 7021,
+      "sha256": "90f0efa3df29536dac10c5a44ea3a8014b3970ba3bebbaced9520d622697ec59"
+    },
+    "diagnostics/memory-regression/R056-memory-attribution/client-command.json": {
+      "bytes": 245,
+      "sha256": "23bf60577893beb101793b9a6a09dc482e5bdc6bcb5fd0ba26814b359c2650e9"
+    },
+    "diagnostics/memory-regression/R056-memory-attribution/client-log.txt": {
+      "bytes": 6891,
+      "sha256": "76758875cc9868e3106b4881765495fba7bb2ed2958684029ff797a0e4217609"
+    },
+    "diagnostics/memory-regression/R056-memory-attribution/configuration.json": {
+      "bytes": 1864,
+      "sha256": "7006a2d6ae0db581b6cdd67e8fa60efe0f82b961a2e90e03a745332d27699ed5"
+    },
+    "diagnostics/memory-regression/R056-memory-attribution/effective-sampling-modes.json": {
+      "bytes": 254,
+      "sha256": "26cf4bca672cc8a4844337569cbb0a96eb51167078cd823abe5d45369dbd3b76"
+    },
+    "diagnostics/memory-regression/R056-memory-attribution/engine-session.txt": {
+      "bytes": 11472,
+      "sha256": "65a6173242416b4e0ac99981a0f9f94d6eb64e16bfe88c37cbfe23966dfc9e27"
+    },
+    "diagnostics/memory-regression/R056-memory-attribution/identity.json": {
+      "bytes": 8327,
+      "sha256": "f20d2d7d135a0dd3077db914bbc0f19349902a603c55588af07c936b876b5fb2"
+    },
+    "diagnostics/memory-regression/R056-memory-attribution/longer-run-1.output.txt": {
+      "bytes": 2246,
+      "sha256": "626c42aed65378400855d75ae3e81af5fbee8ba1bc00d53def6721e80f55b453"
+    },
+    "diagnostics/memory-regression/R056-memory-attribution/longer-run-1.request.json": {
+      "bytes": 11885,
+      "sha256": "b508ef4d08a5c71cb77158f7377b3f2f04f4aaf96f02c11aa8a9f7ae50478d50"
+    },
+    "diagnostics/memory-regression/R056-memory-attribution/longer-run-1.sse": {
+      "bytes": 121934,
+      "sha256": "5b296fc765139708af707ccdb5f8a12777240b06e2f9207fff0b5dd8948ccca9"
+    },
+    "diagnostics/memory-regression/R056-memory-attribution/longer-run-2.output.txt": {
+      "bytes": 2485,
+      "sha256": "655013032f7e7e834cb3a1ade434aa0776d42e4b9b7c96981caf59d52fca7e20"
+    },
+    "diagnostics/memory-regression/R056-memory-attribution/longer-run-2.request.json": {
+      "bytes": 11885,
+      "sha256": "7b454072012314b7a629f420fe7793c0f740ad185f0315c8efe094233ca3b621"
+    },
+    "diagnostics/memory-regression/R056-memory-attribution/longer-run-2.sse": {
+      "bytes": 122179,
+      "sha256": "d8e8f60bd8948edc4e904f94401580b5f7acdebb2c9813ecad6abaa2f6636e06"
+    },
+    "diagnostics/memory-regression/R056-memory-attribution/longer-run-3.output.txt": {
+      "bytes": 2411,
+      "sha256": "354df84a00a123a6c1d3b1b6873574f731459287e34b0c9aa435df1b11055663"
+    },
+    "diagnostics/memory-regression/R056-memory-attribution/longer-run-3.request.json": {
+      "bytes": 11885,
+      "sha256": "4f9b1aa1699173866166320568cb5aded9f861ecc2484a1e040d2187e324acdc"
+    },
+    "diagnostics/memory-regression/R056-memory-attribution/longer-run-3.sse": {
+      "bytes": 122106,
+      "sha256": "86072cfdf2b5dd625616c1d4201e2116732b094dea6338f143501bd785d83a83"
+    },
+    "diagnostics/memory-regression/R056-memory-attribution/longer-run-4.output.txt": {
+      "bytes": 2551,
+      "sha256": "a0a0e28038dc1ff8909b39628779dc4eac768070d7a530ab58cbbf2232e33ed2"
+    },
+    "diagnostics/memory-regression/R056-memory-attribution/longer-run-4.request.json": {
+      "bytes": 11885,
+      "sha256": "811b0e42c9f71f6c47790e22723fb3d63f425a79d8b3b64b810ade186fd5e7b7"
+    },
+    "diagnostics/memory-regression/R056-memory-attribution/longer-run-4.sse": {
+      "bytes": 122242,
+      "sha256": "7844260f87b5304c2ade678e659c6bfb58bb781b78a9161edef2629cf09a3b4c"
+    },
+    "diagnostics/memory-regression/R056-memory-attribution/longer-run-5.output.txt": {
+      "bytes": 2571,
+      "sha256": "7f9f4fef066880f1ee81bdf09f74f250d3c9efd24a087cdc5073364c008d0425"
+    },
+    "diagnostics/memory-regression/R056-memory-attribution/longer-run-5.request.json": {
+      "bytes": 11885,
+      "sha256": "7af1600c90072e39fc6a487b2873db81425923a80972cece0273188c9b772c54"
+    },
+    "diagnostics/memory-regression/R056-memory-attribution/longer-run-5.sse": {
+      "bytes": 122259,
+      "sha256": "9ef773b0747475f34535738ff4a137f3acb8cd0a8b4f69a6de1d6378584a6602"
+    },
+    "diagnostics/memory-regression/R056-memory-attribution/longer-warmup.output.txt": {
+      "bytes": 2359,
+      "sha256": "c663c914708b3f3995d50f9cc7b7e44d77d1faf3ca2470a34e4b897333511b8d"
+    },
+    "diagnostics/memory-regression/R056-memory-attribution/longer-warmup.request.json": {
+      "bytes": 11885,
+      "sha256": "85a5b8c8a7aa54fa07745a1b4d09c1b3c2a56a74389fd87b1686a44f27d1d449"
+    },
+    "diagnostics/memory-regression/R056-memory-attribution/longer-warmup.sse": {
+      "bytes": 122048,
+      "sha256": "944680bdaf7ea46ae53d44afee36e05ad1ea14df765e1e859f588b7c650943fc"
+    },
+    "diagnostics/memory-regression/R056-memory-attribution/memory-guard.py": {
+      "bytes": 835,
+      "sha256": "0eb2e6466cea2d9487acd287e67f2919558791eb10c2efcceaa5ee372341a9b3"
+    },
+    "diagnostics/memory-regression/R056-memory-attribution/monitor-log.txt": {
+      "bytes": 1260,
+      "sha256": "b273d8348dbb6cc08caf810c4b926c7452b7bf8d8cd78f41a783a5c563babb6a"
+    },
+    "diagnostics/memory-regression/R056-memory-attribution/observer-audit.json": {
+      "bytes": 279241,
+      "sha256": "e87b3f023fe1538fdb260938b09f6ed4b502a1fd3315b69a4fb94a714200a217"
+    },
+    "diagnostics/memory-regression/R056-memory-attribution/observer.json": {
+      "bytes": 102,
+      "sha256": "fae690257930be882eeec3ce79ec3c911d8f6d6b9da00238be9bd8410776812a"
+    },
+    "diagnostics/memory-regression/R056-memory-attribution/prepare.txt": {
+      "bytes": 214,
+      "sha256": "261375b72b17b25849936f4451f1aef2cdc5b79eb1167f86ecdf9d88f924b83e"
+    },
+    "diagnostics/memory-regression/R056-memory-attribution/resident-mode-guard.py": {
+      "bytes": 1268,
+      "sha256": "70e0a993a1aa2cee4f255d3e853ebb26488d87b4c774304520c205aa724c0795"
+    },
+    "diagnostics/memory-regression/R056-memory-attribution/runs.csv": {
+      "bytes": 2182,
+      "sha256": "e984d64753228d7d4582e01f018aef12d81da054ca46eee86c43d6ea8ab17e20"
+    },
+    "diagnostics/memory-regression/R056-memory-attribution/runs.json": {
+      "bytes": 10331,
+      "sha256": "948825bebabc3805b0cce134800b8564945f15c3a55a503d04d6911dd22186ae"
+    },
+    "diagnostics/memory-regression/R056-memory-attribution/safety.csv": {
+      "bytes": 12423,
+      "sha256": "3a9f61af09d740a84349e93b2c558714fd8f1b94227879890277fd43ff8621a2"
+    },
+    "diagnostics/memory-regression/R056-memory-attribution/short-run-1.output.txt": {
+      "bytes": 2363,
+      "sha256": "21c8f49873a4c90368234ffc951089b250999243488a1f87fe25d5e86e51b7cb"
+    },
+    "diagnostics/memory-regression/R056-memory-attribution/short-run-1.request.json": {
+      "bytes": 955,
+      "sha256": "09c7db64c6dadb98ac526e641f41d469c2ec501ea1c6cab2fbea1d275e255dff"
+    },
+    "diagnostics/memory-regression/R056-memory-attribution/short-run-1.sse": {
+      "bytes": 122054,
+      "sha256": "7f92468fdb8aaf70c896cc46a7925fed27e3537f56cdbb0c9780603d235b2443"
+    },
+    "diagnostics/memory-regression/R056-memory-attribution/short-run-2.output.txt": {
+      "bytes": 2490,
+      "sha256": "7f71cba005cf5c07023a6c77caa06cebc689c809753876fc92931fec82c0bb09"
+    },
+    "diagnostics/memory-regression/R056-memory-attribution/short-run-2.request.json": {
+      "bytes": 955,
+      "sha256": "2072428311779184a8c38b94198192d84ced11a2515c659a47dd04b24e2217be"
+    },
+    "diagnostics/memory-regression/R056-memory-attribution/short-run-2.sse": {
+      "bytes": 122179,
+      "sha256": "4d7c150ceeede38425b2cc525a4de9a9962e42df52ade7e23cc36b94896b3bc6"
+    },
+    "diagnostics/memory-regression/R056-memory-attribution/short-run-3.output.txt": {
+      "bytes": 2351,
+      "sha256": "49fa66699fc81fae2b8a67055c80d883b078e693be4a61d8730143c0bd5f3d9c"
+    },
+    "diagnostics/memory-regression/R056-memory-attribution/short-run-3.request.json": {
+      "bytes": 955,
+      "sha256": "07b2670edba3e424359564da9dcbd2a00854f48e0cbba8a12befbfc4efa28d08"
+    },
+    "diagnostics/memory-regression/R056-memory-attribution/short-run-3.sse": {
+      "bytes": 122029,
+      "sha256": "455016d998c3702931f7d6d8cd77eb301a35849e83882f51b26e74918ce1a5b8"
+    },
+    "diagnostics/memory-regression/R056-memory-attribution/short-run-4.output.txt": {
+      "bytes": 2365,
+      "sha256": "1b9160a6106140cda10317bddb58fa39f3802e8beb9295faff10c55106eb3b1d"
+    },
+    "diagnostics/memory-regression/R056-memory-attribution/short-run-4.request.json": {
+      "bytes": 955,
+      "sha256": "f88ef344c27bd93518a99cd45ac269c4bacf95d5bd8eb79875bf9d3d04b4b4e8"
+    },
+    "diagnostics/memory-regression/R056-memory-attribution/short-run-4.sse": {
+      "bytes": 122044,
+      "sha256": "6aaadcfd1bffcec15eee36b197b542c98782705522f3b616dda9b83944d47e36"
+    },
+    "diagnostics/memory-regression/R056-memory-attribution/short-run-5.output.txt": {
+      "bytes": 2371,
+      "sha256": "b43b83f6829ab1d77c264ca3304cb3c102b77c1d3ca7d9a5061e0dd7c0e2d0cf"
+    },
+    "diagnostics/memory-regression/R056-memory-attribution/short-run-5.request.json": {
+      "bytes": 955,
+      "sha256": "5d3f0b19ed2566d3db0aad5d3af96fadcbdb1404a9726646241e53d1027adc57"
+    },
+    "diagnostics/memory-regression/R056-memory-attribution/short-run-5.sse": {
+      "bytes": 122050,
+      "sha256": "a64d0719921e48d38afd3aaf6de382c8ee1de82c27fe8ce311fac1cbebb3b1c0"
+    },
+    "diagnostics/memory-regression/R056-memory-attribution/short-warmup.output.txt": {
+      "bytes": 2366,
+      "sha256": "47f8c7132256b8ad6098f1939b97897b900bc46c5a2218cbce76d33e7fab2e48"
+    },
+    "diagnostics/memory-regression/R056-memory-attribution/short-warmup.request.json": {
+      "bytes": 955,
+      "sha256": "057285fcb5b01fd8d7e4ed73cb6f46642d5581c976b3103548fa1d79e7de5a0d"
+    },
+    "diagnostics/memory-regression/R056-memory-attribution/short-warmup.sse": {
+      "bytes": 122056,
+      "sha256": "d9cf288fc3698aedb456511861d5f0a4126ee88a7df7f04baaf9e5a40d677fe7"
+    },
+    "diagnostics/memory-regression/R056-memory-attribution/spec-quality-guard.py": {
+      "bytes": 2282,
+      "sha256": "c5a9ffa351f59b66958d0b0e7fa49cff023eaf4ef287cf08c4bef164f8e6b356"
+    },
+    "diagnostics/memory-regression/R056-memory-attribution/startup.txt": {
+      "bytes": 4836,
+      "sha256": "7c492c9abf59d442bd129e8d3f88686ff9f26df53c1b20292e7ec3b5f764fe16"
+    },
+    "diagnostics/memory-regression/R056-memory-attribution/summary.json": {
+      "bytes": 1824,
+      "sha256": "d5bd2d955fdc1e8478524558794361f00b0a32821902c77fe7fa8ff98d61ff2d"
+    },
+    "diagnostics/memory-regression/R056-memory-attribution/supervisor-output.txt": {
+      "bytes": 656,
+      "sha256": "b3cd7725fb6b47ef107da465fcf78e78454da27886265426881c78f2e353bb72"
+    },
+    "diagnostics/memory-regression/R056-memory-attribution/supervisor.py": {
+      "bytes": 7668,
+      "sha256": "9eee1c905143b6cfffa5e37533b3149088a3eacf850f2ca69f2e115f85869a91"
+    },
     "diagnostics/observer/audit-memory-watch.py": {
       "bytes": 2157,
       "sha256": "2e948e4c212da6616827bafa30cbd987fa3c65d47ae262ed98577e54cda13aaa"
@@ -1232,6 +1660,690 @@
     "diagnostics/profile-coverage/E069/profile-completeness-plan.md": {
       "bytes": 1417,
       "sha256": "91c9b66e0315d35b61846563fc35d5b4781a64b057967dba40d824e7328afae9"
+    },
+    "diagnostics/q6-confirmation/C030/build-c030-dense.cmd": {
+      "bytes": 595,
+      "sha256": "6a81a578765b5b608dc1aa11bd58a24d335bc5497623158ea1e2bfd024a41d89"
+    },
+    "diagnostics/q6-confirmation/C030/c029-dense-test.cu": {
+      "bytes": 6099,
+      "sha256": "ebebdc7eae5bb72cc7eded14f41b18bb697805edf2701f5d8f3d17d7125f73a3"
+    },
+    "diagnostics/q6-confirmation/C030/c029-onewarp.inl": {
+      "bytes": 1783,
+      "sha256": "dfebf7213eede425107da0478aa19c3437a829b14ac69b4c2804a082d05936b4"
+    },
+    "diagnostics/q6-confirmation/C030/c029-original-helpers.inl": {
+      "bytes": 3588,
+      "sha256": "19935ebcfece00dd1dd2fcacbbbd8e0dadeeabb57b58cbf97a33b1ba402bebfc"
+    },
+    "diagnostics/q6-confirmation/C030/C030-build.txt": {
+      "bytes": 317,
+      "sha256": "4ddb0ed83dfae4f59c470d62702f6a3bac5335854e2bcc1e37cf46d31a318814"
+    },
+    "diagnostics/q6-confirmation/C030/c030-confirmation-plan.md": {
+      "bytes": 1503,
+      "sha256": "8870fbaf51e8f46cc91c37f004c70735f3c0a24ab3284e6c86faf649414cc43f"
+    },
+    "diagnostics/q6-confirmation/C030/C030-process-summary.json": {
+      "bytes": 9974,
+      "sha256": "4d1227060591e72fc123dc716ef9d417fedc569d0b93b6001f6304f20991edc6"
+    },
+    "diagnostics/q6-confirmation/C030/C030-wrapper.txt": {
+      "bytes": 447,
+      "sha256": "573cf5a8becb291183589ad54abe45890eb5a61a27c9275603b952a4b0f9f85d"
+    },
+    "diagnostics/q6-confirmation/C030/identity.json": {
+      "bytes": 913,
+      "sha256": "7b7210e47ee7c2ff15c0614c4c7618a09a94dad8d552d0777819e0b41bba6039"
+    },
+    "diagnostics/q6-confirmation/C030/pcie-zero-plan.md": {
+      "bytes": 1670,
+      "sha256": "0b963104164122e46760cd5b35de354c7e6045b3a83aa87608cce800c59c2d50"
+    },
+    "diagnostics/q6-confirmation/C030/q6-onewarp-integration-plan.md": {
+      "bytes": 2030,
+      "sha256": "95baf110af5d99e5e6d8401c47ccf4e49978259f79f6230bc3769f82cd4d1dbc"
+    },
+    "diagnostics/q6-confirmation/C030/repeat0-blk.0.attn_qkv.weight.txt": {
+      "bytes": 1027,
+      "sha256": "5edbf626de2fd5be0e3e3cbcfcd9574156f452a6e492b0afd5a6ef7032a36d47"
+    },
+    "diagnostics/q6-confirmation/C030/repeat0-blk.14.attn_qkv.weight.txt": {
+      "bytes": 1028,
+      "sha256": "8e093bb7b5da55cec5a54f01e2a4704e2f4679829a992895378ff4c211f0fb44"
+    },
+    "diagnostics/q6-confirmation/C030/repeat0-blk.16.attn_qkv.weight.txt": {
+      "bytes": 1028,
+      "sha256": "eca3ca84518374d9d56235c276b9d05afee2658df581a652af72de810aab7776"
+    },
+    "diagnostics/q6-confirmation/C030/repeat0-blk.17.attn_qkv.weight.txt": {
+      "bytes": 1028,
+      "sha256": "7b4fcccab5f17f3cd98698f181d8c449723a45703b250c1f81cb1f1556f89ca1"
+    },
+    "diagnostics/q6-confirmation/C030/repeat0-blk.18.attn_qkv.weight.txt": {
+      "bytes": 1028,
+      "sha256": "15cc51b6cb3f326ab48ee86b922dd1e9e4c8cde36371410ff55ca799bcc1429e"
+    },
+    "diagnostics/q6-confirmation/C030/repeat0-blk.2.attn_qkv.weight.txt": {
+      "bytes": 1027,
+      "sha256": "c80ce5cde3671000782c0e12c708776947cef6095911e1ce2f06dab379b30740"
+    },
+    "diagnostics/q6-confirmation/C030/repeat0-blk.20.attn_qkv.weight.txt": {
+      "bytes": 1028,
+      "sha256": "b36e4ca36839f2d8f67a7c0f47ee11afb16bdb910aaf9b2d629ada04e28c9368"
+    },
+    "diagnostics/q6-confirmation/C030/repeat0-blk.21.attn_qkv.weight.txt": {
+      "bytes": 1028,
+      "sha256": "5a44a345c95d2f4d0a6163804c7f593458a8c8e025db3c41b594fbcf5d1115f6"
+    },
+    "diagnostics/q6-confirmation/C030/repeat0-blk.22.attn_qkv.weight.txt": {
+      "bytes": 1028,
+      "sha256": "950b129928b1aa64e610315f3b3a4de28c96983a49d3b8d0f28a551f51ed24be"
+    },
+    "diagnostics/q6-confirmation/C030/repeat0-blk.24.attn_qkv.weight.txt": {
+      "bytes": 1028,
+      "sha256": "af9644af569674f951e3668e1a63d108f5108aeaedb0d7599f607c73b24bf664"
+    },
+    "diagnostics/q6-confirmation/C030/repeat0-blk.25.attn_qkv.weight.txt": {
+      "bytes": 1028,
+      "sha256": "7dda1f7e5b6e38dc63985f6741eb09d027a16288ac427d840a7a4591a9ce050f"
+    },
+    "diagnostics/q6-confirmation/C030/repeat0-blk.28.attn_qkv.weight.txt": {
+      "bytes": 1028,
+      "sha256": "860ae6e3326c5bd18000734d5d7dec6c1431b263e8b012852ceaceff13b663dc"
+    },
+    "diagnostics/q6-confirmation/C030/repeat0-blk.30.attn_qkv.weight.txt": {
+      "bytes": 1028,
+      "sha256": "b95c6166df670465865da8623bd1338728adae82f94f45a34e05c60572524b4e"
+    },
+    "diagnostics/q6-confirmation/C030/repeat0-blk.32.attn_qkv.weight.txt": {
+      "bytes": 1028,
+      "sha256": "d7cb10ef6737d80a24191004c375a4c3f644e1d599ea58889511e7edad58789f"
+    },
+    "diagnostics/q6-confirmation/C030/repeat0-blk.36.attn_qkv.weight.txt": {
+      "bytes": 1028,
+      "sha256": "92f30077481c10fc3d34fc686abf8baaf155b779b5506b14265362c65db0d899"
+    },
+    "diagnostics/q6-confirmation/C030/repeat0-blk.37.attn_qkv.weight.txt": {
+      "bytes": 1028,
+      "sha256": "33a6ef422a533c2f81d4162f8ec8b4e1274614a0207011a6260dbe3ea010e541"
+    },
+    "diagnostics/q6-confirmation/C030/repeat0-blk.4.attn_qkv.weight.txt": {
+      "bytes": 1027,
+      "sha256": "2f20ea34b808bfb85aa1d1ae141015fdb93595a84be343750c18d72802b60547"
+    },
+    "diagnostics/q6-confirmation/C030/repeat0-blk.40.attn_qkv.weight.txt": {
+      "bytes": 1028,
+      "sha256": "67adbedb6f806761d1e49a336477627dc8dde4f55d557e46d3c0e92275ca78b6"
+    },
+    "diagnostics/q6-confirmation/C030/repeat0-blk.5.attn_qkv.weight.txt": {
+      "bytes": 1027,
+      "sha256": "63574e6215c37005609af0035a640231e49d34adae1bab68b6e78be4dec5367a"
+    },
+    "diagnostics/q6-confirmation/C030/repeat0-blk.6.attn_qkv.weight.txt": {
+      "bytes": 1027,
+      "sha256": "b8712074903b3a78b6832b58167f78a30f27f4816f6ad5dff51434a2c2a48e04"
+    },
+    "diagnostics/q6-confirmation/C030/repeat0-blk.8.attn_qkv.weight.txt": {
+      "bytes": 1027,
+      "sha256": "a8812145ceb68d83beb494916caff614d779913db54c663717fe2d185aa66e4d"
+    },
+    "diagnostics/q6-confirmation/C030/repeat0-blk.9.attn_qkv.weight.txt": {
+      "bytes": 1027,
+      "sha256": "4ef3a95831ea2a2f35260f96b964d4abd2ae0adc8cb0bd8b7ed87d0bfa1fed8b"
+    },
+    "diagnostics/q6-confirmation/C030/repeat1-blk.0.attn_qkv.weight.txt": {
+      "bytes": 1027,
+      "sha256": "fd1e8445187ea5067aaac800db50674456ec7ea1450137c0a9747a1e32ac5703"
+    },
+    "diagnostics/q6-confirmation/C030/repeat1-blk.14.attn_qkv.weight.txt": {
+      "bytes": 1028,
+      "sha256": "03cbe941eb969574dcf87e9f81c1e4f7d0530130d700da211658269d9ba4faf7"
+    },
+    "diagnostics/q6-confirmation/C030/repeat1-blk.16.attn_qkv.weight.txt": {
+      "bytes": 1028,
+      "sha256": "729294e8b04f0fd53879969fa96dc2e28b482843c0790f67af560e9ba64cc41b"
+    },
+    "diagnostics/q6-confirmation/C030/repeat1-blk.17.attn_qkv.weight.txt": {
+      "bytes": 1028,
+      "sha256": "405355ae1dd393ad0a3eab658a5d3b620c8d443f24ff8e1101707a46e6cf0e14"
+    },
+    "diagnostics/q6-confirmation/C030/repeat1-blk.18.attn_qkv.weight.txt": {
+      "bytes": 1028,
+      "sha256": "2ddd5304b945a657e4addcf35fd2f8dfe666281e059403dfd012496c49346a96"
+    },
+    "diagnostics/q6-confirmation/C030/repeat1-blk.2.attn_qkv.weight.txt": {
+      "bytes": 1027,
+      "sha256": "bedf9e86d5bef57860a1f27c30d48b81be58bfc36ff4a5f27bc8d2f0672daae9"
+    },
+    "diagnostics/q6-confirmation/C030/repeat1-blk.20.attn_qkv.weight.txt": {
+      "bytes": 1028,
+      "sha256": "be5d19a7e54670526c2c2d364a68751ec1e534d391ce8698c151a98ee9c172df"
+    },
+    "diagnostics/q6-confirmation/C030/repeat1-blk.21.attn_qkv.weight.txt": {
+      "bytes": 1028,
+      "sha256": "2faf1b759f0dff7af5c0e018d75cf27c589f7b7b035bebde325dd987b0845a68"
+    },
+    "diagnostics/q6-confirmation/C030/repeat1-blk.22.attn_qkv.weight.txt": {
+      "bytes": 1028,
+      "sha256": "e33e71cf9cd15fa157e7fc5f0085300206604ac2e1e8e013d8d172b74d6d0efe"
+    },
+    "diagnostics/q6-confirmation/C030/repeat1-blk.24.attn_qkv.weight.txt": {
+      "bytes": 1028,
+      "sha256": "49134d7e0a608a1e71b3baa3ae78a96035e676c9992ef22dd0ad145c6d479951"
+    },
+    "diagnostics/q6-confirmation/C030/repeat1-blk.25.attn_qkv.weight.txt": {
+      "bytes": 1028,
+      "sha256": "a8572f6dda136deb1fcd1200d3375d3d1e953c72fe1cae2806a0d43fc058efa4"
+    },
+    "diagnostics/q6-confirmation/C030/repeat1-blk.28.attn_qkv.weight.txt": {
+      "bytes": 1028,
+      "sha256": "0c0f30103fccea9bb1a03015f8b49babe5a328cf4fe6d38afa5a01f739da4eae"
+    },
+    "diagnostics/q6-confirmation/C030/repeat1-blk.30.attn_qkv.weight.txt": {
+      "bytes": 1028,
+      "sha256": "fe04c682896207d2e50f69c5f9a20a506c19a766d699b5d5e88d366facb7e314"
+    },
+    "diagnostics/q6-confirmation/C030/repeat1-blk.32.attn_qkv.weight.txt": {
+      "bytes": 1028,
+      "sha256": "41d2c5d52ef5d682084bf88ad24c1f085d1168d5b21c820923f86501a6964a40"
+    },
+    "diagnostics/q6-confirmation/C030/repeat1-blk.36.attn_qkv.weight.txt": {
+      "bytes": 1028,
+      "sha256": "8aa30253be041bfa7c3697d5f2f5a0235891063d1f7dcbbf3bdb5b1684a1eb2c"
+    },
+    "diagnostics/q6-confirmation/C030/repeat1-blk.37.attn_qkv.weight.txt": {
+      "bytes": 1028,
+      "sha256": "7eae639d39a7931a12c8d9a8b5329400e27a3d7fff276835398d12dbed39c71f"
+    },
+    "diagnostics/q6-confirmation/C030/repeat1-blk.4.attn_qkv.weight.txt": {
+      "bytes": 1027,
+      "sha256": "330e7758eaa7f3f022b8b7ef48e9732e5c3fcfe7f3e9dc08a12447ea6f3c14f5"
+    },
+    "diagnostics/q6-confirmation/C030/repeat1-blk.40.attn_qkv.weight.txt": {
+      "bytes": 1028,
+      "sha256": "a4be4874caeb3d2a5b10d517d910d7ac71286f03639f306efca5f36a9f538cc8"
+    },
+    "diagnostics/q6-confirmation/C030/repeat1-blk.5.attn_qkv.weight.txt": {
+      "bytes": 1027,
+      "sha256": "99a4da4414771085e820405b3ec943df10ceb5154a7c8d8afc38a0e134d582f3"
+    },
+    "diagnostics/q6-confirmation/C030/repeat1-blk.6.attn_qkv.weight.txt": {
+      "bytes": 1027,
+      "sha256": "22263d2761c47b6a6c8ec0fd3fef8b3897afc05906e9247555089d0dfb8ec987"
+    },
+    "diagnostics/q6-confirmation/C030/repeat1-blk.8.attn_qkv.weight.txt": {
+      "bytes": 1027,
+      "sha256": "aaf0cf656320ac73f0cc04da01eca4e592e6cf940486fbc11706ef9e7115adde"
+    },
+    "diagnostics/q6-confirmation/C030/repeat1-blk.9.attn_qkv.weight.txt": {
+      "bytes": 1027,
+      "sha256": "414300a5914dc74a602b437241d4a77c1d506a01d75bba31ac54027ff51b8e62"
+    },
+    "diagnostics/q6-confirmation/C030/repeat2-blk.0.attn_qkv.weight.txt": {
+      "bytes": 1027,
+      "sha256": "cc1aadaad096ac085781b1af25472ead079fae79f4bf0301912de113b4122b38"
+    },
+    "diagnostics/q6-confirmation/C030/repeat2-blk.14.attn_qkv.weight.txt": {
+      "bytes": 1028,
+      "sha256": "fe868399fb5333654154a2d47a9c6d28037427b7ea6ba23cbcf29f61b20458e3"
+    },
+    "diagnostics/q6-confirmation/C030/repeat2-blk.16.attn_qkv.weight.txt": {
+      "bytes": 1028,
+      "sha256": "0c4937f24801127c5718c7ff6ee2d449110e316f45e7cf9d9ac112fd1939692f"
+    },
+    "diagnostics/q6-confirmation/C030/repeat2-blk.17.attn_qkv.weight.txt": {
+      "bytes": 1028,
+      "sha256": "e95d30c2861078a9f69d668508fc4415724440d00c0c6323b55f4cfbcf51d81e"
+    },
+    "diagnostics/q6-confirmation/C030/repeat2-blk.18.attn_qkv.weight.txt": {
+      "bytes": 1028,
+      "sha256": "422e4cde5bdaa4f4080bbe9a6b1e692969abae2559c84c2a9749868c250f0319"
+    },
+    "diagnostics/q6-confirmation/C030/repeat2-blk.2.attn_qkv.weight.txt": {
+      "bytes": 1027,
+      "sha256": "5f5c7a4c49ae2f3d768d89b459e54c7b609867828f4319ec3b72a354de68c0f8"
+    },
+    "diagnostics/q6-confirmation/C030/repeat2-blk.20.attn_qkv.weight.txt": {
+      "bytes": 1028,
+      "sha256": "1cccb84c8cf35cf7be3b498808d0394927a1b9f96f8a34823ab6ae47045f7946"
+    },
+    "diagnostics/q6-confirmation/C030/repeat2-blk.21.attn_qkv.weight.txt": {
+      "bytes": 1028,
+      "sha256": "a294dfa443aa701cc3af5ec77e2f23d28877c378412a94e8963a6e875c5040f7"
+    },
+    "diagnostics/q6-confirmation/C030/repeat2-blk.22.attn_qkv.weight.txt": {
+      "bytes": 1028,
+      "sha256": "9f7c9822a94327ec161a3356a2bd16d1fe515e36cc824d494d3989496282c72e"
+    },
+    "diagnostics/q6-confirmation/C030/repeat2-blk.24.attn_qkv.weight.txt": {
+      "bytes": 1028,
+      "sha256": "7d0e1fa2e5f2bf9412788131fe875336af18522cca1932bf91ccee779823e250"
+    },
+    "diagnostics/q6-confirmation/C030/repeat2-blk.25.attn_qkv.weight.txt": {
+      "bytes": 1028,
+      "sha256": "39901a0370622cb26bd2a1b5fd6e025e9634f20a9e8f16b5dd563ef119900130"
+    },
+    "diagnostics/q6-confirmation/C030/repeat2-blk.28.attn_qkv.weight.txt": {
+      "bytes": 1028,
+      "sha256": "84db2abe39cf6b1329dc3fbafcdc1388da66d14c6b495b248b3ffc246ed41f7b"
+    },
+    "diagnostics/q6-confirmation/C030/repeat2-blk.30.attn_qkv.weight.txt": {
+      "bytes": 1028,
+      "sha256": "81753ccc5301677490331e3aae15ac366bcb54a0b3ae276b1586a4555ceaeac9"
+    },
+    "diagnostics/q6-confirmation/C030/repeat2-blk.32.attn_qkv.weight.txt": {
+      "bytes": 1028,
+      "sha256": "f04c488352324a49e0680794f214a3e0876f176b3093829ef61fee83a2a73040"
+    },
+    "diagnostics/q6-confirmation/C030/repeat2-blk.36.attn_qkv.weight.txt": {
+      "bytes": 1028,
+      "sha256": "7fefaa74be3adf3f716f6ec8b05187c5ed3d107c470b8621e1e7a958313e8cd4"
+    },
+    "diagnostics/q6-confirmation/C030/repeat2-blk.37.attn_qkv.weight.txt": {
+      "bytes": 1028,
+      "sha256": "39f4edacff5dafda72f8fbad29d65975f86d64aefb1ee913d795ed4da178051a"
+    },
+    "diagnostics/q6-confirmation/C030/repeat2-blk.4.attn_qkv.weight.txt": {
+      "bytes": 1027,
+      "sha256": "5f0095e009edff988d43622426ca3cbe099861fe2decbfd8e4c1ed02718c36bd"
+    },
+    "diagnostics/q6-confirmation/C030/repeat2-blk.40.attn_qkv.weight.txt": {
+      "bytes": 1028,
+      "sha256": "ccf349ab02e0bdbae69348c2757cc2b4ff7f71a171584c4d502592f9796b0520"
+    },
+    "diagnostics/q6-confirmation/C030/repeat2-blk.5.attn_qkv.weight.txt": {
+      "bytes": 1027,
+      "sha256": "2172e3035a55ff2b1b9bac85a5d5dbfd14776435d10673e729b54dfb369816f0"
+    },
+    "diagnostics/q6-confirmation/C030/repeat2-blk.6.attn_qkv.weight.txt": {
+      "bytes": 1027,
+      "sha256": "0f82235dd1df14c32a134ada3cc78124f36737bb0bb2d7e8cd2a304621bd4755"
+    },
+    "diagnostics/q6-confirmation/C030/repeat2-blk.8.attn_qkv.weight.txt": {
+      "bytes": 1027,
+      "sha256": "371e2fcf1aeed0000a696d11d47cfb5e26047e8a650df948829c7ac11dbb0e42"
+    },
+    "diagnostics/q6-confirmation/C030/repeat2-blk.9.attn_qkv.weight.txt": {
+      "bytes": 1027,
+      "sha256": "eac6a779a51b97046f9386f34bf2202d515745372da7894740210758a201c71f"
+    },
+    "diagnostics/q6-confirmation/C030/run-c030.ps1": {
+      "bytes": 1496,
+      "sha256": "17e8192bfa25b2d3a506710679b5c4a01d8988732f5abfa1d2151271c2845a47"
+    },
+    "diagnostics/q6-confirmation/C030/stack-qualification-plan.md": {
+      "bytes": 2248,
+      "sha256": "6bf0bd19c27c6209dcb248de6e8c07f8cb7f13ef90977f43d1fff81577533f7a"
+    },
+    "diagnostics/q6-confirmation/C030/summary.json": {
+      "bytes": 56237,
+      "sha256": "744397f0dc9d2adaf25c4bc72a40cc23b6c27973a412bf5ab812ce92d8ccf14d"
+    },
+    "diagnostics/q6-integration/C031-C032/actual-weight-parity/mode0-blk.0.attn_qkv.weight.txt": {
+      "bytes": 638,
+      "sha256": "cb954f7232a1232ebd085eab68ea650bae1a771b44d4fe2da89e0fbfbd3ba0f3"
+    },
+    "diagnostics/q6-integration/C031-C032/actual-weight-parity/mode0-blk.14.attn_qkv.weight.txt": {
+      "bytes": 639,
+      "sha256": "ce6edacda7cd0954aaa8d79b78aa89f38552b1af3170c8e861debcc7dbc9b794"
+    },
+    "diagnostics/q6-integration/C031-C032/actual-weight-parity/mode0-blk.16.attn_qkv.weight.txt": {
+      "bytes": 639,
+      "sha256": "c378ef4a66c65d3ee72ab8d8673b6a1f0b738ee39941f22f825bc49274c10083"
+    },
+    "diagnostics/q6-integration/C031-C032/actual-weight-parity/mode0-blk.17.attn_qkv.weight.txt": {
+      "bytes": 639,
+      "sha256": "58c8d8d2f3abf0121d9112fe169e425cd28683fb90939c2fd6a73fcec2e2a9ed"
+    },
+    "diagnostics/q6-integration/C031-C032/actual-weight-parity/mode0-blk.18.attn_qkv.weight.txt": {
+      "bytes": 639,
+      "sha256": "12db4ab471b7b4e36278245f60b72c2d30c6def4d18c6c73212086e681ae1159"
+    },
+    "diagnostics/q6-integration/C031-C032/actual-weight-parity/mode0-blk.2.attn_qkv.weight.txt": {
+      "bytes": 638,
+      "sha256": "84dac64a46deb64ac7def246034c99f2d19ba420cf64ac1ca88097051a3d5fb1"
+    },
+    "diagnostics/q6-integration/C031-C032/actual-weight-parity/mode0-blk.20.attn_qkv.weight.txt": {
+      "bytes": 639,
+      "sha256": "36133d56d7dcda2ebdb6035311bbac9708763822e2939cf8d7b1fe95e9329409"
+    },
+    "diagnostics/q6-integration/C031-C032/actual-weight-parity/mode0-blk.21.attn_qkv.weight.txt": {
+      "bytes": 639,
+      "sha256": "b0d2d72b1f0e528079ff2a890046abae2d537706f875eb3d390e46c211060bf4"
+    },
+    "diagnostics/q6-integration/C031-C032/actual-weight-parity/mode0-blk.22.attn_qkv.weight.txt": {
+      "bytes": 639,
+      "sha256": "8f206e0e07bcc725dfc260bd904ba15f0752202f4892c43bc605767c0e6743e7"
+    },
+    "diagnostics/q6-integration/C031-C032/actual-weight-parity/mode0-blk.24.attn_qkv.weight.txt": {
+      "bytes": 639,
+      "sha256": "fc626b4f0b6b267533013d60edc2befd4af7c9762bbd49c4fa15c5742e69d0ec"
+    },
+    "diagnostics/q6-integration/C031-C032/actual-weight-parity/mode0-blk.25.attn_qkv.weight.txt": {
+      "bytes": 639,
+      "sha256": "666a9bb0516979ec7b13a6d68a36700ca7ba4f3982f81166bcd231b49674dfff"
+    },
+    "diagnostics/q6-integration/C031-C032/actual-weight-parity/mode0-blk.28.attn_qkv.weight.txt": {
+      "bytes": 639,
+      "sha256": "c99a51365a78ac819fbda4a21b34c260d6c902ed195d138a27fe019293d06a76"
+    },
+    "diagnostics/q6-integration/C031-C032/actual-weight-parity/mode0-blk.30.attn_qkv.weight.txt": {
+      "bytes": 639,
+      "sha256": "4fcbcf9a08ff636c4a0f25c7c794c67e4968a85f78a97f5b3e48d159f4feaef4"
+    },
+    "diagnostics/q6-integration/C031-C032/actual-weight-parity/mode0-blk.32.attn_qkv.weight.txt": {
+      "bytes": 639,
+      "sha256": "b710fa72a35e4766bf9077141851d7926979a87c8379d0a6c1febacb5bf2edad"
+    },
+    "diagnostics/q6-integration/C031-C032/actual-weight-parity/mode0-blk.36.attn_qkv.weight.txt": {
+      "bytes": 639,
+      "sha256": "56527b3e19063a9fa0f0f10f9aa3a7a31d2bf4aeec3c8749a4234bdabeed4e08"
+    },
+    "diagnostics/q6-integration/C031-C032/actual-weight-parity/mode0-blk.37.attn_qkv.weight.txt": {
+      "bytes": 639,
+      "sha256": "93bc7b9d467502b58cd952f67e9479f1d5ea5778b708af7a796d32d3bb005def"
+    },
+    "diagnostics/q6-integration/C031-C032/actual-weight-parity/mode0-blk.4.attn_qkv.weight.txt": {
+      "bytes": 638,
+      "sha256": "16c437e69548732b47288d83be56deb415b55f60cb74454c8769cd5fde8c1da8"
+    },
+    "diagnostics/q6-integration/C031-C032/actual-weight-parity/mode0-blk.40.attn_qkv.weight.txt": {
+      "bytes": 639,
+      "sha256": "9f2c8a74737a4778a2632514edc3726224b18614c4aef57738293c145d192202"
+    },
+    "diagnostics/q6-integration/C031-C032/actual-weight-parity/mode0-blk.5.attn_qkv.weight.txt": {
+      "bytes": 638,
+      "sha256": "1156023eaf8c226f3819015aa56bb4f40723e59368c5e67c0f79e5836d2c3457"
+    },
+    "diagnostics/q6-integration/C031-C032/actual-weight-parity/mode0-blk.6.attn_qkv.weight.txt": {
+      "bytes": 638,
+      "sha256": "3abb8e8ad034bbfa8c7936b46446b1489edc31b78acd07e68c6e7014440df4cc"
+    },
+    "diagnostics/q6-integration/C031-C032/actual-weight-parity/mode0-blk.8.attn_qkv.weight.txt": {
+      "bytes": 638,
+      "sha256": "cc99aaf87a626a362ce9205854744cc9879eb0b56de000082cd6589a37ce8a68"
+    },
+    "diagnostics/q6-integration/C031-C032/actual-weight-parity/mode0-blk.9.attn_qkv.weight.txt": {
+      "bytes": 638,
+      "sha256": "4c0847ac625943fa0494fb2792029cd74e98b7597ab359ad16cf03170f902651"
+    },
+    "diagnostics/q6-integration/C031-C032/actual-weight-parity/mode1-blk.0.attn_qkv.weight.txt": {
+      "bytes": 638,
+      "sha256": "49dfb8695158b30c300a1efe62e56609710f4b7663d40e408534de2fc806777e"
+    },
+    "diagnostics/q6-integration/C031-C032/actual-weight-parity/mode1-blk.14.attn_qkv.weight.txt": {
+      "bytes": 639,
+      "sha256": "dd0036d3db64dfc9d21fe5af48a00f8d2df5af0e6843b3019e069ef2c0bf934b"
+    },
+    "diagnostics/q6-integration/C031-C032/actual-weight-parity/mode1-blk.16.attn_qkv.weight.txt": {
+      "bytes": 639,
+      "sha256": "78fd95ccad709880f5d3b594c8010de3225fe00f91f431cfdf3bd8e39f7320c2"
+    },
+    "diagnostics/q6-integration/C031-C032/actual-weight-parity/mode1-blk.17.attn_qkv.weight.txt": {
+      "bytes": 639,
+      "sha256": "5d34593d75bc7d0bdcacc0feb3ba619abc2c8e47a46a5b5ae8d815df30557981"
+    },
+    "diagnostics/q6-integration/C031-C032/actual-weight-parity/mode1-blk.18.attn_qkv.weight.txt": {
+      "bytes": 639,
+      "sha256": "25addd463a7d0d3243a26b35b350977bc3719f5c652a59c40ebcdb50faebd12e"
+    },
+    "diagnostics/q6-integration/C031-C032/actual-weight-parity/mode1-blk.2.attn_qkv.weight.txt": {
+      "bytes": 638,
+      "sha256": "f028738f94a6a3ae7ee586756fe887d7019c11dbe5798435a558a6042ce61464"
+    },
+    "diagnostics/q6-integration/C031-C032/actual-weight-parity/mode1-blk.20.attn_qkv.weight.txt": {
+      "bytes": 639,
+      "sha256": "beccb155292b0e9bf490549f2b880a2e1a5627e6d913289632b9caec7db03ab1"
+    },
+    "diagnostics/q6-integration/C031-C032/actual-weight-parity/mode1-blk.21.attn_qkv.weight.txt": {
+      "bytes": 639,
+      "sha256": "970ebabb515e8940901099d1e5115ede912e5d61d1c30e054676d5b6599f3c38"
+    },
+    "diagnostics/q6-integration/C031-C032/actual-weight-parity/mode1-blk.22.attn_qkv.weight.txt": {
+      "bytes": 639,
+      "sha256": "a3f282f0cbe05d05551f1b418e55ff7455f44fe8f79e4b024b2505639f435b0d"
+    },
+    "diagnostics/q6-integration/C031-C032/actual-weight-parity/mode1-blk.24.attn_qkv.weight.txt": {
+      "bytes": 639,
+      "sha256": "869298bd3672a8fd5362a349ba1d8d375900d77532a37a74f99079973b343513"
+    },
+    "diagnostics/q6-integration/C031-C032/actual-weight-parity/mode1-blk.25.attn_qkv.weight.txt": {
+      "bytes": 639,
+      "sha256": "01c517894d99fdf8c2b14985a37c2baa819e16ca969109c1e8d0c4344689f485"
+    },
+    "diagnostics/q6-integration/C031-C032/actual-weight-parity/mode1-blk.28.attn_qkv.weight.txt": {
+      "bytes": 639,
+      "sha256": "e902cdef0bc5f942b1cbcb1e7a990948cf0aeae987584054af70b6343454637f"
+    },
+    "diagnostics/q6-integration/C031-C032/actual-weight-parity/mode1-blk.30.attn_qkv.weight.txt": {
+      "bytes": 639,
+      "sha256": "a0c4c46fac203f32f09d4527d4b3d2747ea52d7e7cb4c1dc997c8034409d8b6b"
+    },
+    "diagnostics/q6-integration/C031-C032/actual-weight-parity/mode1-blk.32.attn_qkv.weight.txt": {
+      "bytes": 639,
+      "sha256": "38bb3a2f9319f49539a7a53dc82fa1d2459ff92bc846261e8b6bc54f5d3ed7aa"
+    },
+    "diagnostics/q6-integration/C031-C032/actual-weight-parity/mode1-blk.36.attn_qkv.weight.txt": {
+      "bytes": 639,
+      "sha256": "4dd3c787b2e729057985641f966c0d2188debb797654b51c17f7fbbc60845509"
+    },
+    "diagnostics/q6-integration/C031-C032/actual-weight-parity/mode1-blk.37.attn_qkv.weight.txt": {
+      "bytes": 639,
+      "sha256": "a7debdf5bc8b72ed38870e7dd31f9bad64fdf0a496a98d7ba400a7fb6e5e18cc"
+    },
+    "diagnostics/q6-integration/C031-C032/actual-weight-parity/mode1-blk.4.attn_qkv.weight.txt": {
+      "bytes": 638,
+      "sha256": "9c2746dc14f3f33b8d4ead08ade0e9f3ea342838dbbf0082e2c883c20d29e686"
+    },
+    "diagnostics/q6-integration/C031-C032/actual-weight-parity/mode1-blk.40.attn_qkv.weight.txt": {
+      "bytes": 639,
+      "sha256": "2b68fc7a49c9a7d01ed4e08cc8bc1236e2c9836ae3bfc8080e15cc28ad1e7338"
+    },
+    "diagnostics/q6-integration/C031-C032/actual-weight-parity/mode1-blk.5.attn_qkv.weight.txt": {
+      "bytes": 638,
+      "sha256": "30adf4acfe784d457852a5850da0d48b7ad4270b010d3e39206cc33b2b89e121"
+    },
+    "diagnostics/q6-integration/C031-C032/actual-weight-parity/mode1-blk.6.attn_qkv.weight.txt": {
+      "bytes": 638,
+      "sha256": "4dc95aff9ffbe550a588b91d863b2b9a6eaca47892487fe3964e65fabf26e781"
+    },
+    "diagnostics/q6-integration/C031-C032/actual-weight-parity/mode1-blk.8.attn_qkv.weight.txt": {
+      "bytes": 638,
+      "sha256": "5d1b5d0f99964d21a36b87ed9142e7ec23b3fd69bd92d782a1e987a1cf3ea7ca"
+    },
+    "diagnostics/q6-integration/C031-C032/actual-weight-parity/mode1-blk.9.attn_qkv.weight.txt": {
+      "bytes": 638,
+      "sha256": "b71fdb6bb969c79282904275608588f442f1ff95422006a59b857e2c6574ebed"
+    },
+    "diagnostics/q6-integration/C031-C032/build-c031-dispatch-green.cmd": {
+      "bytes": 543,
+      "sha256": "5ffcb021b0976a5ed1b9641b3c62e387cf813722ae6987bd82e7824af1eeddba"
+    },
+    "diagnostics/q6-integration/C031-C032/build-c031-dispatch.cmd": {
+      "bytes": 538,
+      "sha256": "1b6c16dff1c9b924ee827e22535a635be59b72522d21bb572fa13b8c79f043e1"
+    },
+    "diagnostics/q6-integration/C031-C032/build-c031-engine.cmd": {
+      "bytes": 325,
+      "sha256": "3b983b0548a9f800025fd33132f725cf060dd3186f900295ffdf51dc4d8d72bc"
+    },
+    "diagnostics/q6-integration/C031-C032/build-c032-integrated.cmd": {
+      "bytes": 610,
+      "sha256": "c79723b587d32ec238cdb89a3662fa88451f2c698484f924084d2885fbe1cf93"
+    },
+    "diagnostics/q6-integration/C031-C032/build-cache.txt": {
+      "bytes": 50756,
+      "sha256": "8a9acf488fa5102348aee1a71ed54179cbd7cd30702df9196df704e7d7ed2ee2"
+    },
+    "diagnostics/q6-integration/C031-C032/c029-original-helpers.inl": {
+      "bytes": 3588,
+      "sha256": "19935ebcfece00dd1dd2fcacbbbd8e0dadeeabb57b58cbf97a33b1ba402bebfc"
+    },
+    "diagnostics/q6-integration/C031-C032/C031-ctest.txt": {
+      "bytes": 329,
+      "sha256": "baf87a99a13e7eb039b825383c595e560d8d254a1c97c4ae501d7124c27861d5"
+    },
+    "diagnostics/q6-integration/C031-C032/C031-default.txt": {
+      "bytes": 253,
+      "sha256": "c51df23dcfa6f332c91069268baa0b3e5295480d642b9ec39593f257bb815158"
+    },
+    "diagnostics/q6-integration/C031-C032/C031-enabled.txt": {
+      "bytes": 253,
+      "sha256": "74dc22b815a59ffee9884e1499e8be721858bf353868633d14453de2ede3e8c8"
+    },
+    "diagnostics/q6-integration/C031-C032/C031-engine-build-path-failure.txt": {
+      "bytes": 286,
+      "sha256": "23a90b07dc32090bf74e607f36188b7fbc450178294fb56497053eed3f32a98f"
+    },
+    "diagnostics/q6-integration/C031-C032/C031-engine-build.txt": {
+      "bytes": 205806,
+      "sha256": "9941e17d89c0d4ac4e67f19cd64aa91db259cfffd3d9b95f83dbc01a4c8a6f2c"
+    },
+    "diagnostics/q6-integration/C031-C032/C031-green-build.txt": {
+      "bytes": 335,
+      "sha256": "afdee015a988d8fc21da36cf67a2a11438864080ea9f11b8fdceac40f755c207"
+    },
+    "diagnostics/q6-integration/C031-C032/C031-red.txt": {
+      "bytes": 58,
+      "sha256": "fa26a5481048adefe044602a12b09aaf2fdd6f57354120c68c1100a8e2125efd"
+    },
+    "diagnostics/q6-integration/C031-C032/C031-review-build.txt": {
+      "bytes": 335,
+      "sha256": "20472c06c66337cc2eef3b805bcb38bbf1e4aa6dcbc66e75b13195fa9147324b"
+    },
+    "diagnostics/q6-integration/C031-C032/C031-review-default.txt": {
+      "bytes": 311,
+      "sha256": "b02946431bf13ac681367dd5230b8b6b4e398ed8ff9bbc65dd350a7b709cca06"
+    },
+    "diagnostics/q6-integration/C031-C032/C031-review-enabled.txt": {
+      "bytes": 311,
+      "sha256": "86fad1c9f9fe9aa7b82140489a25ac85abd005207e6c2324ee345e9e50b9f7c0"
+    },
+    "diagnostics/q6-integration/C031-C032/C031-review-unset.txt": {
+      "bytes": 311,
+      "sha256": "b02946431bf13ac681367dd5230b8b6b4e398ed8ff9bbc65dd350a7b709cca06"
+    },
+    "diagnostics/q6-integration/C031-C032/C031-unset.txt": {
+      "bytes": 253,
+      "sha256": "c51df23dcfa6f332c91069268baa0b3e5295480d642b9ec39593f257bb815158"
+    },
+    "diagnostics/q6-integration/C031-C032/C032-build.txt": {
+      "bytes": 327,
+      "sha256": "a104da5ab3435441626a4e64dece39acc0c2e9b86a72707eb8c444f8d1385534"
+    },
+    "diagnostics/q6-integration/C031-C032/c032-integrated-test.cu": {
+      "bytes": 6087,
+      "sha256": "847419dd917c6671d1e1d53828a1d6f5999938796f7bdfe189e05411183d0b70"
+    },
+    "diagnostics/q6-integration/C031-C032/c032-reference.inl": {
+      "bytes": 1937,
+      "sha256": "47a50e57c9e2cb6b9dbb3ed5ef22f825ef01178dd02ad2979dd8ae229558a9a2"
+    },
+    "diagnostics/q6-integration/C031-C032/C032-wrapper.txt": {
+      "bytes": 196,
+      "sha256": "3b7e07a6a15bf25889c0fe2e4a37f50f929cd102df8faa5a712a1f37fe17e696"
+    },
+    "diagnostics/q6-integration/C031-C032/identity.json": {
+      "bytes": 757,
+      "sha256": "fbb91a9995c1eb83f8ace9f287a1bc44711768ccb9828a8efcfa423b53559322"
+    },
+    "diagnostics/q6-integration/C031-C032/prepare-c032.py": {
+      "bytes": 2553,
+      "sha256": "f9afc6c8e136fefe4c402af131f46d8dbd676c54ef128cb22fe269badd7c32c9"
+    },
+    "diagnostics/q6-integration/C031-C032/q6-onewarp-integration-plan.md": {
+      "bytes": 2030,
+      "sha256": "f5c99803df2fd5d8985e6760b689f108183698010a93f1912d2c15d2eeacb0da"
+    },
+    "diagnostics/q6-integration/C031-C032/R053-disabled-stop/client-command.json": {
+      "bytes": 238,
+      "sha256": "8ed7ee99eaab0177346cd08caec8e77523902c956078f75be03753171602cacb"
+    },
+    "diagnostics/q6-integration/C031-C032/R053-disabled-stop/client-log.txt": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "diagnostics/q6-integration/C031-C032/R053-disabled-stop/configuration.json": {
+      "bytes": 1891,
+      "sha256": "d8f29ccc4bfefb8b1496e4278b90e7ce0d5e4bea139ae2195017f3148e7f0293"
+    },
+    "diagnostics/q6-integration/C031-C032/R053-disabled-stop/effective-sampling-modes.json": {
+      "bytes": 254,
+      "sha256": "26cf4bca672cc8a4844337569cbb0a96eb51167078cd823abe5d45369dbd3b76"
+    },
+    "diagnostics/q6-integration/C031-C032/R053-disabled-stop/engine-session.txt": {
+      "bytes": 4834,
+      "sha256": "a4efb5229192bc5794951c48609742df48b48faa83543606d6a3955380eb0b8f"
+    },
+    "diagnostics/q6-integration/C031-C032/R053-disabled-stop/failure.json": {
+      "bytes": 176,
+      "sha256": "7d5cc228730da52376770b9ed8ece1b0632382dcc84f21d0bb15a6294794d632"
+    },
+    "diagnostics/q6-integration/C031-C032/R053-disabled-stop/identity.json": {
+      "bytes": 8129,
+      "sha256": "31fa707c66e46ffabf5dc70b99bce4c50033aa05d4c40f9a70903eaf15e6d33a"
+    },
+    "diagnostics/q6-integration/C031-C032/R053-disabled-stop/memory-guard.py": {
+      "bytes": 835,
+      "sha256": "0eb2e6466cea2d9487acd287e67f2919558791eb10c2efcceaa5ee372341a9b3"
+    },
+    "diagnostics/q6-integration/C031-C032/R053-disabled-stop/monitor-log.txt": {
+      "bytes": 1259,
+      "sha256": "052b10190311a52ad6b9b82b7a7e2c67772b811516614811e192fd293b051d47"
+    },
+    "diagnostics/q6-integration/C031-C032/R053-disabled-stop/observer-audit.json": {
+      "bytes": 159539,
+      "sha256": "d459e3c31042f557aa4ef90b6e74c67917d6cc5b6873e1deb760839cf6623825"
+    },
+    "diagnostics/q6-integration/C031-C032/R053-disabled-stop/observer.json": {
+      "bytes": 102,
+      "sha256": "fae690257930be882eeec3ce79ec3c911d8f6d6b9da00238be9bd8410776812a"
+    },
+    "diagnostics/q6-integration/C031-C032/R053-disabled-stop/prepare.txt": {
+      "bytes": 208,
+      "sha256": "bf681ecba0976553d866a1ba45bae303c23b15d036c6b87fe3e4fb690c3e818c"
+    },
+    "diagnostics/q6-integration/C031-C032/R053-disabled-stop/resident-mode-guard.py": {
+      "bytes": 1268,
+      "sha256": "70e0a993a1aa2cee4f255d3e853ebb26488d87b4c774304520c205aa724c0795"
+    },
+    "diagnostics/q6-integration/C031-C032/R053-disabled-stop/safety.csv": {
+      "bytes": 5374,
+      "sha256": "326234f5047621ae28c00dba92ba3a97c4bbfa4a9ed9efcae74378b275761927"
+    },
+    "diagnostics/q6-integration/C031-C032/R053-disabled-stop/spec-quality-guard.py": {
+      "bytes": 2282,
+      "sha256": "c5a9ffa351f59b66958d0b0e7fa49cff023eaf4ef287cf08c4bef164f8e6b356"
+    },
+    "diagnostics/q6-integration/C031-C032/R053-disabled-stop/startup.txt": {
+      "bytes": 4834,
+      "sha256": "a4efb5229192bc5794951c48609742df48b48faa83543606d6a3955380eb0b8f"
+    },
+    "diagnostics/q6-integration/C031-C032/R053-disabled-stop/supervisor-output.txt": {
+      "bytes": 1409,
+      "sha256": "df57fcf587877e5f2c0ec63212f67b162973bf19c016598be14c53a2bcf49d23"
+    },
+    "diagnostics/q6-integration/C031-C032/R053-disabled-stop/supervisor.py": {
+      "bytes": 7021,
+      "sha256": "90f0efa3df29536dac10c5a44ea3a8014b3970ba3bebbaced9520d622697ec59"
+    },
+    "diagnostics/q6-integration/C031-C032/record-c031-c032.py": {
+      "bytes": 6861,
+      "sha256": "1bf900974d9f3783fc799ef1d6f6c87db3b6331e9ac5c0216382a0766d6658a2"
+    },
+    "diagnostics/q6-integration/C031-C032/run-c032.ps1": {
+      "bytes": 1329,
+      "sha256": "a29b7bc34b9fc6d41f02eda9d6bd0711a06bba1e576453812eca3c5febf33141"
+    },
+    "diagnostics/q6-integration/C031-C032/source/src/kernels/cuda/native_mmvq.cu": {
+      "bytes": 124350,
+      "sha256": "39009cf7700016d44d16694dd3b12ef09f46ba853c7a2c104c4678de3093b4ff"
+    },
+    "diagnostics/q6-integration/C031-C032/source/tools/test_q6_onewarp_dispatch.cu": {
+      "bytes": 2704,
+      "sha256": "c59726905c0d0f3dc36d1f6941774e0bf16440c3aea0b4b0d4295b1db2aa245c"
     },
     "diagnostics/q6-rowgroup/build-c021-rowgroup.cmd": {
       "bytes": 602,
@@ -1853,6 +2965,62 @@
       "bytes": 7021,
       "sha256": "90f0efa3df29536dac10c5a44ea3a8014b3970ba3bebbaced9520d622697ec59"
     },
+    "diagnostics/served-candidates/R052-pcie000/config-diff.json": {
+      "bytes": 1657,
+      "sha256": "e2e045b4ef87afa0cbb5eaa89533eb75a8476fb7ff8555847da5fe2a771803be"
+    },
+    "diagnostics/served-candidates/R052-pcie000/effective-sampling-modes.json": {
+      "bytes": 254,
+      "sha256": "26cf4bca672cc8a4844337569cbb0a96eb51167078cd823abe5d45369dbd3b76"
+    },
+    "diagnostics/served-candidates/R052-pcie000/engine-session.txt": {
+      "bytes": 10475,
+      "sha256": "d7fbf72f4c24e239b3bcc58779ece9ee99fbac066f16e55cff38fdca871c6e8e"
+    },
+    "diagnostics/served-candidates/R052-pcie000/memory-guard.py": {
+      "bytes": 835,
+      "sha256": "0eb2e6466cea2d9487acd287e67f2919558791eb10c2efcceaa5ee372341a9b3"
+    },
+    "diagnostics/served-candidates/R052-pcie000/memory-summary.json": {
+      "bytes": 338,
+      "sha256": "093db5ab2ff8309211d6af7e89ce23af7667403bb9bd09e57c51fecc5e4768a2"
+    },
+    "diagnostics/served-candidates/R052-pcie000/mtp-summary.json": {
+      "bytes": 368,
+      "sha256": "be8b7508919ad5be2cfbb882ec82e2fdc6287b8973079f55f6287e0758a86235"
+    },
+    "diagnostics/served-candidates/R052-pcie000/observer-audit.json": {
+      "bytes": 270934,
+      "sha256": "d7023426a8a72bee73f03910c91885669e2cfec510bcba97dcd183c0b95b7970"
+    },
+    "diagnostics/served-candidates/R052-pcie000/observer.json": {
+      "bytes": 102,
+      "sha256": "fae690257930be882eeec3ce79ec3c911d8f6d6b9da00238be9bd8410776812a"
+    },
+    "diagnostics/served-candidates/R052-pcie000/prepare.txt": {
+      "bytes": 202,
+      "sha256": "fa9cf5aaab7e3286ca4ddeb2f0a8b9aec8bb2d4cbe01f99997a757d32051a6ed"
+    },
+    "diagnostics/served-candidates/R052-pcie000/resident-mode-guard.py": {
+      "bytes": 1268,
+      "sha256": "70e0a993a1aa2cee4f255d3e853ebb26488d87b4c774304520c205aa724c0795"
+    },
+    "diagnostics/served-candidates/R052-pcie000/safety.csv": {
+      "bytes": 12025,
+      "sha256": "980c008cfaff25f50d0eaa7916f66c77d6b406b78172484c848d55a03ee45674"
+    },
+    "diagnostics/served-candidates/R052-pcie000/spec-quality-guard.py": {
+      "bytes": 2282,
+      "sha256": "c5a9ffa351f59b66958d0b0e7fa49cff023eaf4ef287cf08c4bef164f8e6b356"
+    },
+    "diagnostics/served-candidates/R052-pcie000/supervisor-output.txt": {
+      "bytes": 648,
+      "sha256": "03aebdff41eabfdc357e5f0cd04991a02e5230b3e8266fb4b18fd76c8fb25f13"
+    },
+    "diagnostics/served-candidates/R052-pcie000/supervisor.py": {
+      "bytes": 7021,
+      "sha256": "90f0efa3df29536dac10c5a44ea3a8014b3970ba3bebbaced9520d622697ec59"
+    },
     "diagnostics/spec-prob-audit/all-run-acceptance-comparison.json": {
       "bytes": 940,
       "sha256": "068ece47c13703618e6272059080e314f18b45b7b3a1a933fa0b9042fec30dab"
@@ -2050,12 +3218,12 @@
       "sha256": "2b50e44df19b0b201212d4218a744111913e55a2f3bb2daec73fdec7ac6a072c"
     },
     "engine-timings.txt": {
-      "bytes": 183708,
-      "sha256": "6af296e68ee7242f6a6bb25030c9a3b4ded35f82f620f245b287868d667bfc31"
+      "bytes": 189750,
+      "sha256": "ab76894283b4c530337d79b0e181b92b57c83b9d01c93ce36bf3c36ea2d2980b"
     },
     "experiment-index.json": {
-      "bytes": 61054,
-      "sha256": "8e5da4cb10008bd988ebe47af68aa9194a70dde064512446c0b1bed3efcc2544"
+      "bytes": 62660,
+      "sha256": "b683c7a9fe1bc0a80cdaaec0004541a1ee2f49a7e1c2f26c1f1dd46abeda3036"
     },
     "F001-pcie.csv": {
       "bytes": 9046,
@@ -2094,8 +3262,8 @@
       "sha256": "2f62bfdf31004200f39c1304db55b529c33f169fec03d3f572c9c4564d092739"
     },
     "goal-90-state.json": {
-      "bytes": 1277,
-      "sha256": "c928064b6dbd53f7878ca911b4ab3d601636006339e41add671b613904bdbf43"
+      "bytes": 1280,
+      "sha256": "87174fa99d768631f34f6d0d41c932ad4ed97d9432f5e3e755da0d75ad179c5d"
     },
     "goal90-benchmark.py": {
       "bytes": 13011,
@@ -2126,16 +3294,16 @@
       "sha256": "f1340e812574b74b1139b75eaa2cad11a2cd0c11f168f6c2f1f0e7a0bb4cbaf6"
     },
     "ledger.md": {
-      "bytes": 160926,
-      "sha256": "e55abd37e5794fa86cbf29dffd70ea6f2cadd2d1becd6e2a521473cfefcc6206"
+      "bytes": 170183,
+      "sha256": "77376282e9f2cf0a37155c378988de5927e8ef923df740de02e772ff42d180cd"
     },
     "measure.py": {
       "bytes": 13940,
       "sha256": "a071cf6400f06945e7fd0f41e0adf1cbed86b7d7f11800b560550446f98b57ea"
     },
     "memory-snapshots.json": {
-      "bytes": 32925,
-      "sha256": "5e2b7ed450db4ff5bd6c7e1face3d3432154e568e392e033c3150ab76545b08b"
+      "bytes": 33814,
+      "sha256": "80e2e66106f6c93cd562864aaf9dc25042794f1df2dfbdc5a2cb8364a38d36b6"
     },
     "P001-cuda_api_sum.csv": {
       "bytes": 2053,
@@ -9621,9 +10789,225 @@
       "bytes": 1821,
       "sha256": "01b01049498248d9e07ecef5b386e25a81a3f783070c00dbd614c59477ae25ca"
     },
+    "raw/target-80/R052-pcie000/identity.json": {
+      "bytes": 5152,
+      "sha256": "12ab12cb0b63e7f26df7da96566bc731b4bba17cfb27a8feec3c70ac3dbe2dd2"
+    },
+    "raw/target-80/R052-pcie000/runs.json": {
+      "bytes": 10335,
+      "sha256": "8486e5476df63437c26c1b3ddd865a3d2910ce0f42ba8ff5beae5d40a09336a0"
+    },
+    "raw/target-80/R052-pcie000/samples/longer-run-1.output.txt": {
+      "bytes": 2463,
+      "sha256": "44b7471750800b31ea397ca6d23acdb88e08e647bdcd9d8984f21b175e2af11d"
+    },
+    "raw/target-80/R052-pcie000/samples/longer-run-1.request.json": {
+      "bytes": 11885,
+      "sha256": "b508ef4d08a5c71cb77158f7377b3f2f04f4aaf96f02c11aa8a9f7ae50478d50"
+    },
+    "raw/target-80/R052-pcie000/samples/longer-run-2.output.txt": {
+      "bytes": 2536,
+      "sha256": "5dfcf14fd6f39c852f1f0093897ba7892751fb5b3fdad384b13c5af61a4f4265"
+    },
+    "raw/target-80/R052-pcie000/samples/longer-run-2.request.json": {
+      "bytes": 11885,
+      "sha256": "7b454072012314b7a629f420fe7793c0f740ad185f0315c8efe094233ca3b621"
+    },
+    "raw/target-80/R052-pcie000/samples/longer-run-3.output.txt": {
+      "bytes": 2524,
+      "sha256": "813d0c3abf2e9890fa452d42c3fcc6bbcaaddd76b57d5cc438b52c34712ece94"
+    },
+    "raw/target-80/R052-pcie000/samples/longer-run-3.request.json": {
+      "bytes": 11885,
+      "sha256": "4f9b1aa1699173866166320568cb5aded9f861ecc2484a1e040d2187e324acdc"
+    },
+    "raw/target-80/R052-pcie000/samples/longer-run-4.output.txt": {
+      "bytes": 2195,
+      "sha256": "30fc6226839c5ccb3d53e3f312c928d260ceb19c36e098399d3c3cf853e59336"
+    },
+    "raw/target-80/R052-pcie000/samples/longer-run-4.request.json": {
+      "bytes": 11885,
+      "sha256": "811b0e42c9f71f6c47790e22723fb3d63f425a79d8b3b64b810ade186fd5e7b7"
+    },
+    "raw/target-80/R052-pcie000/samples/longer-run-5.output.txt": {
+      "bytes": 2404,
+      "sha256": "6ea4ad4b73378370aed5fe2b7cfcec0d9e49ccd2a4d8ad28da07ca9136e8f7e9"
+    },
+    "raw/target-80/R052-pcie000/samples/longer-run-5.request.json": {
+      "bytes": 11885,
+      "sha256": "7af1600c90072e39fc6a487b2873db81425923a80972cece0273188c9b772c54"
+    },
+    "raw/target-80/R052-pcie000/samples/longer-warmup.output.txt": {
+      "bytes": 2183,
+      "sha256": "8846814499a7361148aa0770a3bc1e939109663e0de01b1f8807175b87938575"
+    },
+    "raw/target-80/R052-pcie000/samples/longer-warmup.request.json": {
+      "bytes": 11885,
+      "sha256": "85a5b8c8a7aa54fa07745a1b4d09c1b3c2a56a74389fd87b1686a44f27d1d449"
+    },
+    "raw/target-80/R052-pcie000/samples/short-run-1.output.txt": {
+      "bytes": 2486,
+      "sha256": "6da5c2b076dad7e45aa2917f43463b3d6ed5d5fe44db6205291c89a8f8d4555a"
+    },
+    "raw/target-80/R052-pcie000/samples/short-run-1.request.json": {
+      "bytes": 955,
+      "sha256": "09c7db64c6dadb98ac526e641f41d469c2ec501ea1c6cab2fbea1d275e255dff"
+    },
+    "raw/target-80/R052-pcie000/samples/short-run-2.output.txt": {
+      "bytes": 2384,
+      "sha256": "0699c37558485db19c04ac9f86b96867a40f767a195f5ab4af3a1aa49cbce7f7"
+    },
+    "raw/target-80/R052-pcie000/samples/short-run-2.request.json": {
+      "bytes": 955,
+      "sha256": "2072428311779184a8c38b94198192d84ced11a2515c659a47dd04b24e2217be"
+    },
+    "raw/target-80/R052-pcie000/samples/short-run-3.output.txt": {
+      "bytes": 2524,
+      "sha256": "2f8335e1c317d188373f806486280415168c4653e832d0f5903d5293cb4b751f"
+    },
+    "raw/target-80/R052-pcie000/samples/short-run-3.request.json": {
+      "bytes": 955,
+      "sha256": "07b2670edba3e424359564da9dcbd2a00854f48e0cbba8a12befbfc4efa28d08"
+    },
+    "raw/target-80/R052-pcie000/samples/short-run-4.output.txt": {
+      "bytes": 2375,
+      "sha256": "4eda99bb396fc28a1423f0f871f7b0037c95357af103f079d75081558f0393b7"
+    },
+    "raw/target-80/R052-pcie000/samples/short-run-4.request.json": {
+      "bytes": 955,
+      "sha256": "f88ef344c27bd93518a99cd45ac269c4bacf95d5bd8eb79875bf9d3d04b4b4e8"
+    },
+    "raw/target-80/R052-pcie000/samples/short-run-5.output.txt": {
+      "bytes": 2360,
+      "sha256": "edabd018d96ba21be49d6d93838b1f01f12e598b8a3d70537cbd6d167e352b47"
+    },
+    "raw/target-80/R052-pcie000/samples/short-run-5.request.json": {
+      "bytes": 955,
+      "sha256": "5d3f0b19ed2566d3db0aad5d3af96fadcbdb1404a9726646241e53d1027adc57"
+    },
+    "raw/target-80/R052-pcie000/samples/short-warmup.output.txt": {
+      "bytes": 2413,
+      "sha256": "991642c596dd3e8ede502bda99c1625e118012431cbf8b49b5c4f41478b260b8"
+    },
+    "raw/target-80/R052-pcie000/samples/short-warmup.request.json": {
+      "bytes": 955,
+      "sha256": "057285fcb5b01fd8d7e4ed73cb6f46642d5581c976b3103548fa1d79e7de5a0d"
+    },
+    "raw/target-80/R052-pcie000/summary.json": {
+      "bytes": 1825,
+      "sha256": "b10f2de6877f7f80b5dfeaac5976d9e3432bd2cb7b4d2e2bbab29eeff477adad"
+    },
+    "raw/target-80/R056-memory-attribution/identity.json": {
+      "bytes": 4523,
+      "sha256": "62814e464df9777e984ab67d3cd60ded2ca8b1109ead72aaf85e786322868af9"
+    },
+    "raw/target-80/R056-memory-attribution/runs.json": {
+      "bytes": 10331,
+      "sha256": "948825bebabc3805b0cce134800b8564945f15c3a55a503d04d6911dd22186ae"
+    },
+    "raw/target-80/R056-memory-attribution/samples/longer-run-1.output.txt": {
+      "bytes": 2246,
+      "sha256": "626c42aed65378400855d75ae3e81af5fbee8ba1bc00d53def6721e80f55b453"
+    },
+    "raw/target-80/R056-memory-attribution/samples/longer-run-1.request.json": {
+      "bytes": 11885,
+      "sha256": "b508ef4d08a5c71cb77158f7377b3f2f04f4aaf96f02c11aa8a9f7ae50478d50"
+    },
+    "raw/target-80/R056-memory-attribution/samples/longer-run-2.output.txt": {
+      "bytes": 2485,
+      "sha256": "655013032f7e7e834cb3a1ade434aa0776d42e4b9b7c96981caf59d52fca7e20"
+    },
+    "raw/target-80/R056-memory-attribution/samples/longer-run-2.request.json": {
+      "bytes": 11885,
+      "sha256": "7b454072012314b7a629f420fe7793c0f740ad185f0315c8efe094233ca3b621"
+    },
+    "raw/target-80/R056-memory-attribution/samples/longer-run-3.output.txt": {
+      "bytes": 2411,
+      "sha256": "354df84a00a123a6c1d3b1b6873574f731459287e34b0c9aa435df1b11055663"
+    },
+    "raw/target-80/R056-memory-attribution/samples/longer-run-3.request.json": {
+      "bytes": 11885,
+      "sha256": "4f9b1aa1699173866166320568cb5aded9f861ecc2484a1e040d2187e324acdc"
+    },
+    "raw/target-80/R056-memory-attribution/samples/longer-run-4.output.txt": {
+      "bytes": 2551,
+      "sha256": "a0a0e28038dc1ff8909b39628779dc4eac768070d7a530ab58cbbf2232e33ed2"
+    },
+    "raw/target-80/R056-memory-attribution/samples/longer-run-4.request.json": {
+      "bytes": 11885,
+      "sha256": "811b0e42c9f71f6c47790e22723fb3d63f425a79d8b3b64b810ade186fd5e7b7"
+    },
+    "raw/target-80/R056-memory-attribution/samples/longer-run-5.output.txt": {
+      "bytes": 2571,
+      "sha256": "7f9f4fef066880f1ee81bdf09f74f250d3c9efd24a087cdc5073364c008d0425"
+    },
+    "raw/target-80/R056-memory-attribution/samples/longer-run-5.request.json": {
+      "bytes": 11885,
+      "sha256": "7af1600c90072e39fc6a487b2873db81425923a80972cece0273188c9b772c54"
+    },
+    "raw/target-80/R056-memory-attribution/samples/longer-warmup.output.txt": {
+      "bytes": 2359,
+      "sha256": "c663c914708b3f3995d50f9cc7b7e44d77d1faf3ca2470a34e4b897333511b8d"
+    },
+    "raw/target-80/R056-memory-attribution/samples/longer-warmup.request.json": {
+      "bytes": 11885,
+      "sha256": "85a5b8c8a7aa54fa07745a1b4d09c1b3c2a56a74389fd87b1686a44f27d1d449"
+    },
+    "raw/target-80/R056-memory-attribution/samples/short-run-1.output.txt": {
+      "bytes": 2363,
+      "sha256": "21c8f49873a4c90368234ffc951089b250999243488a1f87fe25d5e86e51b7cb"
+    },
+    "raw/target-80/R056-memory-attribution/samples/short-run-1.request.json": {
+      "bytes": 955,
+      "sha256": "09c7db64c6dadb98ac526e641f41d469c2ec501ea1c6cab2fbea1d275e255dff"
+    },
+    "raw/target-80/R056-memory-attribution/samples/short-run-2.output.txt": {
+      "bytes": 2490,
+      "sha256": "7f71cba005cf5c07023a6c77caa06cebc689c809753876fc92931fec82c0bb09"
+    },
+    "raw/target-80/R056-memory-attribution/samples/short-run-2.request.json": {
+      "bytes": 955,
+      "sha256": "2072428311779184a8c38b94198192d84ced11a2515c659a47dd04b24e2217be"
+    },
+    "raw/target-80/R056-memory-attribution/samples/short-run-3.output.txt": {
+      "bytes": 2351,
+      "sha256": "49fa66699fc81fae2b8a67055c80d883b078e693be4a61d8730143c0bd5f3d9c"
+    },
+    "raw/target-80/R056-memory-attribution/samples/short-run-3.request.json": {
+      "bytes": 955,
+      "sha256": "07b2670edba3e424359564da9dcbd2a00854f48e0cbba8a12befbfc4efa28d08"
+    },
+    "raw/target-80/R056-memory-attribution/samples/short-run-4.output.txt": {
+      "bytes": 2365,
+      "sha256": "1b9160a6106140cda10317bddb58fa39f3802e8beb9295faff10c55106eb3b1d"
+    },
+    "raw/target-80/R056-memory-attribution/samples/short-run-4.request.json": {
+      "bytes": 955,
+      "sha256": "f88ef344c27bd93518a99cd45ac269c4bacf95d5bd8eb79875bf9d3d04b4b4e8"
+    },
+    "raw/target-80/R056-memory-attribution/samples/short-run-5.output.txt": {
+      "bytes": 2371,
+      "sha256": "b43b83f6829ab1d77c264ca3304cb3c102b77c1d3ca7d9a5061e0dd7c0e2d0cf"
+    },
+    "raw/target-80/R056-memory-attribution/samples/short-run-5.request.json": {
+      "bytes": 955,
+      "sha256": "5d3f0b19ed2566d3db0aad5d3af96fadcbdb1404a9726646241e53d1027adc57"
+    },
+    "raw/target-80/R056-memory-attribution/samples/short-warmup.output.txt": {
+      "bytes": 2366,
+      "sha256": "47f8c7132256b8ad6098f1939b97897b900bc46c5a2218cbce76d33e7fab2e48"
+    },
+    "raw/target-80/R056-memory-attribution/samples/short-warmup.request.json": {
+      "bytes": 955,
+      "sha256": "057285fcb5b01fd8d7e4ed73cb6f46642d5581c976b3103548fa1d79e7de5a0d"
+    },
+    "raw/target-80/R056-memory-attribution/summary.json": {
+      "bytes": 1824,
+      "sha256": "d5bd2d955fdc1e8478524558794361f00b0a32821902c77fe7fa8ff98d61ff2d"
+    },
     "README.md": {
-      "bytes": 22765,
-      "sha256": "4c192cc1f8ff8c1960dcd8d546170e233fb55fcdb44137616f7eb8e42eb72dfb"
+      "bytes": 22848,
+      "sha256": "a4f1c93a40061d9570db05acb98f183ccf717a30b55b8948e92bcae903b0a5c5"
     },
     "replay.py": {
       "bytes": 1104,
@@ -9642,8 +11026,8 @@
       "sha256": "649d5bb6ff558984406fb099959fc59133d908507bbc4381ed123b4ea6793e66"
     },
     "RESULTS.md": {
-      "bytes": 35121,
-      "sha256": "f9f7d1f0a91c4a47c5acbe6a67713649921ef8820cd5376dcfe090ec1393b5f3"
+      "bytes": 35981,
+      "sha256": "c0e0ede7ab19c8626ec34d5bd3db7d7c710c84da3145726ea733242a0e866eaf"
     },
     "sampling.json": {
       "bytes": 311,

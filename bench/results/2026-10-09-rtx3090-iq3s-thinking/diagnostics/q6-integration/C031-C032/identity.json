@@ -1,0 +1,11 @@
+{
+  "engine_sha256": "1dfeecd9869c266e82961426026e14c82ff822e0e004898959a900925ea57cf4",
+  "kernel_source_sha256": "6ed0c6859461ed63db151da7db004493696ee236dfea4fd57b7797a2614914bf",
+  "compiler": "CUDA 13.3.73, sm_86, Release",
+  "actual_weight_cases": 2464,
+  "finite_bitwise_float_comparisons": 7219168,
+  "dispatch_cases_per_mode": 5,
+  "backend_scope": "CUDA tested. New code excluded by __HIPCC__. HIP and SYCL builds unavailable; not claimed.",
+  "review": "Independent read-only review found no blocking correctness issue. Added the requested wrong-input/correct-output dispatch case 2304/10240; all three flag modes passed again.",
+  "quality_scope": "Kernel parity and dispatch only, not completed coding-answer or full workload qualification."
+}

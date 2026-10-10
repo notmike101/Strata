@@ -1,0 +1,11 @@
+We need answer user's request. Need produce final answer with complete code, tests, detailed explanation at least 1200 words. Need think fully.
+
+Task: Implement thread-safe Python TTLCache class using OrderedDict and monotonic clock. Include set, get, delete, clear, len, expiration, capacity eviction, unit tests with injected fake clock, detailed explanation of thread safety and complexity. Write complete code, then tests, then explain design. Do not abbreviate implementation. At least 1200 words.
+
+Need produce Python code. Need consider thread safety: use RLock? OrderedDict operations not thread-safe. Need protect with lock. TTL: monotonic clock injected, default time.monotonic. Store OrderedDict mapping key -> (value, expires_at). On get: check expiry. On set: if expired remove existing. Move to end for LRU? Need capacity eviction: when exceed maxsize, popitem(last=False) (oldest). But expiration order? TTL expiry independent of insertion/access order; could maintain? Requirement using OrderedDict and monotonic clock. Could implement LRU-like eviction and also expiration. If maxsize None? Need define. len should include only non-expired? Typically len returns number of non-expired entries; need maybe prune expired before len. But if no get? We can _purge_expired while holding lock. However scanning O(n) every len can be costly. But with OrderedDict and TTL, if entries inserted with same TTL? Not necessarily. Expiration can't be O(1) unless using heap or sorted keys. Requirement expiration maybe check on access. Could include _remove_expired_on_access. But if capacity eviction and expiration, need maybe store expires_at. For capacity eviction: if maxsize is not None and len after set? If len includes expired not purged, could pop non-expired? Need ensure accurate. Could maintain non-expired count? But expiration times varying. Could maintain an expiration heap? But requirement OrderedDict maybe only. We can implement lazy expiration plus optional _purge if many expired? Need keep simple and correct.
+
+Possible design:
+class TTLCache:
+    def __init__(self, maxsize=128, ttl=None, clock=time.monotonic):
+        if ttl is not None and ttl <=0? maybe allow None means never expires, positive ttl. maxsize non-negative. Use OrderedDict._data. self._lock = threading.RLock() (or Lock). Clock callable returns float monotonic.
+    _now

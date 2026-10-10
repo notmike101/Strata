@@ -1,0 +1,14 @@
+We need answer user's request. Need produce detailed answer at least 1200 words. User asks: Benchmark identifier ignore. Implement thread-safe Python TTLCache class using OrderedDict and monotonic clock. Include set, get, delete, clear, len, expiration, capacity eviction, unit tests with injected fake clock, detailed explanation thread safety and complexity. Write complete code, then tests, then explain design. Do not abbreviate implementation.
+
+Need produce final with code complete, tests complete, explanation. Need ensure code works. Need decide API.
+
+Implementation:
+class TTLCache:
+    __slots__? maybe not.
+    def __init__(self, maxsize, ttl, clock=time.monotonic): check maxsize positive, ttl >=0? If ttl None? Could allow no TTL? Better ttl seconds. If maxsize 0? Evict all? Maybe maxsize >=1. Use OrderedDict mapping key to value with expiry? Use OrderedDict as LRU? For capacity eviction, OrderedDict with move_to_end on get. Need expiration. Store (value, expires_at). But OrderedDict for LRU. Need thread safe. Use RLock? Need allow get calls maybe reentrant? Use threading.Lock. If methods need internal operations without locks. Use _purge_expired, _evict. But careful with lock reentrancy: if public methods acquire lock and call internal helpers no lock. Use threading.RLock to be safe? A simple Lock enough if internal helpers don't call public. But nested calls? Could be. Use RLock easier. But if get calls _touch and _is_expired? okay. We should define sentinel maybe. 
+
+Monotonic clock: time.monotonic default. Inject fake clock for tests.
+
+TTL cache: set(key, value, ttl=None?) maybe optional override ttl. get(key, default=None). delete(key) returns bool? clear() sets len zero. len: returns number non-expired entries. __len__ maybe call len? User says include len. Could provide __len__. Also maybe keys? Not needed.
+
+Thread safety issues: OrderedDict not thread safe. Lock critical sections. However using RLock can cause memory visibility? Python GIL, but lock ensures. Need avoid holding lock while user code? We can not call external except clock; clock could be user-supplied. If injected fake clock maybe not thread-safe? Could call clock outside lock? Better get now at start inside lock to avoid reentrancy? Clock could call back? Usually safe

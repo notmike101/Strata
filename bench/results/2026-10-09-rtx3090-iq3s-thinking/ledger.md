@@ -947,3 +947,136 @@ behavior of PCIe 0.20 and longer behavior of 0.10? Inspect the upstream balance
 controller and current schedule dependencies before any code change; reject
 timing-dependent quality shortcuts. The fixed 90 TPS matrix, Q007 coding failures,
 prompt/client-rate preservation and safe memory gates remain in force.
+
+
+## E076 / R052-pcie000
+
+Same retained production engine and loaded library hashes as R037. Config diff is archived. Fixed numeric sampling, high/xhigh reasoning, model/quant, vision, context262144 and INT8KV retained. Original TTLCache streaming cache-miss workloads; one excluded warmup and five measured seeds101-105 per cell,512tokens per measured run. No slow seed excluded.
+
+| Workload | Decode median (range), tok/s | Prompt median, tok/s | E2E median, tok/s | Stream total median, tok/s | TTFT median, s | Draft accepted/offered |
+|---|---:|---:|---:|---:|---:|---:|
+| short | 85.7 (84.4-90.1) | 196.0 | 74.7886 | 74.8024 | 0.8834 | 879/1130 (77.79%) |
+| longer | 84.0 (80.7-87.8) | 495.0 | 41.8174 | 41.8219 | 6.1676 | 951/1289 (73.78%) |
+
+Minimum available physical RAM 63,746,965,504 bytes; available commit 42,041,077,760 bytes. Sampled GPU peak 25,109,200,896 bytes. Both16GiB host floors passed. Per-process peak memory not sampled. Full launcher/server/text/vision cleanup passed and previous config restored.
+
+Zero PCIe share reached 85.7/84.0 short/longer server decode tok/s. Compared with same-order R051 control 87.8/82.3, short decode, prompt throughput and client rate fell; reject this setting as a stack component. All 8409 GPU-cache slots remained present. Production stays at PCIe 0.20.
+
+Next: Confirm the narrow C029 2560/10240 four-warp-CTA component with the retained CUDA 13.3 toolchain, all 22 actual tensors of that shape and three fresh processes each. Preserve small verified gains for interaction testing rather than requiring any component to reach 90 alone.
+
+
+## E077 / C030 small-component confirmation and interaction plan
+
+User steering explicitly calls for combining below-target improvements while
+checking their interactions. A component does not need to reach 90 tok/s alone.
+Ruling: reopen only C029's 2560/10240 group-4 case, which won 10/11 initial paired
+rounds, rather than discard it because its isolated gain is small. The general
+Q6 mapping remains rejected; the narrow case required confirmation first.
+
+C030 uses the retained CUDA 13.3.73 compiler and unchanged reference library on
+all 22 actual Q6_K tensors of that shape. Three fresh processes per tensor retain
+eleven alternating timing rounds each, excluding both priming and graph warmup.
+The middle pass reverses tensor order. All 66 process medians favor the preselected
+group-4 candidate: median candidate/reference time ratio 0.985704, range
+0.956067-0.997541. That is about 1.43% less kernel time at the median process ratio,
+not an estimate of whole-request throughput. Every tensor's 33 timing values,
+every process median, and alternative group measurements remain in the raw files.
+
+All 11,088 parity cases and 32,486,256 finite float comparisons were bitwise equal,
+with output canaries intact. The kernel keeps the original quantization, per-lane
+four-part accumulation order and reduction. No target sampler runs in this test.
+Each process resets the CUDA device; GPU memory returned to451MiB, with no server
+or benchmark model resident. The desktop's idle allocation was lower than the
+earlier553MiB baseline; R052 nevertheless retained8409 cache slots.
+
+Decision: verified kernel component, pending integrated-source and served checks.
+Add a CUDA-only opt-in for exactly the measured single-column shape; defaults and
+other shapes retain original dispatch. C031 first captured the old native graph
+and failed the requested activation check (onewarp0, expected1), then the code was
+added. The first build command used a nonexistent CMake path and failed before
+compiling; the corrected command uses the established .venv CMake. These command
+and test failures are retained. Build and integrated parity checks are in progress.
+
+The factorial stack plan preserves A (retained stack), A+B, A+C and A+B+C, then
+reverses order in fresh processes. It measures interaction instead of adding
+percentages. R052's zero PCIe share is not a component because it regressed short,
+prompt and client metrics. PCIe0.10 remains mixed, not promoted. Every served test
+retains the fixed model, quant,262144 context, thinking sampling and quality gates.
+
+
+## E078 / C031-C032 integrated Q6 opt-in; R053 memory stop
+
+The narrow CUDA-only STRATA_Q6_ONEWARP=1 component is now implemented for
+single-column Q6_K projections with input width2560 and output width10240.
+Four physical warps own four rows. Each lane retains four virtual partials and
+the original ordered combination and warp reduction. Unset, zero and all other
+shapes retain the original dispatch. No sampling, precision or model change.
+
+C031 graph inspection failed against the unchanged library before implementation,
+then passed against the new library. Independent review found no blocking issue;
+its requested additional wrong-input/correct-output shape2304/10240 now passes,
+alongside eligible, wrong-output, both-wrong and multicolumn shapes. All five
+dispatch cases passed with the flag absent, zero and one. Both existing CUDA
+MMVQ parity suites passed (2/2). CUDA13.3.73 Release sm_86 was built; HIP/SYCL
+execution is unavailable and is not claimed. The initial nonexistent CMake-path
+failure and the corrected build command remain archived.
+
+C032 links the actual integrated native entry against an independent copy of the
+original reference. Both flag modes across all22 actual tensors passed2,464 cases
+and7,219,168 finite bitwise float comparisons, including odd/full row counts and
+eight activation patterns. Output canaries passed. All44 subprocesses exited and
+GPU usage returned to451MiB. The first PowerShell runner invocation had a string
+interpolation parse error before execution; it was corrected before these checks.
+These are kernel-correctness results, not served TPS or coding-answer proof.
+
+R053 attempted the rebuilt binary with the opt-in disabled, preserving the
+retained configuration. It produced no completed warmup or measured run. The
+independent memory guard stopped it at physical headroom39,973,257,216 bytes and
+commit headroom16,785,092,608 bytes, below the16GiB commit floor. All launcher,
+server, engine and vision processes were stopped; the production config was
+restored byte-for-byte and GPU returned to451MiB. No TPS is assigned to this arm.
+
+Startup cache8409, prefill8192, ring384 and borrowed-cache2315 match R051. The
+R053 starting commit headroom was about8.28GB lower than R051; the subsequent
+growth remains unexplained. The retained executable is therefore being rerun
+under current host conditions before attributing this to the code or enabling
+the new dispatch. Safety floors remain unchanged. Production is not promoted.
+The small component remains a candidate for stacking, subject to the same
+sampling, quality, memory and workload contract. Goal90 remains active.
+
+
+## E079 / R055 retained-engine memory failure; R056 diagnostic repeat
+
+R055 repeats the retained production executable and fixed profile under current
+host conditions. Its memory guard also stopped the arm: physical headroom
+40,795,901,952 bytes and commit16,578,236,416 bytes, below the16GiB floor.
+There is no complete qualifying summary. All completed and interrupted request
+payloads, raw SSE, outputs and timing rows remain archived, including longer
+runs at13.3 and13.6 server decode tok/s. These failures are not dropped in favor
+of a successful repeat. The failure therefore is not unique to the Q6 rebuild.
+
+R056 adds a diagnostic-only early-stop hook below32GiB commit headroom, at which
+point it would capture process private/RSS attribution once and then stop. The
+hook never triggered; no process-memory query ran during generation. The fixed
+original requests, sampling,512-token cap and five measured seeds were retained.
+All ten measured requests completed. Ordinary medians: short86.8 and longer84.2
+server_decode_tps; prompt200.9/496.2; request_e2e75.8817/41.9018; TTFT0.8742/6.1570s.
+The longer69.5 tok/s run remains included (range69.5-86.3). This diagnostic is
+not a promotion or proof that the intermittent memory failure is resolved.
+Minimum physical/commit headroom61,737,230,336/39,387,676,672 bytes passed both
+original16GiB floors. Raw all-run statistics and the modified supervisor are saved.
+
+Both arms completed full launcher-tree cleanup and restored the production config
+SHA2563457fdfe7d69fbf6651e2031320cdebf88a9d8d269ebbe459db7fdd885e8c9f0.
+Direct Computer Use inspection after cleanup found Task Manager on Performance /
+Memory. It was not showing a Strata details row; that observation does not prove
+or rule out observer interference. No Task Manager setting was changed. UI capture
+raised the subsequent idle GPU sample to773MiB from451MiB, so another idle check
+is required before any comparison. Screenshots and unrelated app details are not
+published. Attribution of the intermittent commit growth remains unresolved.
+
+Next: repeat the rebuilt disabled control with the normal observer and the same
+payloads. Do not infer a code regression from R053 alone, and do not silently
+exclude R055 or its slow rows. Enable the exact Q6 component only after a stable
+control; evaluate combinations as measured interactions, not summed percentages.
+Goal90 remains active, fixed thinking sampling and all quality gates unchanged.

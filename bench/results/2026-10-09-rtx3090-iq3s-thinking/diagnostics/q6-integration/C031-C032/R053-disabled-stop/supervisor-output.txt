@@ -1,0 +1,20 @@
+SUCCESS: The process with PID 557152 (child process of PID 155656) has been terminated.
+SUCCESS: The process with PID 165196 (child process of PID 155656) has been terminated.
+SUCCESS: The process with PID 155656 (child process of PID 728996) has been terminated.
+SUCCESS: The process with PID 49000 (child process of PID 352232) has been terminated.
+SUCCESS: The process with PID 728996 (child process of PID 352232) has been terminated.
+SUCCESS: The process with PID 352232 (child process of PID 736180) has been terminated.
+Cleanup verified: no live Strata launcher, server, engine or vision process.
+Traceback (most recent call last):
+  File "C:\strata\local-setup\target-80\run-c020-arm.py", line 72, in <module>
+    wait_child(child,'benchmark',2400)
+    ~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\strata\local-setup\target-80\run-c020-arm.py", line 39, in wait_child
+    check_safety(phase)
+    ~~~~~~~~~~~~^^^^^^^
+  File "C:\strata\local-setup\target-80\run-c020-arm.py", line 34, in check_safety
+    memory_guard.require_headroom(physical,commit)
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^
+  File "C:\strata\local-setup\target-80\memory-guard.py", line 5, in require_headroom
+    raise RuntimeError(f'Safety headroom stop: physical={physical}, commit={commit}, minimum={floor} bytes')
+RuntimeError: Safety headroom stop: physical=39973257216, commit=16785092608, minimum=17179869184 bytes

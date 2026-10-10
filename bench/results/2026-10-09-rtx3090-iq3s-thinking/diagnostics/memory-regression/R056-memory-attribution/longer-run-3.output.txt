@@ -1,0 +1,13 @@
+We need answer user's request. Need produce final answer with complete code, tests, explanation at least 1200 words. Need implement thread-safe Python TTLCache using OrderedDict and monotonic clock. Include set,get,delete,clear,len, expiration, capacity eviction, unit tests with injected fake clock, detailed explanation thread safety and complexity. No abbreviate. Need maybe mention existing cache rules? The user says read existing design requirements before implementing cache. Rules likely specify each item lifetime/size; but we implement generic TTLCache. Could mention that rules can be preloaded? Maybe include capacity based on byte size? The rules have size bytes for each key. Existing cache rule says key item_000 lifetime size etc; expiration remove stale, access update LRU. It might be context to require handling per-key lifetime and size? Need incorporate size eviction? Existing rules include size per entry. Could include size tracking with capacity_bytes? The request says set, get, delete, clear, len, expiration, capacity eviction. Capacity eviction could be max entries or max bytes. Rules mention size bytes. Better design supports maxsize entries and optional max_bytes with per-item size. Or simpler capacity eviction max number entries. But because rules mention size, maybe use item_size metadata. Need implement robust thread-safe.
+
+Need answer with code, tests, design explanation. At least 1200 words. Need be careful with thread safety: RLock, monotonic clock, OrderedDict LRU, moving on get. Expiration lazy + eager. Could include purge_expired. With injected clock for tests. Need not use external libs. Need type hints.
+
+Potential implementation:
+class CacheEntry dataclass: value, expires_at, size.
+class TTLCache:
+ __init__(maxsize=1024, max_bytes=None, clock=time.monotonic, default_lifetime=30, default_size=1)
+ _lock = RLock
+ _data = OrderedDict, move_to_end=True? Use OrderedDict with move_to_end on get/set.
+ _total_bytes = 0
+ set(key, value, lifetime=None, size=None, expires_at=None?). If lifetime <=0 maybe immediately? Need not store expired? Could remove.
+ _purge_expired_locked: iterate over ordered dict and remove while front expired? LRU order not necessarily expiration order if lifetimes differ. If entries inserted at different times with different TTL, front may not be expired while later expired. Need if we want expiration remove stale entries. We can

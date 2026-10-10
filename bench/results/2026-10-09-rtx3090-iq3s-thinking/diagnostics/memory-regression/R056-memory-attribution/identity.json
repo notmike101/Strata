@@ -1,0 +1,215 @@
+{
+  "utc_started": "2026-10-10T01:27:24.705573+00:00",
+  "base_url": "http://<LAN_HOST>:8080",
+  "listener": {
+    "ProcessId": 67080,
+    "ExecutablePath": "<USER_HOME>\\AppData\\Local\\Python\\pythoncore-3.14-64\\python.exe",
+    "CommandLine": "\"C:\\Strata\\.venv\\Scripts\\python.exe\" -m serve.server --engine strata --config C:\\Strata\\strata-iq3_s.json --host 0.0.0.0 --port 8080"
+  },
+  "engine_processes": [
+    {
+      "ProcessId": 54244,
+      "Name": "strata-vision.exe",
+      "ExecutablePath": "C:\\strata\\engine\\strata-vision.exe",
+      "CommandLine": "C:\\strata\\engine\\strata-vision.exe --mmproj C:\\models\\Qwen3.8-Flash-Next\\mmproj-F16.gguf --model C:\\models\\Qwen3.8-Flash-Next\\IQ3_S\\Qwen3.8-Flash-Next-GSQ-RCO-IQ3_S-00001-of-00002.gguf --max-tokens 1024"
+    },
+    {
+      "ProcessId": 207256,
+      "Name": "strata-cuda133-format-gather.exe",
+      "ExecutablePath": "C:\\strata\\engine\\strata-cuda133-format-gather.exe",
+      "CommandLine": "C:\\strata\\engine\\strata-cuda133-format-gather.exe --serve --pack C:\\models\\Qwen3.8-Flash-Next\\Strata\\packs\\iq3_s --native C:\\models\\Qwen3.8-Flash-Next\\IQ3_S\\Qwen3.8-Flash-Next-GSQ-RCO-IQ3_S-00001-of-00002.gguf --ple-gguf C:\\models\\Qwen3.8-Flash-Next\\IQ3_S\\Qwen3.8-Flash-Next-GSQ-RCO-IQ3_S-00002-of-00002.gguf --expert-profile C:\\strata\\data\\expert-profile.bin --expert-cache auto --prefill auto --spec 4 --spec-min-p 0.70 --mtp C:\\models\\Qwen3.8-Flash-Next\\Strata\\mtp\\rt --max-context 262144 --kv int8 --kv-resident 32768 --vision --vram-reserve-mib 700 --pcie-frac 0.20"
+    }
+  ],
+  "engine_sha256": "6048736d7674d8f3c66ce50060f11ca6623df33d3e885030941a6ef9e62f427c",
+  "vision_sha256": "a4a8488a45a19bdf10f0c550a4fddd980572ac9c355456f0412a06cfd57b4f75",
+  "backend_library_sha256": {
+    "C:\\Strata\\.venv\\Lib\\site-packages\\nvidia\\cu13\\bin\\x86_64\\cublas64_13.dll": "b5846446f2a151ca24b74b8113d4ca32c52105ad89d4c2f1bc56a4ccffa9ea61",
+    "C:\\Strata\\.venv\\Lib\\site-packages\\nvidia\\cu13\\bin\\x86_64\\cublasLt64_13.dll": "680561bdc5d8a8c921e9ae974e6b60a6608c9d9fca8c0fd125e9da08c5c33ff1",
+    "C:\\WINDOWS\\SYSTEM32\\nvcuda.dll": "3fe38dc3b7eb45f4c364d87df01dbf1c224c5ffd96b542cea8c0dca215330b84"
+  },
+  "projector_sha256": "1f7b7f0b984cf065c604360c29c8098362ed61b290db0ff12c6f360bb1a8a980",
+  "shards": [
+    {
+      "path": "C:\\models\\Qwen3.8-Flash-Next\\IQ3_S\\Qwen3.8-Flash-Next-GSQ-RCO-IQ3_S-00001-of-00002.gguf",
+      "bytes": 54817524224,
+      "sha256_from_setup_verification": "sha256 4c1eb2ceb4915e1192f4f386021897bde56a97f40a0bb78bb86465e0f7d2aca3",
+      "note": "Previously fully hashed during this setup; not rehashed by this benchmark."
+    },
+    {
+      "path": "C:\\models\\Qwen3.8-Flash-Next\\IQ3_S\\Qwen3.8-Flash-Next-GSQ-RCO-IQ3_S-00002-of-00002.gguf",
+      "bytes": 28800138432,
+      "sha256_from_setup_verification": "sha256 316b46f3a2dbd68c900f43136ab9449f9dcc3725dfd8c794847c204bc161e113",
+      "note": "Previously fully hashed during this setup; not rehashed by this benchmark."
+    }
+  ],
+  "config": {
+    "exe": "C:\\strata\\engine\\strata-cuda133-format-gather.exe",
+    "args": [
+      "--pack",
+      "C:\\models\\Qwen3.8-Flash-Next\\Strata\\packs\\iq3_s",
+      "--native",
+      "C:\\models\\Qwen3.8-Flash-Next\\IQ3_S\\Qwen3.8-Flash-Next-GSQ-RCO-IQ3_S-00001-of-00002.gguf",
+      "--ple-gguf",
+      "C:\\models\\Qwen3.8-Flash-Next\\IQ3_S\\Qwen3.8-Flash-Next-GSQ-RCO-IQ3_S-00002-of-00002.gguf",
+      "--expert-profile",
+      "C:\\strata\\data\\expert-profile.bin",
+      "--expert-cache",
+      "auto",
+      "--prefill",
+      "auto",
+      "--spec",
+      "4",
+      "--spec-min-p",
+      "0.70",
+      "--mtp",
+      "C:\\models\\Qwen3.8-Flash-Next\\Strata\\mtp\\rt",
+      "--max-context",
+      "262144",
+      "--kv",
+      "int8",
+      "--kv-resident",
+      "32768",
+      "--vision",
+      "--vram-reserve-mib",
+      "700",
+      "--pcie-frac",
+      "0.20"
+    ],
+    "cwd": "C:\\strata",
+    "tokenizer": "C:\\models\\Qwen3.8-Flash-Next\\Strata\\packs\\iq3_s\\tokenizer",
+    "model_name": "qwen3.8-flash-next-iq3_s",
+    "log": "C:\\strata\\strata-iq3_s.log",
+    "lib_dirs": [
+      "C:\\Strata\\.venv\\Lib\\site-packages\\nvidia\\cu13\\bin\\x86_64"
+    ],
+    "port": 8080,
+    "gpu": 0,
+    "gpus_asked": true,
+    "open_browser": false,
+    "parallel": 1,
+    "vision": {
+      "exe": "C:\\strata\\engine\\strata-vision.exe",
+      "mmproj": "C:\\models\\Qwen3.8-Flash-Next\\mmproj-F16.gguf",
+      "model": "C:\\models\\Qwen3.8-Flash-Next\\IQ3_S\\Qwen3.8-Flash-Next-GSQ-RCO-IQ3_S-00001-of-00002.gguf",
+      "gpu": false,
+      "max_tokens": 1024
+    },
+    "host": "0.0.0.0",
+    "sampling": {
+      "temperature": 1.0,
+      "top_p": 0.95,
+      "top_k": 20,
+      "min_p": 0.0,
+      "presence_penalty": 0.0,
+      "repetition_penalty": 1.0,
+      "frequency_penalty": 0.0
+    },
+    "reasoning_budget_tokens": 0,
+    "env": {
+      "STRATA_IQ256_GATHER": "1",
+      "STRATA_IQ_MT_MIN": "1",
+      "STRATA_IQ256_GATHER_IQ2_S": "0",
+      "STRATA_ADAPT_LAG": "2"
+    }
+  },
+  "config_sha256": "3457fdfe7d69fbf6651e2031320cdebf88a9d8d269ebbe459db7fdd885e8c9f0",
+  "expert_profile_sha256": "8f59b4aa8873209dff11c11e37bcda9529a1335b724a1afeea37bf6388975baf",
+  "expert_profile_filename": "expert-profile.bin",
+  "health": {
+    "status": "ok",
+    "max_context": 262144,
+    "model": "qwen3.8-flash-next-iq3_s",
+    "images": true,
+    "api_key": false,
+    "loaded": true,
+    "service": "strata"
+  },
+  "models": {
+    "object": "list",
+    "data": [
+      {
+        "id": "qwen3.8-flash-next-iq3_s",
+        "object": "model",
+        "status": {
+          "value": "loaded"
+        },
+        "meta": {
+          "n_ctx": 262144
+        },
+        "architecture": {
+          "input_modalities": [
+            "text",
+            "image"
+          ],
+          "output_modalities": [
+            "text"
+          ]
+        }
+      }
+    ]
+  },
+  "props": {
+    "default_generation_settings": {
+      "n_ctx": 262144,
+      "params": {
+        "temperature": 1.0,
+        "top_p": 0.95,
+        "top_k": 20,
+        "min_p": 0.0,
+        "presence_penalty": 0.0,
+        "repeat_penalty": 1.0,
+        "frequency_penalty": 0.0,
+        "n_predict": -1
+      }
+    },
+    "model_alias": "qwen3.8-flash-next-iq3_s",
+    "model_path": "C:\\models\\Qwen3.8-Flash-Next\\IQ3_S\\Qwen3.8-Flash-Next-GSQ-RCO-IQ3_S-00001-of-00002.gguf",
+    "build_info": "Strata 0.1.41",
+    "total_slots": 1
+  },
+  "git_commit": "745b5e38045a63753ee9455700f79786c9276f4c",
+  "gpu_before": "name, driver_version, memory.used [MiB], memory.total [MiB], utilization.gpu [%], temperature.gpu, power.draw [W]\nNVIDIA GeForce RTX 3090, 610.88, 23546 MiB, 24576 MiB, 0 %, 32, 11.96 W\n",
+  "contract": {
+    "route": "/v1/chat/completions",
+    "stream": true,
+    "max_tokens": 512,
+    "concurrency": 1,
+    "sampling_and_thinking": {
+      "temperature": 1.0,
+      "top_p": 0.95,
+      "top_k": 20,
+      "min_p": 0.0,
+      "presence_penalty": 0.0,
+      "repetition_penalty": 1.0,
+      "frequency_penalty": 0.0,
+      "reasoning_effort": "high",
+      "reasoning_budget_tokens": 0,
+      "chat_template_kwargs": {
+        "enable_thinking": true,
+        "preserve_thinking": true
+      }
+    },
+    "hardware_tune": {},
+    "sweep_arms": [
+      [
+        "single",
+        {}
+      ]
+    ],
+    "checkpoint": true,
+    "profile_sha256": "6820cb09f179ff75f705392089605b8e9ca9b273892208f16715d0a2cf304264",
+    "token_metric": "Generated tokens include reasoning and final content; 512-token speed diagnostic may end in reasoning. Separate natural-stop coding tests validate completed answers.",
+    "cache_state": "Unique opening nonce per request; actual cache_n reported",
+    "warmup": "One request per workload, excluded from measured results",
+    "measured_runs_per_workload": 5,
+    "model_loading_included": false,
+    "workload_order": [
+      "short",
+      "longer"
+    ],
+    "vision": "Remains loaded; requests are text only",
+    "network": "Client is this PC, connecting through its LAN IP; remote-device latency is not measured"
+  },
+  "gpu_after": "name, memory.used [MiB], memory.total [MiB], utilization.gpu [%], temperature.gpu, power.draw [W]\nNVIDIA GeForce RTX 3090, 23994 MiB, 24576 MiB, 99 %, 75, 342.62 W\n",
+  "configuration_unchanged": true
+}
