@@ -1,0 +1,738 @@
+{
+  "checker_v1_sha256": "babc1f194d8b4f4b94b1edbc1cf56e6bf34900a3b55a7c306eeba70248c6287c",
+  "checker_v2_sha256": "c171f43c491b1ab05c931d648f71d1b14d89973855392245820bd5848e563e0b",
+  "only_change": "Expose standard TypeError builtin; exact tests, AST restrictions, reference, seed, and scoring unchanged",
+  "new_inference_requests": 0,
+  "arms": {
+    "Q007-goal-coding": {
+      "original_passed_count": 3,
+      "corrected_passed_count": 3,
+      "count": 5,
+      "rows": [
+        {
+          "seed": 101,
+          "finish_reason": "length",
+          "completion_tokens": 8192,
+          "original_passed": false,
+          "answer_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "corrected_passed": false,
+          "reason": "Natural-stop requirement still fails; no checker revision can clear output-cap failures"
+        },
+        {
+          "seed": 102,
+          "finish_reason": "stop",
+          "completion_tokens": 4121,
+          "original_passed": true,
+          "answer_sha256": "87688807d232949e03daaf3776538b3b6bf0d31a26333f6aaa2cae5d9f6bf312",
+          "v1": {
+            "returncode": 0,
+            "stdout": "{\"passed\": true, \"compiled\": true, \"cases\": 72, \"test_seed\": 904001}\n",
+            "stderr": ""
+          },
+          "v2": {
+            "returncode": 0,
+            "stdout": "{\"passed\": true, \"compiled\": true, \"cases\": 72, \"test_seed\": 904001}\n",
+            "stderr": ""
+          },
+          "normal_python_diagnostic": {
+            "returncode": 0,
+            "stdout": "{\"passed\": true, \"compiled\": true, \"cases\": 72, \"test_seed\": 904001}\n",
+            "stderr": ""
+          },
+          "corrected_passed": true
+        },
+        {
+          "seed": 103,
+          "finish_reason": "stop",
+          "completion_tokens": 4415,
+          "original_passed": true,
+          "answer_sha256": "fdea6f8b2a3c1f71aa341ecc31b4edb8c04aa3a231326c707ac6033a2a626790",
+          "v1": {
+            "returncode": 0,
+            "stdout": "{\"passed\": true, \"compiled\": true, \"cases\": 72, \"test_seed\": 904001}\n",
+            "stderr": ""
+          },
+          "v2": {
+            "returncode": 0,
+            "stdout": "{\"passed\": true, \"compiled\": true, \"cases\": 72, \"test_seed\": 904001}\n",
+            "stderr": ""
+          },
+          "normal_python_diagnostic": {
+            "returncode": 0,
+            "stdout": "{\"passed\": true, \"compiled\": true, \"cases\": 72, \"test_seed\": 904001}\n",
+            "stderr": ""
+          },
+          "corrected_passed": true
+        },
+        {
+          "seed": 104,
+          "finish_reason": "stop",
+          "completion_tokens": 8079,
+          "original_passed": true,
+          "answer_sha256": "7859494f550583e2d3d3c026a7d593cc7026a559f065a28dc596e36fa01c03bf",
+          "v1": {
+            "returncode": 0,
+            "stdout": "{\"passed\": true, \"compiled\": true, \"cases\": 72, \"test_seed\": 904001}\n",
+            "stderr": ""
+          },
+          "v2": {
+            "returncode": 0,
+            "stdout": "{\"passed\": true, \"compiled\": true, \"cases\": 72, \"test_seed\": 904001}\n",
+            "stderr": ""
+          },
+          "normal_python_diagnostic": {
+            "returncode": 0,
+            "stdout": "{\"passed\": true, \"compiled\": true, \"cases\": 72, \"test_seed\": 904001}\n",
+            "stderr": ""
+          },
+          "corrected_passed": true
+        },
+        {
+          "seed": 105,
+          "finish_reason": "length",
+          "completion_tokens": 8192,
+          "original_passed": false,
+          "answer_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "corrected_passed": false,
+          "reason": "Natural-stop requirement still fails; no checker revision can clear output-cap failures"
+        }
+      ]
+    },
+    "Q008-goal-coding": {
+      "original_passed_count": 1,
+      "corrected_passed_count": 1,
+      "count": 5,
+      "rows": [
+        {
+          "seed": 101,
+          "finish_reason": "length",
+          "completion_tokens": 8192,
+          "original_passed": false,
+          "answer_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "corrected_passed": false,
+          "reason": "Natural-stop requirement still fails; no checker revision can clear output-cap failures"
+        },
+        {
+          "seed": 102,
+          "finish_reason": "length",
+          "completion_tokens": 8192,
+          "original_passed": false,
+          "answer_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "corrected_passed": false,
+          "reason": "Natural-stop requirement still fails; no checker revision can clear output-cap failures"
+        },
+        {
+          "seed": 103,
+          "finish_reason": "stop",
+          "completion_tokens": 6600,
+          "original_passed": true,
+          "answer_sha256": "930ca4dc0747869c58c57b6326a1633cec584ba14c3e25e3ab13fdc83d0c552c",
+          "v1": {
+            "returncode": 0,
+            "stdout": "{\"passed\": true, \"compiled\": true, \"cases\": 72, \"test_seed\": 904001}\n",
+            "stderr": ""
+          },
+          "v2": {
+            "returncode": 0,
+            "stdout": "{\"passed\": true, \"compiled\": true, \"cases\": 72, \"test_seed\": 904001}\n",
+            "stderr": ""
+          },
+          "normal_python_diagnostic": {
+            "returncode": 0,
+            "stdout": "{\"passed\": true, \"compiled\": true, \"cases\": 72, \"test_seed\": 904001}\n",
+            "stderr": ""
+          },
+          "corrected_passed": true
+        },
+        {
+          "seed": 104,
+          "finish_reason": "length",
+          "completion_tokens": 8192,
+          "original_passed": false,
+          "answer_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "corrected_passed": false,
+          "reason": "Natural-stop requirement still fails; no checker revision can clear output-cap failures"
+        },
+        {
+          "seed": 105,
+          "finish_reason": "length",
+          "completion_tokens": 8192,
+          "original_passed": false,
+          "answer_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "corrected_passed": false,
+          "reason": "Natural-stop requirement still fails; no checker revision can clear output-cap failures"
+        }
+      ]
+    },
+    "Q009-production-quality": {
+      "original_passed_count": 1,
+      "corrected_passed_count": 1,
+      "count": 5,
+      "rows": [
+        {
+          "seed": 101,
+          "finish_reason": "length",
+          "completion_tokens": 8192,
+          "original_passed": false,
+          "answer_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "corrected_passed": false,
+          "reason": "Natural-stop requirement still fails; no checker revision can clear output-cap failures"
+        },
+        {
+          "seed": 102,
+          "finish_reason": "stop",
+          "completion_tokens": 5211,
+          "original_passed": true,
+          "answer_sha256": "7a2c13957f73678378b212e4601879e2284a0b6c004dc157c29c1cffc5ca16aa",
+          "v1": {
+            "returncode": 0,
+            "stdout": "{\"passed\": true, \"compiled\": true, \"cases\": 72, \"test_seed\": 904001}\n",
+            "stderr": ""
+          },
+          "v2": {
+            "returncode": 0,
+            "stdout": "{\"passed\": true, \"compiled\": true, \"cases\": 72, \"test_seed\": 904001}\n",
+            "stderr": ""
+          },
+          "normal_python_diagnostic": {
+            "returncode": 0,
+            "stdout": "{\"passed\": true, \"compiled\": true, \"cases\": 72, \"test_seed\": 904001}\n",
+            "stderr": ""
+          },
+          "corrected_passed": true
+        },
+        {
+          "seed": 103,
+          "finish_reason": "length",
+          "completion_tokens": 8192,
+          "original_passed": false,
+          "answer_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "corrected_passed": false,
+          "reason": "Natural-stop requirement still fails; no checker revision can clear output-cap failures"
+        },
+        {
+          "seed": 104,
+          "finish_reason": "length",
+          "completion_tokens": 8192,
+          "original_passed": false,
+          "answer_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "corrected_passed": false,
+          "reason": "Natural-stop requirement still fails; no checker revision can clear output-cap failures"
+        },
+        {
+          "seed": 105,
+          "finish_reason": "length",
+          "completion_tokens": 8192,
+          "original_passed": false,
+          "answer_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "corrected_passed": false,
+          "reason": "Natural-stop requirement still fails; no checker revision can clear output-cap failures"
+        }
+      ]
+    },
+    "Q010-expanded-candidate": {
+      "original_passed_count": 4,
+      "corrected_passed_count": 4,
+      "count": 5,
+      "rows": [
+        {
+          "seed": 101,
+          "finish_reason": "stop",
+          "completion_tokens": 15491,
+          "original_passed": true,
+          "answer_sha256": "f995cfb58d6118c930102f3e8fd360dde1074777c179153697f0f31147354bda",
+          "v1": {
+            "returncode": 0,
+            "stdout": "{\"passed\": true, \"compiled\": true, \"cases\": 72, \"test_seed\": 904001}\n",
+            "stderr": ""
+          },
+          "v2": {
+            "returncode": 0,
+            "stdout": "{\"passed\": true, \"compiled\": true, \"cases\": 72, \"test_seed\": 904001}\n",
+            "stderr": ""
+          },
+          "normal_python_diagnostic": {
+            "returncode": 0,
+            "stdout": "{\"passed\": true, \"compiled\": true, \"cases\": 72, \"test_seed\": 904001}\n",
+            "stderr": ""
+          },
+          "corrected_passed": true
+        },
+        {
+          "seed": 102,
+          "finish_reason": "stop",
+          "completion_tokens": 6210,
+          "original_passed": true,
+          "answer_sha256": "da8ac37504dbdfa836a9e076a20dc75b9a6e360617dc2f1b179b94c889975fd9",
+          "v1": {
+            "returncode": 0,
+            "stdout": "{\"passed\": true, \"compiled\": true, \"cases\": 72, \"test_seed\": 904001}\n",
+            "stderr": ""
+          },
+          "v2": {
+            "returncode": 0,
+            "stdout": "{\"passed\": true, \"compiled\": true, \"cases\": 72, \"test_seed\": 904001}\n",
+            "stderr": ""
+          },
+          "normal_python_diagnostic": {
+            "returncode": 0,
+            "stdout": "{\"passed\": true, \"compiled\": true, \"cases\": 72, \"test_seed\": 904001}\n",
+            "stderr": ""
+          },
+          "corrected_passed": true
+        },
+        {
+          "seed": 103,
+          "finish_reason": "length",
+          "completion_tokens": 32768,
+          "original_passed": false,
+          "answer_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "corrected_passed": false,
+          "reason": "Natural-stop requirement still fails; no checker revision can clear output-cap failures"
+        },
+        {
+          "seed": 104,
+          "finish_reason": "stop",
+          "completion_tokens": 2254,
+          "original_passed": true,
+          "answer_sha256": "18b047d809b39502fb8cca91d499dfa5a47ea4bda0dbf49bf5d8af973ddcc5b6",
+          "v1": {
+            "returncode": 0,
+            "stdout": "{\"passed\": true, \"compiled\": true, \"cases\": 72, \"test_seed\": 904001}\n",
+            "stderr": ""
+          },
+          "v2": {
+            "returncode": 0,
+            "stdout": "{\"passed\": true, \"compiled\": true, \"cases\": 72, \"test_seed\": 904001}\n",
+            "stderr": ""
+          },
+          "normal_python_diagnostic": {
+            "returncode": 0,
+            "stdout": "{\"passed\": true, \"compiled\": true, \"cases\": 72, \"test_seed\": 904001}\n",
+            "stderr": ""
+          },
+          "corrected_passed": true
+        },
+        {
+          "seed": 105,
+          "finish_reason": "stop",
+          "completion_tokens": 7939,
+          "original_passed": true,
+          "answer_sha256": "bd026dabbfa45819d7ff4087e04356f1c37a3b3b5a2298b340dbf3a7ae9789d3",
+          "v1": {
+            "returncode": 0,
+            "stdout": "{\"passed\": true, \"compiled\": true, \"cases\": 72, \"test_seed\": 904001}\n",
+            "stderr": ""
+          },
+          "v2": {
+            "returncode": 0,
+            "stdout": "{\"passed\": true, \"compiled\": true, \"cases\": 72, \"test_seed\": 904001}\n",
+            "stderr": ""
+          },
+          "normal_python_diagnostic": {
+            "returncode": 0,
+            "stdout": "{\"passed\": true, \"compiled\": true, \"cases\": 72, \"test_seed\": 904001}\n",
+            "stderr": ""
+          },
+          "corrected_passed": true
+        }
+      ]
+    },
+    "Q011-expanded-production": {
+      "original_passed_count": 5,
+      "corrected_passed_count": 5,
+      "count": 5,
+      "rows": [
+        {
+          "seed": 101,
+          "finish_reason": "stop",
+          "completion_tokens": 9087,
+          "original_passed": true,
+          "answer_sha256": "90e2a757dd2e0c31d87354a7e6ef5bcd7367e6771a25bd884dcf1815e54627b3",
+          "v1": {
+            "returncode": 0,
+            "stdout": "{\"passed\": true, \"compiled\": true, \"cases\": 72, \"test_seed\": 904001}\n",
+            "stderr": ""
+          },
+          "v2": {
+            "returncode": 0,
+            "stdout": "{\"passed\": true, \"compiled\": true, \"cases\": 72, \"test_seed\": 904001}\n",
+            "stderr": ""
+          },
+          "normal_python_diagnostic": {
+            "returncode": 0,
+            "stdout": "{\"passed\": true, \"compiled\": true, \"cases\": 72, \"test_seed\": 904001}\n",
+            "stderr": ""
+          },
+          "corrected_passed": true
+        },
+        {
+          "seed": 102,
+          "finish_reason": "stop",
+          "completion_tokens": 3740,
+          "original_passed": true,
+          "answer_sha256": "c4c1261eaabf9fd3a3dba1883d03a90b6efa91188e3ee51b3a12b1d2a6bb86ec",
+          "v1": {
+            "returncode": 0,
+            "stdout": "{\"passed\": true, \"compiled\": true, \"cases\": 72, \"test_seed\": 904001}\n",
+            "stderr": ""
+          },
+          "v2": {
+            "returncode": 0,
+            "stdout": "{\"passed\": true, \"compiled\": true, \"cases\": 72, \"test_seed\": 904001}\n",
+            "stderr": ""
+          },
+          "normal_python_diagnostic": {
+            "returncode": 0,
+            "stdout": "{\"passed\": true, \"compiled\": true, \"cases\": 72, \"test_seed\": 904001}\n",
+            "stderr": ""
+          },
+          "corrected_passed": true
+        },
+        {
+          "seed": 103,
+          "finish_reason": "stop",
+          "completion_tokens": 3417,
+          "original_passed": true,
+          "answer_sha256": "e81eccd878490c81b80514434bf7b0ecb833767da2502dd6ebac5f3d91731e04",
+          "v1": {
+            "returncode": 0,
+            "stdout": "{\"passed\": true, \"compiled\": true, \"cases\": 72, \"test_seed\": 904001}\n",
+            "stderr": ""
+          },
+          "v2": {
+            "returncode": 0,
+            "stdout": "{\"passed\": true, \"compiled\": true, \"cases\": 72, \"test_seed\": 904001}\n",
+            "stderr": ""
+          },
+          "normal_python_diagnostic": {
+            "returncode": 0,
+            "stdout": "{\"passed\": true, \"compiled\": true, \"cases\": 72, \"test_seed\": 904001}\n",
+            "stderr": ""
+          },
+          "corrected_passed": true
+        },
+        {
+          "seed": 104,
+          "finish_reason": "stop",
+          "completion_tokens": 5742,
+          "original_passed": true,
+          "answer_sha256": "c157f8633c820d16d27c369d81392e6401e49c95e43b7ad15680cab19f444046",
+          "v1": {
+            "returncode": 0,
+            "stdout": "{\"passed\": true, \"compiled\": true, \"cases\": 72, \"test_seed\": 904001}\n",
+            "stderr": ""
+          },
+          "v2": {
+            "returncode": 0,
+            "stdout": "{\"passed\": true, \"compiled\": true, \"cases\": 72, \"test_seed\": 904001}\n",
+            "stderr": ""
+          },
+          "normal_python_diagnostic": {
+            "returncode": 0,
+            "stdout": "{\"passed\": true, \"compiled\": true, \"cases\": 72, \"test_seed\": 904001}\n",
+            "stderr": ""
+          },
+          "corrected_passed": true
+        },
+        {
+          "seed": 105,
+          "finish_reason": "stop",
+          "completion_tokens": 7482,
+          "original_passed": true,
+          "answer_sha256": "913c9b2f21ca66aa25cabd72a23e85ea9022a609298baaefbbb9fe94057f242e",
+          "v1": {
+            "returncode": 0,
+            "stdout": "{\"passed\": true, \"compiled\": true, \"cases\": 72, \"test_seed\": 904001}\n",
+            "stderr": ""
+          },
+          "v2": {
+            "returncode": 0,
+            "stdout": "{\"passed\": true, \"compiled\": true, \"cases\": 72, \"test_seed\": 904001}\n",
+            "stderr": ""
+          },
+          "normal_python_diagnostic": {
+            "returncode": 0,
+            "stdout": "{\"passed\": true, \"compiled\": true, \"cases\": 72, \"test_seed\": 904001}\n",
+            "stderr": ""
+          },
+          "corrected_passed": true
+        }
+      ]
+    },
+    "Q012-replay-candidate": {
+      "original_passed_count": 3,
+      "corrected_passed_count": 3,
+      "count": 3,
+      "rows": [
+        {
+          "seed": 101,
+          "finish_reason": "stop",
+          "completion_tokens": 5172,
+          "original_passed": true,
+          "answer_sha256": "c43229e4ed16f1ede2647c09205666ba3d3b2391e101325a6d27d776b42e1193",
+          "v1": {
+            "returncode": 0,
+            "stdout": "{\"passed\": true, \"compiled\": true, \"cases\": 72, \"test_seed\": 904001}\n",
+            "stderr": ""
+          },
+          "v2": {
+            "returncode": 0,
+            "stdout": "{\"passed\": true, \"compiled\": true, \"cases\": 72, \"test_seed\": 904001}\n",
+            "stderr": ""
+          },
+          "normal_python_diagnostic": {
+            "returncode": 0,
+            "stdout": "{\"passed\": true, \"compiled\": true, \"cases\": 72, \"test_seed\": 904001}\n",
+            "stderr": ""
+          },
+          "corrected_passed": true
+        },
+        {
+          "seed": 102,
+          "finish_reason": "stop",
+          "completion_tokens": 7054,
+          "original_passed": true,
+          "answer_sha256": "8e48f865263f3dbce0af0b51689e6099f18ebc4a68a0c95d43f9ed433eaeb8de",
+          "v1": {
+            "returncode": 0,
+            "stdout": "{\"passed\": true, \"compiled\": true, \"cases\": 72, \"test_seed\": 904001}\n",
+            "stderr": ""
+          },
+          "v2": {
+            "returncode": 0,
+            "stdout": "{\"passed\": true, \"compiled\": true, \"cases\": 72, \"test_seed\": 904001}\n",
+            "stderr": ""
+          },
+          "normal_python_diagnostic": {
+            "returncode": 0,
+            "stdout": "{\"passed\": true, \"compiled\": true, \"cases\": 72, \"test_seed\": 904001}\n",
+            "stderr": ""
+          },
+          "corrected_passed": true
+        },
+        {
+          "seed": 103,
+          "finish_reason": "stop",
+          "completion_tokens": 4628,
+          "original_passed": true,
+          "answer_sha256": "440756cf1eb2e4d15e48222f4e0d503e1c8c469ceec9b37824430b936c4a8482",
+          "v1": {
+            "returncode": 0,
+            "stdout": "{\"passed\": true, \"compiled\": true, \"cases\": 72, \"test_seed\": 904001}\n",
+            "stderr": ""
+          },
+          "v2": {
+            "returncode": 0,
+            "stdout": "{\"passed\": true, \"compiled\": true, \"cases\": 72, \"test_seed\": 904001}\n",
+            "stderr": ""
+          },
+          "normal_python_diagnostic": {
+            "returncode": 0,
+            "stdout": "{\"passed\": true, \"compiled\": true, \"cases\": 72, \"test_seed\": 904001}\n",
+            "stderr": ""
+          },
+          "corrected_passed": true
+        }
+      ]
+    },
+    "Q013-replay-production": {
+      "original_passed_count": 3,
+      "corrected_passed_count": 3,
+      "count": 3,
+      "rows": [
+        {
+          "seed": 101,
+          "finish_reason": "stop",
+          "completion_tokens": 8244,
+          "original_passed": true,
+          "answer_sha256": "268733574e128ab961cf6059b9bee8c92c5fa0fd9f91ddef40cf78d524a8a082",
+          "v1": {
+            "returncode": 0,
+            "stdout": "{\"passed\": true, \"compiled\": true, \"cases\": 72, \"test_seed\": 904001}\n",
+            "stderr": ""
+          },
+          "v2": {
+            "returncode": 0,
+            "stdout": "{\"passed\": true, \"compiled\": true, \"cases\": 72, \"test_seed\": 904001}\n",
+            "stderr": ""
+          },
+          "normal_python_diagnostic": {
+            "returncode": 0,
+            "stdout": "{\"passed\": true, \"compiled\": true, \"cases\": 72, \"test_seed\": 904001}\n",
+            "stderr": ""
+          },
+          "corrected_passed": true
+        },
+        {
+          "seed": 102,
+          "finish_reason": "stop",
+          "completion_tokens": 8207,
+          "original_passed": true,
+          "answer_sha256": "ad469b7697e2eb29e8d9bf300391ded25fa46296dd40059133e0b5aa50860da0",
+          "v1": {
+            "returncode": 0,
+            "stdout": "{\"passed\": true, \"compiled\": true, \"cases\": 72, \"test_seed\": 904001}\n",
+            "stderr": ""
+          },
+          "v2": {
+            "returncode": 0,
+            "stdout": "{\"passed\": true, \"compiled\": true, \"cases\": 72, \"test_seed\": 904001}\n",
+            "stderr": ""
+          },
+          "normal_python_diagnostic": {
+            "returncode": 0,
+            "stdout": "{\"passed\": true, \"compiled\": true, \"cases\": 72, \"test_seed\": 904001}\n",
+            "stderr": ""
+          },
+          "corrected_passed": true
+        },
+        {
+          "seed": 103,
+          "finish_reason": "stop",
+          "completion_tokens": 13008,
+          "original_passed": true,
+          "answer_sha256": "1de4bffdbf4d32835224e9dd56b4e046397fe29a7c8d1213ce944edaf6534aa0",
+          "v1": {
+            "returncode": 0,
+            "stdout": "{\"passed\": true, \"compiled\": true, \"cases\": 72, \"test_seed\": 904001}\n",
+            "stderr": ""
+          },
+          "v2": {
+            "returncode": 0,
+            "stdout": "{\"passed\": true, \"compiled\": true, \"cases\": 72, \"test_seed\": 904001}\n",
+            "stderr": ""
+          },
+          "normal_python_diagnostic": {
+            "returncode": 0,
+            "stdout": "{\"passed\": true, \"compiled\": true, \"cases\": 72, \"test_seed\": 904001}\n",
+            "stderr": ""
+          },
+          "corrected_passed": true
+        }
+      ]
+    },
+    "Q014-coupled-quality": {
+      "original_passed_count": 4,
+      "corrected_passed_count": 5,
+      "count": 5,
+      "rows": [
+        {
+          "seed": 101,
+          "finish_reason": "stop",
+          "completion_tokens": 7748,
+          "original_passed": true,
+          "answer_sha256": "f14c2f65ad813b31c70bf96f6b586fae1fb9510c548e78be0aa81409ae2651c4",
+          "v1": {
+            "returncode": 0,
+            "stdout": "{\"passed\": true, \"compiled\": true, \"cases\": 72, \"test_seed\": 904001}\n",
+            "stderr": ""
+          },
+          "v2": {
+            "returncode": 0,
+            "stdout": "{\"passed\": true, \"compiled\": true, \"cases\": 72, \"test_seed\": 904001}\n",
+            "stderr": ""
+          },
+          "normal_python_diagnostic": {
+            "returncode": 0,
+            "stdout": "{\"passed\": true, \"compiled\": true, \"cases\": 72, \"test_seed\": 904001}\n",
+            "stderr": ""
+          },
+          "corrected_passed": true
+        },
+        {
+          "seed": 102,
+          "finish_reason": "stop",
+          "completion_tokens": 14847,
+          "original_passed": true,
+          "answer_sha256": "f5ac0a33a8c51733208eee2ad30f81dceef589dfb4a45ff462735087a7becba6",
+          "v1": {
+            "returncode": 0,
+            "stdout": "{\"passed\": true, \"compiled\": true, \"cases\": 72, \"test_seed\": 904001}\n",
+            "stderr": ""
+          },
+          "v2": {
+            "returncode": 0,
+            "stdout": "{\"passed\": true, \"compiled\": true, \"cases\": 72, \"test_seed\": 904001}\n",
+            "stderr": ""
+          },
+          "normal_python_diagnostic": {
+            "returncode": 0,
+            "stdout": "{\"passed\": true, \"compiled\": true, \"cases\": 72, \"test_seed\": 904001}\n",
+            "stderr": ""
+          },
+          "corrected_passed": true
+        },
+        {
+          "seed": 103,
+          "finish_reason": "stop",
+          "completion_tokens": 16435,
+          "original_passed": true,
+          "answer_sha256": "7c9dbf8961d14925a1aa9da86850939db79b7a4f96c409b2bea5d940804d95d4",
+          "v1": {
+            "returncode": 0,
+            "stdout": "{\"passed\": true, \"compiled\": true, \"cases\": 72, \"test_seed\": 904001}\n",
+            "stderr": ""
+          },
+          "v2": {
+            "returncode": 0,
+            "stdout": "{\"passed\": true, \"compiled\": true, \"cases\": 72, \"test_seed\": 904001}\n",
+            "stderr": ""
+          },
+          "normal_python_diagnostic": {
+            "returncode": 0,
+            "stdout": "{\"passed\": true, \"compiled\": true, \"cases\": 72, \"test_seed\": 904001}\n",
+            "stderr": ""
+          },
+          "corrected_passed": true
+        },
+        {
+          "seed": 104,
+          "finish_reason": "stop",
+          "completion_tokens": 7830,
+          "original_passed": true,
+          "answer_sha256": "bb8684459b2492587ac4d4d769fd18e54d54382271c0430ccee9b58d637c4f82",
+          "v1": {
+            "returncode": 0,
+            "stdout": "{\"passed\": true, \"compiled\": true, \"cases\": 72, \"test_seed\": 904001}\n",
+            "stderr": ""
+          },
+          "v2": {
+            "returncode": 0,
+            "stdout": "{\"passed\": true, \"compiled\": true, \"cases\": 72, \"test_seed\": 904001}\n",
+            "stderr": ""
+          },
+          "normal_python_diagnostic": {
+            "returncode": 0,
+            "stdout": "{\"passed\": true, \"compiled\": true, \"cases\": 72, \"test_seed\": 904001}\n",
+            "stderr": ""
+          },
+          "corrected_passed": true
+        },
+        {
+          "seed": 105,
+          "finish_reason": "stop",
+          "completion_tokens": 12225,
+          "original_passed": false,
+          "answer_sha256": "9cccb07c5b1839173c6512add3c6ef75aa9102df0f0ec56f8c6279681b9cbeb5",
+          "v1": {
+            "returncode": 1,
+            "stdout": "",
+            "stderr": "Traceback (most recent call last):\n  File \"generated-topological\", line 17, in topological_order\nValueError: edge endpoint absent from nodes\n\nDuring handling of the above exception, another exception occurred:\n\nTraceback (most recent call last):\n  File \"C:\\strata\\local-setup\\target-80\\check-topological.py\", line 43, in <module>\n    (['a','b','c','d'],[('a','c'),('b','c'),('c','d')])]:check(nodes,edges)\n                                                         ~~~~~^^^^^^^^^^^^^\n  File \"C:\\strata\\local-setup\\target-80\\check-topological.py\", line 32, in check\n    try: got=fn(nodes,edges)\n             ~~^^^^^^^^^^^^^\n  File \"generated-topological\", line 18, in topological_order\nNameError: name 'TypeError' is not defined\n"
+          },
+          "v2": {
+            "returncode": 0,
+            "stdout": "{\"passed\": true, \"compiled\": true, \"cases\": 72, \"test_seed\": 904001}\n",
+            "stderr": ""
+          },
+          "normal_python_diagnostic": {
+            "returncode": 0,
+            "stdout": "{\"passed\": true, \"compiled\": true, \"cases\": 72, \"test_seed\": 904001}\n",
+            "stderr": ""
+          },
+          "corrected_passed": true
+        }
+      ]
+    }
+  }
+}

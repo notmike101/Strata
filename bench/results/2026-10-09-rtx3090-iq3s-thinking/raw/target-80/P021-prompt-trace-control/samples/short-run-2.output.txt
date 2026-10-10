@@ -1,0 +1,12 @@
+We need answer user's request. Need produce final detailed answer at least 1200 words, complete code, tests, explanation thread safety complexity. User says benchmark identifier ignore. Implement thread-safe Python TTLCache class using OrderedDict and monotonic clock. Include set, get, delete, clear, len, expiration, capacity eviction, unit tests with injected fake clock, detailed explanation. Do not abbreviate implementation. Need likely provide code fully. Need think about design.
+
+Need ensure thread-safe. Use OrderedDict for LRU? They didn't explicitly require LRU but capacity eviction. Using OrderedDict can evict least-recently-used by moving to end on get/set. TTLCache: keys with expiry deadlines. Monotonic clock injected as callable returning seconds. Thread safety with RLock maybe. Need handle expiration: get returns default if expired; set deletes expired? capacity evict. len should count non-expired? They say include expiration, capacity eviction. For len likely active entries not expired; but if we purge expired entries. Could implement active_entries property. Need be careful with thread safety: clock injection. Unit tests with fake clock. Need complete code. Need no abbreviations. Could include imports: time, threading, collections.OrderedDict, typing? Python 3. Maybe type hints.
+
+Need decide behavior.
+
+Class TTLCache:
+- __init__(self, maxsize, ttl=None, clock=time.monotonic): if maxsize <=0? Should maybe ValueError. ttl non-negative? Could allow default TTL. clock callable.
+- _entries OrderedDict key -> (value, expires_at). expires_at monotonic deadline or None for infinite.
+- _lock threading.RLock to allow public methods calling internals safely.
+- _now() clock.
+- _purge(self, now): remove expired from front? Since entries inserted/moved at end. To purge all expired efficiently, iterate list(_entries.items())? But OrderedDict can't change size during iteration. Could collect keys. For complexity: if many expired, O(n) to purge. But can we maintain expiry heap? They require OrderedDict and monotonic clock. Simpler: get checks key-specific expiry; set if maxsize exceeded evicts oldest (LRU) after removing expired? Need capacity eviction with expired? len active. Need maybe remove expired entries during set to avoid stale. If many expired entries occupying maxsize but expired, evict expired first. We can remove expired by iterating all items and deleting; O(n). If maxsize huge

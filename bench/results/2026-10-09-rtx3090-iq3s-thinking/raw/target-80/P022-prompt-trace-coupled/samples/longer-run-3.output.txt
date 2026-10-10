@@ -1,0 +1,13 @@
+We need answer user's request. Need produce final detailed answer at least 1200 words. Need implement thread-safe Python TTLCache using OrderedDict and monotonic clock. Include set, get, delete, clear, len, expiration, capacity eviction, unit tests with injected fake clock, detailed explanation thread safety complexity. Do not abbreviate implementation. Need maybe read existing cache rules? They list 64 items lifetimes sizes, likely benchmark noise but maybe we need implement generic TTLCache. Could mention rules ignored? User says ignore identifier but read existing design requirements before implementing cache: existing cache rules... maybe requirements: expiration must remove stale entries, access must update LRU order. We should ensure cache supports per-item lifetime and maybe size? They mention size bytes. TTLCache class maybe capacity by size? Need include capacity eviction. Existing rules have size 64..253 and lifetimes. Could design supports per-entry size and cache max total bytes? They asked using OrderedDict monotonic clock; set get delete clear len expiration capacity eviction. Existing rules have size bytes. Might need capacity eviction by total bytes, not just item count. Need implement thread-safe TTLCache with optional maxsize and maxbytes? The existing cache rule includes size; perhaps capacity eviction could be based on total size in bytes. We can include both max_entries and max_bytes? Need avoid overcomplication but complete. Unit tests with fake clock. Detailed explanation. Need produce code not abbreviated. Need maybe define TTLCache:
+
+class TTLCache:
+    def __init__(self, maxsize=128, maxbytes=None, ttl=None, clock=time.monotonic):
+        self._maxsize = maxsize
+        self._maxbytes = maxbytes
+        self._ttl = ttl
+        self._clock = clock
+        self._lock = threading.RLock()
+        self._entries = OrderedDict()
+        self._total_size = 0
+
+Entry tuple (value, expires_at, size). set(key, value, ttl=None, size=0): if ttl is None use default. If size negative? validate. If ttl <=0? Could delete immediately? TTL expiration: maybe if ttl <=0 delete key. Then remove existing if exists to adjust size. If size > maxbytes maybe raise ValueError? Or store if no max? Need capacity eviction: while len > maxsize or (maxbytes and total_size > maxbytes): evict LRU. Access updates LRU order: get returns value if not expired;

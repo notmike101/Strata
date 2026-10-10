@@ -1501,6 +1501,82 @@
   },
   {
     "campaign": "target-80",
+    "arm": "P021-prompt-trace-control",
+    "workload": "longer",
+    "runs": 5,
+    "decode_median": 88.1,
+    "decode_min": 86.6,
+    "decode_max": 90.4,
+    "e2e_median": 42.8421979350974,
+    "stream_total_median": 42.846391210541334,
+    "ttft_median_seconds": 6.161726799968164,
+    "raw_decode": [
+      87.8,
+      88.9,
+      90.4,
+      88.1,
+      86.6
+    ]
+  },
+  {
+    "campaign": "target-80",
+    "arm": "P021-prompt-trace-control",
+    "workload": "short",
+    "runs": 5,
+    "decode_median": 88.8,
+    "decode_min": 86.4,
+    "decode_max": 96.2,
+    "e2e_median": 78.0713747716846,
+    "stream_total_median": 78.08582840375763,
+    "ttft_median_seconds": 0.8111960000242107,
+    "raw_decode": [
+      88.6,
+      90.0,
+      88.8,
+      96.2,
+      86.4
+    ]
+  },
+  {
+    "campaign": "target-80",
+    "arm": "P022-prompt-trace-coupled",
+    "workload": "longer",
+    "runs": 5,
+    "decode_median": 87.6,
+    "decode_min": 80.8,
+    "decode_max": 88.5,
+    "e2e_median": 42.69362235250587,
+    "stream_total_median": 42.697701134920386,
+    "ttft_median_seconds": 6.160188499954529,
+    "raw_decode": [
+      88.4,
+      85.8,
+      87.6,
+      80.8,
+      88.5
+    ]
+  },
+  {
+    "campaign": "target-80",
+    "arm": "P022-prompt-trace-coupled",
+    "workload": "short",
+    "runs": 5,
+    "decode_median": 88.9,
+    "decode_min": 87.1,
+    "decode_max": 91.0,
+    "e2e_median": 77.81446760321016,
+    "stream_total_median": 77.82595741626628,
+    "ttft_median_seconds": 0.8436389000271447,
+    "raw_decode": [
+      89.2,
+      88.9,
+      87.1,
+      87.6,
+      91.0
+    ]
+  },
+  {
+    "campaign": "target-80",
     "arm": "Q007-goal-coding",
     "workload": "quality/coding",
     "runs": 5,
@@ -1626,6 +1702,25 @@
       79.5,
       78.0,
       78.5
+    ]
+  },
+  {
+    "campaign": "target-80",
+    "arm": "Q014-coupled-quality",
+    "workload": "quality/coding",
+    "runs": 5,
+    "decode_median": 78.9,
+    "decode_min": 77.5,
+    "decode_max": 79.9,
+    "e2e_median": 78.55059597898317,
+    "stream_total_median": 78.55114592696869,
+    "ttft_median_seconds": 0.9283242000383325,
+    "raw_decode": [
+      79.9,
+      78.9,
+      77.5,
+      78.7,
+      79.5
     ]
   },
   {

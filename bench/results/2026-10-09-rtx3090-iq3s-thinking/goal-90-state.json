@@ -3,17 +3,17 @@
   "target_tps": 90,
   "metric": "server_decode_tps",
   "contract": "goal-90-contract.md",
-  "current": "C054 numeric TTLCache thresholds90.15/87.15 reached; short prompt-1.93percent, quality and full matrix unproven. No promotion.",
+  "current": "C054 corrected coding gate5/5; prompt trace localizes short slowdown to compute. Numeric90.15/87.15 remains separate; full goal unqualified.",
   "next": [
-    "Q014-coupled-quality once: full five-seed32768 coding gate on C054.",
-    "If quality passes, matched outstanding coding/nonstream/cache-hit/real-use matrix; resolve prompt non-degradation."
+    "Quantify smaller short-prompt buffer capacity footprint and audit alignment/relayout correctness before any C055 change.",
+    "Keep short-prompt non-degradation and missing selected-coding/nonstream/cache-hit/real-use gates mandatory."
   ],
   "promoted": "The previously qualified format-gather engine with IQ2_S gather disabled and adaptive lag2; no changes this turn.",
   "stopping_rule": "Leave goal active until all fixed qualification cells pass. No benchmark model resident at handoff.",
-  "quality": "Approved32768: Q0104/5, Q0115/5. Legacy8192 Q0073/5 Q0081/5 Q0091/5 preserved. Candidate seed10332768 cap failure retained.",
-  "last_checkpoint": "E196",
-  "resume_command": "All model trees stopped. Verify live state then launch prepared Q014-coupled-quality.json with --goal-quality-expanded and audit-no-process.",
-  "safety": "R112-R115 cleanup and physical/commit16GiB floors passed; production3457fdfe restored; idleGPU457MiB/0percent.",
+  "quality": "Q014 v1 4/5; v2 same72tests5/5 after TypeError builtin repair. All36 stored answers rechecked; only Q014seed105 changed. Q0104/5 and older cap failures preserved.",
+  "last_checkpoint": "E204",
+  "resume_command": "No model resident. Check current branch/status and ledger. Quality v2 client is selected with --goal-quality-expanded-v2; old clients/checker and all original outcomes are preserved.",
+  "safety": "Q014/P021/P022 exact cleanup and16GiB physical/commit floors passed; production3457fdfe restored; idleGPU457MiB/0percent.",
   "goal_tool_status_at_entry": "active, verified get_goal",
   "target_short_tps": 90,
   "target_longer_tps": 85,
@@ -21,7 +21,8 @@
   "quality_allowance_tokens": 32768,
   "expanded_quality_results": {
     "Q010-expanded-candidate": 4,
-    "Q011-expanded-production": 5
+    "Q011-expanded-production": 5,
+    "Q014-coupled-quality": 4
   },
   "replay_diagnostics": {
     "Q012-replay-candidate": 3,
@@ -32,7 +33,8 @@
     "short_decode_tps": 90.15,
     "longer_decode_tps": 87.15,
     "short_prompt_delta_percent": -1.9345593503701908,
-    "quality": "not yet run on this combined configuration",
+    "quality": "Q014 5/5 corrected v2; original v1 4/5 preserved",
     "repetitions_per_cell": 10
-  }
+  },
+  "quality_checker_revision": "v2: standard TypeError restored, objective cases unchanged"
 }

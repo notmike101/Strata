@@ -1,0 +1,12 @@
+We need answer user's request. Need produce final answer at least 1200 words, complete code, tests, explanation. Need no abbreviations. Implement thread-safe Python TTLCache class using OrderedDict and monotonic clock. Include set, get, delete, clear, len, expiration, capacity eviction, unit tests with injected fake clock, detailed explanation thread safety and complexity. Need likely include imports threading, time, OrderedDict, Optional? Need maybe use monotonic clock by default, fake clock injection. Need robust thread safety: use RLock? Need avoid lock held during callbacks? No callbacks. Need handle capacity eviction. OrderedDict: can move_to_end on get, set. Expiration: when get, check expiration; maybe also periodic purge on set/get/clear? Need capacity eviction: if maxsize exceeded, popitem(last=False) oldest. TTLCache maybe no default maxsize? Could set maxsize optional, ttl optional. Need include len returns valid count after purge. Need expiration method? User says include expiration. Could implement _purge_expired and len triggers purge. get returns default if expired. Maybe has __contains__? They didn't ask but can include. Need complete code not abbreviated. Need unit tests with fake clock. Need detailed explanation thread safety and complexity. Need maybe mention reentrant lock if methods call other methods? If using _set_internal under lock. Need ensure atomicity. Potential issues: OrderedDict with Python 3.7 preserves insertion order? OrderedDict specifically. But move_to_end makes LRU order. TTLCache with TTL and capacity. For capacity eviction, if maxsize=0? Raise ValueError? maxsize None unlimited. ttl None? Could set no expiration? Need monotonic clock. FakeClock increments now(). Thread-safety tests? They requested unit tests with injected fake clock. We can include tests that fake clock advances. Could include threading stress test? Maybe include concurrency test? At least unit tests with fake clock; maybe also thread-safe tests? Need detailed answer.
+
+Need ensure code runs. Python class:
+
+from __future__ import annotations
+from collections import OrderedDict
+from threading import RLock
+from time import monotonic
+from typing import Any, Callable, Hashable, Optional, Tuple
+
+class TTLCache:
+    def __init__(self, maxsize: Optional[int] = 128, ttl: Optional[float] = None, clock: Callable[[], float] = monotonic, *, lock: Optional[threading.RLock]? Actually threading import? Use _lock =

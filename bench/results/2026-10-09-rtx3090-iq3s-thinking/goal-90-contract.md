@@ -15,3 +15,6 @@ Additional real-use gates: five completed and objectively tested coding answers;
 All viable backends must be assessed for this exact architecture and quant before claiming native-backend parity. Unsupported backends are documented as unsupported, not assigned invented throughput. Profiler runs, raw target/no-MTP decode, microbenchmarks and altered workloads are diagnostic only.
 
 Keep the existing working branch perf/rtx3090-thinking-80 and published technical ledger. Stop each exact benchmark process after its arm and verify memory release. At a handoff or completion leave the launcher configured with the last qualified winner and no benchmark model resident, as explicitly requested by the new goal.
+
+
+Checker execution-environment correction (E200,2026-10-10): use check-topological-v2.py, which exposes the standard TypeError exception omitted by v1. The same72 objective cases, reference, AST restrictions, seed904001 and pass criteria remain unchanged. All36 stored answers were rechecked consistently without generation; only Q014seed105 changes from a checker NameError to a pass. Preserve original v1 outcomes and corrected v2 records side by side. This is not permission to alter test cases, loosen scoring, or erase cap failures. See diagnostics/coding-refresh/checker-v2/README.md.

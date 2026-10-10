@@ -1,0 +1,12 @@
+We need answer user's request. Need produce detailed answer at least 1200 words. User asks: Benchmark identifier ignore. Implement thread-safe Python TTLCache class using OrderedDict and monotonic clock. Include set, get, delete, clear, len, expiration, capacity eviction, unit tests with injected fake clock, detailed explanation thread safety and complexity. Write complete code, then tests, then explain design. Do not abbreviate implementation.
+
+Need think through implementation. Need ensure thread safety. Use OrderedDict, monotonic clock injected. Could use time.monotonic by default. Lock per instance. Expiration: lazy expiration on get/set/clear/len? Need len includes non-expired? Need capacity eviction. Need thread safety. Need unit tests with fake clock. Need no abbreviations. Maybe use threading.RLock? If public methods may call helpers without locks or use _with_lock. Since operations need consistency, use a single Lock around mutations and reads that modify? get needs move_to_end and purge expired, so write lock. Use RLock? Not necessary if no reentrant public calls. But could use RLock for safety if get calls len? Avoid. Could use threading.Lock. Need ensure capacity eviction with OrderedDict. Need details: key-value pairs stored with expiry absolute timestamp. Could store (value, expires_at). OrderedDict order for LRU? TTLCache likely LRU? Capacity eviction can evict least recently used among non-expired. get updates recency. set updates recency. If key exists, replace and move end. Need handle TTL<=0? Could store immediate expired, then purge. If ttl None infinite. monotonic clock may return 0. Could define FakeClock class. Use Callable[[], float].
+
+Need produce complete code and tests. Could include import time, threading, OrderedDict. Type hints.
+
+Potential pitfalls: thread-safe len: need remove expired then count. But length may be called concurrently. We can do with lock. If capacity 0? Need handle. If maxsize <=0? Raise ValueError? Usually maxsize >0. Need ttl default None. Constructor: maxsize, default_ttl=None, clock=time.monotonic. If maxsize <=0 raise ValueError. Validate ttl? If ttl is not None and ttl <0? Could negative expire immediately or raise. For tests maybe allow negative? Better validate ttl>=0 if not None. Constructor default_ttl maybe. If default_ttl <0 raise ValueError.
+
+Need code:
+
+from __future__ import annotations
+import threading,

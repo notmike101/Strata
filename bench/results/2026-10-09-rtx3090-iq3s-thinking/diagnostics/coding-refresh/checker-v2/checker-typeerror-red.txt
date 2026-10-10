@@ -1,0 +1,20 @@
+Traceback (most recent call last):
+  File "C:\strata\local-setup\target-80\test-checker-typeerror.py", line 16, in <module>
+    assert result.returncode == 0, result.stderr
+           ^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: Traceback (most recent call last):
+  File "generated-topological", line 17, in topological_order
+ValueError: edge endpoint absent from nodes
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\strata\local-setup\target-80\check-topological.py", line 43, in <module>
+    (['a','b','c','d'],[('a','c'),('b','c'),('c','d')])]:check(nodes,edges)
+                                                         ~~~~~^^^^^^^^^^^^^
+  File "C:\strata\local-setup\target-80\check-topological.py", line 32, in check
+    try: got=fn(nodes,edges)
+             ~~^^^^^^^^^^^^^
+  File "generated-topological", line 18, in topological_order
+NameError: name 'TypeError' is not defined
+

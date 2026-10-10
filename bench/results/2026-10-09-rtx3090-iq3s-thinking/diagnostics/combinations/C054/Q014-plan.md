@@ -1,0 +1,7 @@
+## E197 / Q014 full quality check for the combined candidate
+
+Previous goal turn made progress: bounded quality replay closed without reproducing the prior cap failure; C054 ABBA completed with ten measured runs per cell, ordinary decode90.15short/87.15long, and short prompt processing-1.93percent. All evidence pushedbb0f1292433d388c4ea9948d7c73c0d8a9dcb719. No full qualification or promotion. Entry checks find no live Strata/llama/profiler process, GPU457MiB/0percent, only the two known unrelated untracked files, and unusedQ014 output path.
+
+Q014-coupled-quality config is byte-identical to R113/R114 (SHA2561e46c2180bec01c26573d8fcc194cf746f2f1f2ebd4bf64b7063fe748cbeb2e1); engine remains0dea69dc. One fresh process, fixed original five seeds101-105, no quality warmup, approved32768 completion allowance, unchanged topological_order fixture and72-case checker. Same numerical thinking profile, context262144, IQ3_S, INT8KV, compatible CPUF16vision, and full safety/identity guards. Coupled/Gumbel execution changes seeded streams but not the numerical sampling parameters; its finite distribution checks are not substituted for model quality.
+
+Run the complete five answers once. Record every outcome and preserve Q0104/5 and all earlier failures. No retry-until-pass. A pass qualifies this coding check only; it does not clear short-prompt non-degradation, the missing full speed matrix or real-use gates. Failure prevents promotion. No engine code or production launcher change. Exact process cleanup and production configuration restoration are mandatory.

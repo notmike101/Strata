@@ -1,0 +1,83 @@
+```python
+def topological_order(nodes, edges):
+    node_list = list(nodes)
+    node_set = set(node_list)
+
+    indegree = {node: 0 for node in node_list}
+    adjacency = {node: [] for node in node_list}
+    seen_edges = set()
+
+    for edge in edges:
+        try:
+            before, after = edge
+        except (TypeError, ValueError):
+            raise ValueError("edge must be a pair") from None
+
+        try:
+            if before not in node_set or after not in node_set:
+                raise ValueError("edge endpoint absent from nodes")
+        except TypeError:
+            raise ValueError("edge endpoint absent from nodes") from None
+
+        edge_key = (before, after)
+        if edge_key in seen_edges:
+            continue
+
+        seen_edges.add(edge_key)
+        adjacency[before].append(after)
+        indegree[after] += 1
+
+    def _sift_down(heap, size, index):
+        while True:
+            left = 2 * index + 1
+            right = left + 1
+            smallest = index
+
+            if left < size and heap[left] < heap[smallest]:
+                smallest = left
+            if right < size and heap[right] < heap[smallest]:
+                smallest = right
+
+            if smallest == index:
+                return
+
+            heap[index], heap[smallest] = heap[smallest], heap[index]
+            index = smallest
+
+    def _sift_up(heap, index):
+        while index > 0:
+            parent = (index - 1) // 2
+            if heap[index] >= heap[parent]:
+                return
+
+            heap[index], heap[parent] = heap[parent], heap[index]
+            index = parent
+
+    available = [node for node in node_list if indegree[node] == 0]
+
+    for index in range(len(available) // 2 - 1, -1, -1):
+        _sift_down(available, len(available), index)
+
+    ordering = []
+
+    while available:
+        node = available[0]
+        last = available.pop()
+
+        if available:
+            available[0] = last
+            _sift_down(available, len(available), 0)
+
+        ordering.append(node)
+
+        for successor in adjacency[node]:
+            indegree[successor] -= 1
+            if indegree[successor] == 0:
+                available.append(successor)
+                _sift_up(available, len(available) - 1)
+
+    if len(ordering) != len(node_list):
+        raise ValueError("cycle detected")
+
+    return ordering
+```

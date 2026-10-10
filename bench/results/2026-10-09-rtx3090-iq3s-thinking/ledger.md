@@ -3844,3 +3844,112 @@ Short prompt processing209.35 to205.30tok/s is -1.93percent; TTFT0.838461 to0.85
 Quality status: Q010's prior HC/accepted-usage candidate remains4/5 under32768, and its three-request replay does not erase the failure. C054 is a distinct combined configuration with no completed five-answer quality suite yet. Q011 production5/5 cannot be transferred to it. Neither quality nor any missing real-use gate is waived. No production launcher or source change promoted. All four exact launcher trees cleaned up and original production config3457fdfe restored. Physical/commit16GiB floors passed; observed GPU memory returned457MiB and utilization0percent after R115.
 
 Next bounded step: one five-seed32768 complete-answer suite for C054 (Q014-coupled-quality), unchanged checker, tasks and numeric profile. Do not retry it until passing. If it fails, preserve and reject promotion. If it passes, proceed to the outstanding selected-coding/nonstream/cache-hit and real-use cells with matched production controls; quantify prompt behavior in those cells rather than treating the present1.93percent loss as allowed. No further blind C054 TTLCache repetitions. Keep the goal active and leave production unchanged until every gate passes.
+
+
+## E197 / Q014 full quality check for the combined candidate
+
+Previous goal turn made progress: bounded quality replay closed without reproducing the prior cap failure; C054 ABBA completed with ten measured runs per cell, ordinary decode90.15short/87.15long, and short prompt processing-1.93percent. All evidence pushedbb0f1292433d388c4ea9948d7c73c0d8a9dcb719. No full qualification or promotion. Entry checks find no live Strata/llama/profiler process, GPU457MiB/0percent, only the two known unrelated untracked files, and unusedQ014 output path.
+
+Q014-coupled-quality config is byte-identical to R113/R114 (SHA2561e46c2180bec01c26573d8fcc194cf746f2f1f2ebd4bf64b7063fe748cbeb2e1); engine remains0dea69dc. One fresh process, fixed original five seeds101-105, no quality warmup, approved32768 completion allowance, unchanged topological_order fixture and72-case checker. Same numerical thinking profile, context262144, IQ3_S, INT8KV, compatible CPUF16vision, and full safety/identity guards. Coupled/Gumbel execution changes seeded streams but not the numerical sampling parameters; its finite distribution checks are not substituted for model quality.
+
+Run the complete five answers once. Record every outcome and preserve Q0104/5 and all earlier failures. No retry-until-pass. A pass qualifies this coding check only; it does not clear short-prompt non-degradation, the missing full speed matrix or real-use gates. Failure prevents promotion. No engine code or production launcher change. Exact process cleanup and production configuration restoration are mandatory.
+
+
+## E198 / prompt slowdown source audit, no causal fix yet
+
+While Q014 runs, read-only source inspection narrows the1.93percent short-prompt regression theory. No build, profiler, process-memory polling, Git operation or second inference workload ran during generation. Repository has no.codegraph directory, so ordinary source search is used.
+
+src/program/generate.cpp starts r0 at9147 before prompt-cache/session handling. It records prompt_ms at9985 after the input is read and lent expert slots are refilled, before the first generation window. The serial short-read window path at9573-9578 disables head sampling while consuming known prompt tokens. Therefore direct target Gumbel sampling in the first generation window is outside the prompt interval and is not itself an established explanation for reduced prompt_tps. The metric also includes session/cache handling and refill work; it is not a pure transformer-prefill kernel metric.
+
+Existing STRATA_TRACE instrumentation reports individual read-part/window durations at9944-9948 and refill counts/duration at9656-9676. A later matched trace can separate these contributions without modifying the production code or redefining the benchmark timer. Possible mechanism: changed generated token histories alter adaptive expert residency before the next uncached prompt. This is a hypothesis, not a proven cause. CPU scheduling or other unmeasured effects remain possible.
+
+Conditional next diagnosis if Q014 passes: use one bounded matched trace pair on original fixed short prompts, preserving warmup and request order, same512 output cap and numeric profile; add only STRATA_TRACE=1 to both arms, label all instrumented timing diagnostic, and preserve every output. Compare prompt read versus refill times and counts. Do not promote from tracing or run unchanged uninstrumented repetitions until the regression disappears. Do not suppress sampling/head work, alter sampler parameters or cache policy based only on this hypothesis. Full coding and real-use qualification remains required.
+
+
+## E199 / Q014-coupled-quality approved expanded quality
+
+Seed101: 7748tokens, finishstop, passed=True; {"passed": true, "compiled": true, "cases": 72, "test_seed": 904001}
+
+Seed102: 14847tokens, finishstop, passed=True; {"passed": true, "compiled": true, "cases": 72, "test_seed": 904001}
+
+Seed103: 16435tokens, finishstop, passed=True; {"passed": true, "compiled": true, "cases": 72, "test_seed": 904001}
+
+Seed104: 7830tokens, finishstop, passed=True; {"passed": true, "compiled": true, "cases": 72, "test_seed": 904001}
+
+Seed105: 12225tokens, finishstop, passed=False; 
+
+Pass count4/5 with user-approved32768 cap. All five requests equal the originalQ007 requests except max_tokens. Configuration, executable, libraries, expert profile and vision hashes matchR113-coupled-stack; fixture hash matchesQ011. Natural-stop passing answers compile and pass72tests each. Zero prompt reuse. Legacy8192 failures remain unchanged. Variable-length quality answers do not satisfy the512-token speed target.
+
+Minimum physical62226292736 and commit41426882560bytes;16GiB floors pass. Exact cleanup verified and production3457fdfe restored. No promotion; other workload, stability and real-use requirements remain.
+
+
+## E200 / checker execution-environment defect: preserve original result, recheck all frozen answers
+
+Q014 generated all five answers to natural stop:7748,14847,16435,7830,12225tokens. Original v1 checker reported4/5. Seed105 correctly raises ValueError for a missing endpoint inside a try with an except TypeError clause. In ordinary Python, the ValueError propagates because it is not a TypeError. The checker omitted the standard TypeError builtin, so evaluating the exception handler instead raised NameError. The task only prohibited imports; it did not prohibit built-in exception classes. This is an execution-environment defect, not evidence of an incorrect topological ordering.
+
+Preserved check-topological.py and all original checks.json, stdout/stderr, answers, requests, cap failures and E1994/5. A regression against the frozen seed105 answer fails v1 with the exact NameError. New check-topological-v2.py differs by one addition to the allowed builtin list: TypeError. The AST restrictions,72 test cases, reference function, random seed904001, natural-stop requirement, timeout, expected exceptions, input immutability checks and score threshold are byte-identical. No imports/eval/open or other capabilities were enabled. Valid-answer regression passes v2; four deliberately incorrect/unsafe answers remain rejected. The same frozen answer passes all72 tests using ordinary Python builtins as a separate diagnostic.
+
+Rechecked every stored answer in Q007-Q014 under v1 and v2, with ordinary-Python parity for naturally completed answers. No inference requests or new seed selection.36answers total; all v1 outcomes reproduced. Only Q014seed105 changes. Counts v1 to v2: Q0073/5 to3/5; Q0081/5 to1/5; Q0091/5 to1/5; Q0104/5 to4/5; Q0115/5 to5/5; Q0123/3 to3/3; Q0133/3 to3/3; Q0144/5 to5/5. All output-cap failures remain failures. Original and corrected records coexist with checker/answer hashes and per-answer stdout/stderr.
+
+Q014's five frozen final functions were reviewed as coherent topological-order implementations and each passes the unchanged72-case objective suite under corrected standard exception semantics. This qualifies only the completed-answer coding gate for C054, not universal quality or the full goal. Numeric thinking sampler, prompts, seeds,512speed requests and approved32768quality allowance unchanged. Future quality runs must use v2 consistently for controls and candidates, retaining the checker hash. This repairs evaluation fidelity; it does not lower the quality standard. Short-prompt slowdown and the missing real-use/speed cells remain open. Exact cleanup passed; no benchmark model resident at this checkpoint.
+
+
+## E201 / paired prompt tracing, diagnostic only
+
+After Q014 coding answers pass the unchanged objective cases under the corrected Python exception environment, investigate C054's measured short-prompt slowdown. P021-prompt-trace-control copies R112 and P022-prompt-trace-coupled copies R113; the sole addition to each is STRATA_TRACE=1. Full original TTLCache benchmark is retained to avoid changing its client: short then longer, one warmup and five measured requests each, seeds101-105,512tokens, numeric profile unchanged. This includes the planned short-prompt trace plus the corresponding longer workload. One fresh process per arm and one pair only. Both output paths were unused at preparation.
+
+Trace code already exists in the verified engine; no source/build change. Read-part/window and refill timing lines will localize prompt interval costs. All timings from these arms are instrumented diagnostic results, not extra qualifying repetitions, and must not be pooled into R112-R115 or used to hide the prior1.93percent loss. Preserve cache-hit counts, every slow seed, generated output and original server/client metrics. Compare same request indices and explicitly disclose that preceding generated tokens and adaptive cache state can differ.
+
+Guarded supervisor remains active: exact identity,16GiB physical/commit floors, one model tree, no process-memory polling during requests, mandatory cleanup and configuration restoration. Q014 natural-stop outputs are frozen and are not regenerated. Production launcher remains unchanged. Next: inspect trace decomposition, then act on an evidenced bottleneck or proceed to missing workload gates; do not invent a causal fix from aggregate noise.
+
+
+## E202 / P021-prompt-trace-control
+
+Same engine and loaded library hashes as R112-coupled-stack-control. Config diff is archived. Fixed numeric sampling, high/xhigh reasoning, model/quant, vision, context262144 and INT8KV retained. Original TTLCache streaming cache-miss workloads; one excluded warmup and five measured seeds101-105 per cell,512tokens per measured run. No slow seed excluded.
+
+| Workload | Decode median (range), tok/s | Prompt median, tok/s | E2E median, tok/s | Stream total median, tok/s | TTFT median, s | Draft accepted/offered |
+|---|---:|---:|---:|---:|---:|---:|
+| short | 88.8 (86.4-96.2) | 212.8 | 78.0714 | 78.0858 | 0.8112 | 819/1088 (75.28%) |
+| longer | 88.1 (86.6-90.4) | 495.2 | 42.8422 | 42.8464 | 6.1617 | 947/1278 (74.10%) |
+
+Minimum available physical RAM 62,440,603,648 bytes; available commit 41,681,256,448 bytes. Sampled GPU peak 25,128,013,824 bytes. Both16GiB host floors passed. Per-process peak memory not sampled. Full launcher/server/text/vision cleanup passed and previous config restored.
+
+Instrumented prompt-stage diagnostic with STRATA_TRACE=1. These timing rows are not qualifying speed repetitions and cannot be pooled into C054 ABBA. Read/refill decomposition pending matched P022; no promotion.
+
+Next: Run P022 matched coupled trace once, then compare prompt-stage timings and counts.
+
+
+## E203 / P022-prompt-trace-coupled
+
+Same engine and loaded library hashes as R113-coupled-stack. Config diff is archived. Fixed numeric sampling, high/xhigh reasoning, model/quant, vision, context262144 and INT8KV retained. Original TTLCache streaming cache-miss workloads; one excluded warmup and five measured seeds101-105 per cell,512tokens per measured run. No slow seed excluded.
+
+| Workload | Decode median (range), tok/s | Prompt median, tok/s | E2E median, tok/s | Stream total median, tok/s | TTFT median, s | Draft accepted/offered |
+|---|---:|---:|---:|---:|---:|---:|
+| short | 88.9 (87.1-91.0) | 209.7 | 77.8145 | 77.8260 | 0.8436 | 833/1074 (77.56%) |
+| longer | 87.6 (80.8-88.5) | 495.5 | 42.6936 | 42.6977 | 6.1602 | 1024/1291 (79.32%) |
+
+Minimum available physical RAM 62,161,031,168 bytes; available commit 40,959,152,128 bytes. Sampled GPU peak 25,128,013,824 bytes. Both16GiB host floors passed. Per-process peak memory not sampled. Full launcher/server/text/vision cleanup passed and previous config restored.
+
+Matched instrumented prompt-stage diagnostic complete. STRATA_TRACE=1 timings are excluded from qualifying medians. Q014 corrected v2 coding quality5/5, original v1 failure preserved; full goal remains unqualified.
+
+Next: Analyze both traces stage by stage; keep C054 speed medians and observed prompt regression unchanged.
+
+
+## E204 / prompt trace localization and current qualification checkpoint
+
+One instrumented matched pairP021/P022 completed, each original short/longer workloads with one warmup+five measured seeds,512tokens, fixed numeric sampler, exact model/context/vision and same C051 engine. Each differs from its corresponding C054 arm only by STRATA_TRACE=1; request bytes match. Parser validates12 request boundaries, all prompt-token counts and read-token totals, no cache reuse and512completion tokens. Trace timing is diagnostic only, excluded from qualifying C054 medians.
+
+| Workload | Arm | Prompt total ms | Batched read ms | Tail windows ms | Refill ms | Refilled slots | Other prompt ms |
+|---|---|---:|---:|---:|---:|---:|---:|
+| short | P021 | 775.4 | 594.8 | 45.1 | 99.0 | 311 | 38.3 |
+| longer | P021 | 6124.8 | 5622.4 | 44.7 | 419.1 | 1318 | 38.2 |
+| short | P022 | 801.0 | 609.5 | 50.8 | 99.0 | 311 | 38.4 |
+| longer | P022 | 6123.1 | 5618.4 | 46.8 | 419.2 | 1318 | 38.2 |
+
+Medians of separate stages need not sum to the median total. Other time is computed per request after subtracting traced read/refill/lend durations; it includes checkpoint/session work and timing/trace overhead, not an attributed bottleneck. Short candidate batched-read median is14.7ms higher and tail-window median5.7ms higher; refill is99.0ms for both with311slots. Longer refill419.1/419.2ms and1318slots is essentially unchanged. This localizes the observed difference to computation rather than more refill bytes; it does not prove cache composition, CPU sharing or Gumbel as the cause. Prompt throughput212.8control/209.7candidate also differs in this instrumented pair, but these values cannot replace the original209.35/205.30 or erase the measured1.93percent loss.
+
+Code investigation: generate.cpp request_chunk rounds each prompt buffer capacity up to256tokens, and lend uses Prefill::bytes_needed for that capacity. Current short main reads160-163tokens while borrowing buffers for256; the four-token tail uses verifier windows. A bounded next feasibility check is to calculate the exact scratch/loan reduction for a smaller short-request capacity and audit all alignment/relayout/kernel requirements. Do not assume it is safe or faster: capacity may affect kernel layout or routing placement. Keep defaults byte-identical, require an opt-in if implemented, and retain the full quality/speed contract. This is a new structural hypothesis motivated by measured work, not a rerun of C054 until favorable. No C055 engine code, build or speed arm exists yet.
+
+Q014 corrected coding gate5/5 is supported by frozen-output tests, standard-Python diagnostic parity, and the one-builtin TypeError repair. Original v1 score4/5 is preserved alongside v2; all36 stored answers were rechecked and only Q014seed105 changes. Legacy cap failures remain failures. Future quality client goal90-quality-expanded-v2.py is a separately versioned copy selecting the v2 checker, recording its hash, saving its source and asserting it cannot change during a run. Private supervisor adds explicit --goal-quality-expanded-v2 with the same7200s timeout and memory/cleanup guards. Original clients/checker remain available unchanged. New helper syntax checks pass; no additional model generation for this correction.
+
+The goal remains unqualified: C054 numeric original streaming-miss medians90.15/87.15 meet90/85, but short-prompt non-degradation is unproven; selected-coding speed, nonstream/cache-hit confirmations and real-use gates remain missing for this combination. No source or launcher promotion. P021/P022 exact trees cleaned up, production config3457fdfe restored, idleGPU457MiB/0percent. Both16GiB physical/commit floors passed. Next: quantify short-buffer opportunity before implementation, then test only an evidence-backed change or complete missing workload gates; never waive the prompt-loss condition.

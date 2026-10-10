@@ -1,0 +1,866 @@
+{
+  "diagnostic_only": true,
+  "qualifying_speed_runs": false,
+  "arms": {
+    "P021-prompt-trace-control": {
+      "rows": [
+        {
+          "prompt_tokens": 165,
+          "batched_ms": 1029.1,
+          "windows_ms": 57.5,
+          "refill_ms": 98.8,
+          "lend_ms": 0.2,
+          "refilled_slots": 311,
+          "read_tokens": 164,
+          "lent_slots": 311,
+          "buffer_chunk_tokens": [
+            256
+          ],
+          "label": "short-warmup",
+          "workload": "short",
+          "warmup": true,
+          "prompt_ms": 1256.6,
+          "prompt_tps": 131.3,
+          "ttft_seconds": 1.3032070000190288,
+          "other_prompt_ms": 71.0
+        },
+        {
+          "prompt_tokens": 165,
+          "batched_ms": 594.8,
+          "windows_ms": 42.6,
+          "refill_ms": 99.6,
+          "lend_ms": 0.1,
+          "refilled_slots": 311,
+          "read_tokens": 164,
+          "lent_slots": 311,
+          "buffer_chunk_tokens": [
+            256
+          ],
+          "label": "short-run-1",
+          "workload": "short",
+          "warmup": false,
+          "prompt_ms": 775.4,
+          "prompt_tps": 212.8,
+          "ttft_seconds": 0.7973120000096969,
+          "other_prompt_ms": 38.30000000000007
+        },
+        {
+          "prompt_tokens": 168,
+          "batched_ms": 576.5,
+          "windows_ms": 43.6,
+          "refill_ms": 99.0,
+          "lend_ms": 0.1,
+          "refilled_slots": 311,
+          "read_tokens": 167,
+          "lent_slots": 311,
+          "buffer_chunk_tokens": [
+            256
+          ],
+          "label": "short-run-2",
+          "workload": "short",
+          "warmup": false,
+          "prompt_ms": 757.5,
+          "prompt_tps": 221.8,
+          "ttft_seconds": 0.7952111000195146,
+          "other_prompt_ms": 38.299999999999955
+        },
+        {
+          "prompt_tokens": 168,
+          "batched_ms": 628.0,
+          "windows_ms": 45.1,
+          "refill_ms": 99.1,
+          "lend_ms": 0.1,
+          "refilled_slots": 311,
+          "read_tokens": 167,
+          "lent_slots": 311,
+          "buffer_chunk_tokens": [
+            256
+          ],
+          "label": "short-run-3",
+          "workload": "short",
+          "warmup": false,
+          "prompt_ms": 810.3,
+          "prompt_tps": 207.3,
+          "ttft_seconds": 0.8483540000161156,
+          "other_prompt_ms": 38.0
+        },
+        {
+          "prompt_tokens": 165,
+          "batched_ms": 618.3,
+          "windows_ms": 48.4,
+          "refill_ms": 98.8,
+          "lend_ms": 0.1,
+          "refilled_slots": 311,
+          "read_tokens": 164,
+          "lent_slots": 311,
+          "buffer_chunk_tokens": [
+            256
+          ],
+          "label": "short-run-4",
+          "workload": "short",
+          "warmup": false,
+          "prompt_ms": 803.8,
+          "prompt_tps": 205.3,
+          "ttft_seconds": 0.8287432999932207,
+          "other_prompt_ms": 38.200000000000045
+        },
+        {
+          "prompt_tokens": 167,
+          "batched_ms": 585.5,
+          "windows_ms": 48.0,
+          "refill_ms": 98.7,
+          "lend_ms": 0.1,
+          "refilled_slots": 311,
+          "read_tokens": 166,
+          "lent_slots": 311,
+          "buffer_chunk_tokens": [
+            256
+          ],
+          "label": "short-run-5",
+          "workload": "short",
+          "warmup": false,
+          "prompt_ms": 770.6,
+          "prompt_tps": 216.7,
+          "ttft_seconds": 0.8111960000242107,
+          "other_prompt_ms": 38.30000000000007
+        },
+        {
+          "prompt_tokens": 3033,
+          "batched_ms": 5622.7,
+          "windows_ms": 55.9,
+          "refill_ms": 419.8,
+          "lend_ms": 0.9,
+          "refilled_slots": 1318,
+          "read_tokens": 3032,
+          "lent_slots": 1318,
+          "buffer_chunk_tokens": [
+            3072
+          ],
+          "label": "longer-warmup",
+          "workload": "longer",
+          "warmup": true,
+          "prompt_ms": 6137.6,
+          "prompt_tps": 494.2,
+          "ttft_seconds": 6.183502100000624,
+          "other_prompt_ms": 38.30000000000018
+        },
+        {
+          "prompt_tokens": 3034,
+          "batched_ms": 5624.3,
+          "windows_ms": 51.6,
+          "refill_ms": 419.1,
+          "lend_ms": 0.9,
+          "refilled_slots": 1318,
+          "read_tokens": 3033,
+          "lent_slots": 1318,
+          "buffer_chunk_tokens": [
+            3072
+          ],
+          "label": "longer-run-1",
+          "workload": "longer",
+          "warmup": false,
+          "prompt_ms": 6133.8,
+          "prompt_tps": 494.6,
+          "ttft_seconds": 6.177386399998795,
+          "other_prompt_ms": 37.899999999999636
+        },
+        {
+          "prompt_tokens": 3035,
+          "batched_ms": 5624.0,
+          "windows_ms": 47.3,
+          "refill_ms": 419.4,
+          "lend_ms": 1.0,
+          "refilled_slots": 1318,
+          "read_tokens": 3034,
+          "lent_slots": 1318,
+          "buffer_chunk_tokens": [
+            3072
+          ],
+          "label": "longer-run-2",
+          "workload": "longer",
+          "warmup": false,
+          "prompt_ms": 6129.8,
+          "prompt_tps": 495.1,
+          "ttft_seconds": 6.171397699974477,
+          "other_prompt_ms": 38.100000000000364
+        },
+        {
+          "prompt_tokens": 3034,
+          "batched_ms": 5620.3,
+          "windows_ms": 44.7,
+          "refill_ms": 418.9,
+          "lend_ms": 0.9,
+          "refilled_slots": 1318,
+          "read_tokens": 3033,
+          "lent_slots": 1318,
+          "buffer_chunk_tokens": [
+            3072
+          ],
+          "label": "longer-run-3",
+          "workload": "longer",
+          "warmup": false,
+          "prompt_ms": 6123.1,
+          "prompt_tps": 495.5,
+          "ttft_seconds": 6.161726799968164,
+          "other_prompt_ms": 38.30000000000018
+        },
+        {
+          "prompt_tokens": 3034,
+          "batched_ms": 5615.0,
+          "windows_ms": 43.1,
+          "refill_ms": 418.9,
+          "lend_ms": 0.9,
+          "refilled_slots": 1318,
+          "read_tokens": 3033,
+          "lent_slots": 1318,
+          "buffer_chunk_tokens": [
+            3072
+          ],
+          "label": "longer-run-4",
+          "workload": "longer",
+          "warmup": false,
+          "prompt_ms": 6116.3,
+          "prompt_tps": 496.1,
+          "ttft_seconds": 6.159004799963441,
+          "other_prompt_ms": 38.400000000000546
+        },
+        {
+          "prompt_tokens": 3033,
+          "batched_ms": 5622.4,
+          "windows_ms": 44.0,
+          "refill_ms": 419.3,
+          "lend_ms": 0.9,
+          "refilled_slots": 1318,
+          "read_tokens": 3032,
+          "lent_slots": 1318,
+          "buffer_chunk_tokens": [
+            3072
+          ],
+          "label": "longer-run-5",
+          "workload": "longer",
+          "warmup": false,
+          "prompt_ms": 6124.8,
+          "prompt_tps": 495.2,
+          "ttft_seconds": 6.149851900001522,
+          "other_prompt_ms": 38.20000000000073
+        }
+      ],
+      "summary": {
+        "short": {
+          "prompt_ms": {
+            "median": 775.4,
+            "raw": [
+              775.4,
+              757.5,
+              810.3,
+              803.8,
+              770.6
+            ]
+          },
+          "prompt_tps": {
+            "median": 212.8,
+            "raw": [
+              212.8,
+              221.8,
+              207.3,
+              205.3,
+              216.7
+            ]
+          },
+          "batched_ms": {
+            "median": 594.8,
+            "raw": [
+              594.8,
+              576.5,
+              628.0,
+              618.3,
+              585.5
+            ]
+          },
+          "windows_ms": {
+            "median": 45.1,
+            "raw": [
+              42.6,
+              43.6,
+              45.1,
+              48.4,
+              48.0
+            ]
+          },
+          "refill_ms": {
+            "median": 99.0,
+            "raw": [
+              99.6,
+              99.0,
+              99.1,
+              98.8,
+              98.7
+            ]
+          },
+          "lend_ms": {
+            "median": 0.1,
+            "raw": [
+              0.1,
+              0.1,
+              0.1,
+              0.1,
+              0.1
+            ]
+          },
+          "other_prompt_ms": {
+            "median": 38.299999999999955,
+            "raw": [
+              38.30000000000007,
+              38.299999999999955,
+              38.0,
+              38.200000000000045,
+              38.30000000000007
+            ]
+          },
+          "refilled_slots": {
+            "median": 311,
+            "raw": [
+              311,
+              311,
+              311,
+              311,
+              311
+            ]
+          },
+          "ttft_seconds": {
+            "median": 0.8111960000242107,
+            "raw": [
+              0.7973120000096969,
+              0.7952111000195146,
+              0.8483540000161156,
+              0.8287432999932207,
+              0.8111960000242107
+            ]
+          }
+        },
+        "longer": {
+          "prompt_ms": {
+            "median": 6124.8,
+            "raw": [
+              6133.8,
+              6129.8,
+              6123.1,
+              6116.3,
+              6124.8
+            ]
+          },
+          "prompt_tps": {
+            "median": 495.2,
+            "raw": [
+              494.6,
+              495.1,
+              495.5,
+              496.1,
+              495.2
+            ]
+          },
+          "batched_ms": {
+            "median": 5622.4,
+            "raw": [
+              5624.3,
+              5624.0,
+              5620.3,
+              5615.0,
+              5622.4
+            ]
+          },
+          "windows_ms": {
+            "median": 44.7,
+            "raw": [
+              51.6,
+              47.3,
+              44.7,
+              43.1,
+              44.0
+            ]
+          },
+          "refill_ms": {
+            "median": 419.1,
+            "raw": [
+              419.1,
+              419.4,
+              418.9,
+              418.9,
+              419.3
+            ]
+          },
+          "lend_ms": {
+            "median": 0.9,
+            "raw": [
+              0.9,
+              1.0,
+              0.9,
+              0.9,
+              0.9
+            ]
+          },
+          "other_prompt_ms": {
+            "median": 38.20000000000073,
+            "raw": [
+              37.899999999999636,
+              38.100000000000364,
+              38.30000000000018,
+              38.400000000000546,
+              38.20000000000073
+            ]
+          },
+          "refilled_slots": {
+            "median": 1318,
+            "raw": [
+              1318,
+              1318,
+              1318,
+              1318,
+              1318
+            ]
+          },
+          "ttft_seconds": {
+            "median": 6.161726799968164,
+            "raw": [
+              6.177386399998795,
+              6.171397699974477,
+              6.161726799968164,
+              6.159004799963441,
+              6.149851900001522
+            ]
+          }
+        }
+      }
+    },
+    "P022-prompt-trace-coupled": {
+      "rows": [
+        {
+          "prompt_tokens": 165,
+          "batched_ms": 1088.4,
+          "windows_ms": 58.1,
+          "refill_ms": 99.2,
+          "lend_ms": 0.2,
+          "refilled_slots": 311,
+          "read_tokens": 164,
+          "lent_slots": 311,
+          "buffer_chunk_tokens": [
+            256
+          ],
+          "label": "short-warmup",
+          "workload": "short",
+          "warmup": true,
+          "prompt_ms": 1317.0,
+          "prompt_tps": 125.3,
+          "ttft_seconds": 1.3638211999787018,
+          "other_prompt_ms": 71.09999999999991
+        },
+        {
+          "prompt_tokens": 165,
+          "batched_ms": 592.0,
+          "windows_ms": 41.0,
+          "refill_ms": 100.1,
+          "lend_ms": 0.1,
+          "refilled_slots": 311,
+          "read_tokens": 164,
+          "lent_slots": 311,
+          "buffer_chunk_tokens": [
+            256
+          ],
+          "label": "short-run-1",
+          "workload": "short",
+          "warmup": false,
+          "prompt_ms": 771.6,
+          "prompt_tps": 213.8,
+          "ttft_seconds": 0.8082723999978043,
+          "other_prompt_ms": 38.39999999999998
+        },
+        {
+          "prompt_tokens": 168,
+          "batched_ms": 609.5,
+          "windows_ms": 54.1,
+          "refill_ms": 99.0,
+          "lend_ms": 0.1,
+          "refilled_slots": 311,
+          "read_tokens": 167,
+          "lent_slots": 311,
+          "buffer_chunk_tokens": [
+            256
+          ],
+          "label": "short-run-2",
+          "workload": "short",
+          "warmup": false,
+          "prompt_ms": 801.0,
+          "prompt_tps": 209.7,
+          "ttft_seconds": 0.8436389000271447,
+          "other_prompt_ms": 38.299999999999955
+        },
+        {
+          "prompt_tokens": 168,
+          "batched_ms": 637.5,
+          "windows_ms": 53.9,
+          "refill_ms": 98.6,
+          "lend_ms": 0.1,
+          "refilled_slots": 311,
+          "read_tokens": 167,
+          "lent_slots": 311,
+          "buffer_chunk_tokens": [
+            256
+          ],
+          "label": "short-run-3",
+          "workload": "short",
+          "warmup": false,
+          "prompt_ms": 828.4,
+          "prompt_tps": 202.8,
+          "ttft_seconds": 0.8692666999995708,
+          "other_prompt_ms": 38.299999999999955
+        },
+        {
+          "prompt_tokens": 165,
+          "batched_ms": 650.2,
+          "windows_ms": 49.6,
+          "refill_ms": 100.0,
+          "lend_ms": 0.1,
+          "refilled_slots": 311,
+          "read_tokens": 164,
+          "lent_slots": 311,
+          "buffer_chunk_tokens": [
+            256
+          ],
+          "label": "short-run-4",
+          "workload": "short",
+          "warmup": false,
+          "prompt_ms": 838.4,
+          "prompt_tps": 196.8,
+          "ttft_seconds": 0.8663433000328951,
+          "other_prompt_ms": 38.499999999999886
+        },
+        {
+          "prompt_tokens": 167,
+          "batched_ms": 603.8,
+          "windows_ms": 50.8,
+          "refill_ms": 98.7,
+          "lend_ms": 0.1,
+          "refilled_slots": 311,
+          "read_tokens": 166,
+          "lent_slots": 311,
+          "buffer_chunk_tokens": [
+            256
+          ],
+          "label": "short-run-5",
+          "workload": "short",
+          "warmup": false,
+          "prompt_ms": 791.8,
+          "prompt_tps": 210.9,
+          "ttft_seconds": 0.8320733000291511,
+          "other_prompt_ms": 38.39999999999998
+        },
+        {
+          "prompt_tokens": 3033,
+          "batched_ms": 5619.1,
+          "windows_ms": 53.2,
+          "refill_ms": 419.1,
+          "lend_ms": 0.9,
+          "refilled_slots": 1318,
+          "read_tokens": 3032,
+          "lent_slots": 1318,
+          "buffer_chunk_tokens": [
+            3072
+          ],
+          "label": "longer-warmup",
+          "workload": "longer",
+          "warmup": true,
+          "prompt_ms": 6130.9,
+          "prompt_tps": 494.7,
+          "ttft_seconds": 6.175294499960728,
+          "other_prompt_ms": 38.599999999999454
+        },
+        {
+          "prompt_tokens": 3034,
+          "batched_ms": 5616.9,
+          "windows_ms": 47.9,
+          "refill_ms": 419.2,
+          "lend_ms": 0.9,
+          "refilled_slots": 1318,
+          "read_tokens": 3033,
+          "lent_slots": 1318,
+          "buffer_chunk_tokens": [
+            3072
+          ],
+          "label": "longer-run-1",
+          "workload": "longer",
+          "warmup": false,
+          "prompt_ms": 6123.1,
+          "prompt_tps": 495.5,
+          "ttft_seconds": 6.164417499967385,
+          "other_prompt_ms": 38.20000000000073
+        },
+        {
+          "prompt_tokens": 3035,
+          "batched_ms": 5608.3,
+          "windows_ms": 49.9,
+          "refill_ms": 420.3,
+          "lend_ms": 0.9,
+          "refilled_slots": 1318,
+          "read_tokens": 3034,
+          "lent_slots": 1318,
+          "buffer_chunk_tokens": [
+            3072
+          ],
+          "label": "longer-run-2",
+          "workload": "longer",
+          "warmup": false,
+          "prompt_ms": 6117.6,
+          "prompt_tps": 496.1,
+          "ttft_seconds": 6.160188499954529,
+          "other_prompt_ms": 38.19999999999982
+        },
+        {
+          "prompt_tokens": 3034,
+          "batched_ms": 5621.9,
+          "windows_ms": 44.3,
+          "refill_ms": 417.5,
+          "lend_ms": 0.9,
+          "refilled_slots": 1318,
+          "read_tokens": 3033,
+          "lent_slots": 1318,
+          "buffer_chunk_tokens": [
+            3072
+          ],
+          "label": "longer-run-3",
+          "workload": "longer",
+          "warmup": false,
+          "prompt_ms": 6123.0,
+          "prompt_tps": 495.5,
+          "ttft_seconds": 6.162467600021046,
+          "other_prompt_ms": 38.400000000000546
+        },
+        {
+          "prompt_tokens": 3034,
+          "batched_ms": 5626.0,
+          "windows_ms": 44.5,
+          "refill_ms": 418.7,
+          "lend_ms": 0.9,
+          "refilled_slots": 1318,
+          "read_tokens": 3033,
+          "lent_slots": 1318,
+          "buffer_chunk_tokens": [
+            3072
+          ],
+          "label": "longer-run-4",
+          "workload": "longer",
+          "warmup": false,
+          "prompt_ms": 6128.2,
+          "prompt_tps": 495.1,
+          "ttft_seconds": 6.152884699986316,
+          "other_prompt_ms": 38.099999999999454
+        },
+        {
+          "prompt_tokens": 3033,
+          "batched_ms": 5618.4,
+          "windows_ms": 46.8,
+          "refill_ms": 419.2,
+          "lend_ms": 0.9,
+          "refilled_slots": 1318,
+          "read_tokens": 3032,
+          "lent_slots": 1318,
+          "buffer_chunk_tokens": [
+            3072
+          ],
+          "label": "longer-run-5",
+          "workload": "longer",
+          "warmup": false,
+          "prompt_ms": 6123.2,
+          "prompt_tps": 495.3,
+          "ttft_seconds": 6.149055499990936,
+          "other_prompt_ms": 37.900000000000546
+        }
+      ],
+      "summary": {
+        "short": {
+          "prompt_ms": {
+            "median": 801.0,
+            "raw": [
+              771.6,
+              801.0,
+              828.4,
+              838.4,
+              791.8
+            ]
+          },
+          "prompt_tps": {
+            "median": 209.7,
+            "raw": [
+              213.8,
+              209.7,
+              202.8,
+              196.8,
+              210.9
+            ]
+          },
+          "batched_ms": {
+            "median": 609.5,
+            "raw": [
+              592.0,
+              609.5,
+              637.5,
+              650.2,
+              603.8
+            ]
+          },
+          "windows_ms": {
+            "median": 50.8,
+            "raw": [
+              41.0,
+              54.1,
+              53.9,
+              49.6,
+              50.8
+            ]
+          },
+          "refill_ms": {
+            "median": 99.0,
+            "raw": [
+              100.1,
+              99.0,
+              98.6,
+              100.0,
+              98.7
+            ]
+          },
+          "lend_ms": {
+            "median": 0.1,
+            "raw": [
+              0.1,
+              0.1,
+              0.1,
+              0.1,
+              0.1
+            ]
+          },
+          "other_prompt_ms": {
+            "median": 38.39999999999998,
+            "raw": [
+              38.39999999999998,
+              38.299999999999955,
+              38.299999999999955,
+              38.499999999999886,
+              38.39999999999998
+            ]
+          },
+          "refilled_slots": {
+            "median": 311,
+            "raw": [
+              311,
+              311,
+              311,
+              311,
+              311
+            ]
+          },
+          "ttft_seconds": {
+            "median": 0.8436389000271447,
+            "raw": [
+              0.8082723999978043,
+              0.8436389000271447,
+              0.8692666999995708,
+              0.8663433000328951,
+              0.8320733000291511
+            ]
+          }
+        },
+        "longer": {
+          "prompt_ms": {
+            "median": 6123.1,
+            "raw": [
+              6123.1,
+              6117.6,
+              6123.0,
+              6128.2,
+              6123.2
+            ]
+          },
+          "prompt_tps": {
+            "median": 495.5,
+            "raw": [
+              495.5,
+              496.1,
+              495.5,
+              495.1,
+              495.3
+            ]
+          },
+          "batched_ms": {
+            "median": 5618.4,
+            "raw": [
+              5616.9,
+              5608.3,
+              5621.9,
+              5626.0,
+              5618.4
+            ]
+          },
+          "windows_ms": {
+            "median": 46.8,
+            "raw": [
+              47.9,
+              49.9,
+              44.3,
+              44.5,
+              46.8
+            ]
+          },
+          "refill_ms": {
+            "median": 419.2,
+            "raw": [
+              419.2,
+              420.3,
+              417.5,
+              418.7,
+              419.2
+            ]
+          },
+          "lend_ms": {
+            "median": 0.9,
+            "raw": [
+              0.9,
+              0.9,
+              0.9,
+              0.9,
+              0.9
+            ]
+          },
+          "other_prompt_ms": {
+            "median": 38.19999999999982,
+            "raw": [
+              38.20000000000073,
+              38.19999999999982,
+              38.400000000000546,
+              38.099999999999454,
+              37.900000000000546
+            ]
+          },
+          "refilled_slots": {
+            "median": 1318,
+            "raw": [
+              1318,
+              1318,
+              1318,
+              1318,
+              1318
+            ]
+          },
+          "ttft_seconds": {
+            "median": 6.160188499954529,
+            "raw": [
+              6.164417499967385,
+              6.160188499954529,
+              6.162467600021046,
+              6.152884699986316,
+              6.149055499990936
+            ]
+          }
+        }
+      }
+    }
+  }
+}

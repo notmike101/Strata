@@ -1,0 +1,16 @@
+We need answer user's request. Need produce final answer with complete code, tests, explanation, at least 1200 words. Need likely include implementation of thread-safe Python TTLCache using OrderedDict and monotonic clock, injected fake clock. User included many existing cache rules but says benchmark identifier ignore. Need read existing requirements before implementing cache: each rule key item_000.. has lifetime and size; expiration removes stale entries, access updates LRU. Need incorporate maybe max size? They mention size bytes. Implement capacity eviction. Need likely support size? TTLCache with capacity maxsize and maybe max_bytes? The rules mention size in bytes. Need design maybe each entry has payload size, capacity can be entry count or byte size. Requirement: OrderedDict and monotonic clock. Include set, get, delete, clear, len, expiration, capacity eviction, unit tests with injected fake clock, detailed explanation thread safety and complexity. Do not abbreviate. At least 1200 words.
+
+Need decide exact API. Thread-safe Python TTLCache class using OrderedDict and monotonic clock. Could be:
+
+class TTLCache:
+    def __init__(self, maxsize, default_ttl=60, clock=time.monotonic, max_size_bytes=None, on_expired=None?) 
+    set(key, value, ttl=None, size_bytes=None)
+    get(key, default=None, update=True)
+    delete(key)
+    clear()
+    __len__
+    _expired(now)
+    expire() / _purge_expired / prune
+    capacity eviction: LRU. With TTL and size. Need use OrderedDict move_to_end.
+
+Need handle concurrent updates: RLock? For correctness use lock around all operations. Expiration can be lazy or active. Use OrderedDict with value as tuple(value, expires_at, size_bytes). On set: with lock: now=clock(); _remove_expired? Need remove existing if present, then insert. While len > maxsize or total_bytes > max_bytes: popitem(last=False) evict LRU. For expired entries, if get: if entry expired: delete, return default. Also set may optionally purge expired entries before capacity check. Need efficient enough. Since only need unit tests with fake clock, maybe no background thread. Could include expire() method to manually remove stale entries, and lazy expiration. "expiration must remove stale entries" maybe method expire() that scans and removes expired. But scanning all on each operation O(n) bad. Could use heap or

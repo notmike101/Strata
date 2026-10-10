@@ -1,0 +1,87 @@
+{
+  "arm": "Q014-coupled-quality",
+  "source_configuration": "R113-coupled-stack",
+  "quality_passed": false,
+  "passed_count": 4,
+  "checks": [
+    {
+      "seed": 101,
+      "finish_reason": "stop",
+      "completion_tokens": 7748,
+      "returncode": 0,
+      "stdout": "{\"passed\": true, \"compiled\": true, \"cases\": 72, \"test_seed\": 904001}\n",
+      "stderr": "",
+      "passed": true
+    },
+    {
+      "seed": 102,
+      "finish_reason": "stop",
+      "completion_tokens": 14847,
+      "returncode": 0,
+      "stdout": "{\"passed\": true, \"compiled\": true, \"cases\": 72, \"test_seed\": 904001}\n",
+      "stderr": "",
+      "passed": true
+    },
+    {
+      "seed": 103,
+      "finish_reason": "stop",
+      "completion_tokens": 16435,
+      "returncode": 0,
+      "stdout": "{\"passed\": true, \"compiled\": true, \"cases\": 72, \"test_seed\": 904001}\n",
+      "stderr": "",
+      "passed": true
+    },
+    {
+      "seed": 104,
+      "finish_reason": "stop",
+      "completion_tokens": 7830,
+      "returncode": 0,
+      "stdout": "{\"passed\": true, \"compiled\": true, \"cases\": 72, \"test_seed\": 904001}\n",
+      "stderr": "",
+      "passed": true
+    },
+    {
+      "seed": 105,
+      "finish_reason": "stop",
+      "completion_tokens": 12225,
+      "returncode": 1,
+      "stdout": "",
+      "stderr": "Traceback (most recent call last):\n  File \"generated-topological\", line 17, in topological_order\nValueError: edge endpoint absent from nodes\n\nDuring handling of the above exception, another exception occurred:\n\nTraceback (most recent call last):\n  File \"C:\\strata\\local-setup\\target-80\\check-topological.py\", line 43, in <module>\n    (['a','b','c','d'],[('a','c'),('b','c'),('c','d')])]:check(nodes,edges)\n                                                         ~~~~~^^^^^^^^^^^^^\n  File \"C:\\strata\\local-setup\\target-80\\check-topological.py\", line 32, in check\n    try: got=fn(nodes,edges)\n             ~~^^^^^^^^^^^^^\n  File \"generated-topological\", line 18, in topological_order\nNameError: name 'TypeError' is not defined\n",
+      "passed": false
+    }
+  ],
+  "request_identity": [
+    {
+      "seed": 101,
+      "matches_original_except_approved_cap": true,
+      "request_sha256": "14dfc02ba3f168b22821eb3dc135635ba875cca3bee3f22106c06ba8d30a00e2"
+    },
+    {
+      "seed": 102,
+      "matches_original_except_approved_cap": true,
+      "request_sha256": "2e24de623705215ed78d36f8f5d842e6f2faae7c655e7bf21163fd00ee843df6"
+    },
+    {
+      "seed": 103,
+      "matches_original_except_approved_cap": true,
+      "request_sha256": "8064840fa77d2df782948a3fb2ededb0bb0f7fb0be21e0abac8ea17b6d3cfc9d"
+    },
+    {
+      "seed": 104,
+      "matches_original_except_approved_cap": true,
+      "request_sha256": "d6a5d34956e2f219dd045ea604af4cd9aee32f30cf8318179aa6b58cbf620937"
+    },
+    {
+      "seed": 105,
+      "matches_original_except_approved_cap": true,
+      "request_sha256": "4e90e60da792a26a39786afc7469771e3c1252f84243f81ca74fc2280553277f"
+    }
+  ],
+  "minimum_memory_bytes": {
+    "physical_available": 62226292736,
+    "commit_available": 41426882560
+  },
+  "speed_qualification": false,
+  "quality_cap": 32768,
+  "legacy_failures_preserved": true
+}
