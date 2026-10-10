@@ -1,0 +1,28 @@
+We need answer to user: implement topological_order in Python, only complete function in code block, no imports. Need analyze requirements.
+
+Function topological_order(nodes, edges). nodes list unique strings; edges list of (before, after) pairs. Return lexicographically smallest topological ordering, include isolated nodes, ignore duplicate edges. Raise ValueError for edge endpoint absent from nodes or a cycle. Do not mutate either input. Use no imports. Return only complete function in Python code block.
+
+Need produce final code block only likely.
+
+Algorithm: Kahn's algorithm with sorted available nodes. Need lexicographically smallest topological ordering for DAG with string nodes. Without imports (no heapq). Can maintain sorted list of available nodes and pop(0) or use min. nodes unique but order not guaranteed. Need include all isolated nodes. Duplicate edges ignored. Need no mutate inputs. Use no imports.
+
+Input: nodes list of unique strings. But we should copy to avoid mutation: node_set = set(nodes) maybe. But using set doesn't mutate input. Edges may be list; iterate. Need ignore duplicates. Build adjacency dict: {node: set()} for all nodes? Need not mutate nodes/edges. Use dict/set.
+
+Validate endpoints: if before not in node_set or after not in node_set raise ValueError. What about self-loop? It's cycle, will be detected; could early raise. Duplicate edges: add to set adjacency[before].
+
+In-degree: dict mapping node to int. Increment for each unique edge. Need careful duplicates ignored: use adjacency sets to compute indegree after edges processed, or maintain edge_set. Since duplicate edges may appear; using adjacency[before].add(after) and later indegree = sum(len(adj)) works. Need ensure if duplicate self-loop? set ignores; still indegree 1.
+
+Kahn:
+node_set = set(nodes)
+adj = {node: set() for node in nodes}
+edge_set? We can use adj sets.
+for before, after in edges:
+   if before not in node_set or after not in node_set: raise ValueError
+   if before == after? maybe leave; detected. But if self-loop, adj[before].add(before).
+   adj[before].add(after)
+
+indegree = {node: 0 for node in nodes}
+for before in adj:
+   for after in adj[before]: indegree[after] += 1
+
+available = [node for node in nodes

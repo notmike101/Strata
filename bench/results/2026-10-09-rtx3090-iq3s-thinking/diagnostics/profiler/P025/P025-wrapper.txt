@@ -1,0 +1,49 @@
+Cleanup verified: no live Strata launcher, server, engine or vision process.
+memory.used [MiB], memory.free [MiB]
+457 MiB, 23866 MiB
+START short-warmup-new
+{"label": "short-warmup-new", "workload": "short/stream/new", "warmup": true, "seed": 100, "request_started_utc": "2026-10-10T11:55:25.072602+00:00", "prompt_tokens": 166, "fresh_prompt_tokens": 166, "cached_tokens": 0, "completion_tokens": 512, "server_decode_tps": 70.6, "prompt_tps": 126.5, "request_seconds": 8.633443599974271, "request_e2e_tps": 59.30426185925693, "stream_total_tps": 59.30747335193178, "ttft_seconds": 1.3699102000100538, "finish_reason": "length", "cache_expected": "miss", "cache_valid": true, "output_512": true}
+START short-warmup-hit
+{"label": "short-warmup-hit", "workload": "short/stream/hit", "warmup": true, "seed": 100, "request_started_utc": "2026-10-10T11:55:34.820186+00:00", "prompt_tokens": 166, "fresh_prompt_tokens": 5, "cached_tokens": 161, "completion_tokens": 512, "server_decode_tps": 76.6, "prompt_tps": 74.2, "request_seconds": 6.79323629999999, "request_e2e_tps": 75.36908439354609, "stream_total_tps": 75.3760014798454, "ttft_seconds": 0.10452059999806806, "finish_reason": "length", "cache_expected": "hit", "cache_valid": true, "output_512": true}
+WARNING: CPU context switches trace requires administrative privileges, disabling.
+WARNING: CPU sampling requires administrative privileges, disabling.
+START short-run-1-new
+{"label": "short-run-1-new", "workload": "short/stream/new", "warmup": false, "seed": 101, "request_started_utc": "2026-10-10T11:55:43.168958+00:00", "prompt_tokens": 167, "fresh_prompt_tokens": 167, "cached_tokens": 0, "completion_tokens": 512, "server_decode_tps": 77.8, "prompt_tps": 209.2, "request_seconds": 7.413857500010636, "request_e2e_tps": 69.05986525897828, "stream_total_tps": 69.06462181048616, "ttft_seconds": 0.8724754000431858, "finish_reason": "length", "cache_expected": "miss", "cache_valid": true, "output_512": true}
+START short-run-1-hit
+{"label": "short-run-1-hit", "workload": "short/stream/hit", "warmup": false, "seed": 101, "request_started_utc": "2026-10-10T11:55:51.697622+00:00", "prompt_tokens": 167, "fresh_prompt_tokens": 5, "cached_tokens": 162, "completion_tokens": 512, "server_decode_tps": 76.2, "prompt_tps": 77.0, "request_seconds": 6.85344969999278, "request_e2e_tps": 74.706902715072, "stream_total_tps": 74.71212230060682, "ttft_seconds": 0.10376899997936562, "finish_reason": "length", "cache_expected": "hit", "cache_valid": true, "output_512": true}
+Generating '<USER_HOME>\AppData\Local\Temp\nsys-me\nsys-report-6089.qdstrm'
+
+[1/1] [0%                          ] P025-decode.nsys-rep
+[1/1] [0%                          ] P025-decode.nsys-rep
+[1/1] [1%                          ] P025-decode.nsys-rep
+[1/1] [2%                          ] P025-decode.nsys-rep
+[1/1] [5%                          ] P025-decode.nsys-rep
+[1/1] [6%                          ] P025-decode.nsys-rep
+[1/1] [7%                          ] P025-decode.nsys-rep
+[1/1] [8%                          ] P025-decode.nsys-rep
+[1/1] [9%                          ] P025-decode.nsys-rep
+[1/1] [10%                         ] P025-decode.nsys-rep
+[1/1] [11%                         ] P025-decode.nsys-rep
+[1/1] [12%                         ] P025-decode.nsys-rep
+[1/1] [13%                         ] P025-decode.nsys-rep
+[1/1] [14%                         ] P025-decode.nsys-rep
+[1/1] [=15%                        ] P025-decode.nsys-rep
+[1/1] [=16%                        ] P025-decode.nsys-rep
+[1/1] [=17%                        ] P025-decode.nsys-rep
+[1/1] [==18%                       ] P025-decode.nsys-rep
+[1/1] [==19%                       ] P025-decode.nsys-rep
+[1/1] [==20%                       ] P025-decode.nsys-rep
+[1/1] [======================91%   ] P025-decode.nsys-rep
+[1/1] [=======================96%  ] P025-decode.nsys-rep
+[1/1] [========================98% ] P025-decode.nsys-rep
+[1/1] [========================100%] P025-decode.nsys-rep
+[1/1] [========================100%] P025-decode.nsys-rep
+Generated:
+	C:\Strata\local-setup\target-80\P025-decode.nsys-rep
+SUCCESS: The process with PID 142584 (child process of PID 673048) has been terminated.
+SUCCESS: The process with PID 41972 (child process of PID 673048) has been terminated.
+SUCCESS: The process with PID 673048 (child process of PID 448784) has been terminated.
+SUCCESS: The process with PID 651532 (child process of PID 316368) has been terminated.
+SUCCESS: The process with PID 448784 (child process of PID 316368) has been terminated.
+SUCCESS: The process with PID 316368 (child process of PID 21280) has been terminated.
+Cleanup verified: no live Strata launcher, server, engine or vision process.

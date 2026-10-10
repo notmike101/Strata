@@ -1,0 +1,34 @@
+{
+  "source_sha256": "7d1c2d4aa0ac65d3550912df37a319c6d6c5cba15930fa894698ba6d22ba9108",
+  "input_weights": [
+    {
+      "id": 0,
+      "name": "blk.0.hc_attn_up.weight",
+      "bf16_bytes": 6553600,
+      "packed_bytes": 5324800,
+      "fallback_bytes": 15552,
+      "sha256": "6e87eb16e95e4e24cb83f3852d4200bdff7da87d8e8989022fe8012b88c2f978"
+    },
+    {
+      "id": 1,
+      "name": "blk.30.hc_attn_up.weight",
+      "bf16_bytes": 6553600,
+      "packed_bytes": 5324800,
+      "fallback_bytes": 18368,
+      "sha256": "84b7c47df4665513a9c249f4e21d2dc7619458eaa477cbb4040b16718c0cb248"
+    },
+    {
+      "id": 2,
+      "name": "output_hc_up.weight",
+      "bf16_bytes": 6553600,
+      "packed_bytes": 5324800,
+      "fallback_bytes": 19456,
+      "sha256": "19b34c5c01898ca37573bca248f3783b6eac776f00174a019d04d5bc387d516d"
+    }
+  ],
+  "scope": "generic T1..8 half-column up projection;32rows/block,256threads,320blocks; QFUSE disabled identically",
+  "generated_sha256": "65ccdeba456894767d803260f2644b74e2d535da74242f3b2ce5207d9e85cbbe",
+  "executable_sha256": "cc6dd0cec419794cd2f6a1755a6de42e43db8917a67789c10a1e0175d869829b",
+  "harness_sha256": "24532a0ecbb56fed4e93a8794989b2dbd6b566b74fa169e691b00b46db88379c",
+  "utc": "2026-10-10T12:09:16.150782+00:00"
+}

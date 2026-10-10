@@ -1729,6 +1729,36 @@
   },
   {
     "campaign": "target-80",
+    "arm": "P025-short-profile",
+    "workload": "short/stream/hit",
+    "runs": 1,
+    "decode_median": 76.2,
+    "decode_min": 76.2,
+    "decode_max": 76.2,
+    "e2e_median": 74.706902715072,
+    "stream_total_median": 74.71212230060682,
+    "ttft_median_seconds": 0.10376899997936562,
+    "raw_decode": [
+      76.2
+    ]
+  },
+  {
+    "campaign": "target-80",
+    "arm": "P025-short-profile",
+    "workload": "short/stream/new",
+    "runs": 1,
+    "decode_median": 77.8,
+    "decode_min": 77.8,
+    "decode_max": 77.8,
+    "e2e_median": 69.05986525897828,
+    "stream_total_median": 69.06462181048616,
+    "ttft_median_seconds": 0.8724754000431858,
+    "raw_decode": [
+      77.8
+    ]
+  },
+  {
+    "campaign": "target-80",
     "arm": "Q007-goal-coding",
     "workload": "quality/coding",
     "runs": 5,

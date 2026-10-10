@@ -1,0 +1,263 @@
+{
+  "sqlite_sha256": "0e9d29844308e03a051e9bc72ba678dd73388117136d074d65ecbebdf00da11e",
+  "capture_settings_allowlist": {
+    "CAPTURE_EVENT_TYPE": [
+      "Cuda"
+    ],
+    "DEVICE_TYPE": [
+      "Windows"
+    ],
+    "CUDA_GRAPH_TRACE_OPTIONS:MODE": [
+      "Node"
+    ],
+    "CUDA_FLUSH_PERIOD": [
+      "1000000000"
+    ],
+    "CUDA_SKIP_SOME_API_CALLS": [
+      "true"
+    ],
+    "RUN_DURATION_MS": [
+      "16595"
+    ]
+  },
+  "kernel_records": 1519023,
+  "invalid_kernel_intervals": 0,
+  "graph_launch_apis": 2009,
+  "graph_launch_activity_keys": 2009,
+  "graph_apis_without_kernel_records": 0,
+  "graph_activity_keys_without_launch_api": 0,
+  "graph_cohorts": [
+    {
+      "graph_id": 2,
+      "observed_launches": 67,
+      "kernel_nodes_per_launch": [
+        2181
+      ],
+      "different_node_multisets_from_first": 0,
+      "duplicate_node_ids_within_launch": 0
+    },
+    {
+      "graph_id": 5,
+      "observed_launches": 279,
+      "kernel_nodes_per_launch": [
+        98
+      ],
+      "different_node_multisets_from_first": 0,
+      "duplicate_node_ids_within_launch": 0
+    },
+    {
+      "graph_id": 8,
+      "observed_launches": 2,
+      "kernel_nodes_per_launch": [
+        22
+      ],
+      "different_node_multisets_from_first": 0,
+      "duplicate_node_ids_within_launch": 0
+    },
+    {
+      "graph_id": 11,
+      "observed_launches": 389,
+      "kernel_nodes_per_launch": [
+        2100
+      ],
+      "different_node_multisets_from_first": 0,
+      "duplicate_node_ids_within_launch": 0
+    },
+    {
+      "graph_id": 14,
+      "observed_launches": 441,
+      "kernel_nodes_per_launch": [
+        54
+      ],
+      "different_node_multisets_from_first": 0,
+      "duplicate_node_ids_within_launch": 0
+    },
+    {
+      "graph_id": 17,
+      "observed_launches": 270,
+      "kernel_nodes_per_launch": [
+        53
+      ],
+      "different_node_multisets_from_first": 0,
+      "duplicate_node_ids_within_launch": 0
+    },
+    {
+      "graph_id": 20,
+      "observed_launches": 126,
+      "kernel_nodes_per_launch": [
+        53
+      ],
+      "different_node_multisets_from_first": 0,
+      "duplicate_node_ids_within_launch": 0
+    },
+    {
+      "graph_id": 23,
+      "observed_launches": 49,
+      "kernel_nodes_per_launch": [
+        61
+      ],
+      "different_node_multisets_from_first": 0,
+      "duplicate_node_ids_within_launch": 0
+    },
+    {
+      "graph_id": 26,
+      "observed_launches": 76,
+      "kernel_nodes_per_launch": [
+        2173
+      ],
+      "different_node_multisets_from_first": 0,
+      "duplicate_node_ids_within_launch": 0
+    },
+    {
+      "graph_id": 29,
+      "observed_launches": 41,
+      "kernel_nodes_per_launch": [
+        62
+      ],
+      "different_node_multisets_from_first": 0,
+      "duplicate_node_ids_within_launch": 0
+    },
+    {
+      "graph_id": 32,
+      "observed_launches": 133,
+      "kernel_nodes_per_launch": [
+        2148
+      ],
+      "different_node_multisets_from_first": 0,
+      "duplicate_node_ids_within_launch": 0
+    },
+    {
+      "graph_id": 35,
+      "observed_launches": 132,
+      "kernel_nodes_per_launch": [
+        58
+      ],
+      "different_node_multisets_from_first": 0,
+      "duplicate_node_ids_within_launch": 0
+    },
+    {
+      "graph_id": 44,
+      "observed_launches": 3,
+      "kernel_nodes_per_launch": [
+        2140
+      ],
+      "different_node_multisets_from_first": 0,
+      "duplicate_node_ids_within_launch": 0
+    },
+    {
+      "graph_id": 47,
+      "observed_launches": 1,
+      "kernel_nodes_per_launch": [
+        66
+      ],
+      "different_node_multisets_from_first": 0,
+      "duplicate_node_ids_within_launch": 0
+    }
+  ],
+  "direct_kernel_activity_keys": 13303,
+  "direct_launch_api_keys": 15509,
+  "direct_launch_apis_without_kernel_record_by_name": {
+    "cudaLaunchKernel_v7000": 2206
+  },
+  "capture_api_reconciliation": [
+    {
+      "begin_after_api_ns": 2393643159,
+      "end_before_api_ns": 2398683077,
+      "unmatched_launch_apis_inside_capture": 2140,
+      "nodes_created_in_capture": 2140,
+      "executed_graphs_with_exact_original_node_set": [
+        44
+      ]
+    },
+    {
+      "begin_after_api_ns": 2442947554,
+      "end_before_api_ns": 2443283388,
+      "unmatched_launch_apis_inside_capture": 66,
+      "nodes_created_in_capture": 66,
+      "executed_graphs_with_exact_original_node_set": [
+        47
+      ]
+    }
+  ],
+  "direct_kernel_records_without_matching_launch_api": 0,
+  "nonzero_launch_api_returns": 0,
+  "selected_diagnostics": [
+    {
+      "source": 3,
+      "severity": 2,
+      "global_pid": 283867139276800,
+      "text": "Not all CUDA events might have been collected."
+    },
+    {
+      "source": 3,
+      "severity": 2,
+      "global_pid": 283867139276800,
+      "text": "No CUDA events collected. Does the process use CUDA?"
+    },
+    {
+      "source": 3,
+      "severity": 2,
+      "global_pid": 282179150020608,
+      "text": "Not all CUDA events might have been collected."
+    },
+    {
+      "source": 3,
+      "severity": 1,
+      "global_pid": 282179150020608,
+      "text": "Number of CUDA events collected: \t1573324."
+    },
+    {
+      "source": 1,
+      "severity": 1,
+      "global_pid": 283867139276800,
+      "text": "CUDA legacy/software instrumented trace was collected."
+    },
+    {
+      "source": 1,
+      "severity": 1,
+      "global_pid": 283867139276800,
+      "text": "Number of CUPTI events produced: \t0, CUPTI buffers: 50."
+    },
+    {
+      "source": 1,
+      "severity": 1,
+      "global_pid": 282179150020608,
+      "text": "CUDA hardware tracing is not supported on this system. A legacy (software instrumented) trace was collected instead."
+    },
+    {
+      "source": 1,
+      "severity": 1,
+      "global_pid": 282179150020608,
+      "text": "Number of CUPTI events produced: \t1652740, CUPTI buffers: 325."
+    }
+  ],
+  "measured_request_timings": [
+    {
+      "cache_n": 0,
+      "prompt_n": 167,
+      "prompt_ms": 798.1,
+      "prompt_per_token_ms": 4.779,
+      "prompt_per_second": 209.2,
+      "predicted_n": 512,
+      "predicted_ms": 6577.7,
+      "predicted_per_token_ms": 12.847,
+      "predicted_per_second": 77.8,
+      "draft_n": 244,
+      "draft_n_accepted": 181
+    },
+    {
+      "cache_n": 162,
+      "prompt_n": 5,
+      "prompt_ms": 64.9,
+      "prompt_per_token_ms": 12.98,
+      "prompt_per_second": 77.0,
+      "predicted_n": 512,
+      "predicted_ms": 6723.3,
+      "predicted_per_token_ms": 13.131,
+      "predicted_per_second": 76.2,
+      "draft_n": 251,
+      "draft_n_accepted": 177
+    }
+  ],
+  "limitation": "Internal consistency is not independent proof of all expected kernel or memory activity. Uniformly absent records can pass cohort equality. No performance qualification follows from this instrumented capture."
+}
