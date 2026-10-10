@@ -1,0 +1,33 @@
+{
+  "experiment": "C035",
+  "model": "ISTA-DASLab/Qwen3.8-Flash-Next-GSQ-RCO-GGUF IQ3_S",
+  "scope": "all target HC projection/injection/normalization tensors in both model shards; draft weights separately inventoried",
+  "source_shards": [
+    {
+      "name": "Qwen3.8-Flash-Next-GSQ-RCO-IQ3_S-00001-of-00002.gguf",
+      "bytes": 54817524224
+    },
+    {
+      "name": "Qwen3.8-Flash-Next-GSQ-RCO-IQ3_S-00002-of-00002.gguf",
+      "bytes": 28800138432
+    }
+  ],
+  "pack_index_sha256": "b2a014878c3b61d6a6f915e194055a5e68ede34f9465dd1cb13249d902f008ac",
+  "config_sha256": "3457fdfe7d69fbf6651e2031320cdebf88a9d8d269ebbe459db7fdd885e8c9f0",
+  "tensor_count": 387,
+  "expected_tensor_count": 387,
+  "type_counts": {
+    "BF16": 290,
+    "F32": 97
+  },
+  "coefficients_compared": 640624640,
+  "packed_bytes_compared": 1283235840,
+  "mismatching_bytes": 0,
+  "q8_source_tensors": 0,
+  "decision": "reject: required Q8 source blocks absent",
+  "microbenchmark_run": false,
+  "server_launched": false,
+  "minimum_physical_available_bytes": 120180817920,
+  "minimum_commit_available_bytes": 123979243520,
+  "seconds": 12.391884799988475
+}
