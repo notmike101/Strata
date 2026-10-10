@@ -1,0 +1,263 @@
+{
+  "upstream": "https://github.com/Niko1221/Strata",
+  "upstream_remote": "origin",
+  "fork_remote": "https://github.com/notmike101/Strata",
+  "branch": "perf/rtx3090-thinking-80",
+  "main_sha": "fb58e0dbc8399662c0e47c76578c6e878b14f6cf",
+  "main_update": "unchanged; no newer default-branch update",
+  "scope": {
+    "unique_open_candidates_title_screened": 158,
+    "merged_listings_screened": 30,
+    "full_PR_metadata_and_diffs_reviewed": 14,
+    "not_exhaustive": true
+  },
+  "reviews": [
+    {
+      "number": 1779,
+      "title": "feat: accepted-token adaptive cache barriers; 3x P4 23.69 -> 28.30 tok/s",
+      "url": "https://github.com/Niko1221/Strata/pull/1779",
+      "headRefOid": "f3727b2464321a35c4638491d75bcda1d4ecbb9c",
+      "baseRefOid": "fb58e0dbc8399662c0e47c76578c6e878b14f6cf",
+      "files": [
+        "docs/MULTI_GPU.md",
+        "include/strata/core/mtp.hpp",
+        "src/core/mtp.cpp",
+        "src/core/verify.cpp",
+        "src/program/generate.cpp"
+      ],
+      "diff_sha256": "239d824420a50a75d9473b36d94ba65657330ec83058723b8154d6d32492f7bb",
+      "assessment": "Excluded: explicitly requires distinct-GPU layer split; this host has one GPU. Includes dependencies1656/1674; no partial import."
+    },
+    {
+      "number": 1744,
+      "title": "CUDA SM86: opt-in IQ3 two-stage prefill build",
+      "url": "https://github.com/Niko1221/Strata/pull/1744",
+      "headRefOid": "0701e617b93c8ea37984d2121ce3b1447f0c4e81",
+      "baseRefOid": "fb58e0dbc8399662c0e47c76578c6e878b14f6cf",
+      "files": [
+        ".gitignore",
+        "CMakeLists.txt",
+        "docs/DETAILS.md",
+        "docs/INSTALL.md",
+        "docs/INSTALL_SM86_PREFILL.md",
+        "docs/benchmarks/2026-10-09-rtx3060-iq3-stage2/README.md",
+        "docs/benchmarks/2026-10-09-rtx3060-iq3-stage2/cuda-only-evidence.json",
+        "docs/benchmarks/2026-10-09-rtx3060-iq3-stage2/cuda-only-parity.log",
+        "docs/benchmarks/2026-10-09-rtx3060-iq3-stage2/evidence.json",
+        "docs/benchmarks/2026-10-09-rtx3060-iq3-stage2/isolated-parity.log",
+        "docs/benchmarks/2026-10-09-rtx3060-iq3-stage2/prompts.json",
+        "setup.py",
+        "src/prefill/cuda/moe_fused_iq_stage2_sm86.cu",
+        "src/prefill/cuda/native_fused_iq_sm86.cuh",
+        "tools/test_cuda_prefill_variant.py",
+        "tools/test_setup_sm86_prefill.py"
+      ],
+      "diff_sha256": "1ff8cfcd47faa6153f166ac584e8cd36e60974ca8702caac66056f04e0059a20",
+      "assessment": "Compatible SM86 prefill lead, deferred: changes fused prompt path only; no decode claim; separate enable/build flags required."
+    },
+    {
+      "number": 1742,
+      "title": "CUDA SM86: opt-in one-superblock prefetch build",
+      "url": "https://github.com/Niko1221/Strata/pull/1742",
+      "headRefOid": "fab43d049ebb57a2cdac25ca34de7dcb089f4993",
+      "baseRefOid": "fb58e0dbc8399662c0e47c76578c6e878b14f6cf",
+      "files": [
+        ".gitignore",
+        "CMakeLists.txt",
+        "docs/DETAILS.md",
+        "docs/INSTALL.md",
+        "docs/INSTALL_SM86_PREFILL.md",
+        "docs/benchmarks/2026-10-09-rtx3060-prefetch-one/README.md",
+        "docs/benchmarks/2026-10-09-rtx3060-prefetch-one/cuda-only-evidence.json",
+        "docs/benchmarks/2026-10-09-rtx3060-prefetch-one/cuda-only-parity.log",
+        "docs/benchmarks/2026-10-09-rtx3060-prefetch-one/evidence.json",
+        "docs/benchmarks/2026-10-09-rtx3060-prefetch-one/isolated-parity.log",
+        "docs/benchmarks/2026-10-09-rtx3060-prefetch-one/prompts.json",
+        "setup.py",
+        "src/prefill/cuda/moe_fused_iq_prefetch_sm86.cu",
+        "src/prefill/cuda/native_fused_iq_sm86.cuh",
+        "tools/test_cuda_prefill_variant.py",
+        "tools/test_setup_sm86_prefill.py"
+      ],
+      "diff_sha256": "9c9fd1d778d0a3d617ae4f8df9500f6a32f40cc234ddeca74af4aaa185772684",
+      "assessment": "Compatible SM86 prefill lead, deferred: modest reported prompt gain, no decode change; do not combine with1744 blindly."
+    },
+    {
+      "number": 1741,
+      "title": "verify: service returns before any CUDA call while nothing has rung (#1740)",
+      "url": "https://github.com/Niko1221/Strata/pull/1741",
+      "headRefOid": "462a79df354d9597be6de521043f2ec3e55f7f34",
+      "baseRefOid": "fb58e0dbc8399662c0e47c76578c6e878b14f6cf",
+      "files": [
+        "src/core/verify.cpp"
+      ],
+      "diff_sha256": "68e86036edbb45ffc0e9d7ef5f5ca91e62785fae8b0deec18496ad932045121c",
+      "assessment": "Excluded from this workload: changes Verifier::service used by pipelined windows; current one-GPU serial path uses run(). Rechecked prior E066 finding."
+    },
+    {
+      "number": 1737,
+      "title": "route-resident: one warp per token in the swap kernel",
+      "url": "https://github.com/Niko1221/Strata/pull/1737",
+      "headRefOid": "72070620821a26677c4fff85c5f3813362407fc4",
+      "baseRefOid": "fb58e0dbc8399662c0e47c76578c6e878b14f6cf",
+      "files": [
+        "CMakeLists.txt",
+        "src/kernels/cuda/native_router.cu",
+        "src/kernels/route_resident_parity.cu"
+      ],
+      "diff_sha256": "b8d23cb0647ba5657ee2df65ce2bf9de2afca51928594fa6a5968d382af30ca8",
+      "assessment": "Excluded: optimizes resident-routing substitutions; enabling that policy changes expert selection, violating fixed quality contract."
+    },
+    {
+      "number": 1720,
+      "title": "dequant: coalesced Q8_0 path (four threads per block, 16-byte stores), bit-identical, 7x faster on V100",
+      "url": "https://github.com/Niko1221/Strata/pull/1720",
+      "headRefOid": "17a16c689ea5e9c45a6b73b060c150e6ab6065b5",
+      "baseRefOid": "fb58e0dbc8399662c0e47c76578c6e878b14f6cf",
+      "files": [
+        "src/kernels/cuda/dequant_bf16.cu"
+      ],
+      "diff_sha256": "7c3f1b08fc08f35fbf0961aceeb98504de81ac422b2dc34346d2fa3a7414bd04",
+      "assessment": "Deferred prefill-only Q8_0 dequant optimization; review actual dense tensor/call-site eligibility before importing."
+    },
+    {
+      "number": 1368,
+      "title": "prefill: quantize each token's MoE input once and scatter it to its k rows (the same bytes)",
+      "url": "https://github.com/Niko1221/Strata/pull/1368",
+      "headRefOid": "d27059967d942562c8d303c013d0c6af4fef45d1",
+      "baseRefOid": "e8ca9afd03d839d4f8dbbe82dffce7f8a3bafd7a",
+      "files": [
+        "CMakeLists.txt",
+        "include/strata/prefill/moe_mmq.hpp",
+        "src/prefill/moe_mmq.cu",
+        "src/prefill/prefill.cpp",
+        "tests/cuda/prefill_mmq_scatter_test.cpp"
+      ],
+      "diff_sha256": "7f86275ce130188865f0686ed7f7b16782b30e075de6a612dd012e9da51d4002",
+      "assessment": "Promising prompt-read preservation candidate: exact per-token quantize/scatter, new symbols absent locally. Deferred behind decode candidate; distinct from rejected C038 native-vs-routed sharing."
+    },
+    {
+      "number": 1548,
+      "title": "decode: STRATA_PCIE_BALANCE=1 picks each layer's PCIe count from measured costs (refile of #1038 by @sergqwer, on 0.1.40.3)",
+      "url": "https://github.com/Niko1221/Strata/pull/1548",
+      "headRefOid": "a513394c4768f1d0fa13957e79b171b0fcc51c32",
+      "baseRefOid": "6674a0065fb96bacde33e3eb10f91a1df86f95f2",
+      "files": [
+        "include/strata/core/expert_source.hpp",
+        "include/strata/core/verify.hpp",
+        "include/strata/kernels/verify_kernels.hpp",
+        "src/core/expert_source.cpp",
+        "src/core/verify.cpp",
+        "src/kernels/cuda/verify_kernels.cu",
+        "src/program/generate.cpp"
+      ],
+      "diff_sha256": "00fa5f86b2bf34fc24d9d0c33ecfca054a19b011efd8ad5b6452f2eede5fc218",
+      "assessment": "Deferred architectural candidate: dynamic fitted PCIe allocation requires removing fixed pcie-frac; reported below manually tuned share. Timing-derived placement needs reproducibility design before testing."
+    },
+    {
+      "number": 1544,
+      "title": "cpu: IQ2_S in the bit-exact singleton rows, and the singleton path only below the #152 rule (stacked on #1415)",
+      "url": "https://github.com/Niko1221/Strata/pull/1544",
+      "headRefOid": "9d0614f43757f8ffcd1f90b2647d4d0d31200d32",
+      "baseRefOid": "6674a0065fb96bacde33e3eb10f91a1df86f95f2",
+      "files": [
+        "bench/results/2026-10-07-cpu-singleton/README.md",
+        "include/strata/kernels/cpu/iq_avx2.hpp",
+        "src/kernels/cpu/iq_avx2.cpp",
+        "src/kernels/cpu/iq_avx2_parity.cpp",
+        "src/kernels/cpu/iq_avx2_rows.inl",
+        "src/kernels/cpu/native_expert.cpp",
+        "src/kernels/native_expert_parity.cpp"
+      ],
+      "diff_sha256": "9e636feecf93fe0ea0ba97f2658ed22883e31e3995831b9ba3ce0789548f51ee",
+      "assessment": "Inactive under retained IQ_MT_MIN1: exact singleton gate is nt<mt_min. Do not change arithmetic dispatch to make benchmark benefit appear."
+    },
+    {
+      "number": 1525,
+      "title": "prefill: dense IQ4_XS / Q8_0 to FP16 with 16-byte stores, swiglu + q8_1 and the MoE combine + hyper-connection write fused (32K prompt -4.0%, the same bits)",
+      "url": "https://github.com/Niko1221/Strata/pull/1525",
+      "headRefOid": "f048d15594c62335b9fa7c350ecf4d07b749d30d",
+      "baseRefOid": "fb58e0dbc8399662c0e47c76578c6e878b14f6cf",
+      "files": [
+        "CMakeLists.txt",
+        "include/strata/prefill/kernels.hpp",
+        "include/strata/prefill/moe_mmq.hpp",
+        "src/kernels/cuda/dequant_bf16.cu",
+        "src/prefill/kernels.cu",
+        "src/prefill/moe_mmq.cu",
+        "src/prefill/prefill.cpp",
+        "tests/cuda/dequant_f16_test.cpp",
+        "tests/cuda/prefill_combine_write_test.cpp",
+        "tests/cuda/prefill_swiglu_quant_test.cpp"
+      ],
+      "diff_sha256": "383e59c9bfc188372f8be6a8dc9dcc2bad9dd805952bcc3b1afdb86bbd093b71",
+      "assessment": "Promising prompt-only fusion/dequant candidate; new symbols absent locally. No decode claim; validate exact arithmetic independently and do not stack with1720 before conflict review."
+    },
+    {
+      "number": 1418,
+      "title": "cuda: opt-in MMVQ activation reuse across output rows",
+      "url": "https://github.com/Niko1221/Strata/pull/1418",
+      "headRefOid": "8cae814e6e819736e47c95f3b5e8b056c7528c0f",
+      "baseRefOid": "d5ea7133741e67743c0e886bb426c0ce8d69cf6c",
+      "files": [
+        "CMakeLists.txt",
+        "include/strata/kernels/native_mmvq.hpp",
+        "src/kernels/b6_mmvq_bench.cpp",
+        "src/kernels/cuda/native_mmvq.cu"
+      ],
+      "diff_sha256": "461a69c4401cf63b23c4b8c8ad8e14587dc24d9200d7573af1a25ad2f7b72a6f",
+      "assessment": "Closed mechanism overlap: multi-row activation reuse, unre-based against current interleaved kernels; related C021/C030 work already failed. No new integration without distinct applicable shapes."
+    },
+    {
+      "number": 1095,
+      "title": "kv_q8: the gather decodes 8 int8 per thread (V100 experimental build, +11%)",
+      "url": "https://github.com/Niko1221/Strata/pull/1095",
+      "headRefOid": "af52a5e847c0cbb81d7b3cd94ed0bb49b9e15b0b",
+      "baseRefOid": "82f46a8c8f475f001ad76d92f58f4a4f8ffb0253",
+      "files": [
+        "bench/results/2026-10-03-v100-kv-int8-read/README.md",
+        "src/kernels/cuda/kv_q8.cu",
+        "src/kernels/kv_q8_parity.cpp"
+      ],
+      "diff_sha256": "b662615e90801c43c2fc0077c531b338d311868e0662fc5089c1b350ae2de08d",
+      "assessment": "Excluded as written: compile-gated experimental pre75 device; RTX3090 is sm86. Reported gain only KV gather micro, not end-to-end."
+    },
+    {
+      "number": 1125,
+      "title": "cpu experts: an AVX2 Q8_K activation quantizer (byte-identical to ggml's)",
+      "url": "https://github.com/Niko1221/Strata/pull/1125",
+      "headRefOid": "6dd03c47bc09afd9546a71fc54bc52186cc2c3b9",
+      "baseRefOid": "82f46a8c8f475f001ad76d92f58f4a4f8ffb0253",
+      "files": [
+        "CMakeLists.txt",
+        "include/strata/kernels/cpu/iq_avx2.hpp",
+        "src/kernels/cpu/iq_avx2.cpp",
+        "src/kernels/cpu/native_expert.cpp",
+        "src/kernels/cpu/q8k_quant_parity.cpp"
+      ],
+      "diff_sha256": "4a413f246c606d42b5387b2141762c34378cba42054a1bb2aec7f5e3d3a78d42",
+      "assessment": "Already implemented locally: q8k_quant_avx2 and native_quant_act/h default runtime gate present; do not reimport open PR merely because GitHub says open."
+    },
+    {
+      "number": 1166,
+      "title": "cpu pool: --host-core sibling, the host off the interrupts' logical processor (hybrid CPUs too)",
+      "url": "https://github.com/Niko1221/Strata/pull/1166",
+      "headRefOid": "a71da892150aa6b30cf560c2294c936a0353c5a8",
+      "baseRefOid": "82f46a8c8f475f001ad76d92f58f4a4f8ffb0253",
+      "files": [
+        "docs/DETAILS.md",
+        "include/strata/kernels/cpu/pool.hpp",
+        "src/core/session.cpp",
+        "src/kernels/cpu/pool.cpp",
+        "src/kernels/cpu/pool_affinity_test.cpp",
+        "src/program/generate.cpp"
+      ],
+      "diff_sha256": "51eb6334c015b94bc71ee2e6ea8c3f75fac045250d2fb7875f716ef4a9696ccd",
+      "assessment": "Selected: absent HostCore::Sibling; opt-in host LP1 on physical core0, workers2/4/...18 unchanged. Distinct from rejected host-last LP18. No numerical or sampling change; upstream speed/IRQ claims not assumed true here."
+    }
+  ],
+  "selected": 1166,
+  "authorization": "user-requested upstream review, existing local-integration scope; no upstream merge/PR/message or production promotion",
+  "authentication": "GitHub App identity helper; no personal connector",
+  "selected_result": "C044 rejected after R078/R079 same-binary served comparison; source restored"
+}

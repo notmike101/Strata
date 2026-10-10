@@ -3,16 +3,15 @@
   "target_tps": 90,
   "metric": "server_decode_tps",
   "contract": "goal-90-contract.md",
-  "current": "R072/R073: dual-output Q8 rejected. Decode87.4/81.2 control versus85.7/80.8 candidate; source restored.",
+  "current": "C044 PR1166 rejected and reverted:86.3/83.4 vs87.4/84.2. C042 compiler also rejected. P014 finite upstream review published.",
   "next": [
-    "Reassess CPU expert code generation against prior host traces and actual mixed-format inventory. Avoid repeating closed GPU scheduling paths.",
-    "Rebuild build-cuda86-main before treating its library/engine as a new source baseline; it currently retains C039 objects."
+    "Use P014 finite review to select exact prompt-only PR1368 or1525 with independent parity and same-day served checks; no unsupported decode promise. C043 batched-transfer runtime remains unmeasured, held for upstream priority."
   ],
   "promoted": "The previously qualified format-gather engine with IQ2_S gather disabled and adaptive lag2; no changes this turn.",
   "stopping_rule": "Leave goal active until all fixed qualification cells pass. No benchmark model resident at handoff.",
   "quality": "Q007: 3/5 compiled and passed72 tests each, 2/5 no final answer at8192 tokens. Goal unqualified.",
-  "last_checkpoint": "E108",
-  "resume_command": "Read E106-E108/C039 and verify live ownership; no model resident.",
-  "safety": "R072/R073 both16GiB floors passed, minimum physical62.7GB and commit40.9GB decimal; clean shutdown and457MiB idle GPU; config/exe hashes unchanged.",
+  "last_checkpoint": "E120",
+  "resume_command": "Read E117-E120 P014/C044. No model resident. Source restored; rebuild build-cuda86-main before any new current-source baseline. PR1368/1525 are deferred prompt-only leads; C043 R077 held.",
+  "safety": "All R074/R075/R076/R078/R079 passed16GiB floors and exact cleanup. GPU457MiB after final cleanup. Production hashes unchanged.",
   "goal_tool_status_at_entry": "active, verified get_goal"
 }

@@ -1,0 +1,3 @@
+# P013 interval audit
+
+Offline interval-union audit of existing P009, no model launched. Recorded CUDA activity spans8271.267ms:6691.268ms with any recorded kernel/memcpy/memset and1579.998ms without recorded activity. Memcpy-only-category time768.870ms; wait-flag-only642.708ms; Q6MMVQ-family-only944.558ms. These are temporal categories, NOT dependency critical paths, removable latency, or proof of idle hardware/CPU stalls. P010 coverage limits remain. Pinned H2D:3973calls,8,041,226,240bytes,1295.604ms summed. Existing adaptive copy submission is a distinct candidate; kernel sum reductions alone have not consistently improved served TPS. Raw NSYS/SQLite remain private; only allowlisted interval summaries exported. Artifacts: diagnostics/profiler/P013/.

@@ -1,0 +1,16 @@
+We need answer user's request. Need produce final answer with complete code, tests, detailed explanation at least 1200 words. Need satisfy ignore identifier. Need implement thread-safe Python TTLCache using OrderedDict and monotonic clock. Include set, get, delete, clear, len, expiration, capacity eviction, unit tests with injected fake clock, detailed explanation of thread safety and complexity. No abbreviate. Need likely code complete. Let's design carefully.
+
+Need think about requirements:
+- Thread-safe Python TTLCache class using OrderedDict and monotonic clock.
+- Include set, get, delete, clear, len, expiration, capacity eviction.
+- Unit tests with injected fake clock.
+- Detailed explanation of thread safety and complexity.
+- Write complete code, then tests, then explain design. Do not abbreviate implementation. Produce detailed answer >=1200 words.
+
+Need decide API. TTLCache(capacity, ttl=None? default?). Use OrderedDict from collections. monotonic clock: maybe default time.monotonic. Injected fake clock for tests: constructor accepts clock: Callable[[], float]. Thread safety: use threading.RLock or Lock. OrderedDict not thread-safe. Need ensure operations atomic. Expiration lazy on access and maybe active cleanup. Capacity eviction LRU. TTL per key.
+
+Implementation details:
+- class _Entry? Could store tuple(value, expires_at). OrderedDict maps key -> (value, expires_at). Need capacity int >0. ttl maybe float or int. If None, no expiration? Or ttl must be non-negative? Include default ttl maybe 60.
+- clock function returns monotonic seconds. Could inject fake clock for tests.
+- Thread safety: all public methods acquire lock. Need be careful reentrancy if internal method called under lock. Use _get_under_lock no public. Use Lock (not RLock) if no nested lock, but RLock safer? Use threading.Lock and private methods assume lock held. If public calls public, avoid. Use context manager.
+- Methods: set(key, value, ttl=None): if key exists, update value and expires_at, move_to_end. If new, insert then if len>capacity evict least-recently-used? OrderedDict popitem(last=False) removes oldest/least recently used. But if expired entries remain maybe can cleanup expired before eviction? Capacity eviction should evict expired entries first? Need design. If capacity full and expired entries exist, could delete expired then if still full evict LRU.

@@ -380,6 +380,26 @@
     "target-80/R073-dualq-on": {
       "gpu_before": "name, driver_version, memory.used [MiB], memory.total [MiB], utilization.gpu [%], temperature.gpu, power.draw [W]\nNVIDIA GeForce RTX 3090, 610.88, 23552 MiB, 24576 MiB, 0 %, 44, 14.20 W\n",
       "gpu_after": "name, memory.used [MiB], memory.total [MiB], utilization.gpu [%], temperature.gpu, power.draw [W]\nNVIDIA GeForce RTX 3090, 23700 MiB, 24576 MiB, 53 %, 75, 334.25 W\n"
+    },
+    "target-80/R074-clang-off": {
+      "gpu_before": "name, driver_version, memory.used [MiB], memory.total [MiB], utilization.gpu [%], temperature.gpu, power.draw [W]\nNVIDIA GeForce RTX 3090, 610.88, 23552 MiB, 24576 MiB, 0 %, 31, 12.51 W\n",
+      "gpu_after": "name, memory.used [MiB], memory.total [MiB], utilization.gpu [%], temperature.gpu, power.draw [W]\nNVIDIA GeForce RTX 3090, 23712 MiB, 24576 MiB, 99 %, 74, 346.95 W\n"
+    },
+    "target-80/R075-clang-on": {
+      "gpu_before": "name, driver_version, memory.used [MiB], memory.total [MiB], utilization.gpu [%], temperature.gpu, power.draw [W]\nNVIDIA GeForce RTX 3090, 610.88, 23552 MiB, 24576 MiB, 0 %, 42, 13.58 W\n",
+      "gpu_after": "name, memory.used [MiB], memory.total [MiB], utilization.gpu [%], temperature.gpu, power.draw [W]\nNVIDIA GeForce RTX 3090, 23710 MiB, 24576 MiB, 99 %, 76, 342.36 W\n"
+    },
+    "target-80/R076-dma-off": {
+      "gpu_before": "name, driver_version, memory.used [MiB], memory.total [MiB], utilization.gpu [%], temperature.gpu, power.draw [W]\nNVIDIA GeForce RTX 3090, 610.88, 23552 MiB, 24576 MiB, 0 %, 36, 12.36 W\n",
+      "gpu_after": "name, memory.used [MiB], memory.total [MiB], utilization.gpu [%], temperature.gpu, power.draw [W]\nNVIDIA GeForce RTX 3090, 23710 MiB, 24576 MiB, 99 %, 75, 334.49 W\n"
+    },
+    "target-80/R078-host-first": {
+      "gpu_before": "name, driver_version, memory.used [MiB], memory.total [MiB], utilization.gpu [%], temperature.gpu, power.draw [W]\nNVIDIA GeForce RTX 3090, 610.88, 23552 MiB, 24576 MiB, 0 %, 33, 12.85 W\n",
+      "gpu_after": "name, memory.used [MiB], memory.total [MiB], utilization.gpu [%], temperature.gpu, power.draw [W]\nNVIDIA GeForce RTX 3090, 23702 MiB, 24576 MiB, 100 %, 75, 337.07 W\n"
+    },
+    "target-80/R079-host-sibling": {
+      "gpu_before": "name, driver_version, memory.used [MiB], memory.total [MiB], utilization.gpu [%], temperature.gpu, power.draw [W]\nNVIDIA GeForce RTX 3090, 610.88, 23552 MiB, 24576 MiB, 0 %, 43, 13.72 W\n",
+      "gpu_after": "name, memory.used [MiB], memory.total [MiB], utilization.gpu [%], temperature.gpu, power.draw [W]\nNVIDIA GeForce RTX 3090, 23708 MiB, 24576 MiB, 99 %, 75, 339.07 W\n"
     }
   }
 }

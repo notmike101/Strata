@@ -1,0 +1,24 @@
+**********************************************************************
+** Visual Studio 2022 Developer Command Prompt v17.14.36
+** Copyright (c) 2025 Microsoft Corporation
+**********************************************************************
+[1/12] Building CXX object CMakeFiles\strata_kernels_cpu.dir\src\kernels\cpu\expert.cpp.obj
+[2/12] Building CXX object CMakeFiles\strata_kernels_cpu.dir\src\kernels\cpu\q2_avx2.cpp.obj
+[3/12] Building CXX object CMakeFiles\strata_kernels_cpu.dir\src\kernels\cpu\iq_avx512.cpp.obj
+[4/12] Building CXX object CMakeFiles\strata_kernels_cpu.dir\src\kernels\cpu\native_expert.cpp.obj
+[5/12] Building CXX object CMakeFiles\strata_kernels_cpu.dir\src\kernels\cpu\expert_layout.cpp.obj
+[6/12] Building CXX object CMakeFiles\strata_kernels_cpu.dir\src\kernels\cpu\kq_avx1.cpp.obj
+[7/12] Building CXX object CMakeFiles\strata_kernels_cpu.dir\src\kernels\cpu\kq_avx2.cpp.obj
+[8/12] Building CXX object CMakeFiles\strata_kernels_cpu.dir\src\kernels\cpu\pool.cpp.obj
+[9/12] Building CXX object CMakeFiles\strata_kernels_cpu.dir\src\kernels\cpu\iq_avx2.cpp.obj
+[10/12] Linking CXX static library strata_kernels_cpu.lib
+[11/12] Building CXX object CMakeFiles\pool_affinity_test.dir\src\kernels\cpu\pool_affinity_test.cpp.obj
+FAILED: CMakeFiles/pool_affinity_test.dir/src/kernels/cpu/pool_affinity_test.cpp.obj
+C:\llama-cpp-src\toolchains\vs-buildtools\VC\Tools\MSVC\14.44.35207\bin\Hostx64\x64\cl.exe  /nologo /TP -DSTRATA_NATIVE_EXPERTS=1 -DSTRATA_VERSION=\"0.1.41\" -IC:\strata\include -IC:\strata\local-setup\target-80\deps\llama.cpp-3cf03257f219afbe7334045ff7c6a06ac68c627d\ggml\src\..\include /DWIN32 /D_WINDOWS /EHsc /O2 /Ob2 /DNDEBUG -std:c++20 -MT /Zi /showIncludes /FoCMakeFiles\pool_affinity_test.dir\src\kernels\cpu\pool_affinity_test.cpp.obj /FdCMakeFiles\pool_affinity_test.dir\ /FS -c C:\strata\src\kernels\cpu\pool_affinity_test.cpp
+C:\strata\src\kernels\cpu\pool_affinity_test.cpp(116): error C2838: 'Sibling': illegal qualified name in member declaration
+C:\strata\src\kernels\cpu\pool_affinity_test.cpp(116): error C2065: 'Sibling': undeclared identifier
+C:\strata\src\kernels\cpu\pool_affinity_test.cpp(122): error C2039: 'host_sibling': is not a member of 'strata::kernels::cpu::CpuTopology'
+C:\strata\include\strata/kernels/cpu/pool.hpp(74): note: see declaration of 'strata::kernels::cpu::CpuTopology'
+C:\strata\src\kernels\cpu\pool_affinity_test.cpp(126): error C2039: 'host_sibling': is not a member of 'strata::kernels::cpu::CpuTopology'
+C:\strata\include\strata/kernels/cpu/pool.hpp(74): note: see declaration of 'strata::kernels::cpu::CpuTopology'
+ninja: build stopped: subcommand failed.

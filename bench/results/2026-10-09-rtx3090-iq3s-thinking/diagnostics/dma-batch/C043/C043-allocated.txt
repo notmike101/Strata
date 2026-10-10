@@ -1,0 +1,74 @@
+headers=13030 runtime=13030 driver=13030 registered=0
+case mode=0 n=0 bytes=37
+case mode=1 n=0 bytes=37
+case mode=2 n=0 bytes=37
+case mode=0 n=1 bytes=37
+case mode=1 n=1 bytes=37
+case mode=2 n=1 bytes=37
+case mode=0 n=4 bytes=37
+case mode=1 n=4 bytes=37
+case mode=2 n=4 bytes=37
+case mode=0 n=17 bytes=37
+case mode=1 n=17 bytes=37
+case mode=2 n=17 bytes=37
+case mode=0 n=64 bytes=37
+case mode=1 n=64 bytes=37
+case mode=2 n=64 bytes=37
+case mode=0 n=128 bytes=37
+case mode=1 n=128 bytes=37
+case mode=2 n=128 bytes=37
+case mode=0 n=129 bytes=37
+case mode=1 n=129 bytes=37
+case mode=2 n=129 bytes=37
+case mode=0 n=0 bytes=4096
+case mode=1 n=0 bytes=4096
+case mode=2 n=0 bytes=4096
+case mode=0 n=1 bytes=4096
+case mode=1 n=1 bytes=4096
+case mode=2 n=1 bytes=4096
+case mode=0 n=4 bytes=4096
+case mode=1 n=4 bytes=4096
+case mode=2 n=4 bytes=4096
+case mode=0 n=17 bytes=4096
+case mode=1 n=17 bytes=4096
+case mode=2 n=17 bytes=4096
+case mode=0 n=64 bytes=4096
+case mode=1 n=64 bytes=4096
+case mode=2 n=64 bytes=4096
+case mode=0 n=128 bytes=4096
+case mode=1 n=128 bytes=4096
+case mode=2 n=128 bytes=4096
+case mode=0 n=129 bytes=4096
+case mode=1 n=129 bytes=4096
+case mode=2 n=129 bytes=4096
+case mode=0 n=0 bytes=2097152
+case mode=1 n=0 bytes=2097152
+case mode=2 n=0 bytes=2097152
+case mode=0 n=1 bytes=2097152
+case mode=1 n=1 bytes=2097152
+case mode=2 n=1 bytes=2097152
+case mode=0 n=4 bytes=2097152
+case mode=1 n=4 bytes=2097152
+case mode=2 n=4 bytes=2097152
+case mode=0 n=17 bytes=2097152
+case mode=1 n=17 bytes=2097152
+case mode=2 n=17 bytes=2097152
+case mode=0 n=64 bytes=2097152
+case mode=1 n=64 bytes=2097152
+case mode=2 n=64 bytes=2097152
+case mode=0 n=128 bytes=2097152
+case mode=1 n=128 bytes=2097152
+case mode=2 n=128 bytes=2097152
+case mode=0 n=129 bytes=2097152
+case mode=1 n=129 bytes=2097152
+case mode=2 n=129 bytes=2097152
+PASS: 63 byte-parity/event-order cases, CUDA 13030
+n=4 bytes=2097152 mode=0 median_submit_ms=0.0196 median_total_ms=1.3043 median_thread_cycles=72026
+n=4 bytes=2097152 mode=1 median_submit_ms=0.0081 median_total_ms=1.2966 median_thread_cycles=30007
+n=4 bytes=2097152 mode=2 median_submit_ms=0.0083 median_total_ms=1.2989 median_thread_cycles=30885
+n=16 bytes=2097152 mode=0 median_submit_ms=0.0808 median_total_ms=5.2405 median_thread_cycles=281081
+n=16 bytes=2097152 mode=1 median_submit_ms=0.0139 median_total_ms=5.2187 median_thread_cycles=51398
+n=16 bytes=2097152 mode=2 median_submit_ms=0.0137 median_total_ms=5.1980 median_thread_cycles=50728
+n=48 bytes=2097152 mode=0 median_submit_ms=0.4473 median_total_ms=15.6929 median_thread_cycles=1651373
+n=48 bytes=2097152 mode=1 median_submit_ms=0.0438 median_total_ms=15.5705 median_thread_cycles=162162
+n=48 bytes=2097152 mode=2 median_submit_ms=0.0436 median_total_ms=15.6710 median_thread_cycles=161146

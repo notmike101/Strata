@@ -1,0 +1,3 @@
+# C043 DMA transfer correctness
+
+Existing DMA batch byte/event-order test passed63cases with allocated pinned memory and63cases with Windows registered memory on CUDA13.3.73/sm86. This is transfer correctness, not generation quality. Aggregate diagnostic timing for registered48x2MiB: submission .3348ms individual vs .0431ms batch; total15.6793ms vs15.6212ms. Raw repeat times are absent from this upstream test, so no all-run campaign speed claim. R076 runtimeOFF control was allowed to finish when the user prioritized upstream PR review. R077 runtimeON has NOT run; candidate and activation remain unmeasured. No production change. Artifacts: diagnostics/dma-batch/C043/.

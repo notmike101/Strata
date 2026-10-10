@@ -1,0 +1,504 @@
+**********************************************************************
+** Visual Studio 2022 Developer Command Prompt v17.14.36
+** Copyright (c) 2025 Microsoft Corporation
+**********************************************************************
+[1/19] Building CXX object CMakeFiles\strata_engine.dir\src\core\session.cpp.obj
+C:\strata\include\strata/kernels/cpu/expert.hpp(74): warning C4324: 'strata::kernels::cpu::ActQ': structure was padded due to alignment specifier
+C:\strata\include\strata/kernels/cpu/pool.hpp(271): warning C4324: 'strata::kernels::cpu::ExpertPool': structure was padded due to alignment specifier
+C:\strata\include\strata/kernels/cpu/pool.hpp(272): warning C4324: 'strata::kernels::cpu::ExpertPool': structure was padded due to alignment specifier
+C:\strata\include\strata/kernels/cpu/pool.hpp(273): warning C4324: 'strata::kernels::cpu::ExpertPool': structure was padded due to alignment specifier
+C:\strata\include\strata/kernels/cpu/pool.hpp(274): warning C4324: 'strata::kernels::cpu::ExpertPool': structure was padded due to alignment specifier
+C:\strata\include\strata/kernels/cpu/pool.hpp(275): warning C4324: 'strata::kernels::cpu::ExpertPool': structure was padded due to alignment specifier
+C:\strata\include\strata/kernels/cpu/pool.hpp(278): warning C4324: 'strata::kernels::cpu::ExpertPool': structure was padded due to alignment specifier
+C:\strata\src\core\session.cpp(923): warning C4996: 'getenv': This function or variable may be unsafe. Consider using _dupenv_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+[2/19] Building CXX object CMakeFiles\strata_engine.dir\src\core\remote_experts.cpp.obj
+C:\strata\include\strata/kernels/cpu/expert.hpp(74): warning C4324: 'strata::kernels::cpu::ActQ': structure was padded due to alignment specifier
+C:\strata\include\strata/kernels/cpu/pool.hpp(271): warning C4324: 'strata::kernels::cpu::ExpertPool': structure was padded due to alignment specifier
+C:\strata\include\strata/kernels/cpu/pool.hpp(272): warning C4324: 'strata::kernels::cpu::ExpertPool': structure was padded due to alignment specifier
+C:\strata\include\strata/kernels/cpu/pool.hpp(273): warning C4324: 'strata::kernels::cpu::ExpertPool': structure was padded due to alignment specifier
+C:\strata\include\strata/kernels/cpu/pool.hpp(274): warning C4324: 'strata::kernels::cpu::ExpertPool': structure was padded due to alignment specifier
+C:\strata\include\strata/kernels/cpu/pool.hpp(275): warning C4324: 'strata::kernels::cpu::ExpertPool': structure was padded due to alignment specifier
+C:\strata\include\strata/kernels/cpu/pool.hpp(278): warning C4324: 'strata::kernels::cpu::ExpertPool': structure was padded due to alignment specifier
+C:\strata\src\core\remote_experts.cpp(78): warning C4996: 'getenv': This function or variable may be unsafe. Consider using _dupenv_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+C:\strata\src\core\remote_experts.cpp(209): warning C4996: 'getenv': This function or variable may be unsafe. Consider using _dupenv_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+[3/19] Building CXX object CMakeFiles\strata_kernels_cpu.dir\src\kernels\cpu\pool.cpp.obj
+[4/19] Building CXX object CMakeFiles\strata_engine.dir\src\core\mtp.cpp.obj
+C:\strata\include\strata/kernels/cpu/expert.hpp(74): warning C4324: 'strata::kernels::cpu::ActQ': structure was padded due to alignment specifier
+C:\strata\include\strata/kernels/cpu/pool.hpp(271): warning C4324: 'strata::kernels::cpu::ExpertPool': structure was padded due to alignment specifier
+C:\strata\include\strata/kernels/cpu/pool.hpp(272): warning C4324: 'strata::kernels::cpu::ExpertPool': structure was padded due to alignment specifier
+C:\strata\include\strata/kernels/cpu/pool.hpp(273): warning C4324: 'strata::kernels::cpu::ExpertPool': structure was padded due to alignment specifier
+C:\strata\include\strata/kernels/cpu/pool.hpp(274): warning C4324: 'strata::kernels::cpu::ExpertPool': structure was padded due to alignment specifier
+C:\strata\include\strata/kernels/cpu/pool.hpp(275): warning C4324: 'strata::kernels::cpu::ExpertPool': structure was padded due to alignment specifier
+C:\strata\include\strata/kernels/cpu/pool.hpp(278): warning C4324: 'strata::kernels::cpu::ExpertPool': structure was padded due to alignment specifier
+C:\strata\include\strata/core/coupled_draft.hpp(59): warning C4996: 'getenv': This function or variable may be unsafe. Consider using _dupenv_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+C:\strata\include\strata/core/coupled_draft.hpp(69): warning C4996: 'getenv': This function or variable may be unsafe. Consider using _dupenv_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+C:\strata\include\strata/core/spec_prob.hpp(47): warning C4996: 'getenv': This function or variable may be unsafe. Consider using _dupenv_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+C:\strata\include\strata/core/spec_prob.hpp(57): warning C4996: 'getenv': This function or variable may be unsafe. Consider using _dupenv_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+C:\strata\include\strata/core/spec_prob.hpp(69): warning C4996: 'getenv': This function or variable may be unsafe. Consider using _dupenv_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+C:\strata\src\core\mtp.cpp(61): warning C4996: 'getenv': This function or variable may be unsafe. Consider using _dupenv_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+C:\strata\src\core\mtp.cpp(110): warning C4996: 'fopen': This function or variable may be unsafe. Consider using fopen_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+C:\strata\src\core\mtp.cpp(421): warning C4996: 'getenv': This function or variable may be unsafe. Consider using _dupenv_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+C:\strata\src\core\mtp.cpp(301): warning C4996: 'fopen': This function or variable may be unsafe. Consider using fopen_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+C:\strata\src\core\mtp.cpp(455): warning C4996: 'getenv': This function or variable may be unsafe. Consider using _dupenv_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+C:\strata\src\core\mtp.cpp(461): warning C4996: 'getenv': This function or variable may be unsafe. Consider using _dupenv_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+C:\strata\src\core\mtp.cpp(488): warning C4996: 'fopen': This function or variable may be unsafe. Consider using fopen_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+C:\strata\src\core\mtp.cpp(732): warning C4996: 'getenv': This function or variable may be unsafe. Consider using _dupenv_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+C:\strata\src\core\mtp.cpp(850): warning C4996: 'getenv': This function or variable may be unsafe. Consider using _dupenv_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+C:\strata\src\core\mtp.cpp(857): warning C4996: 'getenv': This function or variable may be unsafe. Consider using _dupenv_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+C:\strata\src\core\mtp.cpp(867): warning C4996: 'getenv': This function or variable may be unsafe. Consider using _dupenv_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+C:\strata\src\core\mtp.cpp(893): warning C4127: conditional expression is constant
+C:\strata\src\core\mtp.cpp(893): note: consider using 'if constexpr' statement instead
+C:\strata\src\core\mtp.cpp(914): warning C4996: 'getenv': This function or variable may be unsafe. Consider using _dupenv_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+C:\strata\src\core\mtp.cpp(918): warning C4127: conditional expression is constant
+C:\strata\src\core\mtp.cpp(918): note: consider using 'if constexpr' statement instead
+C:\strata\src\core\mtp.cpp(927): warning C4127: conditional expression is constant
+C:\strata\src\core\mtp.cpp(927): note: consider using 'if constexpr' statement instead
+C:\strata\src\core\mtp.cpp(1155): warning C4996: 'getenv': This function or variable may be unsafe. Consider using _dupenv_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+[5/19] Building CXX object CMakeFiles\strata_engine.dir\src\core\expert_source.cpp.obj
+C:\strata\include\strata/kernels/cpu/expert.hpp(74): warning C4324: 'strata::kernels::cpu::ActQ': structure was padded due to alignment specifier
+C:\strata\include\strata/kernels/cpu/pool.hpp(271): warning C4324: 'strata::kernels::cpu::ExpertPool': structure was padded due to alignment specifier
+C:\strata\include\strata/kernels/cpu/pool.hpp(272): warning C4324: 'strata::kernels::cpu::ExpertPool': structure was padded due to alignment specifier
+C:\strata\include\strata/kernels/cpu/pool.hpp(273): warning C4324: 'strata::kernels::cpu::ExpertPool': structure was padded due to alignment specifier
+C:\strata\include\strata/kernels/cpu/pool.hpp(274): warning C4324: 'strata::kernels::cpu::ExpertPool': structure was padded due to alignment specifier
+C:\strata\include\strata/kernels/cpu/pool.hpp(275): warning C4324: 'strata::kernels::cpu::ExpertPool': structure was padded due to alignment specifier
+C:\strata\include\strata/kernels/cpu/pool.hpp(278): warning C4324: 'strata::kernels::cpu::ExpertPool': structure was padded due to alignment specifier
+C:\strata\src\core\expert_source.cpp(524): warning C4100: 'exact': unreferenced parameter
+C:\strata\src\core\expert_source.cpp(1196): warning C4996: 'getenv': This function or variable may be unsafe. Consider using _dupenv_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+C:\strata\src\core\expert_source.cpp(1424): warning C4996: 'getenv': This function or variable may be unsafe. Consider using _dupenv_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+C:\strata\src\core\expert_source.cpp(1526): warning C4996: 'getenv': This function or variable may be unsafe. Consider using _dupenv_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+C:\strata\src\core\expert_source.cpp(2133): warning C4996: 'getenv': This function or variable may be unsafe. Consider using _dupenv_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+C:\strata\src\core\expert_source.cpp(2377): warning C4996: 'getenv': This function or variable may be unsafe. Consider using _dupenv_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+C:\strata\src\core\expert_source.cpp(2465): warning C4996: 'getenv': This function or variable may be unsafe. Consider using _dupenv_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+C:\strata\src\core\expert_source.cpp(2471): warning C4996: 'getenv': This function or variable may be unsafe. Consider using _dupenv_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+C:\strata\src\core\expert_source.cpp(2450): warning C4996: 'strerror': This function or variable may be unsafe. Consider using strerror_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+C:\strata\src\core\expert_source.cpp(2765): warning C4996: 'getenv': This function or variable may be unsafe. Consider using _dupenv_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+C:\strata\src\core\expert_source.cpp(3267): warning C4996: 'getenv': This function or variable may be unsafe. Consider using _dupenv_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+C:\strata\src\core\expert_source.cpp(3270): warning C4996: 'getenv': This function or variable may be unsafe. Consider using _dupenv_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+C:\strata\src\core\expert_source.cpp(3128): warning C4996: 'getenv': This function or variable may be unsafe. Consider using _dupenv_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+C:\strata\src\core\expert_source.cpp(3808): warning C4996: 'fopen': This function or variable may be unsafe. Consider using fopen_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+C:\strata\src\core\expert_source.cpp(4051): warning C4127: conditional expression is constant
+C:\strata\src\core\expert_source.cpp(4051): note: consider using 'if constexpr' statement instead
+C:\strata\src\core\expert_source.cpp(4055): warning C4127: conditional expression is constant
+C:\strata\src\core\expert_source.cpp(4055): note: consider using 'if constexpr' statement instead
+C:\strata\src\core\expert_source.cpp(3977): warning C4996: 'getenv': This function or variable may be unsafe. Consider using _dupenv_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+C:\strata\src\core\expert_source.cpp(4041): warning C4996: 'getenv': This function or variable may be unsafe. Consider using _dupenv_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+C:\strata\src\core\expert_source.cpp(4057): warning C4996: 'fopen': This function or variable may be unsafe. Consider using fopen_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+C:\strata\src\core\expert_source.cpp(4403): warning C4996: 'getenv': This function or variable may be unsafe. Consider using _dupenv_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+C:\strata\src\core\expert_source.cpp(4394): warning C4996: 'getenv': This function or variable may be unsafe. Consider using _dupenv_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+C:\strata\src\core\expert_source.cpp(4397): warning C4996: 'getenv': This function or variable may be unsafe. Consider using _dupenv_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+[6/19] Building CXX object CMakeFiles\strata_engine.dir\src\core\conversation_snapshot.cpp.obj
+C:\strata\include\strata/kernels/cpu/expert.hpp(74): warning C4324: 'strata::kernels::cpu::ActQ': structure was padded due to alignment specifier
+C:\strata\include\strata/kernels/cpu/pool.hpp(271): warning C4324: 'strata::kernels::cpu::ExpertPool': structure was padded due to alignment specifier
+C:\strata\include\strata/kernels/cpu/pool.hpp(272): warning C4324: 'strata::kernels::cpu::ExpertPool': structure was padded due to alignment specifier
+C:\strata\include\strata/kernels/cpu/pool.hpp(273): warning C4324: 'strata::kernels::cpu::ExpertPool': structure was padded due to alignment specifier
+C:\strata\include\strata/kernels/cpu/pool.hpp(274): warning C4324: 'strata::kernels::cpu::ExpertPool': structure was padded due to alignment specifier
+C:\strata\include\strata/kernels/cpu/pool.hpp(275): warning C4324: 'strata::kernels::cpu::ExpertPool': structure was padded due to alignment specifier
+C:\strata\include\strata/kernels/cpu/pool.hpp(278): warning C4324: 'strata::kernels::cpu::ExpertPool': structure was padded due to alignment specifier
+[7/19] Building CXX object CMakeFiles\strata_engine.dir\src\core\conversation_state.cpp.obj
+C:\strata\include\strata/kernels/cpu/expert.hpp(74): warning C4324: 'strata::kernels::cpu::ActQ': structure was padded due to alignment specifier
+C:\strata\include\strata/kernels/cpu/pool.hpp(271): warning C4324: 'strata::kernels::cpu::ExpertPool': structure was padded due to alignment specifier
+C:\strata\include\strata/kernels/cpu/pool.hpp(272): warning C4324: 'strata::kernels::cpu::ExpertPool': structure was padded due to alignment specifier
+C:\strata\include\strata/kernels/cpu/pool.hpp(273): warning C4324: 'strata::kernels::cpu::ExpertPool': structure was padded due to alignment specifier
+C:\strata\include\strata/kernels/cpu/pool.hpp(274): warning C4324: 'strata::kernels::cpu::ExpertPool': structure was padded due to alignment specifier
+C:\strata\include\strata/kernels/cpu/pool.hpp(275): warning C4324: 'strata::kernels::cpu::ExpertPool': structure was padded due to alignment specifier
+C:\strata\include\strata/kernels/cpu/pool.hpp(278): warning C4324: 'strata::kernels::cpu::ExpertPool': structure was padded due to alignment specifier
+[8/19] Building CXX object CMakeFiles\strata_engine.dir\src\core\verify.cpp.obj
+C:\strata\include\strata/kernels/cpu/expert.hpp(74): warning C4324: 'strata::kernels::cpu::ActQ': structure was padded due to alignment specifier
+C:\strata\include\strata/kernels/cpu/pool.hpp(271): warning C4324: 'strata::kernels::cpu::ExpertPool': structure was padded due to alignment specifier
+C:\strata\include\strata/kernels/cpu/pool.hpp(272): warning C4324: 'strata::kernels::cpu::ExpertPool': structure was padded due to alignment specifier
+C:\strata\include\strata/kernels/cpu/pool.hpp(273): warning C4324: 'strata::kernels::cpu::ExpertPool': structure was padded due to alignment specifier
+C:\strata\include\strata/kernels/cpu/pool.hpp(274): warning C4324: 'strata::kernels::cpu::ExpertPool': structure was padded due to alignment specifier
+C:\strata\include\strata/kernels/cpu/pool.hpp(275): warning C4324: 'strata::kernels::cpu::ExpertPool': structure was padded due to alignment specifier
+C:\strata\include\strata/kernels/cpu/pool.hpp(278): warning C4324: 'strata::kernels::cpu::ExpertPool': structure was padded due to alignment specifier
+C:\strata\include\strata/core/dma_batch.hpp(32): warning C4996: 'getenv': This function or variable may be unsafe. Consider using _dupenv_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+C:\strata\include\strata/core/spec_prob.hpp(47): warning C4996: 'getenv': This function or variable may be unsafe. Consider using _dupenv_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+C:\strata\include\strata/core/spec_prob.hpp(57): warning C4996: 'getenv': This function or variable may be unsafe. Consider using _dupenv_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+C:\strata\include\strata/core/spec_prob.hpp(69): warning C4996: 'getenv': This function or variable may be unsafe. Consider using _dupenv_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+C:\strata\src\core\verify.cpp(65): warning C4996: 'getenv': This function or variable may be unsafe. Consider using _dupenv_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+C:\strata\src\core\verify.cpp(66): warning C4996: 'getenv': This function or variable may be unsafe. Consider using _dupenv_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+C:\strata\src\core\verify.cpp(95): warning C4996: 'getenv': This function or variable may be unsafe. Consider using _dupenv_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+C:\strata\src\core\verify.cpp(96): warning C4996: 'getenv': This function or variable may be unsafe. Consider using _dupenv_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+C:\strata\src\core\verify.cpp(101): warning C4996: 'getenv': This function or variable may be unsafe. Consider using _dupenv_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+C:\strata\src\core\verify.cpp(102): warning C4996: 'getenv': This function or variable may be unsafe. Consider using _dupenv_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+C:\strata\src\core\verify.cpp(103): warning C4996: 'getenv': This function or variable may be unsafe. Consider using _dupenv_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+C:\strata\src\core\verify.cpp(107): warning C4996: 'getenv': This function or variable may be unsafe. Consider using _dupenv_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+C:\strata\src\core\verify.cpp(108): warning C4996: 'getenv': This function or variable may be unsafe. Consider using _dupenv_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+C:\strata\src\core\verify.cpp(125): warning C4996: 'getenv': This function or variable may be unsafe. Consider using _dupenv_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+C:\strata\src\core\verify.cpp(146): warning C4996: 'getenv': This function or variable may be unsafe. Consider using _dupenv_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+C:\strata\src\core\verify.cpp(166): warning C4996: 'getenv': This function or variable may be unsafe. Consider using _dupenv_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+C:\strata\src\core\verify.cpp(178): warning C4996: 'getenv': This function or variable may be unsafe. Consider using _dupenv_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+C:\strata\src\core\verify.cpp(268): warning C4996: 'getenv': This function or variable may be unsafe. Consider using _dupenv_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+C:\strata\src\core\verify.cpp(581): warning C4996: 'getenv': This function or variable may be unsafe. Consider using _dupenv_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+C:\strata\src\core\verify.cpp(619): warning C4996: 'getenv': This function or variable may be unsafe. Consider using _dupenv_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+C:\strata\src\core\verify.cpp(637): warning C4996: 'getenv': This function or variable may be unsafe. Consider using _dupenv_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+C:\strata\src\core\verify.cpp(654): warning C4996: 'getenv': This function or variable may be unsafe. Consider using _dupenv_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+C:\strata\src\core\verify.cpp(714): warning C4996: 'getenv': This function or variable may be unsafe. Consider using _dupenv_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+C:\strata\src\core\verify.cpp(831): warning C4996: 'getenv': This function or variable may be unsafe. Consider using _dupenv_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+C:\strata\src\core\verify.cpp(840): warning C4996: 'getenv': This function or variable may be unsafe. Consider using _dupenv_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+C:\strata\src\core\verify.cpp(875): warning C4996: 'getenv': This function or variable may be unsafe. Consider using _dupenv_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+C:\strata\src\core\verify.cpp(1077): warning C4996: 'getenv': This function or variable may be unsafe. Consider using _dupenv_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+C:\strata\src\core\verify.cpp(1148): warning C4456: declaration of 'st' hides previous local declaration
+C:\strata\src\core\verify.cpp(1043): note: see declaration of 'st'
+C:\strata\src\core\verify.cpp(1277): warning C4996: 'getenv': This function or variable may be unsafe. Consider using _dupenv_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+C:\strata\src\core\verify.cpp(1405): warning C4996: 'getenv': This function or variable may be unsafe. Consider using _dupenv_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+C:\strata\src\core\verify.cpp(1704): warning C4996: 'getenv': This function or variable may be unsafe. Consider using _dupenv_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+C:\strata\src\core\verify.cpp(2108): warning C4996: 'getenv': This function or variable may be unsafe. Consider using _dupenv_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+C:\strata\src\core\verify.cpp(2241): warning C4996: 'getenv': This function or variable may be unsafe. Consider using _dupenv_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+C:\strata\src\core\verify.cpp(2259): warning C4996: 'getenv': This function or variable may be unsafe. Consider using _dupenv_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+[9/19] Linking CXX static library strata_kernels_cpu.lib
+[10/19] Building CUDA object CMakeFiles\strata_engine.dir\src\core\remote_expert_opt.cu.obj
+C:/strata/include\strata/core/expert_source.hpp(471): warning #611-D: overloaded virtual function "strata::core::ExpertSource::prefetch" is only partially overridden in class "strata::core::FileExpertSource"
+  class FileExpertSource : public ExpertSource {
+        ^
+
+Remark: The warnings can be suppressed with "-diag-suppress <warning-number>"
+
+C:/strata/include\strata/core/expert_source.hpp(814): warning #611-D: overloaded virtual function "strata::core::ExpertSource::prefetch" is only partially overridden in class "strata::core::ArenaExpertSource"
+  class ArenaExpertSource : public ExpertSource {
+        ^
+
+C:/strata/include\strata/core/expert_source.hpp(471): warning #611-D: overloaded virtual function "strata::core::ExpertSource::prefetch" is only partially overridden in class "strata::core::FileExpertSource"
+  class FileExpertSource : public ExpertSource {
+        ^
+
+Remark: The warnings can be suppressed with "-diag-suppress <warning-number>"
+
+C:/strata/include\strata/core/expert_source.hpp(814): warning #611-D: overloaded virtual function "strata::core::ExpertSource::prefetch" is only partially overridden in class "strata::core::ArenaExpertSource"
+  class ArenaExpertSource : public ExpertSource {
+        ^
+
+remote_expert_opt.cu
+tmpxft_00082efc_00000000-7_remote_expert_opt.cudafe1.cpp
+C:/strata/include\strata/kernels/cpu/expert.hpp(74): warning C4324: 'strata::kernels::cpu::ActQ': structure was padded due to alignment specifier
+C:/strata/include\strata/kernels/cpu/pool.hpp(271): warning C4324: 'strata::kernels::cpu::ExpertPool': structure was padded due to alignment specifier
+C:/strata/include\strata/kernels/cpu/pool.hpp(272): warning C4324: 'strata::kernels::cpu::ExpertPool': structure was padded due to alignment specifier
+C:/strata/include\strata/kernels/cpu/pool.hpp(273): warning C4324: 'strata::kernels::cpu::ExpertPool': structure was padded due to alignment specifier
+C:/strata/include\strata/kernels/cpu/pool.hpp(274): warning C4324: 'strata::kernels::cpu::ExpertPool': structure was padded due to alignment specifier
+C:/strata/include\strata/kernels/cpu/pool.hpp(275): warning C4324: 'strata::kernels::cpu::ExpertPool': structure was padded due to alignment specifier
+C:/strata/include\strata/kernels/cpu/pool.hpp(278): warning C4324: 'strata::kernels::cpu::ExpertPool': structure was padded due to alignment specifier
+<USER_HOME>\AppData\Local\Temp\tmpxft_00082efc_00000000-7_remote_expert_opt.cudafe1.stub.c(25): warning C4211: nonstandard extension used: redefined extern to static
+<USER_HOME>\AppData\Local\Temp\tmpxft_00082efc_00000000-7_remote_expert_opt.cudafe1.stub.c(16): warning C4211: nonstandard extension used: redefined extern to static
+
+[11/19] Building CXX object CMakeFiles\strata_engine.dir\src\core\peer_experts.cpp.obj
+C:\strata\include\strata/kernels/cpu/expert.hpp(74): warning C4324: 'strata::kernels::cpu::ActQ': structure was padded due to alignment specifier
+C:\strata\include\strata/kernels/cpu/pool.hpp(271): warning C4324: 'strata::kernels::cpu::ExpertPool': structure was padded due to alignment specifier
+C:\strata\include\strata/kernels/cpu/pool.hpp(272): warning C4324: 'strata::kernels::cpu::ExpertPool': structure was padded due to alignment specifier
+C:\strata\include\strata/kernels/cpu/pool.hpp(273): warning C4324: 'strata::kernels::cpu::ExpertPool': structure was padded due to alignment specifier
+C:\strata\include\strata/kernels/cpu/pool.hpp(274): warning C4324: 'strata::kernels::cpu::ExpertPool': structure was padded due to alignment specifier
+C:\strata\include\strata/kernels/cpu/pool.hpp(275): warning C4324: 'strata::kernels::cpu::ExpertPool': structure was padded due to alignment specifier
+C:\strata\include\strata/kernels/cpu/pool.hpp(278): warning C4324: 'strata::kernels::cpu::ExpertPool': structure was padded due to alignment specifier
+C:\strata\src\core\peer_experts.cpp(101): warning C4996: 'getenv': This function or variable may be unsafe. Consider using _dupenv_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+C:\strata\src\core\peer_experts.cpp(189): warning C4996: 'getenv': This function or variable may be unsafe. Consider using _dupenv_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+[12/19] Linking CXX static library strata_engine.lib
+[13/19] Linking CXX executable iq_avx2_parity.exe
+[14/19] Building CXX object CMakeFiles\pool_affinity_test.dir\src\kernels\cpu\pool_affinity_test.cpp.obj
+[15/19] Linking CXX executable pool_affinity_test.exe
+[16/19] Building CXX object CMakeFiles\strata.dir\src\program\generate.cpp.obj
+C:\strata\include\strata/core/dma_batch.hpp(32): warning C4996: 'getenv': This function or variable may be unsafe. Consider using _dupenv_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+C:\strata\include\strata/kernels/cpu/expert.hpp(74): warning C4324: 'strata::kernels::cpu::ActQ': structure was padded due to alignment specifier
+C:\strata\include\strata/kernels/cpu/pool.hpp(271): warning C4324: 'strata::kernels::cpu::ExpertPool': structure was padded due to alignment specifier
+C:\strata\include\strata/kernels/cpu/pool.hpp(272): warning C4324: 'strata::kernels::cpu::ExpertPool': structure was padded due to alignment specifier
+C:\strata\include\strata/kernels/cpu/pool.hpp(273): warning C4324: 'strata::kernels::cpu::ExpertPool': structure was padded due to alignment specifier
+C:\strata\include\strata/kernels/cpu/pool.hpp(274): warning C4324: 'strata::kernels::cpu::ExpertPool': structure was padded due to alignment specifier
+C:\strata\include\strata/kernels/cpu/pool.hpp(275): warning C4324: 'strata::kernels::cpu::ExpertPool': structure was padded due to alignment specifier
+C:\strata\include\strata/kernels/cpu/pool.hpp(278): warning C4324: 'strata::kernels::cpu::ExpertPool': structure was padded due to alignment specifier
+C:\strata\include\strata/core/coupled_draft.hpp(59): warning C4996: 'getenv': This function or variable may be unsafe. Consider using _dupenv_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+C:\strata\include\strata/core/coupled_draft.hpp(69): warning C4996: 'getenv': This function or variable may be unsafe. Consider using _dupenv_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+C:\strata\include\strata/core/emulate.hpp(17): warning C4996: 'getenv': This function or variable may be unsafe. Consider using _dupenv_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+C:\strata\src\program\generate.cpp(219): warning C4996: 'getenv': This function or variable may be unsafe. Consider using _dupenv_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+C:\strata\src\program\generate.cpp(221): warning C4996: 'fopen': This function or variable may be unsafe. Consider using fopen_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+C:\strata\src\program\generate.cpp(233): warning C4996: 'getenv': This function or variable may be unsafe. Consider using _dupenv_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+C:\strata\src\program\generate.cpp(242): warning C4996: 'getenv': This function or variable may be unsafe. Consider using _dupenv_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+C:\strata\src\program\generate.cpp(243): warning C4996: 'getenv': This function or variable may be unsafe. Consider using _dupenv_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+C:\strata\src\program\generate.cpp(1193): warning C4996: 'getenv': This function or variable may be unsafe. Consider using _dupenv_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+C:\strata\src\program\generate.cpp(1250): warning C4996: 'getenv': This function or variable may be unsafe. Consider using _dupenv_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+C:\strata\src\program\generate.cpp(1259): warning C4996: 'getenv': This function or variable may be unsafe. Consider using _dupenv_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+C:\strata\src\program\generate.cpp(1269): warning C4996: 'getenv': This function or variable may be unsafe. Consider using _dupenv_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+C:\strata\src\program\generate.cpp(1325): warning C4996: 'getenv': This function or variable may be unsafe. Consider using _dupenv_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+C:\strata\src\program\generate.cpp(2635): warning C4996: 'getenv': This function or variable may be unsafe. Consider using _dupenv_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+C:\strata\src\program\generate.cpp(2655): warning C4996: 'fopen': This function or variable may be unsafe. Consider using fopen_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+C:\strata\src\program\generate.cpp(2659): warning C4996: 'sscanf': This function or variable may be unsafe. Consider using sscanf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+C:\strata\src\program\generate.cpp(3277): warning C4996: 'getenv': This function or variable may be unsafe. Consider using _dupenv_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+C:\strata\src\program\generate.cpp(3378): warning C4996: 'getenv': This function or variable may be unsafe. Consider using _dupenv_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+C:\strata\src\program\generate.cpp(3521): warning C4996: 'getenv': This function or variable may be unsafe. Consider using _dupenv_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+C:\strata\src\program\generate.cpp(4304): warning C4996: 'getenv': This function or variable may be unsafe. Consider using _dupenv_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+C:\strata\src\program\generate.cpp(4788): warning C4996: 'getenv': This function or variable may be unsafe. Consider using _dupenv_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+C:\strata\src\program\generate.cpp(4794): warning C4996: 'getenv': This function or variable may be unsafe. Consider using _dupenv_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+C:\strata\src\program\generate.cpp(4946): warning C4996: 'getenv': This function or variable may be unsafe. Consider using _dupenv_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+C:\strata\src\program\generate.cpp(4968): warning C4996: 'getenv': This function or variable may be unsafe. Consider using _dupenv_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+C:\strata\src\program\generate.cpp(4969): warning C4996: 'getenv': This function or variable may be unsafe. Consider using _dupenv_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+C:\strata\src\program\generate.cpp(4971): warning C4996: 'getenv': This function or variable may be unsafe. Consider using _dupenv_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+C:\strata\src\program\generate.cpp(5253): warning C4244: '=': conversion from 'const int64_t' to 'int32_t', possible loss of data
+C:\strata\src\program\generate.cpp(5737): warning C4996: 'getenv': This function or variable may be unsafe. Consider using _dupenv_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+C:\strata\src\program\generate.cpp(5758): warning C4996: 'getenv': This function or variable may be unsafe. Consider using _dupenv_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+C:\strata\src\program\generate.cpp(5880): warning C4996: 'getenv': This function or variable may be unsafe. Consider using _dupenv_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+C:\strata\src\program\generate.cpp(5882): warning C4996: 'getenv': This function or variable may be unsafe. Consider using _dupenv_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+C:\strata\src\program\generate.cpp(5926): warning C4456: declaration of 'r' hides previous local declaration
+C:\strata\src\program\generate.cpp(5898): note: see declaration of 'r'
+C:\strata\src\program\generate.cpp(6084): warning C4996: 'getenv': This function or variable may be unsafe. Consider using _dupenv_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+C:\strata\src\program\generate.cpp(6214): warning C4456: declaration of 'sp' hides previous local declaration
+C:\strata\src\program\generate.cpp(5212): note: see declaration of 'sp'
+C:\strata\src\program\generate.cpp(6434): warning C4996: 'getenv': This function or variable may be unsafe. Consider using _dupenv_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+C:\strata\src\program\generate.cpp(7026): warning C4996: 'getenv': This function or variable may be unsafe. Consider using _dupenv_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+C:\strata\src\program\generate.cpp(7304): warning C4996: 'getenv': This function or variable may be unsafe. Consider using _dupenv_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+C:\strata\src\program\generate.cpp(8623): warning C4189: 'w': local variable is initialized but not referenced
+C:\strata\src\program\generate.cpp(8822): warning C4456: declaration of 'wo' hides previous local declaration
+C:\strata\src\program\generate.cpp(4015): note: see declaration of 'wo'
+C:\strata\src\program\generate.cpp(8952): warning C4456: declaration of 'tok' hides previous local declaration
+C:\strata\src\program\generate.cpp(5292): note: see declaration of 'tok'
+C:\strata\src\program\generate.cpp(9008): warning C4456: declaration of 'hdr' hides previous local declaration
+C:\strata\src\program\generate.cpp(5232): note: see declaration of 'hdr'
+C:\strata\src\program\generate.cpp(9322): warning C4996: 'getenv': This function or variable may be unsafe. Consider using _dupenv_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+C:\strata\src\program\generate.cpp(9554): warning C4996: 'getenv': This function or variable may be unsafe. Consider using _dupenv_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+C:\strata\src\program\generate.cpp(9555): warning C4996: 'fopen': This function or variable may be unsafe. Consider using fopen_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+C:\strata\src\program\generate.cpp(9558): warning C4996: 'getenv': This function or variable may be unsafe. Consider using _dupenv_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+C:\strata\src\program\generate.cpp(9526): warning C4996: 'getenv': This function or variable may be unsafe. Consider using _dupenv_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+C:\strata\src\program\generate.cpp(9698): warning C4996: 'getenv': This function or variable may be unsafe. Consider using _dupenv_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+C:\strata\src\program\generate.cpp(9850): warning C4996: 'getenv': This function or variable may be unsafe. Consider using _dupenv_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+C:\strata\src\program\generate.cpp(9951): warning C4456: declaration of 'sbuf' hides previous local declaration
+C:\strata\src\program\generate.cpp(2791): note: see declaration of 'sbuf'
+C:\strata\src\program\generate.cpp(10901): warning C4456: declaration of 'pool' hides previous local declaration
+C:\strata\src\program\generate.cpp(4258): note: see declaration of 'pool'
+C:\strata\src\program\generate.cpp(10910): warning C4456: declaration of 'pool' hides previous local declaration
+C:\strata\src\program\generate.cpp(4258): note: see declaration of 'pool'
+C:\strata\src\program\generate.cpp(11568): warning C4996: 'getenv': This function or variable may be unsafe. Consider using _dupenv_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+C:\strata\src\program\generate.cpp(11598): warning C4996: 'getenv': This function or variable may be unsafe. Consider using _dupenv_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+C:\strata\src\program\generate.cpp(11712): warning C4456: declaration of 'sbuf' hides previous local declaration
+C:\strata\src\program\generate.cpp(2791): note: see declaration of 'sbuf'
+C:\strata\src\program\generate.cpp(12038): warning C4456: declaration of 'hdr' hides previous local declaration
+C:\strata\src\program\generate.cpp(5232): note: see declaration of 'hdr'
+C:\strata\src\program\generate.cpp(1588): warning C4996: 'getenv': This function or variable may be unsafe. Consider using _dupenv_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+C:\strata\src\program\generate.cpp(1610): warning C4996: 'getenv': This function or variable may be unsafe. Consider using _dupenv_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+C:\strata\src\program\generate.cpp(1776): warning C4996: 'getenv': This function or variable may be unsafe. Consider using _dupenv_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+C:\strata\src\program\generate.cpp(1921): warning C4996: 'getenv': This function or variable may be unsafe. Consider using _dupenv_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+C:\strata\src\program\generate.cpp(1923): warning C4996: 'getenv': This function or variable may be unsafe. Consider using _dupenv_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+C:\strata\src\program\generate.cpp(1932): warning C4996: 'getenv': This function or variable may be unsafe. Consider using _dupenv_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+C:\strata\src\program\generate.cpp(1934): warning C4996: 'getenv': This function or variable may be unsafe. Consider using _dupenv_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+C:\strata\src\program\generate.cpp(1967): warning C4996: 'getenv': This function or variable may be unsafe. Consider using _dupenv_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+C:\strata\src\program\generate.cpp(2083): warning C4996: 'getenv': This function or variable may be unsafe. Consider using _dupenv_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+C:\strata\src\program\generate.cpp(2183): warning C4996: 'getenv': This function or variable may be unsafe. Consider using _dupenv_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+C:\strata\src\program\generate.cpp(2444): warning C4996: 'getenv': This function or variable may be unsafe. Consider using _dupenv_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+C:\strata\src\program\generate.cpp(2483): warning C4996: 'getenv': This function or variable may be unsafe. Consider using _dupenv_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+C:\strata\src\program\generate.cpp(2817): warning C4996: 'fopen': This function or variable may be unsafe. Consider using fopen_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+C:\strata\src\program\generate.cpp(2860): warning C4996: 'getenv': This function or variable may be unsafe. Consider using _dupenv_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+C:\strata\src\program\generate.cpp(2861): warning C4996: 'getenv': This function or variable may be unsafe. Consider using _dupenv_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+C:\strata\src\program\generate.cpp(3152): warning C4996: 'getenv': This function or variable may be unsafe. Consider using _dupenv_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+C:\strata\src\program\generate.cpp(3154): warning C4996: 'getenv': This function or variable may be unsafe. Consider using _dupenv_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+C:\strata\src\program\generate.cpp(3330): warning C4996: 'getenv': This function or variable may be unsafe. Consider using _dupenv_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+C:\strata\src\program\generate.cpp(3356): warning C4996: 'getenv': This function or variable may be unsafe. Consider using _dupenv_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+C:\strata\src\program\generate.cpp(3362): warning C4996: 'getenv': This function or variable may be unsafe. Consider using _dupenv_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+C:\strata\src\program\generate.cpp(3795): warning C4996: 'getenv': This function or variable may be unsafe. Consider using _dupenv_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+C:\strata\src\program\generate.cpp(3807): warning C4996: 'getenv': This function or variable may be unsafe. Consider using _dupenv_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+C:\strata\src\program\generate.cpp(3873): warning C4996: 'getenv': This function or variable may be unsafe. Consider using _dupenv_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+C:\strata\src\program\generate.cpp(4157): warning C4996: 'getenv': This function or variable may be unsafe. Consider using _dupenv_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+C:\strata\src\program\generate.cpp(4176): warning C4996: 'getenv': This function or variable may be unsafe. Consider using _dupenv_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+C:\strata\src\program\generate.cpp(4183): warning C4996: 'getenv': This function or variable may be unsafe. Consider using _dupenv_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+C:\strata\src\program\generate.cpp(4184): warning C4996: 'getenv': This function or variable may be unsafe. Consider using _dupenv_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+C:\strata\src\program\generate.cpp(4194): warning C4996: 'getenv': This function or variable may be unsafe. Consider using _dupenv_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+C:\strata\src\program\generate.cpp(4210): warning C4996: 'getenv': This function or variable may be unsafe. Consider using _dupenv_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+C:\strata\src\program\generate.cpp(4560): warning C4996: 'getenv': This function or variable may be unsafe. Consider using _dupenv_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+C:\strata\src\program\generate.cpp(4665): warning C4996: 'getenv': This function or variable may be unsafe. Consider using _dupenv_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+C:\strata\src\program\generate.cpp(4982): warning C4996: 'getenv': This function or variable may be unsafe. Consider using _dupenv_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+C:\strata\src\program\generate.cpp(4985): warning C4996: 'getenv': This function or variable may be unsafe. Consider using _dupenv_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+C:\strata\src\program\generate.cpp(5090): warning C4996: 'fopen': This function or variable may be unsafe. Consider using fopen_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+C:\strata\src\program\generate.cpp(5240): warning C4996: 'fopen': This function or variable may be unsafe. Consider using fopen_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+C:\strata\src\program\generate.cpp(5264): warning C4996: 'fopen': This function or variable may be unsafe. Consider using fopen_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+C:\strata\src\program\generate.cpp(5598): warning C4996: 'getenv': This function or variable may be unsafe. Consider using _dupenv_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+C:\strata\src\program\generate.cpp(6195): warning C4996: 'getenv': This function or variable may be unsafe. Consider using _dupenv_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+C:\strata\src\program\generate.cpp(6272): warning C4996: 'getenv': This function or variable may be unsafe. Consider using _dupenv_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+C:\strata\src\program\generate.cpp(6624): warning C4996: 'getenv': This function or variable may be unsafe. Consider using _dupenv_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+C:\strata\src\program\generate.cpp(6626): warning C4996: 'getenv': This function or variable may be unsafe. Consider using _dupenv_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+C:\strata\src\program\generate.cpp(7985): warning C4996: 'getenv': This function or variable may be unsafe. Consider using _dupenv_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+C:\strata\src\program\generate.cpp(8073): warning C4996: 'getenv': This function or variable may be unsafe. Consider using _dupenv_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+C:\strata\src\program\generate.cpp(8077): warning C4996: 'getenv': This function or variable may be unsafe. Consider using _dupenv_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+C:\strata\src\program\generate.cpp(9005): warning C4996: 'fopen': This function or variable may be unsafe. Consider using fopen_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+C:\strata\src\program\generate.cpp(9267): warning C4996: 'getenv': This function or variable may be unsafe. Consider using _dupenv_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+C:\strata\src\program\generate.cpp(9294): warning C4996: 'getenv': This function or variable may be unsafe. Consider using _dupenv_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+C:\strata\src\program\generate.cpp(9343): warning C4996: 'getenv': This function or variable may be unsafe. Consider using _dupenv_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+C:\strata\src\program\generate.cpp(9400): warning C4996: 'getenv': This function or variable may be unsafe. Consider using _dupenv_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+C:\strata\src\program\generate.cpp(9422): warning C4996: 'fopen': This function or variable may be unsafe. Consider using fopen_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+C:\strata\src\program\generate.cpp(9615): warning C4996: 'getenv': This function or variable may be unsafe. Consider using _dupenv_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+C:\strata\src\program\generate.cpp(9968): warning C4996: 'getenv': This function or variable may be unsafe. Consider using _dupenv_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+C:\strata\src\program\generate.cpp(9977): warning C4996: 'getenv': This function or variable may be unsafe. Consider using _dupenv_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+C:\strata\src\program\generate.cpp(10576): warning C4996: 'fopen': This function or variable may be unsafe. Consider using fopen_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+C:\strata\src\program\generate.cpp(10697): warning C4996: 'getenv': This function or variable may be unsafe. Consider using _dupenv_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+C:\strata\src\program\generate.cpp(10702): warning C4996: 'fopen': This function or variable may be unsafe. Consider using fopen_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+C:\strata\src\program\generate.cpp(10812): warning C4996: 'getenv': This function or variable may be unsafe. Consider using _dupenv_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+C:\strata\src\program\generate.cpp(10854): warning C4996: 'getenv': This function or variable may be unsafe. Consider using _dupenv_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+C:\strata\src\program\generate.cpp(11078): warning C4996: 'getenv': This function or variable may be unsafe. Consider using _dupenv_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+C:\strata\src\program\generate.cpp(11107): warning C4996: 'getenv': This function or variable may be unsafe. Consider using _dupenv_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+C:\strata\src\program\generate.cpp(11140): warning C4996: 'fopen': This function or variable may be unsafe. Consider using fopen_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+C:\strata\src\program\generate.cpp(11700): warning C4996: 'fopen': This function or variable may be unsafe. Consider using fopen_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+C:\strata\src\program\generate.cpp(11755): warning C4996: 'getenv': This function or variable may be unsafe. Consider using _dupenv_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+C:\strata\src\program\generate.cpp(11823): warning C4996: 'getenv': This function or variable may be unsafe. Consider using _dupenv_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+C:\strata\src\program\generate.cpp(11825): warning C4996: 'fopen': This function or variable may be unsafe. Consider using fopen_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+C:\strata\src\program\generate.cpp(12013): warning C4996: 'fopen': This function or variable may be unsafe. Consider using fopen_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+C:\strata\src\program\generate.cpp(12033): warning C4996: 'fopen': This function or variable may be unsafe. Consider using fopen_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+C:\llama-cpp-src\toolchains\vs-buildtools\VC\Tools\MSVC\14.44.35207\include\vector(1461): warning C4244: '=': conversion from '__int64' to 'int', possible loss of data
+C:\llama-cpp-src\toolchains\vs-buildtools\VC\Tools\MSVC\14.44.35207\include\vector(1461): note: the template instantiation context (the oldest one first) is
+C:\strata\src\program\generate.cpp(7242): note: see reference to function template instantiation 'void std::vector<int32_t,std::allocator<int>>::assign<std::_Vector_iterator<std::_Vector_val<std::_Simple_types<_Ty>>>,0>(_Iter,_Iter)' being compiled
+        with
+        [
+            _Ty=int64_t,
+            _Iter=std::_Vector_iterator<std::_Vector_val<std::_Simple_types<int64_t>>>
+        ]
+C:\strata\src\program\generate.cpp(7242): note: see the first reference to 'std::vector<int32_t,std::allocator<int>>::assign' in 'main::<lambda_78>::operator ()'
+C:\llama-cpp-src\toolchains\vs-buildtools\VC\Tools\MSVC\14.44.35207\include\vector(1491): note: see reference to function template instantiation 'void std::vector<int32_t,std::allocator<int>>::_Assign_counted_range<__int64*>(_Iter,const unsigned __int64)' being compiled
+        with
+        [
+            _Iter=__int64 *
+        ]
+C:\llama-cpp-src\toolchains\vs-buildtools\VC\Tools\MSVC\14.44.35207\include\xutility(4813): warning C4244: '=': conversion from '__int64' to 'int', possible loss of data
+C:\llama-cpp-src\toolchains\vs-buildtools\VC\Tools\MSVC\14.44.35207\include\xutility(4813): note: the template instantiation context (the oldest one first) is
+C:\llama-cpp-src\toolchains\vs-buildtools\VC\Tools\MSVC\14.44.35207\include\vector(1491): note: see reference to function template instantiation 'void std::vector<int32_t,std::allocator<int>>::_Assign_counted_range<__int64*>(_Iter,const unsigned __int64)' being compiled
+        with
+        [
+            _Iter=__int64 *
+        ]
+C:\llama-cpp-src\toolchains\vs-buildtools\VC\Tools\MSVC\14.44.35207\include\vector(1475): note: see reference to function template instantiation '_OutIt *std::_Copy_n_unchecked4<__int64*,unsigned __int64,int*>(_InIt,_SizeTy,_OutIt)' being compiled
+        with
+        [
+            _OutIt=int *,
+            _InIt=__int64 *,
+            _SizeTy=unsigned __int64
+        ]
+C:\llama-cpp-src\toolchains\vs-buildtools\VC\Tools\MSVC\14.44.35207\include\xutility(462): warning C4244: 'initializing': conversion from 'int64_t' to '_Ty', possible loss of data
+        with
+        [
+            _Ty=int
+        ]
+C:\llama-cpp-src\toolchains\vs-buildtools\VC\Tools\MSVC\14.44.35207\include\xutility(462): note: the template instantiation context (the oldest one first) is
+C:\llama-cpp-src\toolchains\vs-buildtools\VC\Tools\MSVC\14.44.35207\include\vector(1436): note: see reference to function template instantiation 'int *std::_Uninitialized_copy_n<__int64*,std::allocator<int>>(_InIt,size_t,int *,_Alloc &)' being compiled
+        with
+        [
+            _InIt=__int64 *,
+            _Alloc=std::allocator<int>
+        ]
+C:\llama-cpp-src\toolchains\vs-buildtools\VC\Tools\MSVC\14.44.35207\include\xmemory(1938): note: see reference to function template instantiation 'void std::_Uninitialized_backout_al<std::allocator<int>>::_Emplace_back<__int64&>(__int64 &)' being compiled
+C:\llama-cpp-src\toolchains\vs-buildtools\VC\Tools\MSVC\14.44.35207\include\xmemory(1844): note: see reference to function template instantiation 'void std::_Default_allocator_traits<_Alloc>::construct<_Ty,int64_t&>(_Alloc &,_Objty *const ,int64_t &)' being compiled
+        with
+        [
+            _Alloc=std::allocator<int>,
+            _Ty=int,
+            _Objty=int
+        ]
+C:\llama-cpp-src\toolchains\vs-buildtools\VC\Tools\MSVC\14.44.35207\include\xmemory(730): note: see reference to function template instantiation '_Ty *std::construct_at<_Objty,int64_t&>(_Ty *const ,int64_t &) noexcept(<expr>)' being compiled
+        with
+        [
+            _Ty=int,
+            _Objty=int
+        ]
+C:\llama-cpp-src\toolchains\vs-buildtools\VC\Tools\MSVC\14.44.35207\include\xutility(463): warning C4244: 'initializing': conversion from 'int64_t' to '_Objty', possible loss of data
+        with
+        [
+            _Objty=int
+        ]
+C:\llama-cpp-src\toolchains\vs-buildtools\VC\Tools\MSVC\14.44.35207\include\xutility(463): note: the template instantiation context (the oldest one first) is
+C:\llama-cpp-src\toolchains\vs-buildtools\VC\Tools\MSVC\14.44.35207\include\xmemory(1844): note: see reference to function template instantiation 'void std::_Default_allocator_traits<_Alloc>::construct<_Ty,int64_t&>(_Alloc &,_Objty *const ,int64_t &)' being compiled
+        with
+        [
+            _Alloc=std::allocator<int>,
+            _Ty=int,
+            _Objty=int
+        ]
+C:\llama-cpp-src\toolchains\vs-buildtools\VC\Tools\MSVC\14.44.35207\include\xmemory(730): note: see reference to function template instantiation '_Ty *std::construct_at<_Objty,int64_t&>(_Ty *const ,int64_t &) noexcept' being compiled
+        with
+        [
+            _Ty=int,
+            _Objty=int
+        ]
+[17/19] Building CXX object CMakeFiles\strata_prefill.dir\src\prefill\prefill.cpp.obj
+C:\strata\include\strata/kernels/cpu/expert.hpp(74): warning C4324: 'strata::kernels::cpu::ActQ': structure was padded due to alignment specifier
+C:\strata\include\strata/kernels/cpu/pool.hpp(271): warning C4324: 'strata::kernels::cpu::ExpertPool': structure was padded due to alignment specifier
+C:\strata\include\strata/kernels/cpu/pool.hpp(272): warning C4324: 'strata::kernels::cpu::ExpertPool': structure was padded due to alignment specifier
+C:\strata\include\strata/kernels/cpu/pool.hpp(273): warning C4324: 'strata::kernels::cpu::ExpertPool': structure was padded due to alignment specifier
+C:\strata\include\strata/kernels/cpu/pool.hpp(274): warning C4324: 'strata::kernels::cpu::ExpertPool': structure was padded due to alignment specifier
+C:\strata\include\strata/kernels/cpu/pool.hpp(275): warning C4324: 'strata::kernels::cpu::ExpertPool': structure was padded due to alignment specifier
+C:\strata\include\strata/kernels/cpu/pool.hpp(278): warning C4324: 'strata::kernels::cpu::ExpertPool': structure was padded due to alignment specifier
+C:\strata\src\prefill\mmq_resident_sort.hpp(17): warning C4996: 'getenv': This function or variable may be unsafe. Consider using _dupenv_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+C:\strata\src\prefill\prefill.cpp(106): warning C4996: 'getenv': This function or variable may be unsafe. Consider using _dupenv_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+C:\strata\src\prefill\prefill.cpp(117): warning C4996: 'getenv': This function or variable may be unsafe. Consider using _dupenv_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+C:\strata\src\prefill\prefill.cpp(126): warning C4996: 'getenv': This function or variable may be unsafe. Consider using _dupenv_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+C:\strata\src\prefill\prefill.cpp(144): warning C4996: 'getenv': This function or variable may be unsafe. Consider using _dupenv_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+C:\strata\src\prefill\prefill.cpp(165): warning C4996: 'getenv': This function or variable may be unsafe. Consider using _dupenv_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+C:\strata\src\prefill\prefill.cpp(182): warning C4996: 'getenv': This function or variable may be unsafe. Consider using _dupenv_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+C:\strata\src\prefill\prefill.cpp(185): warning C4996: 'getenv': This function or variable may be unsafe. Consider using _dupenv_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+C:\strata\src\prefill\prefill.cpp(257): warning C4996: 'getenv': This function or variable may be unsafe. Consider using _dupenv_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+C:\strata\src\prefill\prefill.cpp(261): warning C4996: 'getenv': This function or variable may be unsafe. Consider using _dupenv_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+C:\strata\src\prefill\prefill.cpp(271): warning C4996: 'getenv': This function or variable may be unsafe. Consider using _dupenv_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+C:\strata\src\prefill\prefill.cpp(303): warning C4996: 'getenv': This function or variable may be unsafe. Consider using _dupenv_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+C:\strata\src\prefill\prefill.cpp(313): warning C4996: 'getenv': This function or variable may be unsafe. Consider using _dupenv_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+C:\strata\src\prefill\prefill.cpp(317): warning C4996: 'getenv': This function or variable may be unsafe. Consider using _dupenv_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+C:\strata\src\prefill\prefill.cpp(327): warning C4996: 'getenv': This function or variable may be unsafe. Consider using _dupenv_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+C:\strata\src\prefill\prefill.cpp(335): warning C4996: 'getenv': This function or variable may be unsafe. Consider using _dupenv_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+C:\strata\src\prefill\prefill.cpp(340): warning C4996: 'getenv': This function or variable may be unsafe. Consider using _dupenv_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+C:\strata\src\prefill\prefill.cpp(348): warning C4996: 'getenv': This function or variable may be unsafe. Consider using _dupenv_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+C:\strata\src\prefill\prefill.cpp(357): warning C4996: 'getenv': This function or variable may be unsafe. Consider using _dupenv_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+C:\strata\src\prefill\prefill.cpp(429): warning C4996: 'getenv': This function or variable may be unsafe. Consider using _dupenv_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+C:\strata\src\prefill\prefill.cpp(807): warning C4996: 'getenv': This function or variable may be unsafe. Consider using _dupenv_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+C:\strata\src\prefill\prefill.cpp(926): warning C4996: 'getenv': This function or variable may be unsafe. Consider using _dupenv_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+C:\strata\src\prefill\prefill.cpp(1033): warning C4996: 'getenv': This function or variable may be unsafe. Consider using _dupenv_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+C:\strata\src\prefill\prefill.cpp(1045): warning C4996: 'getenv': This function or variable may be unsafe. Consider using _dupenv_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+C:\strata\src\prefill\prefill.cpp(1053): warning C4996: 'getenv': This function or variable may be unsafe. Consider using _dupenv_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+C:\strata\src\prefill\prefill.cpp(1057): warning C4996: 'getenv': This function or variable may be unsafe. Consider using _dupenv_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+C:\strata\src\prefill\prefill.cpp(1068): warning C4996: 'getenv': This function or variable may be unsafe. Consider using _dupenv_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+C:\strata\src\prefill\prefill.cpp(1277): warning C4996: 'getenv': This function or variable may be unsafe. Consider using _dupenv_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+C:\strata\src\prefill\prefill.cpp(1282): warning C4996: 'getenv': This function or variable may be unsafe. Consider using _dupenv_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+C:\strata\src\prefill\prefill.cpp(1314): warning C4996: 'getenv': This function or variable may be unsafe. Consider using _dupenv_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+C:\strata\src\prefill\prefill.cpp(1345): warning C4996: 'getenv': This function or variable may be unsafe. Consider using _dupenv_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+C:\strata\src\prefill\prefill.cpp(1444): warning C4996: 'getenv': This function or variable may be unsafe. Consider using _dupenv_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+C:\strata\src\prefill\prefill.cpp(1456): warning C4996: 'getenv': This function or variable may be unsafe. Consider using _dupenv_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+C:\strata\src\prefill\prefill.cpp(1575): warning C4996: 'getenv': This function or variable may be unsafe. Consider using _dupenv_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+C:\strata\src\prefill\prefill.cpp(1587): warning C4996: 'getenv': This function or variable may be unsafe. Consider using _dupenv_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+C:\strata\src\prefill\prefill.cpp(1602): warning C4996: 'getenv': This function or variable may be unsafe. Consider using _dupenv_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+C:\strata\src\prefill\prefill.cpp(1618): warning C4996: 'getenv': This function or variable may be unsafe. Consider using _dupenv_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+C:\strata\src\prefill\prefill.cpp(1632): warning C4996: 'getenv': This function or variable may be unsafe. Consider using _dupenv_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+C:\strata\src\prefill\prefill.cpp(1636): warning C4996: 'getenv': This function or variable may be unsafe. Consider using _dupenv_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+C:\strata\src\prefill\prefill.cpp(1659): warning C4996: 'getenv': This function or variable may be unsafe. Consider using _dupenv_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+C:\strata\src\prefill\prefill.cpp(1663): warning C4996: 'getenv': This function or variable may be unsafe. Consider using _dupenv_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+C:\strata\src\prefill\prefill.cpp(1666): warning C4996: 'getenv': This function or variable may be unsafe. Consider using _dupenv_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+C:\strata\src\prefill\prefill.cpp(1981): warning C4996: 'getenv': This function or variable may be unsafe. Consider using _dupenv_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+C:\strata\src\prefill\prefill.cpp(2034): warning C4996: 'getenv': This function or variable may be unsafe. Consider using _dupenv_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+C:\strata\src\prefill\prefill.cpp(2317): warning C4996: 'getenv': This function or variable may be unsafe. Consider using _dupenv_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+C:\strata\src\prefill\prefill.cpp(2383): warning C4996: 'getenv': This function or variable may be unsafe. Consider using _dupenv_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+C:\strata\src\prefill\prefill.cpp(2490): warning C4996: 'getenv': This function or variable may be unsafe. Consider using _dupenv_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+C:\strata\src\prefill\prefill.cpp(2801): warning C4996: 'getenv': This function or variable may be unsafe. Consider using _dupenv_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+C:\strata\src\prefill\prefill.cpp(2811): warning C4996: 'getenv': This function or variable may be unsafe. Consider using _dupenv_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+C:\strata\src\prefill\prefill.cpp(2812): warning C4996: 'fopen': This function or variable may be unsafe. Consider using fopen_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+C:\strata\src\prefill\prefill.cpp(2890): warning C4996: 'getenv': This function or variable may be unsafe. Consider using _dupenv_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+C:\strata\src\prefill\prefill.cpp(3024): warning C4456: declaration of 'g' hides previous local declaration
+C:\strata\src\prefill\prefill.cpp(1969): note: see declaration of 'g'
+C:\strata\src\prefill\prefill.cpp(3038): warning C4456: declaration of 'v' hides previous local declaration
+C:\strata\src\prefill\prefill.cpp(2398): note: see declaration of 'v'
+C:\strata\src\prefill\prefill.cpp(3239): warning C4457: declaration of 'n' hides function parameter
+C:\strata\src\prefill\prefill.cpp(1965): note: see declaration of 'n'
+C:\strata\src\prefill\prefill.cpp(3243): warning C4456: declaration of 'g' hides previous local declaration
+C:\strata\src\prefill\prefill.cpp(1969): note: see declaration of 'g'
+C:\strata\src\prefill\prefill.cpp(3297): warning C4457: declaration of 'n' hides function parameter
+C:\strata\src\prefill\prefill.cpp(1965): note: see declaration of 'n'
+C:\strata\src\prefill\prefill.cpp(3593): warning C4996: 'getenv': This function or variable may be unsafe. Consider using _dupenv_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+C:\strata\src\prefill\prefill.cpp(3756): warning C4244: 'argument': conversion from 'const int64_t' to 'int32_t', possible loss of data
+C:\strata\src\prefill\prefill.cpp(3840): warning C4996: 'getenv': This function or variable may be unsafe. Consider using _dupenv_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+C:\strata\src\prefill\prefill.cpp(2060): warning C4996: 'getenv': This function or variable may be unsafe. Consider using _dupenv_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+C:\strata\src\prefill\prefill.cpp(2641): warning C4996: 'getenv': This function or variable may be unsafe. Consider using _dupenv_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+C:\strata\src\prefill\prefill.cpp(2663): warning C4996: 'getenv': This function or variable may be unsafe. Consider using _dupenv_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+C:\strata\src\prefill\prefill.cpp(2674): warning C4996: 'getenv': This function or variable may be unsafe. Consider using _dupenv_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+C:\strata\src\prefill\prefill.cpp(2696): warning C4996: 'getenv': This function or variable may be unsafe. Consider using _dupenv_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+C:\strata\src\prefill\prefill.cpp(2742): warning C4996: 'getenv': This function or variable may be unsafe. Consider using _dupenv_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+C:\strata\src\prefill\prefill.cpp(2743): warning C4996: 'getenv': This function or variable may be unsafe. Consider using _dupenv_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+C:\strata\src\prefill\prefill.cpp(2744): warning C4996: 'getenv': This function or variable may be unsafe. Consider using _dupenv_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+C:\strata\src\prefill\prefill.cpp(2749): warning C4996: 'fopen': This function or variable may be unsafe. Consider using fopen_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+C:\strata\src\prefill\prefill.cpp(2764): warning C4996: 'getenv': This function or variable may be unsafe. Consider using _dupenv_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+C:\strata\src\prefill\prefill.cpp(2795): warning C4996: 'getenv': This function or variable may be unsafe. Consider using _dupenv_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+C:\strata\src\prefill\prefill.cpp(2796): warning C4996: 'getenv': This function or variable may be unsafe. Consider using _dupenv_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+C:\strata\src\prefill\prefill.cpp(2798): warning C4996: 'fopen': This function or variable may be unsafe. Consider using fopen_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+C:\strata\src\prefill\prefill.cpp(3044): warning C4996: 'getenv': This function or variable may be unsafe. Consider using _dupenv_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+C:\strata\src\prefill\prefill.cpp(3795): warning C4996: 'getenv': This function or variable may be unsafe. Consider using _dupenv_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+C:\strata\src\prefill\prefill.cpp(3916): warning C4996: 'getenv': This function or variable may be unsafe. Consider using _dupenv_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+C:\strata\src\prefill\prefill.cpp(3918): warning C4996: 'fopen': This function or variable may be unsafe. Consider using fopen_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+C:\strata\src\prefill\prefill.cpp(3929): warning C4996: 'getenv': This function or variable may be unsafe. Consider using _dupenv_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+C:\strata\src\prefill\prefill.cpp(3933): warning C4996: 'fopen': This function or variable may be unsafe. Consider using fopen_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+C:\strata\src\prefill\prefill.cpp(3968): warning C4996: 'getenv': This function or variable may be unsafe. Consider using _dupenv_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+C:\strata\src\prefill\prefill.cpp(4036): warning C4996: 'getenv': This function or variable may be unsafe. Consider using _dupenv_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+[18/19] Linking CXX static library strata_prefill.lib
+[19/19] Linking CXX executable strata.exe

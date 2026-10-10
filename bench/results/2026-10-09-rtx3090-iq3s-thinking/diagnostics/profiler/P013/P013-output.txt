@@ -1,0 +1,51 @@
+{
+  "span_ms": 8271.266687,
+  "activity_ms": {
+    "no_recorded_activity": 1579.998271,
+    "any_activity": 6691.268416
+  },
+  "categories": {
+    "other_kernel": {
+      "count": 652145,
+      "summed_ms": 4201.439873,
+      "union_ms": 3889.092287,
+      "only_category_active_ms": 3406.024965
+    },
+    "wait_flag": {
+      "count": 47808,
+      "summed_ms": 795.644513,
+      "union_ms": 795.644513,
+      "only_category_active_ms": 642.707867
+    },
+    "expert_fetch": {
+      "count": 15936,
+      "summed_ms": 305.690387,
+      "union_ms": 305.690387,
+      "only_category_active_ms": 212.420398
+    },
+    "q6_mmvq": {
+      "count": 43359,
+      "summed_ms": 1063.466204,
+      "union_ms": 1063.466204,
+      "only_category_active_ms": 944.558312
+    },
+    "sampler": {
+      "count": 662,
+      "summed_ms": 15.406897,
+      "union_ms": 15.406897,
+      "only_category_active_ms": 15.210961
+    },
+    "memcpy": {
+      "count": 4361,
+      "summed_ms": 1327.080437,
+      "union_ms": 1327.062901,
+      "only_category_active_ms": 768.869797
+    },
+    "memset": {
+      "count": 1253,
+      "summed_ms": 5.877462,
+      "union_ms": 5.877462,
+      "only_category_active_ms": 1.538045
+    }
+  }
+}

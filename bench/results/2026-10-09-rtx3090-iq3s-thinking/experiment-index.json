@@ -3584,5 +3584,195 @@
       83.7,
       88.5
     ]
+  },
+  {
+    "campaign": "target-80",
+    "arm": "R074-clang-off",
+    "workload": "longer",
+    "runs": 5,
+    "decode_median": 83.3,
+    "decode_min": 82.0,
+    "decode_max": 84.0,
+    "e2e_median": 41.68441001848534,
+    "stream_total_median": 41.69148273458231,
+    "ttft_median_seconds": 6.159527999989223,
+    "raw_decode": [
+      83.3,
+      82.2,
+      82.0,
+      84.0,
+      83.8
+    ]
+  },
+  {
+    "campaign": "target-80",
+    "arm": "R074-clang-off",
+    "workload": "short",
+    "runs": 5,
+    "decode_median": 87.5,
+    "decode_min": 85.0,
+    "decode_max": 89.0,
+    "e2e_median": 76.59058334620313,
+    "stream_total_median": 76.60103035504049,
+    "ttft_median_seconds": 0.8650324000045657,
+    "raw_decode": [
+      89.0,
+      85.0,
+      87.5,
+      87.8,
+      87.5
+    ]
+  },
+  {
+    "campaign": "target-80",
+    "arm": "R075-clang-on",
+    "workload": "longer",
+    "runs": 5,
+    "decode_median": 82.6,
+    "decode_min": 80.6,
+    "decode_max": 85.9,
+    "e2e_median": 41.43869147629297,
+    "stream_total_median": 41.44164574761336,
+    "ttft_median_seconds": 6.151751999976113,
+    "raw_decode": [
+      83.9,
+      82.6,
+      81.2,
+      80.6,
+      85.9
+    ]
+  },
+  {
+    "campaign": "target-80",
+    "arm": "R075-clang-on",
+    "workload": "short",
+    "runs": 5,
+    "decode_median": 87.5,
+    "decode_min": 82.9,
+    "decode_max": 90.1,
+    "e2e_median": 76.65079386399853,
+    "stream_total_median": 76.66195060905261,
+    "ttft_median_seconds": 0.8541205999790691,
+    "raw_decode": [
+      87.5,
+      88.7,
+      87.0,
+      90.1,
+      82.9
+    ]
+  },
+  {
+    "campaign": "target-80",
+    "arm": "R076-dma-off",
+    "workload": "longer",
+    "runs": 5,
+    "decode_median": 84.9,
+    "decode_min": 80.5,
+    "decode_max": 86.7,
+    "e2e_median": 42.09047264897252,
+    "stream_total_median": 42.09632426667173,
+    "ttft_median_seconds": 6.162221699953079,
+    "raw_decode": [
+      86.7,
+      80.5,
+      84.9,
+      85.7,
+      83.2
+    ]
+  },
+  {
+    "campaign": "target-80",
+    "arm": "R076-dma-off",
+    "workload": "short",
+    "runs": 5,
+    "decode_median": 87.6,
+    "decode_min": 85.1,
+    "decode_max": 88.7,
+    "e2e_median": 76.46874618574134,
+    "stream_total_median": 76.47965806929871,
+    "ttft_median_seconds": 0.8716571999830194,
+    "raw_decode": [
+      86.6,
+      88.7,
+      88.6,
+      87.6,
+      85.1
+    ]
+  },
+  {
+    "campaign": "target-80",
+    "arm": "R078-host-first",
+    "workload": "longer",
+    "runs": 5,
+    "decode_median": 84.2,
+    "decode_min": 79.6,
+    "decode_max": 86.1,
+    "e2e_median": 41.949188717450475,
+    "stream_total_median": 41.95385596982553,
+    "ttft_median_seconds": 6.152094400022179,
+    "raw_decode": [
+      86.1,
+      79.6,
+      84.1,
+      84.4,
+      84.2
+    ]
+  },
+  {
+    "campaign": "target-80",
+    "arm": "R078-host-first",
+    "workload": "short",
+    "runs": 5,
+    "decode_median": 87.4,
+    "decode_min": 85.8,
+    "decode_max": 88.8,
+    "e2e_median": 76.05368368052652,
+    "stream_total_median": 76.06749361687217,
+    "ttft_median_seconds": 0.835609600006137,
+    "raw_decode": [
+      85.9,
+      87.7,
+      87.4,
+      88.8,
+      85.8
+    ]
+  },
+  {
+    "campaign": "target-80",
+    "arm": "R079-host-sibling",
+    "workload": "longer",
+    "runs": 5,
+    "decode_median": 83.4,
+    "decode_min": 80.2,
+    "decode_max": 85.2,
+    "e2e_median": 41.68963396382244,
+    "stream_total_median": 41.69265875504172,
+    "ttft_median_seconds": 6.148616100021172,
+    "raw_decode": [
+      80.2,
+      82.8,
+      84.1,
+      85.2,
+      83.4
+    ]
+  },
+  {
+    "campaign": "target-80",
+    "arm": "R079-host-sibling",
+    "workload": "short",
+    "runs": 5,
+    "decode_median": 86.3,
+    "decode_min": 85.4,
+    "decode_max": 90.1,
+    "e2e_median": 76.04122265970143,
+    "stream_total_median": 76.06068067647041,
+    "ttft_median_seconds": 0.8534167000325397,
+    "raw_decode": [
+      86.3,
+      90.1,
+      87.9,
+      85.4,
+      86.3
+    ]
   }
 ]

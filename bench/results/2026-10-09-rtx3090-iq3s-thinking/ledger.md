@@ -1880,3 +1880,141 @@ Minimum available physical RAM 62,705,815,552 bytes; available commit 40,997,621
 Reject dual-output quantization: short decode85.7 versus87.4, longer80.8 versus81.2 tok/s. Prompt processing improved slightly but both generation medians fell. Activation at T4 confirmed. Production source restored; original launcher/executable untouched.
 
 Next: Reassess CPU expert code generation against existing traces and actual mixed formats. Closed GPU scheduling paths are not to be repeated without a new mechanism.
+
+
+## E109 / C040 Blanket Clang GU rejected
+
+Clang19.1.5 replaced GU code generation across IQ3_XXS/IQ3_S/IQ2_S while retaining MSVC pool/down/quantization. All576 actual-weight pool-output cases (48layers, experts0/173/511, T1/2/4/8) matched bitwise. Synthetic large-weight pool timing:27cells, nine workers plus host0,30tasks, T1/2/4, jobs1/3/6; one warmup and five alternating rounds of100calls. Geomean candidate/control time .9484517 but worst1.1166899. Predeclared no-cell>3% regression gate FAILED. Blanket replacement rejected. All failed cells retained; no served speed claim.
+
+Artifacts: diagnostics/cpu-compiler/C040/README.md
+
+
+## E110 / C041 Selective IQ3_S Clang GU passed independent offline gate
+
+A distinct format-selective hypothesis follows the blanket failure. Fresh MSVC19.44.35228.0 and Clang19.1.5 copies of the SAME iq_avx2.cpp coexist with renamed symbols. Clang flags /O2 /MT /EHsc /arch:AVX2 /fp:precise /clang:-ffp-contract=off, STRATA_AVXVNNI0. Explicit FMA intrinsics retained; no reassociation/fast math. All576 actual-weight full-pool outputs matched bitwise. Independent timing used ten actual IQ3_S layers and64experts/layer ((29+17*i)%512), beyond L3; T1/2/4, jobs1/3/6, nineworkers+host0,30tasks, one warmup+five alternating100call rounds:90cells. All90 parity checks passed. Geomean time ratio .8492428922, minimum .7299289867, maximum1.0100528315. PASS >=5% geomean gain/no cell>3% slower. About15.1% less CPU pool time is NOT served token generation improvement. Other formats/down projections retain MSVC.
+
+Artifacts: diagnostics/cpu-compiler/C041/README.md
+
+
+## E111 / C042 Opt-in integrated compiler candidate ready for served validation
+
+Added defaultOFF STRATA_CLANG_IQ3S CMake option and defaultOFF STRATA_IQ3S_CLANG runtime dispatch. Windows/MSVC portable static-runtime builds only, explicit clang-cl path; separate compiler symbols. Only type21 AVX2 GU can switch, VNNI and all other formats retain existing dispatch. Red fixture first failed missing dispatch; green on/off checks passed. Integrated actual-weight576 full pool outputs matched bitwise; existing iq_avx2_parity reports0 failures. CUDA13.3.73/sm86 engine rebuilt, including GPU sources restored after C039. No HIP/SYCL validation or review request. No model/context/sampling/weights changed. R074/R075 will compare runtimeOFF/ON with same binary, fixed TTLCache contract. This remains experimental; no launcher promotion and goal active.
+
+Artifacts: diagnostics/cpu-compiler/C042/README.md
+
+
+## E112 / R074-clang-off
+
+Explicitly verified candidate engine SHA256 8b39f7c08733abcf4fbe3b4cc76f7599e7b928b34eb1361d1f4d05d51bb50e3d; loaded library hashes match R072-dualq-off. This is a new-binary control comparison, not a same-binary claim. Config diff is archived. Fixed numeric sampling, high/xhigh reasoning, model/quant, vision, context262144 and INT8KV retained. Original TTLCache streaming cache-miss workloads; one excluded warmup and five measured seeds101-105 per cell,512tokens per measured run. No slow seed excluded.
+
+| Workload | Decode median (range), tok/s | Prompt median, tok/s | E2E median, tok/s | Stream total median, tok/s | TTFT median, s | Draft accepted/offered |
+|---|---:|---:|---:|---:|---:|---:|
+| short | 87.5 (85.0-89.0) | 200.0 | 76.5906 | 76.6010 | 0.8650 | 924/1257 (73.51%) |
+| longer | 83.3 (82.0-84.0) | 496.2 | 41.6844 | 41.6915 | 6.1595 | 935/1278 (73.16%) |
+
+Minimum available physical RAM 62,641,897,472 bytes; available commit 40,920,264,704 bytes. Sampled GPU peak 25,130,110,976 bytes. Both16GiB host floors passed. Per-process peak memory not sampled. Full launcher/server/text/vision cleanup passed and previous config restored.
+
+C042 same-binary compiler runtimeOFF control: decode87.5/83.3; prompt200.0/496.2. R075 will isolate the IQ3_S GU compiler. No promotion or quality qualification.
+
+Next: Evaluate R075 runtimeON against this control and reject any regression.
+
+
+## E113 / R075-clang-on
+
+Same engine and loaded library hashes as R074-clang-off. Config diff is archived. Fixed numeric sampling, high/xhigh reasoning, model/quant, vision, context262144 and INT8KV retained. Original TTLCache streaming cache-miss workloads; one excluded warmup and five measured seeds101-105 per cell,512tokens per measured run. No slow seed excluded.
+
+| Workload | Decode median (range), tok/s | Prompt median, tok/s | E2E median, tok/s | Stream total median, tok/s | TTFT median, s | Draft accepted/offered |
+|---|---:|---:|---:|---:|---:|---:|
+| short | 87.5 (82.9-90.1) | 204.2 | 76.6508 | 76.6620 | 0.8541 | 870/1182 (73.60%) |
+| longer | 82.6 (80.6-85.9) | 496.7 | 41.4387 | 41.4416 | 6.1518 | 961/1325 (72.53%) |
+
+Minimum available physical RAM 62,644,117,504 bytes; available commit 40,929,189,888 bytes. Sampled GPU peak 25,128,013,824 bytes. Both16GiB host floors passed. Per-process peak memory not sampled. Full launcher/server/text/vision cleanup passed and previous config restored.
+
+C042 rejected: runtimeON decode87.5/82.6 versus87.5/83.3 control; short tie and longer regression. Prompt204.2/496.7 versus200.0/496.2. The15.1% independent CPU pool gain did not transfer to served generation. No repeat or stacking retry. Production source restored; retained launcher unchanged.
+
+Next: Reassess critical-path overlap before another kernel edit; isolated pool/kernel gains have repeatedly failed to improve served generation. Keep all closed paths closed absent a new mechanism.
+
+
+## E114 / P013 overlap audit
+
+Offline interval-union audit of existing P009, no model launched. Recorded CUDA activity spans8271.267ms:6691.268ms with any recorded kernel/memcpy/memset and1579.998ms without recorded activity. Memcpy-only-category time768.870ms; wait-flag-only642.708ms; Q6MMVQ-family-only944.558ms. These are temporal categories, NOT dependency critical paths, removable latency, or proof of idle hardware/CPU stalls. P010 coverage limits remain. Pinned H2D:3973calls,8,041,226,240bytes,1295.604ms summed. Existing adaptive copy submission is a distinct candidate; kernel sum reductions alone have not consistently improved served TPS. Raw NSYS/SQLite remain private; only allowlisted interval summaries exported. Artifacts: diagnostics/profiler/P013/.
+
+
+## E115 / C043 existing batch-transfer correctness
+
+Existing DMA batch byte/event-order test passed63cases with allocated pinned memory and63cases with Windows registered memory on CUDA13.3.73/sm86. This is transfer correctness, not generation quality. Aggregate diagnostic timing for registered48x2MiB: submission .3348ms individual vs .0431ms batch; total15.6793ms vs15.6212ms. Raw repeat times are absent from this upstream test, so no all-run campaign speed claim. R076 runtimeOFF control was allowed to finish when the user prioritized upstream PR review. R077 runtimeON has NOT run; candidate and activation remain unmeasured. No production change. Artifacts: diagnostics/dma-batch/C043/.
+
+
+## E116 / R076-dma-off
+
+Same engine and loaded library hashes as R037-observer-no-process. Config diff is archived. Fixed numeric sampling, high/xhigh reasoning, model/quant, vision, context262144 and INT8KV retained. Original TTLCache streaming cache-miss workloads; one excluded warmup and five measured seeds101-105 per cell,512tokens per measured run. No slow seed excluded.
+
+| Workload | Decode median (range), tok/s | Prompt median, tok/s | E2E median, tok/s | Stream total median, tok/s | TTFT median, s | Draft accepted/offered |
+|---|---:|---:|---:|---:|---:|---:|
+| short | 87.6 (85.1-88.7) | 202.1 | 76.4687 | 76.4797 | 0.8717 | 843/1088 (77.48%) |
+| longer | 84.9 (80.5-86.7) | 495.4 | 42.0905 | 42.0963 | 6.1622 | 974/1277 (76.27%) |
+
+Minimum available physical RAM 62,620,717,056 bytes; available commit 40,869,150,720 bytes. Sampled GPU peak 25,128,013,824 bytes. Both16GiB host floors passed. Per-process peak memory not sampled. Full launcher/server/text/vision cleanup passed and previous config restored.
+
+Fresh retained-engine control, explicit STRATA_DMA_BATCH0: decode87.6/84.9, prompt202.1/495.4. R077 not run: user requested upstream PR review during this arm; in-flight measurement finished undisturbed, then exact cleanup. No candidate comparison or promotion.
+
+Next: Prioritize finite upstream PR compatibility review; keep C043 runtimeON unmeasured.
+
+
+## E117 / P014 upstream review
+
+Verified origin **Niko1221/Strata**, main `fb58e0dbc8399662c0e47c76578c6e878b14f6cf` unchanged. Fork is notmike101/Strata; working branch remains perf/rtx3090-thinking-80. Screened158unique open titles across the newest100 plus targeted searches,30merged listings, and14full metadata/diff sets. This is a bounded review, not a claim to audit every open PR.
+
+- [#1779](https://github.com/Niko1221/Strata/pull/1779) at `f3727b2464321a35c4638491d75bcda1d4ecbb9c`: Excluded: explicitly requires distinct-GPU layer split; this host has one GPU. Includes dependencies1656/1674; no partial import.
+- [#1744](https://github.com/Niko1221/Strata/pull/1744) at `0701e617b93c8ea37984d2121ce3b1447f0c4e81`: Compatible SM86 prefill lead, deferred: changes fused prompt path only; no decode claim; separate enable/build flags required.
+- [#1742](https://github.com/Niko1221/Strata/pull/1742) at `fab43d049ebb57a2cdac25ca34de7dcb089f4993`: Compatible SM86 prefill lead, deferred: modest reported prompt gain, no decode change; do not combine with1744 blindly.
+- [#1741](https://github.com/Niko1221/Strata/pull/1741) at `462a79df354d9597be6de521043f2ec3e55f7f34`: Excluded from this workload: changes Verifier::service used by pipelined windows; current one-GPU serial path uses run(). Rechecked prior E066 finding.
+- [#1737](https://github.com/Niko1221/Strata/pull/1737) at `72070620821a26677c4fff85c5f3813362407fc4`: Excluded: optimizes resident-routing substitutions; enabling that policy changes expert selection, violating fixed quality contract.
+- [#1720](https://github.com/Niko1221/Strata/pull/1720) at `17a16c689ea5e9c45a6b73b060c150e6ab6065b5`: Deferred prefill-only Q8_0 dequant optimization; review actual dense tensor/call-site eligibility before importing.
+- [#1368](https://github.com/Niko1221/Strata/pull/1368) at `d27059967d942562c8d303c013d0c6af4fef45d1`: Promising prompt-read preservation candidate: exact per-token quantize/scatter, new symbols absent locally. Deferred behind decode candidate; distinct from rejected C038 native-vs-routed sharing.
+- [#1548](https://github.com/Niko1221/Strata/pull/1548) at `a513394c4768f1d0fa13957e79b171b0fcc51c32`: Deferred architectural candidate: dynamic fitted PCIe allocation requires removing fixed pcie-frac; reported below manually tuned share. Timing-derived placement needs reproducibility design before testing.
+- [#1544](https://github.com/Niko1221/Strata/pull/1544) at `9d0614f43757f8ffcd1f90b2647d4d0d31200d32`: Inactive under retained IQ_MT_MIN1: exact singleton gate is nt<mt_min. Do not change arithmetic dispatch to make benchmark benefit appear.
+- [#1525](https://github.com/Niko1221/Strata/pull/1525) at `f048d15594c62335b9fa7c350ecf4d07b749d30d`: Promising prompt-only fusion/dequant candidate; new symbols absent locally. No decode claim; validate exact arithmetic independently and do not stack with1720 before conflict review.
+- [#1418](https://github.com/Niko1221/Strata/pull/1418) at `8cae814e6e819736e47c95f3b5e8b056c7528c0f`: Closed mechanism overlap: multi-row activation reuse, unre-based against current interleaved kernels; related C021/C030 work already failed. No new integration without distinct applicable shapes.
+- [#1095](https://github.com/Niko1221/Strata/pull/1095) at `af52a5e847c0cbb81d7b3cd94ed0bb49b9e15b0b`: Excluded as written: compile-gated experimental pre75 device; RTX3090 is sm86. Reported gain only KV gather micro, not end-to-end.
+- [#1125](https://github.com/Niko1221/Strata/pull/1125) at `6dd03c47bc09afd9546a71fc54bc52186cc2c3b9`: Already implemented locally: q8k_quant_avx2 and native_quant_act/h default runtime gate present; do not reimport open PR merely because GitHub says open.
+- [#1166](https://github.com/Niko1221/Strata/pull/1166) at `a71da892150aa6b30cf560c2294c936a0353c5a8`: Selected: absent HostCore::Sibling; opt-in host LP1 on physical core0, workers2/4/...18 unchanged. Distinct from rejected host-last LP18. No numerical or sampling change; upstream speed/IRQ claims not assumed true here.
+
+Chosen action: integrate1166 locally as an opt-in, run the upstream topology test and CPU regressions, then same-binary first/sibling fixed served comparison. Source adaptation only where current generate.cpp contains additional options. Preserve original patch/hash and current integration patch. No imported performance number is accepted as this host's measurement. Default production launcher unchanged. C043 batchDMA runtime test is on hold, not silently combined.
+
+
+## E118 / C044 PR1166 integration
+
+PR1166 head a71da892150aa6b30cf560c2294c936a0353c5a8 integrated locally, opt-in; only generate.cpp patch context adapted around existing campaign options. Upstream layout test first failed compilation on missing Sibling/host_sibling (red); after integration Windows affinity tests and iq_avx2_parity passed (zero failures). Topology proof: first host0/workers2,4,6,8,10,12,14,16,18; sibling host1/SAME workers; last host18/workers0..16. CUDA13.3.73/sm86 build succeeded. No Linux/HIP/SYCL runtime test, no upstream review/merge request. No claim of IRQ placement or output-quality qualification. Next R078/R079 same-binary first/sibling comparison, no DMA/Clang changes. Candidate engine SHA256 ce7d4ecc250185acd2b14941b66c31a4c71558a0f75f03d53ca85ad11c97355f. Artifacts: diagnostics/host-sibling/C044/.
+
+
+## E119 / R078-host-first
+
+Explicitly verified candidate engine SHA256 ce7d4ecc250185acd2b14941b66c31a4c71558a0f75f03d53ca85ad11c97355f; loaded library hashes match R076-dma-off. This is a new-binary control comparison, not a same-binary claim. Config diff is archived. Fixed numeric sampling, high/xhigh reasoning, model/quant, vision, context262144 and INT8KV retained. Original TTLCache streaming cache-miss workloads; one excluded warmup and five measured seeds101-105 per cell,512tokens per measured run. No slow seed excluded.
+
+| Workload | Decode median (range), tok/s | Prompt median, tok/s | E2E median, tok/s | Stream total median, tok/s | TTFT median, s | Draft accepted/offered |
+|---|---:|---:|---:|---:|---:|---:|
+| short | 87.4 (85.8-88.8) | 207.5 | 76.0537 | 76.0675 | 0.8356 | 824/1085 (75.94%) |
+| longer | 84.2 (79.6-86.1) | 496.9 | 41.9492 | 41.9539 | 6.1521 | 931/1252 (74.36%) |
+
+Minimum available physical RAM 62,653,054,976 bytes; available commit 40,921,882,624 bytes. Sampled GPU peak 25,119,625,216 bytes. Both16GiB host floors passed. Per-process peak memory not sampled. Full launcher/server/text/vision cleanup passed and previous config restored.
+
+C044 PR1166 same-binary first-core control: decode87.4/84.2, prompt207.5/496.9. No performance/quality promotion.
+
+Next: Compare R079 sibling against this same-binary control.
+
+
+## E120 / R079-host-sibling
+
+Same engine and loaded library hashes as R078-host-first. Config diff is archived. Fixed numeric sampling, high/xhigh reasoning, model/quant, vision, context262144 and INT8KV retained. Original TTLCache streaming cache-miss workloads; one excluded warmup and five measured seeds101-105 per cell,512tokens per measured run. No slow seed excluded.
+
+| Workload | Decode median (range), tok/s | Prompt median, tok/s | E2E median, tok/s | Stream total median, tok/s | TTFT median, s | Draft accepted/offered |
+|---|---:|---:|---:|---:|---:|---:|
+| short | 86.3 (85.4-90.1) | 205.3 | 76.0412 | 76.0607 | 0.8534 | 830/1074 (77.28%) |
+| longer | 83.4 (80.2-85.2) | 497.0 | 41.6896 | 41.6927 | 6.1486 | 917/1244 (73.71%) |
+
+Minimum available physical RAM 62,612,475,904 bytes; available commit 40,870,113,280 bytes. Sampled GPU peak 25,125,916,672 bytes. Both16GiB host floors passed. Per-process peak memory not sampled. Full launcher/server/text/vision cleanup passed and previous config restored.
+
+C044 PR1166 rejected: sibling decode86.3/83.4 versus87.4/84.2 control; both generation medians fell. Prompt205.3/497.0 versus207.5/496.9; short prompt also fell. Startup proves hostLP1 with unchanged workers. No repeat or stack retry; upstream integration reverted and patch retained. Production launcher unchanged.
+
+Next: Use P014 finite review to select exact prompt-only PR1368 or1525 with independent parity and same-day served checks; no unsupported decode promise. C043 batched-transfer runtime remains unmeasured, held for upstream priority.

@@ -1,0 +1,25 @@
+We need answer user's request. Need produce detailed answer at least 1200 words. User asks: Benchmark identifier ignore. Implement thread-safe Python TTLCache class using OrderedDict and monotonic clock. Include set, get, delete, clear, len, expiration, capacity eviction, unit tests with injected fake clock, detailed explanation thread safety and complexity. Write complete code, then tests, then explain design. Do not abbreviate implementation.
+
+Need produce final with code and tests and explanation. Need ensure complete code not abbreviated. Need probably use Python 3.12? But maybe no typing Self. Need thread-safe using RLock or Lock. Use OrderedDict for LRU and TTL expiration. Monotonic clock injected. Maybe TTLCache class:
+from collections import OrderedDict
+from threading import RLock
+from time import monotonic
+from typing import Callable, Generic, Hashable, Optional, Tuple, TypeVar
+
+T = TypeVar...
+class TTLCache(Generic[KT, VT]):
+    def __init__(self, maxsize=128, ttl=60.0, clock: Callable[[], float] = monotonic):
+         if maxsize <=0 raise ValueError; ttl <0? etc.
+         self._maxsize=int(maxsize)
+         self._ttl=float(ttl)
+         self._clock=clock
+         self._data=OrderedDict() # key -> (value, expires_at)
+         self._lock=RLock()
+
+    def __len__(self): with lock: expire(); return len(self._data)
+    def __contains__(key) -> bool: maybe not necessary but include. get returns sentinel for default? set(key,value,ttl=None) update ttl and move to end. get(key, default=None): with lock: if key not in data return default; value, expires = data[key]; if now>=expires: del data[key]; return default; move_to_end(key); return value.
+    delete(key): with lock: return data.pop(key, sentinel?) Could return True/False? Need spec delete. Maybe delete returns bool if key existed (unexpired or expired? If expired, treat as not existing and remove). Use _remove_if_expired? 
+    clear: with lock data.clear.
+    keys/values/items? maybe not required but can add.
+
+Expiration: lazy expire on get/len; capacity eviction when inserting: before insert if key present update; else while len(data) >= maxsize: pop

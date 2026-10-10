@@ -1,0 +1,16 @@
+We need answer user's request. Need produce final answer with complete code, tests, detailed explanation at least 1200 words. Need satisfy Benchmark identifier ignored? It says Benchmark identifier ... Ignore this identifier. We should ignore. Need implement thread-safe Python TTLCache using OrderedDict and monotonic clock. Include set, get, delete, clear, len, expiration, capacity eviction, unit tests with injected fake clock, detailed explanation of thread safety and complexity. Do not abbreviate implementation. Detailed answer >=1200 words.
+
+Need think carefully. Python TTLCache class. Thread-safe. Use OrderedDict. Monotonic clock injectable. Methods set, get, delete, clear, len, expiration. Perhaps also __getitem__, __setitem__? Need complete code. Need unit tests using fake clock. Need explain thread safety, complexity.
+
+Potential design:
+- import threading, time, OrderedDict from collections.abc? collections.
+- TTLCache class:
+   def __init__(self, maxsize: int, ttl: float | None = None, clock: Callable[[], float] = time.monotonic)
+   validate maxsize >=0, ttl None or >0? ttl can be None no expiration.
+   _cache: OrderedDict[str, tuple[Any, float|None]] value, expires_at or None
+   _lock = threading.Lock()
+- set(key, value, ttl=None): ttl per item override. Compute expires_at = clock()+ttl if effective ttl not None else None. With lock:
+   if key in cache: pop key (to move to end? OrderedDict has move_to_end). We'll insert at end for LRU.
+   while len(cache) >= maxsize: popitem(last=False) evict oldest if maxsize >0? if maxsize == 0: don't store? capacity eviction. If maxsize 0, set no-op (or clear). But if maxsize=0 and ttl? Need avoid infinite loop. if maxsize <=0: clear then return.
+   cache[key] = (value, expires_at)
+   maybe expire before insert? Could call _expire_locked first. Need handle expired items. Complexity: expiration lazy in get? For len and iteration should remove expired. We can purge expired entries on operations. Use while next iter expires <= now popitem(last=False)? OrderedDict is LRU insertion order, not expiration order if TTL varies. If TTL differs, oldest inserted not necessarily earliest expiring. Capacity eviction

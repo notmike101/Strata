@@ -1,0 +1,13 @@
+We need answer user's request. Need produce final answer with complete code, tests, detailed explanation at least 1200 words. Need think fully.
+
+Task: Implement thread-safe Python TTLCache class using OrderedDict and monotonic clock. Include set, get, delete, clear, len, expiration, capacity eviction, unit tests with injected fake clock, detailed explanation of thread safety and complexity. Write complete code, then tests, then explain design. Do not abbreviate implementation. Produce detailed answer at least 1200 words.
+
+Need likely include Python code. Need ensure thread-safe. Use threading.RLock? OrderedDict operations need atomic. Monotonic clock: time.monotonic or injected. We can design fake clock with now() function. TTLCache with maxsize, ttl default maybe. Need expiration: get returns default if expired, deletes expired entry. set stores expiry, moves to end, evicts oldest if len > maxsize. capacity eviction: if inserting new and over capacity, popitem(last=False) to evict least recently used? OrderedDict used for LRU + TTL? Need specify TTLCache: capacity eviction likely LRU. Using OrderedDict. Need maybe cleanup expired entries on operations? Could implement _expire_entries on set/get/clear? But if no background timer, expiration checked lazily. Need ensure len excludes expired items? If len should return actual current valid items, we may need prune expired. But pruning in len under lock O(n) could be expensive. Could make len return valid entries by scanning? For correctness with TTL, len could return count including expired unless we prune. But requirement includes len, expiration. We can define __len__ prunes expired entries O(n). Or maintain expired count? Simpler: prune expired entries on operations and len prunes. Complexity average O(1) for set/get/delete/clear, len/clear O(n). But clear should remove all entries O(1) if clear OrderedDict? OrderedDict.clear O(1)? CPython? It's O(n) maybe. But fine. For thread safety with injected clock: fake clock monotonic. Need use context manager? We'll implement with lock.
+
+Potential issue recursive lock: set calls evict inside lock; get calls _prune? Use self._lock = threading.RLock(). If using RLock allows nested method calls while holding lock. But can also use Lock and separate helper assumes lock held. Need avoid deadlocks.
+
+Need code complete no abbreviation.
+
+Could implement:
+
+import threading, time

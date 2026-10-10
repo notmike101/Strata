@@ -1,0 +1,13 @@
+We need answer user's request. Need produce final detailed answer at least 1200 words, complete code, tests, explanation design. Need implement thread-safe Python TTLCache class using OrderedDict and monotonic clock. Include set, get, delete, clear, len, expiration, capacity eviction, unit tests with injected fake clock, detailed explanation thread safety and complexity. Do not abbreviate implementation. Benchmark identifier ignore.
+
+Need think about design. Use OrderedDict. Thread-safe: likely use threading.RLock. Monotonic clock injectable clock function default time.monotonic. TTLCache has capacity maxsize, default_ttl. OrderedDict stores key -> (value, expires_at). Eviction capacity: LRU? Using OrderedDict move_to_end for access. Insertion order maybe insertion, on set move_to_end. On get move_to_end. Expiration lazy in get; need also purge expired on set? len should be accurate? They mention len and expiration. For len thread-safe and accurate: We can purge expired entries before returning length, or maintain expiration heap? But requirement using OrderedDict and monotonic clock. Could maintain dict? Let's design robust.
+
+Simple TTLCache:
+class TTLCache:
+ def __init__(self, maxsize=1024, ttl=None, clock=time.monotonic, max_lock? use RLock)
+ self._cache = OrderedDict()
+ self._lock = threading.RLock()
+ self._maxsize = maxsize if positive? If maxsize <=0? Could validate >0. ttl None means no expiration? They ask expiration. If ttl is None maybe entries never expire? Or ttl default maybe float('inf')? Could implement ttl: default seconds for set, get; if None means no expiry. set(key, value, ttl=None, expire_at=None?) Need simple.
+
+Methods:
+- set(key, value, ttl=None): with lock: now=clock(); if ttl is None: ttl = self._ttl; if ttl is None: expire_at = math.inf? Or None? Use None for no expiry? Need compare. If ttl is not None: expire_at = now + ttl else None. _purge_expired? Could call _purge_expired(now) maybe expensive O(n). But capacity eviction. OrderedDict insertion order is not expiration order. For correct len, need remove expired. Could either purge all expired before len: O(n). Since len often called, could maintain min-heap expiration to O(log n). But user specifically says using OrderedDict and

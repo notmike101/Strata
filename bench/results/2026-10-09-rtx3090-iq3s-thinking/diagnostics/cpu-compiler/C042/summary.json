@@ -1,0 +1,220 @@
+{
+  "final_decision": "reject under predeclared served gate; source restored; no repeat or stack retry",
+  "engine_sha256": "8b39f7c08733abcf4fbe3b4cc76f7599e7b928b34eb1361d1f4d05d51bb50e3d",
+  "parity": {
+    "actual_weight_cases": 576,
+    "existing_suite_failures": 0,
+    "dispatch_fixture": "red then on/off green"
+  },
+  "served": {
+    "R074-clang-off": {
+      "longer": {
+        "runs": 5,
+        "prompt_tokens": [
+          3034,
+          3035,
+          3034,
+          3034,
+          3033
+        ],
+        "completion_tokens": [
+          512,
+          512,
+          512,
+          512,
+          512
+        ],
+        "server_decode_tps": {
+          "median": 83.3,
+          "min": 82.0,
+          "max": 84.0
+        },
+        "prompt_tps": {
+          "median": 496.2,
+          "min": 495.1,
+          "max": 496.8
+        },
+        "ttft_seconds": {
+          "median": 6.159527999989223,
+          "min": 6.137719699996524,
+          "max": 6.172165900003165
+        },
+        "request_seconds": {
+          "median": 12.282769499986898,
+          "min": 12.208641499979421,
+          "max": 12.395395600004122
+        },
+        "request_e2e_tps": {
+          "median": 41.68441001848534,
+          "min": 41.30566030501114,
+          "max": 41.937507952941615
+        },
+        "stream_total_tps": {
+          "median": 41.69148273458231,
+          "min": 41.31014012088508,
+          "max": 41.94208464916085
+        }
+      },
+      "short": {
+        "runs": 5,
+        "prompt_tokens": [
+          165,
+          168,
+          168,
+          165,
+          167
+        ],
+        "completion_tokens": [
+          512,
+          512,
+          512,
+          512,
+          512
+        ],
+        "server_decode_tps": {
+          "median": 87.5,
+          "min": 85.0,
+          "max": 89.0
+        },
+        "prompt_tps": {
+          "median": 200.0,
+          "min": 199.4,
+          "max": 207.3
+        },
+        "ttft_seconds": {
+          "median": 0.8650324000045657,
+          "min": 0.8283190000220202,
+          "max": 0.8944553000037558
+        },
+        "request_seconds": {
+          "median": 6.684894900012296,
+          "min": 6.558969600009732,
+          "max": 6.897834700008389
+        },
+        "request_e2e_tps": {
+          "median": 76.59058334620313,
+          "min": 74.22619159014891,
+          "max": 78.06104178303255
+        },
+        "stream_total_tps": {
+          "median": 76.60103035504049,
+          "min": 74.2407721040752,
+          "max": 78.07727750337352
+        }
+      }
+    },
+    "R075-clang-on": {
+      "longer": {
+        "runs": 5,
+        "prompt_tokens": [
+          3034,
+          3035,
+          3034,
+          3034,
+          3033
+        ],
+        "completion_tokens": [
+          512,
+          512,
+          512,
+          512,
+          512
+        ],
+        "server_decode_tps": {
+          "median": 82.6,
+          "min": 80.6,
+          "max": 85.9
+        },
+        "prompt_tps": {
+          "median": 496.7,
+          "min": 495.2,
+          "max": 497.1
+        },
+        "ttft_seconds": {
+          "median": 6.151751999976113,
+          "min": 6.137579400034156,
+          "max": 6.186354899953585
+        },
+        "request_seconds": {
+          "median": 12.3556024999707,
+          "min": 12.088640799978748,
+          "max": 12.466102400037926
+        },
+        "request_e2e_tps": {
+          "median": 41.43869147629297,
+          "min": 41.071377690467415,
+          "max": 42.35381036393274
+        },
+        "stream_total_tps": {
+          "median": 41.44164574761336,
+          "min": 41.075436105305414,
+          "max": 42.357180748777644
+        }
+      },
+      "short": {
+        "runs": 5,
+        "prompt_tokens": [
+          165,
+          168,
+          168,
+          165,
+          167
+        ],
+        "completion_tokens": [
+          512,
+          512,
+          512,
+          512,
+          512
+        ],
+        "server_decode_tps": {
+          "median": 87.5,
+          "min": 82.9,
+          "max": 90.1
+        },
+        "prompt_tps": {
+          "median": 204.2,
+          "min": 196.2,
+          "max": 210.1
+        },
+        "ttft_seconds": {
+          "median": 0.8541205999790691,
+          "min": 0.8343276000232436,
+          "max": 0.8878191000549123
+        },
+        "request_seconds": {
+          "median": 6.679643800016493,
+          "min": 6.540024399990216,
+          "max": 6.992470700002741
+        },
+        "request_e2e_tps": {
+          "median": 76.65079386399853,
+          "min": 73.22161535833096,
+          "max": 78.28716969324549
+        },
+        "stream_total_tps": {
+          "median": 76.66195060905261,
+          "min": 73.2341236002048,
+          "max": 78.30327568305327
+        }
+      }
+    }
+  },
+  "activation": [
+    {
+      "arm": "R074-clang-off",
+      "file": "engine-session.txt",
+      "lines": []
+    },
+    {
+      "arm": "R075-clang-on",
+      "file": "engine-session.txt",
+      "lines": [
+        "[cpu] IQ3_S Clang AVX2 GU enabled (other formats unchanged)"
+      ]
+    }
+  ],
+  "production_changes_retained": false,
+  "upstream_main": "fb58e0dbc8399662c0e47c76578c6e878b14f6cf",
+  "build_validation": "CUDA13.3.73 sm86 and MSVC/Clang CPU; HIP/SYCL not built; no review requested"
+}

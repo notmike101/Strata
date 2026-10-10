@@ -1,0 +1,12 @@
+We need answer user's request. Need produce complete code, tests, explanation >=1200 words. Need think thoroughly.
+
+User: Implement thread-safe Python TTLCache class using OrderedDict and monotonic clock. Include set, get, delete, clear, len, expiration, capacity eviction, unit tests with injected fake clock, detailed explanation of thread safety and complexity. Write complete code, then tests, then explain design. Do not abbreviate implementation. Detailed answer at least 1200 words.
+
+Need craft final with code blocks. Need no abbreviations? Means not leave implementation incomplete. We can provide full implementation.
+
+Design: TTLCache with OrderedDict storing values? Need expiration. Options: store (value, expiry) in OrderedDict. For TTL, set(key,value,ttl=None), get(key, default=None). Monotonic clock via monotonic_ns? Fake clock injected. Use threading.RLock or Lock. OrderedDict is not fully thread-safe; protect operations. Expiration: lazy expiration on get and len, maybe purge expired keys. Capacity eviction: LRU? OrderedDict with move_to_end. Need len: count non-expired? The user asks len. If len returns current count after purging expired. Could implement purge() that removes expired keys. But with monotonic clock and TTL, expiration could be lazy. For len, we need accurate len: purge all expired? That can be O(n). But if keys inserted in expiry order? With TTL varying and LRU reordering, OrderedDict order by LRU not expiration, so purge all needed for accurate len. Could maintain a min-heap of expiries to prune, but requested OrderedDict; maybe len O(1) approximate? User asks expiration, capacity eviction. Could store expiry in dict? Need OrderedDict. Could maintain internal OrderedDict and maybe another OrderedDict sorted by expiry? But they specifically using an OrderedDict. Maybe len purge O(n). We can discuss complexity: set/get/delete/clear amortized O(1), len O(n) if purging expired; if using expiry heap could O(log n) but OrderedDict alone O(n). They want complexity explanation. But maybe better maintain OrderedDict only plus maybe min-heap? Hmm "using an OrderedDict and a monotonic clock" likely store key -> (value, expires_at) in OrderedDict, purge expired entries by iterating. Need thread-safe.
+
+Maybe implement:
+
+class TTLCache:
+    def __init__(self, maxsize=128, ttl=10.0, clock=time.monot

@@ -1,0 +1,223 @@
+diff --git a/docs/DETAILS.md b/docs/DETAILS.md
+index 2b73cb0c..20be322f 100644
+--- a/docs/DETAILS.md
++++ b/docs/DETAILS.md
+@@ -262,7 +262,11 @@ RTX 5070, against ~3 tokens/s before these changes.
+   and with `--batch`, `--vram-elastic` or `--peer-device`, the engine says so and stays off.
+ - `--host-core last` (or `STRATA_HOST_CORE=last`, Windows): the host thread runs on the last physical core and the
+   workers take the first. Windows sends a GPU's interrupts to the first core, where a host spinning on the GPU's flags
+-  waits for them (`--host-core first` is the default; the startup log names the cores).
++  waits for them (`--host-core first` is the default; the startup log names the cores). It leaves a hybrid CPU as it
++  is. `--host-core sibling` (or `STRATA_HOST_CORE=sibling`) keeps the host on the first core but on its other
++  hardware thread (SMT), so the interrupts keep the first logical processor and the workers keep every core; it works
++  on hybrid CPUs too, and is `first` on a core without SMT. On a 4060 Ti + 5080 layer split with an i9-14900KF it
++  turned a decode that swung by ±6% from run to run into a steady one, 8% faster on average.
+ - `STRATA_ADAPT_LAG=2` (#764): a window takes the adaptive tier's swaps once they are two windows old (default 1,
+   as 0.1.39). `STRATA_PREFILL_EQUAL=1` (#693): a prompt segment is read in chunks of equal size, not full chunks and a
+   short last one (changes the rounding). `STRATA_OWNED_PRICE=exact` (#796): the cache sizing prices the prompt path's
+diff --git a/include/strata/kernels/cpu/pool.hpp b/include/strata/kernels/cpu/pool.hpp
+index 6796e391..686abd6e 100644
+--- a/include/strata/kernels/cpu/pool.hpp
++++ b/include/strata/kernels/cpu/pool.hpp
+@@ -78,15 +78,19 @@ struct CpuTopology {
+     int e_cores = 0;                ///< Efficient cores
+     std::vector<int> worker_cores;  ///< Ordered CPU IDs; on Windows, group * 64 + processor within the group
+     int host_core = -1;             ///< Logical core reserved for host thread
++    int host_sibling = -1;          ///< The host core's SMT sibling (-1: none), the logical processor `Sibling` takes
+ };
+ 
+ /// Which core the host thread - the layer loop that spins on the GPU's flags - takes when `skip_first` reserves one
+-/// (--host-core first|last, STRATA_HOST_CORE).  `First` is the layout the pool has always used.  `Last` (eddoursul's
+-/// fork, F12) puts the host on the last physical core and lets the workers have the first: Windows sends a GPU's
+-/// interrupts to one logical processor, usually the first, and every copy that lands raises one (~13 us in the ISR
+-/// and a DPC), which delays a spinning host there.  The placement changes no result, only where threads run.  A hybrid
+-/// CPU keeps `First` (its first core is the best P-core).
+-enum class HostCore { First, Last };
++/// (--host-core first|last|sibling, STRATA_HOST_CORE).  `First` is the layout the pool has always used.  `Last`
++/// (eddoursul's fork, F12) puts the host on the last physical core and lets the workers have the first: Windows sends
++/// a GPU's interrupts to one logical processor, usually the first, and every copy that lands raises one (~13 us in the
++/// ISR and a DPC), which delays a spinning host there.  The placement changes no result, only where threads run.  A
++/// hybrid CPU keeps `First` under `Last` (its first core is the best P-core).  `Sibling` keeps the host on that first
++/// core but on its other hardware thread: the interrupts stay on the first logical processor, no worker shares the
++/// core (the workers take one logical processor per core), and it applies to hybrid CPUs too.  Without an SMT sibling
++/// it is `First`.
++enum class HostCore { First, Last, Sibling };
+ void set_host_core(HostCore where);
+ HostCore host_core_setting();
+ 
+diff --git a/src/core/session.cpp b/src/core/session.cpp
+index d87452d0..7318e3cd 100644
+--- a/src/core/session.cpp
++++ b/src/core/session.cpp
+@@ -544,7 +544,8 @@ bool SessionLoopScratch::init(size_t parts_bytes_in, std::string& err) {
+     // core or its SMT sibling.  The symptom is not an error: it is a CPU path at 26.9 GB/s where the same pool
+     // runs at 36.32.  It was being done and undone on EVERY token, which is a syscall pair on the critical path
+     // for a property that wants to hold for the whole session.
+-    // The host's core is the pool's reserved one: the first physical core, or the last with --host-core last (F12).
++    // The host's core is the pool's reserved one: the first physical core, or the last with --host-core last (F12),
++    // or the first core's SMT sibling with --host-core sibling.
+     const int host_core = strata::kernels::cpu::planned_host_core();
+     if (host_core >= 0) {
+         pinned_core = strata::kernels::cpu::pin_current_thread(host_core);
+diff --git a/src/kernels/cpu/pool.cpp b/src/kernels/cpu/pool.cpp
+index 16e3fb2d..36e044d6 100644
+--- a/src/kernels/cpu/pool.cpp
++++ b/src/kernels/cpu/pool.cpp
+@@ -50,6 +50,13 @@ CpuTopology detect_cpu_topology(bool skip_first, PoolAffinity affinity) {
+         topo.worker_cores.insert(topo.worker_cores.begin(), topo.host_core);
+         topo.host_core = last;
+     }
++    // --host-core sibling: the host on its core's other hardware thread; the first logical processor stays to the
++    // interrupts and to nothing else (a worker on it would share the host's core)
++    if (skip_first && host_core_setting() == HostCore::Sibling && topo.host_sibling >= 0) {
++        topo.worker_cores.erase(std::remove(topo.worker_cores.begin(), topo.worker_cores.end(), topo.host_sibling),
++                                topo.worker_cores.end());
++        topo.host_core = topo.host_sibling;
++    }
+     return topo;
+ }
+ 
+@@ -141,6 +148,7 @@ static CpuTopology detect_cpu_topology_impl(bool skip_first, PoolAffinity affini
+             if (skip_first && !topo.worker_cores.empty()) {
+                 topo.host_core = topo.worker_cores.front();
+                 topo.worker_cores.erase(topo.worker_cores.begin());
++                if (descs.front().lps.size() > 1) topo.host_sibling = descs.front().lps[1];
+             }
+             return topo;
+         }
+@@ -168,6 +176,11 @@ static CpuTopology detect_cpu_topology_impl(bool skip_first, PoolAffinity affini
+         if (skip_first && !p_primaries.empty()) {
+             topo.host_core = p_primaries.front();
+             p_primaries.erase(p_primaries.begin());
++            for (const auto& c : descs)
++                if (c.lps[0] == topo.host_core) {
++                    if (c.lps.size() > 1) topo.host_sibling = c.lps[1];
++                    break;
++                }
+         }
+ 
+         for (int cpu : p_primaries) topo.worker_cores.push_back(cpu);
+@@ -293,6 +306,15 @@ static CpuTopology detect_cpu_topology_impl(bool skip_first, PoolAffinity affini
+         topo.p_threads = (int) all_cpus.size();
+     }
+ 
++    // the host core's SMT sibling, an allowed CPU of the same (package, core) (--host-core sibling)
++    auto sibling_of = [&](int cpu) {
++        for (const auto& h : all_cpus)
++            if (h.cpu == cpu && h.pkg >= 0 && h.core >= 0)
++                for (const auto& cl : all_cpus)
++                    if (cl.cpu != cpu && cl.pkg == h.pkg && cl.core == h.core) return cl.cpu;
++        return -1;
++    };
++
+     if (affinity == PoolAffinity::All || !topo.is_hybrid) {
+         if (topo.is_hybrid)   // #642: the P-cores first (see the Windows branch)
+             std::stable_sort(all_cpus.begin(), all_cpus.end(),
+@@ -305,6 +327,7 @@ static CpuTopology detect_cpu_topology_impl(bool skip_first, PoolAffinity affini
+         if (skip_first && !topo.worker_cores.empty()) {
+             topo.host_core = topo.worker_cores.front();
+             topo.worker_cores.erase(topo.worker_cores.begin());
++            topo.host_sibling = sibling_of(topo.host_core);
+         }
+         return topo;
+     }
+@@ -326,6 +349,7 @@ static CpuTopology detect_cpu_topology_impl(bool skip_first, PoolAffinity affini
+     if (skip_first && !p_primaries.empty()) {
+         topo.host_core = p_primaries.front();
+         p_primaries.erase(p_primaries.begin());
++        topo.host_sibling = sibling_of(topo.host_core);
+     }
+ 
+     for (int cpu : p_primaries) topo.worker_cores.push_back(cpu);
+diff --git a/src/kernels/cpu/pool_affinity_test.cpp b/src/kernels/cpu/pool_affinity_test.cpp
+index 052ae59b..6a947a49 100644
+--- a/src/kernels/cpu/pool_affinity_test.cpp
++++ b/src/kernels/cpu/pool_affinity_test.cpp
+@@ -106,7 +106,32 @@ static bool inherited_default(int core, ULONG id, int temporary_core, ULONG temp
+     return check(ok && restored, "restore inherited process default");
+ }
+ 
++// --host-core sibling: the host on the first layout's host core's SMT sibling, which no worker takes, and the first
++// logical processor left to nothing; `first` on a core without SMT.  Every affinity mode.
++static bool host_sibling_layout() {
++    bool ok = true;
++    for (const auto affinity : {cpu::PoolAffinity::All, cpu::PoolAffinity::Auto, cpu::PoolAffinity::PCores}) {
++        cpu::set_host_core(cpu::HostCore::First);
++        const cpu::CpuTopology first = cpu::detect_cpu_topology(true, affinity);
++        cpu::set_host_core(cpu::HostCore::Sibling);
++        const cpu::CpuTopology sib = cpu::detect_cpu_topology(true, affinity);
++        cpu::set_host_core(cpu::HostCore::First);
++        const auto has = [&](int core) {
++            return std::find(sib.worker_cores.begin(), sib.worker_cores.end(), core) != sib.worker_cores.end();
++        };
++        if (first.host_sibling < 0)
++            ok = check(sib.host_core == first.host_core && sib.worker_cores == first.worker_cores,
++                       "--host-core sibling without SMT must be first") && ok;
++        else
++            ok = check(sib.host_core == first.host_sibling && sib.host_core != first.host_core && !has(sib.host_core) &&
++                           !has(first.host_core),
++                       "--host-core sibling: the host on the sibling, no worker on its core") && ok;
++    }
++    return ok;
++}
++
+ int main() {
++    if (!host_sibling_layout()) return 1;
+     const auto all = cpu::physical_cores(false);
+     std::vector<int> cores;
+     std::vector<ULONG> ids;
+diff --git a/src/program/generate.cpp b/src/program/generate.cpp
+index 433d3957..ea0edb12 100644
+--- a/src/program/generate.cpp
++++ b/src/program/generate.cpp
+@@ -412,7 +412,7 @@ struct Options {
+     int pool_tasks = 0;           ///< Batched CPU expert tasks per phase; 0 keeps the existing policy
+     /// #272: the pool's core layout; `all` (the default) is the layout it always had, auto / p-cores are opt-in
+     strata::kernels::cpu::PoolAffinity pool_affinity = strata::kernels::cpu::PoolAffinity::All;
+-    /// --host-core first|last (STRATA_HOST_CORE): the host thread's core (see HostCore in pool.hpp)
++    /// --host-core first|last|sibling (STRATA_HOST_CORE): the host thread's core (see HostCore in pool.hpp)
+     std::string host_core;
+     /// R2.2's first half, as an A/B arm.  **ON by default**, because the measurement that justifies it is the
+     /// pool's own drain: 33.7 GB/s against 5/6 x 44.14 = 36.8 for five workers, on a machine whose sixth core
+@@ -850,7 +850,9 @@ void usage() {
+                  "                       last (the last physical core, the workers on the others).  Windows sends a GPU's\n"
+                  "                       interrupts to one logical processor, usually the first, and every copy that lands\n"
+                  "                       raises one: a spinning host there waits for them.  Moves threads only, never a\n"
+-                 "                       result.  Not on hybrid CPUs (STRATA_HOST_CORE sets it too).\n"
++                 "                       result.  Not on hybrid CPUs.  sibling: the first core's other hardware thread\n"
++                 "                       (SMT), so the interrupts keep the first logical processor and the workers keep\n"
++                 "                       every core; hybrid CPUs too, first without SMT (STRATA_HOST_CORE sets it too).\n"
+                  "  --pool-affinity MODE Worker CPU affinity: all (default: one worker per physical core, as\n"
+                  "                       always), auto (hybrid CPUs: P-cores first, then their SMT siblings,\n"
+                  "                       then E-cores) or p-cores (P-cores and their siblings only).\n"
+@@ -1727,8 +1729,9 @@ int main(int argc, char** argv) {
+         }
+         else if (a == "--host-core") {
+             o.host_core = next("--host-core");
+-            if (o.host_core != "first" && o.host_core != "last") {
+-                std::fprintf(stderr, "strata generate: unknown --host-core value '%s' (expected first or last)\n", o.host_core.c_str());
++            if (o.host_core != "first" && o.host_core != "last" && o.host_core != "sibling") {
++                std::fprintf(stderr, "strata generate: unknown --host-core value '%s' (expected first, last or sibling)\n",
++                             o.host_core.c_str());
+                 return 2;
+             }
+         }
+@@ -1963,6 +1966,7 @@ int main(int argc, char** argv) {
+         if (hc.empty())
+             if (const char* e = std::getenv("STRATA_HOST_CORE")) hc = e;
+         if (hc == "last") strata::kernels::cpu::set_host_core(strata::kernels::cpu::HostCore::Last);
++        if (hc == "sibling") strata::kernels::cpu::set_host_core(strata::kernels::cpu::HostCore::Sibling);
+     }
+     strata::core::set_peer_portable(o.peer_device >= 1);   // multi-GPU: the Portable flag on mapped host buffers only with a peer device (before any allocation)
+     if (o.serve && o.conversation_cache_mib > 0 && (o.prompt_cache == 0 || o.conversation_cache_slots == 0))
+@@ -4271,7 +4275,9 @@ int main(int argc, char** argv) {
+         std::fprintf(stderr, "strata generate: %d pool workers on logical processors %s, the host thread on %d%s "
+                              "(--host-core %s)\n", pool.workers(), on.c_str(), ht.host_core,
+                      pool.host_works() ? " (draining too)" : "",
+-                     strata::kernels::cpu::host_core_setting() == strata::kernels::cpu::HostCore::Last ? "last" : "first");
++                     strata::kernels::cpu::host_core_setting() == strata::kernels::cpu::HostCore::Last      ? "last"
++                     : strata::kernels::cpu::host_core_setting() == strata::kernels::cpu::HostCore::Sibling ? "sibling"
++                                                                                                             : "first");
+     }
+     if (o.no_ple_prefetch) strata::kernels::ple_prefetch_enable(false);
+     // ---- R4's slot storage.  Allocated AFTER the weights and the session, so `cudaMemGetInfo` inside `open`

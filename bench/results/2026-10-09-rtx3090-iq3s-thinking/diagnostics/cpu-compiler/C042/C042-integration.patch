@@ -1,0 +1,119 @@
+diff --git a/CMakeLists.txt b/CMakeLists.txt
+index 98409b83..66d76f61 100644
+--- a/CMakeLists.txt
++++ b/CMakeLists.txt
+@@ -32,6 +32,11 @@ endif()
+ # instead of this machine's (Strata's own AVX-512 kernels are per-file and chosen at run time either way), and
+ # the MSVC runtime linked in, so no Visual C++ redistributable is needed.
+ option(STRATA_PORTABLE "build for other PCs: AVX2 baseline, static MSVC runtime" OFF)
++option(STRATA_CLANG_IQ3S "experimental Clang AVX2 IQ3_S GU image, runtime opt-in" OFF)
++set(STRATA_CLANG_CL_COMPILER "" CACHE FILEPATH "clang-cl executable for STRATA_CLANG_IQ3S")
++if(STRATA_CLANG_IQ3S AND (NOT WIN32 OR NOT MSVC OR NOT STRATA_PORTABLE))
++  message(FATAL_ERROR "STRATA_CLANG_IQ3S requires Windows MSVC and STRATA_PORTABLE (/MT)")
++endif()
+ # EXPERIMENTAL, opt-in: an engine for CPUs without AVX2 (#394, #595, #623), compiled on that PC.  ggml-cpu, which then
+ # computes every CPU expert row, is built for this floor instead of AVX2 or the build host: "avx" (Sandy/Ivy Bridge:
+ # AVX, no FMA/F16C/AVX2) or "none" (SSE4.2 + POPCNT: Nehalem/Westmere).  Strata's own AVX2/AVX-512 kernels stay in the
+@@ -1129,6 +1134,9 @@ target_link_libraries(strata_kernels_cpu PUBLIC Threads::Threads)
+ # weight means exactly what it means in llama.cpp.  ggml is built static from a llama.cpp checkout: a local one
+ # with -DSTRATA_GGML_DIR=..., otherwise the pinned upstream commit (third_party/ggml/VERSION.txt).
+ option(STRATA_NATIVE_EXPERTS "Native (IQ) expert support through ggml-cpu" ON)
++if(STRATA_CLANG_IQ3S AND NOT STRATA_NATIVE_EXPERTS)
++  message(FATAL_ERROR "STRATA_CLANG_IQ3S requires STRATA_NATIVE_EXPERTS=ON")
++endif()
+ set(STRATA_GGML_DIR "" CACHE PATH "llama.cpp checkout to take ggml from (empty: fetch the pinned commit)")
+ if(STRATA_PREFILL_MMQ AND NOT STRATA_NATIVE_EXPERTS)
+   message(FATAL_ERROR "STRATA_PREFILL_MMQ requires STRATA_NATIVE_EXPERTS=ON for GGML sources")
+@@ -1189,6 +1197,27 @@ if(STRATA_NATIVE_EXPERTS)
+                                            src/kernels/cpu/iq_avx2.cpp src/kernels/cpu/kq_avx2.cpp
+                                            src/kernels/cpu/kq_avx1.cpp)
+   target_include_directories(strata_kernels_cpu PRIVATE third_party/ggml)
++  if(STRATA_CLANG_IQ3S)
++    if(NOT EXISTS "${STRATA_CLANG_CL_COMPILER}")
++      message(FATAL_ERROR "Set STRATA_CLANG_CL_COMPILER to the clang-cl executable")
++    endif()
++    set(_iq3s_clang_obj "${CMAKE_CURRENT_BINARY_DIR}/iq_avx2_clang.obj")
++    # Track included implementation fragments and tables as well as the wrapper.
++    file(GLOB _iq3s_clang_deps CONFIGURE_DEPENDS
++      "${CMAKE_CURRENT_SOURCE_DIR}/src/kernels/cpu/iq*.inl"
++      "${CMAKE_CURRENT_SOURCE_DIR}/include/strata/kernels/cpu/*.hpp"
++      "${CMAKE_CURRENT_SOURCE_DIR}/third_party/ggml/*.h")
++    add_custom_command(OUTPUT "${_iq3s_clang_obj}"
++      COMMAND "${STRATA_CLANG_CL_COMPILER}" /nologo /std:c++20 /O2 /MT /EHsc /arch:AVX2
++        /fp:precise /clang:-ffp-contract=off /DSTRATA_AVXVNNI=0
++        "/I${CMAKE_CURRENT_SOURCE_DIR}/include" "/I${CMAKE_CURRENT_SOURCE_DIR}/third_party/ggml"
++        /c "${CMAKE_CURRENT_SOURCE_DIR}/src/kernels/cpu/iq_avx2_clang.cpp" "/Fo${_iq3s_clang_obj}"
++      DEPENDS src/kernels/cpu/iq_avx2_clang.cpp src/kernels/cpu/iq_avx2.cpp ${_iq3s_clang_deps}
++      VERBATIM)
++    set_source_files_properties("${_iq3s_clang_obj}" PROPERTIES GENERATED TRUE EXTERNAL_OBJECT TRUE)
++    target_sources(strata_kernels_cpu PRIVATE "${_iq3s_clang_obj}")
++    target_compile_definitions(strata_kernels_cpu PRIVATE STRATA_CLANG_IQ3S_BUILD=1)
++  endif()
+   if(MSVC)
+     set_source_files_properties(src/kernels/cpu/iq_avx512.cpp PROPERTIES COMPILE_OPTIONS "/arch:AVX512")
+     set_source_files_properties(src/kernels/cpu/iq_avx2.cpp PROPERTIES COMPILE_OPTIONS "/arch:AVX2")
+diff --git a/src/kernels/cpu/native_expert.cpp b/src/kernels/cpu/native_expert.cpp
+index 8baead06..9f950b93 100644
+--- a/src/kernels/cpu/native_expert.cpp
++++ b/src/kernels/cpu/native_expert.cpp
+@@ -12,10 +12,17 @@
+ #include "ggml-cpu.h"
+ 
+ #include <cmath>
++#include <cstdio>
+ #include <cstdlib>
+ #include <mutex>
+ 
+ namespace strata::kernels::cpu {
++#if defined(STRATA_CLANG_IQ3S_BUILD)
++// An optional second compiler image; the default MSVC symbols remain unchanged.
++void iq3s_clang_iq256_gu_rows_v(int variant, int type, const uint8_t* blob, size_t row,
++                              size_t up, int n, const void* const* act, int nt,
++                              float* const* out, int r0, int r1);
++#endif
+ namespace {
+ 
+ const ggml_type_traits_cpu* traits(int type) { return ggml_get_type_traits_cpu((ggml_type) type); }
+@@ -157,6 +164,22 @@ void native_gu_rows(const NativeFmt& f, const uint8_t* blob, const void* const*
+             return;
+         }
+         if (avx2 && iq256_supported(f.gu_type)) {
++#if defined(STRATA_CLANG_IQ3S_BUILD)
++            static const bool clang_iq3s = [] {
++                const char* v = std::getenv("STRATA_IQ3S_CLANG");
++                const bool enabled = v && std::atoi(v) != 0;
++                if (enabled) std::fprintf(stderr, "[cpu] IQ3_S Clang AVX2 GU enabled (other formats unchanged)\n");
++                return enabled;
++            }();
++            const int variant = iq256_variant_for(f.gu_type);
++            // This image contains AVX2 only. Keep VNNI and every other format on
++            // their original path, including all down projections/quantizers.
++            if (clang_iq3s && f.gu_type == 21 && !(variant & kIq256Vnni)) {
++                iq3s_clang_iq256_gu_rows_v(variant, f.gu_type, blob, f.gu_row, f.up_off,
++                                         (int) f.n_embd, act, nt, ff, r0, r1);
++                return;
++            }
++#endif
+             iq256_gu_rows(f.gu_type, blob, f.gu_row, f.up_off, (int) f.n_embd, act, nt, ff, r0, r1);
+             return;
+         }
+
+diff --git a/src/kernels/cpu/iq_avx2_clang.cpp b/src/kernels/cpu/iq_avx2_clang.cpp
+new file mode 100644
+--- /dev/null
++++ b/src/kernels/cpu/iq_avx2_clang.cpp
+@@ -0,0 +1,14 @@
++// Optional MSVC-ABI Clang image. Only IQ3_S GU dispatch can select this image;
++// keep separate symbols so the normal compiler path remains available.
++#define iq256_supported iq3s_clang_iq256_supported
++#define iq256_gu_rows iq3s_clang_iq256_gu_rows
++#define iq256_rows iq3s_clang_iq256_rows
++#define iq256_variant iq3s_clang_iq256_variant
++#define iq256_variant_for iq3s_clang_iq256_variant_for
++#define iq256_variants iq3s_clang_iq256_variants
++#define iq256_gu_rows_v iq3s_clang_iq256_gu_rows_v
++#define iq256_rows_v iq3s_clang_iq256_rows_v
++#define q8k_quant_avx2 iq3s_clang_q8k_quant_avx2
++#define iq4nl256_down_rows iq3s_clang_iq4nl256_down_rows
++#define iq4nl256_down_rows_v iq3s_clang_iq4nl256_down_rows_v
++#include "iq_avx2.cpp"

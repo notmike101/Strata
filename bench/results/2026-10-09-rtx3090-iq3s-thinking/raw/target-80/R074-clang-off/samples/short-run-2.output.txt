@@ -1,0 +1,15 @@
+We need answer user's request. Need produce final detailed answer at least 1200 words, complete code, tests, explanation design. Need likely Python TTLCache class using OrderedDict, monotonic clock, thread-safe. Include set, get, delete, clear, len, expiration, capacity eviction, unit tests with injected fake clock. Detailed explanation thread safety and complexity. Do not abbreviate implementation. Need ensure code complete. Need probably use threading.RLock? OrderedDict operations not thread-safe. Need handle get with expiration. Need monotonic clock injected: time_func callable. Constructor maxsize, ttl, clock=monotonic. Use OrderedDict, entries mapping key -> (value, expires_at). set default ttl maybe instance ttl or None; if ttl<=0? Need behavior. capacity eviction: if maxsize <=0? Should decide. Could support maxsize None for no capacity? User says capacity eviction, likely maxsize positive. Implement robust: if maxsize is not None and maxsize < 0 raise ValueError; if 0 then cache holds nothing? set removes? Could implement maxsize optional None. len includes expired entries? Usually len should return number of items currently in cache, but expired entries can remain until accessed or purged. Need maybe _purge expired on get, set, len? For deterministic tests with fake clock, len should reflect non-expired? Requirement len, expiration. To be precise, len should return number of valid entries, not stale ones, maybe purge expired. But purging all O(n) on len. Could make len O(n) due to expiry. But typical cache len may return raw length? Need detailed explanation. Could implement len by filtering expired. That makes correctness but O(n). Could also expose __len__ and use _purge_expired maybe if ttl not None. Need ensure thread safety. OrderedDict move_to_end. Need use collections.OrderedDict. Use monotonic clock. Fake clock class. Unit tests using unittest. Need no abbreviations. Need at least 1200 words final. Let's design.
+
+Class:
+from collections import OrderedDict
+from threading import RLock
+from time import monotonic
+import unittest
+
+class TTLCache:
+    """Thread-safe TTL + LRU cache using OrderedDict."""
+    NO_TTL sentinel? Use None for no ttl.
+
+    def __init__(self, maxsize: int|None, ttl: float|None, clock: callable = monotonic):
+       if clock is None raise TypeError
+       if
