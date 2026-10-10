@@ -1,0 +1,282 @@
+{
+  "decision": "reject, less than required5% aggregate timing improvement",
+  "geomean_nonempty_time_ratio": 0.9996040831392622,
+  "nonempty_min_ratio": 0.979664,
+  "nonempty_max_ratio": 1.02174,
+  "empty_max_penalty_us": 0.22399999999999998,
+  "original_payload_bandwidth_GB_per_second": {
+    "median": 6.439852789924334,
+    "min": 6.211250067603708,
+    "max": 6.46620653263001
+  },
+  "sizes": [
+    1510400,
+    1715200,
+    1868800,
+    1971200,
+    2176000,
+    2329600,
+    2662400
+  ],
+  "parity_cases": 140,
+  "total_bytes_verified": 3131392000,
+  "timing_cells": [
+    {
+      "bytes": "1510400",
+      "n": "0",
+      "original_us": "1.433000",
+      "candidate_us": "1.376000",
+      "ratio": "0.960223"
+    },
+    {
+      "bytes": "1510400",
+      "n": "1",
+      "original_us": "234.303996",
+      "candidate_us": "234.043002",
+      "ratio": "0.998886"
+    },
+    {
+      "bytes": "1510400",
+      "n": "2",
+      "original_us": "468.032002",
+      "candidate_us": "467.005014",
+      "ratio": "0.997806"
+    },
+    {
+      "bytes": "1510400",
+      "n": "4",
+      "original_us": "935.711980",
+      "candidate_us": "938.015997",
+      "ratio": "1.002462"
+    },
+    {
+      "bytes": "1510400",
+      "n": "8",
+      "original_us": "1872.128010",
+      "candidate_us": "1880.473971",
+      "ratio": "1.004458"
+    },
+    {
+      "bytes": "1715200",
+      "n": "0",
+      "original_us": "2.272000",
+      "candidate_us": "2.227000",
+      "ratio": "0.980194"
+    },
+    {
+      "bytes": "1715200",
+      "n": "1",
+      "original_us": "267.866999",
+      "candidate_us": "267.520010",
+      "ratio": "0.998705"
+    },
+    {
+      "bytes": "1715200",
+      "n": "2",
+      "original_us": "531.418979",
+      "candidate_us": "529.247999",
+      "ratio": "0.995915"
+    },
+    {
+      "bytes": "1715200",
+      "n": "4",
+      "original_us": "1068.639994",
+      "candidate_us": "1083.423972",
+      "ratio": "1.013834"
+    },
+    {
+      "bytes": "1715200",
+      "n": "8",
+      "original_us": "2122.047901",
+      "candidate_us": "2168.181896",
+      "ratio": "1.021740"
+    },
+    {
+      "bytes": "1868800",
+      "n": "0",
+      "original_us": "2.272000",
+      "candidate_us": "2.240000",
+      "ratio": "0.985915"
+    },
+    {
+      "bytes": "1868800",
+      "n": "1",
+      "original_us": "290.847987",
+      "candidate_us": "291.359007",
+      "ratio": "1.001757"
+    },
+    {
+      "bytes": "1868800",
+      "n": "2",
+      "original_us": "590.080023",
+      "candidate_us": "578.079998",
+      "ratio": "0.979664"
+    },
+    {
+      "bytes": "1868800",
+      "n": "4",
+      "original_us": "1171.607018",
+      "candidate_us": "1157.248020",
+      "ratio": "0.987744"
+    },
+    {
+      "bytes": "1868800",
+      "n": "8",
+      "original_us": "2355.360031",
+      "candidate_us": "2355.999947",
+      "ratio": "1.000272"
+    },
+    {
+      "bytes": "1971200",
+      "n": "0",
+      "original_us": "1.888000",
+      "candidate_us": "2.039000",
+      "ratio": "1.079979"
+    },
+    {
+      "bytes": "1971200",
+      "n": "1",
+      "original_us": "307.289988",
+      "candidate_us": "307.608008",
+      "ratio": "1.001035"
+    },
+    {
+      "bytes": "1971200",
+      "n": "2",
+      "original_us": "610.656023",
+      "candidate_us": "611.168027",
+      "ratio": "1.000838"
+    },
+    {
+      "bytes": "1971200",
+      "n": "4",
+      "original_us": "1224.279046",
+      "candidate_us": "1223.423958",
+      "ratio": "0.999302"
+    },
+    {
+      "bytes": "1971200",
+      "n": "8",
+      "original_us": "2538.877010",
+      "candidate_us": "2510.047913",
+      "ratio": "0.988645"
+    },
+    {
+      "bytes": "2176000",
+      "n": "0",
+      "original_us": "1.504000",
+      "candidate_us": "1.728000",
+      "ratio": "1.148936"
+    },
+    {
+      "bytes": "2176000",
+      "n": "1",
+      "original_us": "338.164002",
+      "candidate_us": "337.433010",
+      "ratio": "0.997838"
+    },
+    {
+      "bytes": "2176000",
+      "n": "2",
+      "original_us": "674.965978",
+      "candidate_us": "674.399018",
+      "ratio": "0.999160"
+    },
+    {
+      "bytes": "2176000",
+      "n": "4",
+      "original_us": "1349.753976",
+      "candidate_us": "1351.552010",
+      "ratio": "1.001332"
+    },
+    {
+      "bytes": "2176000",
+      "n": "8",
+      "original_us": "2727.072001",
+      "candidate_us": "2696.928024",
+      "ratio": "0.988946"
+    },
+    {
+      "bytes": "2329600",
+      "n": "0",
+      "original_us": "1.459000",
+      "candidate_us": "1.408000",
+      "ratio": "0.965045"
+    },
+    {
+      "bytes": "2329600",
+      "n": "1",
+      "original_us": "360.960007",
+      "candidate_us": "360.222012",
+      "ratio": "0.997955"
+    },
+    {
+      "bytes": "2329600",
+      "n": "2",
+      "original_us": "723.551989",
+      "candidate_us": "721.271992",
+      "ratio": "0.996849"
+    },
+    {
+      "bytes": "2329600",
+      "n": "4",
+      "original_us": "1448.384047",
+      "candidate_us": "1445.119977",
+      "ratio": "0.997746"
+    },
+    {
+      "bytes": "2329600",
+      "n": "8",
+      "original_us": "2906.719923",
+      "candidate_us": "2917.632103",
+      "ratio": "1.003754"
+    },
+    {
+      "bytes": "2662400",
+      "n": "0",
+      "original_us": "1.472000",
+      "candidate_us": "1.404000",
+      "ratio": "0.953804"
+    },
+    {
+      "bytes": "2662400",
+      "n": "1",
+      "original_us": "411.872000",
+      "candidate_us": "411.552012",
+      "ratio": "0.999223"
+    },
+    {
+      "bytes": "2662400",
+      "n": "2",
+      "original_us": "824.703991",
+      "candidate_us": "829.501987",
+      "ratio": "1.005818"
+    },
+    {
+      "bytes": "2662400",
+      "n": "4",
+      "original_us": "1651.826978",
+      "candidate_us": "1648.733974",
+      "ratio": "0.998128"
+    },
+    {
+      "bytes": "2662400",
+      "n": "8",
+      "original_us": "3310.688019",
+      "candidate_us": "3343.647957",
+      "ratio": "1.009956"
+    }
+  ],
+  "memory_snapshot": {
+    "physical_available": 120894988288,
+    "commit_available": 124079091712
+  },
+  "prototype_sha256": "810705814bfa658787e21ef370b2b0df1f62ba8598df6445c0075c9e6ed1f2d2",
+  "limitations": [
+    "single isolated mapped-host copy microbenchmark process",
+    "synthetic byte patterns and source pointer permutation with actual blob sizes, not an engine benchmark",
+    "no model allocation or server; no served TPS claim",
+    "one global headroom snapshot, not a continuous memory trace; fixed host/device allocations below0.5GiB each"
+  ],
+  "production_changes": false
+}

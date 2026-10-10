@@ -162,3 +162,5 @@ Latest E101: HC fast cumulative15-run medians and rejected PCIe interaction are 
 Latest E102: [C035 exact HC source screen](diagnostics/hyper-connection/C035/README.md) rejected source-Q8 reconstruction because no such blocks exist in the selected model. No production changes.
 
 Latest E103: [C036 exact BF16 storage screen](diagnostics/hyper-connection/C036/README.md) saved18.54% storage but failed GPU timing; rejected without production changes.
+
+Latest E104: [C037 expert-fetch screen](diagnostics/expert-fetch/C037/README.md) passed byte parity but produced no useful timing gain; rejected. Goal API is active.

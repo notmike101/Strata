@@ -3,16 +3,16 @@
   "target_tps": 90,
   "metric": "server_decode_tps",
   "contract": "goal-90-contract.md",
-  "current": "C036 rejected: exact reconstruction saved18.54% bytes but14/15 GPU projection cells slowed20-56%. No integration or server launch.",
+  "current": "C037 exact transfer kernel rejected: geometric mean timing essentially unchanged; mapped-host copy reaches about6.4GB/s.",
   "next": [
-    "Reassess existing host/device scheduling traces for removable work; do not retune the failed BF16 decoder without new evidence.",
-    "Full quality gate remains unresolved; goal90 not qualified."
+    "Inspect applicability of existing foresight/prefetch architecture to exact mixed-format model before any experiment. Distinguish it from previously rejected profile/PCIe changes.",
+    "Keep full coding quality and workload matrix unchanged; no qualifying90 TPS result."
   ],
   "promoted": "The previously qualified format-gather engine with IQ2_S gather disabled and adaptive lag2; no changes this turn.",
   "stopping_rule": "Leave goal active until all fixed qualification cells pass. No benchmark model resident at handoff.",
   "quality": "Q007: 3/5 compiled and passed72 tests each, 2/5 no final answer at8192 tokens. Goal unqualified.",
-  "last_checkpoint": "E103",
-  "resume_command": "Read E103/C036; no model resident. Confirm process ownership before any new experiment.",
+  "last_checkpoint": "E104",
+  "resume_command": "Read E104/C037 and inspect live process ownership; no model resident.",
   "safety": "R070/R071 cleanup passed, config hash restored, idle GPU589MiB; both16GiB host floors passed.",
-  "goal_tool_status_at_entry": "blocked; reconfirmed by get_goal, no active/resume transition exists in exposed update_goal enum"
+  "goal_tool_status_at_entry": "active, verified get_goal"
 }
