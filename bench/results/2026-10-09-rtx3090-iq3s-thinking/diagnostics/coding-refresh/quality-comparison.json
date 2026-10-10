@@ -1,0 +1,105 @@
+{
+  "Q007_Q009_identity_matches": {
+    "engine_sha256": true,
+    "vision_sha256": true,
+    "backend_library_sha256": true,
+    "config_sha256": true,
+    "expert_profile_sha256": true,
+    "fixture_sha256": true
+  },
+  "outcomes": [
+    {
+      "seed": 101,
+      "historical": {
+        "passed": false,
+        "finish_reason": "length",
+        "completion_tokens": 8192
+      },
+      "candidate": {
+        "passed": false,
+        "finish_reason": "length",
+        "completion_tokens": 8192
+      },
+      "production": {
+        "passed": false,
+        "finish_reason": "length",
+        "completion_tokens": 8192
+      }
+    },
+    {
+      "seed": 102,
+      "historical": {
+        "passed": true,
+        "finish_reason": "stop",
+        "completion_tokens": 4121
+      },
+      "candidate": {
+        "passed": false,
+        "finish_reason": "length",
+        "completion_tokens": 8192
+      },
+      "production": {
+        "passed": true,
+        "finish_reason": "stop",
+        "completion_tokens": 5211
+      }
+    },
+    {
+      "seed": 103,
+      "historical": {
+        "passed": true,
+        "finish_reason": "stop",
+        "completion_tokens": 4415
+      },
+      "candidate": {
+        "passed": true,
+        "finish_reason": "stop",
+        "completion_tokens": 6600
+      },
+      "production": {
+        "passed": false,
+        "finish_reason": "length",
+        "completion_tokens": 8192
+      }
+    },
+    {
+      "seed": 104,
+      "historical": {
+        "passed": true,
+        "finish_reason": "stop",
+        "completion_tokens": 8079
+      },
+      "candidate": {
+        "passed": false,
+        "finish_reason": "length",
+        "completion_tokens": 8192
+      },
+      "production": {
+        "passed": false,
+        "finish_reason": "length",
+        "completion_tokens": 8192
+      }
+    },
+    {
+      "seed": 105,
+      "historical": {
+        "passed": false,
+        "finish_reason": "length",
+        "completion_tokens": 8192
+      },
+      "candidate": {
+        "passed": false,
+        "finish_reason": "length",
+        "completion_tokens": 8192
+      },
+      "production": {
+        "passed": false,
+        "finish_reason": "length",
+        "completion_tokens": 8192
+      }
+    }
+  ],
+  "causal_quality_regression_proven": false,
+  "current_quality_gate_passed": false,
+  "pending_user_decision": "Raise only completed-answer quality allowance from8192 to32768;512-token speed tests and sampling unchanged. No change applied."
+}

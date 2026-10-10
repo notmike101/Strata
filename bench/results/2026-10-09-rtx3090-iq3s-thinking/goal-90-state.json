@@ -3,16 +3,17 @@
   "target_tps": 90,
   "metric": "server_decode_tps",
   "contract": "goal-90-contract.md",
-  "current": "Q008 quality1/5; full goal remains unqualified.",
+  "current": "Q008 candidate1/5 and Q009 production1/5 quality. Neither qualifies; no candidate-specific regression established. No model resident.",
   "next": [
-    "Run identical Q009 quality suite on production control to separate inherent8192-token incompletion from candidate regressions before more tuning."
+    "Resolve pending user choice about separate quality allowance; do not change it without reply.",
+    "Independently audit coupled-Gumbel integration with retained HC/accepted-cache stack before bounded same-binary performance comparison."
   ],
   "promoted": "The previously qualified format-gather engine with IQ2_S gather disabled and adaptive lag2; no changes this turn.",
   "stopping_rule": "Leave goal active until all fixed qualification cells pass. No benchmark model resident at handoff.",
-  "quality": "Q0081/5; Q0073/5 retained. See coding-refresh/Q008-goal-coding/audit.json.",
-  "last_checkpoint": "E178",
-  "resume_command": "Q008 is complete and exact cleanup verified. No model resident. Inspect E178 and authoritative state before next arm.",
-  "safety": "Q008 global floors and exact cleanup passed; production config restored.",
+  "quality": "Q007 historical3/5; Q008 candidate1/5; Q009 same-day production1/5. All failures preserved.8192 cap unchanged pending user decision.",
+  "last_checkpoint": "E181",
+  "resume_command": "No model resident; Q008 session57761 and Q009 session9786 both exited0 with exact cleanup. Read E181 and quality-comparison.json. Sampling and8192 quality cap unchanged. Do not repeat completed suites blindly.",
+  "safety": "Q008/Q009 global floors and exact tree cleanup passed. Production3457fdfe restored; idleGPU457MiB/0percent.",
   "goal_tool_status_at_entry": "active, verified get_goal",
   "target_short_tps": 90,
   "target_longer_tps": 85,

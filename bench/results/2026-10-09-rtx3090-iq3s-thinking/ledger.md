@@ -3572,3 +3572,33 @@ Next: Run identical Q009 quality suite on production control to separate inheren
 ## E179 / Q009 same-day production quality control
 
 Q008 passed1/5 versus historical Q0073/5, with seeds101/102/104/105 incomplete at8192 and no final answer. Historical comparison alone does not establish cause. Run Q009 immediately on the restored production configuration3457fdfe, format-gather engine6048736d, identical quality client, prompts, seeds, profile, vision, context and8192 cap. Only engine and environment differ fromQ008; explicit diff archived. No speed claim from variable-length quality answers. All five seeds retained regardless of prior failure. Same guarded supervisor and exact cleanup apply. No production changes.
+
+
+## E180 / Q009 completed-answer quality results
+
+Seed101: 8192tokens, finishlength, passed=False; Did not stop naturally
+
+Seed102: 5211tokens, finishstop, passed=True; {"passed": true, "compiled": true, "cases": 72, "test_seed": 904001}
+
+Seed103: 8192tokens, finishlength, passed=False; Did not stop naturally
+
+Seed104: 8192tokens, finishlength, passed=False; Did not stop naturally
+
+Seed105: 8192tokens, finishlength, passed=False; Did not stop naturally
+
+Quality pass count1/5. Every request exactly matchesQ007, including numeric profile, thinking, seed, task and8192 cap. All actual cache counts are zero. Every passing answer stopped naturally, compiled and passed72 objective tests. All failures retained. These variable-length answers are excluded from512-token target statistics. No quality warmup; inherited manifest warmup wording is corrected in this audit.
+
+Minimum physical62260240384 and commit41414959104bytes; both16GiB floors pass. Supervisor exact cleanup verified and production config3457fdfe restored. Production control quality measured; experimental stack remains unpromoted.
+
+Next: Compare Q009 production with Q008 candidate outcomes and isolate the component affecting completion; do not promote the quality-failing stack.
+
+
+## E181 / paired quality interpretation and unchanged contract
+
+Q008 candidate1/5 and same-day Q009 production1/5. Q008 seed103 completed6600tokens; Q009 seed102 completed5211tokens; each compiled and passed72 objective tests. Other four responses in each suite exhausted8192 during reasoning without final answer. All ten request payloads matchQ007 exactly. Original Q0073/5 remains retained. Q007/Q009 engine, vision, loaded backend libraries, configuration, expert-profile and fixture hashes all match; outcome variation therefore exists even for the same recorded production identity. Different cache/scheduling state and floating-point execution paths remain hypotheses, not established causes. Fixed seeds do not promise identical full text here. Source inspection confirms serve/server.py forwards positive integer seeds and generate.cpp initializes req_sp.seed from the request and resets counter0. No code fix was made on speculative attribution.
+
+Both configurations fail the existing completed-answer gate. The current data do not establish a candidate-specific quality regression, nor do equal pass counts prove quality equivalence. The512-token medians93.6 short/89.35 longer remain narrow speed-cell results, not goal completion. Variable-length quality decode ranges77.6-82.6 candidate and77.9-81.2 production are separate diagnostics, not the512-token metric. Production launcher remains unchanged; all benchmark trees stopped; GPU457MiB/0percent after each suite. Both global16GiB memory floors passed.
+
+Rechecked the user-specified model card on2026-10-10: https://huggingface.co/unsloth/Qwen3.8-Flash-Next-GGUF#best-practices . It keeps the prescribed thinking sampler and advises ample generation length for reasoning. Our8192 completion-quality cap is a frozen test limit, not that model-card recommendation. Asked the user whether to raise only this separate quality allowance to32768;512-token speed requests, prompts, seeds, sampler, context and objective tests would stay fixed. No answer yet and no cap change applied. This approval is required by the user's fixed-contract instruction, not an inferred skill restriction. All failures remain historical evidence whatever the decision.
+
+Next independent optimization work: audit the existing distribution-preserving coupled-Gumbel path with the retained HC/accepted-cache stack, then a bounded same-binary control/candidate comparison if integration is sound. Earlier R040 coupling alone86.9/85.1 versus R03787.5/83.9 was mixed, not a winner; the new hypothesis is a measured interaction with GPU/cache improvements, not assumed additive gains. Preserve every numeric sampling parameter and exact-match target verification; biased probability/suffix paths stay excluded. A new random stream requires its own fixed-arm reproducibility and completed-answer checks before promotion. No new inference run has started.
