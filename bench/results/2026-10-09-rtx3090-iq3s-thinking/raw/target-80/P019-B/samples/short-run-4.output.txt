@@ -1,0 +1,21 @@
+We need answer user's request. Need produce detailed answer at least 1200 words. User: "Benchmark identifier ... Ignore. Implement a thread-safe Python TTLCache class using an OrderedDict and a monotonic clock. Include set, get, delete, clear, len, expiration, capacity eviction, unit tests with an injected fake clock, and a detailed explanation of thread safety and complexity. Write complete code, then tests, then explain the design. Do not abbreviate the implementation. Produce a detailed answer of at least 1200 words."
+
+We need output complete code, tests, explanation. Need likely mention ignore identifier. Need satisfy thread-safe, OrderedDict, monotonic clock. Include set, get, delete, clear, len, expiration, capacity eviction, unit tests with fake clock. Detailed explanation. At least 1200 words. Could write long. Need no abbreviations. Code should be full implementation. Need maybe use threading.RLock. OrderedDict with move_to_end on get. Expiration lazy: get checks TTL, _is_expired, purge expired entries. Capacity eviction: if exceeds maxsize, popitem(last=False) least recently used (LRU). TTLCache class:
+
+from collections import OrderedDict
+import threading
+from time import monotonic
+from typing import Any, Optional, Callable
+
+class TTLCache:
+    def __init__(self, maxsize=0, ttl=30.0, clock: Callable[[], float]=monotonic):
+       self._maxsize = maxsize if maxsize>=0 else 0 maybe negative? Could raise ValueError. ttl can be None? We'll support None for no expiration? Use Optional[float]. if ttl is None or ttl <0? ttl None no expiration. Negative maybe treat as 0? Raise ValueError for ttl <0? Better raise ValueError for ttl <0 except None.
+       self._clock = clock
+       self._lock = threading.RLock()
+       self._cache = OrderedDict() # key -> (value, expires_at or None)
+       self._hits = self._misses? Not required.
+       self._purged =? Not required.
+    def set(self, key, value, ttl=None):
+       with self._lock:
+          expires_at = None if ttl is None or self._ttl is None else self._now() + ttl if ttl is not None else ... Need method.
+          if expires_at is not None and expires_at <= now? If ttl

@@ -3,15 +3,15 @@
   "target_tps": 90,
   "metric": "server_decode_tps",
   "contract": "goal-90-contract.md",
-  "current": "Not promoted: fixed80 improves prompt/TTFT and partial reproducibility but loses decode and E2E. Retain experimental component; finite comparison closed.",
+  "current": "P019 diagnostic pair closed; see detailed conclusion. C047 remains unpromoted; 90/85 and full quality not qualified.",
   "next": [
-    "Localize first differing longer window under fixed80; assess accepted-token adaptation barriers as distinct architecture."
+    "Review P019 evidence before selecting accepted-token cache barrier architecture."
   ],
   "promoted": "The previously qualified format-gather engine with IQ2_S gather disabled and adaptive lag2; no changes this turn.",
   "stopping_rule": "Leave goal active until all fixed qualification cells pass. No benchmark model resident at handoff.",
   "quality": "Q007: 3/5 compiled and passed72 tests each, 2/5 no final answer at8192 tokens. Goal unqualified.",
-  "last_checkpoint": "E144",
-  "resume_command": "Read E136-E144/P016-P018/C047. No model resident. Source restored to08602c45; current source build tree holds debug P018 objects, so rebuild before using it as a source control.",
-  "safety": "Four C047 arms and five P016-P018 diagnostics passed16GiB floors and exact cleanup. Production hashes unchanged.",
+  "last_checkpoint": "E146",
+  "resume_command": "Read E145-E146 and diagnostics/reproducibility/P019. No model resident. Remain on perf/rtx3090-thinking-80. Production unchanged; build tree still contains P018 debug objects.",
+  "safety": "P019 A/B: all eighteen 512-token requests passed 16 GiB physical/commit guards; exact process cleanup and production config restore verified.",
   "goal_tool_status_at_entry": "active, verified get_goal"
 }
