@@ -3708,3 +3708,139 @@ No replay started. Both model trees remain cleaned up. C054 speed candidate stil
 Publication check: an atomic replacement of an existing P018 identity export returned transient Windows AccessDenied once; both files had ordinary Archive attributes. Re-running the unchanged exporter succeeded. No experiment was rerun and no measurement was discarded. Final inventory/hash validation is required before push.
 
 Publication validation also caught the private LAN literal in the newly copied audit-helper source before any push. Sanitized that public copy; executable private helper and all measurements unchanged.
+
+
+## E189 / bounded completion-replay pair prepared
+
+Previous turn made progress: expanded matched Q0104/5 vsQ0115/5 completed, code outputs reviewed, cleanup verified, user-approved contract change and evidence pushed55daf8c1. Fresh upstream GitHub API check still finds mainfb58e0dbc8399662c0e47c76578c6e878b14f6cf and releasev0.1.41 published2026-10-08; no new Strata update to apply. Current checkout has only the two known unrelated untracked files; neither is read or staged.
+
+One diagnostic pair only: Q012-replay-candidate uses byte-identical Q010 config; Q013-replay-production uses byte-identical Q011 config. Fresh process per arm, no warmup, requests101,102,103 in original order. Each request exactly matches its expanded-suite counterpart. This preserves preceding request history and lets the adaptive cache evolve normally; it does not promise identical hidden cache tensors when generated text varies. Focus is whether seed103 incompletion reproduces.32768cap, numerical thinking profile,72-case checker, model/context/vision and16GiB physical/commit floors fixed.
+
+New private goal90-quality-replay.py changes only the original expanded client's loop bound and diagnostic metadata/workload label. Summary explicitly says diagnostic_only and full_quality_qualified false even if all three pass. Private guarded supervisor selects this client with --goal-quality-replay and a5400s whole-suite timeout. Original five-seed and512-token clients unchanged. No code/runtime modification or speculative flag change is being tested. Snapshot guards reject concurrent inference/profiler/build processes; full-tree cleanup before the next arm.
+
+Finite outcome rule: run each configuration once. Preserve both a reproduction and a non-reproduction; do not repeat until a preferred result. An ablation follows only with supporting evidence. This diagnosis never overwrites Q010's failed five-answer gate or substitutes three answers for five. C054 R113/R114/R115 remain queued, not started. Next: Q012 thenQ013, compare complete prefix outcomes and seed103, then choose the next safe action from evidence.
+
+
+## E190 / Q012-replay-candidate bounded replay
+
+Seed101: 5172tokens, finishstop, passed=True; {"passed": true, "compiled": true, "cases": 72, "test_seed": 904001}
+
+Seed102: 7054tokens, finishstop, passed=True; {"passed": true, "compiled": true, "cases": 72, "test_seed": 904001}
+
+Seed103: 4628tokens, finishstop, passed=True; {"passed": true, "compiled": true, "cases": 72, "test_seed": 904001}
+
+Diagnostic count3/3; not full quality qualification. Requests byte-identical toQ010-expanded-candidate, run101/102/103 in original order from a fresh process. No warmup. Same32768 cap, profile, tests, binaries/libraries/config/model/vision identity. Generated histories may differ; cache tensors are not claimed identical. Prior failures are never replaced.
+
+Minimum physical62469341184 and commit41708654592bytes;16GiB floors pass. Exact cleanup verified; production3457fdfe restored. No promotion.
+
+
+## E191 / Q013-replay-production bounded replay
+
+Seed101: 8244tokens, finishstop, passed=True; {"passed": true, "compiled": true, "cases": 72, "test_seed": 904001}
+
+Seed102: 8207tokens, finishstop, passed=True; {"passed": true, "compiled": true, "cases": 72, "test_seed": 904001}
+
+Seed103: 13008tokens, finishstop, passed=True; {"passed": true, "compiled": true, "cases": 72, "test_seed": 904001}
+
+Diagnostic count3/3; not full quality qualification. Requests byte-identical toQ011-expanded-production, run101/102/103 in original order from a fresh process. No warmup. Same32768 cap, profile, tests, binaries/libraries/config/model/vision identity. Generated histories may differ; cache tensors are not claimed identical. Prior failures are never replaced.
+
+Minimum physical62526005248 and commit41694203904bytes;16GiB floors pass. Exact cleanup verified; production3457fdfe restored. No promotion.
+
+
+## E192 / bounded replay closes; no causal component identified
+
+The immediately preceding user-question response explained metrics and made no optimization progress. This continuation authoritatively polled live session32540, completed its audit, and ran the already registered production replay serially. No run was restarted because an observation expired.
+
+Q012 did not reproduce the candidate seed103 cap failure. Three requests in the original101/102/103 order all completed and passed72tests. Q013 provides the matched production replay below. Request files are byte-identical between arms and to the corresponding expanded suite. Fresh process per arm; no warmup; fixed32768 allowance and unchanged numerical thinking profile, checker, model, context and vision. Prior generated text and hidden adaptive-cache state need not be identical even with the same request seeds.
+
+| Seed | Candidate tokens / outcome | Production tokens / outcome |
+|---|---|---|
+| 101 | 5172 / stop / pass=True | 8244 / stop / pass=True |
+| 102 | 7054 / stop / pass=True | 8207 / stop / pass=True |
+| 103 | 4628 / stop / pass=True | 13008 / stop / pass=True |
+
+This ends the one-pair diagnosis. Do not rerun the unchanged configuration until a favorable result appears, and do not attribute the earlier cap failure to HC or accepted-row accounting without causal evidence. Q010 remains4/5 and ineligible for promotion; Q011 remains5/5 for production only. Three passing diagnostic answers never replace the full five-answer gate. All earlier failures and generated answers remain published. Fixed512-token speed measurements are separate.
+
+Qualification assessment before another speed test:
+
+- Retained production has Q011 five completed answers passing all72tests, but is not certified to meet the new90/85 speed goal. Its previous real-use checks remain historical evidence.
+- Experimental C051 HC/accepted-usage/conditional-barrier stack has R110/R111 selected-coding streaming medians93.6/89.35, but original-workload R112 short88.7 is below90. Its Q010 quality gate failed4/5. These are two independent blockers to promotion.
+- Current experimental stack still lacks two qualifying confirmations of selected-coding nonstream misses and exact-repeat hits in both modes, plus refreshed mixed-history, tools, vision, reasoning controls, cancellation, idle and near-limit checks. No old production result certifies this stack.
+- Q012 is diagnostic evidence only and does not clear any missing full-quality or workload gate. A broad component ablation is unsupported by this non-reproduction.
+
+Next: resume the already preregistered C054 combination screen, R113 coupled/Gumbel drafting on the unchanged HC/accepted-usage/conditional-barrier stack versus R112. This is an explicitly new candidate, not continued qualification of the failed unchanged candidate. The bounded speed screen comes before a costly full matrix because the existing candidate is already ineligible and below the original-workload short target. This tests a new composition of existing mechanisms, not a quality retry or promotion. Numeric sampling and all fixed workload settings remain unchanged. If either decode/E2E/prompt median loses more than3percent, reject after the first pair; otherwise finish the bounded reverse-order R114/R115 comparison and pool every measured row. New seeded streams require their own full quality and real-use gates before any promotion. No production launcher changes.
+
+
+## E193 / R113-coupled-stack
+
+Same engine and loaded library hashes as R112-coupled-stack-control. Config diff is archived. Fixed numeric sampling, high/xhigh reasoning, model/quant, vision, context262144 and INT8KV retained. Original TTLCache streaming cache-miss workloads; one excluded warmup and five measured seeds101-105 per cell,512tokens per measured run. No slow seed excluded.
+
+| Workload | Decode median (range), tok/s | Prompt median, tok/s | E2E median, tok/s | Stream total median, tok/s | TTFT median, s | Draft accepted/offered |
+|---|---:|---:|---:|---:|---:|---:|
+| short | 90.0 (87.7-91.6) | 206.6 | 78.5023 | 78.5139 | 0.8545 | 850/1097 (77.48%) |
+| longer | 86.0 (81.7-89.8) | 496.4 | 42.3687 | 42.3719 | 6.1528 | 880/1194 (73.70%) |
+
+Minimum available physical RAM 62,540,607,488 bytes; available commit 41,750,736,896 bytes. Sampled GPU peak 25,128,013,824 bytes. Both16GiB host floors passed. Per-process peak memory not sampled. Full launcher/server/text/vision cleanup passed and previous config restored.
+
+First C054 pair mixed: candidate90.0/86.0 versus control88.7/86.7 decode. Short prompt median206.6 versus210.0; all pre-registered screen losses less than3percent. Neither a winner nor full qualification. Original Q010 quality failure remains.
+
+Next: Complete bounded reverse-order R114 candidate then R115 control and pool all ten rows per cell; no further unchanged retries.
+
+
+## E194 / R114-coupled-stack-reverse
+
+Same engine and loaded library hashes as R112-coupled-stack-control. Config diff is archived. Fixed numeric sampling, high/xhigh reasoning, model/quant, vision, context262144 and INT8KV retained. Original TTLCache streaming cache-miss workloads; one excluded warmup and five measured seeds101-105 per cell,512tokens per measured run. No slow seed excluded.
+
+| Workload | Decode median (range), tok/s | Prompt median, tok/s | E2E median, tok/s | Stream total median, tok/s | TTFT median, s | Draft accepted/offered |
+|---|---:|---:|---:|---:|---:|---:|
+| short | 90.3 (86.1-91.5) | 200.2 | 78.3273 | 78.3423 | 0.8679 | 860/1097 (78.40%) |
+| longer | 88.3 (83.4-91.4) | 496.5 | 42.9287 | 42.9328 | 6.1492 | 1047/1333 (78.54%) |
+
+Minimum available physical RAM 62,498,480,128 bytes; available commit 41,779,806,208 bytes. Sampled GPU peak 25,117,528,064 bytes. Both16GiB host floors passed. Per-process peak memory not sampled. Full launcher/server/text/vision cleanup passed and previous config restored.
+
+C054 second candidate arm completed in reverse workload order. Preserve all rows; final decision deferred until registered reverse control R115 completes and both ten-run sets are pooled. No promotion or full-quality qualification.
+
+Next: Run R115 reverse-order control once; close C054 using complete ordinary medians and no-degradation contract.
+
+
+## E195 / R115-coupled-stack-control-reverse
+
+Same engine and loaded library hashes as R112-coupled-stack-control. Config diff is archived. Fixed numeric sampling, high/xhigh reasoning, model/quant, vision, context262144 and INT8KV retained. Original TTLCache streaming cache-miss workloads; one excluded warmup and five measured seeds101-105 per cell,512tokens per measured run. No slow seed excluded.
+
+| Workload | Decode median (range), tok/s | Prompt median, tok/s | E2E median, tok/s | Stream total median, tok/s | TTFT median, s | Draft accepted/offered |
+|---|---:|---:|---:|---:|---:|---:|
+| short | 87.7 (87.6-92.4) | 209.0 | 77.1613 | 77.1814 | 0.8422 | 858/1141 (75.20%) |
+| longer | 84.7 (81.6-92.4) | 495.8 | 42.0414 | 42.0447 | 6.1545 | 974/1294 (75.27%) |
+
+Minimum available physical RAM 62,472,945,664 bytes; available commit 41,714,196,480 bytes. Sampled GPU peak 25,115,430,912 bytes. Both16GiB host floors passed. Per-process peak memory not sampled. Full launcher/server/text/vision cleanup passed and previous config restored.
+
+C054 registered ABBA sequence complete. Final reverse-order control retained without dropping slow seeds; evaluate complete pooled comparison next. No promotion or full-quality qualification.
+
+Next: Compute all ten-run ordinary medians, prompt/E2E differences, preserve quality uncertainty and publish bounded C054 result.
+
+
+## E196 / C054 complete ABBA: numeric thresholds reached, no-degradation unproven
+
+Same C051 engine0dea69dc and loaded libraries, modelIQ3_S,262144context,INT8KV, compatible CPUF16vision, serial requests, MTP4/minp.70 and fixed thinking numeric profile. ControlR112/R115 has coupled/Gumbel0/0; candidateR113/R114 has1/1. Other configuration fields match exactly. All measured request bytes match control, seeds101-105,512completion tokens and zero cache reuse. One excluded warmup per cell per fresh process, two opposite workload orders, ten measured rows per cell per configuration. The comparison script verifies these conditions. No cherry-picked seed, peak or upper median.
+
+| Workload | Configuration | Decode median | Prompt median | E2E median | Stream-total median | TTFT median seconds |
+|---|---|---:|---:|---:|---:|---:|
+| short | control | 88.55 | 209.35 | 77.56124 | 77.57229 | 0.838461 |
+| short | candidate | 90.15 | 205.30 | 78.41483 | 78.42810 | 0.856666 |
+| longer | control | 86.55 | 496.00 | 42.45596 | 42.46041 | 6.153906 |
+| longer | candidate | 87.15 | 496.45 | 42.64870 | 42.65235 | 6.150953 |
+
+All raw decode values in arm order, each arm in seed101-105 order:
+
+- short control: [91.2, 88.7, 88.4, 91.2, 87.4, 87.6, 87.6, 87.7, 92.4, 90.0]; accepted/offered 1663/2229.
+- short candidate: [90.9, 91.6, 90.0, 87.7, 88.9, 88.8, 91.5, 90.3, 86.1, 90.7]; accepted/offered 1710/2194.
+- longer control: [82.2, 86.7, 88.1, 86.5, 88.1, 81.6, 92.4, 84.2, 86.6, 84.7]; accepted/offered 1952/2584.
+- longer candidate: [81.7, 89.7, 84.5, 86.0, 89.8, 83.4, 90.2, 84.7, 88.3, 91.4]; accepted/offered 1927/2527.
+
+Candidate ordinary decode medians90.15short/87.15long reach the corrected numerical90/85 thresholds in these original TTLCache streaming miss cells only. Both candidate five-run arms also reach the corresponding thresholds individually. Pooled short decode+1.81percent and E2E+1.10percent; longer decode+0.69percent and E2E+0.45percent. These modest gains need the remaining workload/quality evidence and are not a global goal-completion claim.
+
+Short prompt processing209.35 to205.30tok/s is -1.93percent; TTFT0.838461 to0.856666seconds rises0.018205seconds. Longer prompt496.00 to496.45tok/s. The preregistered3percent stop threshold was only a screening rule, never permission to accept a regression. The user's no-prompt-degradation requirement is NOT proven. This finite ABBA screen is closed; do not keep repeating it until the prompt difference disappears. Preserve this mixed result and investigate the prompt/cache interaction through separately specified evidence. Coupled/Gumbel changes the seeded text stream; finite target-distribution checks are archived, not a claim of byte-identical output or a full model-quality guarantee.
+
+Quality status: Q010's prior HC/accepted-usage candidate remains4/5 under32768, and its three-request replay does not erase the failure. C054 is a distinct combined configuration with no completed five-answer quality suite yet. Q011 production5/5 cannot be transferred to it. Neither quality nor any missing real-use gate is waived. No production launcher or source change promoted. All four exact launcher trees cleaned up and original production config3457fdfe restored. Physical/commit16GiB floors passed; observed GPU memory returned457MiB and utilization0percent after R115.
+
+Next bounded step: one five-seed32768 complete-answer suite for C054 (Q014-coupled-quality), unchanged checker, tasks and numeric profile. Do not retry it until passing. If it fails, preserve and reject promotion. If it passes, proceed to the outstanding selected-coding/nonstream/cache-hit and real-use cells with matched production controls; quantify prompt behavior in those cells rather than treating the present1.93percent loss as allowed. No further blind C054 TTLCache repetitions. Keep the goal active and leave production unchanged until every gate passes.

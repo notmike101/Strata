@@ -1,0 +1,12 @@
+We need answer user's request. Need produce final detailed answer at least 1200 words. Need implement thread-safe Python TTLCache using OrderedDict monotonic clock. Include set, get, delete, clear, len, expiration, capacity eviction, unit tests with injected fake clock, detailed explanation thread safety complexity. Also existing cache rules maybe need incorporate? They list 64 rules from item_000 to item_063 lifetimes 30+rule and sizes 64+3*rule? Need likely implement cache respecting existing rules? Let's parse prompt.
+
+"Benchmark identifier ... Ignore this identifier.
+Read these existing design requirements before implementing the cache:
+Existing cache rule 0: key item_000 has lifetime 30 seconds and size 64 bytes; expiration must remove stale entries, and access must update least-recently-used order.
+...
+Existing cache rule 63: key item_063 has lifetime 93 seconds and size 253 bytes; expiration must remove stale entries, and access must update least-recently-used order.
+Implement a thread-safe Python TTLCache class using an OrderedDict and a monotonic clock. Include set, get, delete, clear, len, expiration, capacity eviction, unit tests with an injected fake clock, and a detailed explanation of thread safety and complexity. Write complete code, then tests, then explain the design. Do not abbreviate the implementation. Produce a detailed answer of at least 1200 words."
+
+Need likely include these existing rules in tests? The prompt says read existing design requirements before implementing cache. Could need seed cache with those rules? We can implement general TTL/LRU cache with per-key lifetime and size? Existing cache rule has key, lifetime, size. Need support size? Maybe capacity in bytes? It says capacity eviction, but existing rules include size bytes. Implement size-aware capacity eviction (max_size bytes) plus max_entries? TTLCache often capacity number of items. But rules include size bytes. Need likely handle byte sizes for eviction. Could set size param on set. If capacity is max bytes. Need include len returns number entries. Expiration method remove stale entries. Access updates LRU. Thread safe.
+
+Need produce complete code then tests then explanation. Use OrderedDict, monotonic clock injected for tests. Python code not abbreviate. Need ensure thread-safe: use RLock? OrderedDict not thread-safe. Lock all mutating/read methods. Could use RLock for recursion

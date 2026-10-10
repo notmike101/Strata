@@ -1,0 +1,463 @@
+We need answer user's request: implement topological_order(nodes, edges) in Python. Need only complete function in Python code block. Need satisfy: Validation identifier 102 ignore. Input nodes unique strings. edges list of pairs before, after. Return lexicographically smallest topological ordering, include isolated nodes, ignore duplicate edges. Raise ValueError for edge endpoint absent from nodes or cycle. Do not mutate inputs. No imports. Need only code block. Need think carefully.
+
+We need implement deterministic lexicographically smallest topological sort. Usually Kahn with min-heap. No imports, so can implement heap manually or use list sorted and pop min O(n^2). Need no imports. Simpler: set out-neighbors per node (to dedupe), indegree. Use a list available initially sorted? For lexicographically smallest, at each step choose smallest string among available (indegree 0). Need efficient? n maybe unspecified. Can do available sorted and pop(0) O(n^2) maybe acceptable. Could implement binary heap without imports. Need careful not mutate inputs: nodes list not mutated, edges list not mutated. Creating copies fine. Need validate endpoints: for each (before, after), if before not in node_set or after not in node_set raise ValueError. Duplicate edges: if edge already added, don't increment indegree again. self-loop cycle: if before == after, if added once indegree increments, no zero? If node only self-loop, available excludes? If other nodes, eventually cycle detected by length mismatch. Good. But for self-loop duplicate ignored. Need cycle detection after process if len(order) != len(nodes). ValueError. Lexicographic smallest among strings: use Python < on strings.
+
+Need return list. Need not import heapq. We can implement with heap using no imports. But code length maybe okay. Use heap functions inline. Or easier: available list sorted; pop min via min index. For lexicographically smallest: if nodes sorted initially? Need when indegree becomes zero, insert into available and keep sorted. Could maintain available sorted by bisect (no imports) manual insertion and pop first. But O(n^2). Could implement heap.
+
+Need no imports. Implement helper push/pop inside function. But final only function. Use nested functions.
+
+Option 1: available = sorted(node for indegree==0), while available: node = available.pop(0) O(n^2). For simplicity and correctness. Since no import and unique strings maybe n not huge. But lexicographically smallest? Yes. However if duplicate edges ignored. If edge endpoints missing raise.
+
+Potential issue: If initial available sorted, pop(0) yields smallest. When add after decrement, need insert into available maintaining sorted. Could available.append then sort? O(k log k), still okay. Better maintain sorted insert. Could also at each step choose min from available then remove. Simpler but O(n^2). Need code robust.
+
+But topological lexicographically smallest: Kahn selecting min among zero indegree yields lexicographically smallest topological order for strings? Yes when comparing sequence lexicographically. Need include isolated nodes: they have indegree 0 and outdegree 0, initially available sorted.
+
+Could use heap with manual functions:
+
+def topological_order(nodes, edges):
+    node_set = set(nodes)
+    indegree = {node:0 for node in nodes}
+    neighbors = {node:set() for node in nodes}
+    for before, after in edges:
+        if before not in node_set or after not in node_set:
+            raise ValueError(...)
+        if before == after:
+             # self-loop still add? We can just mark; for dedup check. If in set no duplicate increment. If not, add and indegree++ to detect cycle. It's okay.
+        if after not in neighbors[before]:
+            neighbors[before].add(after)
+            indegree[after] += 1
+    heap = [node for node in nodes if indegree[node] == 0]
+    # heapify manually O(n)
+    heap = [node for ...]
+    for i in range(len(heap)//2 -1, -1, -1): sift_down heap
+    def sift_down...
+    def sift_up...
+    order=[]
+    while heap:
+       node = heap[0]
+       last = heap.pop()
+       if heap: heap[0]=last; sift_down
+       order.append(node)
+       for nxt in neighbors[node]:
+           indegree[nxt]-=1
+           if indegree[nxt]==0:
+              heap.append(nxt); sift_up
+    if len(order) != len(nodes): raise ValueError
+    return order
+
+Need ensure neighbors iteration: sets not sorted, but heap selection ensures lexicographic? It should not depend on neighbor iteration, but when multiple become zero, heap handles. However set iteration arbitrary not problem. Could sort neighbors not needed. But deterministic? Output deterministic; sets iteration order randomized for strings due hash randomization? Actually strings hash randomized, set iteration order arbitrary; but we never rely on it for order except processing order of decrement, but heap will eventually order; if decrementing indegree to zero for two nodes in arbitrary order, they both inserted into heap and heap sorts. So output deterministic. But if using sets, no import, okay. For duplicate edges: need check edge in neighbors[before]. If before==after, add self edge, indegree increment. If self-loop duplicate no inc. Cycle detected.
+
+Potential issue: Using set(nodes) with nodes list; nodes unique but if not? okay. Do not mutate nodes or edges. set comprehension reads.
+
+Need code only in Python code block. User asked return only complete function in a Python code block. So final should only be code block, no explanation. Need not include identifier. Could include ValueError messages. Use no imports. Need ensure not use type annotations? Could avoid imports. Fine.
+
+Manual heap implementation careful.
+
+Implement:
+
+def topological_order(nodes, edges):
+    node_set = set(nodes)
+    indegree = {}
+    adjacency = {}
+    for node in nodes:
+        indegree[node] = 0
+        adjacency[node] = set()
+
+    for before, after in edges:
+        if before not in node_set or after not in node_set:
+            raise ValueError("Edge endpoint not in nodes")
+        if after not in adjacency[before]:
+            adjacency[before].add(after)
+            indegree[after] += 1
+
+    heap = [node for node in nodes if indegree[node] == 0]
+    # build heap
+    def heap_sift_down(start_index):
+        size = len(heap)
+        node = heap[start_index]
+        child_index = 2 * start_index + 1
+        while child_index < size:
+            right = child_index + 1
+            if right < size and heap[right] < heap[child_index]:
+                child_index = right
+            if heap[child_index] >= node:
+                break
+            heap[start_index] = heap[child_index]
+            start_index = child_index
+            child_index = 2 * start_index + 1
+        heap[start_index] = node
+
+    for i in range(len(heap) // 2 - 1, -1, -1):
+        heap_sift_down(i)
+
+    def heap_sift_up(index):
+        node = heap[index]
+        while index > 0:
+            parent = (index - 1) // 2
+            if heap[parent] <= node:
+                break
+            heap[index] = heap[parent]
+            index = parent
+        heap[index] = node
+
+    result = []
+    while heap:
+        node = heap[0]
+        last = heap.pop()
+        if heap:
+            heap[0] = last
+            heap_sift_down(0)
+        result.append(node)
+        for nxt in adjacency[node]:
+            indegree[nxt] -= 1
+            if indegree[nxt] == 0:
+                heap.append(nxt)
+                heap_sift_up(len(heap)-1)
+    if len(result) != len(node_set): raise ValueError("Cycle detected")
+    return result
+
+Wait in heap pop: node=heap[0]; last=heap.pop(). If heap length was 1, heap becomes empty, skip sift. But we popped root, node stored. Good. If length >1, last popped, set root. But if last is same? Good. But we popped root's original from heap? We didn't replace before pop; after pop last removed. root still original until replaced. Good.
+
+Need ensure heap_sift_down uses len(heap) and start_index. Good.
+
+Potential bug: in heap_sift_down, comparison heap[child_index] >= node break. For min-heap, if child >= node, node can stay. If equal? unique nodes no equal. Good.
+
+Potential bug: in heap_sift_up: if heap[parent] <= node break. Good.
+
+Potential bug: When build heap with initial heap list maybe unsorted (nodes order arbitrary? nodes list). Manual heapify works.
+
+Could use sorted to make initial heap maybe simpler? But heapify fine.
+
+Need check lexicographic smallest. Kahn's algorithm with min-heap. Proof okay.
+
+Need include isolated nodes: indegree zero initial, included.
+
+Edge cases: nodes empty? unique strings list could empty. node_set empty. edges maybe with endpoints absent -> raise. If nodes empty and edges empty: heap empty, result [], len result != len node_set? 0==0 return []. If edges nonempty -> endpoint absent raise. Good.
+
+Nodes list may not be unique? User says unique. If duplicate, indegree dict overwrites but len(node_set) differs from result? Could maybe return wrong. Not required.
+
+Need do not mutate inputs: We create set, dict, sets. Iterate edges list no mutation. Good.
+
+Question: Return lexicographically smallest topological ordering. Lexicographically smallest list of strings. Using min-heap of available nodes works if node names compared by Python string. For example: nodes: a,b; edge (b,a). available b? indegrees: b=0, a=1 => pop b, then a -> [b,a]. But lexicographically smallest topological ordering? Only [b,a]. Good. Another: nodes b,c,a edges (b,a). indeg b=0,c=0,a=1. available b,c -> pop b (smallest), then c,a. Could there be a topological order c,b,a lexicographically? compare [b,c,a] vs [c,b,a], [b...] smaller. Good.
+
+Could there be need to include isolated nodes earliest if they are lex small but have dependencies? Kahn min zero works.
+
+Could use adjacency sets; no need to sort. But if using set for neighbors, iteration arbitrary might decrement indegree to zero and append to heap in arbitrary order. But heap reorders. However there is a subtle issue: Suppose node X and Y both become zero during processing current node. If we process adjacency in arbitrary order, we append X then Y, heap sifts. If one inserted before other, heap contains both; popping min works. No issue. If processing multiple adjacency edges from different nodes could affect? All zero indegree inserted when last incoming processed. The set of zero nodes available after each step same. Heap gives min. Good.
+
+Potential issue with duplicate edges: adjacency before set ensures indegree not incremented twice. Good.
+
+Potential issue with endpoints absent: if edge tuple not pair? Not specified. Could unpack error; okay? Better for edge in edges: if len(edge)!=2 raise? Not required. But robust could: for before, after in edges. If edge malformed raises TypeError. Fine.
+
+Need only complete function in Python code block. Should not include main. Could include docstring? Maybe okay but only function. Need no imports. Good.
+
+But let's consider if manual heap functions nested and closure variables: heap_sift_down defined before heap? It uses heap list from outer scope. Good. If we reassign heap = [ ... ] and then define functions? In code order: initialize heap, define heap_sift_down, then heapify, then heap_sift_up. It's okay. But nested functions use heap, and while loop reassigns heap[0] etc. Good. In Python, no nonlocal needed for mutation. Good.
+
+Could there be issue in pop: node = heap[0]; last = heap.pop(); if heap: heap[0] = last. If heap length >1 but last is at last index. We didn't remove root? Actually root still in heap[0], then we set root to last, but the old root is overwritten; the popped element was last. Good.
+
+Potential bug: heap_sift_down uses node variable = heap[start_index]; but after heap[0]=last, start_index=0, node=last. It moves children up. Good.
+
+Potential bug: in build heap for range(len(heap)//2 -1, -1, -1), if len=0: len//2-1 = -1, range(-1,-1,-1) empty. Good. If len=1: 0-1=-1 empty. Good.
+
+Need check heap_sift_down if start_index is valid but heap size maybe changed? Called only when valid. Good.
+
+Could implement using list sorted and insertion to be shorter, but manual heap okay. Need ensure final answer only code block. But maybe user expects complete function only, no explanations. Good.
+
+Let's test mentally:
+nodes=["C","B","A"], edges=[("B","A")] -> adjacency. indegree A=1. heap=[C,B] -> heapify [B,C]. pop B, result B, decrement A to 0 insert A -> heap [C,A]? sift up: insert at index2? Let's trace heap before [B,C], append A -> [B,C,A]. sift_up index2: parent0 B <= A? 'B' <= 'A'? false, heap[2]=B, index=0, heap[0]=A => heap [A,C]. pop A -> last C, heap[0]=C, result B,A,C. Topological? C isolated can be anywhere. Lexicographically smallest among valid? Available B,C; min B, then C or A? After B, A zero; available C,A; min A, so [B,A,C]. Good.
+
+Cycle: nodes A,B edges A,B B,A. indegree both 1 heap empty result len 0 !=2 raise. Good.
+Missing: edges (A,D) -> D not node raise. Good.
+
+Could there be memory issue? no.
+
+Alternative to avoid set iteration random in case deterministic? It doesn't affect output. But if cycle detection only len(result) != len(node_set). Good.
+
+Need consider self-loop duplicate: nodes A, edges (A,A). indegree A=1 heap empty raise. If duplicate edges list contains (A,A) twice: first add indegree1, second after in adjacency so no inc. raise. Good.
+
+Now think about lexicographically smallest: There is known issue: for lexicographically smallest topological order, choosing min available works. Yes.
+
+Potential requirement: "nodes is a list of unique strings" maybe we should not rely on set if nodes order matters? We include isolated nodes. The output order lexicographic among strings, not stable by input. Good.
+
+Could use tuple comparison? Strings only. Good.
+
+Need no imports. Could use sorted and list. But heap code no import. Fine.
+
+Need ensure code block language python. final:
+```python
+def topological_order(nodes, edges):
+    ...
+```
+
+But user says Return only the complete function in a Python code block. So no leading text.
+
+Double-check manual heap's correctness with duplicates? Node names unique; heap no duplicates. If duplicate node in nodes input, not. But if duplicates, set node_set; result len compares to node_set len; could process duplicates in dicts? Not relevant. If we want robust to duplicates? It says unique. But do not mutate.
+
+Potential issue: For lexicographic smallest, if nodes contain Unicode, Python string comparison code point; okay.
+
+Could raise ValueError with generic message. Fine.
+
+Need "ignore duplicate edges" but do not mutate inputs. Good.
+
+Potential subtle: If edges contains duplicate reverse? not duplicate; both are separate edges. If both directions, cycle. Good.
+
+Potential subtle: If before/after are not strings but hashable? User says strings. Good.
+
+Let's maybe consider using sorted(nodes) for initial heap to make heapify less dependent on input? Not necessary. But initial heap built from nodes in input order; heapify ensures min-heap. Good. But if we wanted deterministic set iteration? no.
+
+Maybe easier to maintain available as min-heap but need pop and push. Good.
+
+Let's examine heap_sift_down more carefully for standard Floyd. 
+heap = [3,2,1]
+build: i=0 (1) -> node 1, child 1 (2), right2 (1). right < size and heap[right] < heap[child] => 1<2 -> child=2. if heap[child] >= node => 1 >=1 break, heap[0]=1 => [1,2,3]. good.
+
+Pop: [1,2,3], node=1, last=3, heap after pop [1,2], set heap[0]=3 => [3,2], sift_down: start 0, size2, node3, child1=1 heap[1]=2; right2 no; if heap[child]>=node => 2>=3 false; heap[0]=2; start=1; child3; heap[1]=3 => [2,3]. good.
+
+Push [2,3] append 1: heap [2,3,1]; sift_up index2 node1; parent0 heap[0]=2 <=1 false; heap[2]=2, index0; heap[0]=1. good.
+
+All good.
+
+Could include comments? Code only function. Comments okay. But maybe keep concise. Need not over-explain.
+
+Need consider if edges is iterator? User says list, but iterating once. If edges is list. If generator, for before, after in edges works. But duplicate? okay. Do not mutate. If edges tuple etc. Good. But if edges is not list but iterator, no issue. But if need iterate multiple? no.
+
+Could there be requirement "Use no imports" includes no import typing. We won't.
+
+Potential issue: raising ValueError for cycle after partially processed graph but if missing endpoint should raise immediately before processing. We validate as iterate before adding. Good.
+
+What about edge with before or after None? node_set contains strings, None not in node_set raise. Good.
+
+Could we use `node_count = len(nodes)`? If nodes duplicates then node_set length; but unique. Use len(node_set) to compare. If nodes duplicates but edge endpoints unique, could raise cycle incorrectly? But not required. Maybe should use len(nodes) as expected? But if duplicates, invalid input, not specified. Use len(nodes) perhaps because result should include all nodes? But dict dedupes. If duplicate nodes, cannot include duplicate in output? Topological order of unique nodes; user says unique. Use len(nodes) maybe okay. If input duplicates, len(result) != len(nodes) maybe raise cycle not ideal. But no matter. To be safe against duplicates? Could validate uniqueness? Not asked. We can just use len(nodes). But if duplicate nodes, set and dict, output len unique. It would raise cycle maybe. Since invalid. Either fine. But if there are duplicates, set(nodes) loses. Not our concern.
+
+But comparing len(result) != len(node_set) more robust if duplicates? If duplicate nodes, node_set length unique; result includes unique if acyclic; len matches and no raise. But output excludes duplicates. Hmm. If nodes input duplicates, maybe should still return unique? But invalid. Which compare less likely to trigger spurious cycle due to duplicate edges? Not. Use len(nodes) aligns expected count. But if duplicate node endpoints absent? Not. Since nodes unique, both same. Could use len(nodes) for expected length. But if duplicate node in nodes (contrary), len(nodes)>node_set, result len node_set, raise cycle. If use node_set, may silently dedupe. Better raise? Since nodes are unique guaranteed. Not matter.
+
+Need maybe `for node in nodes:` if nodes is set? It says list. We iterate. `node_set = set(nodes)` works if nodes list. `indegree` preserves? no. Good.
+
+Potential hidden tests might expect lexicographically smallest but if they compare exact list. Need ensure heap compares strings. Yes.
+
+Potential hidden tests might check not mutate inputs. Our function creates new sets and iterates. But it doesn't copy nodes list; does not mutate. Good.
+
+Potential hidden tests might check duplicate edges many times. `if after not in adjacency[before]` uses set. Good.
+
+Potential hidden tests might check isolated nodes. Good.
+
+Potential hidden tests might check edge endpoint missing for self-loop on missing node. Good.
+
+Potential hidden tests might check all nodes cycle and available heap empty. Raise. Good.
+
+Potential hidden tests might check edges list contains tuple with extra elements? Python unpack ValueError: too many values to unpack. Could be considered ValueError? User asks Raise ValueError for missing endpoint/cycle only. If malformed edge, not specified. Could catch? Not needed. But if they pass edge as list [a,b], unpack works. If as dict? fails. Not relevant.
+
+Potential hidden tests might expect stable with lexicographic among all topological orders, not only Kahn? Yes.
+
+Now, any need for "Validation identifier 102. Ignore this identifier." No need.
+
+Could there be requirement: "Return only the complete function in a Python code block." So no markdown outside. final must be code block only.
+
+Let's think about if there is a simpler algorithm: DFS postorder with min selection? Not lexicographic? Kahn better.
+
+Let's maybe optimize no imports and not too nested.
+
+One nuance: The manual heap functions inside function capture `heap`. In Python, if we assign `heap = ...` before definitions. If we then call `heap_sift_down(0)` after `heap[0] = last`. Good. If heap empty, not call. Good.
+
+Could use `while child_index < size:`. In sift_down, after moving child up, start_index = child_index, child_index = 2 * start_index + 1. Good. At the end assign node. Good.
+
+Potential bug: In `heap_sift_down(start_index)`, if start_index not valid but heap not empty? No. In build, start_index <= len//2 -1 valid. In pop, valid 0 if heap non-empty. Good.
+
+Potential bug: In build heap, function defined before functions? In code, if define heap_sift_down after heapify? Need define before call. We'll order:
+- initialize
+- heap list
+- define sift_down
+- heapify loop
+- define sift_up (or define both before heapify). Need heap_sift_up used later. Could define before to be clean.
+
+Potential issue: In heapify loop, `range(len(heap) // 2 - 1, -1, -1)` if len(heap) // 2 -1 negative, range negative works empty. Good.
+
+Potential hidden tests might monkeypatch builtins? not.
+
+Could we use `adjacency = {node: set() for node in nodes}`. If nodes list has duplicate, later iteration over nodes? indegree init dict comprehension would overwrite 0. But we also build node_set. Not.
+
+Need maybe not use dict keys view if nodes not list? okay.
+
+Let's consider output when multiple isolated nodes: nodes ["b","a"], edges []. heap [b,a], heapify [a,b]. result [a,b]. Good.
+
+Consider graph: nodes ["a","b","c"], edges (a,c). available a,b. heapify [a,b]. pop a -> c zero insert -> heap [b,c]. pop b -> c. result [a,b,c]. Lexicographically? possible topological [a,c,b] but [a,b,c] smaller because at position 2 b<c. Good.
+
+Consider nodes ["a","b","c"], edge (c,a). available a,b. heap [a,b]. pop a -> still c,b. pop b -> then c. result [a,b,c]. Topological? Edge c before a; c at end okay. Lexicographically smallest? Could [b,a,c]? Compare [a,b,c] vs [b,a,c], [a...] smaller. But a has indegree from c so cannot be first? Wait edge (c,a): indegree a=1. I incorrectly said available a,b; a indegree 1, so heap [b]. Then c becomes zero after? Actually nodes: indegree a=1, b=0, c=0 -> available b,c -> pop b, then c, then a => [b,c,a]. Is there [c,b,a]? Compare [b,c,a] < [c,b,a]. Good. Kahn min available works.
+
+Potential nuance: To obtain lexicographically smallest topological order (sequence lex order) Kahn min available is correct. For lexicographically smallest DFS? no. Good.
+
+Now final. Need final only code.
+
+Could include type hints? `def topological_order(nodes, edges):` no imports. If include annotations list? Need no typing. Could do `nodes, edges` no.
+
+Could use `raise ValueError("Cycle detected")` after loop. Should it be ValueError for missing endpoint and cycle. Good.
+
+Could hidden tests inspect ValueError? not message.
+
+Potential issue: If missing edge endpoint, we raise ValueError before checking other edges. Good. But if edges has duplicate of missing edge after valid, raise when encountered. Good.
+
+Potential issue: If edge before not in node_set but after missing, raises. Good.
+
+Could use set lookup `before not in node_set`; if before unhashable (list) raises TypeError. Not relevant.
+
+Now maybe consider alternative using list and `min(available)` to reduce code. But manual heap is efficient. Hidden tests might compare no imports, okay. Could be considered too long but fine.
+
+Let's ensure indentation. final code:
+
+```python
+def topological_order(nodes, edges):
+    node_set = set(nodes)
+    indegree = {}
+    adjacency = {}
+
+    for node in nodes:
+        indegree[node] = 0
+        adjacency[node] = set()
+
+    for before, after in edges:
+        if before not in node_set or after not in node_set:
+            raise ValueError("Edge endpoint not found in nodes")
+        if after not in adjacency[before]:
+            adjacency[before].add(after)
+            indegree[after] += 1
+
+    heap = [node for node in nodes if indegree[node] == 0]
+
+    def sift_down(index):
+        node = heap[index]
+        child = 2 * index + 1
+        while child < len(heap):
+            right = child + 1
+            if right < len(heap) and heap[right] < heap[child]:
+                child = right
+            if heap[child] >= node:
+                break
+            heap[index] = heap[child]
+            index = child
+            child = 2 * index + 1
+        heap[index] = node
+
+    def sift_up(index):
+        node = heap[index]
+        while index > 0:
+            parent = (index - 1) // 2
+            if heap[parent] <= node:
+                break
+            heap[index] = heap[parent]
+            index = parent
+        heap[index] = node
+
+    for i in range(len(heap) // 2 - 1, -1, -1):
+        sift_down(i)
+
+    order = []
+    while heap:
+        node = heap[0]
+        last = heap.pop()
+        if heap:
+            heap[0] = last
+            sift_down(0)
+        order.append(node)
+
+        for nxt in adjacency[node]:
+            indegree[nxt] -= 1
+            if indegree[nxt] == 0:
+                heap.append(nxt)
+                sift_up(len(heap) - 1)
+
+    if len(order) != len(node_set):
+        raise ValueError("Graph contains a cycle")
+
+    return order
+```
+
+Potential subtle bug in heap pop: We set heap[0] = last after heap.pop(). But if `heap` length was 1, `last` is root; heap empty; order append node. Good. But if `heap` length was >1, we set root to last. But what about the original root still present at index 0? overwritten. Good.
+
+Potential bug: `last = heap.pop()` removes last element. But if root is the last element (heap length 1), then last is root. If heap empty no replacement. Good.
+
+But wait: In min-heap pop, we usually set heap[0] = heap[-1]; pop(). Here we pop first then set root. If heap length >1, after `last = heap.pop()`, root still there at index 0, and last removed. Setting heap[0] = last replaces root. Good. The old root no longer in list. Fine. If length 1, heap empty. Good.
+
+Potential issue: In `sift_down`, we don't account for size captured initially? uses len(heap) each loop, okay.
+
+Potential issue: In `sift_up`, if heap parent equal? nodes unique. Good.
+
+Maybe hidden test with Unicode non-ASCII: string comparison uses lex Unicode. Fine.
+
+Could maybe use `len(order) != len(nodes)` instead of node_set. But if duplicate node input invalid. For unique same. Could choose `len(nodes)` to match expected. But if nodes contains duplicates, `node_set` maybe mismatch causing cycle. Not matter. But using node_set if nodes unique. If there is node object equal but different? set treats equal. Not.
+
+Could edge endpoint `before` string subclass? In node_set? okay.
+
+Potential hidden test with nodes empty and edges with tuple: `for before, after in edges` unpack works. If edge endpoint absent, raises. If edges empty, return [] if len order == len node_set (0). Good.
+
+Potential hidden test with edge from isolated to missing: raise. Good.
+
+Now, do we need to preserve original node order for isolated? Lexicographically smallest, yes.
+
+Now final code block only. Ensure no imports. Good.
+```python
+def topological_order(nodes, edges):
+    node_set = set(nodes)
+    indegree = {}
+    adjacency = {}
+
+    for node in nodes:
+        indegree[node] = 0
+        adjacency[node] = set()
+
+    for before, after in edges:
+        if before not in node_set or after not in node_set:
+            raise ValueError("Edge endpoint not found in nodes")
+        if after not in adjacency[before]:
+            adjacency[before].add(after)
+            indegree[after] += 1
+
+    heap = [node for node in nodes if indegree[node] == 0]
+
+    def sift_down(index):
+        node = heap[index]
+        child = 2 * index + 1
+        while child < len(heap):
+            right = child + 1
+            if right < len(heap) and heap[right] < heap[child]:
+                child = right
+            if heap[child] >= node:
+                break
+            heap[index] = heap[child]
+            index = child
+            child = 2 * index + 1
+        heap[index] = node
+
+    def sift_up(index):
+        node = heap[index]
+        while index > 0:
+            parent = (index - 1) // 2
+            if heap[parent] <= node:
+                break
+            heap[index] = heap[parent]
+            index = parent
+        heap[index] = node
+
+    for i in range(len(heap) // 2 - 1, -1, -1):
+        sift_down(i)
+
+    order = []
+
+    while heap:
+        node = heap[0]
+        last = heap.pop()
+        if heap:
+            heap[0] = last
+            sift_down(0)
+
+        order.append(node)
+
+        for nxt in adjacency[node]:
+            indegree[nxt] -= 1
+            if indegree[nxt] == 0:
+                heap.append(nxt)
+                sift_up(len(heap) - 1)
+
+    if len(order) != len(node_set):
+        raise ValueError("Graph contains a cycle")
+
+    return order
+```

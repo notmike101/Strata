@@ -1,0 +1,40 @@
+```python
+def topological_order(nodes, edges):
+    node_set = set(nodes)
+
+    adjacency = {node: [] for node in node_set}
+    indegree = {node: 0 for node in node_set}
+
+    seen_edges = set()
+    for before, after in edges:
+        if before not in node_set or after not in node_set:
+            raise ValueError("edge endpoint not in nodes")
+
+        edge = (before, after)
+        if edge in seen_edges:
+            continue
+
+        seen_edges.add(edge)
+        adjacency[before].append(after)
+        indegree[after] += 1
+
+    available = sorted(node for node in node_set if indegree[node] == 0)
+    order = []
+
+    while available:
+        node = available.pop(0)
+        order.append(node)
+
+        for nxt in adjacency[node]:
+            indegree[nxt] -= 1
+            if indegree[nxt] == 0:
+                index = 0
+                while index < len(available) and available[index] < nxt:
+                    index += 1
+                available.insert(index, nxt)
+
+    if len(order) != len(node_set):
+        raise ValueError("cycle detected")
+
+    return order
+```

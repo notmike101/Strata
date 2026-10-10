@@ -1,0 +1,19 @@
+We need answer user: implement thread-safe Python TTLCache class using OrderedDict and monotonic clock. Include set, get, delete, clear, len, expiration, capacity eviction, unit tests with injected fake clock, detailed explanation thread safety and complexity. Complete code, tests, then explain design. Do not abbreviate implementation. At least 1200 words. Need produce final only. Need think thoroughly. Need likely include imports collections OrderedDict, time, threading, typing. Need fake clock for tests. TTLCache class.
+
+Need ensure correct details.
+
+Need design:
+
+class Clock: interface with monotonic() returns float.
+SystemClock using time.monotonic.
+
+TTLCache:
+- _lock = threading.RLock() maybe because internal methods under lock.
+- _cache: OrderedDict
+- _ttl: float maybe per-item expiration? Use OrderedDict values as (value, expires_at). Or separate dict. Use OrderedDict to maintain insertion/access order for LRU eviction? For TTL cache, capacity eviction can evict oldest inserted or LRU. User says OrderedDict and expiration capacity eviction. We can use OrderedDict for LRU: move_to_end on get/set. Evict oldest when len > capacity. Need expiration lazy and maybe purge expired entries in len? For len should include unexpired only? Include expiration. Need methods: set(key, value, ttl=None), get(key, default=None), delete(key), clear(), __len__, maybe __contains__, maybe __iter__? Need len return count of non-expired entries. But careful: if len purges expired under lock, could be expensive O(n). Could implement count_non_expired with expiration. For unit tests with fake clock.
+
+Potential approach:
+- Store OrderedDict[key] = CacheEntry(value, expires_at)
+- On set: with lock: if ttl is None use default_ttl. If key exists delete then set. If capacity ==0? maybe just don't store? Raise? Need robust.
+- _is_expired(entry, now): entry.expires_at <= now maybe. Need handle default_ttl None means no expiration? Could support ttl=None for no expiration? But TTL cache maybe default_ttl must be float. Could allow None as infinite? Simpler: default_ttl positive, ttl None uses default. But if default_ttl=None no expiration. Use Optional[float]. Expiration: if ttl is None -> expires_at = None if default_ttl is None else now+ttl. is_expired checks expires_at is not None and expires_at <= now.
+-

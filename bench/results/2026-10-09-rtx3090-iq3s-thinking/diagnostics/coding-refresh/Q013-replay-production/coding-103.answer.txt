@@ -1,0 +1,84 @@
+```python
+def topological_order(nodes, edges):
+    node_set = set(nodes)
+    indegree = {node: 0 for node in node_set}
+    adjacency = {node: set() for node in node_set}
+    seen_edges = set()
+
+    for before, after in edges:
+        if before not in node_set or after not in node_set:
+            raise ValueError("Edge endpoint is not present in nodes")
+
+        if (before, after) in seen_edges:
+            continue
+
+        seen_edges.add((before, after))
+        adjacency[before].add(after)
+        indegree[after] += 1
+
+    def _sift_down(heap, pos):
+        n = len(heap)
+        while True:
+            left = 2 * pos + 1
+            if left >= n:
+                break
+
+            right = left + 1
+            smallest = pos
+
+            if left < n and heap[left] < heap[smallest]:
+                smallest = left
+            if right < n and heap[right] < heap[smallest]:
+                smallest = right
+
+            if smallest == pos:
+                break
+
+            heap[pos], heap[smallest] = heap[smallest], heap[pos]
+            pos = smallest
+
+    available = [node for node, degree in indegree.items() if degree == 0]
+
+    for i in range(len(available) // 2 - 1, -1, -1):
+        _sift_down(available, i)
+
+    def _heappush(heap, item):
+        heap.append(item)
+        pos = len(heap) - 1
+
+        while pos > 0:
+            parent = (pos - 1) // 2
+            if heap[parent] <= item:
+                break
+
+            heap[pos] = heap[parent]
+            pos = parent
+
+        heap[pos] = item
+
+    def _heappop(heap):
+        item = heap[0]
+        last = heap.pop()
+
+        if heap:
+            heap[0] = last
+            _sift_down(heap, 0)
+
+        return item
+
+    result = []
+
+    while available:
+        node = _heappop(available)
+        result.append(node)
+
+        for neighbor in adjacency[node]:
+            indegree[neighbor] -= 1
+            if indegree[neighbor] == 0:
+                _heappush(available, neighbor)
+
+    if len(result) != len(node_set):
+        raise ValueError("Cycle detected")
+
+    return result
+```

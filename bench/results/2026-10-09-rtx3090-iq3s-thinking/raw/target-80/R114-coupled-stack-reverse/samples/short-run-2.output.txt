@@ -1,0 +1,14 @@
+We need answer user's request. Need produce final answer at least 1200 words, complete code, tests, explanation. Need implement thread-safe Python TTLCache using OrderedDict and monotonic clock. Include set, get, delete, clear, len, expiration, capacity eviction, unit tests with injected fake clock, detailed explanation of thread safety and complexity. Do not abbreviate implementation. Ignore identifier.
+
+Need craft thorough. Let's think design.
+
+Need class TTLCache. Use collections.OrderedDict. Monotonic clock via time.monotonic, but injectable clock for tests. Thread safe with RLock maybe. Need expiration: lazy expiration on access? Could include _purge_expired, maybe cleanup on set/get. Also maybe count property? User asks len, expiration. Maybe expiration capacity eviction. Include len? Could implement __len__, __contains__, get, set, delete, clear, maxsize, ttl, maybe items? Need ensure capacity eviction. OrderedDict with move_to_end True for LRU? TTL cache could evict expired first, then LRU? We need decide.
+
+Implement:
+
+class TTLCache:
+    __slots__ = ('_store','_lock','_maxsize','_ttl','_clock')
+
+    def __init__(self, maxsize=128, ttl=60.0, *, clock=None): validate maxsize positive int, ttl non-negative? clock callable no args returns float. If None use time.monotonic.
+
+    def set(self, key, value, ttl=None): with lock, now = clock(); _expire(now); if key in store: store[key][value, expiry], move_to_end; else if maxsize <=0? maybe if maxsize == 0? Could support zero maxsize no store? But maxsize maybe positive. If len >= maxsize: evict oldest non-expired? If expired already purged, len < maxsize. store[key]= (value, now + ttl); move_to_end. Return None. Need ttl per-item optional. Validate ttl if given. If ttl ==0 then item expires immediately? Should not store? Could if ttl <= 0: maybe delete if exists, return. But expiration now. Better: if ttl is not None: ttl=float(ttl); if ttl < 0 raise. In set: if ttl == 0: if key exists delete; return. Or store with expiry <= now then purge at next op. But get should not return. Simpler

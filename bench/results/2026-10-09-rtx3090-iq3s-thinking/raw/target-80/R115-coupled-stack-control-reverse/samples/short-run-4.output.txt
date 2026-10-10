@@ -1,0 +1,19 @@
+We need answer user's request. Need produce complete code, tests, explanation detailed >=1200 words. User: Benchmark identifier ignore. Implement thread-safe Python TTLCache class using OrderedDict and monotonic clock. Include set, get, delete, clear, len, expiration, capacity eviction, unit tests with injected fake clock, detailed explanation thread safety and complexity. Complete code, then tests, then explain design. Do not abbreviate implementation. At least 1200 words.
+
+Need final only. Need think details. Need ensure Python code correct. Implement TTLCache using OrderedDict. Thread-safe with RLock. Fake clock injected. Monotonic clock default time.monotonic. Methods set, get, delete, clear, __len__, maybe contains, pop, keys? Need include expiration and capacity eviction. Need maybe maxsize, ttl. If maxsize None unlimited? Use OrderedDict move_to_end for LRU on set/get. Expiration: store (value, expires_at). On get check expired. Also need maybe _purge_expired() during set or get. len should return number of non-expired entries? If len called, need expire stale entries and return count. But if many expired keys and no operations, len should reflect actual count after expiration; implement _purge_expired to remove expired. Complexity if purge all keys O(n). Could mention amortized? OrderedDict no time-heap. For strict efficiency, expiration can be lazy; len forces O(n). Alternative maintain expiry heap? But requested using OrderedDict and monotonic clock; likely simple TTL cache. Need maybe if len called often, O(n). Need detailed explanation. Need unit tests with fake clock. Need not abbreviate. Use unittest. Maybe dataclass? Keep code readable.
+
+Need ensure no type issues. TTLCache:
+from __future__ import annotations
+import threading, time
+from collections import OrderedDict
+from typing import Any, Callable, Hashable, Optional, TypeVar
+
+class _FakeClock:
+   def __init__(self, start=0.0): self._now=float(start)
+   def monotonic(self): return self._now
+   def advance(self, seconds): self._now += seconds
+
+class TTLCache:
+    def __init__(self, maxsize=128, ttl=None, clock=time.monotonic):
+       if maxsize is not None and maxsize <=0 raise ValueError
+       if ttl is not None and ttl <=0 raise ValueError? ttl zero? Could allow 0
