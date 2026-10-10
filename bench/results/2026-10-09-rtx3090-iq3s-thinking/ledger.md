@@ -2994,3 +2994,138 @@ Use dependency/overlap evidence, not summed overlapping durations as saved time.
 Full frozen random-coding, cold/warm/cache-hit/vision/tools/reasoning/cancel/max-
 context matrix remains required. Q007 two incomplete coding answers unresolved.
 Goal remains active and unqualified; no safe experiment is currently blocked.
+
+
+## E157 / P020 refreshed cumulative-stack short-request profile
+
+Previous goal turn was progress: C049 four-arm comparison finished, source and
+ledger pushed d1a15b1c. Candidate89.1/85.0 versus89.4/82.9 control; no promotion.
+Refresh profiler evidence before another change. Existing P009/P013 predate HC1
+and accepted-usage accounting. Do not infer the remaining bottleneck from them.
+
+One fresh process, exact R099 short warmup(seed100) and short-run1(seed101)
+payloads,512tokens each, streaming/cachemiss, frozen thinking coding profile,
+IQ3_S/262144/INT8KV/CPU F16vision. Current engineac43e898,HC1/accepted1,auto prompt
+share/MAX1024,conditional64/minfresh1025 (inactive for this165-token request),
+DMA0/deviceplan0,MTP4/.70,PCIe.20,9workers30tasks. Only host decode timers added.
+Nsight Systems2026.5.1 graph-node software trace, CUDA events disabled,1s flush,
+CPU sampling/context-switch tracing disabled. Start after warmup, stop after the
+entire measured request. Capture includes prompt processing; never label total
+GPU sums as decode-only. No GPU phase stamps or source changes.
+
+Finite budget one capture. Independent16GiB physical/commit guard eachsecond,
+preflight process inventory, identity-checked requests, exact profile-session and
+launcher/model/vision cleanup and production config restore in finally. No other
+model/build/profiler/GUI or process-memory polling during generation. Raw nsys-rep
+and SQLite stay private; export only selected stats and diagnostics. Audit record
+consistency before conclusions; absence of records is not proof of GPU idle.
+Overlapping kernel/copy sums and interval unions are not a dependency critical
+path or removable latency. Instrumented TPS is diagnostic, never qualification.
+
+
+## E158 / P020 findings and E159 / C050 IQ4_NL down compiler probe
+
+P020 completed one warmup and one profiled512-token exact R099 short request.
+Software graph-node tracing slowed served decode to72.9 and E2E64.7341tok/s;
+diagnostic only, never a qualifying performance value. Capture includes827ms
+prompt processing plus7018.8ms decode. Host decode timers:311windows,22.57ms per
+window, verify20.79 (GPU-reach wait10.44, host6.02: plan.08, activationquant.10,
+jobs.01, CPUexpertwork5.81), commit/emit.18, draft1.24. These instrumented timers
+identify CPU expert work as a larger host target than planning, not a guaranteed
+critical-path saving or precise uninstrumented fraction.
+
+Trace audit:720399kernel records,991 graph launch API/activity matches,12543direct
+launches/activity matches; zero invalid intervals, nonzero launch returns or
+unmatched launches. Cohort node sets stable. Nsight still warns not all CUDA
+events may be collected; producer/collector counts differ by category and are not
+a dropped-kernel count. Internal reconciliation does not prove completeness.
+Whole-request recorded activity span7848.909ms, any6768.548, no recorded1080.362.
+Only-category-active:Q6MMVQ855.068ms, memcpy762.882ms, waitflag647.689ms. These
+overlap categories are not dependency critical paths, removable time or proof
+of idle hardware. Raw SQLite/nsys metadata remains private. Exact cleanup passed,
+GPU457MiB and config3457fdfe... restored. Capture budget closed.
+
+C050 is a NEW compiler target: IQ4_NL down projection(type20), not C042's IQ3_S
+gate/up retry. C040/C041/C042 deliberately kept down projections on MSVC. Compile
+the identical current iq_avx2.cpp as separately renamed MSVC and Clang19.1.5
+images, AVX2 only, precise math, Clang FP contraction off; explicit FMA intrinsics
+unchanged. Only the test pool's type20 down dispatch differs; GU, quantization and
+all other formats remain identical. No production source/runtime edits yet.
+
+Proof gate: all576 actual-weight full-pool outputs across48layers,experts0/173/511,
+T1/2/4/8 must match bitwise and be finite. Then one finite timing probe: eligible
+type20 layers0/5/10/15/20/25/30/35/40/45/47,64 actual experts/layer with prior fixed
+(29+17*i)%512 selection (beyond L3),T1/2/4/8,jobs1/3/6,9workers+host0,30tasks,
+one warmup and five alternating paired100-call rounds per cell. All cells retained.
+Require at least5% geometric-mean whole-pool time gain and no cell over3% slower
+before any engine integration. Otherwise close this compiler path without served
+runs. This is an offline primitive probe, not TPS or full answer-quality proof.
+Independent16GiB physical/commit guards, no model server or concurrent build during
+timing. Sampling/model/context contract is untouched; no weight files exported.
+
+
+## E160 / C050 down-only compiler gate rejected; P020 evidence published
+
+Previous turn answering the metric question changed no optimization state; this
+continuation revalidated the pending build rather than restarting it. Both fresh
+C050 executables existed, compiler processes were absent, and the full build log
+ended after successful links. No engine source edits were made.
+
+C050 compares identical current IQ4_NL down code compiled by MSVC19.44 versus
+Clang19.1.5, AVX2, precise math, explicit FMA preserved, Clang contraction off.
+GU, activation quantization and other down formats use the same current library.
+All576 actual-weight complete-pool cases passed bitwise and finite-output checks:
+48layers x experts0/173/511 x T1/2/4/8. This is sampled kernel parity, not full
+model quality or a served TPS measurement.
+
+Timing used the predeclared predicate down_type20 AND (layer%5==0 OR layer47).
+Eight layers qualify:0,5,15,25,35,40,45,47. Layers10,20,30 have another down type
+and were excluded by the predicate, not by their measured speed. Thus96cells,
+960 measured values (5 alternating pairs each), plus192 warmup values. Each
+value averages100 complete-pool calls across64actual experts/layer. T1/2/4/8,
+jobs1/3/6,9workers+host0,30tasks. All timings, including slow cells, are retained.
+
+Geometric mean of Clang/MSVC per-cell ordinary-median time ratios:
+0.992158989 (0.7841% lower time). Worst ratio1.180074938 (18.0075% slower);
+18/96cells slower,3/96over3% slower. The required>=5% aggregate time reduction
+AND no cell>3% slower both fail. Reject and close this compiler path; no cherry-
+picked subset, extra confirmation, engine integration, server run or promotion.
+This does not imply a0.78% served throughput improvement.
+
+Independent global memory guard passed every second. Minimum available physical
+119752142848bytes and commit124670394368bytes,
+both above16GiB. Exact child exit/cleanup recorded. No model server launched.
+Executable hashes and source/build commands accompany all raw results.
+
+Process-inventory correction: CIM again listed the same five old Python PIDs
+30352/134612/90924/70108/273856 from the prior E050 investigation. No8080 listener
+or model engine was present and GPU memory was457MiB. E050 had already proved
+these were exited process objects; the initial commentary calling them wrappers
+needed that distinction. Terminate returned0 for those exact validated records;
+psutil's live inventory contained only the current diagnostic Python processes.
+No evidence of five running models, GPU competition, or a new throughput loss.
+
+P020 allowlisted trace audits, timing statistics, request evidence, safety logs
+and scripts are published alongside this result. Raw Nsight/SQLite files stay
+private. Trace consistency is not completeness, overlap sums are not removable
+latency, and instrumented72.9decode is not a qualifying arm.
+
+Upstream refreshed at2026-10-10 approximately07:07UTC using the bot helper:
+main stillfb58e0dbc8399662c0e47c76578c6e878b14f6cf, releasev0.1.41 unchanged.
+No stable update to apply. Fresh broader review:
+- PR1813 adf979544232c18e6d90b27adf41a5ed4e9b5afe adds exact greedy-window tests,
+  not a runtime optimization. Useful test design, not sampled-profile proof.
+- PR1713 432702961faba67ae5325444a328ebc6fcde9f26 splits the SYCL verify graph
+  around CPU service and pipelines a helper. CUDA is untested upstream. This is
+  a distinct scheduling architecture worth examining against the current CUDA
+  mapped-buffer/coherence and overlap design; Arc measurements do not transfer.
+- PR1426 73b3db6b688f059350d1812ed67efc85bfbbdb30 DFlash currently falls back to
+  target-only for sampled requests and loses to MTP in its reported greedy test.
+  Not a drop-in candidate under this fixed sampling contract.
+
+Next: examine the CUDA CPU-service/GPU-consumer dependency path and the stepped
+verify architecture. Before implementing, establish whether a bounded opt-in
+prototype could remove a measured cost without losing current overlap; abandon
+it if that mechanism is absent. Do not retry the three closed compiler paths.
+Production launcher, context262144, vision and sampling remain unchanged. Goal
+active:90short/85long and complete quality/workload matrix still unqualified.

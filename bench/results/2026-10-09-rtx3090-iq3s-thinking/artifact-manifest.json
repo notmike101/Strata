@@ -1,13 +1,13 @@
 {
-  "exported_utc": "2026-10-10T06:46:40.075693+00:00",
+  "exported_utc": "2026-10-10T07:08:55.569524+00:00",
   "files": {
     ".gitattributes": {
       "bytes": 205,
       "sha256": "15b57f1650e1c6330ac02814e730d7470c68f7e1ccee5e2fbeeffa69ad9dcd5a"
     },
     "all-runs.csv": {
-      "bytes": 264222,
-      "sha256": "2639625048c9d89e61ad7b38208a4202962f06f488ac4a6dfe0cf18755a5a90c"
+      "bytes": 264642,
+      "sha256": "8f655688265730c51d411c7ee08ad42aa7c32a7083b5c2eb32dacf70b58eb1d8"
     },
     "B008-pcie.csv": {
       "bytes": 7700,
@@ -1068,6 +1068,78 @@
     "diagnostics/cpu-compiler/C042/summary.json": {
       "bytes": 5294,
       "sha256": "38290e639c18dc5cf2c77b4bdef8940dad7f5282c4f8aa073767b53f490180c7"
+    },
+    "diagnostics/cpu-compiler/C050/actual.txt": {
+      "bytes": 36713,
+      "sha256": "1c8b2019dab16d8c70affa162fbe24cf3310960ae693332559829ab90fa6f3c2"
+    },
+    "diagnostics/cpu-compiler/C050/build-c050.cmd": {
+      "bytes": 2554,
+      "sha256": "d366cfdefb277b17fd10567a364c8bfd9979196224c7340551e73350ed864abf"
+    },
+    "diagnostics/cpu-compiler/C050/c050-actual.cpp": {
+      "bytes": 3776,
+      "sha256": "e03912e22f510fb271bee87add70255e89f1982bff8180b744d37a9ff02ae2f9"
+    },
+    "diagnostics/cpu-compiler/C050/C050-build.txt": {
+      "bytes": 2805,
+      "sha256": "454534d7de2495a1edbbd664c5b1d33c177f789b66c2c7556726473f1bc3380c"
+    },
+    "diagnostics/cpu-compiler/C050/c050-clang-api.hpp": {
+      "bytes": 1419,
+      "sha256": "33d1a653b69938488a15a3ca9bd48e68e15ddbdf1963609c25ca1d8023aac1e6"
+    },
+    "diagnostics/cpu-compiler/C050/c050-clang.cpp": {
+      "bytes": 592,
+      "sha256": "b9c07c568e0cf69a103182113ac4027a149a05dee32aa5ed5923e4ff80f605c9"
+    },
+    "diagnostics/cpu-compiler/C050/c050-msvc-api.hpp": {
+      "bytes": 1408,
+      "sha256": "dc5dafc2072aac5a9238ee8861d696dfb2c9c61b036516da3a4225a91d4f69bd"
+    },
+    "diagnostics/cpu-compiler/C050/c050-msvc.cpp": {
+      "bytes": 581,
+      "sha256": "8bd3eec159eac8b56816700358ac4663d16eba1e993c4a98f959c3db954f47d4"
+    },
+    "diagnostics/cpu-compiler/C050/c050-pool.cpp": {
+      "bytes": 3630,
+      "sha256": "c1c95764fc4556bde3954a5df55657c1f3cf97e9bae5776e032c4a2dec3199a6"
+    },
+    "diagnostics/cpu-compiler/C050/manifest.json": {
+      "bytes": 751,
+      "sha256": "718db6c2404849f087fcb3974aaff8af1c0f6ea28da85e26f565a4a30fb9b39c"
+    },
+    "diagnostics/cpu-compiler/C050/memory-guard.py": {
+      "bytes": 835,
+      "sha256": "0eb2e6466cea2d9487acd287e67f2919558791eb10c2efcceaa5ee372341a9b3"
+    },
+    "diagnostics/cpu-compiler/C050/plan.md": {
+      "bytes": 2769,
+      "sha256": "e04aa55268f894392cd42616baddc0e159c19c285e07ef2738b4f40c6784040c"
+    },
+    "diagnostics/cpu-compiler/C050/pool.txt": {
+      "bytes": 77551,
+      "sha256": "5c69ac3b98b1bc2e26d12174bbf1104bd4bb37051f493c7d566156759e3e7250"
+    },
+    "diagnostics/cpu-compiler/C050/README.md": {
+      "bytes": 4254,
+      "sha256": "55e50cba14801f1dc1c0afe455345974112f04a8ddea0285a9a3ec95f8a9b5b3"
+    },
+    "diagnostics/cpu-compiler/C050/record-c050-p020.py": {
+      "bytes": 8909,
+      "sha256": "46cab9bc168621bc4a16fda2548f530a1418be1b8f325426a0985290721404f6"
+    },
+    "diagnostics/cpu-compiler/C050/run-c050.py": {
+      "bytes": 2954,
+      "sha256": "e1acdce4b5a87b93cc364a2690e2c14af582b49022b1935261b74a9bde723dbb"
+    },
+    "diagnostics/cpu-compiler/C050/safety.csv": {
+      "bytes": 3826,
+      "sha256": "0f4deb8e009a0aa0b643e35b1b2bff9e8e37d19d059a690729b740c2ac920f3c"
+    },
+    "diagnostics/cpu-compiler/C050/summary.json": {
+      "bytes": 179370,
+      "sha256": "c2d4bea966cf6a9b45704faeeb9183425b4725dbb7ec342f3f4e6f6d3e2931fc"
     },
     "diagnostics/cuda134-control/build-cuda134-control.cmd": {
       "bytes": 1367,
@@ -2476,6 +2548,94 @@
     "diagnostics/profiler/P015/README.md": {
       "bytes": 488,
       "sha256": "e883ab0cb568692ab78e27d0d5346a2aa3c90fc9ad3c6f66a8ba1a45f450135f"
+    },
+    "diagnostics/profiler/P020/audit-p020-coverage.py": {
+      "bytes": 5849,
+      "sha256": "2d7d1245573b43eeab36f72c14de70f92b927b61ace3c4056489ddd9d3da0f65"
+    },
+    "diagnostics/profiler/P020/audit-p020-overlap.py": {
+      "bytes": 3536,
+      "sha256": "9bf0b959fa9ddd2cc1d1620cae5aea1c6815ec03903f7b022ad6fa797b4eded8"
+    },
+    "diagnostics/profiler/P020/audit-p020-q6-shapes.py": {
+      "bytes": 1574,
+      "sha256": "d9b4892626db17da0d55204ed3ea2f08eb477d50fd76397da3e5b1376b493ca4"
+    },
+    "diagnostics/profiler/P020/P020-capture.json": {
+      "bytes": 259,
+      "sha256": "6c732efc759f527c23bd7786ba15f6c2604ed8dd1a53a8643d87646eecdc91e0"
+    },
+    "diagnostics/profiler/P020/P020-coverage-audit.json": {
+      "bytes": 5673,
+      "sha256": "53c6cdc6a1c0a52ab1a5a84960fed133e5f6b995634883702649707f7e4b9bd3"
+    },
+    "diagnostics/profiler/P020/P020-export.txt": {
+      "bytes": 8128,
+      "sha256": "58b23174503b47623acbbc683e7651126df123e0f8a15d181c11c2213f97cd48"
+    },
+    "diagnostics/profiler/P020/P020-overlap.json": {
+      "bytes": 5451,
+      "sha256": "beb50b6611235f06c0d83f7fdf2b3f01113ebdfb929f5ada0125ea443fb68a0e"
+    },
+    "diagnostics/profiler/P020/P020-q6-shapes.json": {
+      "bytes": 18868,
+      "sha256": "870c89b9a17ef3438d1db933fd1544a48c40b05e2d54fc1b681a9b8d567bf927"
+    },
+    "diagnostics/profiler/P020/P020-stats.txt": {
+      "bytes": 564,
+      "sha256": "d6706a93cd22e3919aa0b585564dba9bcd42fa91c4b9c1126a6f3574efa28705"
+    },
+    "diagnostics/profiler/P020/P020-stats_cuda_api_sum.csv": {
+      "bytes": 1144,
+      "sha256": "d61efb8aff741ee10c6ca38f21d906a1ebbde25548c1e6d1e61a1de9ca5179b0"
+    },
+    "diagnostics/profiler/P020/P020-stats_cuda_gpu_kern_sum.csv": {
+      "bytes": 61871,
+      "sha256": "6ba71912f8a7fca1ee8cd9c49d13b9c8dbe1710fca42697bb13a89e943e9ea29"
+    },
+    "diagnostics/profiler/P020/P020-wrapper.txt": {
+      "bytes": 3566,
+      "sha256": "104fd8705a50c49eedbc14e5f92feae1132d8d15e58b82e70f7b391e7edcb2f4"
+    },
+    "diagnostics/profiler/P020/plan.md": {
+      "bytes": 1734,
+      "sha256": "a6ef0b4dc9a9ef4880c3b954df4d388fe905feb05c72d16777847f9680d07410"
+    },
+    "diagnostics/profiler/P020/prepare-p020.py": {
+      "bytes": 4226,
+      "sha256": "eefc3cc5155051e6c4d68e0b5d88f6a747061c60403e2be7b2babe05d9a8f595"
+    },
+    "diagnostics/profiler/P020/profile-p020.ps1": {
+      "bytes": 2883,
+      "sha256": "016ba13c1590a0cb7fd0a7c440c834cc3f26d7a653b4f883884fbfaa9ef9a85e"
+    },
+    "diagnostics/profiler/P020/profile-p020.py": {
+      "bytes": 1527,
+      "sha256": "9156ee6ca058e58ad7384f20af7770d569212381199e45ba344d3b6d76b70c2b"
+    },
+    "diagnostics/profiler/P020/README.md": {
+      "bytes": 1549,
+      "sha256": "54e66377a8c1e50fad3d66eac6abeaa1aff07122bb4a3725783de11cd767ad17"
+    },
+    "diagnostics/profiler/P020/run-p020.py": {
+      "bytes": 3299,
+      "sha256": "fd394f323987da2adadc52775c1698c84101ac6b390143d30a4f29d0736ab3da"
+    },
+    "diagnostics/profiler/P020/supervisor/cleanup.txt": {
+      "bytes": 107,
+      "sha256": "6cf2e6d4b83490a7661f8b6f92a91232bdc7fd008922dce3e47de889036bdc65"
+    },
+    "diagnostics/profiler/P020/supervisor/engine-session.txt": {
+      "bytes": 7535,
+      "sha256": "a21395fcf042274ac56959ecdbf6eff7dfbc4f23bbd2fe922cb85d6a553b9ff4"
+    },
+    "diagnostics/profiler/P020/supervisor/safety.csv": {
+      "bytes": 5197,
+      "sha256": "794f7d885b546cf3ffaa9b62f20e9ef6c212317bc07df91c1d8adeaabb62c283"
+    },
+    "diagnostics/profiler/P020/supervisor/supervisor.py": {
+      "bytes": 3299,
+      "sha256": "fd394f323987da2adadc52775c1698c84101ac6b390143d30a4f29d0736ab3da"
     },
     "diagnostics/q6-confirmation/C030/build-c030-dense.cmd": {
       "bytes": 595,
@@ -7070,12 +7230,12 @@
       "sha256": "cbe4ae52f24f188900426835d93180165d642914a08c7078e9aeff2860c5e5de"
     },
     "engine-timings.txt": {
-      "bytes": 285913,
-      "sha256": "f3013ffc916c1d7b2aee1e6001a2ed8ffa873968b62cba5a735edad980a32d2a"
+      "bytes": 286896,
+      "sha256": "db279168c757b36d65b5f00b31f371baae4b7435d95c0b2f891a272a0220c676"
     },
     "experiment-index.json": {
-      "bytes": 101029,
-      "sha256": "39516250f3110727b13d97f84ee1ba2e7b5b6c87942bbd48953e4dd446c1e1cb"
+      "bytes": 101382,
+      "sha256": "d08920fae69eb3955c5609c0113b601a61e764675d0c2d1d5325cc029c084ce3"
     },
     "F001-pcie.csv": {
       "bytes": 9046,
@@ -7114,8 +7274,8 @@
       "sha256": "2f62bfdf31004200f39c1304db55b529c33f169fec03d3f572c9c4564d092739"
     },
     "goal-90-state.json": {
-      "bytes": 1321,
-      "sha256": "057a5809af2a2c887e8947cb1349b787ece92d082f20f6e543915c0bfadd7a85"
+      "bytes": 1163,
+      "sha256": "e4abff6c93dae42ff06bc69c4b5c99dbd3279efea9b09b1609731ef9a96d3dd0"
     },
     "goal90-benchmark.py": {
       "bytes": 13011,
@@ -7146,16 +7306,16 @@
       "sha256": "f1340e812574b74b1139b75eaa2cad11a2cd0c11f168f6c2f1f0e7a0bb4cbaf6"
     },
     "ledger.md": {
-      "bytes": 316479,
-      "sha256": "060068ca08f5a6e0cd57b63d8f6fd4994f1668db66232d7aaa048f4e64215dc6"
+      "bytes": 325242,
+      "sha256": "3de8990f6753f54c48fe2f5a1c581861e3fe544d6915195c4b984958b72763d3"
     },
     "measure.py": {
       "bytes": 13940,
       "sha256": "a071cf6400f06945e7fd0f41e0adf1cbed86b7d7f11800b560550446f98b57ea"
     },
     "memory-snapshots.json": {
-      "bytes": 55171,
-      "sha256": "381480edd365b2a6e3e4040db9a4f7c0d70fe0d98e9ceb6185ce8d176966cd1b"
+      "bytes": 55427,
+      "sha256": "c342f700a82090989413cc9239468b8ea748a0ec1663cc036a8101dbac331dc4"
     },
     "P001-cuda_api_sum.csv": {
       "bytes": 2053,
@@ -11104,6 +11264,34 @@
     "raw/target-80/P019-B/summary.json": {
       "bytes": 1754,
       "sha256": "68c00e0f394a9830e3f191aac927ef37acc463328b4fcd87d58cf1027943c5db"
+    },
+    "raw/target-80/P020-short-profile/identity.json": {
+      "bytes": 5552,
+      "sha256": "29543937d0782afa637853b236a6f86e12a75450a7061e80a0532405772ee3c2"
+    },
+    "raw/target-80/P020-short-profile/runs.json": {
+      "bytes": 1912,
+      "sha256": "cd63c161c6bbe3e6b077c4d0c616fc29bfac934e360cedff57228f93645a1edd"
+    },
+    "raw/target-80/P020-short-profile/samples/short-run-1.output.txt": {
+      "bytes": 2193,
+      "sha256": "0731b01a02e0b9a6fa25b739b22e3e5ec9dea5899cfebbf7b211e6b2344cc533"
+    },
+    "raw/target-80/P020-short-profile/samples/short-run-1.request.json": {
+      "bytes": 955,
+      "sha256": "09c7db64c6dadb98ac526e641f41d469c2ec501ea1c6cab2fbea1d275e255dff"
+    },
+    "raw/target-80/P020-short-profile/samples/short-warmup.output.txt": {
+      "bytes": 2439,
+      "sha256": "97f98a55ebb3029f6c3f36533c94f6f0b15275b83c23689a7599dff0be5400f3"
+    },
+    "raw/target-80/P020-short-profile/samples/short-warmup.request.json": {
+      "bytes": 955,
+      "sha256": "057285fcb5b01fd8d7e4ed73cb6f46642d5581c976b3103548fa1d79e7de5a0d"
+    },
+    "raw/target-80/P020-short-profile/summary.json": {
+      "bytes": 822,
+      "sha256": "febcee06039839222b37d8538c5f923ffd4c2ef1edf5680b1a1405bfebb57972"
     },
     "raw/target-80/Q007-goal-coding/checks.json": {
       "bytes": 1017,
@@ -19866,8 +20054,8 @@
       "sha256": "e396f948c0fd6d052e50595108c4b6d7fa55123866f01c9f8d863d89a069c82a"
     },
     "README.md": {
-      "bytes": 23800,
-      "sha256": "7cad4e30c876b8d9064da0c38e2813f6590f72021a6f43d7581023f161e8121a"
+      "bytes": 23794,
+      "sha256": "ccfa0afc1697f630757b1f8171d57c27bb8ce636a20109227bc1a86eda2341c0"
     },
     "replay.py": {
       "bytes": 1104,
@@ -19886,8 +20074,8 @@
       "sha256": "649d5bb6ff558984406fb099959fc59133d908507bbc4381ed123b4ea6793e66"
     },
     "RESULTS.md": {
-      "bytes": 56623,
-      "sha256": "36f1cb0170ca40f47b28daffbf647cf38d6bdc53a4d055a3eed5ab593ab06f52"
+      "bytes": 56827,
+      "sha256": "788af5e998654ca47d027aafb9ef4b34541a440ee73a4dde616a2a9cb0b04de2"
     },
     "sampling.json": {
       "bytes": 311,

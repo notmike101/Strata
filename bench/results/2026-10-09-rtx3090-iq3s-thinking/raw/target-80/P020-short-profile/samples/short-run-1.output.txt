@@ -1,0 +1,23 @@
+We need answer user's request. Need produce detailed answer at least 1200 words. User asks: Benchmark identifier ... Ignore. Implement thread-safe Python TTLCache class using OrderedDict and monotonic clock. Include set, get, delete, clear, len, expiration, capacity eviction, unit tests with injected fake clock, detailed explanation thread safety and complexity. Write complete code, then tests, then explain design. Do not abbreviate implementation.
+
+Need final only. Need ensure code complete. Need likely include imports threading, time, OrderedDict, MutableMapping maybe. Need class TTLCache: maxsize, ttl, clock=time.monotonic. Thread-safe. Methods set(key, value, ttl=None), get(key, default=None), delete(key), clear(), __len__, maybe items? expiration: need evict expired keys. capacity eviction LRU? using OrderedDict: for get, move_to_end(key, last=True) for LRU? But user says using OrderedDict and capacity eviction; likely LRU. Need expiration. Need fake clock tests.
+
+Need be careful thread safety: single lock (RLock?) Operations call _purge_expired etc under lock. If public methods use with self._lock. Need avoid deadlocks if using RLock or design no reentrant. Use RLock safe. But with RLock can re-enter. Could use threading.RLock. OrderedDict not thread-safe.
+
+Need complete code: maybe include sentinel for default? If default sentinel. TTLCache class maybe:
+
+from collections import OrderedDict
+import threading
+import time
+
+class TTLCache:
+    def __init__(self, maxsize, ttl=0, clock=None):
+       self._maxsize=maxsize
+       self._ttl=ttl
+       self._clock=clock or time.monotonic
+       self._store=OrderedDict()
+       self._lock=threading.RLock()
+    def set(self,key,value,ttl=None):
+       if ttl is None: ttl=self._ttl
+       now=self._clock()
+       expires_at = None if ttl is None or ttl <=0 else now + ttl? TTL 0 means no ttl? But class TTL cache; ttl can float. Could treat ttl=None indefinite? Need expiration. Let's design: ttl: if None means indefinite. If <=0 maybe expires immediately? Better: ttl is float seconds >0 for expiry; None no expiry. But default? User says TTLCache, probably ttl default 300? But tests need fake clock. Could allow ttl

@@ -1,0 +1,690 @@
+{
+  "trace": "P020-decode.sqlite",
+  "scope": "Instrumented durations; overlapping costs are not request critical-path shares.",
+  "cohorts": [
+    {
+      "name": "void strata::kernels::<unnamed>::native_q6_k_mmvq_kernel<(bool)0>(const strata::kernels::<unnamed>::Q6KBlock *, const strata::kernels::<unnamed>::Q81Block *, float *, int, int)",
+      "grid": [
+        106299,
+        1,
+        1
+      ],
+      "block": [
+        32,
+        4,
+        1
+      ],
+      "registers_per_thread": 40,
+      "count": 531,
+      "sum_ms": 134.2869,
+      "median_us": 251.935,
+      "min_us": 251.04,
+      "max_us": 256.992
+    },
+    {
+      "name": "void strata::kernels::<unnamed>::native_q6_k_mmvq_kernel<(bool)0>(const strata::kernels::<unnamed>::Q6KBlock *, const strata::kernels::<unnamed>::Q81Block *, float *, int, int)",
+      "grid": [
+        2560,
+        1,
+        1
+      ],
+      "block": [
+        32,
+        4,
+        1
+      ],
+      "registers_per_thread": 40,
+      "count": 6600,
+      "sum_ms": 129.341041,
+      "median_us": 19.84,
+      "min_us": 18.111,
+      "max_us": 486.143
+    },
+    {
+      "name": "void strata::kernels::<unnamed>::native_q6_k_mmvq_kernel<(bool)0>(const strata::kernels::<unnamed>::Q6KBlock *, const strata::kernels::<unnamed>::Q81Block *, float *, int, int)",
+      "grid": [
+        248320,
+        1,
+        1
+      ],
+      "block": [
+        32,
+        4,
+        1
+      ],
+      "registers_per_thread": 40,
+      "count": 165,
+      "sum_ms": 97.91683,
+      "median_us": 593.312,
+      "min_us": 591.231,
+      "max_us": 601.024
+    },
+    {
+      "name": "void strata::kernels::<unnamed>::native_q6_k_mmvq_kernel<(bool)0>(const strata::kernels::<unnamed>::Q6KBlock *, const strata::kernels::<unnamed>::Q81Block *, float *, int, int)",
+      "grid": [
+        10240,
+        1,
+        1
+      ],
+      "block": [
+        32,
+        4,
+        1
+      ],
+      "registers_per_thread": 40,
+      "count": 3630,
+      "sum_ms": 96.41728199999999,
+      "median_us": 26.528,
+      "min_us": 26.208,
+      "max_us": 27.232
+    },
+    {
+      "name": "void strata::kernels::<unnamed>::native_mmvq_multi_kernel<strata::kernels::<unnamed>::Q6KTraits, (int)4, (int)4, (int)2, (bool)0, (bool)0>(const T1::Block *, const strata::kernels::<unnamed>::Q81Block *, float *, int, int, const T1::Block *, float *)",
+      "grid": [
+        1280,
+        1,
+        1
+      ],
+      "block": [
+        32,
+        4,
+        1
+      ],
+      "registers_per_thread": 80,
+      "count": 2280,
+      "sum_ms": 58.245450000000005,
+      "median_us": 25.472,
+      "min_us": 24.736,
+      "max_us": 27.008
+    },
+    {
+      "name": "void strata::kernels::<unnamed>::native_mmvq_multi_kernel<strata::kernels::<unnamed>::Q6KTraits, (int)2, (int)4, (int)2, (bool)0, (bool)0>(const T1::Block *, const strata::kernels::<unnamed>::Q81Block *, float *, int, int, const T1::Block *, float *)",
+      "grid": [
+        1280,
+        1,
+        1
+      ],
+      "block": [
+        32,
+        4,
+        1
+      ],
+      "registers_per_thread": 64,
+      "count": 2760,
+      "sum_ms": 54.190133,
+      "median_us": 19.328,
+      "min_us": 18.848,
+      "max_us": 21.472
+    },
+    {
+      "name": "void strata::kernels::<unnamed>::native_mmvq_multi_kernel<strata::kernels::<unnamed>::Q6KTraits, (int)2, (int)4, (int)2, (bool)0, (bool)0>(const T1::Block *, const strata::kernels::<unnamed>::Q81Block *, float *, int, int, const T1::Block *, float *)",
+      "grid": [
+        124160,
+        1,
+        1
+      ],
+      "block": [
+        32,
+        4,
+        1
+      ],
+      "registers_per_thread": 64,
+      "count": 69,
+      "sum_ms": 52.609876,
+      "median_us": 762.111,
+      "min_us": 754.751,
+      "max_us": 768.64
+    },
+    {
+      "name": "void strata::kernels::<unnamed>::native_mmvq_il_kernel<strata::kernels::<unnamed>::IlQ6K, (int)2, (int)1>(const T1::F::Block *, const int *, const float *, float *, int, int)",
+      "grid": [
+        2560,
+        1,
+        1
+      ],
+      "block": [
+        128,
+        1,
+        1
+      ],
+      "registers_per_thread": 55,
+      "count": 1518,
+      "sum_ms": 45.04021900000001,
+      "median_us": 29.632,
+      "min_us": 29.216,
+      "max_us": 30.496
+    },
+    {
+      "name": "void strata::kernels::<unnamed>::native_mmvq_il_kernel<strata::kernels::<unnamed>::IlQ6K, (int)4, (int)1>(const T1::F::Block *, const int *, const float *, float *, int, int)",
+      "grid": [
+        2560,
+        1,
+        1
+      ],
+      "block": [
+        128,
+        1,
+        1
+      ],
+      "registers_per_thread": 56,
+      "count": 1254,
+      "sum_ms": 40.351583999999995,
+      "median_us": 32.16,
+      "min_us": 31.423,
+      "max_us": 33.568
+    },
+    {
+      "name": "void strata::kernels::<unnamed>::native_q6_k_mmvq_kernel<(bool)0>(const strata::kernels::<unnamed>::Q6KBlock *, const strata::kernels::<unnamed>::Q81Block *, float *, int, int)",
+      "grid": [
+        6144,
+        1,
+        1
+      ],
+      "block": [
+        32,
+        4,
+        1
+      ],
+      "registers_per_thread": 40,
+      "count": 2310,
+      "sum_ms": 39.622913,
+      "median_us": 17.152,
+      "min_us": 16.8,
+      "max_us": 17.6
+    },
+    {
+      "name": "void strata::kernels::<unnamed>::native_mmvq_il_kernel<strata::kernels::<unnamed>::IlQ6K, (int)4, (int)1>(const T1::F::Block *, const int *, const float *, float *, int, int)",
+      "grid": [
+        62080,
+        1,
+        1
+      ],
+      "block": [
+        128,
+        1,
+        1
+      ],
+      "registers_per_thread": 56,
+      "count": 57,
+      "sum_ms": 39.364317,
+      "median_us": 690.336,
+      "min_us": 685.727,
+      "max_us": 695.327
+    },
+    {
+      "name": "void strata::kernels::<unnamed>::native_q6_k_mmvq_kernel<(bool)0>(const strata::kernels::<unnamed>::Q6KBlock *, const strata::kernels::<unnamed>::Q81Block *, float *, int, int)",
+      "grid": [
+        12288,
+        1,
+        1
+      ],
+      "block": [
+        32,
+        4,
+        1
+      ],
+      "registers_per_thread": 40,
+      "count": 825,
+      "sum_ms": 25.837386,
+      "median_us": 31.296,
+      "min_us": 31.072,
+      "max_us": 31.936
+    },
+    {
+      "name": "void strata::kernels::<unnamed>::native_mmvq_il_kernel<strata::kernels::<unnamed>::IlQ6K, (int)2, (int)1>(const T1::F::Block *, const int *, const float *, float *, int, int)",
+      "grid": [
+        1536,
+        1,
+        1
+      ],
+      "block": [
+        128,
+        1,
+        1
+      ],
+      "registers_per_thread": 55,
+      "count": 966,
+      "sum_ms": 21.744755,
+      "median_us": 22.56,
+      "min_us": 20.576,
+      "max_us": 24.832
+    },
+    {
+      "name": "void strata::kernels::<unnamed>::native_q6_k_mmvq_kernel<(bool)0>(const strata::kernels::<unnamed>::Q6KBlock *, const strata::kernels::<unnamed>::Q81Block *, float *, int, int)",
+      "grid": [
+        640,
+        1,
+        1
+      ],
+      "block": [
+        32,
+        4,
+        1
+      ],
+      "registers_per_thread": 40,
+      "count": 4290,
+      "sum_ms": 19.575761000000004,
+      "median_us": 4.32,
+      "min_us": 3.84,
+      "max_us": 14.144
+    },
+    {
+      "name": "void strata::kernels::<unnamed>::native_mmvq_il_kernel<strata::kernels::<unnamed>::IlQ6K, (int)4, (int)1>(const T1::F::Block *, const int *, const float *, float *, int, int)",
+      "grid": [
+        1536,
+        1,
+        1
+      ],
+      "block": [
+        128,
+        1,
+        1
+      ],
+      "registers_per_thread": 56,
+      "count": 798,
+      "sum_ms": 19.566699,
+      "median_us": 24.544,
+      "min_us": 23.168,
+      "max_us": 25.984
+    },
+    {
+      "name": "void strata::kernels::<unnamed>::native_mmvq_multi_kernel<strata::kernels::<unnamed>::Q6KTraits, (int)3, (int)4, (int)2, (bool)0, (bool)0>(const T1::Block *, const strata::kernels::<unnamed>::Q81Block *, float *, int, int, const T1::Block *, float *)",
+      "grid": [
+        1280,
+        1,
+        1
+      ],
+      "block": [
+        32,
+        4,
+        1
+      ],
+      "registers_per_thread": 72,
+      "count": 800,
+      "sum_ms": 18.427629,
+      "median_us": 22.704,
+      "min_us": 22.176,
+      "max_us": 25.056
+    },
+    {
+      "name": "void strata::kernels::<unnamed>::native_mmvq_il_kernel<strata::kernels::<unnamed>::IlQ6K, (int)3, (int)1>(const T1::F::Block *, const int *, const float *, float *, int, int)",
+      "grid": [
+        2560,
+        1,
+        1
+      ],
+      "block": [
+        128,
+        1,
+        1
+      ],
+      "registers_per_thread": 72,
+      "count": 440,
+      "sum_ms": 14.102774,
+      "median_us": 32.0,
+      "min_us": 31.392,
+      "max_us": 33.312
+    },
+    {
+      "name": "void strata::kernels::<unnamed>::native_mmvq_multi_kernel<strata::kernels::<unnamed>::Q6KTraits, (int)2, (int)4, (int)2, (bool)0, (bool)0>(const T1::Block *, const strata::kernels::<unnamed>::Q81Block *, float *, int, int, const T1::Block *, float *)",
+      "grid": [
+        6144,
+        1,
+        1
+      ],
+      "block": [
+        32,
+        4,
+        1
+      ],
+      "registers_per_thread": 64,
+      "count": 345,
+      "sum_ms": 13.460371,
+      "median_us": 38.976,
+      "min_us": 38.368,
+      "max_us": 39.904
+    },
+    {
+      "name": "void strata::kernels::<unnamed>::native_mmvq_il_kernel<strata::kernels::<unnamed>::IlQ6K, (int)3, (int)2>(const T1::F::Block *, const int *, const float *, float *, int, int)",
+      "grid": [
+        31040,
+        1,
+        1
+      ],
+      "block": [
+        128,
+        1,
+        1
+      ],
+      "registers_per_thread": 80,
+      "count": 20,
+      "sum_ms": 13.397332,
+      "median_us": 670.1275,
+      "min_us": 662.623,
+      "max_us": 674.527
+    },
+    {
+      "name": "void strata::kernels::<unnamed>::native_mmvq_il_kernel<strata::kernels::<unnamed>::IlQ6K, (int)4, (int)1>(const T1::F::Block *, const int *, const float *, float *, int, int)",
+      "grid": [
+        3072,
+        1,
+        1
+      ],
+      "block": [
+        128,
+        1,
+        1
+      ],
+      "registers_per_thread": 56,
+      "count": 285,
+      "sum_ms": 11.178707000000001,
+      "median_us": 39.264,
+      "min_us": 38.08,
+      "max_us": 40.416
+    },
+    {
+      "name": "void strata::kernels::<unnamed>::native_mmvq_multi_kernel<strata::kernels::<unnamed>::Q6KTraits, (int)2, (int)4, (int)2, (bool)0, (bool)0>(const T1::Block *, const strata::kernels::<unnamed>::Q81Block *, float *, int, int, const T1::Block *, float *)",
+      "grid": [
+        320,
+        1,
+        1
+      ],
+      "block": [
+        32,
+        4,
+        1
+      ],
+      "registers_per_thread": 64,
+      "count": 1794,
+      "sum_ms": 11.164307,
+      "median_us": 5.696,
+      "min_us": 5.184,
+      "max_us": 11.392
+    },
+    {
+      "name": "void strata::kernels::<unnamed>::native_q6_k_mmvq_kernel<(bool)0>(const strata::kernels::<unnamed>::Q6KBlock *, const strata::kernels::<unnamed>::Q81Block *, float *, int, int)",
+      "grid": [
+        512,
+        1,
+        1
+      ],
+      "block": [
+        32,
+        4,
+        1
+      ],
+      "registers_per_thread": 40,
+      "count": 3465,
+      "sum_ms": 11.064215,
+      "median_us": 3.168,
+      "min_us": 3.008,
+      "max_us": 3.616
+    },
+    {
+      "name": "void strata::kernels::<unnamed>::native_mmvq_multi_kernel<strata::kernels::<unnamed>::Q6KTraits, (int)4, (int)4, (int)2, (bool)0, (bool)0>(const T1::Block *, const strata::kernels::<unnamed>::Q81Block *, float *, int, int, const T1::Block *, float *)",
+      "grid": [
+        320,
+        1,
+        1
+      ],
+      "block": [
+        32,
+        4,
+        1
+      ],
+      "registers_per_thread": 80,
+      "count": 1482,
+      "sum_ms": 11.055952999999999,
+      "median_us": 7.36,
+      "min_us": 5.952,
+      "max_us": 13.888
+    },
+    {
+      "name": "void strata::kernels::<unnamed>::native_mmvq_multi_kernel<strata::kernels::<unnamed>::Q6KTraits, (int)2, (int)4, (int)2, (bool)0, (bool)0>(const T1::Block *, const strata::kernels::<unnamed>::Q81Block *, float *, int, int, const T1::Block *, float *)",
+      "grid": [
+        256,
+        1,
+        1
+      ],
+      "block": [
+        32,
+        4,
+        1
+      ],
+      "registers_per_thread": 64,
+      "count": 1449,
+      "sum_ms": 6.656727,
+      "median_us": 4.576,
+      "min_us": 4.352,
+      "max_us": 4.992
+    },
+    {
+      "name": "void strata::kernels::<unnamed>::native_mmvq_multi_kernel<strata::kernels::<unnamed>::Q6KTraits, (int)4, (int)4, (int)2, (bool)0, (bool)0>(const T1::Block *, const strata::kernels::<unnamed>::Q81Block *, float *, int, int, const T1::Block *, float *)",
+      "grid": [
+        256,
+        1,
+        1
+      ],
+      "block": [
+        32,
+        4,
+        1
+      ],
+      "registers_per_thread": 80,
+      "count": 1197,
+      "sum_ms": 6.086617,
+      "median_us": 5.088,
+      "min_us": 4.736,
+      "max_us": 5.472
+    },
+    {
+      "name": "void strata::kernels::<unnamed>::native_mmvq_il_kernel<strata::kernels::<unnamed>::IlQ6K, (int)3, (int)1>(const T1::F::Block *, const int *, const float *, float *, int, int)",
+      "grid": [
+        1536,
+        1,
+        1
+      ],
+      "block": [
+        128,
+        1,
+        1
+      ],
+      "registers_per_thread": 72,
+      "count": 280,
+      "sum_ms": 5.664826,
+      "median_us": 20.192,
+      "min_us": 19.584,
+      "max_us": 21.12
+    },
+    {
+      "name": "void strata::kernels::<unnamed>::native_mmvq_il_kernel<strata::kernels::<unnamed>::IlQ6K, (int)3, (int)2>(const T1::F::Block *, const int *, const float *, float *, int, int)",
+      "grid": [
+        1536,
+        1,
+        1
+      ],
+      "block": [
+        128,
+        1,
+        1
+      ],
+      "registers_per_thread": 80,
+      "count": 100,
+      "sum_ms": 4.690720000000001,
+      "median_us": 46.912000000000006,
+      "min_us": 45.216,
+      "max_us": 48.928
+    },
+    {
+      "name": "void strata::kernels::<unnamed>::native_mmvq_multi_kernel<strata::kernels::<unnamed>::Q6KTraits, (int)3, (int)4, (int)2, (bool)0, (bool)0>(const T1::Block *, const strata::kernels::<unnamed>::Q81Block *, float *, int, int, const T1::Block *, float *)",
+      "grid": [
+        320,
+        1,
+        1
+      ],
+      "block": [
+        32,
+        4,
+        1
+      ],
+      "registers_per_thread": 72,
+      "count": 520,
+      "sum_ms": 3.725213,
+      "median_us": 6.976,
+      "min_us": 5.792,
+      "max_us": 13.344
+    },
+    {
+      "name": "void strata::kernels::<unnamed>::native_mmvq_multi_kernel<strata::kernels::<unnamed>::Q6KTraits, (int)3, (int)4, (int)2, (bool)0, (bool)0>(const T1::Block *, const strata::kernels::<unnamed>::Q81Block *, float *, int, int, const T1::Block *, float *)",
+      "grid": [
+        256,
+        1,
+        1
+      ],
+      "block": [
+        32,
+        4,
+        1
+      ],
+      "registers_per_thread": 72,
+      "count": 420,
+      "sum_ms": 2.027712,
+      "median_us": 4.832,
+      "min_us": 4.576,
+      "max_us": 5.248
+    },
+    {
+      "name": "void strata::kernels::<unnamed>::native_mmvq_multi_kernel<strata::kernels::<unnamed>::Q6KTraits, (int)6, (int)4, (int)2, (bool)0, (bool)0>(const T1::Block *, const strata::kernels::<unnamed>::Q81Block *, float *, int, int, const T1::Block *, float *)",
+      "grid": [
+        124160,
+        1,
+        1
+      ],
+      "block": [
+        32,
+        4,
+        1
+      ],
+      "registers_per_thread": 96,
+      "count": 1,
+      "sum_ms": 1.472799,
+      "median_us": 1472.799,
+      "min_us": 1472.799,
+      "max_us": 1472.799
+    },
+    {
+      "name": "void strata::kernels::<unnamed>::native_mmvq_multi_kernel<strata::kernels::<unnamed>::Q6KTraits, (int)6, (int)4, (int)2, (bool)0, (bool)0>(const T1::Block *, const strata::kernels::<unnamed>::Q81Block *, float *, int, int, const T1::Block *, float *)",
+      "grid": [
+        1280,
+        1,
+        1
+      ],
+      "block": [
+        32,
+        4,
+        1
+      ],
+      "registers_per_thread": 96,
+      "count": 40,
+      "sum_ms": 1.3487339999999999,
+      "median_us": 33.664,
+      "min_us": 32.96,
+      "max_us": 34.464
+    },
+    {
+      "name": "void strata::kernels::<unnamed>::native_mmvq_multi_kernel<strata::kernels::<unnamed>::Q6KTraits, (int)6, (int)4, (int)2, (bool)0, (bool)0>(const T1::Block *, const strata::kernels::<unnamed>::Q81Block *, float *, int, int, const T1::Block *, float *)",
+      "grid": [
+        5120,
+        1,
+        1
+      ],
+      "block": [
+        32,
+        4,
+        1
+      ],
+      "registers_per_thread": 96,
+      "count": 22,
+      "sum_ms": 1.338847,
+      "median_us": 60.704,
+      "min_us": 60.576,
+      "max_us": 61.824
+    },
+    {
+      "name": "void strata::kernels::<unnamed>::native_mmvq_multi_kernel<strata::kernels::<unnamed>::Q6KTraits, (int)6, (int)4, (int)2, (bool)0, (bool)0>(const T1::Block *, const strata::kernels::<unnamed>::Q81Block *, float *, int, int, const T1::Block *, float *)",
+      "grid": [
+        3072,
+        1,
+        1
+      ],
+      "block": [
+        32,
+        4,
+        1
+      ],
+      "registers_per_thread": 96,
+      "count": 14,
+      "sum_ms": 0.53155,
+      "median_us": 37.951499999999996,
+      "min_us": 37.664,
+      "max_us": 38.272
+    },
+    {
+      "name": "void strata::kernels::<unnamed>::native_mmvq_multi_kernel<strata::kernels::<unnamed>::Q6KTraits, (int)6, (int)4, (int)2, (bool)0, (bool)0>(const T1::Block *, const strata::kernels::<unnamed>::Q81Block *, float *, int, int, const T1::Block *, float *)",
+      "grid": [
+        6144,
+        1,
+        1
+      ],
+      "block": [
+        32,
+        4,
+        1
+      ],
+      "registers_per_thread": 96,
+      "count": 5,
+      "sum_ms": 0.360992,
+      "median_us": 72.16,
+      "min_us": 72.064,
+      "max_us": 72.384
+    },
+    {
+      "name": "void strata::kernels::<unnamed>::native_mmvq_multi_kernel<strata::kernels::<unnamed>::Q6KTraits, (int)6, (int)4, (int)2, (bool)0, (bool)0>(const T1::Block *, const strata::kernels::<unnamed>::Q81Block *, float *, int, int, const T1::Block *, float *)",
+      "grid": [
+        320,
+        1,
+        1
+      ],
+      "block": [
+        32,
+        4,
+        1
+      ],
+      "registers_per_thread": 96,
+      "count": 26,
+      "sum_ms": 0.20729599999999998,
+      "median_us": 8.016,
+      "min_us": 6.656,
+      "max_us": 9.664
+    },
+    {
+      "name": "void strata::kernels::<unnamed>::native_mmvq_multi_kernel<strata::kernels::<unnamed>::Q6KTraits, (int)6, (int)4, (int)2, (bool)0, (bool)0>(const T1::Block *, const strata::kernels::<unnamed>::Q81Block *, float *, int, int, const T1::Block *, float *)",
+      "grid": [
+        256,
+        1,
+        1
+      ],
+      "block": [
+        32,
+        4,
+        1
+      ],
+      "registers_per_thread": 96,
+      "count": 21,
+      "sum_ms": 0.125536,
+      "median_us": 5.984,
+      "min_us": 5.44,
+      "max_us": 6.368
+    }
+  ]
+}

@@ -1,0 +1,217 @@
+{
+  "source": "P020-decode.sqlite",
+  "source_sha256": "d4568768ec4609ecc92ca46390c0a42b725f5005c83524bc84537b9999615119",
+  "scope": "all recorded CUDA kernel/memcpy/memset intervals, software node-instrumented diagnostic capture",
+  "span_ms": 7848.909434,
+  "activity_ms": {
+    "no_recorded_activity": 1080.361825,
+    "any_activity": 6768.547609
+  },
+  "categories": {
+    "other_kernel": {
+      "count": 619094,
+      "summed_ms": 4097.026863,
+      "union_ms": 3795.337283,
+      "only_category_active_ms": 3067.423625
+    },
+    "q6_mmvq": {
+      "count": 40779,
+      "summed_ms": 1012.200003,
+      "union_ms": 1012.200003,
+      "only_category_active_ms": 855.068335
+    },
+    "sampler": {
+      "count": 622,
+      "summed_ms": 14.699833,
+      "union_ms": 14.699833,
+      "only_category_active_ms": 14.117466
+    },
+    "wait_flag": {
+      "count": 44928,
+      "summed_ms": 845.869331,
+      "union_ms": 845.869331,
+      "only_category_active_ms": 647.689216
+    },
+    "expert_fetch": {
+      "count": 14976,
+      "summed_ms": 546.967488,
+      "union_ms": 546.967488,
+      "only_category_active_ms": 333.224826
+    },
+    "memcpy": {
+      "count": 5186,
+      "summed_ms": 1654.051412,
+      "union_ms": 1654.026452,
+      "only_category_active_ms": 762.882331
+    },
+    "memset": {
+      "count": 1139,
+      "summed_ms": 5.640696,
+      "union_ms": 5.640696,
+      "only_category_active_ms": 1.428798
+    }
+  },
+  "streams": {
+    "19": {
+      "span_ms": 7071.148932,
+      "union_ms": 3445.734401,
+      "gaps_ms": 3625.414531,
+      "gap_count": 229845,
+      "median_gap_us": 0.064,
+      "max_gap_us": 20326.201
+    },
+    "13": {
+      "span_ms": 634.310287,
+      "union_ms": 229.202702,
+      "gaps_ms": 405.107585,
+      "gap_count": 11920,
+      "median_gap_us": 6.944,
+      "max_gap_us": 2530.972
+    },
+    "27": {
+      "span_ms": 7013.89635,
+      "union_ms": 749.791332,
+      "gaps_ms": 6264.105018,
+      "gap_count": 91725,
+      "median_gap_us": 0.064,
+      "max_gap_us": 745447.936
+    },
+    "23": {
+      "span_ms": 5744.111788,
+      "union_ms": 953.890294,
+      "gaps_ms": 4790.221494,
+      "gap_count": 33580,
+      "median_gap_us": 0.064,
+      "max_gap_us": 933209.239
+    },
+    "14": {
+      "span_ms": 7004.819448,
+      "union_ms": 309.907403,
+      "gaps_ms": 6694.912045,
+      "gap_count": 15307,
+      "median_gap_us": 0.064,
+      "max_gap_us": 56858.778
+    },
+    "29": {
+      "span_ms": 6976.091429,
+      "union_ms": 7.99609,
+      "gaps_ms": 6968.095339,
+      "gap_count": 655,
+      "median_gap_us": 0.288,
+      "max_gap_us": 375806.834
+    },
+    "31": {
+      "span_ms": 6939.470827,
+      "union_ms": 6.070473,
+      "gaps_ms": 6933.400354,
+      "gap_count": 486,
+      "median_gap_us": 0.192,
+      "max_gap_us": 238228.607
+    },
+    "33": {
+      "span_ms": 6806.484958,
+      "union_ms": 3.182495,
+      "gaps_ms": 6803.302463,
+      "gap_count": 241,
+      "median_gap_us": 0.192,
+      "max_gap_us": 569280.447
+    },
+    "43": {
+      "span_ms": 49.391139,
+      "union_ms": 34.562766,
+      "gaps_ms": 14.828373,
+      "gap_count": 526,
+      "median_gap_us": 0.064,
+      "max_gap_us": 536.543
+    },
+    "35": {
+      "span_ms": 5336.499016,
+      "union_ms": 1.39043,
+      "gaps_ms": 5335.108586,
+      "gap_count": 109,
+      "median_gap_us": 0.224,
+      "max_gap_us": 1220309.941
+    },
+    "37": {
+      "span_ms": 6874.612275,
+      "union_ms": 510.273602,
+      "gaps_ms": 6364.338673,
+      "gap_count": 40020,
+      "median_gap_us": 0.064,
+      "max_gap_us": 568867.218
+    },
+    "39": {
+      "span_ms": 6829.605357,
+      "union_ms": 2.942909,
+      "gaps_ms": 6826.662448,
+      "gap_count": 286,
+      "median_gap_us": 0.176,
+      "max_gap_us": 370752.588
+    },
+    "47": {
+      "span_ms": 6636.290397,
+      "union_ms": 0.670975,
+      "gaps_ms": 6635.619422,
+      "gap_count": 56,
+      "median_gap_us": 0.224,
+      "max_gap_us": 1019072.619
+    },
+    "41": {
+      "span_ms": 5792.822935,
+      "union_ms": 240.551377,
+      "gaps_ms": 5552.271558,
+      "gap_count": 11639,
+      "median_gap_us": 0.064,
+      "max_gap_us": 896414.084
+    }
+  },
+  "graph_launch_envelopes": 991,
+  "limitations": [
+    "Temporal overlap is not a CUDA dependency or critical-path reconstruction.",
+    "Only-category-active time includes multiple kernels of that category; it is not removable latency.",
+    "No recorded activity is not proof the GPU was idle or blocked on CPU; missing activity and instrumentation gaps remain possible.",
+    "P010 internal consistency does not independently prove completeness. No served speed or optimization benefit is inferred."
+  ],
+  "copy_groups": [
+    {
+      "copy_kind": 1,
+      "src_kind": 0,
+      "dst_kind": 2,
+      "calls": 85,
+      "bytes": 7868640,
+      "summed_ms": 1.361278
+    },
+    {
+      "copy_kind": 1,
+      "src_kind": 1,
+      "dst_kind": 2,
+      "calls": 4835,
+      "bytes": 9807211520,
+      "summed_ms": 1622.745575
+    },
+    {
+      "copy_kind": 2,
+      "src_kind": 2,
+      "dst_kind": 0,
+      "calls": 50,
+      "bytes": 118063920,
+      "summed_ms": 18.272387
+    },
+    {
+      "copy_kind": 2,
+      "src_kind": 2,
+      "dst_kind": 1,
+      "calls": 46,
+      "bytes": 75366400,
+      "summed_ms": 11.471436
+    },
+    {
+      "copy_kind": 8,
+      "src_kind": 2,
+      "dst_kind": 2,
+      "calls": 170,
+      "bytes": 13476304,
+      "summed_ms": 0.200736
+    }
+  ]
+}

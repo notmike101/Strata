@@ -1,0 +1,12 @@
+#define iq256_supported c050_clang_iq256_supported
+#define iq256_gu_rows c050_clang_iq256_gu_rows
+#define iq256_rows c050_clang_iq256_rows
+#define iq256_variant c050_clang_iq256_variant
+#define iq256_variant_for c050_clang_iq256_variant_for
+#define iq256_variants c050_clang_iq256_variants
+#define iq256_gu_rows_v c050_clang_iq256_gu_rows_v
+#define iq256_rows_v c050_clang_iq256_rows_v
+#define q8k_quant_avx2 c050_clang_q8k_quant_avx2
+#define iq4nl256_down_rows c050_clang_iq4nl256_down_rows
+#define iq4nl256_down_rows_v c050_clang_iq4nl256_down_rows_v
+#include "src/kernels/cpu/iq_avx2.cpp"

@@ -1,0 +1,220 @@
+{
+  "sqlite_sha256": "d4568768ec4609ecc92ca46390c0a42b725f5005c83524bc84537b9999615119",
+  "capture_settings_allowlist": {
+    "CAPTURE_EVENT_TYPE": [
+      "Cuda"
+    ],
+    "DEVICE_TYPE": [
+      "Windows"
+    ],
+    "CUDA_GRAPH_TRACE_OPTIONS:MODE": [
+      "Node"
+    ],
+    "CUDA_FLUSH_PERIOD": [
+      "1000000000"
+    ],
+    "CUDA_SKIP_SOME_API_CALLS": [
+      "true"
+    ],
+    "RUN_DURATION_MS": [
+      "9135"
+    ]
+  },
+  "kernel_records": 720399,
+  "invalid_kernel_intervals": 0,
+  "graph_launch_apis": 991,
+  "graph_launch_activity_keys": 991,
+  "graph_apis_without_kernel_records": 0,
+  "graph_activity_keys_without_launch_api": 0,
+  "graph_cohorts": [
+    {
+      "graph_id": 2,
+      "observed_launches": 57,
+      "kernel_nodes_per_launch": [
+        2181
+      ],
+      "different_node_multisets_from_first": 0,
+      "duplicate_node_ids_within_launch": 0
+    },
+    {
+      "graph_id": 5,
+      "observed_launches": 147,
+      "kernel_nodes_per_launch": [
+        98
+      ],
+      "different_node_multisets_from_first": 0,
+      "duplicate_node_ids_within_launch": 0
+    },
+    {
+      "graph_id": 8,
+      "observed_launches": 1,
+      "kernel_nodes_per_launch": [
+        22
+      ],
+      "different_node_multisets_from_first": 0,
+      "duplicate_node_ids_within_launch": 0
+    },
+    {
+      "graph_id": 11,
+      "observed_launches": 165,
+      "kernel_nodes_per_launch": [
+        2100
+      ],
+      "different_node_multisets_from_first": 0,
+      "duplicate_node_ids_within_launch": 0
+    },
+    {
+      "graph_id": 14,
+      "observed_launches": 191,
+      "kernel_nodes_per_launch": [
+        53
+      ],
+      "different_node_multisets_from_first": 0,
+      "duplicate_node_ids_within_launch": 0
+    },
+    {
+      "graph_id": 17,
+      "observed_launches": 145,
+      "kernel_nodes_per_launch": [
+        53
+      ],
+      "different_node_multisets_from_first": 0,
+      "duplicate_node_ids_within_launch": 0
+    },
+    {
+      "graph_id": 20,
+      "observed_launches": 76,
+      "kernel_nodes_per_launch": [
+        53
+      ],
+      "different_node_multisets_from_first": 0,
+      "duplicate_node_ids_within_launch": 0
+    },
+    {
+      "graph_id": 23,
+      "observed_launches": 33,
+      "kernel_nodes_per_launch": [
+        61
+      ],
+      "different_node_multisets_from_first": 0,
+      "duplicate_node_ids_within_launch": 0
+    },
+    {
+      "graph_id": 26,
+      "observed_launches": 69,
+      "kernel_nodes_per_launch": [
+        2148
+      ],
+      "different_node_multisets_from_first": 0,
+      "duplicate_node_ids_within_launch": 0
+    },
+    {
+      "graph_id": 29,
+      "observed_launches": 70,
+      "kernel_nodes_per_launch": [
+        57
+      ],
+      "different_node_multisets_from_first": 0,
+      "duplicate_node_ids_within_launch": 0
+    },
+    {
+      "graph_id": 32,
+      "observed_launches": 20,
+      "kernel_nodes_per_launch": [
+        2173
+      ],
+      "different_node_multisets_from_first": 0,
+      "duplicate_node_ids_within_launch": 0
+    },
+    {
+      "graph_id": 35,
+      "observed_launches": 1,
+      "kernel_nodes_per_launch": [
+        2140
+      ],
+      "different_node_multisets_from_first": 0,
+      "duplicate_node_ids_within_launch": 0
+    },
+    {
+      "graph_id": 41,
+      "observed_launches": 16,
+      "kernel_nodes_per_launch": [
+        60
+      ],
+      "different_node_multisets_from_first": 0,
+      "duplicate_node_ids_within_launch": 0
+    }
+  ],
+  "direct_kernel_activity_keys": 12543,
+  "direct_launch_api_keys": 12543,
+  "direct_launch_apis_without_kernel_record_by_name": {},
+  "capture_api_reconciliation": [],
+  "direct_kernel_records_without_matching_launch_api": 0,
+  "nonzero_launch_api_returns": 0,
+  "selected_diagnostics": [
+    {
+      "source": 3,
+      "severity": 2,
+      "global_pid": 287747508011008,
+      "text": "Not all CUDA events might have been collected."
+    },
+    {
+      "source": 3,
+      "severity": 2,
+      "global_pid": 287747508011008,
+      "text": "No CUDA events collected. Does the process use CUDA?"
+    },
+    {
+      "source": 3,
+      "severity": 2,
+      "global_pid": 282554154352640,
+      "text": "Not all CUDA events might have been collected."
+    },
+    {
+      "source": 3,
+      "severity": 1,
+      "global_pid": 282554154352640,
+      "text": "Number of CUDA events collected: \t765341."
+    },
+    {
+      "source": 1,
+      "severity": 1,
+      "global_pid": 287747508011008,
+      "text": "CUDA legacy/software instrumented trace was collected."
+    },
+    {
+      "source": 1,
+      "severity": 1,
+      "global_pid": 287747508011008,
+      "text": "Number of CUPTI events produced: \t0, CUPTI buffers: 50."
+    },
+    {
+      "source": 1,
+      "severity": 1,
+      "global_pid": 282554154352640,
+      "text": "CUDA hardware tracing is not supported on this system. A legacy (software instrumented) trace was collected instead."
+    },
+    {
+      "source": 1,
+      "severity": 1,
+      "global_pid": 282554154352640,
+      "text": "Number of CUPTI events produced: \t814768, CUPTI buffers: 168."
+    }
+  ],
+  "measured_request_timings": [
+    {
+      "cache_n": 0,
+      "prompt_n": 165,
+      "prompt_ms": 827.0,
+      "prompt_per_token_ms": 5.012,
+      "prompt_per_second": 199.5,
+      "predicted_n": 512,
+      "predicted_ms": 7018.8,
+      "predicted_per_token_ms": 13.709,
+      "predicted_per_second": 72.9,
+      "draft_n": 282,
+      "draft_n_accepted": 201
+    }
+  ],
+  "limitation": "Internal consistency is not independent proof of all expected kernel or memory activity. Uniformly absent records can pass cohort equality. No performance qualification follows from this instrumented capture."
+}
