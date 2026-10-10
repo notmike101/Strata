@@ -1,0 +1,50 @@
+// Throwaway C038 two-stream quantization DAG screen; not production code.
+#include "strata/kernels/native_mmvq.hpp"
+#include "strata/kernels/iq_kernels.hpp"
+#include <cuda_runtime.h>
+#include <algorithm>
+#include <cmath>
+#include <cstdio>
+#include <cstdlib>
+#include <cstring>
+#include <fstream>
+#include <iterator>
+#include <random>
+#include <string>
+#include <vector>
+namespace K=strata::kernels;
+static void ck(cudaError_t e){if(e!=cudaSuccess){std::fprintf(stderr,"CUDA %s\n",cudaGetErrorString(e));std::exit(2);}}
+template<class T> T* alloc(size_t bytes){T*p;ck(cudaMalloc((void**)&p,bytes));return p;}
+int main(){
+ setvbuf(stdout,nullptr,_IONBF,0); K::native_mmvq_set_multi_exact(true);
+ cudaStream_t main,side;ck(cudaStreamCreateWithFlags(&main,cudaStreamNonBlocking));ck(cudaStreamCreateWithFlags(&side,cudaStreamNonBlocking));
+ cudaEvent_t fork,join,e0,e1;ck(cudaEventCreateWithFlags(&fork,cudaEventDisableTiming));ck(cudaEventCreateWithFlags(&join,cudaEventDisableTiming));ck(cudaEventCreate(&e0));ck(cudaEventCreate(&e1));
+ constexpr int N=2560,M=640,MAXT=8,ITERS=100;size_t qb=K::native_q8_1_bytes(N,MAXT);
+ float*x=alloc<float>(N*MAXT*4),*ym=alloc<float>(M*MAXT*4),*ys=alloc<float>(M*MAXT*4);
+ void*qm=alloc<char>(qb),*qs=alloc<char>(qb);std::vector<float> hx(N*MAXT);std::mt19937 rng(90210);std::uniform_real_distribution<float> dist(-1,1);
+ int types[3][2]={{12,23},{13,13},{12,13}}; // actual Q4_K/IQ4_XS/Q5_K source metadata in manifest
+ for(int layer=0;layer<3;layer++){
+  void*w[2];for(int j=0;j<2;j++){std::string name="C:/Strata/local-setup/target-80/C038-private/"+std::to_string(layer)+(j?"-up.bin":"-gate.bin");std::ifstream f(name,std::ios::binary);std::vector<char>b((std::istreambuf_iterator<char>(f)),{});if(b.empty())return 3;w[j]=alloc<char>(b.size());ck(cudaMemcpy(w[j],b.data(),b.size(),cudaMemcpyHostToDevice));}
+  for(int T=1;T<=MAXT;T++){
+   auto dag=[&](bool share){
+    if(share)K::quantize_q8_1_rows(x,T,N,qm,main);
+    ck(cudaEventRecord(fork,main));ck(cudaStreamWaitEvent(side,fork,0));
+    if(!share)K::native_quantize_q8_1(x,qs,N,T,side);
+    K::native_mmvq(types[layer][1],w[1],share?qm:qs,ys,N,M,T,side);
+    if(!share)K::quantize_q8_1_rows(x,T,N,qm,main);
+    K::native_mmvq(types[layer][0],w[0],qm,ym,N,M,T,main);
+    ck(cudaEventRecord(join,side));ck(cudaStreamWaitEvent(main,join,0));
+   };
+   for(int pattern=0;pattern<4;pattern++){
+    for(size_t i=0;i<hx.size();i++)hx[i]=pattern==0?0.f:dist(rng)*(pattern==1?.001f:pattern==2?1.f:100.f);
+    ck(cudaMemcpy(x,hx.data(),hx.size()*4,cudaMemcpyHostToDevice));
+    K::native_quantize_q8_1(x,qs,N,T,main);K::quantize_q8_1_rows(x,T,N,qm,main);ck(cudaStreamSynchronize(main));size_t bytes=K::native_q8_1_bytes(N,T);
+    std::vector<char>a(bytes),b(bytes);ck(cudaMemcpy(a.data(),qm,bytes,cudaMemcpyDeviceToHost));ck(cudaMemcpy(b.data(),qs,bytes,cudaMemcpyDeviceToHost));if(a!=b){std::printf("FAIL quant layer=%d T=%d pattern=%d\n",layer,T,pattern);for(size_t z=0;z<bytes;z++)if(a[z]!=b[z]){std::printf("DIFF byte=%zu block=%zu offset=%zu routed=%u shared=%u\n",z,z/36,z%36,(unsigned char)a[z],(unsigned char)b[z]);for(int k=0;k<32;k++)std::printf("X %d %a\n",k,hx[z/36*32+k]);}continue;}
+
+   }
+
+  }
+  ck(cudaFree(w[0]));ck(cudaFree(w[1]));
+ }
+ ck(cudaFree(x));ck(cudaFree(ym));ck(cudaFree(ys));ck(cudaFree(qm));ck(cudaFree(qs));ck(cudaEventDestroy(fork));ck(cudaEventDestroy(join));ck(cudaEventDestroy(e0));ck(cudaEventDestroy(e1));ck(cudaStreamDestroy(side));ck(cudaStreamDestroy(main));std::puts("C038 diagnostic done; see all mismatch records");
+}

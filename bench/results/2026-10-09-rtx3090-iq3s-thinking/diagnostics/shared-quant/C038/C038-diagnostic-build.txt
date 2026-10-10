@@ -1,0 +1,16 @@
+**********************************************************************
+** Visual Studio 2022 Developer Command Prompt v17.14.36
+** Copyright (c) 2025 Microsoft Corporation
+**********************************************************************
+C:\Strata\local-setup\target-80\c038-diagnostic.cu(29): warning #177-D: variable "dag" was declared but never referenced
+     auto dag=[&](bool share){
+          ^
+
+Remark: The warnings can be suppressed with "-diag-suppress <warning-number>"
+
+C:\Strata\local-setup\target-80\c038-diagnostic.cu(22): warning #177-D: variable "ITERS" was declared but never referenced
+   constexpr int N=2560,M=640,MAXT=8,ITERS=100;size_t qb=K::native_q8_1_bytes(N,MAXT);
+                                     ^
+
+c038-diagnostic.cu
+tmpxft_0009b2a0_00000000-7_c038-diagnostic.cudafe1.cpp

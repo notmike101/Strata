@@ -1,0 +1,97 @@
+PARITY layer=0 T=1 pattern=0 qbytes=2880 floats=1280 exact=pass
+PARITY layer=0 T=1 pattern=1 qbytes=2880 floats=1280 exact=pass
+PARITY layer=0 T=1 pattern=2 qbytes=2880 floats=1280 exact=pass
+PARITY layer=0 T=1 pattern=3 qbytes=2880 floats=1280 exact=pass
+RAW layer=0 T=1 round=0 candidate=1 us=5.345280
+RAW layer=0 T=1 round=0 candidate=0 us=6.010880
+RAW layer=0 T=1 round=1 candidate=0 us=6.062080
+RAW layer=0 T=1 round=1 candidate=1 us=5.427200
+RAW layer=0 T=1 round=2 candidate=1 us=5.355520
+RAW layer=0 T=1 round=2 candidate=0 us=6.029120
+RAW layer=0 T=1 round=3 candidate=0 us=6.367360
+RAW layer=0 T=1 round=3 candidate=1 us=5.395200
+RAW layer=0 T=1 round=4 candidate=1 us=5.376000
+RAW layer=0 T=1 round=4 candidate=0 us=6.348800
+RAW layer=0 T=1 round=5 candidate=0 us=6.371520
+RAW layer=0 T=1 round=5 candidate=1 us=5.457920
+RAW layer=0 T=1 round=6 candidate=1 us=5.364160
+RAW layer=0 T=1 round=6 candidate=0 us=6.348800
+MEDIAN layer=0 T=1 original_us=6.348800 candidate_us=5.376000 ratio=0.846774
+PARITY layer=0 T=2 pattern=0 qbytes=5760 floats=2560 exact=pass
+PARITY layer=0 T=2 pattern=1 qbytes=5760 floats=2560 exact=pass
+PARITY layer=0 T=2 pattern=2 qbytes=5760 floats=2560 exact=pass
+PARITY layer=0 T=2 pattern=3 qbytes=5760 floats=2560 exact=pass
+RAW layer=0 T=2 round=0 candidate=1 us=6.850560
+RAW layer=0 T=2 round=0 candidate=0 us=7.997440
+RAW layer=0 T=2 round=1 candidate=0 us=7.969600
+RAW layer=0 T=2 round=1 candidate=1 us=6.881280
+RAW layer=0 T=2 round=2 candidate=1 us=6.889600
+RAW layer=0 T=2 round=2 candidate=0 us=8.048000
+RAW layer=0 T=2 round=3 candidate=0 us=7.955200
+RAW layer=0 T=2 round=3 candidate=1 us=6.871040
+RAW layer=0 T=2 round=4 candidate=1 us=6.878400
+RAW layer=0 T=2 round=4 candidate=0 us=8.006720
+RAW layer=0 T=2 round=5 candidate=0 us=7.956480
+RAW layer=0 T=2 round=5 candidate=1 us=6.932480
+RAW layer=0 T=2 round=6 candidate=1 us=6.881280
+RAW layer=0 T=2 round=6 candidate=0 us=8.048640
+MEDIAN layer=0 T=2 original_us=7.997440 candidate_us=6.881280 ratio=0.860435
+PARITY layer=0 T=3 pattern=0 qbytes=8640 floats=3840 exact=pass
+PARITY layer=0 T=3 pattern=1 qbytes=8640 floats=3840 exact=pass
+PARITY layer=0 T=3 pattern=2 qbytes=8640 floats=3840 exact=pass
+PARITY layer=0 T=3 pattern=3 qbytes=8640 floats=3840 exact=pass
+RAW layer=0 T=3 round=0 candidate=1 us=8.171520
+RAW layer=0 T=3 round=0 candidate=0 us=9.186880
+RAW layer=0 T=3 round=1 candidate=0 us=9.328640
+RAW layer=0 T=3 round=1 candidate=1 us=8.240320
+RAW layer=0 T=3 round=2 candidate=1 us=8.169920
+RAW layer=0 T=3 round=2 candidate=0 us=9.338880
+RAW layer=0 T=3 round=3 candidate=0 us=9.289600
+RAW layer=0 T=3 round=3 candidate=1 us=8.180480
+RAW layer=0 T=3 round=4 candidate=1 us=8.202240
+RAW layer=0 T=3 round=4 candidate=0 us=9.031680
+RAW layer=0 T=3 round=5 candidate=0 us=9.154560
+RAW layer=0 T=3 round=5 candidate=1 us=8.355840
+RAW layer=0 T=3 round=6 candidate=1 us=8.396800
+RAW layer=0 T=3 round=6 candidate=0 us=9.216000
+MEDIAN layer=0 T=3 original_us=9.216000 candidate_us=8.202240 ratio=0.890000
+PARITY layer=0 T=4 pattern=0 qbytes=11520 floats=5120 exact=pass
+PARITY layer=0 T=4 pattern=1 qbytes=11520 floats=5120 exact=pass
+PARITY layer=0 T=4 pattern=2 qbytes=11520 floats=5120 exact=pass
+PARITY layer=0 T=4 pattern=3 qbytes=11520 floats=5120 exact=pass
+RAW layer=0 T=4 round=0 candidate=1 us=8.784320
+RAW layer=0 T=4 round=0 candidate=0 us=9.543680
+RAW layer=0 T=4 round=1 candidate=0 us=9.414400
+RAW layer=0 T=4 round=1 candidate=1 us=8.712320
+RAW layer=0 T=4 round=2 candidate=1 us=8.734720
+RAW layer=0 T=4 round=2 candidate=0 us=9.553600
+RAW layer=0 T=4 round=3 candidate=0 us=9.376960
+RAW layer=0 T=4 round=3 candidate=1 us=8.814400
+RAW layer=0 T=4 round=4 candidate=1 us=8.763840
+RAW layer=0 T=4 round=4 candidate=0 us=9.520320
+RAW layer=0 T=4 round=5 candidate=0 us=9.408000
+RAW layer=0 T=4 round=5 candidate=1 us=8.775680
+RAW layer=0 T=4 round=6 candidate=1 us=8.764160
+RAW layer=0 T=4 round=6 candidate=0 us=9.553920
+MEDIAN layer=0 T=4 original_us=9.520320 candidate_us=8.764160 ratio=0.920574
+PARITY layer=0 T=5 pattern=0 qbytes=14400 floats=6400 exact=pass
+PARITY layer=0 T=5 pattern=1 qbytes=14400 floats=6400 exact=pass
+PARITY layer=0 T=5 pattern=2 qbytes=14400 floats=6400 exact=pass
+PARITY layer=0 T=5 pattern=3 qbytes=14400 floats=6400 exact=pass
+RAW layer=0 T=5 round=0 candidate=1 us=9.789440
+RAW layer=0 T=5 round=0 candidate=0 us=11.375040
+RAW layer=0 T=5 round=1 candidate=0 us=11.510720
+RAW layer=0 T=5 round=1 candidate=1 us=9.840640
+RAW layer=0 T=5 round=2 candidate=1 us=9.840320
+RAW layer=0 T=5 round=2 candidate=0 us=11.673599
+RAW layer=0 T=5 round=3 candidate=0 us=11.632640
+RAW layer=0 T=5 round=3 candidate=1 us=9.789440
+RAW layer=0 T=5 round=4 candidate=1 us=9.799680
+RAW layer=0 T=5 round=4 candidate=0 us=11.724160
+RAW layer=0 T=5 round=5 candidate=0 us=11.614400
+RAW layer=0 T=5 round=5 candidate=1 us=9.779200
+RAW layer=0 T=5 round=6 candidate=1 us=9.902080
+RAW layer=0 T=5 round=6 candidate=0 us=11.634560
+MEDIAN layer=0 T=5 original_us=11.632640 candidate_us=9.799680 ratio=0.842430
+PARITY layer=0 T=6 pattern=0 qbytes=17280 floats=7680 exact=pass
+FAIL quant layer=0 T=6 pattern=1

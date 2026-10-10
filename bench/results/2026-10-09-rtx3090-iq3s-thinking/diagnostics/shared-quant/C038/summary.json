@@ -1,0 +1,77 @@
+{
+  "decision": "reject: quantizers are not byte-identical, so shared input violates parity gate",
+  "first_screen_exit_code": 4,
+  "diagnostic_exit_code": 0,
+  "screen_passed_cases_before_stop": 21,
+  "completed_timing_cells_before_stop": [
+    {
+      "layer": "0",
+      "T": "1",
+      "original_us": "6.348800",
+      "candidate_us": "5.376000",
+      "ratio": "0.846774"
+    },
+    {
+      "layer": "0",
+      "T": "2",
+      "original_us": "7.997440",
+      "candidate_us": "6.881280",
+      "ratio": "0.860435"
+    },
+    {
+      "layer": "0",
+      "T": "3",
+      "original_us": "9.216000",
+      "candidate_us": "8.202240",
+      "ratio": "0.890000"
+    },
+    {
+      "layer": "0",
+      "T": "4",
+      "original_us": "9.520320",
+      "candidate_us": "8.764160",
+      "ratio": "0.920574"
+    },
+    {
+      "layer": "0",
+      "T": "5",
+      "original_us": "11.632640",
+      "candidate_us": "9.799680",
+      "ratio": "0.842430"
+    }
+  ],
+  "sequential_diagnostic_cases": 96,
+  "sequential_mismatching_cases": 3,
+  "differences": [
+    "FAIL quant layer=0 T=6 pattern=1",
+    "DIFF byte=14433 block=400 offset=33 routed=170 shared=169",
+    "FAIL quant layer=1 T=8 pattern=2",
+    "DIFF byte=5435 block=150 offset=35 routed=132 shared=131",
+    "FAIL quant layer=2 T=4 pattern=3",
+    "DIFF byte=1791 block=49 offset=27 routed=68 shared=69"
+  ],
+  "memory_snapshot": {
+    "physical_available": 121187450880,
+    "commit_available": 124049149952
+  },
+  "memory_method": "one global snapshot; fixed allocations under128MiB; not a continuous trace",
+  "source_library_hashes": {
+    "strata-iq3_s.json": "3457fdfe7d69fbf6651e2031320cdebf88a9d8d269ebbe459db7fdd885e8c9f0",
+    "engine/strata-cuda133-format-gather.exe": "6048736d7674d8f3c66ce50060f11ca6623df33d3e885030941a6ef9e62f427c",
+    "local-setup/target-80/c038-branch.exe": "97a1967661e9d8355ba3e9ef9431c4410e254d77b8348a3197ff33b976d946e8",
+    "local-setup/target-80/c038-diagnostic.exe": "15d3e2c6c79d18cd1402d5f6c7f7609351ebafb58978aa76ace7fc9a752909ad",
+    "local-setup/target-80/build-cuda86-main/strata_kernels.lib": "c02e35c3a07f7fbb235441747cce1af9006091b6a65d159430f28836223054c8",
+    "src/kernels/cuda/native_mmvq.cu": "320af84a960d0ff04745ac1c8f8ddaee8e6a8a93ff630aed146ff87cdb99ae91",
+    "src/kernels/cuda/iq_kernels.cu": "5275cd16dc919fccd96890afcb8981186b606df897b9d4db8fa0951fffe27e9e",
+    "src/core/verify.cpp": "b3d828372abcb1706ee67f4cde75f2af4c96ff159fa35671fb698c3a64b81a34"
+  },
+  "server_launched": false,
+  "production_changed": false,
+  "cleanup": "Both prototype processes exited; server helper confirmed no live Strata process; GPU457MiB idle.",
+  "limitations": [
+    "actual shared gate/up weights with synthetic finite inputs",
+    "two GEMVs approximate the two branches; not a full expert pipeline",
+    "partial timing set is invalid as an optimization result because correctness failed",
+    "compiler flags differ: native_mmvq uses --use_fast_math, iq_kernels does not; numerical cause plausible, not instruction-level proven"
+  ]
+}

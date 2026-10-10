@@ -1,0 +1,65 @@
+{
+  "memory_snapshot": {
+    "physical_available": 121187450880,
+    "commit_available": 124049149952
+  },
+  "tensors": [
+    {
+      "layer": 0,
+      "weights": [
+        {
+          "name": "blk.0.ffn_gate_shexp.weight",
+          "type": "Q4_K",
+          "type_id": null,
+          "bytes": 921600,
+          "sha256": "49827a29188f36738cfe7382f21d2c7d3ec68e4c0a1a91210134adc95eb0ddfa"
+        },
+        {
+          "name": "blk.0.ffn_up_shexp.weight",
+          "type": "IQ4_XS",
+          "type_id": null,
+          "bytes": 870400,
+          "sha256": "b9133ea1a06cbd944bdb592f080812363dd64c2488c2e4e54cdf7fa40ed1dfab"
+        }
+      ]
+    },
+    {
+      "layer": 23,
+      "weights": [
+        {
+          "name": "blk.23.ffn_gate_shexp.weight",
+          "type": "Q5_K",
+          "type_id": null,
+          "bytes": 1126400,
+          "sha256": "7a02ddf09a9066ee5398d445a13e3bf64de0cf002102b8928d4de5a85b677e25"
+        },
+        {
+          "name": "blk.23.ffn_up_shexp.weight",
+          "type": "Q5_K",
+          "type_id": null,
+          "bytes": 1126400,
+          "sha256": "b989cf46a227b03ae79d56a02e18c88004316498d8c9ab1c77bd6d8d81d64824"
+        }
+      ]
+    },
+    {
+      "layer": 47,
+      "weights": [
+        {
+          "name": "blk.47.ffn_gate_shexp.weight",
+          "type": "Q4_K",
+          "type_id": null,
+          "bytes": 921600,
+          "sha256": "e27f4261d388d32f0fd876ed6248efa9121026bdebbfe74d276d735262e54e9c"
+        },
+        {
+          "name": "blk.47.ffn_up_shexp.weight",
+          "type": "Q5_K",
+          "type_id": null,
+          "bytes": 1126400,
+          "sha256": "43835c68b5900a227d44233260a7babdff4acaf63aa11aac058bb162c19e9a4b"
+        }
+      ]
+    }
+  ]
+}
