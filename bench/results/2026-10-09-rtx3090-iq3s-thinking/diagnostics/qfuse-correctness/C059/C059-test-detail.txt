@@ -1,0 +1,130 @@
+Start testing: Oct 10 07:21 Central Daylight Time
+----------------------------------------------------------
+30/115 Testing: verify_parity
+30/115 Test: verify_parity
+Command: "C:/strata/local-setup/target-80/build-cuda86-main/verify_parity.exe" "--selftest"
+Directory: C:/strata/local-setup/target-80/build-cuda86-main
+"verify_parity" start time: Oct 10 07:21 Central Daylight Time
+Output:
+----------------------------------------------------------
+argmax_rows, row_top_prob_split: bitwise equal to the one-block kernels (ties, NaN, -inf, 1-8 rows on one scratch)
+verify_parity: PASS
+<end of output>
+Test time =   0.29 sec
+----------------------------------------------------------
+Test Passed.
+"verify_parity" end time: Oct 10 07:21 Central Daylight Time
+"verify_parity" time elapsed: 00:00:00
+----------------------------------------------------------
+
+31/115 Testing: qfuse_gdn_test
+31/115 Test: qfuse_gdn_test
+Command: "C:/strata/local-setup/target-80/build-cuda86-main/qfuse_gdn_test.exe"
+Directory: C:/strata/local-setup/target-80/build-cuda86-main
+"qfuse_gdn_test" start time: Oct 10 07:21 Central Daylight Time
+Output:
+----------------------------------------------------------
+QFUSE GDN: 64 cases, 0 failures
+COMMIT full_qfuse=1 enabled=1 fused_output=1 T=1 captured=0 skipped=0 state_bytes_differ=0 output_bytes_differ=0
+COMMIT full_qfuse=0 enabled=1 fused_output=1 T=1 captured=1 skipped=1 state_bytes_differ=0 output_bytes_differ=0
+COMMIT full_qfuse=0 enabled=0 fused_output=1 T=1 captured=0 skipped=0 state_bytes_differ=0 output_bytes_differ=0
+COMMIT full_qfuse=0 enabled=1 fused_output=0 T=1 captured=1 skipped=1 state_bytes_differ=0 output_bytes_differ=0
+<end of output>
+Test time =   0.30 sec
+----------------------------------------------------------
+Test Passed.
+"qfuse_gdn_test" end time: Oct 10 07:21 Central Daylight Time
+"qfuse_gdn_test" time elapsed: 00:00:00
+----------------------------------------------------------
+
+32/115 Testing: gr_parity
+32/115 Test: gr_parity
+Command: "C:/strata/local-setup/target-80/build-cuda86-main/gr_parity.exe" "--selftest"
+Directory: C:/strata/local-setup/target-80/build-cuda86-main
+"gr_parity" start time: Oct 10 07:21 Central Daylight Time
+Output:
+----------------------------------------------------------
+  per-stream RMSNorm vs whole-stack        yes  (86.1097% apart, floor 5.000%)
+  /hc inside the silu vs outside           yes  (7.1852% apart, floor 5.000%)
+  SiLU on lo / sigmoid on gate, swapped    yes  (87.2055% apart, floor 5.000%)
+  mean over streams vs sum                 yes  (300.0000% apart, floor 50.000%)
+  BF16 vs FP32 activation contracts        yes  (0.0978% apart, floor 0.010%)
+
+  mixed vs reference                       worst 1.989e-08 (mean |ref| 0.2165)
+  inject vs reference                      rel 1.423e-08
+  FP32 activations vs reference: pass (mixed 6.352e-08, inject 1.564e-07)
+  restoring default activation contract: byte-identical
+  weight orientation is observable         yes (59.5% apart)
+  null w_inject writes nothing             yes
+  zero injection -> plain residual add     yes (worst rel 5.847e-08)
+  1*sigmoid vs 2*sigmoid is observable     yes (readings 50% apart, kernel within 4.34e-07)
+  every stream adds the same block output  yes (worst rel 9.353e-08)
+
+  real dims 2560/4/320 BF16 pass (mixed 6.622e-08, inject 1.985e-07)
+
+  real dims 2560/4/320 FP32 pass (mixed 1.541e-07, inject 1.591e-07)
+
+  real dims 2560/4/320 native pinned GR pass (mixed 1.690e-07, inject 9.280e-08)
+  fused GR read + q8_1 (STRATA_QFUSE), T 1..8, direct and graph replays: pass
+  fused GR multi max-T=8 LDS launch and changing graph replay pass
+  scalar gamma 1.00000000 BF16 activation/capture pass (mixed 0.614394009, ref 0.614394009)
+  scalar final mixer BF16 pass
+  scalar gamma 1.00000000 FP32 activation/capture pass (mixed 0.614636600, ref 0.614636600)
+  scalar final mixer FP32 pass
+  scalar gamma 1.00000000 native pinned GR activation/capture pass (mixed 0.614636600, ref 0.614636600)
+  scalar final mixer native pinned GR pass
+  scalar gamma 1.00390625 BF16 activation/capture pass (mixed 0.616793990, ref 0.616793990)
+  scalar final mixer BF16 pass
+  scalar gamma 1.00390625 FP32 activation/capture pass (mixed 0.617553174, ref 0.617553174)
+  scalar final mixer FP32 pass
+  scalar gamma 1.00390625 native pinned GR activation/capture pass (mixed 0.617553174, ref 0.617553174)
+  scalar final mixer native pinned GR pass
+
+gr_read/gr_write: 0 failures
+gr_parity OK
+<end of output>
+Test time =   0.46 sec
+----------------------------------------------------------
+Test Passed.
+"gr_parity" end time: Oct 10 07:21 Central Daylight Time
+"gr_parity" time elapsed: 00:00:00
+----------------------------------------------------------
+
+33/115 Testing: gdn_parity
+33/115 Test: gdn_parity
+Command: "C:/strata/local-setup/target-80/build-cuda86-main/gdn_parity.exe" "--selftest"
+Directory: C:/strata/local-setup/target-80/build-cuda86-main
+"gdn_parity" start time: Oct 10 07:21 Central Daylight Time
+Output:
+----------------------------------------------------------
+  modulo vs interleave head pairing          yes  (142.04% apart)
+  decay before vs after the update           yes  (76.93% apart)
+
+  o vs reference                             rel 1.942e-07
+  state (read via (S,h_v,S)) vs reference    rel 4.023e-08
+  gate=beta=0 from a zero state is a no-op   yes
+
+  conv weight layout is observable           yes  (132.6% apart)
+  conv out vs reference                      rel 1.092e-08
+  conv state slide (mapped) vs reference     rel 0.000e+00
+
+  eps on sum vs on mean is observable        yes  (1031.4% apart)
+  l2_norm vs reference                       rel 0.000e+00
+
+  out norm (rms * ssm_norm * sigmoid z)      rel 1.041e-08
+  sigmoid vs SiLU on the gate is observable  yes  (86.78% apart)
+
+  gdn_ab_multi T=1..8 == fused_gdn_ab        bitwise (8 cases)
+  gdn_step_norm_multi T=1..8 == single-token bitwise (47 cases)
+
+gdn: 0 failures
+gdn_parity OK
+<end of output>
+Test time =   0.55 sec
+----------------------------------------------------------
+Test Passed.
+"gdn_parity" end time: Oct 10 07:21 Central Daylight Time
+"gdn_parity" time elapsed: 00:00:00
+----------------------------------------------------------
+
+End testing: Oct 10 07:21 Central Daylight Time

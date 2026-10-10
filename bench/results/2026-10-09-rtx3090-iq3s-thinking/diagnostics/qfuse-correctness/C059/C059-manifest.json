@@ -1,0 +1,8 @@
+{
+  "upstream_test_source": "https://github.com/tntcannon5000/Strata/blob/0a3b624aba82775a8b1949fb905dd178902049c2/tests/qfuse_gdn.cpp",
+  "upstream_test_changes": "add actual current-source capture/commit policy probe using GDN kernel; original64quantizer cases retained",
+  "verify_source_sha256": "b3d828372abcb1706ee67f4cde75f2af4c96ff159fa35671fb698c3a64b81a34",
+  "kernel_library_sha256": "7d49e1541f995bb6d3d5416e06f6ecaffc6b6fddea068dd43945ad871353702e",
+  "capture_predicate": "T == 1 && !batch_rec_ && !g_qfuse() && one_token_self_commit()",
+  "commit_skip_predicate": "last_t_ == 1 && one_token_self_commit()"
+}

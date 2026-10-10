@@ -3,18 +3,18 @@
   "target_tps": 90,
   "metric": "server_decode_tps",
   "contract": "goal-90-contract.md",
-  "current": "C057 and C058 rejected: exact parity preserved but timing gates fail. P025 traced current stack; checkpoint extra-copy design deferred.",
+  "current": "C059 CUDA correctness fix; C060 fusion rejected; C061 private rounded-product repair passes175cases and isolated timing gate. No new served result.",
   "next": [
-    "Inspect existing P025 prompt gather cost and PR1822 applicability before any opt-in build; no decode claim from prefill-only change.",
-    "Stop narrow HC geometry sweeps. Seek a distinct dataflow mechanism supported by counters; retain all failed cache gates.",
-    "Finish full qualification and promote only a verified non-degrading stack."
+    "Screen corrected vectorized scale/combine against actual staged native_moe_combine_multi, including cancellation/signed-zero/subnormal boundaries.",
+    "If exact and faster, integrate default-off scale-only staged-verifier path with existing gate GEMV; do not enable all-resident LFUSE as a substitute.",
+    "Retain C056 failed cache screen and full fixed qualification contract."
   ],
   "promoted": "The previously qualified format-gather engine with IQ2_S gather disabled and adaptive lag2; no changes this turn.",
   "stopping_rule": "Leave goal active until all fixed qualification cells pass. No benchmark model resident at handoff.",
   "quality": "C056 Q015:5/5 natural-stop answers,72tests each, unchanged corrected-v2 checker and approved32768cap. Full real-use matrix remains pending.",
-  "last_checkpoint": "E240",
-  "resume_command": "No model resident. Same branch perf/rtx3090-thinking-80. Read E236-E240. C057/C058 are closed standalone losers; source unchanged; C056 cc85c6c7 remains experimental.",
-  "safety": "R128-R131 exact cleanup and production3457fdfe restoration verified; 16GiB physical/commit floors pass.",
+  "last_checkpoint": "E245",
+  "resume_command": "No model resident. Same branch perf/rtx3090-thinking-80. Read E242-E245. C061 is a microbenchmark lead only; no C062 experiment yet. C059 named engine18baf9e0 has no served qualification.",
+  "safety": "C060/C061 guarded16GiB, exact children exited; GPU457MiB/0percent. C059 lacked continuous guard CSV; limitation recorded E242.",
   "goal_tool_status_at_entry": "active, verified get_goal",
   "target_short_tps": 90,
   "target_longer_tps": 85,
@@ -116,5 +116,29 @@
     "raw_label_note": "Inherited exact=1 and exact_us label identifies the half-column candidate; this is NOT exact-T specialization.",
     "minimum_physical_GiB": 112.52290344238281,
     "minimum_commit_GiB": 116.51482772827148
+  },
+  "c059": {
+    "engine_sha256": "18baf9e01b6e2172d7bd2606c837be8e9bf25d7e2d221635441d2d11e66e800c",
+    "cuda_tests_passed": 4,
+    "quantization_boundary_legacy_different_bytes": 31241,
+    "full_qfuse_qualified": false
+  },
+  "c061": {
+    "id": "C061",
+    "parity_cases": 175,
+    "parity_failed": 0,
+    "geometric_candidate_control_duration_ratio": 0.7416600241648709,
+    "microbenchmark_gate_pass": true,
+    "served_tps_claim": false,
+    "memory_minimum_GiB": {
+      "C060": {
+        "physical_available": 112.6186408996582,
+        "commit_available": 116.85330200195312
+      },
+      "C061": {
+        "physical_available": 112.52841567993164,
+        "commit_available": 116.5482292175293
+      }
+    }
   }
 }

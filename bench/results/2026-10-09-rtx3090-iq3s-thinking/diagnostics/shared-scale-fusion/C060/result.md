@@ -1,0 +1,9 @@
+## E244 / C060 rejected; C061 explicit rounding hypothesis
+
+C060 current LFUSE combine failed105/140 cases. Every ordinary/small/large distribution failed across all T2..8 and five seeds; saturated-gate cases passed. No nonfinite values or inactive-output canary failures. All rows are retained and no timing was run. The entire existing LFUSE option remains disabled. This does not prove generated answers degrade, but fails the required arithmetic equivalence gate before serving.
+
+The gated branch uses a Clang contraction pragma while this CUDA build uses NVCC, and writes sum += shared * sigmoid in one kernel. Hypothesis: that last operation contracts into FMA whereas the original separate scale kernel stores a rounded product. C061 changes only that product in a PRIVATE copy of native_moe.cu to __fmul_rn, preserving the original fast-math compilation and actual native library reference. No production arithmetic changes yet. This tests the proposed cause rather than assuming the pragma was effective.
+
+C061 reruns all140 cases and adds35 subnormal-input cases (175 total), with graph replay and finite/canary checks. Only if every case is bitwise identical, time T2..8, one excluded warmup and seven alternating paired measured rounds,200 repetitions per graph. Both paths include the SAME input-restoration D2D copy; absolute timing is diagnostic and not a served TPS or launch count estimate. Predeclared integration screen: at least5percent geometric mean duration reduction and no slower cell median. Keep all timing rows. A pass permits opt-in engine integration and additional router-aux parity; it cannot enable the whole LFUSE option, transfer C056 quality, or promote a launcher.
+
+Both C060/C061 use16GiB physical and commit guards at1s and exact child cleanup. No model loaded. Fixed sampler/context/output contract unchanged and goal active. No upstream open LFUSE PR was found by the required bot search; no issue or comment posted.

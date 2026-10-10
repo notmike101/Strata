@@ -1,5 +1,5 @@
 {
-  "exported_utc": "2026-10-10T12:11:46.643061+00:00",
+  "exported_utc": "2026-10-10T12:33:33.803907+00:00",
   "files": {
     ".gitattributes": {
       "bytes": 205,
@@ -5233,6 +5233,102 @@
       "bytes": 2099,
       "sha256": "4d8cbe928786a854c7c3e3576d1498394520be2201c3087f88b367cf28c44202"
     },
+    "diagnostics/qfuse-correctness/C059/build-c059-boundary.cmd": {
+      "bytes": 580,
+      "sha256": "f460f40743289b902acdfe0e61687a44ae75ab0c2dfd628887f1f5b11c8cd38a"
+    },
+    "diagnostics/qfuse-correctness/C059/build-c059-engine.cmd": {
+      "bytes": 368,
+      "sha256": "58cd4fbb75247ed93f82a900c647d645421e76397906de7d552b8863d8fb8391"
+    },
+    "diagnostics/qfuse-correctness/C059/build-c059-fixed.cmd": {
+      "bytes": 562,
+      "sha256": "7d4cf0d8ecbad0803836eb2845b15053a6e6668c1b6d3dded856d5b064ac172d"
+    },
+    "diagnostics/qfuse-correctness/C059/build-c059.cmd": {
+      "bytes": 571,
+      "sha256": "9405194e01750996f449219850c1bcb8545dbad9f539eb04bfc5b190242052e1"
+    },
+    "diagnostics/qfuse-correctness/C059/C059-before-build.txt": {
+      "bytes": 256,
+      "sha256": "a997a8ba0ac4a0cb3e9d425a502b16bbf5ac5b9fbd1332b4ab3047a021934106"
+    },
+    "diagnostics/qfuse-correctness/C059/C059-before.txt": {
+      "bytes": 109,
+      "sha256": "e209c918a7f5047c4437f16635c845fb18dc7a18065d89bd43b8c6c74e3f493e"
+    },
+    "diagnostics/qfuse-correctness/C059/C059-boundary-build.txt": {
+      "bytes": 313,
+      "sha256": "3c84b4233e9000f0c3a28c85464c4a85a9b2d4b51b4eac8ffc94d0efb8c04eef"
+    },
+    "diagnostics/qfuse-correctness/C059/c059-boundary.cu": {
+      "bytes": 2796,
+      "sha256": "85bea9475b6dbce5489f54c12f34ca596fc204ff13f536e796fb45421e1db02a"
+    },
+    "diagnostics/qfuse-correctness/C059/C059-boundary.txt": {
+      "bytes": 81,
+      "sha256": "007a6b37601688575fc16d5defcdad2c4fba9bb235c7ce781232f4fd9580033f"
+    },
+    "diagnostics/qfuse-correctness/C059/C059-ctest.txt": {
+      "bytes": 514,
+      "sha256": "af4e238d4ea94573d113a9072a684adffba0916eb242aad57c390bd3e5b1371c"
+    },
+    "diagnostics/qfuse-correctness/C059/C059-engine-build.txt": {
+      "bytes": 10452,
+      "sha256": "12fc9554e7face94f002202a43329c07644c8d49da869ec089a6654102635b85"
+    },
+    "diagnostics/qfuse-correctness/C059/C059-fixed-build.txt": {
+      "bytes": 257,
+      "sha256": "164ff5f1ddfd01c5e0402b5323d0f1fd3d0dd7308ac3b41312c459813ed1e6c6"
+    },
+    "diagnostics/qfuse-correctness/C059/C059-fixed.txt": {
+      "bytes": 103,
+      "sha256": "24ed41c12a25218e05f49944d573323f7f5343f9862af16f49f92c834a6c897c"
+    },
+    "diagnostics/qfuse-correctness/C059/c059-gdn.cpp": {
+      "bytes": 4865,
+      "sha256": "692c04113c732619ecd0b8c8223445b66e7a878022f8b0fdb646a3c56e91180e"
+    },
+    "diagnostics/qfuse-correctness/C059/C059-manifest.json": {
+      "bytes": 623,
+      "sha256": "55d608523dc1fd2cadfd3af7bfa29db591d9021ba9d02fb99503f421b00aac15"
+    },
+    "diagnostics/qfuse-correctness/C059/c059-policy.inl": {
+      "bytes": 266,
+      "sha256": "42054c302291c246642dc9c3f3585dfaae583d75137b097b64949a9d7b2eebbe"
+    },
+    "diagnostics/qfuse-correctness/C059/c059-q8-proposed.cuh": {
+      "bytes": 2393,
+      "sha256": "437229ba6a8c9f4d281832b9deaa19f830218523c6454b09089c90cf05d48ef6"
+    },
+    "diagnostics/qfuse-correctness/C059/C059-test-detail.txt": {
+      "bytes": 6260,
+      "sha256": "017d03c42625d131f7dae85f62babb5e62f7bf7f4acf5e315bc9b1b5b3595971"
+    },
+    "diagnostics/qfuse-correctness/C059/close-c059.py": {
+      "bytes": 5614,
+      "sha256": "2c7c75419609f30a4f7f88356761ab8b861b93263a5ba629d91d673bc2a20a52"
+    },
+    "diagnostics/qfuse-correctness/C059/fixed-engine.json": {
+      "bytes": 154,
+      "sha256": "827112198d3247091451f8db330828c50b3541c6de6dc4c1838f22cda2af6e7b"
+    },
+    "diagnostics/qfuse-correctness/C059/plan.md": {
+      "bytes": 2737,
+      "sha256": "46e89d2e31cfaa44773824f652f7bc6e95a5676bb6b2ae40347139b2ab4024c3"
+    },
+    "diagnostics/qfuse-correctness/C059/prepare-c059-boundary.py": {
+      "bytes": 989,
+      "sha256": "9885c02e9668bd59c872ef65ba3631d09feff500335391d483b0eb0f5e44af2c"
+    },
+    "diagnostics/qfuse-correctness/C059/prepare-c059.py": {
+      "bytes": 7342,
+      "sha256": "72e65efa7ab2b06ff35ed7a9ffd61430c4aca0fb70635fd2b18883109c36179d"
+    },
+    "diagnostics/qfuse-correctness/C059/result.md": {
+      "bytes": 2579,
+      "sha256": "ff70c5c17fc394e5c2e37f0fb1d6f42a3bb4824a05db7ef3422c221487336c06"
+    },
     "diagnostics/README.md": {
       "bytes": 1991,
       "sha256": "71aebe940151b4fe0ad2f8569eb29cdbf0294a8b7509f200aebbb2e2f955b1a5"
@@ -9913,6 +10009,106 @@
       "bytes": 5158,
       "sha256": "783d1e488c6139bbc629ea7e947c4c460ed46c682a54c782ae2898326b8feab1"
     },
+    "diagnostics/shared-scale-fusion/C060/build-c060.cmd": {
+      "bytes": 576,
+      "sha256": "b43d29a424dd31c7e345ce4eb8686dba11c47bf73981462317c1e561b32eb133"
+    },
+    "diagnostics/shared-scale-fusion/C060/C060-build.txt": {
+      "bytes": 309,
+      "sha256": "16c5e0ff380321c0a95d528e94db90533785ceb3f4cb29df296f52092d000711"
+    },
+    "diagnostics/shared-scale-fusion/C060/C060-manifest.json": {
+      "bytes": 623,
+      "sha256": "15bc9a264519633a46a1f0a9102ea19531a65f08c727b7ef31058ccabc5d64dd"
+    },
+    "diagnostics/shared-scale-fusion/C060/C060-result.txt": {
+      "bytes": 14714,
+      "sha256": "f93aa90f40ade440f923865a8680e1cca910fb5283941669ed1211ea4ea6f0d1"
+    },
+    "diagnostics/shared-scale-fusion/C060/C060-safety.csv": {
+      "bytes": 158,
+      "sha256": "259c0e91e82542806dabbdbd8308a41fd59c2af92817678356c6dd383647e968"
+    },
+    "diagnostics/shared-scale-fusion/C060/c060-scale.inl": {
+      "bytes": 460,
+      "sha256": "13571f33e87ba05af16a5ff2e6480e2d3817fc543edd0cdfcfb420a18c6aa982"
+    },
+    "diagnostics/shared-scale-fusion/C060/c060-screen.cu": {
+      "bytes": 2730,
+      "sha256": "636e3236cc8fdf57744b6a1a8dd8c361ebd495c138fe54ee75f9e812a52b2318"
+    },
+    "diagnostics/shared-scale-fusion/C060/plan.md": {
+      "bytes": 1585,
+      "sha256": "b355c42480cd2ce1b226258750df288dfe14cf0f1e0ed0bd56817bfa040f06bd"
+    },
+    "diagnostics/shared-scale-fusion/C060/prepare-c060.py": {
+      "bytes": 3221,
+      "sha256": "be4599b211ed954ac76e623d039350fc179ecd41f51e30313a86b6c956528acc"
+    },
+    "diagnostics/shared-scale-fusion/C060/result.md": {
+      "bytes": 1958,
+      "sha256": "29f7ecf66d1be48fe2e0f2843a198e9f18bd85b3d44a74a8e13d5133c3d7d599"
+    },
+    "diagnostics/shared-scale-fusion/C060/run-c060.py": {
+      "bytes": 1852,
+      "sha256": "334469027dc07d50510aa1b19200238cabb991ea200df248625d4a3a20bd3d4c"
+    },
+    "diagnostics/shared-scale-fusion/C061/build-c061.cmd": {
+      "bytes": 877,
+      "sha256": "2fbb39fd679bd75ad4047566538a692e4b9e968642c3ca0641b2afe98009a720"
+    },
+    "diagnostics/shared-scale-fusion/C061/c060-scale.inl": {
+      "bytes": 460,
+      "sha256": "13571f33e87ba05af16a5ff2e6480e2d3817fc543edd0cdfcfb420a18c6aa982"
+    },
+    "diagnostics/shared-scale-fusion/C061/C061-build.txt": {
+      "bytes": 400,
+      "sha256": "2f9a32c350c19084e91be54ddff210b7ade7e0827b265b37a9051afb85619491"
+    },
+    "diagnostics/shared-scale-fusion/C061/c061-candidate.cu": {
+      "bytes": 9580,
+      "sha256": "f858d7405b605ecb366bd022ee1c7b72202635a9d2263e43b4e5caf927deb337"
+    },
+    "diagnostics/shared-scale-fusion/C061/C061-manifest.json": {
+      "bytes": 912,
+      "sha256": "eaf040f1969c3c7599a7bd4cff79e8224ad9674b34cca83f0220bd0848ddd5a6"
+    },
+    "diagnostics/shared-scale-fusion/C061/C061-result.txt": {
+      "bytes": 21856,
+      "sha256": "6723a8ba48427606e2b565cdd3edcaa15b6517189cfb3b17612046492d2f076a"
+    },
+    "diagnostics/shared-scale-fusion/C061/C061-safety.csv": {
+      "bytes": 217,
+      "sha256": "7dda3a30ba259ed4c7a18ec1efa17cf023275b567b8e57772dc4eed50272d110"
+    },
+    "diagnostics/shared-scale-fusion/C061/c061-screen.cu": {
+      "bytes": 4724,
+      "sha256": "dbd30f083971d7590268a456f93dcda74afdc501b967af2136516911d12c6d71"
+    },
+    "diagnostics/shared-scale-fusion/C061/C061-summary.json": {
+      "bytes": 3572,
+      "sha256": "9de52a73bb80859df9d05bbb2f0906451f718662dc38c0d6a319a92ba44ddb14"
+    },
+    "diagnostics/shared-scale-fusion/C061/close-c061.py": {
+      "bytes": 6854,
+      "sha256": "f583f18052129ae8f4bfbcdecb034c0bf68cb2012ba1a22820b9f82091adbebe"
+    },
+    "diagnostics/shared-scale-fusion/C061/plan.md": {
+      "bytes": 1958,
+      "sha256": "29f7ecf66d1be48fe2e0f2843a198e9f18bd85b3d44a74a8e13d5133c3d7d599"
+    },
+    "diagnostics/shared-scale-fusion/C061/prepare-c061.py": {
+      "bytes": 7292,
+      "sha256": "2c5538df30d4d22f46bd3954474f0c979748d4d39cab91e443a7c82eaf0bdb49"
+    },
+    "diagnostics/shared-scale-fusion/C061/result.md": {
+      "bytes": 2697,
+      "sha256": "4064f21637e3d8839536c028cb91420e1df40633e852d0654a4fbe44e1b269dd"
+    },
+    "diagnostics/shared-scale-fusion/C061/run-c061.py": {
+      "bytes": 1852,
+      "sha256": "529139efa175060cd0c1db5726055f7655048ce924d2519c641b778e870b1310"
+    },
     "diagnostics/spec-prob-audit/all-run-acceptance-comparison.json": {
       "bytes": 940,
       "sha256": "068ece47c13703618e6272059080e314f18b45b7b3a1a933fa0b9042fec30dab"
@@ -10194,8 +10390,8 @@
       "sha256": "2f62bfdf31004200f39c1304db55b529c33f169fec03d3f572c9c4564d092739"
     },
     "goal-90-state.json": {
-      "bytes": 4946,
-      "sha256": "6e80f6cf178cd76263427116324435662bf426c098d0b1a33c4ca0060f4cfd78"
+      "bytes": 5766,
+      "sha256": "ab0b50c17161a5543043711b1d0b027114add7a5eef22ba3bd7a5075823bd748"
     },
     "goal90-benchmark.py": {
       "bytes": 13011,
@@ -10226,8 +10422,8 @@
       "sha256": "f1340e812574b74b1139b75eaa2cad11a2cd0c11f168f6c2f1f0e7a0bb4cbaf6"
     },
     "ledger.md": {
-      "bytes": 490180,
-      "sha256": "9609a9e80053c6db7b4b14c3ebb0fa661b1923134e4526693488a81b067690fd"
+      "bytes": 501746,
+      "sha256": "343823df8454b89a826624f5d95edc8f6316b426825c0fa3d0de31435d77bfe6"
     },
     "measure.py": {
       "bytes": 13940,
@@ -27438,8 +27634,8 @@
       "sha256": "4804689f8b38894215aa8e4e9c87800645058a0ca2393b7a82559099b31213f1"
     },
     "README.md": {
-      "bytes": 24015,
-      "sha256": "71d8aaa9f2f0da0c52ec08b6a0c573e3a39317c02e49f33b1bdddc854c604663"
+      "bytes": 24007,
+      "sha256": "121385c1a1c0d91fc67bbe9b4978c9189bfd9b9db8b334815a09190e678748c4"
     },
     "replay.py": {
       "bytes": 1104,
