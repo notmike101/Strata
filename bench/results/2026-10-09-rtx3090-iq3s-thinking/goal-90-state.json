@@ -3,16 +3,16 @@
   "target_tps": 90,
   "metric": "server_decode_tps",
   "contract": "goal-90-contract.md",
-  "current": "R110/R111 complete. Corrected target90 short /85 longer. Paired coding speed cells pass thresholds; full quality and workload qualification remains outstanding.",
+  "current": "Q008 quality1/5; full goal remains unqualified.",
   "next": [
-    "Pool both coding arms and run Q008 complete-answer quality under unchanged profile and corrected 90 short / 85 long thresholds."
+    "Run identical Q009 quality suite on production control to separate inherent8192-token incompletion from candidate regressions before more tuning."
   ],
   "promoted": "The previously qualified format-gather engine with IQ2_S gather disabled and adaptive lag2; no changes this turn.",
   "stopping_rule": "Leave goal active until all fixed qualification cells pass. No benchmark model resident at handoff.",
-  "quality": "Q007: 3/5 compiled and passed72 tests each, 2/5 no final answer at8192 tokens. Goal unqualified.",
-  "last_checkpoint": "E176",
-  "resume_command": "No benchmark model resident. R110 and R111 have both completed and exact cleanup was verified. Do not rerun them. Prepare Q008 using same C051 config and goal90-quality.py under guarded supervisor; retain Q007 failures.",
-  "safety": "R110/R111 exact cleanup passed and both16GiB global floors passed; production config restored.",
+  "quality": "Q0081/5; Q0073/5 retained. See coding-refresh/Q008-goal-coding/audit.json.",
+  "last_checkpoint": "E178",
+  "resume_command": "Q008 is complete and exact cleanup verified. No model resident. Inspect E178 and authoritative state before next arm.",
+  "safety": "Q008 global floors and exact cleanup passed; production config restored.",
   "goal_tool_status_at_entry": "active, verified get_goal",
   "target_short_tps": 90,
   "target_longer_tps": 85,

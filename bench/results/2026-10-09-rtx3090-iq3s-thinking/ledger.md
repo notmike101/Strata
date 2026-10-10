@@ -3539,3 +3539,36 @@ short/stream/new: all10 decode values[92.2, 95.0, 98.1, 90.9, 92.7, 93.5, 93.7, 
 longer/stream/new: all10 decode values[88.2, 90.2, 88.3, 89.0, 90.3, 78.1, 84.2, 91.5, 90.9, 89.7]; ordinary median89.35; E2E median43.057545; prompt median509.35. Numeric speed threshold met; not full qualification.
 
 Both fresh-process confirmations complete; exact server cleanup verified. No benchmark model resident. Next Q008 completed-answer tests without modifying the fixed profile or8192-token quality allowance.
+
+
+## E177 / Q008 completed-answer quality refresh started
+
+Previous goal turn made progress: R111 finished, both coding baselines were pooled, user targets reconciled to90 short /85 longer, and all evidence was validated and pushed asd055dc26. No numeric profile or quality condition changed.
+
+Q008 uses byte-identical R110 configuration (C0510dea69dc engine; HC1/accepted1/conditional64/minfresh1025), original goal90-quality.py, unchanged topological fixture, seeds101-105, max8192 and natural-stop plus72 objective tests per answer. There is no speed qualification from this quality run and no additional quality warmup. Original Q007 failures remain. Added only a private supervisor --goal-quality selector to run the existing quality client under the same16GiB global physical/commit guard, timeout and exact-tree cleanup. Mutually exclusive workload selectors reject mixed modes. Both helper scripts compile; production configuration3457fdfe and idleGPU457MiB were verified before start. Supervisor rejects concurrent inference/build/profiler processes.
+
+Live session57761; outputQ008-goal-coding, wrapperQ008-wrapper.txt. Inspect that handle before any other model launch. No Git/build/profiler/process-memory polling during requests. Next: verify all five request payloads againstQ007, preserve every outcome, inspect final answers and guard/cleanup evidence before deciding further work.
+
+
+## E178 / Q008 completed-answer quality results
+
+Seed101: 8192tokens, finishlength, passed=False; Did not stop naturally
+
+Seed102: 8192tokens, finishlength, passed=False; Did not stop naturally
+
+Seed103: 6600tokens, finishstop, passed=True; {"passed": true, "compiled": true, "cases": 72, "test_seed": 904001}
+
+Seed104: 8192tokens, finishlength, passed=False; Did not stop naturally
+
+Seed105: 8192tokens, finishlength, passed=False; Did not stop naturally
+
+Quality pass count1/5. Every request exactly matchesQ007, including numeric profile, thinking, seed, task and8192 cap. All actual cache counts are zero. Every passing answer stopped naturally, compiled and passed72 objective tests. All failures retained. These variable-length answers are excluded from512-token target statistics. No quality warmup; inherited manifest warmup wording is corrected in this audit.
+
+Minimum physical62487044096 and commit41671241728bytes; both16GiB floors pass. Supervisor exact cleanup verified and production config3457fdfe restored. Native experimental C051 stack remains unpromoted.
+
+Next: Run identical Q009 quality suite on production control to separate inherent8192-token incompletion from candidate regressions before more tuning.
+
+
+## E179 / Q009 same-day production quality control
+
+Q008 passed1/5 versus historical Q0073/5, with seeds101/102/104/105 incomplete at8192 and no final answer. Historical comparison alone does not establish cause. Run Q009 immediately on the restored production configuration3457fdfe, format-gather engine6048736d, identical quality client, prompts, seeds, profile, vision, context and8192 cap. Only engine and environment differ fromQ008; explicit diff archived. No speed claim from variable-length quality answers. All five seeds retained regardless of prior failure. Same guarded supervisor and exact cleanup apply. No production changes.

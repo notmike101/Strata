@@ -1520,6 +1520,25 @@
   },
   {
     "campaign": "target-80",
+    "arm": "Q008-goal-coding",
+    "workload": "quality/coding",
+    "runs": 5,
+    "decode_median": 79.6,
+    "decode_min": 77.6,
+    "decode_max": 82.6,
+    "e2e_median": 78.9400998032327,
+    "stream_total_median": 78.94110612751567,
+    "ttft_median_seconds": 0.8995924000046216,
+    "raw_decode": [
+      79.3,
+      82.6,
+      77.6,
+      80.9,
+      79.6
+    ]
+  },
+  {
+    "campaign": "target-80",
     "arm": "R001-host-last",
     "workload": "longer",
     "runs": 3,

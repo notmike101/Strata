@@ -1,0 +1,39 @@
+[
+  {
+    "seed": 101,
+    "finish_reason": "length",
+    "completion_tokens": 8192,
+    "passed": false,
+    "error": "Did not stop naturally"
+  },
+  {
+    "seed": 102,
+    "finish_reason": "length",
+    "completion_tokens": 8192,
+    "passed": false,
+    "error": "Did not stop naturally"
+  },
+  {
+    "seed": 103,
+    "finish_reason": "stop",
+    "completion_tokens": 6600,
+    "returncode": 0,
+    "stdout": "{\"passed\": true, \"compiled\": true, \"cases\": 72, \"test_seed\": 904001}\n",
+    "stderr": "",
+    "passed": true
+  },
+  {
+    "seed": 104,
+    "finish_reason": "length",
+    "completion_tokens": 8192,
+    "passed": false,
+    "error": "Did not stop naturally"
+  },
+  {
+    "seed": 105,
+    "finish_reason": "length",
+    "completion_tokens": 8192,
+    "passed": false,
+    "error": "Did not stop naturally"
+  }
+]

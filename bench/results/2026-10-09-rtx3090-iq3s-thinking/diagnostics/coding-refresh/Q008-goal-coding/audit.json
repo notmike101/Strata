@@ -1,0 +1,77 @@
+{
+  "quality_passed": false,
+  "passed_count": 1,
+  "checks": [
+    {
+      "seed": 101,
+      "finish_reason": "length",
+      "completion_tokens": 8192,
+      "passed": false,
+      "error": "Did not stop naturally"
+    },
+    {
+      "seed": 102,
+      "finish_reason": "length",
+      "completion_tokens": 8192,
+      "passed": false,
+      "error": "Did not stop naturally"
+    },
+    {
+      "seed": 103,
+      "finish_reason": "stop",
+      "completion_tokens": 6600,
+      "returncode": 0,
+      "stdout": "{\"passed\": true, \"compiled\": true, \"cases\": 72, \"test_seed\": 904001}\n",
+      "stderr": "",
+      "passed": true
+    },
+    {
+      "seed": 104,
+      "finish_reason": "length",
+      "completion_tokens": 8192,
+      "passed": false,
+      "error": "Did not stop naturally"
+    },
+    {
+      "seed": 105,
+      "finish_reason": "length",
+      "completion_tokens": 8192,
+      "passed": false,
+      "error": "Did not stop naturally"
+    }
+  ],
+  "request_identity": [
+    {
+      "seed": 101,
+      "matches_Q007": true,
+      "request_sha256": "21c1f3fe751446da9a61e6df907d6b9484688b5719ea89ce66887b27bb0ef935"
+    },
+    {
+      "seed": 102,
+      "matches_Q007": true,
+      "request_sha256": "0b047c7739eacf56be37f7adf6d2a018375b230d430c780e34fe523cfae3e824"
+    },
+    {
+      "seed": 103,
+      "matches_Q007": true,
+      "request_sha256": "5bfdfad940573ab1f56cced3a02a5f1fb9b680f39ed5eea2b4c69f568776ff43"
+    },
+    {
+      "seed": 104,
+      "matches_Q007": true,
+      "request_sha256": "c18583993673050dd13b3eecbc84c2c696c8bf4d846d39819aa94817c5437521"
+    },
+    {
+      "seed": 105,
+      "matches_Q007": true,
+      "request_sha256": "1d60462d212a3ae339fc5986ca274f379c7dc09ac9772ca36cab36f96e14fe59"
+    }
+  ],
+  "minimum_memory_bytes": {
+    "physical_available": 62487044096,
+    "commit_available": 41671241728
+  },
+  "speed_qualification": false,
+  "quality_warmup": false,
+  "note": "Inherited client manifest warmup wording describes speed protocol; this quality client executes five seeds without a warmup. Longer output is excluded from the512-token target."
+}

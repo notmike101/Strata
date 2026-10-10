@@ -1,6 +1,6 @@
 # RTX 3090 / i9-10900KF: IQ3_S thinking-mode optimization ledger
 
-Current goal checkpoint (E176): **90 short / 85 approximately3K server_decode_tps**, corrected by the user. R110/R111 frozen coding streaming misses meet the numeric thresholds across ten measured runs per size; full quality and workload qualification remains outstanding. See diagnostics/coding-refresh/paired-summary.json. Production unchanged; both servers cleaned up. Next: Q008 completed coding answers with unchanged profile.
+Current goal checkpoint (E179): **90 short / 85 approximately3K server_decode_tps** remains unqualified. R110/R111 coding speed medians93.6/89.35 meet those numeric thresholds, but Q008 completed-answer quality passes only1/5; four seeds have no final answer at8192 tokens. Same-day production quality control Q009 is next. No candidate promoted.
 
 Active goal: **90 short / 85 approximately3K tok/s server_decode_tps** on the fixed coding matrix; goal created without a token budget at the user's request. See [goal-90-contract.md](goal-90-contract.md). The target remains unproven. Fresh control B010 measured85.9 /84.8 tok/s but included short-run stalls of21.7 and17.5; prompt-read medians77.0 /495.3. No new candidate is promoted. Earlier90/85 follow-up results remain in [follow-up-summary.json](follow-up-summary.json). The B010 stalls remain unexplained; later B011/B012 cells and the Q007 failures are retained without discarding slow or incomplete runs.
 
