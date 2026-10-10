@@ -2619,5 +2619,195 @@
       75.3,
       74.8
     ]
+  },
+  {
+    "campaign": "target-80",
+    "arm": "R047-fresh-control",
+    "workload": "longer",
+    "runs": 5,
+    "decode_median": 80.9,
+    "decode_min": 78.6,
+    "decode_max": 83.8,
+    "e2e_median": 41.10608510724568,
+    "stream_total_median": 41.111465822412605,
+    "ttft_median_seconds": 6.156696199992439,
+    "raw_decode": [
+      80.9,
+      78.6,
+      79.5,
+      83.8,
+      82.4
+    ]
+  },
+  {
+    "campaign": "target-80",
+    "arm": "R047-fresh-control",
+    "workload": "short",
+    "runs": 5,
+    "decode_median": 87.1,
+    "decode_min": 84.5,
+    "decode_max": 93.2,
+    "e2e_median": 76.53563253145009,
+    "stream_total_median": 76.54991678018743,
+    "ttft_median_seconds": 0.8632440000073984,
+    "raw_decode": [
+      87.1,
+      93.2,
+      85.5,
+      84.5,
+      87.5
+    ]
+  },
+  {
+    "campaign": "target-80",
+    "arm": "R048-spec2",
+    "workload": "longer",
+    "runs": 5,
+    "decode_median": 80.8,
+    "decode_min": 76.8,
+    "decode_max": 82.1,
+    "e2e_median": 41.08729765162505,
+    "stream_total_median": 41.091307107453595,
+    "ttft_median_seconds": 6.149425200012047,
+    "raw_decode": [
+      81.2,
+      82.1,
+      76.8,
+      80.0,
+      80.8
+    ]
+  },
+  {
+    "campaign": "target-80",
+    "arm": "R048-spec2",
+    "workload": "short",
+    "runs": 5,
+    "decode_median": 85.5,
+    "decode_min": 82.6,
+    "decode_max": 87.0,
+    "e2e_median": 75.07650948828075,
+    "stream_total_median": 75.09511228638794,
+    "ttft_median_seconds": 0.8488998000102583,
+    "raw_decode": [
+      83.4,
+      85.5,
+      85.8,
+      87.0,
+      82.6
+    ]
+  },
+  {
+    "campaign": "target-80",
+    "arm": "R049-pcie010",
+    "workload": "longer",
+    "runs": 5,
+    "decode_median": 85.3,
+    "decode_min": 81.9,
+    "decode_max": 87.1,
+    "e2e_median": 42.20709784727615,
+    "stream_total_median": 42.212679500095234,
+    "ttft_median_seconds": 6.141496500000358,
+    "raw_decode": [
+      81.9,
+      85.7,
+      82.2,
+      87.1,
+      85.3
+    ]
+  },
+  {
+    "campaign": "target-80",
+    "arm": "R049-pcie010",
+    "workload": "short",
+    "runs": 5,
+    "decode_median": 86.6,
+    "decode_min": 86.1,
+    "decode_max": 89.7,
+    "e2e_median": 75.9130343834331,
+    "stream_total_median": 75.92688561207257,
+    "ttft_median_seconds": 0.8658464000036474,
+    "raw_decode": [
+      86.3,
+      89.7,
+      87.1,
+      86.6,
+      86.1
+    ]
+  },
+  {
+    "campaign": "target-80",
+    "arm": "R050-pcie010-reverse",
+    "workload": "longer",
+    "runs": 5,
+    "decode_median": 85.1,
+    "decode_min": 80.5,
+    "decode_max": 86.5,
+    "e2e_median": 42.14892472984007,
+    "stream_total_median": 42.1520470771103,
+    "ttft_median_seconds": 6.157939900003839,
+    "raw_decode": [
+      86.3,
+      84.8,
+      80.5,
+      86.5,
+      85.1
+    ]
+  },
+  {
+    "campaign": "target-80",
+    "arm": "R050-pcie010-reverse",
+    "workload": "short",
+    "runs": 5,
+    "decode_median": 87.3,
+    "decode_min": 84.5,
+    "decode_max": 88.0,
+    "e2e_median": 76.77006504838339,
+    "stream_total_median": 76.78052308444506,
+    "ttft_median_seconds": 0.8477978000009898,
+    "raw_decode": [
+      88.0,
+      87.3,
+      84.5,
+      88.0,
+      84.6
+    ]
+  },
+  {
+    "campaign": "target-80",
+    "arm": "R051-control-reverse",
+    "workload": "longer",
+    "runs": 5,
+    "decode_median": 82.3,
+    "decode_min": 78.3,
+    "decode_max": 86.6,
+    "e2e_median": 41.46490554951294,
+    "stream_total_median": 41.4679703623649,
+    "ttft_median_seconds": 6.157538300001761,
+    "raw_decode": [
+      82.3,
+      84.0,
+      86.6,
+      82.1,
+      78.3
+    ]
+  },
+  {
+    "campaign": "target-80",
+    "arm": "R051-control-reverse",
+    "workload": "short",
+    "runs": 5,
+    "decode_median": 87.8,
+    "decode_min": 86.5,
+    "decode_max": 88.4,
+    "e2e_median": 76.81121827856674,
+    "stream_total_median": 76.82607592278701,
+    "ttft_median_seconds": 0.8574204000178725,
+    "raw_decode": [
+      87.8,
+      88.4,
+      86.5,
+      88.4,
+      86.9
+    ]
   }
 ]

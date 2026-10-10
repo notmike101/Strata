@@ -1,0 +1,16 @@
+We need answer user's request. Need produce final detailed answer at least 1200 words. Need implement thread-safe Python TTLCache using OrderedDict monotonic clock. Include set, get, delete, clear, len, expiration, capacity eviction, unit tests with injected fake clock, detailed explanation thread safety complexity. Also existing cache rules maybe need incorporate? They list 64 rules from item_000 to item_063 lifetimes 30+ i? sizes 64 + 3i. Need likely implement cache supporting per-key TTL/size? They mention existing design requirements before implementing cache. Could include seeding or tests with those keys? Need not ignore identifier. Need likely use per-entry lifetime and size. Existing cache rules: each key has lifetime and size. Cache has capacity eviction? Need size-based capacity? Existing rule mentions size bytes; capacity eviction could be by count or total bytes? Need decide. TTLCache usually capacity max number of entries. But size bytes may imply capacity in bytes? "capacity eviction" could be based on size (total bytes) with OrderedDict. The rules give key size bytes and lifetime. Need implement support for per-entry size and max total bytes? The request says Python TTLCache class using OrderedDict and monotonic clock. Include set, get, delete, clear, len, expiration, capacity eviction. "len" likely number of entries, not total bytes. Need capacity eviction maybe max entries and/or max total bytes. With existing rules sizes, likely max_size bytes. But len method? Could be __len__ returns entries. Need maybe capacity parameter maxsize and max_bytes? We can support both: max_entries and max_bytes. If size specified, evict until fits. But OrderedDict LRU: move_to_end on get and set. Expiration remove stale entries. Thread-safe with RLock or Lock. Need fake clock injection. Need complete code, tests, explanation.
+
+Need ensure no abbreviation. Could write class:
+
+import threading, time
+from collections import OrderedDict
+from typing import Optional, Hashable, Any, Iterator
+
+class TTLCache:
+    DEFAULT_SIZE = 1
+    def __init__(self, max_entries=None, max_bytes=None, default_ttl=..., clock=None, thread_lock=None):
+       self._max_entries = max_entries ...
+       self._max_bytes = max_bytes ...
+       self._default_ttl = default_ttl
+       self._clock = clock or time.monotonic
+       self._entries = OrderedDict() # key

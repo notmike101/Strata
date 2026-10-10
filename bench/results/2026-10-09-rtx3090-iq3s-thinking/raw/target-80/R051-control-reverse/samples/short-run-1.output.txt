@@ -1,0 +1,11 @@
+We need answer user's request. Need produce detailed answer at least 1200 words. User asks: Benchmark identifier ignore. Implement thread-safe Python TTLCache class using OrderedDict and monotonic clock. Include set, get, delete, clear, len, expiration, capacity eviction, unit tests with injected fake clock, detailed explanation thread safety and complexity. Write complete code, then tests, then explain design. Do not abbreviate implementation.
+
+Need think through implementation. Need ensure thread safety. Use OrderedDict, threading.Lock/RWLock? Need TTL expiration: lazy expiration and maybe sweep on access. Injected fake clock for tests. Use monotonic clock by default. Methods set, get, delete, clear, len, expiration maybe expire method? Include capacity eviction. Need complete code. Tests with fake clock, maybe use unittest. Need ensure not abbreviate implementation. Answer likely >1200 words. Need code complete.
+
+Let's design robust TTLCache.
+
+Class TTLCache:
+- __init__(self, maxsize=128, ttl=300, clock=time.monotonic): validate maxsize>=1, ttl>=0? if ttl None? maybe allow ttl=0. Use OrderedDict. threading.Lock? For get read operations, a single lock okay. For thread safety and simplicity. Could implement with RLock? Need reentrant? not necessary. But if get calls _purge which calls delete, using RLock maybe safe. Better use threading.RLock. Or separate methods acquire. Use internal lock.
+- Internal entry: (value, expires_at) maybe use dataclass? Complete implementation simple.
+- _expiry_for(ttl) if ttl is None then no expiry? Could support ttl=None indefinite. But user asked TTLCache. Could include.
+- set(key, value, ttl=None): if ttl is None use default. If maxsize==0? maxsize>=1. Lock: If key in cache: remove? Need maintain recency. OrderedDict move_to_end. If capacity full, popitem(last=False) evicts least recently inserted/updated? With OrderedDict and access get moves_to_end. Insert new after eviction. Store if not expired? If ttl==0 maybe immediately expired. Could still store with expires_at <= now then next get evicts. Maybe set can skip storing if ttl <=0 and not store? But len might count expired until purged. Better maybe not store ttl<=0? Could store and then immediately purge? Need clear semantics. Simpler

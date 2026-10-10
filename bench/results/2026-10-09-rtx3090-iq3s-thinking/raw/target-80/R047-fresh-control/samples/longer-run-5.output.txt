@@ -1,0 +1,16 @@
+We need answer user's request. Need produce final answer with complete code, tests, explanation. Need analyze carefully.
+
+User: Benchmark identifier ... Ignore. Read existing design requirements before implementing the cache: many rules 0-63: key item_000 lifetime 30 etc size 64 bytes; expiration must remove stale entries, and access must update least-recently-used order. Implement thread-safe Python TTLCache class using OrderedDict and monotonic clock. Include set, get, delete, clear, len, expiration, capacity eviction, unit tests with injected fake clock, and detailed explanation of thread safety and complexity. Write complete code, then tests, then explain design. Do not abbreviate. Detailed answer at least 1200 words.
+
+We need likely incorporate existing rules? The existing rules list keys with lifetimes and sizes. Maybe need consider size? Existing cache rule: key has lifetime and size; expiration remove stale, access update LRU. They want TTLCache using OrderedDict and monotonic clock. Could include capacity eviction by count? They mention size bytes maybe track total size and evict by capacity in bytes? Need implement thread-safe. Include set, get, delete, clear, len, expiration, capacity eviction, unit tests with fake clock.
+
+Need produce code complete, tests, explanation. At least 1200 words. Need maybe mention benchmark identifier ignored. Need not abbreviate implementation. Could write Python code:
+
+import threading, time
+from collections import OrderedDict, namedtuple
+
+class TTLCache:
+    def __init__(self, max_size=None, default_ttl=...?, clock=time.monotonic):
+But size bytes? Existing rules have size. Could support byte_size capacity and per-entry size. Use max_capacity_bytes? Or capacity entries? Requirement: "capacity eviction" generic. Could support max_entries and max_bytes. Existing rules have size bytes, perhaps need track size and evict until within max_bytes. Also existing rules item_000 size 64... item_063 size 253. Maybe implement initialization from those rules? "Read these existing design requirements before implementing the cache" maybe means existing cache rules should be considered; perhaps design should support key-specific TTLs and sizes. Could include seed data? Maybe test with those? But code class generic. Could mention existing rules are examples of per-key TTL and byte size metadata. Use entry size to account capacity. LRU order updated on get and set.
+
+Need thread safety:

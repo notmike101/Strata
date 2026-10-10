@@ -1,0 +1,19 @@
+{
+  "reference_source_sha256": "555384ee4a66889079c780024401d6776d3b1384ddc0a28796b00c2d90df2c96",
+  "reference_library_sha256": "d86febc2ff97f8d64734f30dccb3568151308bba47d40fcba6abaa4332f4b733",
+  "compiler_sha256": "a0186f6283f5cbc99dafc30e590a4ebf991b5fd5666c45c47abbfd7b7c841508",
+  "compiler": "CUDA 13.4.92",
+  "gpu": "RTX 3090 sm_86",
+  "model": "ISTA-DASLab/Qwen3.8-Flash-Next-GSQ-RCO-GGUF IQ3_S",
+  "weights": "Actual Q6_K dense tensors, original GGUF bytes; unchanged model quant.",
+  "driver": "610.88",
+  "flags": "-arch=sm_86 -O3 --use_fast_math -Xcompiler /MT",
+  "memory_scope": "cudaMemGetInfo device-wide allocated bytes includes context and other processes; not isolated graph allocation size.",
+  "sampling": "No sampler in the kernel-only diagnostic. Fixed served thinking profile unchanged.",
+  "after": "All diagnostic processes exited; cudaDeviceReset used in main on success/error; GPU memory returned to 553 MiB.",
+  "executable_sha256": "f8c71e686340d0bb433e3d31d3b388ed476102d046920d9e8cb33433afbae36f",
+  "baseline": "C028: original source in same translation unit; C029: unchanged C022 reference static library.",
+  "cxx_standard": "c++20",
+  "timing_label_1": "Unchanged reference, four warps per output-row CTA; label 1 is a baseline sentinel.",
+  "timing_warmup": "One uncaptured priming call and one captured 64-call warmup per variant; all excluded."
+}

@@ -720,3 +720,230 @@ The cleanup finally stopped the launcher root and every descendant, and the prev
 The memory-layout branch of the experiment queue is closed for the existing implementations: R045 saves expert RAM but loses decode speed, and R046 cannot activate rotation. Generalizing ownership rotation to mixed block sizes would be new engine work and would still retain the extra GPU-to-host transfers; it is not an established path to 90 tok/s. No source change or production promotion is justified by these results alone.
 
 Next: refresh current upstream and profiler evidence for a different single-GPU scheduling or kernel theory on the retained full arena. Do not retry the losing threshold, compiler/runtime, head layout, CPU repack or resident-copy arms without new evidence. The existing --pipeline-windows option is specifically a two-GPU layer-split path and is not an applicable one-GPU knob. Windows large pages still require a user-right/session change; no such change has been made. The fixed numeric sampling and every quality/workload gate remain in force; the goal stays active and unqualified, including Q007's two incomplete answers.
+
+
+## E066 / Current upstream and profiler reassessment
+
+The previous goal turn was progress: resident-copy throughput was measured and rejected, rotation was refused before measurement, and preflight corrections were tested. Fresh read-only GitHub queries again found main fb58e0dbc8399662c0e47c76578c6e878b14f6cf and latest release v0.1.41 unchanged. No newer stable Strata release is waiting to apply. Reviewed current PR1742/1744 (SM86 prefill),1741 (pipelined service early exit),1737 (approximate routing kernel),1544 (exact CPU singleton) and1548 (dynamic PCIe balance). URLs, exact PR heads and applicability limits are retained in diagnostics/research-refresh/E066/sources.json. Nothing was posted upstream or imported blindly.
+
+Approximate resident routing remains excluded despite the attractive reported speed: that mode changes expert selection and the source report measured output-distribution/quality distortion. The SM86 prefill proposals make no decode claim; the singleton proposal's dispatch does not run under the retained multi-token minimum of1. The current one-GPU verifier calls run(), not the pipelined service() addressed by1741. Dynamic PCIe fitting is a potential architectural lead, but its existing evidence is below a manually tuned fraction on the reported machine and does not establish a win against this control.
+
+Rechecked P009 collected kernel/API statistics and P005 host decode timing. The incomplete Nsight trace remains diagnostic, not a complete critical-path partition or speed proof. CPU service plus GPU-reach/transfer wait remain material. Six-token drafting lost in R041; two-token drafting has not been measured. R047 is a fresh unchanged control, then R048 changes only --spec4 to2 on the same retained engine/libraries. The existing suffix policy consequently permits at most four rather than six rows. Every target sampler, context, precision, thinking and quality requirement remains fixed. The detailed hypothesis and rejection/promotion rules are recorded before the experiment.
+
+
+## E067 / R047-fresh-control
+
+Same retained production engine and loaded library hashes as R037. Config diff is archived. Fixed numeric sampling, high/xhigh reasoning, model/quant, vision, context262144 and INT8KV retained. Original TTLCache streaming cache-miss workloads; one excluded warmup and five measured seeds101-105 per cell,512tokens per measured run. No slow seed excluded.
+
+| Workload | Decode median (range), tok/s | Prompt median, tok/s | E2E median, tok/s | Stream total median, tok/s | TTFT median, s | Draft accepted/offered |
+|---|---:|---:|---:|---:|---:|---:|
+| short | 87.1 (84.5-93.2) | 204.0 | 76.5356 | 76.5499 | 0.8632 | 863/1139 (75.77%) |
+| longer | 80.9 (78.6-83.8) | 495.8 | 41.1061 | 41.1115 | 6.1567 | 906/1248 (72.60%) |
+
+Minimum available physical RAM 64,167,477,248 bytes; available commit 42,260,922,368 bytes. Sampled GPU peak 25,222,799,360 bytes. Both16GiB host floors passed. Per-process peak memory not sampled. Full launcher/server/text/vision cleanup passed and previous config restored.
+
+Fresh unchanged control:87.1 short and80.9 longer server decode tok/s. The complete seed ranges are84.5-93.2 and78.6-83.8; a93.2 peak is not qualification. This is a current paired reference for R048, not a new promoted configuration or a replacement for earlier controls.
+
+Next: Run R048 with only the MTP depth reduced from4 to2; every target sampling, model, context and quality condition is unchanged.
+
+
+## E068 / R048-spec2
+
+Same retained production engine and loaded library hashes as R037. Config diff is archived. Fixed numeric sampling, high/xhigh reasoning, model/quant, vision, context262144 and INT8KV retained. Original TTLCache streaming cache-miss workloads; one excluded warmup and five measured seeds101-105 per cell,512tokens per measured run. No slow seed excluded.
+
+| Workload | Decode median (range), tok/s | Prompt median, tok/s | E2E median, tok/s | Stream total median, tok/s | TTFT median, s | Draft accepted/offered |
+|---|---:|---:|---:|---:|---:|---:|
+| short | 85.5 (82.6-87.0) | 206.1 | 75.0765 | 75.0951 | 0.8489 | 701/897 (78.15%) |
+| longer | 80.8 (76.8-82.1) | 496.5 | 41.0873 | 41.0913 | 6.1494 | 825/1038 (79.48%) |
+
+Minimum available physical RAM 64,197,320,704 bytes; available commit 42,335,342,592 bytes. Sampled GPU peak 25,187,147,776 bytes. Both16GiB host floors passed. Per-process peak memory not sampled. Full launcher/server/text/vision cleanup passed and previous config restored.
+
+Two-token MTP finished at85.5/80.8 short/longer server decode tok/s, versus the fresh R047 control87.1/80.9. Short E2E also fell. Reject this smaller-window candidate; the target90 threshold was not met and the marginal prompt increase does not offset decode/client regression. Four-token MTP remains the retained configuration.
+
+Next: Audit P009 trace coverage offline, then select a different kernel or scheduling intervention from verified stage costs rather than repeating losing draft limits.
+
+
+## E069 / P010 retrospective P009 coverage audit; balance theory
+
+Terminology correction: the P009 warning alone does not establish that kernels were lost. A [version-matched NVIDIA forum explanation](https://forums.developer.nvidia.com/t/nsight-systems-2026-5-1-produced-112-collected-100-warning-despite-complete-coverage-of-32-kernels/384749) says its separate probe emitted the warning because of a forced flush. That probe used Linux and ordinary launches, so its conclusion does not automatically transfer to this Windows graph trace. P009 coverage was unproven; calling it definitely incomplete based only on the warning was too strong. The [official guide](https://docs.nvidia.com/nsight-systems/UserGuide/index.html) also distinguishes graph-level from more costly node tracing. No instrumented rate becomes a qualification result.
+
+The read-only SQLite audit found 759,910 kernel records, all with positive intervals. All 996 graph-launch API keys match graph kernel activity keys, in both directions. Across fourteen graph identities, every repeated launch contains the same node multiset as that graph's first observed launch, with no duplicate node IDs within a launch. All 12,628 direct kernel keys match launch APIs. The other 65 launch APIs sit inside one stream-capture interval; 65 graph nodes were created there, and their original IDs exactly match the nodes executed by graph41. Thus those calls are graph construction, not 65 unexplained missing kernel executions. All recorded launch API return values were zero.
+
+This reconciles recorded launches and graph cohorts internally. It does not independently enumerate every node expected by the application, prove all memory-transfer records present, or detect a uniformly absent API/activity pair. The producer855077 and collected804251 totals represent different categories/phases and cannot be treated as a dropped-kernel count. A second process reported zero produced events and no collected CUDA events; those diagnostics remain separately identified by global PID. The audit records the database hash, queries and detailed counts. Raw capture metadata can contain inherited environment values, so only an explicit nonprivate metadata allowlist is exported; the SQLite/NSYS artifacts remain local.
+
+The first ad-hoc correlation query was stopped after an unindexed correlated join ran slowly; the saved audit uses sets and linear scans and completed in about two seconds without a model resident. This analysis never ran alongside a measured request.
+
+R048 accounting supplement: reducing --spec4 to2 also reduced maximum suffix window/buffer size. With automatic cache sizing, startup loaded8412 GPU experts instead of R047's8409 (both rounded15.95GiB). This is a recorded consequence of the flag, not an independently fixed cache amount. The smaller-window arm still lost decode/client speed and remains rejected.
+
+The next controlled test R049 retains four-token MTP and changes PCIe fraction0.20 to0.10. Original calibration predated the retained CPU-dispatch improvements, so the old share need not be optimal for the faster CPU path. Source assigns a rounded integer fraction of distinct missed experts to the GPU; the candidate keeps all expert computations and weights. Source proof and the predeclared workload/rejection rules are in pcie-after-cpu-plan.md. R047 and R049 startup both show8409 GPU experts. A lower transfer count alone is not a win, and changed CPU/GPU rounding still requires the full quality gate before any promotion.
+
+
+## E070 / R049-pcie010
+
+Same retained production engine and loaded library hashes as R037. Config diff is archived. Fixed numeric sampling, high/xhigh reasoning, model/quant, vision, context262144 and INT8KV retained. Original TTLCache streaming cache-miss workloads; one excluded warmup and five measured seeds101-105 per cell,512tokens per measured run. No slow seed excluded.
+
+| Workload | Decode median (range), tok/s | Prompt median, tok/s | E2E median, tok/s | Stream total median, tok/s | TTFT median, s | Draft accepted/offered |
+|---|---:|---:|---:|---:|---:|---:|
+| short | 86.6 (86.1-89.7) | 200.5 | 75.9130 | 75.9269 | 0.8658 | 849/1128 (75.27%) |
+| longer | 85.3 (81.9-87.1) | 497.1 | 42.2071 | 42.2127 | 6.1415 | 930/1240 (75.00%) |
+
+Minimum available physical RAM 64,216,748,032 bytes; available commit 42,317,918,208 bytes. Sampled GPU peak 25,224,896,512 bytes. Both16GiB host floors passed. Per-process peak memory not sampled. Full launcher/server/text/vision cleanup passed and previous config restored.
+
+PCIe fraction0.10 finished at86.6/85.3 short/longer server decode tok/s, versus fresh control87.1/80.9. Longer improved in this pair, but short decode/E2E and prompt median were slightly lower. The result is mixed and below90 in both cells; no promotion. Preserve all runs and repeat in the opposite arm/workload order before deciding whether the apparent longer gain is reproducible.
+
+Next: R050 repeats PCIe0.10 with longer-first workload order, then R051 repeats the unchanged PCIe0.20 control with longer-first order, completing an AB/BA comparison. No benchmark model resident between arms.
+
+
+## E071 / R050-pcie010-reverse
+
+Same retained production engine and loaded library hashes as R037. Config diff is archived. Fixed numeric sampling, high/xhigh reasoning, model/quant, vision, context262144 and INT8KV retained. Original TTLCache streaming cache-miss workloads; one excluded warmup and five measured seeds101-105 per cell,512tokens per measured run. No slow seed excluded.
+
+| Workload | Decode median (range), tok/s | Prompt median, tok/s | E2E median, tok/s | Stream total median, tok/s | TTFT median, s | Draft accepted/offered |
+|---|---:|---:|---:|---:|---:|---:|
+| short | 87.3 (84.5-88.0) | 202.3 | 76.7701 | 76.7805 | 0.8478 | 863/1100 (78.45%) |
+| longer | 85.1 (80.5-86.5) | 496.2 | 42.1489 | 42.1520 | 6.1579 | 1026/1337 (76.74%) |
+
+Minimum available physical RAM 64,239,681,536 bytes; available commit 42,343,604,224 bytes. Sampled GPU peak 25,216,507,904 bytes. Both16GiB host floors passed. Per-process peak memory not sampled. Full launcher/server/text/vision cleanup passed and previous config restored.
+
+The opposite-workload-order PCIe0.10 repeat reached87.3/85.1 short/longer server decode tok/s. The candidate repeats remain below90. Keep this result unpromoted until the opposite-order0.20 control completes; the first control pair alone cannot establish the apparent longer-input gain.
+
+Next: Run R051 unchanged0.20 control in longer-first order, then compare ordinary pooled medians over all ten measured runs per setting and workload, preserving each fresh-process result.
+
+
+## E072 / R051-control-reverse
+
+Same retained production engine and loaded library hashes as R037. Config diff is archived. Fixed numeric sampling, high/xhigh reasoning, model/quant, vision, context262144 and INT8KV retained. Original TTLCache streaming cache-miss workloads; one excluded warmup and five measured seeds101-105 per cell,512tokens per measured run. No slow seed excluded.
+
+| Workload | Decode median (range), tok/s | Prompt median, tok/s | E2E median, tok/s | Stream total median, tok/s | TTFT median, s | Draft accepted/offered |
+|---|---:|---:|---:|---:|---:|---:|
+| short | 87.8 (86.5-88.4) | 201.9 | 76.8112 | 76.8261 | 0.8574 | 916/1168 (78.42%) |
+| longer | 82.3 (78.3-86.6) | 496.4 | 41.4649 | 41.4680 | 6.1575 | 960/1330 (72.18%) |
+
+Minimum available physical RAM 64,174,030,848 bytes; available commit 42,262,347,776 bytes. Sampled GPU peak 25,216,507,904 bytes. Both16GiB host floors passed. Per-process peak memory not sampled. Full launcher/server/text/vision cleanup passed and previous config restored.
+
+The unchanged PCIe 0.20 control in longer-first order reached 87.8/82.3 short/longer server decode tok/s. The four-arm PCIe AB/BA comparison is complete; neither setting reaches 90 in both workloads. Preserve individual-process results and compare all ten measured runs per setting before any conclusion.
+
+Next: Compute the complete R047/R049/R050/R051 AB/BA comparison, keep the retained production setting, and inspect the profiled Q6 single-column shape distribution before choosing a new kernel theory.
+
+
+## E073 / PCIe 0.20 versus 0.10, complete AB/BA
+
+The predeclared four fresh processes are complete: R047 control, R049 candidate,
+R050 candidate with longer-first order, R051 control with longer-first order.
+Each contains one excluded warmup plus five measured seeds per workload. All ten
+measured rows per setting/workload enter the ordinary median below. Every matched
+request JSON is byte-identical across all four arms, including benchmark identifier,
+seed, sampling, reasoning, prompt, streaming and output cap. All measured requests
+generated 512 tokens with zero cached prompt tokens. Engine and loaded-library
+hashes match; normalized configurations differ only in PCIe fraction.
+
+| Workload / setting | Decode median (range), tok/s | Prompt median, tok/s | E2E median, tok/s | Stream median, tok/s | TTFT median, s | Draft accepted/offered |
+|---|---:|---:|---:|---:|---:|---:|
+| short / 0.20 | 87.30 (84.5-93.2) | 202.95 | 76.62434 | 76.64000 | 0.85977 | 1779/2307 |
+| short / 0.10 | 86.85 (84.5-89.7) | 201.50 | 75.99213 | 76.00865 | 0.85682 | 1712/2228 |
+| longer / 0.20 | 82.20 (78.3-86.6) | 496.15 | 41.42366 | 41.42733 | 6.15712 | 1866/2578 |
+| longer / 0.10 | 85.20 (80.5-87.1) | 496.80 | 42.17801 | 42.18236 | 6.14922 | 1956/2577 |
+
+PCIe 0.10 changes short decode by -0.52%, prompt throughput by -0.71%, and
+request E2E throughput by -0.83%. Longer decode improves by 3.65%, prompt by
+0.13%, and E2E by 1.82%. Short process medians are 87.1/87.8 for control and
+86.6/87.3 for candidate; longer process medians are 80.9/82.3 and 85.3/85.1.
+These small samples establish a mixed observed result, not a confidence interval
+or a universal causal improvement. The ten rows repeat five seeds across two
+processes, and the fixed TTLCache prompt does not represent every coding task.
+
+Decision: unpromoted. The apparent longer-input gain survives workload-order
+reversal, but short decode/client/prompt medians decrease and neither setting
+meets the complete 90 tok/s contract. Keep production PCIe 0.20. A pooled median
+does not override a failing per-process qualification cell. Q007 still has two
+incomplete coding answers, and these arms did not repeat the full random-coding,
+cold/cache-hit/nonstream/long-context/tool/vision matrix.
+
+All four arms passed the independent 16 GiB physical/commit floors and full-tree
+cleanup. Post-comparison independent cleanup again found no live launcher, server,
+text engine or vision process; port 8080 was closed, GPU memory 553 MiB and the
+production config SHA256 was 3457fdfe7d69fbf6651e2031320cdebf88a9d8d269ebbe459db7fdd885e8c9f0.
+
+Next: P011 breaks down the existing Q6 single-column trace by projection shape.
+C028 will test the already parity-checked row grouping on actual smaller dense
+tensors, where C021 did not measure timing. No server or model is launched for the
+offline audit; the isolated kernel diagnostic releases all allocations afterward.
+
+
+## E074 / C028 dense Q6_K projection diagnostic
+
+P011's read-only geometry audit finds the Q6_K cohort with 2560 output rows
+accounts for 157.10 ms in 8000 recorded calls. The full-head and reduced-vocabulary
+cohorts account for 120.48 and 137.18 ms respectively; 10240-row projections add
+118.41 ms. These are summed instrumented durations, not exclusive critical-path
+shares. GGUF metadata resolves the six dense shapes tested below. C021 timed only
+the output head, so C028 reuses its unchanged row grouping on actual dense tensors.
+
+Each diagnostic passed 1008 cases and 1,558,608 finite, bitwise-equal float
+comparisons on six actual tensors, eight activation patterns, seven odd/full row
+counts and three candidates, with output canaries intact. Timing uses one uncaptured
+priming call and one captured warmup per variant (both excluded), then eleven
+alternating forward/reverse rounds, a graph of 64 repeated
+projections per sample, and CUDA events. All raw rows are archived. Neither this
+synthetic activation test nor kernel timing qualifies output quality or served TPS.
+In the raw CSV, label 1 means the unchanged four-warps-per-row reference, not a
+one-warp CTA. Candidate labels 2/4/8 name the row or warp grouping under test.
+
+| Actual tensor | Input/output | Reference median, us | rows_per_cta=2, us | =4, us | =8, us |
+|---|---:|---:|---:|---:|---:|
+| blk.0.attn_qkv.weight | 2560/10240 | 27.038 | 29.788 | 33.632 | 45.408 |
+| blk.0.ssm_out.weight | 6144/2560 | 16.800 | 17.888 | 24.432 | 24.304 |
+| blk.1.attn_gate.weight | 2560/6144 | 17.306 | 19.744 | 21.536 | 32.688 |
+| blk.2.ffn_up_shexp.weight | 2560/640 | 3.325 | 3.904 | 5.104 | 7.520 |
+| blk.3.attn_k.weight | 2560/512 | 3.232 | 3.824 | 5.136 | 7.408 |
+| blk.31.attn_q.weight | 2560/12288 | 31.760 | 35.294 | 39.824 | 55.248 |
+
+Decision: reject all dense row-group candidates. Every candidate median is slower; no production source, config or launcher changes. Next: test one physical warp per row with the original ordered virtual partials (C029).
+
+
+## E075 / C029 dense Q6_K projection diagnostic
+
+This tests a different mapping: one physical warp computes each row while
+retaining four virtual partial sums, the original modulo-four block order, Q6/Q8
+dot helpers, ordered partial additions and XOR reduction. Removing shared memory
+and the CTA barrier increases work/register demand per lane. The deliberately
+zero-output RED stub failed on pattern 1, one output row, group 2: reference
+0x3e0a7c9a versus 0x00000000. The implemented candidate then passed every parity
+case. The production native reference links from the unchanged C022 library.
+
+Each diagnostic passed 1008 cases and 1,558,608 finite, bitwise-equal float
+comparisons on six actual tensors, eight activation patterns, seven odd/full row
+counts and three candidates, with output canaries intact. Timing uses one uncaptured
+priming call and one captured warmup per variant (both excluded), then eleven
+alternating forward/reverse rounds, a graph of 64 repeated
+projections per sample, and CUDA events. All raw rows are archived. Neither this
+synthetic activation test nor kernel timing qualifies output quality or served TPS.
+In the raw CSV, label 1 means the unchanged four-warps-per-row reference, not a
+one-warp CTA. Candidate labels 2/4/8 name the row or warp grouping under test.
+
+| Actual tensor | Input/output | Reference median, us | warps_per_cta=2, us | =4, us | =8, us |
+|---|---:|---:|---:|---:|---:|
+| blk.0.attn_qkv.weight | 2560/10240 | 27.360 | 27.840 | 27.104 | 27.404 |
+| blk.0.ssm_out.weight | 6144/2560 | 16.652 | 18.286 | 18.160 | 18.160 |
+| blk.1.attn_gate.weight | 2560/6144 | 17.328 | 18.748 | 17.328 | 17.600 |
+| blk.2.ffn_up_shexp.weight | 2560/640 | 3.311 | 4.352 | 4.416 | 4.444 |
+| blk.3.attn_k.weight | 2560/512 | 3.248 | 4.384 | 4.496 | 4.267 |
+| blk.31.attn_q.weight | 2560/12288 | 32.592 | 33.424 | 33.675 | 34.160 |
+
+Decision: reject as a general or served candidate. Five shapes tie or lose; the
+10240-row four-warp CTA improves only 0.94% in this small diagnostic (27.360 to
+27.104 us). That tiny isolated difference does not establish a repeatable service
+gain or justify another full-model run. No production dispatch was modified.
+
+Both diagnostics release allocations and reset the device. GPU memory returned
+to 553 MiB and no model/server was resident. Device-wide allocated memory during
+the small diagnostics was approximately 1.31-1.34 billion bytes, including context
+and other processes; it is not the standalone graph size. CUDA 13.4 is only the
+paired diagnostic compiler, not a promoted production toolchain change.
+
+The Q6 mapping branch is closed for now. Next architectural question: can a
+deterministic, workload-aware CPU/GPU missed-expert assignment retain the short
+behavior of PCIe 0.20 and longer behavior of 0.10? Inspect the upstream balance
+controller and current schedule dependencies before any code change; reject
+timing-dependent quality shortcuts. The fixed 90 TPS matrix, Q007 coding failures,
+prompt/client-rate preservation and safe memory gates remain in force.

@@ -1,0 +1,22 @@
+We need answer user's request. Need produce final answer with complete code, tests, explanation at least 1200 words. Need implement thread-safe Python TTLCache using OrderedDict and monotonic clock. Include set,get,delete,clear,len, expiration, capacity eviction, unit tests with injected fake clock, detailed explanation thread safety and complexity. No abbreviate. Need maybe mention existing cache rules? The user says read existing design requirements before implementing cache. Likely wants respect that key item_000 lifetime 30 size 64 etc? Could integrate capacity eviction based on size? Requirements mention each key has lifetime and size; expiration removes stale entries, access updates LRU order. Need design supports per-item size and capacity eviction. Capacity eviction likely based on total size, maybe default capacity. Existing cache rules include sizes. Need implement TTLCache with total size limit? Use OrderedDict mapping keys to entry object with value, size, expires_at. set: if key exists remove existing size, insert new at end; enforce capacity by evicting LRU until total_size <= max_size. Need thread-safe using RLock. Expiration: lazy on get, explicit purge method. Also len should count unexpired entries? Typically len triggers expiration? Need thread-safe len, maybe purge expired first. Access get updates LRU and checks expiration. delete. clear. Maybe contains? Not required but can add. Need unit tests with fake clock. Use time.monotonic by default but allow clock parameter. Could include typing.
+
+Need at least 1200 words detailed. Let's plan final:
+
+- Intro: implement TTLCache honoring existing cache rules: per key TTL, per-item size, LRU access update, capacity eviction.
+- Code complete: maybe file ttl_cache.py and tests.py. But final can include code blocks. Need not run but should be complete.
+
+Class:
+from __future__ import annotations
+import threading, time
+from collections import OrderedDict
+from dataclasses import dataclass
+from typing import Any, Optional, Callable
+
+class TTLCache:
+    def __init__(self, max_size: int=1024, default_lifetime: float=30, clock: Callable[[], float]=time.monotonic):
+       if max_size <=0: raise ValueError
+       self._lock=threading.RLock()
+       self._store=OrderedDict()
+       self._max_size=max_size
+       self._default_lifetime=default_lifetime
+       self._clock=clock

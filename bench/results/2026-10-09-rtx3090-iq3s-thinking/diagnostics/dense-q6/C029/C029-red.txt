@@ -1,0 +1,2 @@
+TENSOR blk.3.attn_k.weight input=2560 output=512
+FAIL pattern=1 n_out=1 group=2 row=0 ref=3e0a7c9a got=00000000

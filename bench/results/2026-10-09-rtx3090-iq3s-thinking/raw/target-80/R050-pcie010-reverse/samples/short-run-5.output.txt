@@ -1,0 +1,13 @@
+We need answer user's request. Need produce final answer at least 1200 words. Need implement thread-safe Python TTLCache using OrderedDict monotonic clock, include set, get, delete, clear, len, expiration, capacity eviction, unit tests with injected fake clock, detailed explanation thread safety and complexity. Do not abbreviate implementation. Need ignore benchmark identifier. Need likely provide code, tests, explanation. Need ensure complete code. Could use threading.RLock. OrderedDict for LRU? TTLCache probably capacity eviction (LRU). Need include expiration: remove expired on get, set, len maybe purge. Need monotonic clock injected fake clock for tests. Need unit tests probably using unittest. Need ensure complete. Need maybe type hints. Need code no abbreviations. Need detailed explanation. Word count >=1200. Need consider Python implementation.
+
+Potential code:
+from collections import OrderedDict
+import threading
+import time
+from typing import Any, Optional, Tuple, Union, Callable
+
+class TTLCache:
+   def __init__(self, maxsize=128, ttl=300.0, clock=time.monotonic): ... maxsize int, ttl float, clock Callable[[], float]. Store OrderedDict key->(value, expiry). Lock = threading.RLock? reentrant to allow operations.
+   _validate
+   _now: return self._clock()
+   _purge: remove all expired. But O(n) if scan all. Complexity: get O(1) if not expired but capacity. set may purge expired? For simplicity, purge all expired in set/get/clear/len? Could be expensive if many expired. But TTLCache can remove expired on access. For len exact count may need purge, O(n). Explain. But unit tests require len. Could maintain? If we scan only expired? OrderedDict no time index. Could use per-entry expiry and lazy expiration. Len can either return raw len not expired? If not purged, len inaccurate. User asked expiration, len. We can implement len purges expired by scanning OrderedDict. O(n). Or keep count and a min-heap? But specifically using OrderedDict, so no extra. Maybe len does cleanup? Could use a separate OrderedDict? We can remove expired by iterating keys snapshot to avoid mutation. For len: with lock: self._purge_expired(); return len(self._data). Need avoid modifying during iteration: use list? Could collect expired keys list, then delete. But if many, O(n).

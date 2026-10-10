@@ -1,0 +1,2096 @@
+[
+  {
+    "tensor": "blk.0.attn_qkv.weight",
+    "n_in": 2560,
+    "n_out": 10240,
+    "parity_cases": 168,
+    "bitwise_float_comparisons": 492216,
+    "original_weight_bytes": 21504000,
+    "device_allocated_with_graphs_bytes": 1331167232,
+    "timing": {
+      "1": {
+        "raw_us": [
+          27.423499,
+          26.992001000000002,
+          27.407999999999998,
+          27.008001,
+          27.248001000000002,
+          27.295999000000002,
+          27.279999,
+          27.373999,
+          27.36,
+          27.647501000000002,
+          27.36
+        ],
+        "median_us": 27.36,
+        "min_us": 26.992001000000002,
+        "max_us": 27.647501000000002
+      },
+      "2": {
+        "raw_us": [
+          27.872,
+          27.599999999999998,
+          27.968001,
+          27.599999999999998,
+          27.807999,
+          27.791999,
+          27.791999,
+          28.125500000000002,
+          27.84,
+          28.142,
+          28.128
+        ],
+        "median_us": 27.84,
+        "min_us": 27.599999999999998,
+        "max_us": 28.142
+      },
+      "4": {
+        "raw_us": [
+          27.151999999999997,
+          26.880000000000003,
+          27.184,
+          26.928,
+          27.052499,
+          27.039998999999998,
+          27.264001,
+          27.104,
+          27.470000000000002,
+          27.071998999999998,
+          27.339
+        ],
+        "median_us": 27.104,
+        "min_us": 26.880000000000003,
+        "max_us": 27.470000000000002
+      },
+      "8": {
+        "raw_us": [
+          27.472001,
+          27.243,
+          27.504001,
+          27.2,
+          27.344,
+          27.392,
+          27.373999,
+          27.4045,
+          27.760001,
+          27.407999999999998,
+          27.648
+        ],
+        "median_us": 27.4045,
+        "min_us": 27.2,
+        "max_us": 27.760001
+      }
+    },
+    "raw_timing_rows": [
+      {
+        "round": "0",
+        "order": "0",
+        "warps_per_cta": "1",
+        "milliseconds_per_projection": "0.027423499"
+      },
+      {
+        "round": "0",
+        "order": "1",
+        "warps_per_cta": "2",
+        "milliseconds_per_projection": "0.027872000"
+      },
+      {
+        "round": "0",
+        "order": "2",
+        "warps_per_cta": "4",
+        "milliseconds_per_projection": "0.027152000"
+      },
+      {
+        "round": "0",
+        "order": "3",
+        "warps_per_cta": "8",
+        "milliseconds_per_projection": "0.027472001"
+      },
+      {
+        "round": "1",
+        "order": "0",
+        "warps_per_cta": "8",
+        "milliseconds_per_projection": "0.027243000"
+      },
+      {
+        "round": "1",
+        "order": "1",
+        "warps_per_cta": "4",
+        "milliseconds_per_projection": "0.026880000"
+      },
+      {
+        "round": "1",
+        "order": "2",
+        "warps_per_cta": "2",
+        "milliseconds_per_projection": "0.027600000"
+      },
+      {
+        "round": "1",
+        "order": "3",
+        "warps_per_cta": "1",
+        "milliseconds_per_projection": "0.026992001"
+      },
+      {
+        "round": "2",
+        "order": "0",
+        "warps_per_cta": "1",
+        "milliseconds_per_projection": "0.027408000"
+      },
+      {
+        "round": "2",
+        "order": "1",
+        "warps_per_cta": "2",
+        "milliseconds_per_projection": "0.027968001"
+      },
+      {
+        "round": "2",
+        "order": "2",
+        "warps_per_cta": "4",
+        "milliseconds_per_projection": "0.027184000"
+      },
+      {
+        "round": "2",
+        "order": "3",
+        "warps_per_cta": "8",
+        "milliseconds_per_projection": "0.027504001"
+      },
+      {
+        "round": "3",
+        "order": "0",
+        "warps_per_cta": "8",
+        "milliseconds_per_projection": "0.027200000"
+      },
+      {
+        "round": "3",
+        "order": "1",
+        "warps_per_cta": "4",
+        "milliseconds_per_projection": "0.026928000"
+      },
+      {
+        "round": "3",
+        "order": "2",
+        "warps_per_cta": "2",
+        "milliseconds_per_projection": "0.027600000"
+      },
+      {
+        "round": "3",
+        "order": "3",
+        "warps_per_cta": "1",
+        "milliseconds_per_projection": "0.027008001"
+      },
+      {
+        "round": "4",
+        "order": "0",
+        "warps_per_cta": "1",
+        "milliseconds_per_projection": "0.027248001"
+      },
+      {
+        "round": "4",
+        "order": "1",
+        "warps_per_cta": "2",
+        "milliseconds_per_projection": "0.027807999"
+      },
+      {
+        "round": "4",
+        "order": "2",
+        "warps_per_cta": "4",
+        "milliseconds_per_projection": "0.027052499"
+      },
+      {
+        "round": "4",
+        "order": "3",
+        "warps_per_cta": "8",
+        "milliseconds_per_projection": "0.027344000"
+      },
+      {
+        "round": "5",
+        "order": "0",
+        "warps_per_cta": "8",
+        "milliseconds_per_projection": "0.027392000"
+      },
+      {
+        "round": "5",
+        "order": "1",
+        "warps_per_cta": "4",
+        "milliseconds_per_projection": "0.027039999"
+      },
+      {
+        "round": "5",
+        "order": "2",
+        "warps_per_cta": "2",
+        "milliseconds_per_projection": "0.027791999"
+      },
+      {
+        "round": "5",
+        "order": "3",
+        "warps_per_cta": "1",
+        "milliseconds_per_projection": "0.027295999"
+      },
+      {
+        "round": "6",
+        "order": "0",
+        "warps_per_cta": "1",
+        "milliseconds_per_projection": "0.027279999"
+      },
+      {
+        "round": "6",
+        "order": "1",
+        "warps_per_cta": "2",
+        "milliseconds_per_projection": "0.027791999"
+      },
+      {
+        "round": "6",
+        "order": "2",
+        "warps_per_cta": "4",
+        "milliseconds_per_projection": "0.027264001"
+      },
+      {
+        "round": "6",
+        "order": "3",
+        "warps_per_cta": "8",
+        "milliseconds_per_projection": "0.027373999"
+      },
+      {
+        "round": "7",
+        "order": "0",
+        "warps_per_cta": "8",
+        "milliseconds_per_projection": "0.027404500"
+      },
+      {
+        "round": "7",
+        "order": "1",
+        "warps_per_cta": "4",
+        "milliseconds_per_projection": "0.027104000"
+      },
+      {
+        "round": "7",
+        "order": "2",
+        "warps_per_cta": "2",
+        "milliseconds_per_projection": "0.028125500"
+      },
+      {
+        "round": "7",
+        "order": "3",
+        "warps_per_cta": "1",
+        "milliseconds_per_projection": "0.027373999"
+      },
+      {
+        "round": "8",
+        "order": "0",
+        "warps_per_cta": "1",
+        "milliseconds_per_projection": "0.027360000"
+      },
+      {
+        "round": "8",
+        "order": "1",
+        "warps_per_cta": "2",
+        "milliseconds_per_projection": "0.027840000"
+      },
+      {
+        "round": "8",
+        "order": "2",
+        "warps_per_cta": "4",
+        "milliseconds_per_projection": "0.027470000"
+      },
+      {
+        "round": "8",
+        "order": "3",
+        "warps_per_cta": "8",
+        "milliseconds_per_projection": "0.027760001"
+      },
+      {
+        "round": "9",
+        "order": "0",
+        "warps_per_cta": "8",
+        "milliseconds_per_projection": "0.027408000"
+      },
+      {
+        "round": "9",
+        "order": "1",
+        "warps_per_cta": "4",
+        "milliseconds_per_projection": "0.027071999"
+      },
+      {
+        "round": "9",
+        "order": "2",
+        "warps_per_cta": "2",
+        "milliseconds_per_projection": "0.028142000"
+      },
+      {
+        "round": "9",
+        "order": "3",
+        "warps_per_cta": "1",
+        "milliseconds_per_projection": "0.027647501"
+      },
+      {
+        "round": "10",
+        "order": "0",
+        "warps_per_cta": "1",
+        "milliseconds_per_projection": "0.027360000"
+      },
+      {
+        "round": "10",
+        "order": "1",
+        "warps_per_cta": "2",
+        "milliseconds_per_projection": "0.028128000"
+      },
+      {
+        "round": "10",
+        "order": "2",
+        "warps_per_cta": "4",
+        "milliseconds_per_projection": "0.027339000"
+      },
+      {
+        "round": "10",
+        "order": "3",
+        "warps_per_cta": "8",
+        "milliseconds_per_projection": "0.027648000"
+      }
+    ]
+  },
+  {
+    "tensor": "blk.0.ssm_out.weight",
+    "n_in": 6144,
+    "n_out": 2560,
+    "parity_cases": 168,
+    "bitwise_float_comparisons": 123576,
+    "original_weight_bytes": 12902400,
+    "device_allocated_with_graphs_bytes": 1322778624,
+    "timing": {
+      "1": {
+        "raw_us": [
+          16.480001,
+          16.416,
+          16.464001,
+          16.492501,
+          16.656000000000002,
+          16.636499999999998,
+          16.654501,
+          16.6525,
+          16.666001,
+          16.907001,
+          16.927498999999997
+        ],
+        "median_us": 16.6525,
+        "min_us": 16.416,
+        "max_us": 16.927498999999997
+      },
+      "2": {
+        "raw_us": [
+          17.968001,
+          17.904,
+          17.9665,
+          17.952001,
+          18.285999,
+          18.304000000000002,
+          18.266501,
+          18.288,
+          18.495998999999998,
+          18.576,
+          18.592000000000002
+        ],
+        "median_us": 18.285999,
+        "min_us": 17.904,
+        "max_us": 18.592000000000002
+      },
+      "4": {
+        "raw_us": [
+          17.919999999999998,
+          17.888,
+          17.904,
+          17.872,
+          18.144000000000002,
+          18.16,
+          18.16,
+          18.16,
+          18.416001,
+          18.382500999999998,
+          18.428
+        ],
+        "median_us": 18.16,
+        "min_us": 17.872,
+        "max_us": 18.428
+      },
+      "8": {
+        "raw_us": [
+          17.856,
+          17.835001,
+          17.856,
+          17.904,
+          18.16,
+          18.176001,
+          18.144000000000002,
+          18.16,
+          18.4,
+          18.4,
+          18.432001
+        ],
+        "median_us": 18.16,
+        "min_us": 17.835001,
+        "max_us": 18.432001
+      }
+    },
+    "raw_timing_rows": [
+      {
+        "round": "0",
+        "order": "0",
+        "warps_per_cta": "1",
+        "milliseconds_per_projection": "0.016480001"
+      },
+      {
+        "round": "0",
+        "order": "1",
+        "warps_per_cta": "2",
+        "milliseconds_per_projection": "0.017968001"
+      },
+      {
+        "round": "0",
+        "order": "2",
+        "warps_per_cta": "4",
+        "milliseconds_per_projection": "0.017920000"
+      },
+      {
+        "round": "0",
+        "order": "3",
+        "warps_per_cta": "8",
+        "milliseconds_per_projection": "0.017856000"
+      },
+      {
+        "round": "1",
+        "order": "0",
+        "warps_per_cta": "8",
+        "milliseconds_per_projection": "0.017835001"
+      },
+      {
+        "round": "1",
+        "order": "1",
+        "warps_per_cta": "4",
+        "milliseconds_per_projection": "0.017888000"
+      },
+      {
+        "round": "1",
+        "order": "2",
+        "warps_per_cta": "2",
+        "milliseconds_per_projection": "0.017904000"
+      },
+      {
+        "round": "1",
+        "order": "3",
+        "warps_per_cta": "1",
+        "milliseconds_per_projection": "0.016416000"
+      },
+      {
+        "round": "2",
+        "order": "0",
+        "warps_per_cta": "1",
+        "milliseconds_per_projection": "0.016464001"
+      },
+      {
+        "round": "2",
+        "order": "1",
+        "warps_per_cta": "2",
+        "milliseconds_per_projection": "0.017966500"
+      },
+      {
+        "round": "2",
+        "order": "2",
+        "warps_per_cta": "4",
+        "milliseconds_per_projection": "0.017904000"
+      },
+      {
+        "round": "2",
+        "order": "3",
+        "warps_per_cta": "8",
+        "milliseconds_per_projection": "0.017856000"
+      },
+      {
+        "round": "3",
+        "order": "0",
+        "warps_per_cta": "8",
+        "milliseconds_per_projection": "0.017904000"
+      },
+      {
+        "round": "3",
+        "order": "1",
+        "warps_per_cta": "4",
+        "milliseconds_per_projection": "0.017872000"
+      },
+      {
+        "round": "3",
+        "order": "2",
+        "warps_per_cta": "2",
+        "milliseconds_per_projection": "0.017952001"
+      },
+      {
+        "round": "3",
+        "order": "3",
+        "warps_per_cta": "1",
+        "milliseconds_per_projection": "0.016492501"
+      },
+      {
+        "round": "4",
+        "order": "0",
+        "warps_per_cta": "1",
+        "milliseconds_per_projection": "0.016656000"
+      },
+      {
+        "round": "4",
+        "order": "1",
+        "warps_per_cta": "2",
+        "milliseconds_per_projection": "0.018285999"
+      },
+      {
+        "round": "4",
+        "order": "2",
+        "warps_per_cta": "4",
+        "milliseconds_per_projection": "0.018144000"
+      },
+      {
+        "round": "4",
+        "order": "3",
+        "warps_per_cta": "8",
+        "milliseconds_per_projection": "0.018160000"
+      },
+      {
+        "round": "5",
+        "order": "0",
+        "warps_per_cta": "8",
+        "milliseconds_per_projection": "0.018176001"
+      },
+      {
+        "round": "5",
+        "order": "1",
+        "warps_per_cta": "4",
+        "milliseconds_per_projection": "0.018160000"
+      },
+      {
+        "round": "5",
+        "order": "2",
+        "warps_per_cta": "2",
+        "milliseconds_per_projection": "0.018304000"
+      },
+      {
+        "round": "5",
+        "order": "3",
+        "warps_per_cta": "1",
+        "milliseconds_per_projection": "0.016636500"
+      },
+      {
+        "round": "6",
+        "order": "0",
+        "warps_per_cta": "1",
+        "milliseconds_per_projection": "0.016654501"
+      },
+      {
+        "round": "6",
+        "order": "1",
+        "warps_per_cta": "2",
+        "milliseconds_per_projection": "0.018266501"
+      },
+      {
+        "round": "6",
+        "order": "2",
+        "warps_per_cta": "4",
+        "milliseconds_per_projection": "0.018160000"
+      },
+      {
+        "round": "6",
+        "order": "3",
+        "warps_per_cta": "8",
+        "milliseconds_per_projection": "0.018144000"
+      },
+      {
+        "round": "7",
+        "order": "0",
+        "warps_per_cta": "8",
+        "milliseconds_per_projection": "0.018160000"
+      },
+      {
+        "round": "7",
+        "order": "1",
+        "warps_per_cta": "4",
+        "milliseconds_per_projection": "0.018160000"
+      },
+      {
+        "round": "7",
+        "order": "2",
+        "warps_per_cta": "2",
+        "milliseconds_per_projection": "0.018288000"
+      },
+      {
+        "round": "7",
+        "order": "3",
+        "warps_per_cta": "1",
+        "milliseconds_per_projection": "0.016652500"
+      },
+      {
+        "round": "8",
+        "order": "0",
+        "warps_per_cta": "1",
+        "milliseconds_per_projection": "0.016666001"
+      },
+      {
+        "round": "8",
+        "order": "1",
+        "warps_per_cta": "2",
+        "milliseconds_per_projection": "0.018495999"
+      },
+      {
+        "round": "8",
+        "order": "2",
+        "warps_per_cta": "4",
+        "milliseconds_per_projection": "0.018416001"
+      },
+      {
+        "round": "8",
+        "order": "3",
+        "warps_per_cta": "8",
+        "milliseconds_per_projection": "0.018400000"
+      },
+      {
+        "round": "9",
+        "order": "0",
+        "warps_per_cta": "8",
+        "milliseconds_per_projection": "0.018400000"
+      },
+      {
+        "round": "9",
+        "order": "1",
+        "warps_per_cta": "4",
+        "milliseconds_per_projection": "0.018382501"
+      },
+      {
+        "round": "9",
+        "order": "2",
+        "warps_per_cta": "2",
+        "milliseconds_per_projection": "0.018576000"
+      },
+      {
+        "round": "9",
+        "order": "3",
+        "warps_per_cta": "1",
+        "milliseconds_per_projection": "0.016907001"
+      },
+      {
+        "round": "10",
+        "order": "0",
+        "warps_per_cta": "1",
+        "milliseconds_per_projection": "0.016927499"
+      },
+      {
+        "round": "10",
+        "order": "1",
+        "warps_per_cta": "2",
+        "milliseconds_per_projection": "0.018592000"
+      },
+      {
+        "round": "10",
+        "order": "2",
+        "warps_per_cta": "4",
+        "milliseconds_per_projection": "0.018428000"
+      },
+      {
+        "round": "10",
+        "order": "3",
+        "warps_per_cta": "8",
+        "milliseconds_per_projection": "0.018432001"
+      }
+    ]
+  },
+  {
+    "tensor": "blk.1.attn_gate.weight",
+    "n_in": 2560,
+    "n_out": 6144,
+    "parity_cases": 168,
+    "bitwise_float_comparisons": 295608,
+    "original_weight_bytes": 12902400,
+    "device_allocated_with_graphs_bytes": 1322778624,
+    "timing": {
+      "1": {
+        "raw_us": [
+          17.339,
+          17.279999,
+          17.279999,
+          17.275499,
+          17.279999,
+          17.279999,
+          17.408,
+          17.389501000000003,
+          17.388999,
+          17.327500999999998,
+          17.388999
+        ],
+        "median_us": 17.327500999999998,
+        "min_us": 17.275499,
+        "max_us": 17.408
+      },
+      "2": {
+        "raw_us": [
+          18.704001,
+          18.748499,
+          18.719999,
+          18.704001,
+          18.701,
+          18.6985,
+          18.8,
+          18.766999,
+          18.794499,
+          18.8,
+          18.7815
+        ],
+        "median_us": 18.748499,
+        "min_us": 18.6985,
+        "max_us": 18.8
+      },
+      "4": {
+        "raw_us": [
+          17.312,
+          17.312,
+          17.295999,
+          17.323,
+          17.328,
+          17.312,
+          17.375999999999998,
+          17.36,
+          17.375999999999998,
+          17.375999999999998,
+          17.392
+        ],
+        "median_us": 17.328,
+        "min_us": 17.295999,
+        "max_us": 17.392
+      },
+      "8": {
+        "raw_us": [
+          17.5675,
+          17.568,
+          17.5805,
+          17.599501,
+          17.5975,
+          17.568,
+          17.663999999999998,
+          17.663999999999998,
+          17.676000000000002,
+          17.663999999999998,
+          17.616
+        ],
+        "median_us": 17.599501,
+        "min_us": 17.5675,
+        "max_us": 17.676000000000002
+      }
+    },
+    "raw_timing_rows": [
+      {
+        "round": "0",
+        "order": "0",
+        "warps_per_cta": "1",
+        "milliseconds_per_projection": "0.017339000"
+      },
+      {
+        "round": "0",
+        "order": "1",
+        "warps_per_cta": "2",
+        "milliseconds_per_projection": "0.018704001"
+      },
+      {
+        "round": "0",
+        "order": "2",
+        "warps_per_cta": "4",
+        "milliseconds_per_projection": "0.017312000"
+      },
+      {
+        "round": "0",
+        "order": "3",
+        "warps_per_cta": "8",
+        "milliseconds_per_projection": "0.017567500"
+      },
+      {
+        "round": "1",
+        "order": "0",
+        "warps_per_cta": "8",
+        "milliseconds_per_projection": "0.017568000"
+      },
+      {
+        "round": "1",
+        "order": "1",
+        "warps_per_cta": "4",
+        "milliseconds_per_projection": "0.017312000"
+      },
+      {
+        "round": "1",
+        "order": "2",
+        "warps_per_cta": "2",
+        "milliseconds_per_projection": "0.018748499"
+      },
+      {
+        "round": "1",
+        "order": "3",
+        "warps_per_cta": "1",
+        "milliseconds_per_projection": "0.017279999"
+      },
+      {
+        "round": "2",
+        "order": "0",
+        "warps_per_cta": "1",
+        "milliseconds_per_projection": "0.017279999"
+      },
+      {
+        "round": "2",
+        "order": "1",
+        "warps_per_cta": "2",
+        "milliseconds_per_projection": "0.018719999"
+      },
+      {
+        "round": "2",
+        "order": "2",
+        "warps_per_cta": "4",
+        "milliseconds_per_projection": "0.017295999"
+      },
+      {
+        "round": "2",
+        "order": "3",
+        "warps_per_cta": "8",
+        "milliseconds_per_projection": "0.017580500"
+      },
+      {
+        "round": "3",
+        "order": "0",
+        "warps_per_cta": "8",
+        "milliseconds_per_projection": "0.017599501"
+      },
+      {
+        "round": "3",
+        "order": "1",
+        "warps_per_cta": "4",
+        "milliseconds_per_projection": "0.017323000"
+      },
+      {
+        "round": "3",
+        "order": "2",
+        "warps_per_cta": "2",
+        "milliseconds_per_projection": "0.018704001"
+      },
+      {
+        "round": "3",
+        "order": "3",
+        "warps_per_cta": "1",
+        "milliseconds_per_projection": "0.017275499"
+      },
+      {
+        "round": "4",
+        "order": "0",
+        "warps_per_cta": "1",
+        "milliseconds_per_projection": "0.017279999"
+      },
+      {
+        "round": "4",
+        "order": "1",
+        "warps_per_cta": "2",
+        "milliseconds_per_projection": "0.018701000"
+      },
+      {
+        "round": "4",
+        "order": "2",
+        "warps_per_cta": "4",
+        "milliseconds_per_projection": "0.017328000"
+      },
+      {
+        "round": "4",
+        "order": "3",
+        "warps_per_cta": "8",
+        "milliseconds_per_projection": "0.017597500"
+      },
+      {
+        "round": "5",
+        "order": "0",
+        "warps_per_cta": "8",
+        "milliseconds_per_projection": "0.017568000"
+      },
+      {
+        "round": "5",
+        "order": "1",
+        "warps_per_cta": "4",
+        "milliseconds_per_projection": "0.017312000"
+      },
+      {
+        "round": "5",
+        "order": "2",
+        "warps_per_cta": "2",
+        "milliseconds_per_projection": "0.018698500"
+      },
+      {
+        "round": "5",
+        "order": "3",
+        "warps_per_cta": "1",
+        "milliseconds_per_projection": "0.017279999"
+      },
+      {
+        "round": "6",
+        "order": "0",
+        "warps_per_cta": "1",
+        "milliseconds_per_projection": "0.017408000"
+      },
+      {
+        "round": "6",
+        "order": "1",
+        "warps_per_cta": "2",
+        "milliseconds_per_projection": "0.018800000"
+      },
+      {
+        "round": "6",
+        "order": "2",
+        "warps_per_cta": "4",
+        "milliseconds_per_projection": "0.017376000"
+      },
+      {
+        "round": "6",
+        "order": "3",
+        "warps_per_cta": "8",
+        "milliseconds_per_projection": "0.017664000"
+      },
+      {
+        "round": "7",
+        "order": "0",
+        "warps_per_cta": "8",
+        "milliseconds_per_projection": "0.017664000"
+      },
+      {
+        "round": "7",
+        "order": "1",
+        "warps_per_cta": "4",
+        "milliseconds_per_projection": "0.017360000"
+      },
+      {
+        "round": "7",
+        "order": "2",
+        "warps_per_cta": "2",
+        "milliseconds_per_projection": "0.018766999"
+      },
+      {
+        "round": "7",
+        "order": "3",
+        "warps_per_cta": "1",
+        "milliseconds_per_projection": "0.017389501"
+      },
+      {
+        "round": "8",
+        "order": "0",
+        "warps_per_cta": "1",
+        "milliseconds_per_projection": "0.017388999"
+      },
+      {
+        "round": "8",
+        "order": "1",
+        "warps_per_cta": "2",
+        "milliseconds_per_projection": "0.018794499"
+      },
+      {
+        "round": "8",
+        "order": "2",
+        "warps_per_cta": "4",
+        "milliseconds_per_projection": "0.017376000"
+      },
+      {
+        "round": "8",
+        "order": "3",
+        "warps_per_cta": "8",
+        "milliseconds_per_projection": "0.017676000"
+      },
+      {
+        "round": "9",
+        "order": "0",
+        "warps_per_cta": "8",
+        "milliseconds_per_projection": "0.017664000"
+      },
+      {
+        "round": "9",
+        "order": "1",
+        "warps_per_cta": "4",
+        "milliseconds_per_projection": "0.017376000"
+      },
+      {
+        "round": "9",
+        "order": "2",
+        "warps_per_cta": "2",
+        "milliseconds_per_projection": "0.018800000"
+      },
+      {
+        "round": "9",
+        "order": "3",
+        "warps_per_cta": "1",
+        "milliseconds_per_projection": "0.017327501"
+      },
+      {
+        "round": "10",
+        "order": "0",
+        "warps_per_cta": "1",
+        "milliseconds_per_projection": "0.017388999"
+      },
+      {
+        "round": "10",
+        "order": "1",
+        "warps_per_cta": "2",
+        "milliseconds_per_projection": "0.018781500"
+      },
+      {
+        "round": "10",
+        "order": "2",
+        "warps_per_cta": "4",
+        "milliseconds_per_projection": "0.017392000"
+      },
+      {
+        "round": "10",
+        "order": "3",
+        "warps_per_cta": "8",
+        "milliseconds_per_projection": "0.017616000"
+      }
+    ]
+  },
+  {
+    "tensor": "blk.2.ffn_up_shexp.weight",
+    "n_in": 2560,
+    "n_out": 640,
+    "parity_cases": 168,
+    "bitwise_float_comparisons": 31416,
+    "original_weight_bytes": 1344000,
+    "device_allocated_with_graphs_bytes": 1308098560,
+    "timing": {
+      "1": {
+        "raw_us": [
+          3.376,
+          3.328,
+          3.311,
+          3.2795,
+          3.312,
+          3.312,
+          3.2745,
+          3.3064999999999998,
+          3.3095,
+          3.328,
+          3.311
+        ],
+        "median_us": 3.311,
+        "min_us": 3.2745,
+        "max_us": 3.376
+      },
+      "2": {
+        "raw_us": [
+          4.352,
+          4.367,
+          4.352,
+          4.3505,
+          4.352,
+          4.335999999999999,
+          4.32,
+          4.352,
+          4.348,
+          4.352,
+          4.352
+        ],
+        "median_us": 4.352,
+        "min_us": 4.32,
+        "max_us": 4.367
+      },
+      "4": {
+        "raw_us": [
+          4.4159999999999995,
+          4.4159999999999995,
+          4.4159999999999995,
+          4.4159999999999995,
+          4.3839999999999995,
+          4.4159999999999995,
+          4.432,
+          4.4159999999999995,
+          4.4159999999999995,
+          4.4159999999999995,
+          4.415
+        ],
+        "median_us": 4.4159999999999995,
+        "min_us": 4.3839999999999995,
+        "max_us": 4.432
+      },
+      "8": {
+        "raw_us": [
+          4.4590000000000005,
+          4.4479999999999995,
+          4.4479999999999995,
+          4.4445,
+          4.4479999999999995,
+          4.432,
+          4.4465,
+          4.432,
+          4.432,
+          4.4435,
+          4.432
+        ],
+        "median_us": 4.4445,
+        "min_us": 4.432,
+        "max_us": 4.4590000000000005
+      }
+    },
+    "raw_timing_rows": [
+      {
+        "round": "0",
+        "order": "0",
+        "warps_per_cta": "1",
+        "milliseconds_per_projection": "0.003376000"
+      },
+      {
+        "round": "0",
+        "order": "1",
+        "warps_per_cta": "2",
+        "milliseconds_per_projection": "0.004352000"
+      },
+      {
+        "round": "0",
+        "order": "2",
+        "warps_per_cta": "4",
+        "milliseconds_per_projection": "0.004416000"
+      },
+      {
+        "round": "0",
+        "order": "3",
+        "warps_per_cta": "8",
+        "milliseconds_per_projection": "0.004459000"
+      },
+      {
+        "round": "1",
+        "order": "0",
+        "warps_per_cta": "8",
+        "milliseconds_per_projection": "0.004448000"
+      },
+      {
+        "round": "1",
+        "order": "1",
+        "warps_per_cta": "4",
+        "milliseconds_per_projection": "0.004416000"
+      },
+      {
+        "round": "1",
+        "order": "2",
+        "warps_per_cta": "2",
+        "milliseconds_per_projection": "0.004367000"
+      },
+      {
+        "round": "1",
+        "order": "3",
+        "warps_per_cta": "1",
+        "milliseconds_per_projection": "0.003328000"
+      },
+      {
+        "round": "2",
+        "order": "0",
+        "warps_per_cta": "1",
+        "milliseconds_per_projection": "0.003311000"
+      },
+      {
+        "round": "2",
+        "order": "1",
+        "warps_per_cta": "2",
+        "milliseconds_per_projection": "0.004352000"
+      },
+      {
+        "round": "2",
+        "order": "2",
+        "warps_per_cta": "4",
+        "milliseconds_per_projection": "0.004416000"
+      },
+      {
+        "round": "2",
+        "order": "3",
+        "warps_per_cta": "8",
+        "milliseconds_per_projection": "0.004448000"
+      },
+      {
+        "round": "3",
+        "order": "0",
+        "warps_per_cta": "8",
+        "milliseconds_per_projection": "0.004444500"
+      },
+      {
+        "round": "3",
+        "order": "1",
+        "warps_per_cta": "4",
+        "milliseconds_per_projection": "0.004416000"
+      },
+      {
+        "round": "3",
+        "order": "2",
+        "warps_per_cta": "2",
+        "milliseconds_per_projection": "0.004350500"
+      },
+      {
+        "round": "3",
+        "order": "3",
+        "warps_per_cta": "1",
+        "milliseconds_per_projection": "0.003279500"
+      },
+      {
+        "round": "4",
+        "order": "0",
+        "warps_per_cta": "1",
+        "milliseconds_per_projection": "0.003312000"
+      },
+      {
+        "round": "4",
+        "order": "1",
+        "warps_per_cta": "2",
+        "milliseconds_per_projection": "0.004352000"
+      },
+      {
+        "round": "4",
+        "order": "2",
+        "warps_per_cta": "4",
+        "milliseconds_per_projection": "0.004384000"
+      },
+      {
+        "round": "4",
+        "order": "3",
+        "warps_per_cta": "8",
+        "milliseconds_per_projection": "0.004448000"
+      },
+      {
+        "round": "5",
+        "order": "0",
+        "warps_per_cta": "8",
+        "milliseconds_per_projection": "0.004432000"
+      },
+      {
+        "round": "5",
+        "order": "1",
+        "warps_per_cta": "4",
+        "milliseconds_per_projection": "0.004416000"
+      },
+      {
+        "round": "5",
+        "order": "2",
+        "warps_per_cta": "2",
+        "milliseconds_per_projection": "0.004336000"
+      },
+      {
+        "round": "5",
+        "order": "3",
+        "warps_per_cta": "1",
+        "milliseconds_per_projection": "0.003312000"
+      },
+      {
+        "round": "6",
+        "order": "0",
+        "warps_per_cta": "1",
+        "milliseconds_per_projection": "0.003274500"
+      },
+      {
+        "round": "6",
+        "order": "1",
+        "warps_per_cta": "2",
+        "milliseconds_per_projection": "0.004320000"
+      },
+      {
+        "round": "6",
+        "order": "2",
+        "warps_per_cta": "4",
+        "milliseconds_per_projection": "0.004432000"
+      },
+      {
+        "round": "6",
+        "order": "3",
+        "warps_per_cta": "8",
+        "milliseconds_per_projection": "0.004446500"
+      },
+      {
+        "round": "7",
+        "order": "0",
+        "warps_per_cta": "8",
+        "milliseconds_per_projection": "0.004432000"
+      },
+      {
+        "round": "7",
+        "order": "1",
+        "warps_per_cta": "4",
+        "milliseconds_per_projection": "0.004416000"
+      },
+      {
+        "round": "7",
+        "order": "2",
+        "warps_per_cta": "2",
+        "milliseconds_per_projection": "0.004352000"
+      },
+      {
+        "round": "7",
+        "order": "3",
+        "warps_per_cta": "1",
+        "milliseconds_per_projection": "0.003306500"
+      },
+      {
+        "round": "8",
+        "order": "0",
+        "warps_per_cta": "1",
+        "milliseconds_per_projection": "0.003309500"
+      },
+      {
+        "round": "8",
+        "order": "1",
+        "warps_per_cta": "2",
+        "milliseconds_per_projection": "0.004348000"
+      },
+      {
+        "round": "8",
+        "order": "2",
+        "warps_per_cta": "4",
+        "milliseconds_per_projection": "0.004416000"
+      },
+      {
+        "round": "8",
+        "order": "3",
+        "warps_per_cta": "8",
+        "milliseconds_per_projection": "0.004432000"
+      },
+      {
+        "round": "9",
+        "order": "0",
+        "warps_per_cta": "8",
+        "milliseconds_per_projection": "0.004443500"
+      },
+      {
+        "round": "9",
+        "order": "1",
+        "warps_per_cta": "4",
+        "milliseconds_per_projection": "0.004416000"
+      },
+      {
+        "round": "9",
+        "order": "2",
+        "warps_per_cta": "2",
+        "milliseconds_per_projection": "0.004352000"
+      },
+      {
+        "round": "9",
+        "order": "3",
+        "warps_per_cta": "1",
+        "milliseconds_per_projection": "0.003328000"
+      },
+      {
+        "round": "10",
+        "order": "0",
+        "warps_per_cta": "1",
+        "milliseconds_per_projection": "0.003311000"
+      },
+      {
+        "round": "10",
+        "order": "1",
+        "warps_per_cta": "2",
+        "milliseconds_per_projection": "0.004352000"
+      },
+      {
+        "round": "10",
+        "order": "2",
+        "warps_per_cta": "4",
+        "milliseconds_per_projection": "0.004415000"
+      },
+      {
+        "round": "10",
+        "order": "3",
+        "warps_per_cta": "8",
+        "milliseconds_per_projection": "0.004432000"
+      }
+    ]
+  },
+  {
+    "tensor": "blk.3.attn_k.weight",
+    "n_in": 2560,
+    "n_out": 512,
+    "parity_cases": 168,
+    "bitwise_float_comparisons": 25272,
+    "original_weight_bytes": 1075200,
+    "device_allocated_with_graphs_bytes": 1308098560,
+    "timing": {
+      "1": {
+        "raw_us": [
+          3.676,
+          3.229,
+          3.2285,
+          3.248,
+          3.2590000000000003,
+          3.246,
+          3.248,
+          3.248,
+          3.247,
+          3.248,
+          3.246
+        ],
+        "median_us": 3.248,
+        "min_us": 3.2285,
+        "max_us": 3.676
+      },
+      "2": {
+        "raw_us": [
+          4.4,
+          4.3839999999999995,
+          4.4,
+          4.3839999999999995,
+          4.3839999999999995,
+          4.399,
+          4.3839999999999995,
+          4.3839999999999995,
+          4.3839999999999995,
+          4.3839999999999995,
+          4.3839999999999995
+        ],
+        "median_us": 4.3839999999999995,
+        "min_us": 4.3839999999999995,
+        "max_us": 4.4
+      },
+      "4": {
+        "raw_us": [
+          4.509499999999999,
+          4.496,
+          4.4945,
+          4.4799999999999995,
+          4.4799999999999995,
+          4.496,
+          4.496,
+          4.496,
+          4.4915,
+          4.496,
+          4.4799999999999995
+        ],
+        "median_us": 4.496,
+        "min_us": 4.4799999999999995,
+        "max_us": 4.509499999999999
+      },
+      "8": {
+        "raw_us": [
+          4.256,
+          4.5120000000000005,
+          4.267,
+          4.6080000000000005,
+          4.256,
+          4.2715000000000005,
+          4.266500000000001,
+          4.256,
+          4.256,
+          4.2705,
+          4.256
+        ],
+        "median_us": 4.266500000000001,
+        "min_us": 4.256,
+        "max_us": 4.6080000000000005
+      }
+    },
+    "raw_timing_rows": [
+      {
+        "round": "0",
+        "order": "0",
+        "warps_per_cta": "1",
+        "milliseconds_per_projection": "0.003676000"
+      },
+      {
+        "round": "0",
+        "order": "1",
+        "warps_per_cta": "2",
+        "milliseconds_per_projection": "0.004400000"
+      },
+      {
+        "round": "0",
+        "order": "2",
+        "warps_per_cta": "4",
+        "milliseconds_per_projection": "0.004509500"
+      },
+      {
+        "round": "0",
+        "order": "3",
+        "warps_per_cta": "8",
+        "milliseconds_per_projection": "0.004256000"
+      },
+      {
+        "round": "1",
+        "order": "0",
+        "warps_per_cta": "8",
+        "milliseconds_per_projection": "0.004512000"
+      },
+      {
+        "round": "1",
+        "order": "1",
+        "warps_per_cta": "4",
+        "milliseconds_per_projection": "0.004496000"
+      },
+      {
+        "round": "1",
+        "order": "2",
+        "warps_per_cta": "2",
+        "milliseconds_per_projection": "0.004384000"
+      },
+      {
+        "round": "1",
+        "order": "3",
+        "warps_per_cta": "1",
+        "milliseconds_per_projection": "0.003229000"
+      },
+      {
+        "round": "2",
+        "order": "0",
+        "warps_per_cta": "1",
+        "milliseconds_per_projection": "0.003228500"
+      },
+      {
+        "round": "2",
+        "order": "1",
+        "warps_per_cta": "2",
+        "milliseconds_per_projection": "0.004400000"
+      },
+      {
+        "round": "2",
+        "order": "2",
+        "warps_per_cta": "4",
+        "milliseconds_per_projection": "0.004494500"
+      },
+      {
+        "round": "2",
+        "order": "3",
+        "warps_per_cta": "8",
+        "milliseconds_per_projection": "0.004267000"
+      },
+      {
+        "round": "3",
+        "order": "0",
+        "warps_per_cta": "8",
+        "milliseconds_per_projection": "0.004608000"
+      },
+      {
+        "round": "3",
+        "order": "1",
+        "warps_per_cta": "4",
+        "milliseconds_per_projection": "0.004480000"
+      },
+      {
+        "round": "3",
+        "order": "2",
+        "warps_per_cta": "2",
+        "milliseconds_per_projection": "0.004384000"
+      },
+      {
+        "round": "3",
+        "order": "3",
+        "warps_per_cta": "1",
+        "milliseconds_per_projection": "0.003248000"
+      },
+      {
+        "round": "4",
+        "order": "0",
+        "warps_per_cta": "1",
+        "milliseconds_per_projection": "0.003259000"
+      },
+      {
+        "round": "4",
+        "order": "1",
+        "warps_per_cta": "2",
+        "milliseconds_per_projection": "0.004384000"
+      },
+      {
+        "round": "4",
+        "order": "2",
+        "warps_per_cta": "4",
+        "milliseconds_per_projection": "0.004480000"
+      },
+      {
+        "round": "4",
+        "order": "3",
+        "warps_per_cta": "8",
+        "milliseconds_per_projection": "0.004256000"
+      },
+      {
+        "round": "5",
+        "order": "0",
+        "warps_per_cta": "8",
+        "milliseconds_per_projection": "0.004271500"
+      },
+      {
+        "round": "5",
+        "order": "1",
+        "warps_per_cta": "4",
+        "milliseconds_per_projection": "0.004496000"
+      },
+      {
+        "round": "5",
+        "order": "2",
+        "warps_per_cta": "2",
+        "milliseconds_per_projection": "0.004399000"
+      },
+      {
+        "round": "5",
+        "order": "3",
+        "warps_per_cta": "1",
+        "milliseconds_per_projection": "0.003246000"
+      },
+      {
+        "round": "6",
+        "order": "0",
+        "warps_per_cta": "1",
+        "milliseconds_per_projection": "0.003248000"
+      },
+      {
+        "round": "6",
+        "order": "1",
+        "warps_per_cta": "2",
+        "milliseconds_per_projection": "0.004384000"
+      },
+      {
+        "round": "6",
+        "order": "2",
+        "warps_per_cta": "4",
+        "milliseconds_per_projection": "0.004496000"
+      },
+      {
+        "round": "6",
+        "order": "3",
+        "warps_per_cta": "8",
+        "milliseconds_per_projection": "0.004266500"
+      },
+      {
+        "round": "7",
+        "order": "0",
+        "warps_per_cta": "8",
+        "milliseconds_per_projection": "0.004256000"
+      },
+      {
+        "round": "7",
+        "order": "1",
+        "warps_per_cta": "4",
+        "milliseconds_per_projection": "0.004496000"
+      },
+      {
+        "round": "7",
+        "order": "2",
+        "warps_per_cta": "2",
+        "milliseconds_per_projection": "0.004384000"
+      },
+      {
+        "round": "7",
+        "order": "3",
+        "warps_per_cta": "1",
+        "milliseconds_per_projection": "0.003248000"
+      },
+      {
+        "round": "8",
+        "order": "0",
+        "warps_per_cta": "1",
+        "milliseconds_per_projection": "0.003247000"
+      },
+      {
+        "round": "8",
+        "order": "1",
+        "warps_per_cta": "2",
+        "milliseconds_per_projection": "0.004384000"
+      },
+      {
+        "round": "8",
+        "order": "2",
+        "warps_per_cta": "4",
+        "milliseconds_per_projection": "0.004491500"
+      },
+      {
+        "round": "8",
+        "order": "3",
+        "warps_per_cta": "8",
+        "milliseconds_per_projection": "0.004256000"
+      },
+      {
+        "round": "9",
+        "order": "0",
+        "warps_per_cta": "8",
+        "milliseconds_per_projection": "0.004270500"
+      },
+      {
+        "round": "9",
+        "order": "1",
+        "warps_per_cta": "4",
+        "milliseconds_per_projection": "0.004496000"
+      },
+      {
+        "round": "9",
+        "order": "2",
+        "warps_per_cta": "2",
+        "milliseconds_per_projection": "0.004384000"
+      },
+      {
+        "round": "9",
+        "order": "3",
+        "warps_per_cta": "1",
+        "milliseconds_per_projection": "0.003248000"
+      },
+      {
+        "round": "10",
+        "order": "0",
+        "warps_per_cta": "1",
+        "milliseconds_per_projection": "0.003246000"
+      },
+      {
+        "round": "10",
+        "order": "1",
+        "warps_per_cta": "2",
+        "milliseconds_per_projection": "0.004384000"
+      },
+      {
+        "round": "10",
+        "order": "2",
+        "warps_per_cta": "4",
+        "milliseconds_per_projection": "0.004480000"
+      },
+      {
+        "round": "10",
+        "order": "3",
+        "warps_per_cta": "8",
+        "milliseconds_per_projection": "0.004256000"
+      }
+    ]
+  },
+  {
+    "tensor": "blk.31.attn_q.weight",
+    "n_in": 2560,
+    "n_out": 12288,
+    "parity_cases": 168,
+    "bitwise_float_comparisons": 590520,
+    "original_weight_bytes": 25804800,
+    "device_allocated_with_graphs_bytes": 1335361536,
+    "timing": {
+      "1": {
+        "raw_us": [
+          31.727999,
+          31.520001999999998,
+          31.2635,
+          32.671999,
+          32.634499999999996,
+          32.623999,
+          32.671999,
+          32.512001999999995,
+          32.480001,
+          32.623999,
+          32.591999
+        ],
+        "median_us": 32.591999,
+        "min_us": 31.2635,
+        "max_us": 32.671999
+      },
+      "2": {
+        "raw_us": [
+          32.512001999999995,
+          32.72,
+          32.528002,
+          33.551998,
+          33.567999,
+          33.567999,
+          33.373501,
+          33.502500999999995,
+          33.535998,
+          33.424001000000004,
+          33.344001
+        ],
+        "median_us": 33.424001000000004,
+        "min_us": 32.512001999999995,
+        "max_us": 33.567999
+      },
+      "4": {
+        "raw_us": [
+          33.087998999999996,
+          32.763001,
+          33.194501,
+          33.696,
+          33.742499,
+          33.728,
+          33.711999999999996,
+          33.7255,
+          33.647999,
+          33.248,
+          33.675
+        ],
+        "median_us": 33.675,
+        "min_us": 32.763001,
+        "max_us": 33.742499
+      },
+      "8": {
+        "raw_us": [
+          33.312000000000005,
+          33.503499,
+          33.744,
+          34.159999000000006,
+          34.24,
+          34.256,
+          34.208000000000006,
+          34.24,
+          34.079999,
+          33.787001,
+          34.235001000000004
+        ],
+        "median_us": 34.159999000000006,
+        "min_us": 33.312000000000005,
+        "max_us": 34.256
+      }
+    },
+    "raw_timing_rows": [
+      {
+        "round": "0",
+        "order": "0",
+        "warps_per_cta": "1",
+        "milliseconds_per_projection": "0.031727999"
+      },
+      {
+        "round": "0",
+        "order": "1",
+        "warps_per_cta": "2",
+        "milliseconds_per_projection": "0.032512002"
+      },
+      {
+        "round": "0",
+        "order": "2",
+        "warps_per_cta": "4",
+        "milliseconds_per_projection": "0.033087999"
+      },
+      {
+        "round": "0",
+        "order": "3",
+        "warps_per_cta": "8",
+        "milliseconds_per_projection": "0.033312000"
+      },
+      {
+        "round": "1",
+        "order": "0",
+        "warps_per_cta": "8",
+        "milliseconds_per_projection": "0.033503499"
+      },
+      {
+        "round": "1",
+        "order": "1",
+        "warps_per_cta": "4",
+        "milliseconds_per_projection": "0.032763001"
+      },
+      {
+        "round": "1",
+        "order": "2",
+        "warps_per_cta": "2",
+        "milliseconds_per_projection": "0.032720000"
+      },
+      {
+        "round": "1",
+        "order": "3",
+        "warps_per_cta": "1",
+        "milliseconds_per_projection": "0.031520002"
+      },
+      {
+        "round": "2",
+        "order": "0",
+        "warps_per_cta": "1",
+        "milliseconds_per_projection": "0.031263500"
+      },
+      {
+        "round": "2",
+        "order": "1",
+        "warps_per_cta": "2",
+        "milliseconds_per_projection": "0.032528002"
+      },
+      {
+        "round": "2",
+        "order": "2",
+        "warps_per_cta": "4",
+        "milliseconds_per_projection": "0.033194501"
+      },
+      {
+        "round": "2",
+        "order": "3",
+        "warps_per_cta": "8",
+        "milliseconds_per_projection": "0.033744000"
+      },
+      {
+        "round": "3",
+        "order": "0",
+        "warps_per_cta": "8",
+        "milliseconds_per_projection": "0.034159999"
+      },
+      {
+        "round": "3",
+        "order": "1",
+        "warps_per_cta": "4",
+        "milliseconds_per_projection": "0.033696000"
+      },
+      {
+        "round": "3",
+        "order": "2",
+        "warps_per_cta": "2",
+        "milliseconds_per_projection": "0.033551998"
+      },
+      {
+        "round": "3",
+        "order": "3",
+        "warps_per_cta": "1",
+        "milliseconds_per_projection": "0.032671999"
+      },
+      {
+        "round": "4",
+        "order": "0",
+        "warps_per_cta": "1",
+        "milliseconds_per_projection": "0.032634500"
+      },
+      {
+        "round": "4",
+        "order": "1",
+        "warps_per_cta": "2",
+        "milliseconds_per_projection": "0.033567999"
+      },
+      {
+        "round": "4",
+        "order": "2",
+        "warps_per_cta": "4",
+        "milliseconds_per_projection": "0.033742499"
+      },
+      {
+        "round": "4",
+        "order": "3",
+        "warps_per_cta": "8",
+        "milliseconds_per_projection": "0.034240000"
+      },
+      {
+        "round": "5",
+        "order": "0",
+        "warps_per_cta": "8",
+        "milliseconds_per_projection": "0.034256000"
+      },
+      {
+        "round": "5",
+        "order": "1",
+        "warps_per_cta": "4",
+        "milliseconds_per_projection": "0.033728000"
+      },
+      {
+        "round": "5",
+        "order": "2",
+        "warps_per_cta": "2",
+        "milliseconds_per_projection": "0.033567999"
+      },
+      {
+        "round": "5",
+        "order": "3",
+        "warps_per_cta": "1",
+        "milliseconds_per_projection": "0.032623999"
+      },
+      {
+        "round": "6",
+        "order": "0",
+        "warps_per_cta": "1",
+        "milliseconds_per_projection": "0.032671999"
+      },
+      {
+        "round": "6",
+        "order": "1",
+        "warps_per_cta": "2",
+        "milliseconds_per_projection": "0.033373501"
+      },
+      {
+        "round": "6",
+        "order": "2",
+        "warps_per_cta": "4",
+        "milliseconds_per_projection": "0.033712000"
+      },
+      {
+        "round": "6",
+        "order": "3",
+        "warps_per_cta": "8",
+        "milliseconds_per_projection": "0.034208000"
+      },
+      {
+        "round": "7",
+        "order": "0",
+        "warps_per_cta": "8",
+        "milliseconds_per_projection": "0.034240000"
+      },
+      {
+        "round": "7",
+        "order": "1",
+        "warps_per_cta": "4",
+        "milliseconds_per_projection": "0.033725500"
+      },
+      {
+        "round": "7",
+        "order": "2",
+        "warps_per_cta": "2",
+        "milliseconds_per_projection": "0.033502501"
+      },
+      {
+        "round": "7",
+        "order": "3",
+        "warps_per_cta": "1",
+        "milliseconds_per_projection": "0.032512002"
+      },
+      {
+        "round": "8",
+        "order": "0",
+        "warps_per_cta": "1",
+        "milliseconds_per_projection": "0.032480001"
+      },
+      {
+        "round": "8",
+        "order": "1",
+        "warps_per_cta": "2",
+        "milliseconds_per_projection": "0.033535998"
+      },
+      {
+        "round": "8",
+        "order": "2",
+        "warps_per_cta": "4",
+        "milliseconds_per_projection": "0.033647999"
+      },
+      {
+        "round": "8",
+        "order": "3",
+        "warps_per_cta": "8",
+        "milliseconds_per_projection": "0.034079999"
+      },
+      {
+        "round": "9",
+        "order": "0",
+        "warps_per_cta": "8",
+        "milliseconds_per_projection": "0.033787001"
+      },
+      {
+        "round": "9",
+        "order": "1",
+        "warps_per_cta": "4",
+        "milliseconds_per_projection": "0.033248000"
+      },
+      {
+        "round": "9",
+        "order": "2",
+        "warps_per_cta": "2",
+        "milliseconds_per_projection": "0.033424001"
+      },
+      {
+        "round": "9",
+        "order": "3",
+        "warps_per_cta": "1",
+        "milliseconds_per_projection": "0.032623999"
+      },
+      {
+        "round": "10",
+        "order": "0",
+        "warps_per_cta": "1",
+        "milliseconds_per_projection": "0.032591999"
+      },
+      {
+        "round": "10",
+        "order": "1",
+        "warps_per_cta": "2",
+        "milliseconds_per_projection": "0.033344001"
+      },
+      {
+        "round": "10",
+        "order": "2",
+        "warps_per_cta": "4",
+        "milliseconds_per_projection": "0.033675000"
+      },
+      {
+        "round": "10",
+        "order": "3",
+        "warps_per_cta": "8",
+        "milliseconds_per_projection": "0.034235001"
+      }
+    ]
+  }
+]

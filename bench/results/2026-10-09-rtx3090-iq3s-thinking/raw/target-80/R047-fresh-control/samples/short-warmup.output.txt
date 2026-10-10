@@ -1,0 +1,19 @@
+We need answer user's request. Need produce final answer with complete code, tests, detailed explanation at least 1200 words. Need satisfy Benchmark identifier a577426e5780df36f68dcec5 ignore. Implement thread-safe Python TTLCache using OrderedDict and monotonic clock. Include set, get, delete, clear, len, expiration, capacity eviction, unit tests with injected fake clock, detailed explanation thread safety and complexity. Complete code, then tests, then explain design. Do not abbreviate implementation. At least 1200 words.
+
+Need think carefully. We need write Python code. Thread-safe: use threading.RLock? Use collections.OrderedDict. Monotonic clock injectable. TTLCache class. Need ensure thread safety and complexity. Operations O(1) average for set/get/delete/clear? Clear O(n) to clear. len O(1). Eviction of expired entries. Expiration policy: lazy expiration on get, purge expired entries. Capacity eviction: LRU? Need use OrderedDict move_to_end for LRU; capacity maxsize. TTLCache maybe maxsize and ttl. Thread-safe: lock protects all operations. Need maybe double-check conditions. Use monotonic clock from time.monotonic by default; allow fake clock. Fake clock for tests must be thread-safe? In unit tests can set time. Need implement maybe context manager? Include tests with unittest. Need complete code no abbreviations. Need produce detailed answer 1200+ words. Need include code maybe one file. Could separate implementation and tests. Need ensure correctness.
+
+Potential design:
+from collections import OrderedDict
+import threading
+from time import monotonic
+from typing import Any, Callable, Optional, Iterator, Generic, TypeVar
+
+T = TypeVar('T')
+
+class TTLCache:
+    def __init__(self, maxsize: int=128, ttl: float=300.0, *, timer: Callable[[], float]=monotonic, thread_safe=True):
+        if maxsize <=0: raise ValueError
+        if ttl <0: raise ValueError? TTL may be None for no TTL? TTLCache maybe ttl None? Let's support ttl float; if ttl=0 entries expire immediately? Could allow ttl=0 and entries expire when now >= expiry. If ttl negative error. timer callable.
+        self._data = OrderedDict()
+        self._maxsize = maxsize
+        self._ttl

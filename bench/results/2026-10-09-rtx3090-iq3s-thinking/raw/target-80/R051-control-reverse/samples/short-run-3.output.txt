@@ -1,0 +1,15 @@
+We need answer user's request. Need produce final detailed answer at least 1200 words. Need implement thread-safe Python TTLCache using OrderedDict and monotonic clock. Include set, get, delete, clear, len, expiration, capacity eviction, unit tests with injected fake clock, detailed explanation thread safety complexity. Complete code, tests, explanation. Do not abbreviate implementation. Also Benchmark identifier ignored. Need likely provide Python code. Need ensure thread-safe. Let's design robust class.
+
+Need think through implementation. Python standard threading.RLock? Use OrderedDict. Need store values with expiration timestamp. Monotonic clock injected: clock() function returning float. TTLCache supports ttl maybe default ttl per item? Need set(key, value, ttl=None). get(key, default=None). delete(key) maybe bool. clear(). __len__? Need len returns number of unexpired? Typically expiration occurs lazily: on get, set, len? Need include expiration method. Need capacity eviction: if exceed maxsize, evict least recently used (OrderedDict move_to_end on get/set). Need remove expired items before capacity? Could cleanup expired periodically. Thread safety: all public methods under lock. However if using len() that mutates cache? It can under lock. Need __len__ not raise? It can call _purge_expired maybe O(n). For performance, can do lazy and cleanup expired entries during set/get and maybe explicit expire. To support len accurately, either purge expired each len (O(n)) or maintain expiry min-heap for O(1) len? User specifically using OrderedDict, likely simple. But complexity should discuss. Could optimize by storing expiry times and lazy cleanup; len O(n) if purge. Or maintain expired entries count? Simpler acceptable. Need tests with fake clock. Need ensure not call monotonic during lock? It's okay. Need avoid recursive lock? Use RLock so internal methods maybe called under lock. If public method calls private with lock? Better: public acquire lock, call _set_unlocked etc. Use RLock to allow nested if needed. Need no abbreviations. Full code. Could include type hints.
+
+Need code:
+
+from collections import OrderedDict
+import threading
+import time
+from typing import Any, Callable, Optional
+
+class TTLCache:
+    def __init__(self, maxsize=100, ttl=60.0, clock=None):
+       if maxsize < 1: raise ValueError
+       if ttl <= 0? TTL can

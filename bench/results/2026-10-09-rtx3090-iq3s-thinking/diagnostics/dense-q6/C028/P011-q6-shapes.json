@@ -1,0 +1,158 @@
+{
+  "trace": "P009-decode.sqlite",
+  "scope": "Instrumented durations; overlapping costs are not request critical-path shares.",
+  "cohorts": [
+    {
+      "name": "void strata::kernels::<unnamed>::native_q6_k_mmvq_kernel<(bool)0>(const strata::kernels::<unnamed>::Q6KBlock *, const strata::kernels::<unnamed>::Q81Block *, float *, int, int)",
+      "grid": [
+        2560,
+        1,
+        1
+      ],
+      "block": [
+        32,
+        4,
+        1
+      ],
+      "registers_per_thread": 40,
+      "count": 8000,
+      "sum_ms": 157.100335,
+      "median_us": 19.84,
+      "min_us": 17.984,
+      "max_us": 647.679
+    },
+    {
+      "name": "void strata::kernels::<unnamed>::native_q6_k_mmvq_kernel<(bool)0>(const strata::kernels::<unnamed>::Q6KBlock *, const strata::kernels::<unnamed>::Q81Block *, float *, int, int)",
+      "grid": [
+        106299,
+        1,
+        1
+      ],
+      "block": [
+        32,
+        4,
+        1
+      ],
+      "registers_per_thread": 40,
+      "count": 531,
+      "sum_ms": 137.17942499999998,
+      "median_us": 251.904,
+      "min_us": 251.008,
+      "max_us": 1199.198
+    },
+    {
+      "name": "void strata::kernels::<unnamed>::native_q6_k_mmvq_kernel<(bool)0>(const strata::kernels::<unnamed>::Q6KBlock *, const strata::kernels::<unnamed>::Q81Block *, float *, int, int)",
+      "grid": [
+        248320,
+        1,
+        1
+      ],
+      "block": [
+        32,
+        4,
+        1
+      ],
+      "registers_per_thread": 40,
+      "count": 200,
+      "sum_ms": 120.481998,
+      "median_us": 592.9755,
+      "min_us": 590.719,
+      "max_us": 2459.132
+    },
+    {
+      "name": "void strata::kernels::<unnamed>::native_q6_k_mmvq_kernel<(bool)0>(const strata::kernels::<unnamed>::Q6KBlock *, const strata::kernels::<unnamed>::Q81Block *, float *, int, int)",
+      "grid": [
+        10240,
+        1,
+        1
+      ],
+      "block": [
+        32,
+        4,
+        1
+      ],
+      "registers_per_thread": 40,
+      "count": 4400,
+      "sum_ms": 118.41292999999999,
+      "median_us": 26.56,
+      "min_us": 26.272,
+      "max_us": 510.752
+    },
+    {
+      "name": "void strata::kernels::<unnamed>::native_q6_k_mmvq_kernel<(bool)0>(const strata::kernels::<unnamed>::Q6KBlock *, const strata::kernels::<unnamed>::Q81Block *, float *, int, int)",
+      "grid": [
+        6144,
+        1,
+        1
+      ],
+      "block": [
+        32,
+        4,
+        1
+      ],
+      "registers_per_thread": 40,
+      "count": 2800,
+      "sum_ms": 50.1906,
+      "median_us": 17.184,
+      "min_us": 16.896,
+      "max_us": 2094.172
+    },
+    {
+      "name": "void strata::kernels::<unnamed>::native_q6_k_mmvq_kernel<(bool)0>(const strata::kernels::<unnamed>::Q6KBlock *, const strata::kernels::<unnamed>::Q81Block *, float *, int, int)",
+      "grid": [
+        12288,
+        1,
+        1
+      ],
+      "block": [
+        32,
+        4,
+        1
+      ],
+      "registers_per_thread": 40,
+      "count": 1000,
+      "sum_ms": 31.375345999999997,
+      "median_us": 31.36,
+      "min_us": 31.136,
+      "max_us": 33.056
+    },
+    {
+      "name": "void strata::kernels::<unnamed>::native_q6_k_mmvq_kernel<(bool)0>(const strata::kernels::<unnamed>::Q6KBlock *, const strata::kernels::<unnamed>::Q81Block *, float *, int, int)",
+      "grid": [
+        640,
+        1,
+        1
+      ],
+      "block": [
+        32,
+        4,
+        1
+      ],
+      "registers_per_thread": 40,
+      "count": 5200,
+      "sum_ms": 22.828321,
+      "median_us": 4.192,
+      "min_us": 3.84,
+      "max_us": 11.136
+    },
+    {
+      "name": "void strata::kernels::<unnamed>::native_q6_k_mmvq_kernel<(bool)0>(const strata::kernels::<unnamed>::Q6KBlock *, const strata::kernels::<unnamed>::Q81Block *, float *, int, int)",
+      "grid": [
+        512,
+        1,
+        1
+      ],
+      "block": [
+        32,
+        4,
+        1
+      ],
+      "registers_per_thread": 40,
+      "count": 4200,
+      "sum_ms": 13.799827,
+      "median_us": 3.2,
+      "min_us": 3.008,
+      "max_us": 370.656
+    }
+  ]
+}

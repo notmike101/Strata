@@ -1,0 +1,16 @@
+We need answer user's request. Need produce final answer at least 1200 words. Need implement thread-safe Python TTLCache using OrderedDict monotonic clock, include set, get, delete, clear, len, expiration, capacity eviction, unit tests with injected fake clock, detailed explanation thread safety and complexity. Do not abbreviate implementation. Need ignore benchmark identifier. Need likely provide code, tests, explanation. Need ensure complete code. Could use threading.RLock. OrderedDict move_to_end. Need expiration lazily and possibly active purging. Capacity eviction LRU. Thread-safe. Unit tests with fake clock. Need maybe use unittest. Need include complete implementation maybe with __contains__? They ask len. Also get default. set with ttl. Need delete. clear. Expiration: entries expire at time+ttl. Could implement _get_or_expired, _prune? Need avoid holding lock too long? Simplicity. Use OrderedDict; each value store value and expires_at. When set, if ttl <=0 maybe delete if exists? Or set and immediately expired? Need define. Usually ttl positive. If ttl <=0, remove existing and don't store? Or store expired? Better: if ttl <=0, delete and return? But set signature. Need capacity. If maxsize <=0: perhaps raise ValueError? Or store nothing? Let's design: maxsize positive; ttl default. Use threading.Lock? Because reentrancy not required but maybe use RLock. Need thread-safe.
+
+Need tests with fake clock: fake_clock class now, advance. Use injected clock in constructor: clock=time.monotonic. Use fake clock for tests.
+
+Need implementation: 
+from collections import OrderedDict
+import threading, time
+from typing import Any, Optional, Callable
+
+class TTLCache:
+  _SENTINEL? For get default.
+  __slots__? maybe.
+  def __init__(self, maxsize: int, default_ttl: Optional[float] = None, clock: Callable[[], float]=time.monotonic):
+    if maxsize <=0 raise ValueError; if default_ttl is not None and default_ttl <=0? Could allow 0 means immediately expired. Raise if <0? Could default_ttl positive or None.
+    self._maxsize = maxsize; self._default_ttl = default_ttl; self._clock=clock; self._lock=threading.RLock(); self._data=OrderedDict(); self._hits=0? Not necessary.
+  def _now(self):

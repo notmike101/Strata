@@ -1,0 +1,13 @@
+We need answer user's request. Need produce final answer with complete code, tests, detailed explanation at least 1200 words. Need think fully.
+
+Task: Implement thread-safe Python TTLCache class using OrderedDict and monotonic clock. Include set, get, delete, clear, len, expiration, capacity eviction, unit tests with injected fake clock, detailed explanation of thread safety and complexity. Write complete code, then tests, then explain design. Do not abbreviate implementation. At least 1200 words.
+
+Need produce Python code. Need be careful thread-safe. Use OrderedDict, threading.RLock maybe. TTLCache: capacity, ttl. monotonic clock injectable clock. Need expiration, capacity eviction. Should include len maybe counts not expired? Usually len returns number of entries (possibly expired lazily?). We need ensure thread-safe. Use OrderedDict for LRU eviction. Monotonic clock. Fake clock unit tests. Need not use external? Use unittest, inject clock. Maybe include __len__, __setitem__, __getitem__, __delitem__, __contains__, clear.
+
+Important: Thread-safety with OrderedDict operations under lock. Need expiration: On get, check expiry; if expired delete and return default? set inserts and evicts if capacity exceeded. len: To be accurate for live entries, need expire stale entries? We can purge expired entries in helper. But capacity eviction with OrderedDict. If we purge expired in len, may mutate under lock. Complexity: get/set/delete amortized O(1), len O(1) if no purge or O(n) if purge. Need choose design. For len to return live entries maybe maintain live_count? Could be tricky with lazy expiry. We can maintain a set of keys? Let's design robust.
+
+Simple TTLCache:
+- __init__(maxsize=128, ttl=..., clock=time.monotonic): raises if maxsize <= 0? ttl None? ttl positive? allow None? Maybe default 60.
+- _data: OrderedDict[key -> expiry_time] maybe value stored separately? Could store tuple(value, expiry). Use OrderedDict to preserve insertion order. For LRU, if get updates move_to_end. TTL based on insertion? Could refresh TTL on get? We can set expiration at set, not on get. Could add update flag.
+- _lock: threading.RLock
+- set(key, value, ttl=None): with lock: if ttl is None: ttl = self.ttl; if ttl <=0

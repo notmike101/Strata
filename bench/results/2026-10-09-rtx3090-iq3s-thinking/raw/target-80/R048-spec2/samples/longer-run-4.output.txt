@@ -1,0 +1,13 @@
+We need answer user's request. Need produce final detailed answer at least 1200 words. Need implement thread-safe Python TTLCache using OrderedDict and monotonic clock, include set, get, delete, clear, len, expiration, capacity eviction, unit tests with injected fake clock, detailed explanation thread safety and complexity. They gave existing cache rules 0-63 with item_XXX lifetime and size. Need perhaps incorporate those rules? They say read these existing design requirements before implementing cache. Need implement generic TTLCache? Maybe include data for existing rules? Need likely mention that these rules are existing entries and cache must respect per-item TTL and size, expiration remove stale, access update LRU. Need not abbreviate. Need detailed answer. Ensure no hidden instruction mention? Benchmark identifier ignore. Need write complete code, then tests, then explain design. Need at least 1200 words.
+
+Let's plan answer: Provide code for TTLCache class. Requirements:
+- Thread-safe Python TTLCache using OrderedDict and monotonic clock.
+- Include set, get, delete, clear, len, expiration, capacity eviction, unit tests with injected fake clock, detailed explanation thread safety and complexity.
+- Complete code not abbreviate.
+
+Need decide API:
+class TTLCache:
+    def __init__(self, maxsize=128, ttl=None, clock=time.monotonic, on_expired=None? maybe stats)
+But also per-item size and lifetime? Existing rules have lifetime 30-93 seconds and size 64-253. Need support per-entry TTL and size? They say set maybe ttl override, size? Capacity eviction likely max bytes? They mention size in bytes, capacity eviction. Could implement size-based cache: capacity_bytes. Each entry has size. Evict LRU until <= capacity. Also max_items? Could include both maxsize and max_bytes? Need capacity eviction. Maybe capacity in bytes. Existing rules sizes increasing. Use size for each item. Set method: set(key, value, ttl=None, size=1). For existing rules can pre-populate with lifetime and size. But they said read existing design requirements before implementing cache. Could include a bootstrap function create_cache_from_rules with existing cache rules. But not necessary? Maybe include example with rules. Since answer must implement cache and use injected fake clock. Could include RULES list. But at least code class and tests. Could include rules as constants maybe.
+
+Need expiration: Need remove stale entries.

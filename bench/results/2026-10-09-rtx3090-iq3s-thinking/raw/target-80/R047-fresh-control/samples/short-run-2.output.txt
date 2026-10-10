@@ -1,0 +1,25 @@
+We need answer user's request. Need produce final detailed answer at least 1200 words, complete code, tests, explanation thread safety complexity. User says benchmark identifier ignore. Implement thread-safe Python TTLCache class using OrderedDict and monotonic clock. Include set, get, delete, clear, len, expiration, capacity eviction, unit tests with injected fake clock, detailed explanation. Do not abbreviate implementation. Need likely provide code fully. Need think about design.
+
+Need ensure thread-safe. Use OrderedDict. Monotonic clock injected maybe default time.monotonic. Thread safety: protect all public operations with reentrant lock? OrderedDict not thread-safe. Need avoid deadlocks, maybe lock for entire cache operations. Need expiration: lazy cleanup on get and maybe set/len? len: should reflect unexpired entries. Need decide behavior. Could implement cleanup internally under lock for len. Capacity eviction: LRU? OrderedDict can move_to_end on get for LRU. Evict oldest when over maxsize. TTL expiration. Fake clock: Clock interface now() -> float. Need unit tests using unittest? Could include full test class. Need not abbreviate.
+
+Potential code:
+
+from __future__ import annotations
+import threading, time
+from collections import OrderedDict
+from typing import Optional, Any, Callable, Tuple, TypeVar
+
+class FakeClock:
+    def __init__(self, initial=0.0): self._now=initial; self._lock=threading.Lock()
+    def now(self): ... maybe not thread-safe? For tests can simple but include lock.
+    def advance(self, seconds): ...
+
+class TTLCache:
+    def __init__(self, maxsize, ttl, clock=None):
+       if maxsize <= 0 raise ValueError
+       self._maxsize = int(maxsize)
+       self._ttl = float(ttl) maybe non-negative.
+       self._clock = clock or time.monotonic
+       self._entries = OrderedDict() # key -> (value, expires_at)
+       self._lock = threading.RLock()
+    def set(self, key, value, ttl=None): with lock: if ttl is None ttl=self._ttl; if ttl < 0 raise; self._delete_expired_if_possible? Could do cleanup? If key in existing, move_to_end? Then insert, if len > maxsize: while self._data and self._clock.now()... popitem(last=False) evict least recently used. Need handle if new

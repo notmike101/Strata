@@ -1,0 +1,51 @@
+{
+  "accessed_utc": "2026-10-10T00:00:40.943025+00:00",
+  "upstream_main_sha": "fb58e0dbc8399662c0e47c76578c6e878b14f6cf",
+  "latest_release": "v0.1.41",
+  "latest_release_published_at": "2026-10-08T12:14:59Z",
+  "authentication": "required GitHub App helper; read-only",
+  "leads": [
+    {
+      "number": 1742,
+      "title": "CUDA SM86: opt-in one-superblock prefetch build",
+      "url": "https://github.com/Niko1221/Strata/pull/1742",
+      "headRefOid": "fab43d049ebb57a2cdac25ca34de7dcb089f4993",
+      "assessment": "CUDA SM86 prefill-only weight prefetch specialization; measured on Linux RTX3060/IQ3_XXS, not current Windows decode. Deferred from decode target."
+    },
+    {
+      "number": 1744,
+      "title": "CUDA SM86: opt-in IQ3 two-stage prefill build",
+      "url": "https://github.com/Niko1221/Strata/pull/1744",
+      "headRefOid": "0701e617b93c8ea37984d2121ce3b1447f0c4e81",
+      "assessment": "CUDA SM86 selective two-stage IQ3 prefill specialization; same applicability limits. No decode gain claimed."
+    },
+    {
+      "number": 1741,
+      "title": "verify: service returns before any CUDA call while nothing has rung (#1740)",
+      "url": "https://github.com/Niko1221/Strata/pull/1741",
+      "headRefOid": "462a79df354d9597be6de521043f2ec3e55f7f34",
+      "assessment": "Early exit before CUDA calls in pipelined Verifier::service; current single-GPU path uses Verifier::run instead."
+    },
+    {
+      "number": 1737,
+      "title": "route-resident: one warp per token in the swap kernel",
+      "url": "https://github.com/Niko1221/Strata/pull/1737",
+      "headRefOid": "72070620821a26677c4fff85c5f3813362407fc4",
+      "assessment": "Faster implementation of approximate resident expert routing. The reported speed requires a mode that changes routing and showed distribution/quality distortion. Excluded by this contract."
+    },
+    {
+      "number": 1544,
+      "title": "cpu: IQ2_S in the bit-exact singleton rows, and the singleton path only below the #152 rule (stacked on #1415)",
+      "url": "https://github.com/Niko1221/Strata/pull/1544",
+      "headRefOid": "9d0614f43757f8ffcd1f90b2647d4d0d31200d32",
+      "assessment": "Exact AVX2 singleton optimization for widths below native_gu_mt_min; retained STRATA_IQ_MT_MIN=1 leaves no eligible singleton width. Not a direct gain for current dispatch."
+    },
+    {
+      "number": 1548,
+      "title": "decode: STRATA_PCIE_BALANCE=1 picks each layer's PCIe count from measured costs (refile of #1038 by @sergqwer, on 0.1.40.3)",
+      "url": "https://github.com/Niko1221/Strata/pull/1548",
+      "headRefOid": "a513394c4768f1d0fa13957e79b171b0fcc51c32",
+      "assessment": "Runtime fitting of each layer CPU/GPU expert split; report improves the automatic probe but remains slower than its manually tuned fraction. Current fixed0.20 requires its own evaluation; no imported speed claim."
+    }
+  ]
+}

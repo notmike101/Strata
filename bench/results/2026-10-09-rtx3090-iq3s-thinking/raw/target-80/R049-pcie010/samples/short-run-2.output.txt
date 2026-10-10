@@ -1,0 +1,19 @@
+We need answer user's request. Need produce final detailed answer at least 1200 words, complete code, tests, explanation thread safety and complexity. Need implement thread-safe Python TTLCache using OrderedDict and monotonic clock. Include set, get, delete, clear, len, expiration, capacity eviction, unit tests with injected fake clock. Do not abbreviate implementation. Need likely mention ignore benchmark identifier? They say Benchmark identifier ... Ignore this identifier. So no mention. Need answer in English. Need ensure code complete, not abbreviated. Could include class TTLCache, maybe CacheEntry? OrderedDict, threading.Lock or RLock, monotonic clock. Methods set, get, delete, clear, __len__. Expiration: lazy expiration on access plus maybe explicit purge? Need ensure capacity eviction and TTL. Thread safety: all public ops acquire lock. OrderedDict not thread-safe; using lock. Need avoid deadlocks? Use RLock? Public methods call internal purge without nested lock if not using RLock; use private methods assume lock held. Maybe use context manager? Need unit tests with fake clock. Need at least 1200 words. Need detailed explanation. Let's design robust code.
+
+Potential implementation:
+from collections import OrderedDict
+from threading import Lock
+from time import monotonic
+from typing import Any, Optional
+
+class TTLCache:
+    def __init__(self, max_size=128, ttl=60.0, clock=monotonic):
+        if max_size <=0 ... raise ValueError
+        if ttl <=0? Maybe allow zero? Usually positive. We can allow ttl=None? User asks TTL. Make ttl float >0. Maybe ttl_seconds=None means no TTL? Not needed. But maybe include default. Validate clock callable.
+        self._entries = OrderedDict() # key -> (value, expires_at)
+        self._max_size = max_size
+        self._ttl = ttl
+        self._clock = clock
+        self._lock = Lock()
+
+    def set(self, key, value, ttl=None): with self._lock: now = self._clock(); self._purge_expired(now); if ttl is None: ttl = self._ttl; if ttl <=0? maybe delete if <=0? If set with negative expires immediately. Need capacity eviction before insert? If key exists update. Use OrderedDict move_to_end on hit in get. Set: if key in entries, update value/expiry, move_to_end, return. Else evict while len

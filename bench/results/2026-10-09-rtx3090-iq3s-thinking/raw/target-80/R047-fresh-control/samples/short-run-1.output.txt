@@ -1,0 +1,12 @@
+We need answer user's request. Need produce detailed answer at least 1200 words. User asks: Benchmark identifier ignore. Implement thread-safe Python TTLCache class using OrderedDict and monotonic clock. Include set, get, delete, clear, len, expiration, capacity eviction, unit tests with injected fake clock, detailed explanation thread safety and complexity. Write complete code, then tests, then explain design. Do not abbreviate implementation.
+
+Need produce final with code complete, tests, explanation. Need ensure at least 1200 words. Probably can be longer. Need use Python. Use threading.RLock? OrderedDict move_to_end. Monotonic clock injectable: default time.monotonic. TTLCache class: maxsize, ttl, clock=time.monotonic. Maybe support None ttl for no TTL? Include len method returning number nonexpired? Since OrderedDict stores expired entries until cleaned; len could be physical or logical. Usually cache len returns logical number after purge. Need thread-safe. Methods: __init__, set, get, delete, clear, __len__, maybe purge, _is_expired, _purge_expired? Could use OrderedDict with insertion order or access order? TTL eviction capacity: LRU? User says TTLCache, OrderedDict. Capacity eviction likely remove oldest entries when maxsize exceeded. OrderedDict can preserve insertion order. For get, if expired remove and return default; else maybe move_to_end to implement LRU? TTL cache usually TTL independent of access? If using OrderedDict for insertion order and TTL expiry, capacity eviction oldest inserted. If use move_to_end on get, LRU. Need specify. Use move_to_end to make it LRU and TTL: get refreshes access order? But TTL expiry is by absolute expiration; moving on access is okay for capacity eviction LRU. Could also not move. Need choose. Include detailed explanation.
+
+Need complete code no abbreviation. Tests with unittest and fake clock. Include test cases: set/get, ttl expiry, capacity eviction, delete, clear, len, thread safety concurrency? Could include test with many threads. Also maybe test capacity with default maxsize. Need no abbreviate: full implementation with docstrings.
+
+Need mention monotonic clock. Could store expiry_time = clock() + ttl. If ttl is None, expires_at = inf? Use math.inf. Need import math, threading, OrderedDict, time, unittest. Maybe type hints.
+
+Implementation:
+
+class TTLCache:
+    def __init__(self, maxsize=128, ttl
