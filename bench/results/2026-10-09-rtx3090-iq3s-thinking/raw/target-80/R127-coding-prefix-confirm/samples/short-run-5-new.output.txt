@@ -1,0 +1,27 @@
+We need answer user wants code only in Python code block. Need implement topological_order. Need think thoroughly. We need produce final only complete function code block, no imports.
+
+Requirements:
+- topological_order(nodes, edges)
+- nodes list unique strings; edges list of (before, after) pairs.
+- Return lexicographically smallest topological ordering, include isolated nodes, ignore duplicate edges.
+- Raise ValueError for edge endpoint absent from nodes or a cycle.
+- Do not mutate either input.
+- Use no imports.
+- Return only complete function in Python code block.
+
+Need ensure lexicographically smallest topological ordering. Usual Kahn's algorithm selecting smallest available node at each step yields lexicographically smallest topological order for DAG when all edges from before to after. Need confirm. Yes: among all valid topological sorts, greedily choosing smallest available node yields lexicographically smallest sequence. Need include isolated nodes: nodes with no incoming/outgoing have indegree 0 initially and will be considered.
+
+Need not mutate inputs. Can use sets, dicts, lists copies. No imports. Need avoid mutating edges? Reading okay. Need ignore duplicate edges: use set of pairs or per adjacency sets to avoid counting duplicates. Need check edge endpoints absent: if before not in node_set or after not in node_set raise ValueError. Also maybe edge endpoints same? self-loop edge ('a','a')? It is endpoint absent? no, self-loop creates cycle. Kahn will detect cycle by not processing all nodes. Need include isolated nodes.
+
+Potential issues:
+- nodes is list of unique strings but can be not sorted. Need output lexicographically sorted when tie available.
+- Need efficient? Use min selection. Could simply at each step scan available set for min (max maybe O(n^2)). Could implement heap but heapq is import not allowed. Could use min(available) with set. Available could be set or dict. But when decrement indegree and add to available, duplicates from duplicate edges must not cause double indegree. If we use adjacency as set, indegree counts unique predecessors. Need ignore duplicate edges.
+
+Need avoid mutating edge tuple? fine.
+
+Implementation:
+def topological_order(nodes, edges):
+    node_set = set(nodes)  # assumes unique strings
+    indegree = {node: 0 for node in nodes}
+    successors = {node: set() for node in nodes}
+    # To avoid duplicates, when adding edge, if

@@ -1,0 +1,23 @@
+We need answer to user: implement topological_order in Python, only complete function in code block, no imports. Need analyze requirements.
+
+Function topological_order(nodes, edges). nodes list unique strings; edges list of (before, after) pairs. Return lexicographically smallest topological ordering, include isolated nodes, ignore duplicate edges. Raise ValueError for edge endpoint absent from nodes or a cycle. Do not mutate either input. Use no imports. Return only complete function in Python code block.
+
+Need produce final code block only likely.
+
+Algorithm: need lexicographically smallest topological order. Use Kahn's algorithm with min-heap, but no imports. Need implement heap ourselves? Could sort each time? Need O((n+m) log n?) Without imports. Could use heapq? No imports. Need use no imports. Can implement manual heap or simply maintain sorted list by min() selection. Since no constraint on efficiency? Could be acceptable but better implement heap functions.
+
+Input validation: endpoints absent raise ValueError. Duplicate edges ignore. Do not mutate either input: nodes is list unique strings. Edges list. We can use nodes as list maybe create order list. Need not modify nodes list or edges list. Could create set of nodes. Validate edges before building. For duplicate edges: ignore but need if invalid endpoint? Should validate each edge endpoint absent from nodes even if duplicate? Yes edge endpoint absent from nodes raise. If duplicate ignore in graph construction.
+
+Need lexicographically smallest topological ordering: Kahn with min available node. For all nodes indegree 0 push. Repeatedly pop min. For each successor decrement, push when zero. If length < n cycle raise.
+
+Need include isolated nodes (no edges): indegree zero available.
+
+Need handle edges where before == after? Self-loop: endpoints present, creates cycle. Need raise ValueError. Duplicate self loops ignored but still self-loop cycle. Our indegree logic will not process because indegree >0, final length < n -> ValueError.
+
+Implementation details no imports.
+
+Potential issue lexicographic smallest among strings: Python <. Good.
+
+Need ensure no mutation of inputs: don't modify nodes or edges lists. Use graph dict mapping string -> list; indegree dict. Create graph = {node: [] for node in nodes}. indegree = {node: 0 for node in nodes}. Need nodes iterable. If nodes list is mutated by caller later irrelevant.
+
+Duplicate edges: if pair in edge_set add. Edge_set set of tuples.

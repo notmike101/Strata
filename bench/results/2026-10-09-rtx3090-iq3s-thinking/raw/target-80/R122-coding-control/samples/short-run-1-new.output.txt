@@ -1,0 +1,15 @@
+We need answer user's request: Implement topological_order(nodes, edges) in Python. Need return only complete function in Python code block. Need ensure lexicographically smallest topological ordering, include isolated nodes, ignore duplicate edges. Raise ValueError for edge endpoint absent from nodes or cycle. Do not mutate either input. Use no imports. Need no identifier mention. Need produce final with code block only. Need design robust function.
+
+Requirements:
+- nodes list of unique strings (could be empty? assume unique but validate maybe).
+- edges list of (before, after) pairs.
+- Return lexicographically smallest topological ordering. For DAG, use Kahn with min-heap? But no imports. Can use sorted containers manually? Need lexicographically smallest topological order. Nodes unique strings. Need include isolated nodes. Ignore duplicate edges. Endpoint absent -> ValueError. Cycle -> ValueError.
+- Do not mutate input: avoid modifying nodes or edges. Can create copies or sets.
+
+No imports means cannot heapq. Can maintain list of zero indegree and choose min by built-in min each time O(n^2), acceptable? Need implement no imports. Could also use sorted and index. Lexicographically smallest topological order for arbitrary strings: use Kahn algorithm selecting smallest available at each step. Because partial order constraints. With duplicates ignored. Need ensure cycle detection: if processed count != len(nodes) => ValueError.
+
+Potential pitfalls: self-loop edge (a,a) -> cycle. Duplicate edges count once. Need ignore duplicate edges. If duplicate edges with same before, after, indegree should count once. Use set for edge pairs. However if before/after absent need error before or after duplicate? Either fine. If edge malformed? Maybe expect pairs length 2; could unpack. But maybe raise ValueError if not iterable? We can be safe.
+
+Do not mutate input. But if nodes is list and we create node_set = set(nodes), no mutation. Edges: we iterate. If edge endpoint absent raise ValueError. Need not alter nodes/edges. Could handle unhashable nodes? unique strings so hashable.
+
+Lexicographically smallest: We have available = [n for n in nodes if indegree[n]==0]. Then loop: choose min(available), remove. If we do available.remove(chosen), available.remove uses first equal (unique). Need maybe maintain sorted available to pop min. No imports: can maintain sorted list by insertion. Since no imports, can use available.append and then sort each iteration?

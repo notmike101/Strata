@@ -1,0 +1,23 @@
+We need respond to user: "Implement topological_order(nodes, edges) in Python... Return only the complete function in a Python code block." Need produce final only code block. Need ensure no imports. Need handle nodes list unique strings, edges list of (before, after). Return lexicographically smallest topological ordering. Include isolated nodes. Ignore duplicate edges. Raise ValueError for edge endpoint absent from nodes or cycle. Do not mutate inputs.
+
+Need craft robust deterministic Kahn with min-heap? Without imports can't use heapq? Could implement min selection by scanning available nodes each step O(n^2) fine. Or implement heap manually? Simpler scanning.
+
+Need no mutation: avoid modifying nodes or edges. Build sets/dicts. Duplicate edges ignored. Need careful if duplicate self-loop? edge endpoints present, duplicate ignored. Self-loop causes cycle. Duplicate edges count once. Need detect cycles.
+
+Lexicographically smallest: repeatedly choose smallest node among zero indegree. Nodes strings lex compare. Since nodes unique strings.
+
+Input validation: nodes list unique? prompt says unique, but maybe still handle? Could not raise duplicates? Could convert to set? But if duplicate nodes? not specified. We can maybe if len(set(nodes)) != len(nodes): raise ValueError? It says nodes is list of unique strings; no need. But do not mutate either input. Could not rely. Better if duplicate nodes maybe ValueError? Might not be tested. We can choose not to raise for duplicates except if endpoints? But topological ordering of unique; duplicates weird. Could handle with set; but if duplicate nodes in nodes list, returning each once? "nodes is a list of unique strings" so irrelevant.
+
+Need ignore duplicate edges. Need endpoint absent. Edges iterable maybe list of tuples. If tuple length? If malformed? Maybe unpack with try? But tests likely correct. Could robustly iterate for edge in edges: before, after = edge. If edge length not 2 raises ValueError? Fine.
+
+Implementation approach:
+
+def topological_order(nodes, edges):
+    # Build node_set from nodes. Do not mutate nodes.
+    node_set = set(nodes)
+    # Optional validate nodes unique? maybe if len(node_set) != len(nodes): raise ValueError("nodes must be unique")
+    adj = {node: set() for node in node_set}
+    indegree = {node: 0 for node in node_set}
+    edge_seen = set()
+    for edge in edges:
+        try

@@ -1,0 +1,22 @@
+We need answer user wants implement topological_order in Python. Need produce final only complete function in Python code block. Need think carefully. Requirements:
+- Implement topological_order(nodes, edges)
+- nodes list unique strings; edges list of (before, after) pairs.
+- Return lexicographically smallest topological ordering.
+- include isolated nodes.
+- ignore duplicate edges.
+- Raise ValueError for edge endpoint absent from nodes or a cycle.
+- Do not mutate either input.
+- Use no imports.
+- Return only complete function in Python code block.
+
+Need ensure lexicographically smallest topological ordering. For unique string nodes, typical Kahn with min-heap. But no imports -> can't use heapq. Could implement simple selection: maintain in-degree dict, adjacency set/dict. Duplicate edges ignored. Do not mutate input: need avoid mutating lists/tuples; can read only. We can make copies structures. To ignore duplicate edges, use set of tuples or set per node. Need validate endpoints: edges may contain non-strings? Requirement strings, but we can robustly require exact? If edge not iterable pair? Maybe raise ValueError? But only specified absent endpoint or cycle. Could validate len==2? If malformed maybe ValueError. Keep simple.
+
+Potential edge endpoint absent from nodes. Since nodes unique but could not be set? Build set_nodes = set(nodes). If any before or after not in set_nodes -> ValueError. If self-loop -> cycle, also endpoint present. Kahn detects.
+
+No imports. Need lexicographically smallest topological order: repeatedly pick smallest among zero in-degree. Can sort available list each iteration and use pop(0). Need efficient O(V^2) but fine. But need ensure lexicographically smallest topological ordering among all valid sequences. Kahn with min available works if using total order string lex. Need maintain available list maybe set/dict. If remove duplicate edges: if use adjacency dict of set, indegrees initialized once per unique edge. Could use nested dict or list. No imports.
+
+Implementation options:
+def topological_order(nodes, edges):
+    node_set = set(nodes)
+    # optional verify unique? nodes says unique. If duplicates? Could raise? Not required; but maybe set removes. If nodes duplicate, topological ordering should include each? unique strings assumed. If not, maybe preserve? We can treat set. But "nodes is list of unique strings".
+    # Do not mutate inputs. set(nodes) copies values

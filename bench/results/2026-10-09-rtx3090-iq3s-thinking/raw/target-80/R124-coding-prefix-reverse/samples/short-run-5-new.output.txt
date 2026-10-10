@@ -1,0 +1,16 @@
+We need answer user wants code only in Python code block. Need implement topological_order. Need think thoroughly. We need produce final only complete function code block, no imports.
+
+Requirements:
+- topological_order(nodes, edges)
+- nodes list unique strings; edges list of (before, after) pairs.
+- Return lexicographically smallest topological ordering, include isolated nodes, ignore duplicate edges.
+- Raise ValueError for edge endpoint absent from nodes or a cycle.
+- Do not mutate either input.
+- Use no imports.
+- Return only complete function in Python code block.
+
+Need ensure lexicographically smallest topological ordering. Usual Kahn's algorithm selecting smallest available node at each step yields lexicographically smallest topological order for DAG when all edges from before to after. Need confirm. Yes: among all valid topological sorts, greedily choosing smallest available node yields lexicographically smallest sequence. Need include isolated nodes: nodes with no incoming/outgoing have indegree 0 initially and will be considered.
+
+Need not mutate inputs. Can use sets, dicts, lists copies. No imports. Need avoid mutating edges? Reading okay. Need ignore duplicate edges: use set of pairs or per adjacency sets to avoid counting duplicates. Need check edge endpoints absent: if before not in node_set or after not in node_set raise ValueError. Also maybe edge endpoints must be strings? Not specified; assume present. Edge duplicate ignore: if pair already counted skip. If self-loop? before == after, edge endpoint present; self-loop is a cycle. Need raise ValueError. Kahn will detect cycle because indegree of node includes self-loop, but if isolated? self-loop cycle. Need ensure self-loop counted? If using set, adjacency includes self and indegree count 1, so cycle detected. Good.
+
+Need consider lexicographically smallest: string comparison. Need initial available sorted. Without heapq import, need maintain sorted list? Could sort each time maybe O(n^2) but okay? Need implement no imports. Need efficient enough? We can implement manual min selection from available list and sort initially. For each step, pop min by scanning available list. When adding successors, insert and maintain sorted order via bisect? Cannot import bisect. Could implement insertion manually. Or simpler: use set of available and each iteration select min(min(available)). But min over set O(k), repeated O(n^2). Accept? Could be large but no constraints. We can implement with sorted list and insertion to keep O(n

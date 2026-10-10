@@ -1,0 +1,31 @@
+We need answer user's request: "Implement topological_order(nodes, edges) in Python. nodes is a list of unique strings; edges is a list of (before, after) pairs. Return the lexicographically smallest topological ordering, include isolated nodes, and ignore duplicate edges. Raise ValueError for an edge endpoint absent from nodes or a cycle. Do not mutate either input. Use no imports. Return only the complete function in a Python code block."
+
+Need provide final code block only. Need think through implementation. Need no imports. Lexicographically smallest topological order for nodes strings. Kahn's algorithm with min-heap normally, but no imports. Need no imports means no heapq. Can implement using sorted list? Nodes strings unique. Need lexicographically smallest among valid topological orderings: at each step choose smallest available node (indegree 0). We can avoid heapq by maintaining sorted set? Since no imports and likely simple. Need not mutate inputs: don't mutate nodes, edges. Can make copies or use sets. We can process edges ignoring duplicates. Validate endpoints: if before or after not in node set -> ValueError. Cycle detection: if result length < number nodes -> ValueError.
+
+Implementation options:
+```
+def topological_order(nodes, edges):
+    node_set = set(nodes)
+    indegree = {n:0 for n in nodes}
+    out_edges = {n:set() for n in nodes} # but set iteration? Need avoid mutation? out_edges internal.
+    for before, after in edges:
+        if before not in node_set or after not in node_set:
+            raise ValueError(...)
+        if after not in out_edges[before]:
+            out_edges[before].add(after)
+            indegree[after]+=1
+    available = sorted(node_set)
+    result=[]
+    while available:
+        node = available.pop(0) # O(n^2), okay likely. But lexicographically smallest.
+        result.append(node)
+        new_available=[] maybe for each neighbor decrement, if zero insert into available maintaining sorted order.
+        for neighbor in out_edges[node]: ... 
+```
+But if we just after decrement collect newly zero and then merge sorted? We need available always sorted. Could do:
+```
+    available = sorted(nodes)
+    while available:
+       node=available.pop(0)
+       for nb in sorted(out_edges[node])? order not needed if we handle insertion.
+          

@@ -1,0 +1,13 @@
+We need answer user wants code only in Python code block. Need analyze. Need produce final only code block. Need ensure function correct.
+
+Problem: topological_order(nodes, edges): nodes list unique strings; edges list pairs before, after. Return lexicographically smallest topological ordering, include isolated nodes, ignore duplicate edges. Raise ValueError for edge endpoint absent from nodes or a cycle. Do not mutate either input. No imports. Complete function only.
+
+Need design deterministic lexicographically smallest topological order. Given directed acyclic graph nodes strings. Need Kahn's algorithm with min-heap? No imports. Could use sorted list or simple min each step O(n^2) fine. Need not import heapq. Avoid mutating input: copy nodes/edges or process copies. Need handle duplicate edges: ignore duplicates. But indegree should count unique edges only. Need validate endpoints present. If duplicate edge, ignore but validation? If endpoint absent, even duplicate should raise. Need not mutate input lists; use set of valid nodes. edges can be list of tuples; ignore duplicate edges via set of pairs. Need consider self-loop edge (u,u): if present, cycle? Yes self-loop causes cycle. Endpoint present. We can detect as indegree or heap empty leftover. Could ignore duplicate self-loop and still indegree self, leftover raise. Good.
+
+Need lexicographically smallest among all topological orders (using standard string order). Kahn: repeatedly choose smallest available node with indegree 0. Need ensure isolated nodes initially indegree 0 and chosen by lexicographic order at appropriate times.
+
+Implementation options:
+1) Make nodes_copy = list(nodes) perhaps sort unique? nodes unique. But we should not mutate. Make available = sorted(set(nodes)) and indegree = {n:0 for n in nodes}. For edges, normalize: for before, after in edges: if before not in node_set or after not in node_set: raise ValueError. if before == after? Could still process duplicate? If self-loop: add to unique_edges? If we add indegree and adjacency, cycle. But if self-loop duplicate ignore duplicates. Use edge_set to dedup. But if self-loop, indegree[after]+=1, adjacency[before].add(after). Then available won't include if indegree >0? For self-loop, indegree >0; not available. Later cycle raise. Good.
+But if edge (u,v) and edge (v,u), cycle.
+
+Potential issue: if self-loop

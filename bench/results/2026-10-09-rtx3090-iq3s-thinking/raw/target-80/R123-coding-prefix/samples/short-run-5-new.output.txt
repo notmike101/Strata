@@ -1,0 +1,20 @@
+We need answer user's request. Need produce final with only complete function in Python code block. Need implement topological_order(nodes, edges). Requirements:
+- nodes list unique strings
+- edges list of (before, after) pairs
+- return lexicographically smallest topological ordering
+- include isolated nodes
+- ignore duplicate edges
+- Raise ValueError for edge endpoint absent from nodes or a cycle
+- Do not mutate either input
+- Use no imports
+- Return only complete function in Python code block.
+
+Need think carefully. Need no imports. Need lexicographically smallest topological ordering among all topological orders. Strings unique. Need ignore duplicate edges. Need not mutate inputs: if we convert nodes to set/list, copy. Edges list maybe tuple iteration, don't modify. Duplicate edges ignore. Need detect cycle. Need lex smallest Kahn with min-heap? No imports so cannot heapq? Could use heap? No imports, but can implement min selection by scanning candidates list each iteration O(n^2), okay. Need lexicographically smallest topological ordering for DAG with arbitrary nodes strings. Standard: choose smallest available source at each step yields lexicographically smallest topological order? For total order lex compare strings yes greedy min available source works. Need be careful with duplicate edges: use set to remove duplicates. But set of tuples requires hashable strings; fine. Need no imports but set built-in.
+
+Potential issue: duplicate edges: if input edges has duplicate before after, adjacency set dedup. indegree count should count unique edge. Need check endpoint membership. Need not mutate nodes/edges. We can create nodes_copy = list(nodes) (if nodes maybe list). Need preserve original? not mutate input. Set(nodes). If nodes has unique strings; no validation of unique. Could use set. Need if nodes is not list? spec list; okay.
+
+Need detect missing endpoints and cycles. Validate all edges endpoints in nodes_set. Need if edge not tuple? not required but maybe handle? Could unpack.
+
+Cycle detection: Kahn. If processed count < len(nodes_copy) raise ValueError.
+
+Need lex smallest. We can implement candidates as list of current sources (indegree 0). At each step find min via min(candidates) and remove it. Since no imports, min built-in. But if many nodes, O(n^2) okay. Could maintain sorted list? Need no imports, can use candidates.sort() each iteration? Or use min. We can remove by index. Could also sort candidates

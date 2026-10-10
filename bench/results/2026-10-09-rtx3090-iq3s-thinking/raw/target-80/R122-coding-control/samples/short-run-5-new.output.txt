@@ -1,0 +1,12 @@
+We need answer user's request. Need produce final with only complete function in Python code block. Need implement topological_order(nodes, edges). Requirements:
+- nodes list unique strings
+- edges list of (before, after) pairs
+- return lexicographically smallest topological ordering
+- include isolated nodes
+- ignore duplicate edges
+- Raise ValueError for edge endpoint absent from nodes or a cycle
+- Do not mutate either input
+- Use no imports
+- Return only complete function in Python code block.
+
+Need think carefully about lexicographically smallest topological order. Given directed graph edges before -> after. We want lexicographically smallest sequence among all topological orders. Standard algorithm: Kahn with min-heap selecting available nodes with indegree zero yields lexicographically smallest topological order if comparing list lexicographically by node strings. But nodes are strings, need sort. No imports, can use heapq? imports no. Implement manual min selection: each step select smallest from available list. Since no imports, maintain sorted list or heap via custom operations. Could repeatedly find min among available. Need efficient but probably fine. We can do min(available) then remove. But need no imports; builtins OK. Could maintain available sorted and pop(0) with bisect? no imports; could insert maintaining sorted using while. But simpler: available set/list; each step choose min via min() then list.remove. Complexity O(V*(V+E)). Accept. But ensure duplicates edges ignored: build adjacency sets and indegree counts only for unique edges. Need not mutate input: copy node list? nodes is list of strings; we can build set nodes_set = set(nodes) (does not mutate). Build adj dict: node -> set, indeg dict int. For each edge in edges: validate isinstance? maybe tuple unpack; if len !=2? Could raise ValueError? Problem says edges list of pairs; endpoint absent from nodes or cycle. It may be safe to if before not in nodes_set or after not in nodes_set: raise ValueError. For malformed edge length maybe TypeError or ValueError? Could handle: try before, after = edge except: raise ValueError("edge endpoint absent")? But user specified. Need not overdo. Duplicate edges ignored. Need ignore self loops? Self-loop is cycle; if before==after and node in nodes, indeg increments? Duplicate handling with adjacency set prevents multiple count but self-loop would set indeg? Let's see: if edge (a,a), adj[a] set add a, inde

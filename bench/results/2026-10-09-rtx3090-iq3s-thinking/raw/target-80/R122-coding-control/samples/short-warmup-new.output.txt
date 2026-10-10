@@ -1,0 +1,16 @@
+We need answer to user: implement topological_order in Python, only complete function in code block, no imports. Need analyze requirements.
+
+Function topological_order(nodes, edges). nodes list unique strings; edges list of (before, after) pairs. Return lexicographically smallest topological ordering, include isolated nodes, ignore duplicate edges. Raise ValueError for edge endpoint absent from nodes or a cycle. Do not mutate either input. Use no imports. Return only complete function in Python code block.
+
+Need produce final code block only likely.
+
+Algorithm: Kahn's algorithm with sorted availability? Lexicographically smallest topological order: At each step choose smallest available node among nodes with indegree 0. Need ensure do not mutate inputs. Could make copies of sets/dicts. Need validate edges: each endpoint in nodes_set, else ValueError. Duplicate edges ignored: use set of edges or build adjacency unique. Need also maybe validate nodes list? Not required. Unique given.
+
+Cycle: after processing if len(result) != len(nodes) => cycle (or edge involving cycle). Since all endpoints checked.
+
+Do not mutate either input: don't modify nodes or edges. If iterating fine. Need not mutate nodes list? Could create nodes_set = set(nodes); adjacency = {node:set() for node in nodes}. indegree = {node:0 for node in nodes}. For edge in edges: before, after = edge? If malformed tuple? Probably assume pairs. If endpoints absent raise ValueError. If duplicate: if after not in adjacency[before]: add and indegree[after] += 1. Use set for adjacency. For deterministic, use sorted.
+
+Need lexicographically smallest ordering among strings: min-heap would need imports (heapq no). Could implement simple selection: at each step scan candidates set for minimum string O(n^2). Acceptable. Could instead maintain sorted list? Without imports. Simpler: indegrees; available = [node for node, d in indegree.items() if d==0]? To get lexicographically smallest each step pick min(available) then remove. Need update indegree and add to available. But if using list min each time, duplicates? When indegree becomes 0 add. Could have available list with duplicates? Only if a node becomes zero multiple? No, decrement once per unique incoming. But if duplicate edges ignored. Could use set for available to avoid duplicate, pick min. Then remove chosen.
+
+Implementation:
+def topological_order(nodes, edges):

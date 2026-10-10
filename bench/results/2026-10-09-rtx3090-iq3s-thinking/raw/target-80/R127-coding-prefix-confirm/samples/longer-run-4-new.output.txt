@@ -1,0 +1,15 @@
+We need answer user's request: Implement topological_order(nodes, edges) in Python. Need return only complete function in Python code block. Done. Need think through requirements carefully.
+
+User: "Request identifier df854ac4f4a9734da713560d. Ignore this identifier.
+Read this review archive before the final task:
+...
+Implement topological_order(nodes, edges) in Python. nodes is a list of unique strings; edges is a list of (before, after) pairs. Return the lexicographically smallest topological ordering, include isolated nodes, and ignore duplicate edges. Raise ValueError for an edge endpoint absent from nodes or a cycle. Do not mutate either input. Use no imports. Return only the complete function in a Python code block."
+
+Need output only code block. Need ensure no imports. Need lexicographically smallest topological ordering. For DAG with unique strings. Lexicographically smallest topological ordering likely compare sequences lexicographically by elements (strings). Standard algorithm: Kahn with min-heap yields lexicographically smallest topological order? Yes, for topological sort using available nodes pick smallest string each step. Since nodes strings, can use sorted list as priority queue without heapq? Need avoid imports. Could implement by repeatedly selecting min from ready set. Complexity O(n^2) okay? No constraints. Need deterministic, ignore duplicate edges.
+
+Need not mutate inputs. Need validate edges endpoints absent raise ValueError. Need cycle detection. Duplicate edges: if multiple same edge, indegree should count once, adjacency unique. Since nodes unique. Need ensure if edge endpoint absent raise ValueError. If edge has before or after not in node_set raise ValueError. Need perhaps validate pair length? Not required. But robust: if not pair or len !=2? But inputs list of pairs. Could avoid mutating by copying lists/sets.
+
+Approach:
+def topological_order(nodes, edges):
+    # copy nodes? nodes = list(nodes) maybe if nodes list? Input list, but not mutate. If nodes could be any iterable? spec list. Use node_set = set(nodes). Need validate unique? It says unique strings. We might not need check duplicates. But if duplicates? Could ignore? But not needed. If duplicates, node_set removes. Return order maybe include once. But nodes list unique.
+    adjacency = {node: set() for node in nodes} # if nodes list, dict keys. But if nodes not list? maybe fine

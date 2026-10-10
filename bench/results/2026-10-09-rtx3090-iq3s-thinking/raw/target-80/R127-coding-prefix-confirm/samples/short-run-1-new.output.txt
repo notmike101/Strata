@@ -1,0 +1,13 @@
+We need answer user's request: Implement topological_order(nodes, edges) in Python. Need return only complete function in Python code block. Need ensure lexicographically smallest topological ordering, include isolated nodes, ignore duplicate edges. Raise ValueError for edge endpoint absent from nodes or cycle. Do not mutate either input. Use no imports. Need no identifier mention. Need likely provide just code block. Need think about implementation.
+
+Need careful: nodes list of unique strings. edges list of pairs before, after. Need lexicographically smallest topological ordering among all valid topological orders. Standard Kahn using min-heap. No imports. Could use heapq? Not allowed imports, but could manually implement min selection? Since use no imports. Can implement without heapq by sorting candidates each step; input sizes unspecified, but correctness. Or implement simple priority queue manually? Need no imports. We can create candidate list sorted and pick min. But duplicates and dynamic. Could use sorted list. Simpler: indegree dict, adjacency sets? Need avoid mutating inputs. We can iterate. Duplicate edges: if multiple same edge, must ignore duplicate so indegree not incremented multiple times. Need endpoint validation: any edge with before or after not in nodes set -> ValueError. Since nodes unique strings but maybe not hashable? strings. Could use set for O(1). But constructing set doesn't mutate input. Need cycle detection: after processing, if len(order) < len(nodes_set) -> cycle. Need include isolated nodes: indegree 0 all initial nodes. Lexicographically smallest topological ordering: Kahn with min available node at each step. Is that sufficient? Yes for DAG partial order, choosing smallest currently available yields lexicographically smallest topological sort (standard). Need be careful with duplicate edges: use adjacency sets or edge_set to avoid duplicates. We can build adjacency as dict node -> set/list. But if duplicate, indegree only once.
+
+Implement:
+
+def topological_order(nodes, edges):
+    node_set = set(nodes)
+    # Maybe nodes can be non-unique? Problem says unique. We can preserve nodes list for isolated.
+    indegree = {node: 0 for node in node_set}
+    adjacency = {node: set() for node in node_set}
+    # validate edges: for edge in edges: ensure tuple? not necessary. Could unpack? if len !=2 raise? Not specified. Could just try before, after = edge; except ValueError? Not needed. But robust.
+   

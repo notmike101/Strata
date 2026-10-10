@@ -1,0 +1,12 @@
+We need answer user's request: Implement topological_order(nodes, edges) in Python. Need return only complete function in Python code block. Need ensure lexicographically smallest topological ordering, include isolated nodes, ignore duplicate edges. Raise ValueError for edge endpoint absent from nodes or cycle. Do not mutate either input. Use no imports. Need no identifier mention. Need likely pure Python.
+
+We need craft final code only in Python block. Need consider requirements deeply.
+
+Function topological_order(nodes, edges):
+- nodes list unique strings. Need not mutate either input. Could iterate, make internal structures. Don't sort original.
+- edges list of pairs (before, after). Ignore duplicate edges.
+- Raise ValueError if any endpoint absent from nodes. Need detect before cycle.
+- Return lexicographically smallest topological ordering. For nodes strings, lexicographic by Python string comparison. Need algorithm: Kahn's algorithm with min-heap to pick smallest available. But no imports allowed. Can't use heapq. Need implement min selection manually O(n^2) perhaps fine. Or use sorted list? Could use nodes.sort? That mutates? If copy list sorted. To get lexicographically smallest topological order: at each step select lexicographically smallest node among currently zero indegree nodes. Need efficient. Since no imports, can keep available as list sorted or use min() each iteration O(n^2). For simplicity: available = sorted(set(nodes) maybe). But nodes unique list; if use set? okay. Need include isolated nodes. For edges duplicates: set of edges to ignore duplicate edges. But careful: edges could contain non-tuple? likely pairs. Use set of tuples. Need check endpoints absent: for edge in edges: if before not in node_set or after not in node_set: raise ValueError. Need maybe check duplicate edges before or after. Duplicates ignored for indegree. Could use normalized tuple edge = (before, after). if edge not in seen_edges: add to adjacency; indegree[after]+=1. If duplicate, do not increment.
+- Need adjacency: internal dict: node -> set/list of successors. To avoid mutating inputs. Use node_set.
+- Cycle detection: if len(order)!=len(nodes) raise ValueError. But need maybe self-loop cycle: edge (a,a) endpoint absent? not absent; indegree a +1 and no zero? If all nodes? Kahn will detect cycle. Need consider duplicate self-loop ignore duplicates but still cycle.
+- Need

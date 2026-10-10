@@ -1,0 +1,16 @@
+We need answer user's request. Need produce final only complete function in Python code block. Need ensure no imports. Implement topological_order(nodes, edges). Nodes list unique strings; edges list pairs before, after. Return lexicographically smallest topological ordering, include isolated nodes, ignore duplicate edges. Raise ValueError for edge endpoint absent from nodes or a cycle. Do not mutate either input. Use no imports.
+
+Need think carefully about lexicographically smallest topological ordering. For DAG with partial order constraints before -> after. To get lexicographically smallest ordering among all topological sorts, standard Kahn with min-heap of available nodes (smallest label) yields lexicographically smallest sequence if comparing sequences lexicographically (assuming all elements unique strings). Since strings compare lexicographically by Python default. Need not use imports, so can't use heapq? heapq import banned. Could use list and min each step O(n^2) fine likely. Need avoid mutating inputs. Need not mutate nodes/edges. Duplicate edges ignored. Need validate endpoints. Need detect cycle: if result length != len(nodes) then cycle. But duplicate edges ignored: need indegrees count unique edges only. Need if edge endpoint absent raise ValueError. Also if nodes not unique? Spec says nodes unique; can trust? Could handle duplicates? But no need. Need no mutation: if convert nodes to set/list copy okay. Do not mutate input. We can create nodes_set = set(nodes) (doesn't mutate). Need order among nodes lexicographically initially? For Kahn, available set/list. Could use sorted_nodes = sorted(nodes), indegree dict. Need adjacency dict maybe lists/set of successors to ignore duplicates. Since edges can duplicate; if add to set. But if use sets for adjacency and process, iteration order might matter? We only need min available; adjacency iteration not impact if indegree counts unique. If adjacency set, decrement indegree okay. Need maybe deterministic? Yes.
+
+Algorithm:
+def topological_order(nodes, edges):
+    node_set = set(nodes)
+    # maybe preserve input nodes list for initial sorted
+    adj = {node: set() for node in nodes}
+    indeg = {node: 0 for node in nodes}
+    for before, after in edges:
+        if before not in node_set or after not in node_set:
+            raise ValueError(...)
+        if after not in adj[before]:
+            adj[before].add(after)
+            indeg[after] +=

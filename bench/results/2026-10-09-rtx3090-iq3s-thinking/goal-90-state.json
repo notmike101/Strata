@@ -3,17 +3,17 @@
   "target_tps": 90,
   "metric": "server_decode_tps",
   "contract": "goal-90-contract.md",
-  "current": "C056 original-workload ABBA90.05/88.00 passes paired prompt/E2E; Q015 completed coding5/5. Full goal remains unqualified.",
+  "current": "C056 selected-coding streaming-miss comparison closed:92.3/90.5 decode with prompt/E2E non-degradation over all15runs/cell. Original TTL and Q015 proofs retained; full goal remains unqualified.",
   "next": [
-    "C056 selected-coding512-token streaming-miss matrix using --goal-coding, both workload orders.",
-    "C056 nonstream/cache-hit confirmations, tools/vision/reasoning/cancellation/mixed history and near-limit context/memory before promotion."
+    "C056 stream exact-repeat cache-hit matrix, with opposite-order fresh confirmations and matched controls.",
+    "C056 nonstream miss/hit matrix, then remaining tools/vision/reasoning/cancellation/mixed-history/near-limit checks."
   ],
   "promoted": "The previously qualified format-gather engine with IQ2_S gather disabled and adaptive lag2; no changes this turn.",
   "stopping_rule": "Leave goal active until all fixed qualification cells pass. No benchmark model resident at handoff.",
   "quality": "C056 Q015:5/5 natural-stop answers,72tests each, unchanged corrected-v2 checker and approved32768cap. Full real-use matrix remains pending.",
-  "last_checkpoint": "E215",
-  "resume_command": "No model resident. Stay on perf/rtx3090-thinking-80. Reuse engine/strata-cuda133-prefix-preserve.exe cc85c6c7 and R119 config; use run-c020-arm.py --goal-coding for the next matrix. Check status and live inventory first.",
-  "safety": "All seven arms cleaned up; production3457fdfe restored. Q015 floors passed. IdleGPU457MiB/0percent; no inference/profiler process.",
+  "last_checkpoint": "E224",
+  "resume_command": "No model resident. Stay on perf/rtx3090-thinking-80. Reuse cc85c6c7 engine and R119 config. Next use run-c020-arm.py --goal-coding --cache-hits; do not pool hit-interleaved misses into the closed pure-miss matrix.",
+  "safety": "R122-R127 complete with exact cleanup and production3457fdfe restored;16GiB floors pass. No engine/launcher change.",
   "goal_tool_status_at_entry": "active, verified get_goal",
   "target_short_tps": 90,
   "target_longer_tps": 85,
@@ -37,5 +37,21 @@
     "quality": "Q014 5/5 corrected v2; original v1 4/5 preserved",
     "repetitions_per_cell": 10
   },
-  "quality_checker_revision": "v2: standard TypeError restored, objective cases unchanged"
+  "quality_checker_revision": "v2: standard TypeError restored, objective cases unchanged",
+  "c056": {
+    "status": "experimental; full qualification pending",
+    "engine_sha256": "cc85c6c787beed24c113a3a5c7fe7bb376bd07f04bc48f3e58264dec701b3c91",
+    "original_ttl_decode_tps": [
+      90.05,
+      88.0
+    ],
+    "original_repetitions_per_cell": 10,
+    "selected_coding_decode_tps": [
+      92.3,
+      90.5
+    ],
+    "selected_repetitions_per_cell": 15,
+    "quality": "Q0155/5,72cases per answer, natural stops under approved32768cap",
+    "next_missing": "stream/nonstream cache-hit and nonstream-miss, real-use and near-limit gates"
+  }
 }

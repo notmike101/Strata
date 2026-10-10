@@ -1,0 +1,20 @@
+We need answer user wants code only: complete function in Python code block. Need implement topological_order(nodes, edges). Requirements: nodes list unique strings, edges list of (before, after) pairs. Return lexicographically smallest topological ordering, include isolated nodes, ignore duplicate edges. Raise ValueError for edge endpoint absent from nodes or cycle. Do not mutate inputs. No imports. Return only complete function in Python code block.
+
+Need think carefully. Lexicographically smallest topological ordering. Nodes are strings, ordering lexicographic by string. Need Kahn's algorithm with min-heap? No imports allowed. Could use list and pick min each step. Complexity maybe okay. Need not mutate inputs: avoid modifying nodes, edges. Use local copies/structures.
+
+Potential edge cases: nodes empty returns []? If edges empty and nodes present sorted list? Kahn can initialize indegrees 0 and pick min among available. For lexicographically smallest topological order, repeatedly choose lexicographically smallest among nodes with indegree 0. Need ensure duplicates ignored: when processing duplicate edge (a,b), should not count twice. Could use set of normalized pairs, but sets mutable? no imports, built-in set ok. Need not mutate edges: iterate over edges, create set.
+
+Endpoint absent: if before not in node_set or after not in node_set: ValueError. Self-loop? Cycle. Self edge a,a should cause cycle? Edge endpoint in nodes, duplicate ignore, indegree not incremented? If add to set and count indegree, self loop causes indegree>0 and no sources -> ValueError. Good.
+
+But careful: if duplicate edges and self-loop? duplicate set handles. If invalid edge with self-loop? ValueError cycle. If before == after.
+
+Need no imports. Need implement. Could use adjacency dict and indegree dict.
+
+Input nodes unique strings, but don't rely? Need not mutate. If nodes duplicates? unique per spec. If edges non-list? maybe iterable. Do not mutate edges: iterating ok. If edges list of tuples maybe not mutate. Need avoid modifying input nodes if use list? Use local list.
+
+Algorithm:
+def topological_order(nodes, edges):
+    # local node_set
+    node_set = set(nodes)
+    adj = {node: [] for node in nodes} # careful if nodes is iterator? nodes list per spec. But if nodes consumed? not issue. But if nodes is generator? spec list. Could do list(nodes) local.
+   

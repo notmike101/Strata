@@ -1,0 +1,16 @@
+We need answer user wants implement function in Python code block only? Need produce final with complete function in Python code block. Need think through requirements.
+
+Task: Implement topological_order(nodes, edges) in Python. nodes list of unique strings; edges list of (before, after) pairs. Return lexicographically smallest topological ordering, include isolated nodes, ignore duplicate edges. Raise ValueError for edge endpoint absent from nodes or a cycle. Do not mutate either input. Use no imports. Return only complete function in Python code block.
+
+Need design. Topological ordering lexicographically smallest among all valid orderings. Typical Kahn with min-heap. No imports allowed. Could implement heap manually or use sorted list? No imports means no heapq. Could use sorted selection each time O(N^2) fine. Or implement simple min extraction using min available each step. But need ignore duplicate edges. Need not mutate inputs. Need validate endpoints absent. Need raise ValueError for cycle. Need lexicographically smallest topological order: Kahn's algorithm choosing smallest available node at each step. Use sets to dedupe edges and indegrees. Must avoid mutating inputs; if edges is list, iteration okay. nodes unique but maybe we convert to set? Need maintain set not mutate input? Copy.
+
+Potential subtlety: edges with duplicate endpoints ignored. For cycle, ValueError. For invalid endpoint, ValueError. Need ensure nodes unique? Input says unique strings. We can assume? Could robustly handle duplicates? If nodes has duplicates? Could convert set losing duplicates. But maybe okay? Better to detect duplicates? Problem says unique; no need. Do not mutate inputs: if we do nodes_copy = list(nodes) doesn't mutate. Use set(nodes). If nodes contains duplicates, set changes but no mutation. Lexicographically smallest with nodes set. If duplicate nodes input? Topological ordering should be unique strings? We can ignore duplicates maybe. But don't need.
+
+Need no imports. If using tuple destructuring in edges okay. Need edges may be iterable. If edges is generator? Not specified list but edges is list. But if generator, iterating once okay; but if we need two passes? Could build adjacency and indegree in one pass. No mutation.
+
+Algorithm:
+def topological_order(nodes, edges):
+    node_set = set(nodes)
+    # Maybe check duplicate edges and self loops? Self-loop is cycle if edge (x,x).
+    adjacency = {node: set() for node in node_set}
+   

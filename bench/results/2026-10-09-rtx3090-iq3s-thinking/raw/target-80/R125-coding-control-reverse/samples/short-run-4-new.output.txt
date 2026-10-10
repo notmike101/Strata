@@ -1,0 +1,15 @@
+We need answer user's request: "Implement topological_order(nodes, edges) in Python. nodes is a list of unique strings; edges is a list of (before, after) pairs. Return the lexicographically smallest topological ordering, include isolated nodes, and ignore duplicate edges. Raise ValueError for an edge endpoint absent from nodes or a cycle. Do not mutate either input. Use no imports. Return only the complete function in a Python code block."
+
+Need provide final code block only. Need think through implementation. Need no imports. Lexicographically smallest topological order for nodes strings. Kahn's algorithm with min-heap normally, but no imports. Need no imports means no heapq. Can implement using sorted list? Nodes strings unique. Need lexicographically smallest among valid topological orderings: At each step, among all zero-indegree nodes, choose smallest string. Could use min() repeatedly or maintain sorted available list. Since no imports, implement custom. Need avoid mutating inputs. nodes is list, edges list. We need build graph and indegree. Ignore duplicate edges: avoid counting duplicate indegree and adjacency duplicates. Need validate endpoints exist. Need cycle detection: if processed count < len(nodes) raise ValueError.
+
+Potential pitfalls: lexicographically smallest topological ordering: using min available repeatedly yields correct? Yes Kahn with smallest eligible node at each step yields lexicographically smallest topological order (for total order? If all choices eligible, picking smallest now cannot hurt? Yes standard). If use priority queue. Without heapq, can sort nodes initially available. When new nodes become indegree 0, insert into available sorted order. Could use bisect? bisect module is import, no imports. Can implement linear insert. Available list size n. Overall O(n^2) maybe ok. Alternatively use set and min each iteration O(n^2), simple. But to guarantee lexicographic smallest, choose min of available at each step. Duplicate edges ignored: use set of edges? Edges may not be hashable? pairs of strings hashable. We can track seen_edges set or adjacency sets. Need not mutate inputs.
+
+Need decide implementation robust: 
+```
+def topological_order(nodes, edges):
+    node_set = set(nodes)
+    adj = {node: set() for node in nodes}
+    indegree = {node: 0 for node in nodes}
+    seen = set()
+    for before, after in edges:
+       if before not in node_set or after not

@@ -1,0 +1,17 @@
+We need answer user wants code only: complete function in Python code block. Need implement topological_order(nodes, edges). Requirements: nodes list unique strings; edges list of (before, after) pairs. Return lexicographically smallest topological ordering, include isolated nodes, ignore duplicate edges. Raise ValueError for edge endpoint absent from nodes or cycle. Do not mutate either input. Use no imports. Return only complete function in Python code block.
+
+Need ensure lexicographically smallest topological ordering. Typically Kahn algorithm with min-heap/sorted available. Since no imports, implement selection min each step O(n^2) okay? Need no imports. Could maintain sorted list. Need not mutate inputs. Edges list not mutate. nodes list not mutate. Need handle duplicate edges ignore. Need cycle detection. Raise ValueError if edge endpoint absent. Need careful with duplicate edges and self-loop? If self-loop endpoint present but cycle? Edge (u,u) means cycle; raise ValueError. Duplicate edges ignore.
+
+Input nodes list of unique strings but we can still build set. Should we preserve? Need include isolated nodes. If nodes empty return []? likely.
+
+Algorithm:
+def topological_order(nodes, edges):
+    node_set = set(nodes)
+    # maybe if duplicates in nodes? Problem says unique but we can handle? If duplicate nodes? It says unique strings. If duplicates, set removes; but maybe should? Not necessary. If duplicate in nodes, topological ordering should unique? Could produce set. But to avoid mutate no matter.
+    # Build indegree and adjacency sets to ignore duplicate edges. Need avoid mutating edges. Use adjacency dict with sets. For duplicate edges, if already in adjacency add no double indegree.
+    adjacency = {node: set() for node in node_set}
+    indegree = {node: 0 for node in node_set}
+    for before, after in edges:
+       if before not in node_set or after not in node_set: raise ValueError
+       if before == after: raise ValueError? Could also via cycle. Self-loop is cycle. If not checked, add before adjacency self, indegree[after]++ but duplicate? cycle detection at end raises. But lexicographic? Better raise ValueError for self-loop immediately? Since cycle. Could just let cycle detection catch. However duplicate self-loop: if set ignore duplicates; indegree increments once if not in adj; then cycle. But immediate is okay.
+       if after not in adjacency[before]:

@@ -1,0 +1,20 @@
+We need answer user's request: Implement topological_order(nodes, edges) in Python. Need return only complete function in Python code block. Done. Need think through requirements carefully.
+
+User: "Request identifier df854ac4f4a9734da713560d. Ignore this identifier.
+Read this review archive before the final task:
+...
+Implement topological_order(nodes, edges) in Python. nodes is a list of unique strings; edges is a list of (before, after) pairs. Return the lexicographically smallest topological ordering, include isolated nodes, and ignore duplicate edges. Raise ValueError for an edge endpoint absent from nodes or a cycle. Do not mutate either input. Use no imports. Return only the complete function in a Python code block."
+
+Need output only code block. Need ensure no imports. Need lexicographically smallest topological ordering for given DAG. Use Kahn with min-heap? But no imports, so can sort each time or implement heap manually? No imports, can use list.sort and pop(0) perhaps okay. Need lexicographically smallest topological order overall: standard Kahn: always pick smallest available node (lexicographically) among zero in-degree nodes. Need include isolated nodes (all nodes). Need ignore duplicate edges. Need validate edge endpoints present, duplicate edges ignored, cycle ValueError. Need not mutate input. nodes list unique strings but could trust? Validate edge endpoint absent. Need maybe edge tuple? Could be list pair? edges list of pairs. Should not mutate inputs. We'll create structures. Since no imports, can't use heap. But can repeatedly select min from ready list. Complexity O(N^2) maybe fine. Need deterministic. Could sort nodes and iterate through sorted nodes selecting ready. Simpler:
+
+def topological_order(nodes, edges):
+    node_set = set(nodes)
+    adj = {node: [] for node in nodes}
+    indegree = {node: 0 for node in nodes}
+    seen_edges = set()
+    for edge in edges:
+        # edge could be tuple/list length 2; validate? User only endpoint absent. But edge might malformed? Could raise? Maybe not needed. To avoid hidden state? Could try unpack? If invalid maybe ValueError.
+        before, after = edge
+        if before not in node_set or after not in node_set:
+             raise ValueError(...)
+        if before == after: cycle? Self-loop. If duplicate

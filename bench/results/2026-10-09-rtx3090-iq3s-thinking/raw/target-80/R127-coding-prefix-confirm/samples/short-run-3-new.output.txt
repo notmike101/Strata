@@ -1,0 +1,30 @@
+We need answer user wants code only: complete function in Python code block. Need implement topological_order(nodes, edges). Requirements: nodes list unique strings, edges list of (before, after) pairs. Return lexicographically smallest topological ordering, include isolated nodes, ignore duplicate edges. Raise ValueError for edge endpoint absent from nodes or cycle. Do not mutate inputs. No imports. Return only complete function in Python code block.
+
+Need think carefully. Lexicographically smallest topological ordering. Nodes are strings, ordering lexicographic by string. Need Kahn's algorithm with min-heap? No imports allowed. Could use list and pick min each step. Complexity maybe okay. Need not mutate inputs: avoid modifying nodes, edges, tuples? We create copies structures. Need ignore duplicate edges: use set of edges or adjacency sets. Need raise ValueError for missing endpoint or cycle. Need preserve input? Creating sets/dicts okay.
+
+Implementation options:
+
+def topological_order(nodes, edges):
+    if not isinstance? not required.
+    node_set = set(nodes)
+    # But need maybe check unique? input says unique, no need.
+    indegree = {node:0 for node in nodes}
+    adjacency = {node:set() for node in nodes}
+    edge_seen=set()
+    for edge in edges:
+       # Need handle invalid tuple? Maybe unpack. If edge is not length 2 raises? Could let unpack error, but maybe ValueError? Requirement only for endpoint absent or cycle. Better robust:
+       try:
+          before, after = edge
+       except (TypeError, ValueError):
+          raise ValueError("edges must be pairs")? But if edge not iterable? It may be okay. But maybe tests only valid pairs. We can use for before, after in edges; if edge invalid it throws TypeError. But requirement no mutate. We can do:
+       try:
+           before, after = edge
+       except (TypeError, ValueError) as exc:
+           raise ValueError("edges must be two-element pairs") from exc
+       if before not in node_set or after not in node_set: raise ValueError
+       pair=(before, after)
+       if pair not in edge_seen:
+          edge_seen.add(pair)
+          adjacency[before].add(after)
+          indegree[after]+=1
+    # Kahn with lexicographically smallest: pick min available at each step. Need efficient: available = [n for n in nodes if indegree[n

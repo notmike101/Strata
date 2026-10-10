@@ -4132,3 +4132,146 @@ Next: use the guarded supervisor's --goal-coding selector for C056 selected-codi
 
 
 Publication check: the first staged whitespace check flagged unified-diff blank-context lines and diagnostic helper blank EOF lines. Archived patches are now losslessly encoded as JSON under *.patch.json (decode the patch field to reconstruct the unified diff); helper EOF formatting is normalized. No benchmark result or executable code changed.
+
+
+## E216 / C056 selected-coding matrix and network-description correction
+
+Previous turn was progress: C056 original-workload ABBA, Q015 five-answer quality and commit c2f6195d were completed and pushed. At this entry, tracked checkout is clean, candidate SHA256cc85c6c787beed24c113a3a5c7fe7bb376bd07f04bc48f3e58264dec701b3c91 and production configuration3457fdfe match, no inference/profiler process is resident, idleGPU457MiB/0percent. Fresh upstream check: mainfb58e0dbc8399662c0e47c76578c6e878b14f6cf, latest releasev0.1.41; no newer update to apply. Goal remains active.
+
+Correction: E213 described client E2E as using a loopback endpoint. Inspection of both frozen clients and their identity manifests shows they actually connect from this PC to its LAN IP. No remote-device network latency is measured. The client timing boundaries, payloads, raw data and all numeric results are unchanged. This correction supersedes the loopback wording; original historical entry is preserved.
+
+Next bounded matrix: R122control/R123candidate short-first, R124candidate/R125control longer-first. Same C056 binary/libraries and configurations copied from R118/R119; only STRATA_PREFILL_STAGE_PREFIX0/1 differs. Use the existing --goal-coding client, fixed random-selected topological_order fixture in short and approximately3K forms, five measured seeds101-105 plus one excluded warmup per workload,512generated tokens, streaming and zero prompt-cache reuse. Preserve all exact request bytes. Compare all ten qualifying measured values per cell with ordinary medians; no deletion or replacement of slow runs. Keep sampling, context262144, INT8KV32768 resident, compatible CPUF16vision, MTP and safety floors unchanged. Full supervisor cleanup and production restoration after each arm. No additional optimization or launcher change during this comparison.
+
+This supplies the selected-coding speed requirement; Q015 already supplies completed-answer tests for the same candidate but cannot replace these512-token measurements. Original-workload R118-R121 results remain separate. After this matrix, stream/nonstream cache-hit and nonstream-miss confirmations plus tools/vision/remote-reasoning/cancellation/mixed-history/near-limit gates are still required. Numeric or quality failure leaves the goal active and prevents promotion.
+
+
+## E217 / R122-coding-control frozen coding matrix arm
+
+longer/stream/new: decode[87.8, 90.3, 92.4, 93.0, 92.0] => ordinary median92.0; prompt510.3, E2E43.707821, stream43.711344, TTFT6.172152s.
+
+short/stream/new: decode[92.9, 96.6, 94.1, 90.2, 88.3] => ordinary median92.9; prompt210.1, E2E81.135157, stream81.155707, TTFT0.816787s.
+
+All12requests512tokens/cachemiss, one warmup and5measured per workload; every request matches frozen profile. Exact fixture16fafa0ea4cd5f5a7e535c7df090c9344d11e0909a35bfde0b476ecdc4b743e5, C056 enginecc85c6c787beed24c113a3a5c7fe7bb376bd07f04bc48f3e58264dec701b3c91. HC1/accepted1/conditional64/minfresh1025, model/context/KV/vision unchanged. No comparison against historical B011 claimed. Partial reasoning is not a completed coding answer. Q015 completed-answer quality remains separate; full matrix still required.
+
+Minimum physical62358753280 and commit41621708800bytes,16GiB guard passed. Exact cleanup verified, production config restored by supervisor.
+
+Next: Run R123 with only prefix staging enabled, then complete the reverse-order R124/R125 pair.
+
+
+## E218 / R123-coding-prefix frozen coding matrix arm
+
+longer/stream/new: decode[87.3, 93.8, 92.8, 91.1, 88.4] => ordinary median91.1; prompt514.0, E2E43.609018, stream43.612254, TTFT6.130268s.
+
+short/stream/new: decode[92.3, 91.9, 90.0, 98.2, 87.2] => ordinary median91.9; prompt222.1, E2E81.032552, stream81.049504, TTFT0.777003s.
+
+All12requests512tokens/cachemiss, one warmup and5measured per workload; every request matches frozen profile. Exact fixture16fafa0ea4cd5f5a7e535c7df090c9344d11e0909a35bfde0b476ecdc4b743e5, C056 enginecc85c6c787beed24c113a3a5c7fe7bb376bd07f04bc48f3e58264dec701b3c91. HC1/accepted1/conditional64/minfresh1025, model/context/KV/vision unchanged. No comparison against historical B011 claimed. Partial reasoning is not a completed coding answer. Q015 completed-answer quality remains separate; full matrix still required.
+
+Minimum physical62447947776 and commit41661689856bytes,16GiB guard passed. Exact cleanup verified, production config restored by supervisor.
+
+Next: Complete the predeclared reverse-order candidate R124 and control R125; retain all runs in pooled medians.
+
+
+## E219 / R124-coding-prefix-reverse frozen coding matrix arm
+
+longer/stream/new: decode[81.8, 88.6, 90.2, 90.5, 90.6] => ordinary median90.2; prompt512.1, E2E43.415884, stream43.419378, TTFT6.151300s.
+
+short/stream/new: decode[93.8, 93.9, 94.1, 92.1, 91.7] => ordinary median93.8; prompt213.7, E2E81.841211, stream81.867415, TTFT0.812772s.
+
+All12requests512tokens/cachemiss, one warmup and5measured per workload; every request matches frozen profile. Exact fixture16fafa0ea4cd5f5a7e535c7df090c9344d11e0909a35bfde0b476ecdc4b743e5, C056 enginecc85c6c787beed24c113a3a5c7fe7bb376bd07f04bc48f3e58264dec701b3c91. HC1/accepted1/conditional64/minfresh1025, model/context/KV/vision unchanged. No comparison against historical B011 claimed. Partial reasoning is not a completed coding answer. Q015 completed-answer quality remains separate; full matrix still required.
+
+Minimum physical62528376832 and commit41760288768bytes,16GiB guard passed. Exact cleanup verified, production config restored by supervisor.
+
+Next: Run matching reverse-order control R125, then pool every run in the declared four-arm matrix.
+
+
+## E220 / R125-coding-control-reverse frozen coding matrix arm
+
+longer/stream/new: decode[81.8, 88.3, 90.3, 90.2, 90.3] => ordinary median90.2; prompt510.1, E2E43.290186, stream43.293500, TTFT6.169642s.
+
+short/stream/new: decode[93.9, 94.2, 91.7, 91.6, 91.1] => ordinary median91.7; prompt209.5, E2E80.206426, stream80.222139, TTFT0.818423s.
+
+All12requests512tokens/cachemiss, one warmup and5measured per workload; every request matches frozen profile. Exact fixture16fafa0ea4cd5f5a7e535c7df090c9344d11e0909a35bfde0b476ecdc4b743e5, C056 enginecc85c6c787beed24c113a3a5c7fe7bb376bd07f04bc48f3e58264dec701b3c91. HC1/accepted1/conditional64/minfresh1025, model/context/KV/vision unchanged. No comparison against historical B011 claimed. Partial reasoning is not a completed coding answer. Q015 completed-answer quality remains separate; full matrix still required.
+
+Minimum physical62528991232 and commit41746485248bytes,16GiB guard passed. Exact cleanup verified, production config restored by supervisor.
+
+Next: Pool all four declared arms and verify request bytes, medians, target thresholds and no-degradation gates.
+
+
+## E221 / selected-coding ABBA and bounded ambiguity repeat
+
+The predeclared R122control/R123candidate short-first and R124candidate/R125control longer-first matrix completed: same binary/libraries, exact fixture, configs differing only by prefix-stage0/1, all12payload files byte-identical across arms. Every response512tokens with zero cache reuse; one excluded warmup and five measured seeds101-105 per cell per arm. All forty measured runs retained, including the slow81.8 values. Ordinary ten-run medians:
+
+| Workload | Metric | Control | Candidate | Change |
+|---|---|---:|---:|---:|
+| short/stream/new | server_decode_tps | 92.30000 | 92.20000 | -0.108% |
+| short/stream/new | prompt_tps | 209.80000 | 217.90000 | +3.861% |
+| short/stream/new | request_e2e_tps | 80.67079 | 81.11180 | +0.547% |
+| short/stream/new | stream_total_tps | 80.68892 | 81.12850 | +0.545% |
+| short/stream/new | ttft_seconds | 0.81828 | 0.80017 | -2.213% |
+| short/stream/new | request_seconds | 6.34699 | 6.31228 | -0.547% |
+| longer/stream/new | server_decode_tps | 90.30000 | 90.35000 | +0.055% |
+| longer/stream/new | prompt_tps | 510.20000 | 513.20000 | +0.588% |
+| longer/stream/new | request_e2e_tps | 43.29510 | 43.42237 | +0.294% |
+| longer/stream/new | stream_total_tps | 43.29902 | 43.42572 | +0.293% |
+| longer/stream/new | ttft_seconds | 6.16989 | 6.13393 | -0.583% |
+| longer/stream/new | request_seconds | 11.82582 | 11.79116 | -0.293% |
+
+Both named decode targets are met, as are the measured prompt and client-E2E comparisons. However short server decode is92.20candidate versus92.30control, a0.10tok/s decrease, not an improvement. The first pair also had small E2E decreases, while the pooled E2E medians improved. Preserve this ambiguity and do not turn it into a general no-degradation claim. Decode ranges overlap widely; no statistical certainty is asserted.
+
+Bounded next action, declared before more inference: one additional unchanged matched pair, R126control then R127candidate, both short-first, same frozen payloads/seeds. This repeats the order that showed the first-pair loss. Include every earlier and additional measured run in final ordinary fifteen-run medians per configuration/cell. Close this comparison after this pair; do not keep rerunning it until favorable. No seed exclusion, changing prompt, sampling, context, allowance or quality checker. If uncertainty or a regression remains, retain it as unproven and investigate a new mechanism instead of promoting on a selected subset.
+
+Q0155/5 completed-answer quality and original TTL matrix remain separate. Stream/nonstream cache-hit and nonstream-miss confirmations plus real-use/near-limit gates are still missing for C056. Full goal remains active and unqualified. All four arms passed16GiB physical/commit guards and exact cleanup; production configuration restored after each. No launcher changes.
+
+
+## E222 / R126-coding-control-confirm frozen coding matrix arm
+
+longer/stream/new: decode[88.5, 90.4, 89.1, 90.8, 93.0] => ordinary median90.4; prompt509.1, E2E43.296641, stream43.299925, TTFT6.186290s.
+
+short/stream/new: decode[93.0, 91.3, 90.1, 91.8, 94.3] => ordinary median91.8; prompt204.8, E2E79.816982, stream79.828765, TTFT0.834416s.
+
+All12requests512tokens/cachemiss, one warmup and5measured per workload; every request matches frozen profile. Exact fixture16fafa0ea4cd5f5a7e535c7df090c9344d11e0909a35bfde0b476ecdc4b743e5, C056 enginecc85c6c787beed24c113a3a5c7fe7bb376bd07f04bc48f3e58264dec701b3c91. HC1/accepted1/conditional64/minfresh1025, model/context/KV/vision unchanged. No comparison against historical B011 claimed. Partial reasoning is not a completed coding answer. Q015 completed-answer quality remains separate; full matrix still required.
+
+Minimum physical62438969344 and commit41634820096bytes,16GiB guard passed. Exact cleanup verified, production config restored by supervisor.
+
+Next: Run the single predeclared matching R127 candidate, then close the comparison using all fifteen measured runs per configuration/cell.
+
+
+## E223 / R127-coding-prefix-confirm frozen coding matrix arm
+
+longer/stream/new: decode[85.8, 90.3, 92.2, 91.1, 90.5] => ordinary median90.5; prompt513.3, E2E43.464812, stream43.469256, TTFT6.133021s.
+
+short/stream/new: decode[93.3, 92.0, 95.4, 88.8, 95.5] => ordinary median93.3; prompt216.6, E2E81.658357, stream81.680459, TTFT0.789495s.
+
+All12requests512tokens/cachemiss, one warmup and5measured per workload; every request matches frozen profile. Exact fixture16fafa0ea4cd5f5a7e535c7df090c9344d11e0909a35bfde0b476ecdc4b743e5, C056 enginecc85c6c787beed24c113a3a5c7fe7bb376bd07f04bc48f3e58264dec701b3c91. HC1/accepted1/conditional64/minfresh1025, model/context/KV/vision unchanged. No comparison against historical B011 claimed. Partial reasoning is not a completed coding answer. Q015 completed-answer quality remains separate; full matrix still required.
+
+Minimum physical62495199232 and commit41740632064bytes,16GiB guard passed. Exact cleanup verified, production config restored by supervisor.
+
+Next: Close the comparison with all fifteen measured values per cell and retain any remaining regression or uncertainty; no more reruns of this pair.
+
+
+## E224 / C056 selected-coding comparison closed with all fifteen runs
+
+The single additional pair declared in E221 completed. R126control and R127candidate both ran short-first, matching the order that showed the initial small loss. No more repeats of this comparison. Final ordinary medians include all fifteen measured values per configuration/cell from R122-R127, not just the latest pair. All six arms share the exact binary, loaded libraries and fixture; all twelve request files per arm are byte-identical. Every measured and warmup response has512tokens with zero cache reuse. Sixty measured requests and twelve excluded warmups total. Original four-arm medians and the small short-decode decrease remain in first-comparison.md and c056-coding-pooled.json.
+
+| Workload | Metric | Control | Candidate | Change |
+|---|---|---:|---:|---:|
+| short/stream/new | server_decode_tps | 91.80000 | 92.30000 | +0.545% |
+| short/stream/new | prompt_tps | 208.80000 | 216.60000 | +3.736% |
+| short/stream/new | request_e2e_tps | 80.19192 | 81.19105 | +1.246% |
+| short/stream/new | stream_total_tps | 80.21467 | 81.20750 | +1.238% |
+| short/stream/new | ttft_seconds | 0.82610 | 0.79745 | -3.469% |
+| short/stream/new | request_seconds | 6.38468 | 6.30611 | -1.231% |
+| longer/stream/new | server_decode_tps | 90.30000 | 90.50000 | +0.221% |
+| longer/stream/new | prompt_tps | 509.90000 | 513.20000 | +0.647% |
+| longer/stream/new | request_e2e_tps | 43.29664 | 43.42885 | +0.305% |
+| longer/stream/new | stream_total_tps | 43.29993 | 43.43206 | +0.305% |
+| longer/stream/new | ttft_seconds | 6.17425 | 6.13374 | -0.656% |
+| longer/stream/new | request_seconds | 11.82540 | 11.78940 | -0.304% |
+
+Both90short/85approximately3K targets pass. Final short decode92.3candidate versus91.8control and longer90.5versus90.3 are non-decreasing observed medians; this does not establish statistical certainty or a per-seed speed guarantee. Prompt216.6/513.2versus208.8/509.9 and client E2E81.19105/43.42885versus80.19192/43.29664 also pass the measured non-degradation gate. Candidate fresh-process medians were91.9/91.1,93.8/90.2 and93.3/90.5, each meeting the respective target. All raw ranges and MTP acceptance counts remain published. Server decode, client E2E, stream-total and TTFT are separate metrics. The client runs on this PC through its LAN IP; no remote-device network latency was measured.
+
+This closes only the selected-coding streaming cache-miss requirement. Original TTL streaming-miss proof remains90.05/88.00 over ten runs/cell in its separate comparison. Q0155/5 natural-stop answers with72checks each remains the completed-answer quality proof at the approved32768 allowance. Thinking sampler,262144 configured context, IQ3_S quant, INT8 KV, CPUF16 vision, MTP and expert profile remained fixed. No quality-test substitution, changed allowance, disabled gate, quant reduction or context reduction.
+
+Each of the six arms passed the independent16GiB physical/commit floors, full launcher/server/text/vision cleanup and production configuration restoration. No new engine or launcher edit in this turn. The existing candidate is engine/strata-cuda133-prefix-preserve.exe SHA256cc85c6c787beed24c113a3a5c7fe7bb376bd07f04bc48f3e58264dec701b3c91. No promotion and no benchmark model retained at this checkpoint.
+
+Next required work: selected-coding stream exact-repeat cache-hit and nonstream miss/hit cells, each with fresh-process confirmations in opposite workload order and matched controls. Keep misses from hit-interleaved arms separate from this closed pure-miss comparison because the expert-cache history differs. Record actual positive prompt reuse for hits. Then complete tools, vision, remote reasoning levels, natural-stop/exact-output, cancellation, mixed history, idle/cleanup and near-limit recall/memory gates on this exact candidate. Preserve the earlier258901input2.6decode observation; do not imply90tok/s at full occupied context. Full goal remains active and unqualified.

@@ -1,0 +1,16 @@
+We need answer to user: implement topological_order in Python, only complete function in code block, no imports. Need analyze requirements.
+
+Function topological_order(nodes, edges). nodes list unique strings; edges list of (before, after) pairs. Return lexicographically smallest topological ordering, include isolated nodes, ignore duplicate edges. Raise ValueError for edge endpoint absent from nodes or a cycle. Do not mutate either input. Use no imports. Return only complete function in Python code block.
+
+Need produce final code block only likely.
+
+Algorithm: need lexicographically smallest topological order. Use Kahn's algorithm with min-heap, but no imports. Need implement heap ourselves? Could sort each time? Need O((n+m) log n) but no imports. Can implement manual min-heap with list. Need not mutate inputs: need copy? We don't need mutate nodes/edges if create sets/dicts/lists. Ensure edges iteration doesn't modify original. Use nodes as given. unique but may not sorted. Lexicographic smallest: sort available candidates by string. Need choose smallest available at each step. Kahn: indegree dict initialized 0. adjacency as dict of list unique? Need ignore duplicate edges. Could use set for neighbors per node to dedup. But we must not import. Use built-in set. nodes unique. Need validate endpoints. For each edge: if before not in node_set or after not in node_set raise ValueError. If before==after? self-loop cycle? Kahn detects because indegree. But duplicate self-loop ignored; still cycle. Need not mutate inputs.
+
+To deduplicate edges without mutating: adjacency = {node: set() for node in nodes}. indegree = {node:0}. For edge in edges: validate; if after not in adjacency[before]: add, indegree[after]+=1. But careful: if duplicate edge with self-loop? If before==after, adjacency[before] doesn't contain before initially, add and indegree++. Duplicate ignored. Fine.
+
+Then available nodes with indegree 0. Need maintain sorted/heap. Could simply do:
+available = sorted([n for n in nodes if indegree[n]==0])
+result=[]
+while available:
+  # get smallest: available.pop(0) is O(n). Could use bisect? no imports. Could implement heap.
+Need lexicographically smallest topological ordering. If we pop smallest available and add neighbors, need reinsert newly available maintaining sorted order. Simple approach

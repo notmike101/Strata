@@ -1,0 +1,13 @@
+We need answer user wants implement topological_order in Python. Need provide only complete function in Python code block. Done. Need think thoroughly. Problem: nodes list unique strings, edges list pairs. Return lexicographically smallest topological ordering, include isolated nodes, ignore duplicate edges. Raise ValueError for edge endpoint absent from nodes or a cycle. Do not mutate either input. Use no imports. Return only complete function in a Python code block.
+
+Need produce code. Need ensure lexicographically smallest topological ordering (lexicographic sequence of node names) among all valid topological orders. Standard Kahn using min-heap gives lexicographically smallest if nodes comparable strings. No imports allowed, so implement min-heap manually or use list and pick min each step. Since no imports, can use sorted? Yes builtins. Could use list of ready nodes and sort/pop(0), O(N^2) okay? Not specified. Need robust. Could implement heap manually using heapq? no imports, but heapq is import. Could implement a minimal binary heap or just maintain sorted available list. Simpler: no imports, use list ready_nodes, append new ready, then choose min via min(), remove by index. O(N^2) but fine for unknown constraints? Could implement heap for efficiency. Need no imports: implement local functions for min-heap using list. Or use built-in sorted? We can maintain ready as list and each iteration find min via min and remove. Deterministic. But if large, less efficient. Maybe implement simple heap.
+
+Need ignore duplicate edges. If duplicate edge (a,b), indegree should count once and adjacency unique. So use sets for outgoing and indegree counts. Input nodes list unique. Need not mutate input. Sets from input okay. Edges validation: if before not in node_set or after not in node_set raise ValueError. Also duplicate edges ignored: maybe if (a,b) already seen, don't increment indegree or add adj. Self-loop edge (a,a) should raise ValueError cycle? Since endpoint exists. Kahn: indegree self +1, never ready, remaining -> cycle. But if duplicate self ignored still indegree 1. cycle. Good.
+
+Lexicographically smallest topological ordering: Kahn with min available. Need consider if node names arbitrary strings; min uses lexicographic Unicode code point. Fine.
+
+Implementation options:
+
+def topological_order(nodes, edges):
+    node_set = set(nodes)
+    # Validate nodes unique? Problem says unique; maybe

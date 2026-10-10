@@ -1,0 +1,21 @@
+We need answer user's request: Implement topological_order(nodes, edges) in Python. Need return only complete function in Python code block. Done. Need think through requirements carefully.
+
+User: "Request identifier df854ac4f4a9734da713560d. Ignore this identifier.
+Read this review archive before the final task:
+...
+Implement topological_order(nodes, edges) in Python. nodes is a list of unique strings; edges is a list of (before, after) pairs. Return the lexicographically smallest topological ordering, include isolated nodes, and ignore duplicate edges. Raise ValueError for an edge endpoint absent from nodes or a cycle. Do not mutate either input. Use no imports. Return only the complete function in a Python code block."
+
+Need output only code block. Need ensure no imports. Need lexicographically smallest topological ordering for given DAG. Use Kahn with min-heap? But no imports, can implement heap? Could use sorting and heap? No imports, but could implement min-heap manually or simply repeatedly select min from available set/list. For efficiency maybe implement heapq via local? Can't import. Could implement own heap functions. Or since nodes unique strings, use sorted lists and heap arrays. Need not mutate inputs: don't mutate nodes or edges lists. Need avoid hidden state? deterministic. Need validate edge endpoints: before/after present in nodes. Duplicate edges ignored. Cycle raise ValueError.
+
+Need consider if nodes contains non-strings? Not necessary but strings unique. Edges list of pairs. We should copy or not mutate: don't mutate original lists. If iterating nodes and edges doesn't mutate. Need sets from input creates new. Use nodes_set = set(nodes), but if nodes non-iterable? Not specified. We can assume list. But if nodes has duplicates? says unique; don't need handle. But could if duplicates? Not specified. Return all nodes isolated. Lexicographically smallest topological ordering: choose smallest available node at each step. Need ensure deterministic with duplicate edges ignored.
+
+No imports means no collections.deque/heapq. Implement min heap using list.
+
+Implementation options:
+
+def topological_order(nodes, edges):
+    node_set = set(nodes)
+    indegree = {n:0 for n in node_set}
+    adjacency = {n: [] for n in node_set} # set to avoid duplicates?
+    for edge in edges:
+        try:

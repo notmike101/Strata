@@ -1,0 +1,12 @@
+We need answer user's request: "Implement topological_order(nodes, edges) in Python. nodes is a list of unique strings; edges is a list of (before, after) pairs. Return the lexicographically smallest topological ordering, include isolated nodes, and ignore duplicate edges. Raise ValueError for an edge endpoint absent from nodes or a cycle. Do not mutate either input. Use no imports. Return only the complete function in a Python code block."
+
+Need provide final code block only. Need think through implementation. Need no imports. Lexicographically smallest topological order for nodes strings. Kahn's algorithm with min-heap normally, but no imports. Need no imports means no heapq. Can implement using sorted list of available nodes and repeatedly pick min; O((V+E)*?) if scanning each iteration; acceptable? Need robust. Could implement custom min heap manually without imports. But maybe simpler sort available each time? Need ensure lexicographically smallest topological ordering: Kahn with choosing smallest available node at each step gives lexicographically smallest topological order among all topological sorts? Yes for standard Kahn, selecting minimal available at each step yields lexicographically smallest. Need proof? Not needed in code. But we just output function.
+
+Consider input nodes list of unique strings. edges list of pairs. Need do not mutate either input. Since nodes list not modified if create set/copy. edges iterate. Duplicate edges ignored. Need avoid duplicate edges affecting indegree. Could build adjacency sets and indegree dict. For duplicate edges, need ignore: if (u,v) in edge_set or already added adjacency? Use adjacency dict of sets to ensure duplicates ignored. For each edge: if u not in node_set or v not in node_set: raise ValueError. Also if self-loop? Edge (u,u) endpoint present, creates cycle. indegree increments; not added? If self-loop, add to adjacency? If ignore duplicate, indegree[u]+=1. Kahn will not process because indegree never zero. At end len result < len nodes => cycle -> raise ValueError.
+
+If duplicate edges: Use a set of edges or adjacency set to check. Since edges list may contain duplicates, if we simply adjacency.setdefault(u, set()).add(v), then indegree only increment if not in set before. Eg:
+adj = {node:set() for node in nodes}
+indeg = {node:0 for node in nodes}
+seen_edges=set()
+for pair in edges:
+  try u,v=pair?

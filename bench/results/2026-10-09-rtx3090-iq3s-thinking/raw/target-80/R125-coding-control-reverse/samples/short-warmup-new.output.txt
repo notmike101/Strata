@@ -1,0 +1,20 @@
+We need answer to user: implement topological_order in Python, only complete function in code block, no imports. Need analyze requirements.
+
+Function topological_order(nodes, edges). nodes list unique strings; edges list of (before, after) pairs. Return lexicographically smallest topological ordering, include isolated nodes, ignore duplicate edges. Raise ValueError for edge endpoint absent from nodes or a cycle. Do not mutate either input. Use no imports. Return only complete function in Python code block.
+
+Need produce final code block only likely.
+
+Algorithm: need lexicographically smallest topological order. Use Kahn's algorithm with min-heap, but no imports. Could implement heap manually or use sorted each time? Need O((n+m) log n?) no imports. Could implement heapq functions manually, but simpler use list and min? If n large? No constraints. But could implement binary heap for performance without imports. Need ignore duplicate edges. Need do not mutate inputs. Need validate endpoints, build graph sets to deduplicate edges.
+
+Potential approach:
+- Validate all nodes strings? not required maybe. Use set(nodes), but nodes list unique. We can create set for membership.
+- For edges, if before/after not in node_set: raise ValueError.
+- Use adjacency dict mapping node -> set of successors. Need deduplicate. Could initialize {node: set() for node in nodes}. For each edge: if b in after_set? add. Need avoid mutating input? reading okay.
+- indegree dict. For duplicate edges only count once; use adjacency sets to compute indegree after building: initialize indegree 0; for each succ set count. Or update only if new.
+- Kahn: available nodes with indegree 0. Need smallest lex order among available. Without heapq import, implement min_heap. Or can do repeatedly select min from available list: O(n^2). Could be acceptable but maybe better implement heap functions inline.
+
+Need no imports. We can define internal _heappush, _heappop inside function? That's okay. Or use simple sort of available list. Need lex smallest: at each step pick smallest available. Using heap.
+
+Potential subtleties:
+- duplicate edges ignore: using sets of neighbors per node. If there are multiple identical edges, only one indegree increment. Also if cycle detection: if len(order)!=len(nodes) raise ValueError.
+- Self-loop edge (a,a): endpoint present. Dedup? Add self edge, inde

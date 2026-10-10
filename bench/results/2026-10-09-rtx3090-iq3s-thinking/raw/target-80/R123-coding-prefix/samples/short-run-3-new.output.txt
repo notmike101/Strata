@@ -1,0 +1,16 @@
+We need answer user wants code only: implement topological_order in Python, no imports, complete function in Python code block. Need think through spec.
+
+We need produce only function in code block. Need ensure lexicographically smallest topological ordering among nodes unique strings. Edges pairs before, after. Include isolated nodes. Ignore duplicate edges. Raise ValueError for edge endpoint absent from nodes or cycle. Do not mutate either input. No imports. Need no imports: can't use heapq. Need implement min selection manually. Need be careful with duplicate edges: if same edge appears, indegree should count once and adjacency once. Need not mutate inputs: create copies / sets.
+
+Need lexicographically smallest topological order for DAG: Kahn's algorithm selecting smallest available node each time. Since nodes are strings, use sorted list of available and remove min. Need efficient enough? Could be small. Without imports. Could use list remove(0) after sorted initial available? For new nodes insert and keep sorted? Simpler: available = sorted(available); while available: v = available.pop(0); append; for each neighbor update indegree and if 0 insert into available. Then sort available maybe after each insertion? To maintain sorted with no imports, can use bisect? bisect import prohibited. Could use available.append(w); available.sort() each time, O(N^2 log N) okay? Or implement insert in sorted list. Need not mutate inputs. Could maintain available sorted and insert using while loop. Or just sort available after each insertion; fine unless huge but no constraints. Better implement insertion:
+
+def _insert_sorted(lst, x):
+    i=0
+    while i < len(lst) and lst[i] < x: i +=1
+    lst.insert(i,x)
+
+Need lexicographic compare strings. Fine.
+
+Alternative priority queue via list and sort each iteration. For lexicographically smallest, sort available each time or maintain. Use no imports.
+
+Need validate edges endpoints absent from nodes: if before not in node_set or after not in node_set raise ValueError. What if edge itself has before/after not hashable? nodes unique strings, edge tuple of (before, after) perhaps any. Use membership on set of nodes. If nodes list has unique strings; can trust. Need not mutate nodes list or edges list: create set from nodes; adjacency = {n: [] for n in nodes}; indegree = {n:0}. For edges iteration: if isinstance edge? Could be

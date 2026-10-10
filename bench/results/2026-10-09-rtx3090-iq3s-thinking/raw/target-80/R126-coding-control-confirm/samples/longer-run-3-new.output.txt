@@ -1,0 +1,23 @@
+We need answer user's request. Need produce final only complete function in Python code block. Need ensure no imports. Implement topological_order(nodes, edges). Nodes list unique strings; edges list pairs before, after. Return lexicographically smallest topological ordering, include isolated nodes, ignore duplicate edges. Raise ValueError for edge endpoint absent from nodes or a cycle. Do not mutate either input. Use no imports.
+
+Need think carefully about lexicographically smallest topological ordering. For nodes strings, lexicographic order default string comparison. Need algorithm. Usually Kahn's algorithm choosing smallest available node yields lexicographically smallest topological order for directed graph? Yes for DAG with total order on nodes, selecting minimal zero-in-degree node each step yields lexicographically smallest topological order. Need prove? It's standard.
+
+Need avoid mutating input: copy nodes/edges? Need maintain duplicates ignored. Could build set of edges to avoid duplicate indegree increments. Need not mutate nodes/edges. Could create adjacency sets from unique edges. Need validate all endpoints in nodes. Since nodes unique but list. Could use set nodes_set = set(nodes). But if duplicate nodes? spec unique, but if duplicates? Could not worry. But maybe need preserve? If duplicate nodes in input? Topological order should include unique? spec unique, ignore.
+
+Cycle detection: Kahn result length == len(nodes) else ValueError. If duplicate edges: ignore duplicate. Need not include duplicate edges. Edges may have self-loop? endpoints present but cycle -> raise. Duplicate self-loop? raise. Need handle edges endpoints absent: raise before processing. For tuple? edges list of pairs. Should assume two element pairs. No imports.
+
+Potential lexicographic issue: If nodes are strings with arbitrary Unicode, Python min uses lexicographic code point? Accept. If case sensitive default.
+
+Implementation choices:
+def topological_order(nodes, edges):
+    node_set = set(nodes)
+    adj = {}
+    indeg = {}
+    for n in nodes:
+        adj[n] = [] maybe set for duplicates
+        indeg[n] = 0
+    for edge in edges:
+        before, after = edge
+        if before not in node_set or after not in node_set:
+             raise ValueError(...)
+        if before == after? Self-loop, cycle. Could let Kahn detect: indeg[after]+=1 if not duplicate; before has edge to after, indeg after >0; never zero -> result length < n ->

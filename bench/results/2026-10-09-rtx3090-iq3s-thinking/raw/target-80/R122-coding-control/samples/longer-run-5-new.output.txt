@@ -1,0 +1,16 @@
+We need answer user: "Implement topological_order(nodes, edges) in Python. nodes list unique strings; edges list (before, after) pairs. Return lexicographically smallest topological ordering, include isolated nodes, and ignore duplicate edges. Raise ValueError for edge endpoint absent from nodes or cycle. Do not mutate either input. Use no imports. Return only the complete function in a Python code block."
+
+Need produce final only code block. Need think carefully.
+
+Requirements:
+- topological_order(nodes, edges)
+- nodes list of unique strings, edges list of pairs (before, after).
+- Return lexicographically smallest topological ordering. Lexicographically smallest among valid topological sorts. Standard Kahn with min-heap would be lexicographically smallest if choose smallest available at each step. But no imports. Need implement min selection without heap? We can maintain sorted list or use min each iteration; deterministic. Inputs likely manageable? But maybe we need efficient-ish. No imports. Could use list sort each step. But avoid mutating input. We can build sets and counts.
+
+Need ignore duplicate edges. If duplicate edge should count once for indegree and adjacency. If edges contain duplicate, ignore. Need validate endpoints: for each edge endpoint absent from nodes raise ValueError. Should check all edges? If endpoint invalid raise ValueError. For edges list of pairs maybe ensure pair length? Not necessary? Could unpack. Need not mutate inputs. We can create node_set = set(nodes). Need careful if nodes has non-strings? spec unique strings. We can rely.
+
+Need cycle detection: Kahn result length != len(nodes) -> ValueError.
+
+Lexicographically smallest: We need choose smallest string among nodes with indegree 0 at each step. Implementation without heap: available = [n for n in nodes if indegree[n] == 0]; sort available. While available: pick available[0]; pop(0). Then for each succ, decrement; if indegree becomes 0, insert into available in sorted position (using insort manual) or append then sort each loop. Need avoid imports. O(V^2 + E) if insertion by binary search? Could implement.
+
+Potential issue: Lexicographically smallest topological ordering: Is greedy Kahn smallest available always lexicographically smallest? Yes for total order by labels among all topological orders. Proof: at each prefix, first node must be one of indegree-zero nodes; choose smallest to get lexicographically smallest. After choosing, repeat. This yields lex

@@ -1,0 +1,20 @@
+We need answer user wants implement topological_order in Python. Need provide only complete function in Python code block. Done. Need think thoroughly. Problem: nodes list unique strings, edges list pairs. Return lexicographically smallest topological ordering, include isolated nodes, ignore duplicate edges. Raise ValueError for edge endpoint absent from nodes or a cycle. Do not mutate either input. Use no imports. Return only complete function in a Python code block.
+
+Need produce code. Need ensure lexicographically smallest topological ordering (lexicographic sequence of node names) among all valid topological orders. Standard Kahn using min-heap gives lexicographically smallest if nodes comparable strings. No imports allowed, so implement min-heap manually or use list and pick min each step. Need not mutate inputs. Need avoid duplicate edges. Validate all edges endpoints present. Could build sets and adjacency, in-degrees. Need deterministic.
+
+Potential issue: nodes unique but can be empty. If no nodes, return []. If edges contains endpoint absent raise ValueError. Edges duplicates ignored. Need not mutate: don't append to nodes/edges. Maybe convert nodes list to set but no mutation. Edges can be any iterable? User says list. We can iterate.
+
+Lexicographically smallest topological order for strings: At each step choose smallest label among available zero-indegree nodes. If using heap, no imports so use heap from bisect? bisect is import not allowed. Could use list and min. Complexity O(V^2 + E) acceptable? Need robust. Could implement custom binary heap functions within function or outside? They ask complete function. Can define nested helper functions. Use no imports.
+
+Need consider edge direction: (before, after) means before precedes after. Add edge before -> after, indegree after++.
+
+Need ensure duplicate edges not overcount indegree. Use adjacency sets for each node maybe. But if nodes can be many, set OK. Need include isolated nodes.
+
+Implementation options:
+
+def topological_order(nodes, edges):
+    # copy nodes? To not mutate. Use nodes_set = set(nodes). If nodes contains non-hashable? strings unique. Could handle duplicates? unique. If nodes duplicate, set dedup; but order? We don't need original order.
+    # Validate all nodes are strings? not required.
+    node_set = set(nodes)
+    adj = {node: set() for node in nodes}
+    indegree = {node: 0 for node in nodes

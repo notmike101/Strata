@@ -1,0 +1,21 @@
+We need answer user wants code only: complete function in Python code block. Need implement topological_order(nodes, edges). Requirements: nodes list unique strings, edges list of (before, after) pairs. Return lexicographically smallest topological ordering, include isolated nodes, ignore duplicate edges. Raise ValueError for edge endpoint absent from nodes or cycle. Do not mutate inputs. No imports. Return only complete function in Python code block.
+
+Need think carefully. Lexicographically smallest topological ordering. Nodes are strings, ordering lexicographic by string. Need Kahn's algorithm with min-heap? No imports allowed. Could use list and pick min each step. Complexity maybe okay. Need not mutate inputs: avoid modifying nodes, edges, tuples? We create copies structures. Need ignore duplicate edges: use set of edges or adjacency sets. Need raise ValueError for missing endpoint or cycle. Need preserve? Return list of nodes in order.
+
+Implementation options:
+
+def topological_order(nodes, edges):
+    if not isinstance? not required.
+    node_set = set(nodes)
+    # But need maintain list of remaining nodes. Do not mutate inputs; create list from nodes.
+    in_degree = {node:0 for node in nodes}
+    adjacency = {node:set() for node in nodes}
+    edge_set = set()
+    for before, after in edges:
+       if before not in node_set or after not in node_set: raise ValueError
+       if before == after: # self-loop duplicate; will create cycle; maybe edge_set includes, in_degree increment once, then cycle detected. fine.
+       if (before, after) in edge_set: continue
+       edge_set.add((before, after))
+       adjacency[before].add(after)
+       in_degree[after]+=1
+    # Kahn: ready list of nodes with degree 0. Need lexicographically smallest total order. Pick smallest available each time. Use sorted? no imports. Could do available = [n for n in nodes if in_degree[n]==0]; then each time select min(available). But O(n^2) okay? Could implement min heap manually using heapq but no imports? Can't import heapq. Use list pop min. For performance, maybe use heap with manual implementation? Since no imports, we can implement simple heap or use sorted list. But code can be simple. Need if large? Could implement custom min-heap without imports to get O((n+m)log n). But simpler min

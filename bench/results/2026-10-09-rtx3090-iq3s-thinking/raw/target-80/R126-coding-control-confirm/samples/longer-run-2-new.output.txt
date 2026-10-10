@@ -1,0 +1,14 @@
+We need answer user wants implement topological_order in Python. Need produce final only complete function in Python code block. Need think carefully. Requirements:
+- Implement topological_order(nodes, edges)
+- nodes list unique strings; edges list of (before, after) pairs.
+- Return lexicographically smallest topological ordering.
+- include isolated nodes.
+- ignore duplicate edges.
+- Raise ValueError for edge endpoint absent from nodes or a cycle.
+- Do not mutate either input.
+- Use no imports.
+- Return only complete function in Python code block.
+
+Need ensure lexicographically smallest topological ordering. For unique strings. Lexicographically smallest sequence compare element-wise. Standard Kahn with min-heap yields lexicographically smallest topological order if all nodes available? Yes if we always pick smallest node among zero indegree at each step. But duplicate edges ignored; need avoid double counting indegree due duplicates. Need no imports. Need no mutation: nodes list and edges list not mutate. We can copy sets/dicts. Need validate edges endpoints absent: any before not in node_set or after not in node_set -> ValueError. Also self-loop? Edge (a,a): endpoint present but cycle. Should raise ValueError. Duplicate edges ignore. If duplicate self-loop? still cycle.
+
+Need ensure lexicographically smallest when isolated nodes. Kahn min available works? Let's verify. For DAG, lex smallest topological ordering can be obtained by at each step select smallest node with indegree zero among remaining. Yes because any topological ordering must begin with some zero indegree node; choosing smallest possible first cannot hurt: if an order starts with x > min y, can y be moved to front? y indegree zero in remaining, and all prerequisites absent; if y appears later, moving to front still valid. For subsequent steps recursively. So use min-heap, but no imports. Could use list and min() each step O(n^2) maybe acceptable unspecified. Since no imports, implement manual min each iteration or implement heap manually. Need deterministic and efficient? Could use simple list available, each step sort? Sorting once maybe if we maintain available list and pick min. To avoid imports, we can use heap operations manually? Python has no heap if no imports. Could implement heapq? no imports, can write heap push/pop functions. Or simpler: initialize available = [n for n in nodes if indegree==0], then at each step choose min via min(), remove by index, then push newly available

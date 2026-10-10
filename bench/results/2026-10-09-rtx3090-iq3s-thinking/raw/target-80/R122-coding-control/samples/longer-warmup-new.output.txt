@@ -1,0 +1,24 @@
+We need answer user wants code only in Python code block. Need analyze. Need produce final only code block. Need ensure function correct.
+
+Problem: topological_order(nodes, edges): nodes list unique strings; edges list pairs before, after. Return lexicographically smallest topological ordering, include isolated nodes, ignore duplicate edges. Raise ValueError for edge endpoint absent from nodes or a cycle. Do not mutate either input. No imports. Complete function only.
+
+Need design deterministic lexicographically smallest topological order. Given directed acyclic graph nodes strings. Need Kahn's algorithm with min-heap? No imports. Could use heapq? No imports means cannot import heapq. Need implement min selection manually or sort each iteration. n maybe unspecified. Simpler: maintain set/list of available nodes sorted lexicographically each time. But mutating input not mutate input: copy structures.
+
+Need handle duplicate edges ignore. Need validate endpoints: if before not in nodes set or after not in nodes set raise ValueError. Duplicate edges ignore. Need ensure no mutation: don't mutate nodes list or edges list. Can create node_set, adjacency set dict, indegree dict. Edges can contain duplicates. Need avoid modifying sets? It's fine.
+
+Algorithm:
+
+def topological_order(nodes, edges):
+    node_set = set(nodes)
+    # maybe validate nodes unique? problem says unique; no need but if duplicates? Keep input data intact; maybe if duplicates? Return? Could ignore or raise? Not specified. Could set handles unique. But topological ordering should include each node once. If duplicates in input? Unique guaranteed. We'll not raise for duplicate nodes unless needed. But if nodes has duplicates, set loses duplicates, okay? Might be safer? Maybe not.
+    indegree = {n:0 for n in nodes}
+    adjacency = {n:set() for n in nodes} # sets for duplicate ignore and iteration. But sets unordered; need sorted output. For selection from available sorted.
+    for before, after in edges:
+        if before not in node_set or after not in node_set: raise ValueError
+        if after in adjacency[before]: continue
+        adjacency[before].add(after)
+        indegree[after] += 1
+    available = [n for n in nodes if indegree[n]==0]
+    available.sort()
+    order=[]
+    # Need choose lexicographically smallest among current zero indegree. Kahn with sorted list. To avoid O(n^2 log

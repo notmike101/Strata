@@ -1,0 +1,21 @@
+We need respond to user: "Implement topological_order(nodes, edges) in Python... Return only the complete function in a Python code block." Need produce final only code block. Need ensure no imports. Need handle nodes list unique strings, edges list of (before, after). Return lexicographically smallest topological ordering. Include isolated nodes. Ignore duplicate edges. Raise ValueError for edge endpoint absent from nodes or cycle. Do not mutate inputs.
+
+Need craft robust deterministic Kahn with min-heap? Without imports can't use heapq. Could implement min selection by scanning available nodes each step O(n^2) fine. Or implement simple min-heap manually? No imports. We can build sorted nodes initial zero indegree and repeatedly pop smallest. Since unique strings. Need no mutation: don't modify nodes/edges lists. Could iterate edges without changing. Use sets/dicts. Validate all endpoints in nodes_set else ValueError. Build adjacency as set to ignore duplicate edges. But set order irrelevant if we maintain sorted adjacency? For Kahn, duplicate edges ignored by set. Need not mutate inputs. Building adjacency uses nodes. indegree dict int.
+
+Algorithm:
+def topological_order(nodes, edges):
+    # maybe if nodes is not list? Not specified. But could convert? Do not mutate. We can create node_set = set(nodes). For edges validate endpoint in node_set.
+    adj = {node: set() for node in nodes}
+    indeg = {node: 0 for node in nodes}
+    for before, after in edges:
+       if before not in node_set or after not in node_set: raise ValueError(...)
+       if after in adj[before]: continue
+       adj[before].add(after)
+       indeg[after] += 1
+    # available = [node for node in nodes if indeg[node]==0]
+    # To get lexicographically smallest, repeatedly select min available. Could sort list? Since nodes unique strings maybe lex order by string. Need include isolated nodes.
+    result=[]
+    available = [n for n in nodes if indeg[n]==0]
+    # Need efficient enough. Could implement heap manually to get smallest. But no imports. Could sort available initially and pop(0)? If we append newly zero indegree nodes and insert maintaining sorted? Could use bisect but import bisect not allowed. Could scan min each iteration:
+    for _ in range(len(nodes)):
+       if not available: raise ValueError("

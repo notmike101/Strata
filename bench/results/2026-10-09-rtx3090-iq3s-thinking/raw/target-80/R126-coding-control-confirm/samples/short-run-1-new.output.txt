@@ -1,0 +1,15 @@
+We need answer user's request: Implement topological_order(nodes, edges) in Python. Need return only complete function in Python code block. Need ensure lexicographically smallest topological ordering, include isolated nodes, ignore duplicate edges. Raise ValueError for edge endpoint absent from nodes or cycle. Do not mutate either input. Use no imports. Need no identifier mention. Need likely pure Python no imports. Need lexicographically smallest topological order among all topological sorts of DAG with nodes unique strings. Lexicographically smallest sequence comparing element-wise strings. Need ensure isolated nodes included. Duplicate edges ignored. Need not mutate inputs. Need raise ValueError for missing endpoints or cycle. Need robust.
+
+We need think algorithm. Standard Kahn's algorithm using min-heap gives lexicographically smallest topological order? For DAG with nodes unique strings, if at each step select lexicographically smallest available zero indegree node, yields lexicographically smallest topological order. Is that always true? Yes for total order constraint? I think lexicographically minimal topological order can be obtained by greedy choosing smallest source available. Need be careful with duplicate edges. Use indegree counts and adjacency sets. Need ignore duplicates so indegree not inflated. Could build adjacency: dict node -> set of successors. But sets unordered; for Kahn can maintain available list and sort? Since no imports, can implement min extraction by list and min() each iteration O(n^2) maybe okay? Need not import heapq. But maybe could use simple list sort initial and pop smallest? But when new nodes become zero, need insert and sort, or use min over list. Simpler: avail = sorted([n for n in nodes if indeg[n]==0]). While avail: pick avail.pop(0) (smallest). Then for each successor sorted? order of iterating successors doesn't affect correctness but we can sort for determinism. But if new nodes become zero, append then need keep avail sorted. Options:
+
+avail = [n for n in indeg if indeg[n]==0]
+avail.sort()
+order=[]
+while avail:
+    u = avail.pop(0)
+    order.append(u)
+    for v in adjacency.get(u, ()): # if set unordered maybe no matter
+        indeg[v]-=1
+        if indeg[v]==0:
+             # insert into sorted position maybe bisect but no imports. use avail.append(v); avail.sort() (small).
+    avail.sort() if insertion. But sorting each iteration O
