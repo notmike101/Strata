@@ -1,0 +1,11 @@
+We need answer user's request. Need produce complete code, tests, explanation >=1200 words. Need think thoroughly.
+
+User: Implement thread-safe Python TTLCache class using OrderedDict and monotonic clock. Include set, get, delete, clear, len, expiration, capacity eviction, unit tests with injected fake clock, detailed explanation of thread safety and complexity. Write complete code, then tests, then explain design. Do not abbreviate implementation. Detailed answer at least 1200 words.
+
+Need craft final with code. Ensure no omissions. Let's design TTLCache. Use OrderedDict. Thread-safe via threading.RLock. Monotonic clock injectable default time.monotonic. Need set, get, delete, clear, len. Expiration: TTL per entry? class supports ttl default or per-set. capacity maxsize LRU. Also maybe set(key, value, ttl=None), get(key, default=None). Should remove expired on access; maybe internal _purge_expired? For len, include expired? Need accurate len maybe exclude expired. Need capacity eviction when set. Need maybe get with default. Need return sentinel? Implement.
+
+Need careful: OrderedDict move_to_end on get for LRU. On set if exists update, move_to_end, update expiry. If not exists and maxsize, evict oldest. Then insert. Expiry: if ttl is None? Could allow no expiration? User says TTLCache maybe every entry TTL. Could use default_ttl and per-key. If ttl is None maybe uses default_ttl; if ttl <=0? Maybe immediate expiration or invalid. Could design: ttl: float >= 0, None = default_ttl, 0 = no expiration? But TTL cache maybe default_ttl required? Need simple robust: constructor maxsize, default_ttl=None? If default_ttl is None and ttl None, entries never expire? But monotonic TTLCache. Could use default_ttl: float | None = None. TTL can be None to use default. If ttl is None and default_ttl is None => no expiry. But tests can use. Or enforce float. The user likely expects TTL with expiration.
+
+Need include thread safety and complexity. Need full code, tests. Need avoid abbreviating. Could use dataclass? Keep simple.
+
+Potential thread-safety nuance: Python dict operations atomic but OrderedDict not necessarily? With lock around all public methods and internal methods. Need mention monotonic avoids clock jumps. Need lock granularity; no nested locks if RLock. Use self._lock =

@@ -1,0 +1,14 @@
+We need answer user's request. Need produce complete code, tests, explanation design, at least 1200 words. Need implement thread-safe Python TTLCache using OrderedDict and monotonic clock. Include set, get, delete, clear, len, expiration, capacity eviction, unit tests with injected fake clock. Detailed explanation thread safety and complexity. No abbreviation. Need likely code robust. Need ensure thread safety? OrderedDict not thread-safe; use RLock. Need monotonic clock injected. TTLCache maybe supports default ttl? methods: __init__(capacity, ttl default, clock). set(key,value,ttl=None), get(key,default=None), delete, clear, __len__, maybe __contains__, purge expired. Need expiration on get, set eviction. Use OrderedDict move_to_end for LRU. Capacity eviction when len exceeds capacity: popitem(last=False) maybe oldest in order; but with TTL, expiration. Should maintain entries in insertion/access order. Need thread-safe: lock around public methods. Use context manager? Need maybe no deadlock: methods only call locked helper with _lock? Simpler: each public method acquire lock and call private unlocked helpers. But get needs check expiry and move. set may call delete helper within lock. Use threading.RLock? Could use Lock with no reentrant calls. But maybe clear calls purge etc. Need be careful if using _lock with private methods assuming lock held. If public methods acquire same lock. RLock allows reentrancy if needed. We'll use RLock. Clock injected callable returns float seconds monotonic. Default time.monotonic. Unit tests with fake clock: class FakeClock with now attribute and advance. Use unittest. Need tests for expiration, capacity eviction, thread-safe maybe concurrency? Could include stress test with threads? They requested unit tests with injected fake clock. Include test for thread safety maybe multiple threads incrementing? But cache not atomic counter; can test concurrent set/get doesn't raise, len consistent, etc. Could also use barrier. Need maybe deterministic expiration with fake clock.
+
+Need ensure answer length at least 1200 words. We can write thorough. Need not include benchmark identifier. User said ignore. Need final only answer. Need maybe mention Python code. Need detailed.
+
+Potential implementation:
+
+from __future__ import annotations
+import threading, time
+from collections import OrderedDict
+from typing import Callable, Generic, TypeVar, Optional, Any, Iterator, Hashable
+T = TypeVar("T")
+
+class TTLCache(Generic[T]):
+   

@@ -1,0 +1,21 @@
+We need answer user's request. Need produce detailed answer at least 1200 words. User: "Benchmark identifier ... Ignore. Implement a thread-safe Python TTLCache class using an OrderedDict and a monotonic clock. Include set, get, delete, clear, len, expiration, capacity eviction, unit tests with an injected fake clock, and a detailed explanation of thread safety and complexity. Write complete code, then tests, then explain the design. Do not abbreviate the implementation. Produce a detailed answer of at least 1200 words."
+
+We need output complete code, tests, explanation. Need likely mention ignore identifier. Need satisfy thread-safe, OrderedDict, monotonic clock. Include set, get, delete, clear, len, expiration, capacity eviction, unit tests with fake clock. Detailed explanation. At least 1200 words. Ensure code complete not abbreviated. Could use threading.Lock, OrderedDict.move_to_end, time.monotonic injected clock. Expiration: maybe get checks expiration, maybe internal _is_expired. Need decide if set evicts expired before capacity? Use OrderedDict for insertion order; capacity eviction LRU? With TTLCache, typically OrderedDict and expiry. Need include max_size optional, ttl default? Thread-safe: public methods acquire lock. Clock injected. Monotonic clock: default time.monotonic. Use float.
+
+Potential design:
+
+from collections import OrderedDict
+import threading, time, unittest
+
+class TTLCache:
+    def __init__(self, max_size=None, ttl=300.0, clock=None):
+         self._lock = threading.RLock()? Use Lock. Since methods don't call public methods while locked maybe Lock. Need ensure no recursion. Use threading.Lock.
+         self._store = OrderedDict()
+         self._max_size = max_size
+         self._default_ttl = ttl
+         self._clock = clock or time.monotonic
+    def set(self, key, value, ttl=None):
+         with self._lock:
+             now = self._clock()
+             ttl = self._default_ttl if ttl is None else ttl
+             if ttl <=0? If ttl <=0 delete existing and return? Could allow ttl=0 immediately expired. But set with ttl=0 should not store? Could delete. Need robust. If ttl <0 raise ValueError? I'd validate. ttl == 0 delete and no store. Expiration absolute now + ttl. Remove key if exists to preserve order and avoid old expiry. If

@@ -1,0 +1,13 @@
+We need answer user's request. Need produce final detailed answer at least 1200 words. User asks: Benchmark identifier ignore. Read existing design requirements before implementing cache: many existing cache rules 0-63 keys item_x with lifetime increasing 30+idx, size 64+3idx? Need implement thread-safe Python TTLCache using OrderedDict and monotonic clock. Include set, get, delete, clear, len, expiration, capacity eviction, unit tests with injected fake clock, and detailed explanation thread safety complexity. Complete code, tests, explain design. Do not abbreviate implementation. Produce detailed answer at least 1200 words.
+
+We need likely integrate existing cache rules? It says read existing design requirements before implementing the cache. Existing cache rules specify per-key lifetimes and sizes? Maybe they want initial data? We need implement TTLCache with per-key TTL and size? Existing rules: key item_000 lifetime 30 size 64; ... expiration remove stale, access update LRU. Need include those existing rules? Could seed cache with existing items or a policy that honors per-key lifetimes. Also capacity eviction. Need thread-safe Python TTLCache class using OrderedDict monotonic clock. Include methods set, get, delete, clear, len, expiration, capacity eviction. Unit tests with injected fake clock. Detailed explanation. Need not abbreviate implementation. At least 1200 words. We can provide code:
+
+class TTLCache:
+    def __init__(self, max_size, clock=time.monotonic, max_bytes? maybe existing rules sizes). OrderedDict LRU: move_to_end on access.
+    _entries: OrderedDict key -> CacheEntry(value, expires_at, size)
+    _total_size.
+    _lock = threading.RLock.
+    _next_access_counter? monotonic clock may not enough for same-time. Use OrderedDict order itself for LRU. Need access update order.
+
+Expiration: lazy expiration on get/size? Could have expirations method purge_expired(now=None) returns removed keys or int. Need thread-safe.
+Need set: if expired entry with key exists, remove. Insert; if existing remove old size; add; if over capacity evict LRU until fits. But capacity maybe byte size? They mention size bytes in rules. Implement capacity as max_bytes maybe and also max_entries? Existing cache rules have sizes. Use capacity bytes. But set method needs size param default 1? Existing rule sizes.

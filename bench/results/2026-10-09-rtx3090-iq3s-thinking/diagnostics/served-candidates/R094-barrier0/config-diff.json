@@ -1,0 +1,33 @@
+{
+  "exe": {
+    "control": "C:\\strata\\engine\\strata-cuda133-accepted-usage.exe",
+    "candidate": "C:\\strata\\engine\\strata-cuda133-token-barrier.exe"
+  },
+  "env": {
+    "control": {
+      "STRATA_IQ256_GATHER": "1",
+      "STRATA_IQ_MT_MIN": "1",
+      "STRATA_IQ256_GATHER_IQ2_S": "0",
+      "STRATA_ADAPT_LAG": "2",
+      "STRATA_ACCEPTED_USAGE": "1",
+      "STRATA_GR_FAST": "1",
+      "STRATA_DMA_BATCH": "0",
+      "STRATA_VERIFY_DEVICE_PLAN": "0",
+      "STRATA_PREFILL_CPU_SHARE_MAX": "1024",
+      "STRATA_PREFILL_CPU_SHARE": "0.80"
+    },
+    "candidate": {
+      "STRATA_IQ256_GATHER": "1",
+      "STRATA_IQ_MT_MIN": "1",
+      "STRATA_IQ256_GATHER_IQ2_S": "0",
+      "STRATA_ADAPT_LAG": "2",
+      "STRATA_ACCEPTED_USAGE": "1",
+      "STRATA_GR_FAST": "1",
+      "STRATA_DMA_BATCH": "0",
+      "STRATA_VERIFY_DEVICE_PLAN": "0",
+      "STRATA_PREFILL_CPU_SHARE_MAX": "1024",
+      "STRATA_PREFILL_CPU_SHARE": "0.80",
+      "STRATA_SERIAL_ADAPT_TOKENS": "0"
+    }
+  }
+}

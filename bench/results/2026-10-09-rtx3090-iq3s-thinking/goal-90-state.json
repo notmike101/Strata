@@ -3,15 +3,15 @@
   "target_tps": 90,
   "metric": "server_decode_tps",
   "contract": "goal-90-contract.md",
-  "current": "P019 diagnostic pair closed; see detailed conclusion. C047 remains unpromoted; 90/85 and full quality not qualified.",
+  "current": "C048 rejected: short85.2 vs88.7, longer89.6 vs84.4. No confirmation pair or production change. Source restored; candidate archived.",
   "next": [
-    "Review P019 evidence before selecting accepted-token cache barrier architecture."
+    "Plan C049 long-path-only token barriers using existing1024-token prompt-path boundary; test interactions with prior short requests."
   ],
   "promoted": "The previously qualified format-gather engine with IQ2_S gather disabled and adaptive lag2; no changes this turn.",
   "stopping_rule": "Leave goal active until all fixed qualification cells pass. No benchmark model resident at handoff.",
   "quality": "Q007: 3/5 compiled and passed72 tests each, 2/5 no final answer at8192 tokens. Goal unqualified.",
-  "last_checkpoint": "E146",
-  "resume_command": "Read E145-E146 and diagnostics/reproducibility/P019. No model resident. Remain on perf/rtx3090-thinking-80. Production unchanged; build tree still contains P018 debug objects.",
-  "safety": "P019 A/B: all eighteen 512-token requests passed 16 GiB physical/commit guards; exact process cleanup and production config restore verified.",
+  "last_checkpoint": "E150",
+  "resume_command": "Read E147-E150 and C048. Rejected source restored to dd0555b5. Build tree contains rejected C048; saved candidate hashc9508334. No inference resident. Remain on current branch.",
+  "safety": "24 C048 requests passed16GiB physical/commit floors and exact cleanup; idleGPU457MiB; production hashunchanged.",
   "goal_tool_status_at_entry": "active, verified get_goal"
 }

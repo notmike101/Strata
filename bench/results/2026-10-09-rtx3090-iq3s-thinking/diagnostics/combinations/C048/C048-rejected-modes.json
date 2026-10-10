@@ -1,0 +1,42 @@
+[
+  {
+    "case": "missing accepted usage",
+    "exit": 2,
+    "stderr": "strata: STRATA_SERIAL_ADAPT_TOKENS needs 0..max-context and STRATA_ACCEPTED_USAGE=1 when enabled\n"
+  },
+  {
+    "case": "negative",
+    "exit": 2,
+    "stderr": "strata: STRATA_SERIAL_ADAPT_TOKENS needs 0..max-context and STRATA_ACCEPTED_USAGE=1 when enabled\n"
+  },
+  {
+    "case": "malformed",
+    "exit": 2,
+    "stderr": "strata: STRATA_SERIAL_ADAPT_TOKENS needs 0..max-context and STRATA_ACCEPTED_USAGE=1 when enabled\n"
+  },
+  {
+    "case": "over context",
+    "exit": 2,
+    "stderr": "strata: STRATA_SERIAL_ADAPT_TOKENS needs 0..max-context and STRATA_ACCEPTED_USAGE=1 when enabled\n"
+  },
+  {
+    "case": "overflow",
+    "exit": 2,
+    "stderr": "strata: STRATA_SERIAL_ADAPT_TOKENS needs 0..max-context and STRATA_ACCEPTED_USAGE=1 when enabled\n"
+  },
+  {
+    "case": "batch",
+    "exit": 2,
+    "stderr": "strata: STRATA_ACCEPTED_USAGE requires single-GPU serial serve with synchronous adaptive cache\n"
+  },
+  {
+    "case": "async",
+    "exit": 2,
+    "stderr": "strata: STRATA_ACCEPTED_USAGE requires single-GPU serial serve with synchronous adaptive cache\n"
+  },
+  {
+    "case": "no pool",
+    "exit": 2,
+    "stderr": "strata: STRATA_ACCEPTED_USAGE requires single-GPU serial serve with synchronous adaptive cache\n"
+  }
+]
