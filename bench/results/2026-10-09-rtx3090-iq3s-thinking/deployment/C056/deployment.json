@@ -1,0 +1,35 @@
+{
+  "utc": "2026-10-10T18:29:41.073933+00:00",
+  "authorization": "User explicitly requested the launcher use the new optimized engine and configuration after disclosure of incomplete qualification.",
+  "candidate": "C056 / R119-prefix-preserve",
+  "engine_sha256": "cc85c6c787beed24c113a3a5c7fe7bb376bd07f04bc48f3e58264dec701b3c91",
+  "previous_config_sha256": "3457fdfe7d69fbf6651e2031320cdebf88a9d8d269ebbe459db7fdd885e8c9f0",
+  "deployed_config_sha256": "a88d26a1f55578b6312d1ba933a20c892eac25b522629896ef9b70c4215244d6",
+  "changed_config_fields": [
+    "exe",
+    "env"
+  ],
+  "fully_qualified": false,
+  "previous_launcher_sha256": "77f2378551e94360bf2f596c40e5aeeffc2ceb11ce7ff5ac38b3223472d4b24f",
+  "verification": {
+    "passed": true,
+    "checks": [
+      "exact C056 binary and R119 config",
+      "single text engine plus compatible vision process",
+      "keyless API and 0.0.0.0:8080 listener",
+      "262144 context and effective unchanged sampler",
+      "runtime optimization markers",
+      "high-thinking exact-answer smoke request stopped naturally"
+    ],
+    "fresh_benchmark": false,
+    "full_goal_qualification": false,
+    "smoke_completion_tokens": 41,
+    "utc": "2026-10-10T18:33:02.395901+00:00"
+  },
+  "memory_minimum_bytes": {
+    "physical_available": 62908997632,
+    "commit_available": 42368737280
+  },
+  "launcher_sha256": "155894b251eaee51cbb74a264ec894ea7869ce71dc4a9621e1009068f0e889b5",
+  "cleanup": "No live Strata launcher/server/text/vision process; optimized config remains selected."
+}

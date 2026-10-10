@@ -1,0 +1,38 @@
+{
+  "id": "chatcmpl-a2d9be80247c49898939fc9d",
+  "object": "chat.completion",
+  "created": 1791657180,
+  "model": "qwen3.8-flash-next-iq3_s",
+  "choices": [
+    {
+      "index": 0,
+      "message": {
+        "role": "assistant",
+        "content": "4",
+        "reasoning_content": "We need answer user: \"What is 2 + 2? Return only the single digit.\" Need final only single digit. Need likely output 4. Ensure no extra.\n"
+      },
+      "finish_reason": "stop"
+    }
+  ],
+  "usage": {
+    "prompt_tokens": 66,
+    "completion_tokens": 41,
+    "total_tokens": 107,
+    "prompt_tokens_details": {
+      "cached_tokens": 0
+    }
+  },
+  "timings": {
+    "cache_n": 0,
+    "prompt_n": 66,
+    "prompt_ms": 1026.9,
+    "prompt_per_token_ms": 15.559,
+    "prompt_per_second": 64.3,
+    "predicted_n": 41,
+    "predicted_ms": 529.6,
+    "predicted_per_token_ms": 12.917,
+    "predicted_per_second": 77.4,
+    "draft_n": 27,
+    "draft_n_accepted": 27
+  }
+}

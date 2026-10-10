@@ -1,6 +1,6 @@
 # RTX 3090 / i9-10900KF: IQ3_S thinking-mode optimization ledger
 
-Current goal checkpoint (E257): [bounded closeout and reproducible handoff](HANDOFF.md). C056 measured92.30short/90.50roughly3K server-decode tok/s on the selected coding workload and passed5/5 completed answers, but cache/nonstream/real-use gates prevent full qualification. C063 is regression-tested, default-off and not model-benchmarked. Production launcher unchanged; no benchmark model resident. No full-goal completion claim.
+Current goal checkpoint (E258): [C056 deployed at the user's explicit request](deployment/C056/README.md). The existing launcher now selects the exact92.30short/90.50roughly3K measured engine/configuration. Real-launcher startup, effective sampling and a bounded high-thinking answer passed; verification server stopped. Prior cache regressions and incomplete qualification remain disclosed. No new speed or full-goal success claim.
 
 Active goal: **90 short / 85 approximately3K tok/s server_decode_tps** on the fixed coding matrix; goal created without a token budget at the user's request. See [goal-90-contract.md](goal-90-contract.md). The target remains unproven. Fresh control B010 measured85.9 /84.8 tok/s but included short-run stalls of21.7 and17.5; prompt-read medians77.0 /495.3. No new candidate is promoted. Earlier90/85 follow-up results remain in [follow-up-summary.json](follow-up-summary.json). The B010 stalls remain unexplained; later B011/B012 cells and the Q007 failures are retained without discarding slow or incomplete runs.
 

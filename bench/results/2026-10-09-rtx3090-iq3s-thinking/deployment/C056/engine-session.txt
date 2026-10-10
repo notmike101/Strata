@@ -1,0 +1,14 @@
+strata verify: capturing the 6-token window (458 MiB of VRAM free)
+strata verify: captured the 6-token window (upload no error, sync no error)
+strata verify: capturing the 1-token window (442 MiB of VRAM free)
+strata verify: captured the 1-token window (upload no error, sync no error)
+strata verify: capturing the 4-token window (428 MiB of VRAM free)
+strata verify: captured the 4-token window (upload no error, sync no error)
+strata serial cache policy: 66 fresh prompt tokens, interval 0
+strata verify: capturing the 3-token window (408 MiB of VRAM free)
+strata verify: captured the 3-token window (upload no error, sync no error)
+strata accepted usage: 19680 retained of 19680 routed entries
+strata serve: prompt 66 tokens = 0 reused + 66 read in 1027 ms (64.3 tok/s), 41 generated in 530 ms (77.4 tok/s), drafts accepted 27 of 27, 1 checkpoints
+strata serve: decode expert cache hit rate: 70.6% (13463 hits / 19067 lookups); 613 more read by the GPU over PCIe or from another GPU (3.1% of all 19680 routed)
+strata serve: KV streaming: 98.15% of 17496 block reads hit VRAM, 1.3 MiB read from RAM
+strata serve: suffix drafts: 1 windows, 5 of 5 drafts accepted

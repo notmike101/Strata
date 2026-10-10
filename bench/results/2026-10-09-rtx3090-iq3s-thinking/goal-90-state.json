@@ -3,17 +3,17 @@
   "target_tps": 90,
   "metric": "server_decode_tps",
   "contract": "goal-90-contract.md",
-  "current": "Bounded closeout: C056 meets measured90/85targets and Q0155/5; full qualification remains unresolved. C063 tests retained; no served arm started.",
+  "current": "C056 deployed at explicit user request; real-launcher smoke passed and verification model stopped. Full qualification still incomplete.",
   "next": [
-    "No automatic broad matrix or new sweep. Use HANDOFF.md for achieved results and unresolved acceptance gates."
+    "No automatic broad optimization sweep. Existing launcher now selects the measured C056 engine. Retain known cache-regression and qualification caveats."
   ],
-  "promoted": "The previously qualified format-gather engine with IQ2_S gather disabled and adaptive lag2; no changes this turn.",
+  "promoted": "User-selected C056/R119 configuration, not a full-contract qualified winner.",
   "stopping_rule": "Leave goal active until all fixed qualification cells pass. No benchmark model resident at handoff.",
   "quality": "C056 Q015:5/5 natural-stop answers,72tests each, unchanged corrected-v2 checker and approved32768cap. Full real-use matrix remains pending.",
-  "last_checkpoint": "E257",
-  "resume_command": "Read HANDOFF.md and E257. No model resident; R136-R139 never started. Production launcher unchanged; C063 default-off and unqualified.",
+  "last_checkpoint": "E258",
+  "resume_command": "Read deployment/C056/README.md. Production config is now a88d26a1, not historical3457fdfe. Do not silently restore the old config with historical benchmark helpers.",
   "safety": "Four served arms passed16GiB floors, exact cleanup and production config restoration; post GPU457MiB/0percent.",
-  "goal_tool_status_at_entry": "active, verified get_goal",
+  "goal_tool_status_at_entry": "usageLimited; no goal completion claim or status change",
   "target_short_tps": 90,
   "target_longer_tps": 85,
   "target_correction_source": "Direct user correction relayed by oversight thread01a12373-85f9-7790-b482-bc700a87e0d6 on2026-10-10: goal requires90 short and85 long.",
@@ -397,5 +397,40 @@
     ],
     "full_goal_qualified": false,
     "decision": "Retained default-off with8passing CUDA tests; model benchmark deferred at bounded closeout, no promotion."
+  },
+  "deployment_c056": {
+    "utc": "2026-10-10T18:29:41.073933+00:00",
+    "authorization": "User explicitly requested the launcher use the new optimized engine and configuration after disclosure of incomplete qualification.",
+    "candidate": "C056 / R119-prefix-preserve",
+    "engine_sha256": "cc85c6c787beed24c113a3a5c7fe7bb376bd07f04bc48f3e58264dec701b3c91",
+    "previous_config_sha256": "3457fdfe7d69fbf6651e2031320cdebf88a9d8d269ebbe459db7fdd885e8c9f0",
+    "deployed_config_sha256": "a88d26a1f55578b6312d1ba933a20c892eac25b522629896ef9b70c4215244d6",
+    "changed_config_fields": [
+      "exe",
+      "env"
+    ],
+    "fully_qualified": false,
+    "previous_launcher_sha256": "77f2378551e94360bf2f596c40e5aeeffc2ceb11ce7ff5ac38b3223472d4b24f",
+    "verification": {
+      "passed": true,
+      "checks": [
+        "exact C056 binary and R119 config",
+        "single text engine plus compatible vision process",
+        "keyless API and 0.0.0.0:8080 listener",
+        "262144 context and effective unchanged sampler",
+        "runtime optimization markers",
+        "high-thinking exact-answer smoke request stopped naturally"
+      ],
+      "fresh_benchmark": false,
+      "full_goal_qualification": false,
+      "smoke_completion_tokens": 41,
+      "utc": "2026-10-10T18:33:02.395901+00:00"
+    },
+    "memory_minimum_bytes": {
+      "physical_available": 62908997632,
+      "commit_available": 42368737280
+    },
+    "launcher_sha256": "155894b251eaee51cbb74a264ec894ea7869ce71dc4a9621e1009068f0e889b5",
+    "cleanup": "No live Strata launcher/server/text/vision process; optimized config remains selected."
   }
 }
