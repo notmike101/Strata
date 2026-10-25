@@ -21,7 +21,7 @@ CONTROL_PATHS = {'/v1/load', '/v1/unload', '/load', '/unload'}
 MAX_BODY = 16 * 1024 * 1024
 WEB_ROOT = Path(__file__).resolve().parent / 'web'
 WEB_FILES = {'/': 'index.html', **{'/web/' + name: name for name in
-             ('app.js', 'app.css', 'components.css', 'tokens.css', 'sprite.svg')}}
+             ('app.js', 'app.css', 'components.css', 'tokens.css', 'sprite.svg', 'favicon.svg')}}
 
 
 def reject_nonfinite(value):
