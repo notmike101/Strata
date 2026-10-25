@@ -61,3 +61,9 @@ build-vision-cuda12.bat
 
 /.ccache/
 /.rocm-win/
+
+# Opt-in model gateway: local environments, credentials and generated configs.
+/.model-runtimes/
+/model-gateway.local.json
+/model-gateway-api-key.txt
+/strata-api-key.txt
